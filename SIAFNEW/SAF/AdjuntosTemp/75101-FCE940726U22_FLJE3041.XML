@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cfdi:Comprobante xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd " Version="3.3" Serie="FLJE" Folio="3041" FormaPago="28" Moneda="MXN" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="29050" Fecha="2020-02-14T21:35:38" SubTotal="1397.00" Descuento="89.80" TipoCambio="1" Total="1307.20" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" NoCertificado="00001000000406847396" Certificado="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" Sello="DHgUiAdlI6NjJAgD+THvHAFrydwhIQLu47coE/m6YAYjZk2PT/KXo7w5Z5q24lbsTl3OZWXomuuzCIvvTLSDQ4RSp7AceLyo7Q2FLn6awIAEQfNlKPt9tEE9qcwTl3gFggE36zU/cTfsd8DXqy4EqlOBKburVPbpEfUV2n4Eqi/7d13hWaJwKyryuDOcz8894YPMU8W3cqPkcK90EsR3ficyKWxGONMxE/jDRMZ14dNADV6gUn6WAG5pBBFq5ppzgkYxWmqH7DpOa0D8JOUO/d1aU3gMocWo7UA1GAaKCn4g+qMvLhdM7bLPtdFhSKEq93atmhr4BMIM7oKIUhfyUA==">
+  <cfdi:Emisor Rfc="FCE940726U22" Nombre="FONDO DE CULTURA ECONOMICA" RegimenFiscal="603" />
+  <cfdi:Receptor Rfc="UAC750417LE8" Nombre="UNIVERSIDAD AUTONOMA DE CHIAPAS" UsoCFDI="G03" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="55101500" NoIdentificacion="9786077476085" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="Las teorias sexuales en psicoanalisisQue permanece de ellas en la practica actual" Cantidad="1" ValorUnitario="499.0000" Importe="499.0000" Descuento="0.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" Base="499.00" TasaOCuota="0.000000" Importe="0.00" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="55101500" NoIdentificacion="9789501201468" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="Correspondencia" Cantidad="1" ValorUnitario="499.0000" Importe="499.0000" Descuento="49.90">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" Base="499.00" TasaOCuota="0.000000" Importe="0.00" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="55101500" NoIdentificacion="9789501242201" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="Dibujos fuera del papel" Cantidad="1" ValorUnitario="399.0000" Importe="399.0000" Descuento="39.90">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" Base="399.00" TasaOCuota="0.000000" Importe="0.00" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="0.00">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.00" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="EE2FE089-24FC-AF4B-968C-6CC229B9D2DF" FechaTimbrado="2020-02-14T21:36:48" RfcProvCertif="SCD110105654" SelloCFD="DHgUiAdlI6NjJAgD+THvHAFrydwhIQLu47coE/m6YAYjZk2PT/KXo7w5Z5q24lbsTl3OZWXomuuzCIvvTLSDQ4RSp7AceLyo7Q2FLn6awIAEQfNlKPt9tEE9qcwTl3gFggE36zU/cTfsd8DXqy4EqlOBKburVPbpEfUV2n4Eqi/7d13hWaJwKyryuDOcz8894YPMU8W3cqPkcK90EsR3ficyKWxGONMxE/jDRMZ14dNADV6gUn6WAG5pBBFq5ppzgkYxWmqH7DpOa0D8JOUO/d1aU3gMocWo7UA1GAaKCn4g+qMvLhdM7bLPtdFhSKEq93atmhr4BMIM7oKIUhfyUA==" NoCertificadoSAT="00001000000502000436" SelloSAT="jxYbrBP4gyr2w6TQ/SL5N4z1FRxvgukJJRau7wI/BVmbLsbsdn2F/P5U5m8aAPAnTcU7qPr2YqvUOVu7cmeLPiv3ASoAGqFCvdo/d3S0vx16nM7qE4KXy6B2iQXifmsflCToSflo0gQLcbidwkPaEy5kycJTzu5dgMRuQdmrS+gx6RMj3MAel4WjGcpJeXfnuXcr1s+0sF1fn6D0afO6Be6wJLgA46secgU630DluxETcbOAkEa7Pkz3yS+8Sh28nsZpSmIJHpDWWVCpflO3XQHkB2J0VutwecFGJz1v4mdN5/s8lEX7tSSE69TZYNEzu1OaSchcvXuh3bF1VS894A==" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>
