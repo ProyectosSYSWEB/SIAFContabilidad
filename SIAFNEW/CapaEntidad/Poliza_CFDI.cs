@@ -14,11 +14,24 @@ namespace CapaEntidad
             set { _IdPoliza_CFDI = value; }
         }
 
+        private string _Mes_anio;
+        public string Mes_anio
+        {
+            get { return _Mes_anio.Trim(); }
+            set { _Mes_anio = value.Trim(); }
+        }
+
         private int _IdPoliza;
         public int IdPoliza
         {
             get { return _IdPoliza; }
             set { _IdPoliza = value; }
+        }
+        private string _Numero_poliza;
+        public string Numero_poliza
+        {
+            get { return _Numero_poliza.Trim(); }
+            set { _Numero_poliza = value.Trim(); }
         }
 
         private string _NombreArchivoXML;

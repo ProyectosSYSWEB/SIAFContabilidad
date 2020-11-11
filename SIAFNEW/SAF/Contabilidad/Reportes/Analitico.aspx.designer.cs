@@ -7,11 +7,13 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace SAF.Form {
-    
-    
-    public partial class Analitico {
-        
+namespace SAF.Form
+{
+
+
+    public partial class Analitico
+    {
+
         /// <summary>
         /// Control UpdateProgress1.
         /// </summary>
@@ -20,7 +22,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgress1;
-        
+
         /// <summary>
         /// Control UpdatePanel1.
         /// </summary>
@@ -29,7 +31,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
+
         /// <summary>
         /// Control Label9.
         /// </summary>
@@ -38,7 +40,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label9;
-        
+
         /// <summary>
         /// Control ddlMayor.
         /// </summary>
@@ -47,7 +49,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlMayor;
-        
+
         /// <summary>
         /// Control Label2.
         /// </summary>
@@ -56,7 +58,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label2;
-        
+
         /// <summary>
         /// Control UpdatePanel4.
         /// </summary>
@@ -65,7 +67,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel4;
-        
+
         /// <summary>
         /// Control DDLCentro_Contable.
         /// </summary>
@@ -74,25 +76,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DDLCentro_Contable;
-        
-        /// <summary>
-        /// Control Label10.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label10;
-        
-        /// <summary>
-        /// Control UpdatePanel3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel3;
-        
+
         /// <summary>
         /// Control valCtaCont.
         /// </summary>
@@ -101,7 +85,25 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valCtaCont;
-        
+
+        /// <summary>
+        /// Control Label10.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label10;
+
+        /// <summary>
+        /// Control UpdatePanel3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel3;
+
         /// <summary>
         /// Control DDLCentro_Contable0.
         /// </summary>
@@ -110,16 +112,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DDLCentro_Contable0;
-        
-        /// <summary>
-        /// Control valCtaCont0.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator valCtaCont0;
-        
+
         /// <summary>
         /// Control lblNivel.
         /// </summary>
@@ -128,7 +121,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNivel;
-        
+
         /// <summary>
         /// Control UpdatePanel7.
         /// </summary>
@@ -137,7 +130,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel7;
-        
+
         /// <summary>
         /// Control ddlnivel.
         /// </summary>
@@ -146,7 +139,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlnivel;
-        
+
         /// <summary>
         /// Control UpdateProgress3.
         /// </summary>
@@ -155,7 +148,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgress3;
-        
+
         /// <summary>
         /// Control Label3.
         /// </summary>
@@ -164,7 +157,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label3;
-        
+
         /// <summary>
         /// Control UpdatePanel6.
         /// </summary>
@@ -173,7 +166,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel6;
-        
+
         /// <summary>
         /// Control ddl_cuentas.
         /// </summary>
@@ -182,7 +175,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddl_cuentas;
-        
+
         /// <summary>
         /// Control Label12.
         /// </summary>
@@ -191,7 +184,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label12;
-        
+
         /// <summary>
         /// Control UpdatePanel8.
         /// </summary>
@@ -200,7 +193,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel8;
-        
+
         /// <summary>
         /// Control ddl_cuentas0.
         /// </summary>
@@ -209,7 +202,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddl_cuentas0;
-        
+
         /// <summary>
         /// Control Label4.
         /// </summary>
@@ -218,7 +211,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label4;
-        
+
         /// <summary>
         /// Control UpdatePanel5.
         /// </summary>
@@ -227,7 +220,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel5;
-        
+
         /// <summary>
         /// Control ddlCuenta_Mayor.
         /// </summary>
@@ -236,16 +229,16 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCuenta_Mayor;
-        
+
         /// <summary>
-        /// Control Label11.
+        /// Control rowCtaMayor.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label11;
-        
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl rowCtaMayor;
+
         /// <summary>
         /// Control UpdatePanel9.
         /// </summary>
@@ -254,7 +247,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel9;
-        
+
         /// <summary>
         /// Control ddlCuenta_Mayor0.
         /// </summary>
@@ -263,25 +256,16 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCuenta_Mayor0;
-        
+
         /// <summary>
-        /// Control UpdatePanel12.
+        /// Control rowTipo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel12;
-        
-        /// <summary>
-        /// Control lblTipo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTipo;
-        
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl rowTipo;
+
         /// <summary>
         /// Control UpdatePanel11.
         /// </summary>
@@ -290,7 +274,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel11;
-        
+
         /// <summary>
         /// Control ddlTipo.
         /// </summary>
@@ -299,34 +283,16 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlTipo;
-        
+
         /// <summary>
-        /// Control UpdatePanel13.
+        /// Control rowNivel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel13;
-        
-        /// <summary>
-        /// Control lblNivelReporte.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNivelReporte;
-        
-        /// <summary>
-        /// Control UpdatePanel14.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel14;
-        
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl rowNivel;
+
         /// <summary>
         /// Control ddlNivelReporte.
         /// </summary>
@@ -335,16 +301,25 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlNivelReporte;
-        
+
         /// <summary>
-        /// Control lbl_f_ini.
+        /// Control colFechaIni.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_f_ini;
-        
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl colFechaIni;
+
+        /// <summary>
+        /// Control colFechaIni2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl colFechaIni2;
+
         /// <summary>
         /// Control txtmes_inicial.
         /// </summary>
@@ -353,16 +328,25 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList txtmes_inicial;
-        
+
         /// <summary>
-        /// Control lbl_f_fin.
+        /// Control colFechaFin.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_f_fin;
-        
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl colFechaFin;
+
+        /// <summary>
+        /// Control colFechaFin2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl colFechaFin2;
+
         /// <summary>
         /// Control txtmes_final.
         /// </summary>
@@ -371,7 +355,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList txtmes_final;
-        
+
         /// <summary>
         /// Control Label6.
         /// </summary>
@@ -380,7 +364,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label6;
-        
+
         /// <summary>
         /// Control txtpoliza.
         /// </summary>
@@ -389,7 +373,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtpoliza;
-        
+
         /// <summary>
         /// Control Label7.
         /// </summary>
@@ -398,7 +382,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label7;
-        
+
         /// <summary>
         /// Control ddlsistemas.
         /// </summary>
@@ -407,7 +391,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlsistemas;
-        
+
         /// <summary>
         /// Control Label5.
         /// </summary>
@@ -416,7 +400,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label5;
-        
+
         /// <summary>
         /// Control txttipo.
         /// </summary>
@@ -425,7 +409,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList txttipo;
-        
+
         /// <summary>
         /// Control UpdateProgress4.
         /// </summary>
@@ -434,7 +418,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgress4;
-        
+
         /// <summary>
         /// Control UpdateProgress5.
         /// </summary>
@@ -443,7 +427,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgress5;
-        
+
         /// <summary>
         /// Control UpdatePanel2.
         /// </summary>
@@ -452,7 +436,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
-        
+
         /// <summary>
         /// Control btnAceptar.
         /// </summary>
@@ -461,7 +445,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton btnAceptar;
-        
+
         /// <summary>
         /// Control ImageButton3.
         /// </summary>
@@ -470,7 +454,7 @@ namespace SAF.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton ImageButton3;
-        
+
         /// <summary>
         /// Control UpdateProgress2.
         /// </summary>

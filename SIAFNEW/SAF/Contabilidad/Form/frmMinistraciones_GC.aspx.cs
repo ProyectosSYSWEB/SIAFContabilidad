@@ -92,13 +92,14 @@ namespace SAF.Contabilidad.Form
         }
         protected void Enviar_Click(object sender, EventArgs e)
         {
-            Excel.Application xlApp = new Excel.Application();
             CN_Ministracion CNMinistracion = new CN_Ministracion();
             Session["Ministracion"] = null;
             //Ministracion objMinistracion = new Ministracion();
 
             try
             {
+                Excel.Application xlApp = new Excel.Application();
+
                 if (FileUpload1.HasFile)
                 {
                     HttpPostedFile archivo = FileUpload1.PostedFile;

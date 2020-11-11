@@ -558,8 +558,8 @@ namespace SAF.Rep
                     ddlCuenta_Mayor.Enabled = false;
                     txttipo.Enabled = false;
                     ddlclasificacion.Enabled = false;
-
-
+                    if (grdcuentas_contables.SelectedRow.Cells[4].Text == "3")
+                        DDLSubdependencia.Visible = true;
 
                 }
                 else

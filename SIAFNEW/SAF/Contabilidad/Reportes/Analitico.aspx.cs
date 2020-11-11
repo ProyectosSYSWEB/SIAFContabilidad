@@ -39,10 +39,14 @@ namespace SAF.Form
             btnAceptar.ValidationGroup = string.Empty;
             if (SesionUsu.Usu_Rep == "RP-002" || SesionUsu.Usu_Rep == "RP-004" || SesionUsu.Usu_Rep == "RP-012" || SesionUsu.Usu_Rep == "RP-012-2" || SesionUsu.Usu_Rep == "RP-013" || SesionUsu.Usu_Rep == "RP-023")
             {
-                lbl_f_fin.Visible = true;
-                lbl_f_ini.Visible = true;
-                txtmes_final.Visible = true;
-                txtmes_inicial.Visible = true;
+                //lbl_f_fin.Visible = true;
+                //lbl_f_ini.Visible = true;
+                //txtmes_final.Visible = true;
+                //txtmes_inicial.Visible = true;
+                colFechaIni.Visible = true;
+                colFechaFin.Visible = true;
+                colFechaIni2.Visible = true;
+                colFechaFin2.Visible = true;
 
                 if (SesionUsu.Usu_Rep == "RP-012" || SesionUsu.Usu_Rep == "RP-012-2" || SesionUsu.Usu_Rep == "RP-013" || SesionUsu.Usu_Rep == "RP-023")
                 {
@@ -57,10 +61,15 @@ namespace SAF.Form
                     }
                     else if (SesionUsu.Usu_Rep == "RP-023")
                     {
-                        lbl_f_ini.Visible = false;
-                        txtmes_inicial.Visible = false;
-                        lbl_f_fin.Visible = false;
-                        txtmes_final.Visible = false;
+                        //lbl_f_ini.Visible = false;
+                        //txtmes_inicial.Visible = false;
+                        //lbl_f_fin.Visible = false;
+                        //txtmes_final.Visible = false;
+
+                        colFechaIni.Visible = false;
+                        colFechaFin.Visible = false;
+                        colFechaIni2.Visible = false;
+                        colFechaFin2.Visible = false;
 
                         ImageButton3.Visible = true;
                         CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cuentas_Mayor", ref ddlCuenta_Mayor, ref Listcodigo);
@@ -76,8 +85,7 @@ namespace SAF.Form
                         Label10.Visible = true;
                         lblNivel.Visible = true;
                         ddlnivel.Visible = true;
-                        Label11.Visible = true;
-                        ddlCuenta_Mayor0.Visible = true;
+                        rowCtaMayor.Visible = true;
 
                     }
 
@@ -87,8 +95,7 @@ namespace SAF.Form
                         CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cuentas_Mayor", ref ddlCuenta_Mayor, ref Listcodigo);
                         CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cuentas_Mayor", ref ddlCuenta_Mayor0, ref Listcodigo);
                         Label4.Visible = false;
-                        Label11.Visible = false;
-                        ddlCuenta_Mayor.Visible = false;
+                        rowCtaMayor.Visible = false;
                         ddlCuenta_Mayor0.Visible = false;
                         DDLCentro_Contable0.Visible = true;
                         ddl_cuentas.Visible = false;
@@ -98,16 +105,25 @@ namespace SAF.Form
                         Label10.Visible = true;
                         lblNivel.Visible = true;
                         ddlnivel.Visible = true;
-                        lblTipo.Visible = true;
+                        //lblTipo.Visible = true;
+                        rowTipo.Visible = true;
                         ddlTipo.Visible = true;
                         lblNivel.Visible = false;
                         ddlnivel.Visible = false;
-                        lblNivelReporte.Visible = true;
-                        ddlNivelReporte.Visible = true;
+                        //lblNivelReporte.Visible = true;
+                        //ddlNivelReporte.Visible = true;
+                        rowNivel.Visible = true;
                         btnAceptar.ValidationGroup = "Reporte";
-                        txtmes_inicial.Visible = false;
-                        lbl_f_ini.Visible = false;
-                        lbl_f_fin.Text = "Mes:";
+                        //txtmes_inicial.Visible = false;
+                        //lbl_f_ini.Visible = false;
+                        //lbl_f_fin.Text = "Mes:";
+
+                        colFechaIni.Visible = true;
+                        colFechaFin.Visible = true;
+                        colFechaIni2.Visible = true;
+                        colFechaFin2.Visible = true;
+
+
                         //valCtaCont.ValidationGroup = "Reporte";
                         //valCtaCont0.ValidationGroup = "Reporte";
                     }
@@ -128,12 +144,11 @@ namespace SAF.Form
                         Label10.Visible = true;
                         lblNivel.Visible = true;
                         ddlnivel.Visible = true;
-                        Label11.Visible = true;
-                        ddlCuenta_Mayor0.Visible = true;
+                        rowCtaMayor.Visible = true;
                     }
                 }
 
-                
+
 
             }
             if (SesionUsu.Usu_Rep == "RP-003")
@@ -141,8 +156,12 @@ namespace SAF.Form
                 ddlCuenta_Mayor0.Visible = false;
                 Label12.Visible = false;
                 ImageButton3.Visible = true;
-                txtmes_final.Visible = false;
-                txtmes_inicial.Visible = false;
+                //txtmes_final.Visible = false;
+                //txtmes_inicial.Visible = false;
+                colFechaIni.Visible = false;
+                colFechaFin.Visible = false;
+                colFechaIni2.Visible = false;
+                colFechaFin2.Visible = false;
                 Label3.Visible = false;
                 ddl_cuentas.Visible = false;
                 Label4.Visible = true;
@@ -172,12 +191,17 @@ namespace SAF.Form
                 ddl_cuentas.Visible = false;
                 ddl_cuentas0.Visible = false;
                 ddlCuenta_Mayor.Visible = false;
-                
 
-                lbl_f_fin.Visible = true;
-                lbl_f_ini.Visible = true;
-                txtmes_final.Visible = true;
-                txtmes_inicial.Visible = true;
+
+                //lbl_f_fin.Visible = true;
+                //lbl_f_ini.Visible = true;
+                //txtmes_final.Visible = true;
+                //txtmes_inicial.Visible = true;
+                colFechaIni.Visible = true;
+                colFechaFin.Visible = true;
+                colFechaIni2.Visible = true;
+                colFechaFin2.Visible = true;
+
                 Label7.Visible = true;
                 ddlsistemas.Visible = true;
                 ImageButton3.Visible = true;
@@ -191,13 +215,21 @@ namespace SAF.Form
                 Label9.Visible = true;
                 ddlMayor.Visible = true;
                 Label2.Visible = false;
-                txtmes_final.Visible = false;
+
                 DDLCentro_Contable.Visible = false;
                 Label3.Visible = false;
                 ddl_cuentas.Visible = false;
-                lbl_f_ini.Text = "Mes de Cierre:";
-                lbl_f_ini.Visible = true;
-                txtmes_inicial.Visible = true;
+
+                //txtmes_final.Visible = false;
+                //lbl_f_ini.Text = "Mes de Cierre:";
+                //lbl_f_ini.Visible = true;
+                //txtmes_inicial.Visible = true;
+
+                colFechaIni.Visible = true;
+                colFechaFin.Visible = false;
+                colFechaIni2.Visible = true;
+                colFechaFin2.Visible = false;
+
                 lblNivel.Visible = true;
                 ddlnivel.Visible = true;
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_meses", ref txtmes_inicial);
@@ -207,12 +239,19 @@ namespace SAF.Form
             {
 
                 Label2.Visible = false;
-                txtmes_final.Visible = false;
                 DDLCentro_Contable.Visible = false;
                 Label3.Visible = false;
                 ddl_cuentas.Visible = false;
-                lbl_f_ini.Visible = true;
-                txtmes_inicial.Visible = true;
+
+                //txtmes_final.Visible = false;
+                //lbl_f_ini.Visible = true;
+                //txtmes_inicial.Visible = true;
+
+                colFechaIni.Visible = true;
+                colFechaFin.Visible = false;
+                colFechaIni2.Visible = true;
+                colFechaFin2.Visible = false;
+
                 lblNivel.Visible = true;
                 ddlnivel.Visible = true;
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_meses", ref txtmes_inicial);
@@ -225,13 +264,21 @@ namespace SAF.Form
             {
 
                 Label2.Visible = false;
-                txtmes_final.Visible = false;
+
                 DDLCentro_Contable.Visible = false;
                 Label3.Visible = false;
                 ddl_cuentas.Visible = false;
-                lbl_f_ini.Text = "Mes:";
-                lbl_f_ini.Visible = true;
-                txtmes_inicial.Visible = true;
+                //txtmes_final.Visible = false;
+                //lbl_f_ini.Text = "Mes:";
+                //lbl_f_ini.Visible = true;
+                //txtmes_inicial.Visible = true;
+
+                colFechaIni.Visible = true;
+                colFechaFin.Visible = false;
+                colFechaIni2.Visible = true;
+                colFechaFin2.Visible = false;
+
+
                 lblNivel.Visible = true;
                 ddlnivel.Visible = true;
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_meses", ref txtmes_inicial);
@@ -357,16 +404,33 @@ namespace SAF.Form
             {
                 string ruta;
                 if (ddlNivelReporte.SelectedValue == "1")
+                {
                     if (ddlTipo.SelectedValue == "3220.5" || ddlTipo.SelectedValue == "3220.6")
-                        ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP-012-2&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + Convert.ToString(DDLCentro_Contable.SelectedValue) + Convert.ToString(DDLCentro_Contable0.SelectedValue) + "&mes_inicial=00&mes_final=" + txtmes_final.Text + "&tipo_rep=" + ddlTipo.SelectedValue;
+                    {
+                        //ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP-012-2&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + Convert.ToString(DDLCentro_Contable.SelectedValue) + Convert.ToString(DDLCentro_Contable0.SelectedValue) + "&mes_inicial=00&mes_final=" + txtmes_final.Text + "&tipo_rep=" + ddlTipo.SelectedValue;
+                        ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP-012-2&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + Convert.ToString(DDLCentro_Contable.SelectedValue) + Convert.ToString(DDLCentro_Contable0.SelectedValue) + "&mes_inicial="+txtmes_inicial.SelectedValue+"&mes_final=" + txtmes_final.SelectedValue + "&tipo_rep=" + ddlTipo.SelectedValue;
+
+                    }
                     else
-                        ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP-012-2&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + Convert.ToString(DDLCentro_Contable.SelectedValue) + Convert.ToString(DDLCentro_Contable0.SelectedValue) + "&mes_inicial=" + txtmes_final.Text + "&mes_final=" + txtmes_final.Text + "&tipo_rep=" + ddlTipo.SelectedValue;
+                    {
+                        //ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP-012-2&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + Convert.ToString(DDLCentro_Contable.SelectedValue) + Convert.ToString(DDLCentro_Contable0.SelectedValue) + "&mes_inicial=" + txtmes_final.Text + "&mes_final=" + txtmes_final.Text + "&tipo_rep=" + ddlTipo.SelectedValue;
+                        ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP-012-2&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + Convert.ToString(DDLCentro_Contable.SelectedValue) + Convert.ToString(DDLCentro_Contable0.SelectedValue) + "&mes_inicial=" + txtmes_inicial.SelectedValue + "&mes_final=" + txtmes_final.SelectedValue + "&tipo_rep=" + ddlTipo.SelectedValue;
+
+                    }
+                }
                 else
                 {
                     if (ddlTipo.SelectedValue == "3220.5" || ddlTipo.SelectedValue == "3220.6")
-                        ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP-012-2-Grupo&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + Convert.ToString(DDLCentro_Contable.SelectedValue) + Convert.ToString(DDLCentro_Contable0.SelectedValue) + "&mes_inicial=00&mes_final=" + txtmes_final.Text + "&tipo_rep=" + ddlTipo.SelectedValue;
+                    {
+                        //ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP-012-2-Grupo&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + Convert.ToString(DDLCentro_Contable.SelectedValue) + Convert.ToString(DDLCentro_Contable0.SelectedValue) + "&mes_inicial=00&mes_final=" + txtmes_final.Text + "&tipo_rep=" + ddlTipo.SelectedValue;
+                        ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP-012-2-Grupo&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + Convert.ToString(DDLCentro_Contable.SelectedValue) + Convert.ToString(DDLCentro_Contable0.SelectedValue) + "&mes_inicial="+txtmes_inicial.SelectedValue+"&mes_final=" + txtmes_final.SelectedValue + "&tipo_rep=" + ddlTipo.SelectedValue;
+
+                    }
                     else
-                        ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP-012-2-Grupo&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + Convert.ToString(DDLCentro_Contable.SelectedValue) + Convert.ToString(DDLCentro_Contable0.SelectedValue) + "&mes_inicial=" + txtmes_final.Text + "&mes_final=" + txtmes_final.Text + "&tipo_rep=" + ddlTipo.SelectedValue;
+                    {
+                        //ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP-012-2-Grupo&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + Convert.ToString(DDLCentro_Contable.SelectedValue) + Convert.ToString(DDLCentro_Contable0.SelectedValue) + "&mes_inicial=" + txtmes_final.Text + "&mes_final=" + txtmes_final.Text + "&tipo_rep=" + ddlTipo.SelectedValue;
+                        ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP-012-2-Grupo&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + Convert.ToString(DDLCentro_Contable.SelectedValue) + Convert.ToString(DDLCentro_Contable0.SelectedValue) + "&mes_inicial=" + txtmes_inicial.SelectedValue + "&mes_final=" + txtmes_final.SelectedValue + "&tipo_rep=" + ddlTipo.SelectedValue;
+                    }
                 }
                 string _open = "window.open('" + ruta + "', '_newtab');";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);

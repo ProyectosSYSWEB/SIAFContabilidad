@@ -94,6 +94,9 @@
         .auto-style31 {
             width: 136px;
         }
+        .auto-style32 {
+            height: 26px;
+        }
     </style>
 
 
@@ -1133,8 +1136,8 @@
                                                                 <td align="ce" valign="top" runat="server">
                                                                     <table width="100%">
                                                                         <tr id="rowCFDI" runat="server">
-                                                                            <td runat="server"><strong>¿Incluye CFDI?</strong></td>
-                                                                            <td colspan="3" runat="server">
+                                                                            <td runat="server" class="auto-style32"><strong>¿Incluye CFDI?</strong></td>
+                                                                            <td colspan="3" runat="server" class="auto-style32">
                                                                                 <asp:CheckBox ID="chkIncluyeCFDI" runat="server" Text="Si" />
                                                                             </td>
                                                                         </tr>

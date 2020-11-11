@@ -138,6 +138,9 @@ namespace CapaDatos
                     objPolizaCFDI.Fecha_Captura = Convert.ToString(dr.GetValue(10));
                     objPolizaCFDI.Usuario_Captura = Convert.ToString(dr.GetValue(11));
                     objPolizaCFDI.Centro_Contable = Convert.ToString(dr.GetValue(12));
+                    objPolizaCFDI.Numero_poliza = Convert.ToString(dr.GetValue(13));
+                    objPolizaCFDI.Mes_anio = Convert.ToString(dr.GetValue(14));
+
                     lstPolizasCFDI.Add(objPolizaCFDI);
                 }
                 dr.Close();

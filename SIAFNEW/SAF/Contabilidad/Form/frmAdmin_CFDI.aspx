@@ -85,7 +85,12 @@
 
                                     </td>
                                     <td>
+                                        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                            <ContentTemplate>
                                         <asp:ImageButton ID="imgbtnBuscar" runat="server" CausesValidation="False" ImageUrl="http://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgbtnBuscar_Click" Style="text-align: right" title="Buscar" />
+
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
 
                                     </td>
 
@@ -111,6 +116,8 @@
                                     <asp:GridView ID="grvPolizaCFDI" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" ShowFooter="True" Width="100%" OnPageIndexChanging="grvPolizaCFDI_PageIndexChanging">
                                         <Columns>
                                             <asp:BoundField DataField="Centro_Contable" HeaderText="Centro Contable" />
+                                            <asp:BoundField DataField="Numero_poliza" HeaderText="# Póliza" />
+                                            <asp:BoundField DataField="Mes_anio" HeaderText="Mes Anio" />
                                             <asp:BoundField DataField="Beneficiario_Tipo" HeaderText="Tipo Beneficiario" />
                                             <asp:BoundField DataField="CFDI_Folio" HeaderText="Folio" />
                                             <asp:BoundField DataField="CFDI_Fecha" HeaderText="Fecha" />
