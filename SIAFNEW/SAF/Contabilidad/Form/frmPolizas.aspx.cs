@@ -15,7 +15,7 @@ namespace SAF.Form
     public partial class frmPolizas : System.Web.UI.Page
     {
         #region <Variables>
-        Int32[] Celdas = new Int32[] { 0 };
+        Int32[] Celdas = new Int32[] { 0, 16 };
         string Verificador = string.Empty;
         string Verificador2 = string.Empty;
         string MsjError = string.Empty;
@@ -175,6 +175,7 @@ namespace SAF.Form
             grvPolizaCFDI.DataSource = null;
             grvPolizaCFDI.DataBind();
             Int32[] Celdas = new Int32[] { 11, 12 };
+            Int32[] Celdas2 = new Int32[] { 10, 11, 12 };
             try
             {
                 double TotalPagos;
@@ -187,7 +188,16 @@ namespace SAF.Form
 
                     Label lblTot = (Label)grvPolizaCFDI.FooterRow.FindControl("lblGranTotal");
                     lblTot.Text = TotalPagos.ToString("C");
-                    CNComun.HideColumns(grvPolizaCFDI, Celdas);
+                    if (grvPolizas.SelectedRow.Cells[16].Text == "S")
+                    {
+                        bttnAgregaFactura.Visible = true;
+                        CNComun.HideColumns(grvPolizaCFDI, Celdas);
+                    }
+                    else
+                    {
+                        bttnAgregaFactura.Visible = false;
+                        CNComun.HideColumns(grvPolizaCFDI, Celdas2);
+                    }
 
                 }
 
@@ -567,6 +577,7 @@ namespace SAF.Form
                 DateTime fechaIni =new DateTime();
                 DateTime fechaFin = new DateTime();
                 string MesCC = VerificaMes();
+                SesionUsu.MesActivo = MesCC;
                 if (Convert.ToInt32(MesCC) > 12)
                 {
                     fechaIni = Convert.ToDateTime("31/12/" + SesionUsu.Usu_Ejercicio);
@@ -586,7 +597,7 @@ namespace SAF.Form
 
                 if (SesionUsu.Editar == 0)
                 {
-                    txtFecha.Text = "01/" + MesCC + "/" + SesionUsu.Usu_Ejercicio;
+                    txtFecha.Text = "01/" + MesCC + "/" + SesionUsu.Usu_Ejercicio;                    
                     string Validado = ValidaMes(txtFecha);
                     if (Validado != "Z")
                     {

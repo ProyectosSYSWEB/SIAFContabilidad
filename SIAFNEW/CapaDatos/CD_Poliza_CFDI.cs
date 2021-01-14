@@ -93,6 +93,7 @@ namespace CapaDatos
                     objPolizaCFDI.CFDI_Nombre = Convert.ToString(dr.GetValue(9));
                     objPolizaCFDI.Fecha_Captura = Convert.ToString(dr.GetValue(10));
                     objPolizaCFDI.Usuario_Captura = Convert.ToString(dr.GetValue(11));
+                    objPolizaCFDI.Habilita = (Convert.ToString(dr.GetValue(12))=="S")?true:false;
                     lstPolizasCFDI.Add(objPolizaCFDI);                    
                 }
                 dr.Close();
@@ -115,8 +116,8 @@ namespace CapaDatos
             {
 
                 OracleDataReader dr = null;
-                String[] Parametros = { "P_TIPO_GASTO", "P_TIPO_BENEFICIARIO", "P_BUSCAR" };
-                String[] Valores = { objPolizaCFDI.Tipo_Gasto, objPolizaCFDI.Beneficiario_Tipo, Buscar };
+                String[] Parametros = { "P_TIPO_GASTO", "P_TIPO_BENEFICIARIO", "P_CENTRO_CONTABLE", "P_EJERCICIO", "P_MES", "P_BUSCAR" };
+                String[] Valores = { objPolizaCFDI.Tipo_Gasto, objPolizaCFDI.Beneficiario_Tipo, objPolizaCFDI.Centro_Contable, objPolizaCFDI.Ejercicio, objPolizaCFDI.Mes_anio, Buscar };
 
                 cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Polizas_CFDI_Admin", ref dr, Parametros, Valores);
                 while (dr.Read())

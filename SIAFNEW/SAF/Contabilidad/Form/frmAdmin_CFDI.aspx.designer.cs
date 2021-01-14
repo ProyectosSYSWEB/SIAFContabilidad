@@ -15,15 +15,6 @@ namespace SAF.Contabilidad.Form
     {
 
         /// <summary>
-        /// Control UpdatePanel1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-
-        /// <summary>
         /// Control DDLCentro_Contable.
         /// </summary>
         /// <remarks>
@@ -51,6 +42,15 @@ namespace SAF.Contabilidad.Form
         protected global::System.Web.UI.WebControls.DropDownList ddlTipo_Gasto;
 
         /// <summary>
+        /// Control ddlMes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlMes;
+
+        /// <summary>
         /// Control txtBuscar.
         /// </summary>
         /// <remarks>
@@ -60,13 +60,13 @@ namespace SAF.Contabilidad.Form
         protected global::System.Web.UI.WebControls.TextBox txtBuscar;
 
         /// <summary>
-        /// Control UpdatePanel2.
+        /// Control updPnlBuscar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+        protected global::System.Web.UI.UpdatePanel updPnlBuscar;
 
         /// <summary>
         /// Control imgbtnBuscar.
@@ -76,6 +76,15 @@ namespace SAF.Contabilidad.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgbtnBuscar;
+
+        /// <summary>
+        /// Control updPrgBuscar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPrgBuscar;
 
         /// <summary>
         /// Control UpdateProgress5.

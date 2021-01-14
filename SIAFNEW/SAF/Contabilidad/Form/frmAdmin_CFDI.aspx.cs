@@ -87,6 +87,9 @@ namespace SAF.Contabilidad.Form
                 List<Poliza_CFDI> List = new List<Poliza_CFDI>();
                 ObjPolizaCFDI.Tipo_Gasto = ddlTipo_Gasto.SelectedValue;
                 ObjPolizaCFDI.Beneficiario_Tipo = ddlTipo_Beneficiario.SelectedValue;
+                ObjPolizaCFDI.Centro_Contable = DDLCentro_Contable.SelectedValue;
+                ObjPolizaCFDI.Ejercicio = SesionUsu.Usu_Ejercicio;
+                ObjPolizaCFDI.Mes_anio = ddlMes.SelectedValue;
                 CNPolizaCFDI.PolizaCFDIConsultaDatosAdmin(ObjPolizaCFDI, ref List, txtBuscar.Text);
                 return List;
             }
@@ -133,6 +136,11 @@ namespace SAF.Contabilidad.Form
             string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP_CFDISxls&parametro1=" + ddlTipo_Gasto.SelectedValue + "&parametro2=" + ddlTipo_Beneficiario.SelectedValue + "&parametro3=" + txtBuscar.Text;
             string _open = "window.open('" + ruta + "', 'miniContenedor', 'toolbar=yes', 'location=no', 'menubar=yes', 'resizable=yes');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+        }
+
+        protected void linkBttnBuscar_Click(object sender, EventArgs e)
+        {
+            CargarGridPolizaCFDI();
         }
     }
 }

@@ -290,7 +290,14 @@ namespace SAF.Contabilidad.Form
 
                 CNPoliza.PolizaInsertar(ref objPoliza, ref Verificador);
                 if (Verificador == "0")
-                    CNPolizaDet.PolizaDetInsertar_GC(objPoliza, Convert.ToInt32(DDLCuenta_Contable.SelectedValue), Convert.ToInt32(SesionUsu.Usu_Ejercicio), Mes,  ref Verificador);
+                {
+                    CNPolizaDet.PolizaDetInsertar_GC(objPoliza, Convert.ToInt32(DDLCuenta_Contable.SelectedValue), Convert.ToInt32(SesionUsu.Usu_Ejercicio), Mes, ref Verificador);
+                    if (Verificador != "0")
+                    {
+                        CNComun.VerificaTextoMensajeError(ref Verificador);
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+                    }
+                }
                 //if(Verificador=="0")
             }
             catch (Exception ex)

@@ -46,7 +46,7 @@ namespace SAF
                 //if (Verificador == "0")
                 //{
                     //if (Objinformativa.observaciones.Length > 1)
-                    if (lstComun.Count > 1)
+                    if (lstComun.Count >= 1)
                     {
                         lblMsg_Observaciones.Text = string.Empty;
                         foreach (Comun lst in lstComun)

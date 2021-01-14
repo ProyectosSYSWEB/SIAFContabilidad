@@ -39,16 +39,7 @@ namespace SAF.Form
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow filaCentroContable;
-
-        /// <summary>
-        /// Control lblCentro_Contable.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCentro_Contable;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl filaCentroContable;
 
         /// <summary>
         /// Control UpdatePanel1.
@@ -102,7 +93,7 @@ namespace SAF.Form
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow filaFechas;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl filaFechas;
 
         /// <summary>
         /// Control txtFecha.
@@ -139,15 +130,6 @@ namespace SAF.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblRFecha;
-
-        /// <summary>
-        /// Control lblTipo0.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTipo0;
 
         /// <summary>
         /// Control UpdatePanel24.
@@ -192,7 +174,7 @@ namespace SAF.Form
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow filaFechasBusqueda;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl filaFechasBusqueda;
 
         /// <summary>
         /// Control UpdatePanel23.
@@ -327,7 +309,7 @@ namespace SAF.Form
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow filaBusqueda;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl filaBusqueda;
 
         /// <summary>
         /// Control ddlTipo_CapturaInicio.
@@ -357,6 +339,15 @@ namespace SAF.Form
         protected global::System.Web.UI.WebControls.TextBox txtBuscar;
 
         /// <summary>
+        /// Control UpdatePanel9.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel9;
+
+        /// <summary>
         /// Control imgbtnBuscar.
         /// </summary>
         /// <remarks>
@@ -364,6 +355,15 @@ namespace SAF.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgbtnBuscar;
+
+        /// <summary>
+        /// Control updPrgBuscar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPrgBuscar;
 
         /// <summary>
         /// Control UpdateProgress5.

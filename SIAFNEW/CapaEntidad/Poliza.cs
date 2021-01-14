@@ -42,6 +42,12 @@ namespace CapaEntidad
         private bool _Opcion_CFDI2;
         private bool _Tiene_CFDI;
         private int _Total_CFDI;
+        private string _Mes_Cerrado;
+        public string  Mes_Cerrado
+        {
+            get { return _Mes_Cerrado; }
+            set { _Mes_Cerrado = value; }
+        }
         public bool Opcion_CFDI
         {
             get { return _Opcion_CFDI; }

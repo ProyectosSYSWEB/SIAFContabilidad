@@ -455,6 +455,24 @@
     <Compile Include="Contabilidad\Reportes\CajaGral.aspx.designer.cs">
       <DependentUpon>CajaGral.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Contabilidad\Reportes\RP-004.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RP-004.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\Reportes\RP-005_P.cs">
+      <DependentUpon>RP-005_P.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Contabilidad\Reportes\RP-005.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RP-005.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Contabilidad\Reportes\RP-012-2_Polizas.cs">
       <DependentUpon>RP-012-2_Polizas.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -467,11 +485,17 @@
       <DependentUpon>RP-021.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Contabilidad\Reportes\RP-022.cs">
+    <Compile Include="Contabilidad\Reportes\RP-022_2.cs">
+      <DependentUpon>RP-022_2.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RP-022.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Contabilidad\Reportes\RP-022 - Copia.cs">
+      <DependentUpon>RP-022 - Copia.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Contabilidad\Reportes\RP-compara-01_caja_detalle.cs">
       <DependentUpon>RP-compara-01_caja_detalle.rpt</DependentUpon>
@@ -601,10 +625,10 @@
       <DependentUpon>RP-003exc.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Contabilidad\Reportes\RP-004.cs">
+    <Compile Include="Contabilidad\Reportes\RP-004-2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RP-004.rpt</DependentUpon>
+      <DependentUpon>RP-004-2.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Contabilidad\Reportes\RP-005-lote.cs">
@@ -613,10 +637,10 @@
       <DependentUpon>RP-005-lote.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Contabilidad\Reportes\RP-005.cs">
+    <Compile Include="Contabilidad\Reportes\RP-005-2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RP-005.rpt</DependentUpon>
+      <DependentUpon>RP-005-2.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Contabilidad\Reportes\RP-005exc.cs">
@@ -1519,13 +1543,29 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Contabilidad\Reportes\RP-004.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RP-004.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contabilidad\Reportes\RP-005_P.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RP-005_P.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contabilidad\Reportes\RP-005.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RP-005.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Contabilidad\Reportes\RP-021.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RP-021.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Contabilidad\Reportes\RP-022.rpt">
+    <EmbeddedResource Include="Contabilidad\Reportes\RP-022_2.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>RP-022.cs</LastGenOutput>
+      <LastGenOutput>RP-022_2.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contabilidad\Reportes\RP-022 - Copia.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RP-022 - Copia.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Contabilidad\Reportes\RP-compara-01_caja.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1573,17 +1613,17 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RP-003exc.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Contabilidad\Reportes\RP-004.rpt">
+    <EmbeddedResource Include="Contabilidad\Reportes\RP-004-2.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>RP-004.cs</LastGenOutput>
+      <LastGenOutput>RP-004-2.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Contabilidad\Reportes\RP-005-lote.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RP-005-lote.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Contabilidad\Reportes\RP-005.rpt">
+    <EmbeddedResource Include="Contabilidad\Reportes\RP-005-2.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>RP-005.cs</LastGenOutput>
+      <LastGenOutput>RP-005-2.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Contabilidad\Reportes\RP-005exc.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

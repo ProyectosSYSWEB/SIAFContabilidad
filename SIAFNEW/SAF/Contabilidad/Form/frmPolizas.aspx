@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmPolizas.aspx.cs" Inherits="SAF.Form.frmPolizas" %>
+﻿
+<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmPolizas.aspx.cs" Inherits="SAF.Form.frmPolizas" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style type="text/css">
@@ -91,9 +92,11 @@
         .auto-style29 {
             width: 382px;
         }
+
         .auto-style31 {
             width: 136px;
         }
+
         .auto-style32 {
             height: 26px;
         }
@@ -291,264 +294,239 @@
                 <asp:UpdatePanel ID="UpdatePanel47" runat="server">
                     <ContentTemplate>
                         <asp:Panel ID="pnlPrincipal" runat="server">
-                            <table style="width: 100%;">
-
-                                <tr>
-                                    <td align="right" class="auto-style4" valign="top"></td>
-                                    <td class="auto-style23" valign="top" align="center"></td>
-                                    <td class="style16" valign="top">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td align="right" class="auto-style4" valign="top">&nbsp;</td>
-                                    <td align="center" class="auto-style23" valign="top">&nbsp;</td>
-                                    <td class="style16" valign="top">&nbsp;</td>
-                                </tr>
-                                <tr id="filaCentroContable" runat="server">
-                                    <td align="right" class="auto-style4" valign="top">
-                                        <asp:Label ID="lblCentro_Contable" runat="server" Text="Centro Contable:"></asp:Label>
-
-                                    </td>
-                                    <td class="auto-style23" valign="top">
-                                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                                            <ContentTemplate>
-                                                <asp:DropDownList ID="DDLCentro_Contable" runat="server" Width="100%"
-                                                    AutoPostBack="True"
-                                                    OnSelectedIndexChanged="DDLCentro_Contable_SelectedIndexChanged">
-                                                </asp:DropDownList>
-                                                <br />
-                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server"
-                                                    ControlToValidate="DDLCentro_Contable" ErrorMessage="*Requerido"
-                                                    InitialValue="00000" ValidationGroup="Nuevo"></asp:RequiredFieldValidator>
-                                            </ContentTemplate>
-                                        </asp:UpdatePanel>
-                                    </td>
-                                    <td class="auto-style3" valign="top">
-                                        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                                            <ContentTemplate>
-                                                <asp:ImageButton ID="btnNuevo" runat="server" ImageUrl="http://sysweb.unach.mx/resources/imagenes/nuevo.png" OnClick="btnNuevo_Click" title="Nuevo" ValidationGroup="Nuevo" />
-                                            </ContentTemplate>
-                                        </asp:UpdatePanel>
-                                    </td>
-                                </tr>
-                                <tr id="filaFechas" runat="server" visible="false">
-                                    <td>Fecha:</td>
-                                    <td align="left" colspan="3">
-
-                                        <table width="100%">
-                                            <tr>
-                                                <td class="style17" valign="top">
-                                                    <%--<asp:TextBox ID="txtFecha" runat="server" onFocus="Calendario();"></asp:TextBox>--%>
-                                                    <asp:TextBox ID="txtFecha" runat="server" AutoPostBack="True"
-                                                        CssClass="box" Width="95px" OnTextChanged="txtFecha_TextChanged"></asp:TextBox>
-                                                    <ajaxToolkit:CalendarExtender ID="CalendarExtenderFecha" runat="server" TargetControlID="txtFecha" PopupButtonID="imgCalendario" BehaviorID="_content_CalendarExtenderFecha" />
-                                                    <asp:ImageButton ID="imgCalendario" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
-
-                                                    <asp:Label ID="lblRFecha" runat="server" ForeColor="Red"></asp:Label>
-                                                    <br />
-                                                </td>
-                                                <td class="style9" align="right" valign="top">
-                                                    <asp:Label ID="lblTipo0" runat="server" Text="Tipo:"></asp:Label>
-                                                </td>
-                                                <td class="style9" valign="top">
-                                                    <asp:UpdatePanel ID="UpdatePanel24" runat="server">
-                                                        <ContentTemplate>
-                                                            <asp:DropDownList ID="ddlTipo0" runat="server" AutoPostBack="True"
-                                                                OnSelectedIndexChanged="ddlTipo0_SelectedIndexChanged">
-                                                                <asp:ListItem Value="E">Egreso</asp:ListItem>
-                                                                <asp:ListItem Value="I">Ingreso</asp:ListItem>
-                                                                <asp:ListItem Value="D">Diario</asp:ListItem>
-                                                            </asp:DropDownList>
-                                                        </ContentTemplate>
-                                                    </asp:UpdatePanel>
-                                                </td>
-                                                <td class="style9" align="right" valign="top">
-                                                    <asp:Label ID="lblStatus0" runat="server" Text="Status:" Visible="False"></asp:Label>
-                                                </td>
-                                                <td class="style9" valign="top">
-                                                    <asp:DropDownList ID="ddlStatus0" runat="server" Visible="False">
-                                                        <asp:ListItem Value="A">Aplicado</asp:ListItem>
-                                                        <asp:ListItem Value="N">No Aplicado</asp:ListItem>
-                                                    </asp:DropDownList>
-                                                </td>
-                                                <td class="style9" valign="top">&nbsp;</td>
-                                            </tr>
-                                        </table>
-
-                                    </td>
-                                </tr>
-                                <tr id="filaFechasBusqueda" runat="server">
-                                    <td valign="top">Fecha Inicial:</td>
-                                    <td align="left" width="22%" style="margin-left: 40px;"
-                                        valign="top" colspan="3">
-                                        <table width="100%">
-                                            <tr>
-                                                <td width="100%">
-                                                    <table style="width: 100%;">
-                                                        <tr>
-                                                            <td valign="top" class="style19">
-                                                                <asp:UpdatePanel ID="UpdatePanel23" runat="server">
-                                                                    <ContentTemplate>
-                                                                        <asp:DropDownList ID="ddlFecha_Ini" runat="server" AutoPostBack="True"
-                                                                            OnSelectedIndexChanged="ddlFecha_Ini_SelectedIndexChanged">
-                                                                            <asp:ListItem Value="01">Enero</asp:ListItem>
-                                                                            <asp:ListItem Value="02">Febrero</asp:ListItem>
-                                                                            <asp:ListItem Value="03">Marzo</asp:ListItem>
-                                                                            <asp:ListItem Value="04">Abril</asp:ListItem>
-                                                                            <asp:ListItem Value="05">Mayo</asp:ListItem>
-                                                                            <asp:ListItem Value="06">Junio</asp:ListItem>
-                                                                            <asp:ListItem Value="07">Julio</asp:ListItem>
-                                                                            <asp:ListItem Value="08">Agosto</asp:ListItem>
-                                                                            <asp:ListItem Value="09">Septiembre</asp:ListItem>
-                                                                            <asp:ListItem Value="10">Octubre</asp:ListItem>
-                                                                            <asp:ListItem Value="11">Noviembre</asp:ListItem>
-                                                                            <asp:ListItem Value="12">Diciembre</asp:ListItem>
-                                                                        </asp:DropDownList>
-                                                                        <br />
-                                                                        <asp:Label ID="lblRFecha_Ini" runat="server" ForeColor="Red"></asp:Label>
-                                                                    </ContentTemplate>
-                                                                </asp:UpdatePanel>
-                                                            </td>
-                                                            <td align="right" valign="top" class="auto-style25">Fecha Final:</td>
-                                                            <td valign="top">
-                                                                <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-                                                                    <ContentTemplate>
-                                                                        <asp:DropDownList ID="ddlFecha_Fin" runat="server" AutoPostBack="True"
-                                                                            OnSelectedIndexChanged="ddlFecha_Fin_SelectedIndexChanged1">
-                                                                            <asp:ListItem Value="01">Enero</asp:ListItem>
-                                                                            <asp:ListItem Value="02">Febrero</asp:ListItem>
-                                                                            <asp:ListItem Value="03">Marzo</asp:ListItem>
-                                                                            <asp:ListItem Value="04">Abril</asp:ListItem>
-                                                                            <asp:ListItem Value="05">Mayo</asp:ListItem>
-                                                                            <asp:ListItem Value="06">Junio</asp:ListItem>
-                                                                            <asp:ListItem Value="07">Julio</asp:ListItem>
-                                                                            <asp:ListItem Value="08">Agosto</asp:ListItem>
-                                                                            <asp:ListItem Value="09">Septiembre</asp:ListItem>
-                                                                            <asp:ListItem Value="10">Octubre</asp:ListItem>
-                                                                            <asp:ListItem Value="11">Noviembre</asp:ListItem>
-                                                                            <asp:ListItem Value="12">Diciembre</asp:ListItem>
-                                                                        </asp:DropDownList>
-                                                                        <br />
-                                                                        <asp:Label ID="lblRFecha_Fin" runat="server" ForeColor="Red"></asp:Label>
-                                                                    </ContentTemplate>
-                                                                </asp:UpdatePanel>
-                                                            </td>
-                                                            <td valign="top" align="right" class="auto-style26">
-                                                                <asp:Label ID="lblTipo1" runat="server" Text="Tipo:"></asp:Label>
-                                                                <br />
-                                                            </td>
-                                                            <td valign="top" width="14%" align="left">
-                                                                <asp:UpdatePanel ID="UpdatePanel41" runat="server">
-                                                                    <ContentTemplate>
-                                                                        <asp:DropDownList ID="ddlTipo2" runat="server" AutoPostBack="True"
-                                                                            OnSelectedIndexChanged="ddlTipo2_SelectedIndexChanged">
-                                                                            <asp:ListItem Value="T">Todos</asp:ListItem>
-                                                                            <asp:ListItem Value="E">Egreso</asp:ListItem>
-                                                                            <asp:ListItem Value="I">Ingreso</asp:ListItem>
-                                                                            <asp:ListItem Value="D">Diario</asp:ListItem>
-                                                                        </asp:DropDownList>
-                                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="ddlTipo2" ErrorMessage="*Requerido" InitialValue="T" ValidationGroup="RepLotes"></asp:RequiredFieldValidator>
-                                                                    </ContentTemplate>
-                                                                </asp:UpdatePanel>
-                                                            </td>
-                                                            <td align="right" valign="top" class="auto-style31">
-                                                                <asp:Label ID="lblStatus2" runat="server" Text="Status:"></asp:Label>
-                                                            </td>
-                                                            <td align="left" valign="top">
-                                                                <asp:UpdatePanel ID="UpdatePanel42" runat="server">
-                                                                    <ContentTemplate>
-                                                                        <asp:DropDownList ID="ddlStatus2" runat="server" AutoPostBack="True"
-                                                                            OnSelectedIndexChanged="ddlStatus2_SelectedIndexChanged">
-                                                                            <asp:ListItem Value="T">Todos</asp:ListItem>
-                                                                            <asp:ListItem Value="A">Aplicado</asp:ListItem>
-                                                                            <asp:ListItem Value="N">No Aplicado</asp:ListItem>
-                                                                        </asp:DropDownList>
-                                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="ddlStatus2" ErrorMessage="*Requerido" InitialValue="T" ValidationGroup="RepLotes"></asp:RequiredFieldValidator>
-                                                                    </ContentTemplate>
-                                                                </asp:UpdatePanel>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </table>
-
-                                    </td>
-                                </tr>
-
-                                <tr id="filaBusqueda" runat="server" valign="top">
-                                    <td align="right" class="auto-style4" valign="top">Tipo de Captura: </td>
-                                    <td class="style14" colspan="2" valign="top">
-                                        <table style="width: 100%">
-                                            <tr>
-                                                <td class="auto-style20" valign="top">
-                                                    <asp:DropDownList ID="ddlTipo_CapturaInicio" runat="server">
-                                                        <asp:ListItem Value="T">--Todos--</asp:ListItem>
-                                                        <asp:ListItem Value="MG">Manual Generada</asp:ListItem>
-                                                        <asp:ListItem Value="MC">Manual Capturada</asp:ListItem>
-                                                        <asp:ListItem Value="AC">Automática de Cédula</asp:ListItem>
-                                                        <asp:ListItem Value="AN">Automática de Nómina</asp:ListItem>
-                                                        <asp:ListItem Value="AP">Automática de Presupuesto</asp:ListItem>
-                                                        <asp:ListItem Value="AA">Automática de Adecuación</asp:ListItem>
-                                                        <asp:ListItem Value="AI">Automática de CHIP</asp:ListItem>
-                                                        <asp:ListItem Value="AT">Aplicada Automatica</asp:ListItem>
-                                                    </asp:DropDownList></td>
-                                                <td class="auto-style21" valign="top"># de Póliza/Concepto:
-                                                </td>
-                                                <td valign="top">
-                                                    <asp:UpdatePanel ID="UpdatePanel6" runat="server">
-                                                        <ContentTemplate>
-                                                            <table style="width: 100%">
-                                                                <tr>
-                                                                    <td valign="top" class="auto-style29">
-                                                                        <asp:TextBox ID="txtBuscar" runat="server" CssClass="textbuscar" Width="100%"></asp:TextBox>
-                                                                    </td>
-                                                                    <td valign="top">
-                                                                        <asp:ImageButton ID="imgbtnBuscar" runat="server" CausesValidation="False" ImageUrl="http://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgbtnBuscar_Click" Style="text-align: right" title="Buscar" />
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </ContentTemplate>
-                                                    </asp:UpdatePanel>
-                                                </td>
-
-                                            </tr>
-                                        </table>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="center" valign="top" class="style8" colspan="3" width="100%">
-                                        <asp:UpdateProgress ID="UpdateProgress5" runat="server" AssociatedUpdatePanelID="UpdatePanel2">
-                                            <ProgressTemplate>
-                                                <asp:Image ID="Image7" runat="server" Height="50px" ImageUrl="http://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
-                                                    Width="50px" AlternateText="Espere un momento, por favor.."
-                                                    ToolTip="Espere un momento, por favor.." />
-                                            </ProgressTemplate>
-                                        </asp:UpdateProgress>
-                                        <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel6">
-                                            <ProgressTemplate>
-                                                <asp:Image ID="Image5" runat="server" Height="50px" ImageUrl="http://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
-                                                    Width="50px" AlternateText="Espere un momento, por favor.."
-                                                    ToolTip="Espere un momento, por favor.." />
-                                            </ProgressTemplate>
-                                        </asp:UpdateProgress>
-                                        <asp:UpdateProgress ID="UpdateProgress4" runat="server" AssociatedUpdatePanelID="UpdatePanel10">
-                                            <ProgressTemplate>
-                                                <asp:Image ID="Image4" runat="server" Height="50px" ImageUrl="http://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
-                                                    Width="50px" AlternateText="Espere un momento, por favor.."
-                                                    ToolTip="Espere un momento, por favor.." />
-                                            </ProgressTemplate>
-                                        </asp:UpdateProgress>
-                                        <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
-                                            <ProgressTemplate>
-                                                <asp:Image ID="Image6" runat="server" Height="50px" ImageUrl="http://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
-                                                    Width="50px" AlternateText="Espere un momento, por favor.."
-                                                    ToolTip="Espere un momento, por favor.." />
-                                            </ProgressTemplate>
-                                        </asp:UpdateProgress>
-                                    </td>
-                                </tr>
-                            </table>
+                            <div class="row" id="filaCentroContable" runat="server">
+                                <div class="col-sm-2">
+                                    Centro Contable
+                                </div>
+                                <div class="col-sm-9">
+                                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                        <ContentTemplate>
+                                            <asp:DropDownList ID="DDLCentro_Contable" runat="server" Width="100%"
+                                                AutoPostBack="True"
+                                                OnSelectedIndexChanged="DDLCentro_Contable_SelectedIndexChanged">
+                                            </asp:DropDownList>
+                                            <br />
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server"
+                                                ControlToValidate="DDLCentro_Contable" ErrorMessage="*Requerido"
+                                                InitialValue="00000" ValidationGroup="Nuevo"></asp:RequiredFieldValidator>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                                <div class="col-sm-1">
+                                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                        <ContentTemplate>
+                                            <asp:ImageButton ID="btnNuevo" runat="server" ImageUrl="http://sysweb.unach.mx/resources/imagenes/nuevo.png" OnClick="btnNuevo_Click" title="Nuevo" ValidationGroup="Nuevo" />
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                            <div class="row" id="filaFechas" runat="server" visible="false">
+                                <div class="col-md-2">Fecha</div>
+                                <div class="col-md-2">
+                                    <asp:TextBox ID="txtFecha" runat="server" AutoPostBack="True"
+                                        CssClass="box" Width="95px" OnTextChanged="txtFecha_TextChanged"></asp:TextBox>
+                                    <ajaxToolkit:CalendarExtender ID="CalendarExtenderFecha" runat="server" TargetControlID="txtFecha" PopupButtonID="imgCalendario" BehaviorID="_content_CalendarExtenderFecha" />
+                                    <asp:ImageButton ID="imgCalendario" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
+                                    <asp:Label ID="lblRFecha" runat="server" ForeColor="Red"></asp:Label>
+                                </div>
+                                <div class="col-md-1">
+                                    Tipo
+                                </div>
+                                <div class="col-md-2">
+                                    <asp:UpdatePanel ID="UpdatePanel24" runat="server">
+                                        <ContentTemplate>
+                                            <asp:DropDownList ID="ddlTipo0" runat="server" AutoPostBack="True"
+                                                OnSelectedIndexChanged="ddlTipo0_SelectedIndexChanged">
+                                                <asp:ListItem Value="E">Egreso</asp:ListItem>
+                                                <asp:ListItem Value="I">Ingreso</asp:ListItem>
+                                                <asp:ListItem Value="D">Diario</asp:ListItem>
+                                            </asp:DropDownList>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                                <div class="col-md-2">
+                                    <asp:Label ID="lblStatus0" runat="server" Text="Status:" Visible="False"></asp:Label>
+                                </div>
+                                <div class="col-md-3">
+                                    <asp:DropDownList ID="ddlStatus0" runat="server" Visible="False">
+                                        <asp:ListItem Value="A">Aplicado</asp:ListItem>
+                                        <asp:ListItem Value="N">No Aplicado</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="row" id="filaFechasBusqueda" runat="server">
+                                <div class="col-sm-2">Fecha Inicial</div>
+                                <div class="col-sm-2">
+                                    <asp:UpdatePanel ID="UpdatePanel23" runat="server">
+                                        <ContentTemplate>
+                                            <asp:DropDownList ID="ddlFecha_Ini" runat="server" AutoPostBack="True"
+                                                OnSelectedIndexChanged="ddlFecha_Ini_SelectedIndexChanged">
+                                                <asp:ListItem Value="01">Enero</asp:ListItem>
+                                                <asp:ListItem Value="02">Febrero</asp:ListItem>
+                                                <asp:ListItem Value="03">Marzo</asp:ListItem>
+                                                <asp:ListItem Value="04">Abril</asp:ListItem>
+                                                <asp:ListItem Value="05">Mayo</asp:ListItem>
+                                                <asp:ListItem Value="06">Junio</asp:ListItem>
+                                                <asp:ListItem Value="07">Julio</asp:ListItem>
+                                                <asp:ListItem Value="08">Agosto</asp:ListItem>
+                                                <asp:ListItem Value="09">Septiembre</asp:ListItem>
+                                                <asp:ListItem Value="10">Octubre</asp:ListItem>
+                                                <asp:ListItem Value="11">Noviembre</asp:ListItem>
+                                                <asp:ListItem Value="12">Diciembre</asp:ListItem>
+                                            </asp:DropDownList>
+                                            <br />
+                                            <asp:Label ID="lblRFecha_Ini" runat="server" ForeColor="Red"></asp:Label>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                                <div class="col-sm-1">
+                                    Fecha Final
+                                </div>
+                                <div class="col-md-2">
+                                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                                        <ContentTemplate>
+                                            <asp:DropDownList ID="ddlFecha_Fin" runat="server" AutoPostBack="True"
+                                                OnSelectedIndexChanged="ddlFecha_Fin_SelectedIndexChanged1">
+                                                <asp:ListItem Value="01">Enero</asp:ListItem>
+                                                <asp:ListItem Value="02">Febrero</asp:ListItem>
+                                                <asp:ListItem Value="03">Marzo</asp:ListItem>
+                                                <asp:ListItem Value="04">Abril</asp:ListItem>
+                                                <asp:ListItem Value="05">Mayo</asp:ListItem>
+                                                <asp:ListItem Value="06">Junio</asp:ListItem>
+                                                <asp:ListItem Value="07">Julio</asp:ListItem>
+                                                <asp:ListItem Value="08">Agosto</asp:ListItem>
+                                                <asp:ListItem Value="09">Septiembre</asp:ListItem>
+                                                <asp:ListItem Value="10">Octubre</asp:ListItem>
+                                                <asp:ListItem Value="11">Noviembre</asp:ListItem>
+                                                <asp:ListItem Value="12">Diciembre</asp:ListItem>
+                                            </asp:DropDownList>
+                                            <br />
+                                            <asp:Label ID="lblRFecha_Fin" runat="server" ForeColor="Red"></asp:Label>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                                <div class="col-md-1 text-right">
+                                    <asp:Label ID="lblTipo1" runat="server" Text="Tipo"></asp:Label>
+                                </div>
+                                <div class="col-md-1">
+                                    <asp:UpdatePanel ID="UpdatePanel41" runat="server">
+                                        <ContentTemplate>
+                                            <asp:DropDownList ID="ddlTipo2" runat="server" AutoPostBack="True"
+                                                OnSelectedIndexChanged="ddlTipo2_SelectedIndexChanged">
+                                                <asp:ListItem Value="T">Todos</asp:ListItem>
+                                                <asp:ListItem Value="E">Egreso</asp:ListItem>
+                                                <asp:ListItem Value="I">Ingreso</asp:ListItem>
+                                                <asp:ListItem Value="D">Diario</asp:ListItem>
+                                            </asp:DropDownList>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="ddlTipo2" ErrorMessage="*Requerido" InitialValue="T" ValidationGroup="RepLotes"></asp:RequiredFieldValidator>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                                <div class="col-md-1 text-right">
+                                    <asp:Label ID="lblStatus2" runat="server" Text="Status"></asp:Label>
+                                </div>
+                                <div class="col-md-2">
+                                    <asp:UpdatePanel ID="UpdatePanel42" runat="server">
+                                        <ContentTemplate>
+                                            <asp:DropDownList ID="ddlStatus2" runat="server" AutoPostBack="True"
+                                                OnSelectedIndexChanged="ddlStatus2_SelectedIndexChanged">
+                                                <asp:ListItem Value="T">Todos</asp:ListItem>
+                                                <asp:ListItem Value="A">Aplicado</asp:ListItem>
+                                                <asp:ListItem Value="N">No Aplicado</asp:ListItem>
+                                            </asp:DropDownList>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="ddlStatus2" ErrorMessage="*Requerido" InitialValue="T" ValidationGroup="RepLotes"></asp:RequiredFieldValidator>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                            <div class="row" id="filaBusqueda" runat="server">
+                                <div class="col-md-2">Tipo de Captura</div>
+                                <div class="col-md-3">
+                                    <asp:DropDownList ID="ddlTipo_CapturaInicio" runat="server" Width="100%">
+                                        <asp:ListItem Value="T">--Todos--</asp:ListItem>
+                                        <asp:ListItem Value="MG">Manual Generada</asp:ListItem>
+                                        <asp:ListItem Value="MC">Manual Capturada</asp:ListItem>
+                                        <asp:ListItem Value="AC">Automática de Cédula</asp:ListItem>
+                                        <asp:ListItem Value="AN">Automática de Nómina</asp:ListItem>
+                                        <asp:ListItem Value="AP">Automática de Presupuesto</asp:ListItem>
+                                        <asp:ListItem Value="AA">Automática de Adecuación</asp:ListItem>
+                                        <asp:ListItem Value="AI">Automática de CHIP</asp:ListItem>
+                                        <asp:ListItem Value="AT">Aplicada Automatica</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    # de Póliza/Concepto
+                                </div>
+                                <div class="col-md-4">
+                                    <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="txtBuscar" runat="server" CssClass="textbuscar" Width="100%"></asp:TextBox>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                                <div class="col-md-1">
+                                    <asp:UpdatePanel ID="UpdatePanel9" runat="server">
+                                        <ContentTemplate>
+                                            <asp:ImageButton ID="imgbtnBuscar" runat="server" CausesValidation="False" ImageUrl="http://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgbtnBuscar_Click" Style="text-align: right" title="Buscar" />
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <asp:UpdateProgress ID="updPrgBuscar" runat="server" AssociatedUpdatePanelID="UpdatePanel9">
+                                        <ProgressTemplate>
+                                            <asp:Image ID="imgPgrBuscar" runat="server" Height="50px" ImageUrl="http://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                                Width="50px" AlternateText="Espere un momento, por favor.."
+                                                ToolTip="Espere un momento, por favor.." />
+                                        </ProgressTemplate>
+                                    </asp:UpdateProgress>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <asp:UpdateProgress ID="UpdateProgress5" runat="server" AssociatedUpdatePanelID="UpdatePanel2">
+                                        <ProgressTemplate>
+                                            <asp:Image ID="Image7" runat="server" Height="50px" ImageUrl="http://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                                Width="50px" AlternateText="Espere un momento, por favor.."
+                                                ToolTip="Espere un momento, por favor.." />
+                                        </ProgressTemplate>
+                                    </asp:UpdateProgress>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel6">
+                                        <ProgressTemplate>
+                                            <asp:Image ID="Image5" runat="server" Height="50px" ImageUrl="http://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                                Width="50px" AlternateText="Espere un momento, por favor.."
+                                                ToolTip="Espere un momento, por favor.." />
+                                        </ProgressTemplate>
+                                    </asp:UpdateProgress>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <asp:UpdateProgress ID="UpdateProgress4" runat="server" AssociatedUpdatePanelID="UpdatePanel10">
+                                        <ProgressTemplate>
+                                            <asp:Image ID="Image4" runat="server" Height="50px" ImageUrl="http://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                                Width="50px" AlternateText="Espere un momento, por favor.."
+                                                ToolTip="Espere un momento, por favor.." />
+                                        </ProgressTemplate>
+                                    </asp:UpdateProgress>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
+                                        <ProgressTemplate>
+                                            <asp:Image ID="Image6" runat="server" Height="50px" ImageUrl="http://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                                Width="50px" AlternateText="Espere un momento, por favor.."
+                                                ToolTip="Espere un momento, por favor.." />
+                                        </ProgressTemplate>
+                                    </asp:UpdateProgress>
+                                </div>
+                            </div>
                         </asp:Panel>
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -623,6 +601,7 @@
 
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
+                                                            <asp:BoundField DataField="Mes_Cerrado" />
                                                         </Columns>
                                                         <FooterStyle CssClass="enc" />
                                                         <PagerStyle CssClass="enc" HorizontalAlign="Center" />
@@ -671,467 +650,8 @@
                                                         Información Gral.
                                                     
                                                     </HeaderTemplate>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                                                     <ContentTemplate>
                                                         <table width="100%">
-
                                                             <tr>
                                                                 <td align="ce" valign="top" runat="server">
                                                                     <table width="100%">
@@ -2506,8 +2026,7 @@
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </td>
-                                        <td colspan="3">
-                                            &nbsp;</td>
+                                        <td colspan="3">&nbsp;</td>
                                     </tr>
                                     <tr>
                                         <td>Tipo de Beneficiario:</td>

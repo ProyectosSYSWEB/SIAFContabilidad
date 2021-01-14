@@ -98,6 +98,11 @@ namespace SAF.Reportes
                         reportes_dir();
                         report.SetParameterValue(0, Ejercicio); report.SetParameterValue(1, id); reporte_PDF();
                         break;
+                    case "RP-005_P":
+                        Reporte = "Contabilidad\\Reportes\\RP-005_P.rpt";
+                        reportes_dir();
+                        report.SetParameterValue(0, Ejercicio); report.SetParameterValue(1, id); reporte_PDF();
+                        break;
                     case "RP-006":
                         Reporte = "Contabilidad\\Reportes\\RP-006.rpt";
                         reportes_dir();

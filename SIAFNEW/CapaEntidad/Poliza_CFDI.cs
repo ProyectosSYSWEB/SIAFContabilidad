@@ -14,6 +14,20 @@ namespace CapaEntidad
             set { _IdPoliza_CFDI = value; }
         }
 
+        private string _Ejercicio;
+        public string Ejercicio
+        {
+            get { return _Ejercicio; }
+            set { _Ejercicio = value; }
+        }
+
+        private bool _Habilita;
+        public bool Habilita
+        {
+            get { return _Habilita; }
+            set { _Habilita = value; }
+        }
+
         private string _Mes_anio;
         public string Mes_anio
         {

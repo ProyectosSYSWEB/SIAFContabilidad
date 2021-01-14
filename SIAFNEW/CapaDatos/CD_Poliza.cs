@@ -75,7 +75,7 @@ namespace CapaDatos
 
                     ObjPoliza.Tiene_CFDI = Convert.ToInt32(dr.GetValue(24)) > 0 ? true : false;
 
-
+                    ObjPoliza.Mes_Cerrado = Convert.ToString(dr.GetValue(25));
                     List.Add(ObjPoliza);
                 }
                 dr.Close();
