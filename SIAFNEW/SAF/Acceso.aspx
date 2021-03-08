@@ -40,8 +40,8 @@
                 </div>
                 <div class="col-md-4">
                     <%--                    <h1><small style="color: #FFFFFF">Recaudación de Pagos </small></h1>--%>
-                    <h5 class="logo text-center" style="color: #FFFFFF">Sistema Integral de Administración y Finanzas</h5>
-                    <h1 class="logo text-center" style="color: #FFFFFF">SIAF</h1>
+                    <h6 class="logo text-center" style="color: #FFFFFF">Sistema Integral de Administración y Finanzas</h6>
+                    <h4 class="logo text-center" style="color: #FFFFFF">SIAF-Contabilidad</h4>
                 </div>
                 <div class="col-md-4">
                     <img src="https://sysweb.unach.mx/resources/imagenes/unach.jpg" class="img-fluid d-none d-sm-none d-md-block" alt="Responsive image" style="cursor: pointer" />
@@ -83,6 +83,7 @@
                                 <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                             </div>
                             <asp:DropDownList ID="ddlEjercicio" runat="server" CssClass="form-control">
+                                <asp:ListItem>2021</asp:ListItem>
                                 <asp:ListItem>2020</asp:ListItem>
                                 <asp:ListItem>2019</asp:ListItem>
                                 <asp:ListItem>2018</asp:ListItem>
@@ -127,8 +128,7 @@
                         <div class="row">
                             <div class="col">
                                 <div id="divMsjUsuDep" class="alert alert-warning" role="alert">
-                                    <strong>El acceso al sistema es con la cta. y la contraseña del correo unach,</strong> &nbsp; si no actualizaste tu información dar click en el siguiente enlace.
-                                    <button id="bttnModalActualizar" type="button" class="btn btn-link">Actualizar datos</button>
+                                    <strong>El acceso al sistema es con la cta. y la contraseña del correo unach.</strong>
                                     <br />
                                     <a href="https://ldapauthmaster.unach.mx/pssform_resetaccount.php" target="_blank">¿Olvidó  la contraseña del correo institucional?</a>
 
@@ -150,8 +150,7 @@
                             <p>
                                 <i class="fas fa-home mr-3"></i>2da. Poniente Sur No. 108, Edificio Maciel, 3er. Piso Tuxtla Gutiérrez, Chiapas.
                             </p>
-                            <p><i class="fas fa-envelope mr-3"></i>depfin@unach.mx, sysweb@unach.mx</p>
-                            <p><i class="fas fa-phone mr-3"></i>(961) 61 7 80 00, extensiones: 5108 Y 5501</p>
+                            <p>sysweb@unach.mx</p>
                         </div>
                         <div class="col-md-6 mb-md-0 mb-3">
                             <div class="text-xl-center">
@@ -168,57 +167,10 @@
 
         <asp:HiddenField ID="HiddenField1" runat="server" />
 
-        <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="HiddenField1" PopupControlID="Panel3" BackgroundCssClass="modalBackground_Proy">
-        </ajaxToolkit:ModalPopupExtender>
-
         <%-- Inicia PopUP --%>
 
 
-        <asp:Panel ID="Panel3" runat="server" CssClass="TituloModalPopupMsg" Width="300px">
-
-            <asp:ImageButton ID="imgCerrar" ImageUrl="https://sysweb.unach.mx/resources/imagenes/cerrar.png" runat="server" Width="10px" CssClass="cerrar_pop" />
-
-            <div class="titulo_pop">
-                AVISO
-            </div>
-            <center>
-                <br />
-         <img src="https://sysweb.unach.mx/resources/imagenes/informacion.png"/>
-             </center>
-
-            <div class="info_pop gris_12px">
-                Estimado usuario de Sysweb:<br />
-                <br />
-                Por seguridad, todos los usuarios deberán de completar cierta información de su cuenta Sysweb, ya que en determinado momento solo los usuarios actualizados podrán acceder a nuestros sistemas. Para modificar los datos de su cuenta, de click en el botón <a>'Actualizar mis datos'</a>.
-             <br />
-                Si ya actualizó los datos de su usuario solo de click en el boton <a>'Continuar'</a>
-                <br />
-                <br />
-                Esta medida es meramente preventiva. Lamentamos el inconveniente.
-             <br />
-                <br />
-
-                <label class="f11px">
-                    Para obtener más información acerca de por qué adoptamos esta medida de precaución, no dudes en comunicarte con nosotros:<br />
-                    <br />
-                    Teléfono:<a>(961) 617 80 00 ext.: 1302, 5519, 5520 y 5087</a>
-                </label>
-                <br />
-                <br />
-                Gracias.<br />
-                El equipo de Sysweb
-              <br />
-                <br />
-            </div>
-
-            <div class="esp_botones">
-                <asp:Button ID="btnAceptar" runat="server" Text="Actualizar mis datos" CssClass="btn" PostBackUrl="https://www.sysweb.unach.mx/administrator/" OnClick="btnAceptar_Click" />
-                &nbsp;  
-                 <asp:Button ID="btnCancelar" runat="server" Text="Continuar" CssClass="btn2" />
-            </div>
-
-
-        </asp:Panel>
+        
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">

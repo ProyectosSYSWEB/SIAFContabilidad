@@ -489,7 +489,7 @@ namespace SAF.Form
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "Veranexo_tabular_Exel('RP-023exc'," + SesionUsu.Usu_Ejercicio + ",'" + Convert.ToString(DDLCentro_Contable.SelectedValue) + Convert.ToString(DDLCentro_Contable0.SelectedValue) + "','" + Listcodigo[ddlCuenta_Mayor.SelectedIndex].EtiquetaDos + Listcodigo[ddlCuenta_Mayor0.SelectedIndex].EtiquetaDos + "','" + "00" + anio + "','" + "13" + anio + "','4');", true);
             }
-            if (SesionUsu.Usu_Rep == "RP-003")
+            if (SesionUsu.Usu_Rep == "RP-003-1")
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "VerCatalogo_Cuentas_Exel('RP-003exc'," + SesionUsu.Usu_Ejercicio + ",'" + Convert.ToString(DDLCentro_Contable.SelectedValue) + "','" + ddlCuenta_Mayor.SelectedValue + "');", true);
             }

@@ -153,4 +153,41 @@ namespace CapaEntidad
             set { _Centro_Contable = value.Trim(); }
         }
     }
+    public class Poliza_Oficio
+    {
+        private int _IdPoliza_Oficio;
+        public int IdPoliza_Oficio
+        {
+            get { return _IdPoliza_Oficio; }
+            set { _IdPoliza_Oficio = value; }
+        }
+
+        private string _Numero_Oficio;
+        public string Numero_Oficio
+        {
+            get { return _Numero_Oficio; }
+            set { _Numero_Oficio = value; }
+        }
+
+        private string _Fecha_Oficio;
+        public string Fecha_Oficio
+        {
+            get { return _Fecha_Oficio; }
+            set { _Fecha_Oficio = value; }
+        }
+
+        private string _NombreArchivoOficio = string.Empty;
+        public string NombreArchivoOficio
+        {
+            get { return _NombreArchivoOficio.Trim(); }
+            set { _NombreArchivoOficio = value.Trim(); }
+        }
+
+        private string _Ruta_Oficio = string.Empty;
+        public string Ruta_Oficio
+        {
+            get { return _Ruta_Oficio.Trim(); }
+            set { _Ruta_Oficio = value.Trim(); }
+        }
+    }
 }

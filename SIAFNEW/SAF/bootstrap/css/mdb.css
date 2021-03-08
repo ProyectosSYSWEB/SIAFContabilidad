@@ -2141,18 +2141,38 @@ a.waves-effect, a.waves-light {
           animation-name: fadeOutUp; }
 
 .btn {
-  margin: 0.375rem;
-  color: inherit;
+    /*margin: 0.175rem;*/
+    margin:1px 2px 1px 2px;
+    color: inherit;
+    word-wrap: break-word;
+    white-space: normal;
+    cursor: pointer;
+    border: 0;
+    border-radius: 0.125rem;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    /*padding: 0.84rem 2.14rem;*/
+    /*    padding: .5rem 1rem;*/
+    padding: .5rem;
+    font-size: 12px;
+}
 
-  word-wrap: break-word;
-  white-space: normal;
-  cursor: pointer;
-  border: 0;
-  border-radius: 0.125rem;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  /*padding: 0.84rem 2.14rem;*/
-  font-size: 0.81rem; }
+.btn_grid {
+    /*margin: 0.175rem;*/
+    margin: 1px;
+    color: inherit;
+    word-wrap: break-word;
+    white-space: normal;
+    cursor: pointer;
+    border: 0;
+    border-radius: 0.125rem;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    /*padding: 0.84rem 2.14rem;*/
+    /*    padding: .5rem 1rem;*/
+    padding: 7px 7px;
+    font-size: 11px;
+}
 
 .btn_buscar {
     color: inherit;
@@ -2178,10 +2198,14 @@ a.waves-effect, a.waves-light {
   .btn .fab.left,
   .btn .far.left {
     margin-right: 0.3rem; }
-  .btn.btn-lg {
+/*  .btn.btn-lg {
     padding: 1rem 2.4rem;
     font-size: 0.94rem; }
-  .btn.btn-md {
+*/  
+
+
+
+.btn.btn-md {
     padding: 0.7rem 1.6rem;
     font-size: 0.7rem; }
   .btn.btn-sm {
@@ -2528,23 +2552,26 @@ table.table a.btn.btn-default {
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); }
 
 .btn-secondary {
-  background-color: #aa66cc !important;
-  color: #fff; }
+    background-color: #989898 !important;
+    color: #fff;
+}
   .btn-secondary:hover {
     background-color: #b579d2;
     color: #fff; }
   .btn-secondary:focus, .btn-secondary.focus {
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); }
-  .btn-secondary:focus, .btn-secondary:active, .btn-secondary.active {
-    background-color: #773399; }
+    .btn-secondary:focus, .btn-secondary:active, .btn-secondary.active {
+        background-color: #636363;
+    }
   .btn-secondary.dropdown-toggle {
     background-color: #aa66cc !important; }
     .btn-secondary.dropdown-toggle:hover, .btn-secondary.dropdown-toggle:focus {
       background-color: #b579d2 !important; }
-  .btn-secondary:not([disabled]):not(.disabled):active, .btn-secondary:not([disabled]):not(.disabled).active,
-  .show > .btn-secondary.dropdown-toggle {
-    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
-    background-color: #773399 !important; }
+    .btn-secondary:not([disabled]):not(.disabled):active, .btn-secondary:not([disabled]):not(.disabled).active,
+    .show > .btn-secondary.dropdown-toggle {
+        box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+        background-color: #636363 !important;
+    }
   .btn-secondary:not([disabled]):not(.disabled):active:focus, .btn-secondary:not([disabled]):not(.disabled).active:focus,
   .show > .btn-secondary.dropdown-toggle:focus {
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); }
@@ -4058,7 +4085,7 @@ table.table a.btn.btn-black {
     padding: 0px 0px 0px 0px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
     font-weight: 300;
-    font-size:small;
+    font-size:12px;
 }
   .navbar form .md-form input {
     margin: 0 5px 1px 8px; }
@@ -6191,7 +6218,7 @@ ul.stepper {
   display: inline-block;
   overflow: hidden;
   transition: all 0.2s ease-in-out;
-  margin: 10px;
+  /*margin: 10px;*/
   border-radius: 50%;
   padding: 0;
   cursor: pointer;

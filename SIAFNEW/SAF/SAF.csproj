@@ -125,6 +125,7 @@
     <Content Include="Contabilidad\Form\frmDashboard.aspx" />
     <Content Include="Contabilidad\Form\FrmIngresos_Propios.aspx" />
     <Content Include="Contabilidad\Form\frmMinistraciones_GC.aspx" />
+    <Content Include="Contabilidad\Form\frmPolizas2.aspx" />
     <Content Include="Contabilidad\Form\frmPolizas_Old.aspx" />
     <Content Include="Contabilidad\Reportes\CajaGral.aspx" />
     <Content Include="Inicio.aspx" />
@@ -441,6 +442,13 @@
     <Compile Include="Contabilidad\Form\frmMinistraciones_GC.aspx.designer.cs">
       <DependentUpon>frmMinistraciones_GC.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Contabilidad\Form\frmPolizas2.aspx.cs">
+      <DependentUpon>frmPolizas2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\Form\frmPolizas2.aspx.designer.cs">
+      <DependentUpon>frmPolizas2.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Contabilidad\Form\frmPolizas_Old.aspx.cs">
       <DependentUpon>frmPolizas_Old.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -461,6 +469,12 @@
       <DependentUpon>RP-004.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Contabilidad\Reportes\RP-005-lote-exc.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RP-005-lote-exc.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Contabilidad\Reportes\RP-005_P.cs">
       <DependentUpon>RP-005_P.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -478,6 +492,12 @@
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Contabilidad\Reportes\RP-013_ORIGINAL.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RP-013_ORIGINAL.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Contabilidad\Reportes\RP-021.cs">
       <AutoGen>True</AutoGen>
@@ -1547,6 +1567,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RP-004.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Contabilidad\Reportes\RP-005-lote-exc.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RP-005-lote-exc.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Contabilidad\Reportes\RP-005_P.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RP-005_P.cs</LastGenOutput>
@@ -1554,6 +1578,10 @@
     <EmbeddedResource Include="Contabilidad\Reportes\RP-005.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RP-005.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contabilidad\Reportes\RP-013_ORIGINAL.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RP-013_ORIGINAL.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Contabilidad\Reportes\RP-021.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

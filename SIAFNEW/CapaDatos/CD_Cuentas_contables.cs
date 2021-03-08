@@ -64,6 +64,7 @@ namespace CapaDatos
                 while (dr.Read())
                 {
                     Objcuentas_contables = new cuentas_contables();
+
                     Objcuentas_contables.id = Convert.ToString(dr[0]);
                     Objcuentas_contables.descripcion = Convert.ToString(dr[1]);
                     Objcuentas_contables.natura = Convert.ToString(dr[4]);

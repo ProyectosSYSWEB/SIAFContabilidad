@@ -37,6 +37,7 @@ namespace CapaDatos
                     ObjPoliza.Numero_poliza = Convert.ToString(dr.GetValue(2));
                     ObjPoliza.Tipo = Convert.ToString(dr.GetValue(4));
                     ObjPoliza.Fecha = Convert.ToString(dr.GetValue(7));
+                    ObjPoliza.Mes_anio = Convert.ToString(dr.GetValue(8));
                     ObjPoliza.Status = Convert.ToString(dr.GetValue(9));                    
                     ObjPoliza.Concepto = Convert.ToString(dr.GetValue(6));
                     ObjPoliza.Tot_Cargo = Convert.ToDouble(dr.GetValue(19));
@@ -50,32 +51,47 @@ namespace CapaDatos
                     ObjPoliza.Opcion_Modificar2 = Convert.ToString(dr.GetValue(21)) == "S" ? true : false;
                     ObjPoliza.Opcion_Copiar = Convert.ToString(dr.GetValue(10)) == "MC" ? (Centro_Contable == "00000" || Convert.ToString(dr.GetValue(21)) == "S") ? false : true : false;
                     ObjPoliza.Opcion_Copiar2 = Convert.ToString(dr.GetValue(10)) == "MC" ? (Centro_Contable == "00000" || Convert.ToString(dr.GetValue(21)) == "S") ? true : false : true;
-                    //ObjPoliza.Opcion_CFDI = Convert.ToString(dr.GetValue(22)) == "E" && Convert.ToString(dr.GetValue(23) ? true : false;
-                    //ObjPoliza.Opcion_CFDI2 = Convert.ToString(dr.GetValue(22)) == "E" ? false : true;
+                    //if (Convert.ToString(dr.GetValue(22)) == "E" && Convert.ToString(dr.GetValue(23)) == "S")
+                    //{
+                    //    ObjPoliza.Opcion_CFDI = true;
+                    //    ObjPoliza.Opcion_CFDI2 = false;
+                    //}
+                    //else if (Convert.ToString(dr.GetValue(22)) == "D" && Convert.ToString(dr.GetValue(23))=="S")
+                    //{
+                    //    ObjPoliza.Opcion_CFDI = true;
+                    //    ObjPoliza.Opcion_CFDI2 = false;
 
-                    //ObjPoliza.Opcion_CFDI = (Convert.ToString(dr.GetValue(22)) == "E" && Convert.ToString(dr.GetValue(23)) == "S") ? true : false;
-                    //ObjPoliza.Opcion_CFDI = (Convert.ToString(dr.GetValue(22)) == "E" && Convert.ToString(dr.GetValue(23)) == "S") ? false : true;
-
-                    if (Convert.ToString(dr.GetValue(22)) == "E" && Convert.ToString(dr.GetValue(23)) == "S")
+                    //}
+                    //else
+                    //{
+                    //    ObjPoliza.Opcion_CFDI = false;
+                    //    ObjPoliza.Opcion_CFDI2 = true;
+                    //}
+                    if (Convert.ToString(dr.GetValue(22)) == "E" && (Convert.ToString(dr.GetValue(28)) == "CFDI" || Convert.ToString(dr.GetValue(28)) == "OFICIO"))
                     {
                         ObjPoliza.Opcion_CFDI = true;
                         ObjPoliza.Opcion_CFDI2 = false;
+                        ObjPoliza.Desc_Tipo_Documento = Convert.ToString(dr.GetValue(24))=="0"?"+ " + Convert.ToString(dr.GetValue(28)) : "("+Convert.ToString(dr.GetValue(24))+")" + Convert.ToString(dr.GetValue(28));
                     }
-                    else if (Convert.ToString(dr.GetValue(22)) == "D" && Convert.ToString(dr.GetValue(23))=="S")
+                    else if (Convert.ToString(dr.GetValue(22)) == "D" && (Convert.ToString(dr.GetValue(28)) == "CFDI" || Convert.ToString(dr.GetValue(28)) == "OFICIO"))
                     {
                         ObjPoliza.Opcion_CFDI = true;
                         ObjPoliza.Opcion_CFDI2 = false;
-
+                        ObjPoliza.Desc_Tipo_Documento = Convert.ToString(dr.GetValue(24)) == "0" ? "+ " + Convert.ToString(dr.GetValue(28)) : "(" + Convert.ToString(dr.GetValue(24)) + ")" + Convert.ToString(dr.GetValue(28));
                     }
                     else
                     {
                         ObjPoliza.Opcion_CFDI = false;
                         ObjPoliza.Opcion_CFDI2 = true;
+                        ObjPoliza.Desc_Tipo_Documento = "S/N";
                     }
 
                     ObjPoliza.Tiene_CFDI = Convert.ToInt32(dr.GetValue(24)) > 0 ? true : false;
-
+                    ObjPoliza.Total_CFDI = Convert.ToInt32(dr.GetValue(24));
                     ObjPoliza.Mes_Cerrado = Convert.ToString(dr.GetValue(25));
+                    ObjPoliza.Cheque_numero = Convert.ToString(dr.GetValue(26));
+                    ObjPoliza.Cheque_importe = Convert.ToDouble(dr.GetValue(27));
+                    ObjPoliza.Tipo_Documento = Convert.ToString(dr.GetValue(28));
                     List.Add(ObjPoliza);
                 }
                 dr.Close();
@@ -114,6 +130,8 @@ namespace CapaDatos
                                           "P_CEDULA_NUMERO",
                                           "P_BENEFICIARIO",
                                           "P_CFDI",
+                                          "P_TIPO_DOCUMENTO",
+                                          "P_CLASIFICACION",
                                           "P_BANDERA"
                 };
 
@@ -134,7 +152,8 @@ namespace CapaDatos
                     ObjPoliza.Cedula_numero = Convert.ToString(Cmd.Parameters["P_CEDULA_NUMERO"].Value);
                     ObjPoliza.Beneficiario = Convert.ToString(Cmd.Parameters["P_BENEFICIARIO"].Value);
                     ObjPoliza.CFDI = Convert.ToString(Cmd.Parameters["P_CFDI"].Value);
-
+                    ObjPoliza.Tipo_Documento = Convert.ToString(Cmd.Parameters["P_TIPO_DOCUMENTO"].Value);
+                    ObjPoliza.Clasificacion = Convert.ToString(Cmd.Parameters["P_CLASIFICACION"].Value);
                 }
 
 
@@ -156,13 +175,14 @@ namespace CapaDatos
             {
                 String[] Parametros = { "P_EJERCICIO", "P_NUMERO_POLIZA", "P_CENTRO_CONTABLE", "P_TIPO", 
                                         "P_CONCEPTO", "P_FECHA", "P_STATUS", "P_TIPO_CAPTURA","P_ALTA_USUARIO",
-                                        "P_CHEQUE_CUENTA","P_CHEQUE_NUMERO","P_CHEQUE_IMPORTE","P_CEDULA_NUMERO", "P_BENEFICIARIO", "P_CFDI"};
+                                        "P_CHEQUE_CUENTA","P_CHEQUE_NUMERO","P_CHEQUE_IMPORTE","P_CEDULA_NUMERO", "P_BENEFICIARIO", "P_CFDI", "P_OFICIO_AUTORIZACION","P_TIPO_DOCUMENTO", "P_CLASIFICACION"};
                 object[] Valores = {    ObjPoliza.Ejercicio, ObjPoliza.Numero_poliza, ObjPoliza.Centro_contable, ObjPoliza.Tipo,
                                         ObjPoliza.Concepto, ObjPoliza.Fecha, ObjPoliza.Status, ObjPoliza.Tipo_captura, ObjPoliza.Alta_usuario,
-                                        ObjPoliza.Cheque_cuenta,ObjPoliza.Cheque_numero,ObjPoliza.Cheque_importe,ObjPoliza.Cedula_numero,ObjPoliza.Beneficiario,ObjPoliza.CFDI};
+                                        ObjPoliza.Cheque_cuenta,ObjPoliza.Cheque_numero,ObjPoliza.Cheque_importe,ObjPoliza.Cedula_numero,ObjPoliza.Beneficiario,ObjPoliza.CFDI, ObjPoliza.Oficio_Autorizacion,ObjPoliza.Tipo_Documento,ObjPoliza.Clasificacion};
                 String[] ParametrosOut = { "p_Bandera", "p_id_poliza" };
 
-                Cmd = CDDatos.GenerarOracleCommand("ins_saf_polizas2", ref Verificador, Parametros, Valores, ParametrosOut);
+                //Cmd = CDDatos.GenerarOracleCommand("ins_saf_polizas2", ref Verificador, Parametros, Valores, ParametrosOut);
+                Cmd = CDDatos.GenerarOracleCommand("ins_saf_polizas", ref Verificador, Parametros, Valores, ParametrosOut);
                 if (Verificador == "0")
                 {
                     ObjPoliza.IdPoliza = Convert.ToInt32(Cmd.Parameters["P_ID_POLIZA"].Value);
@@ -185,12 +205,13 @@ namespace CapaDatos
             {
                 String[] Parametros = { "P_ID_POLIZA","P_NUMERO_POLIZA", "P_CENTRO_CONTABLE", "P_TIPO", 
                                         "P_CONCEPTO", "P_FECHA", "P_STATUS", "P_TIPO_CAPTURA","P_MODIFICACION_USUARIO",
-                                        "P_CHEQUE_CUENTA","P_CHEQUE_NUMERO","P_CHEQUE_IMPORTE","P_CEDULA_NUMERO","P_BENEFICIARIO","P_CFDI"};
+                                        "P_CHEQUE_CUENTA","P_CHEQUE_NUMERO","P_CHEQUE_IMPORTE","P_CEDULA_NUMERO","P_BENEFICIARIO","P_CFDI","P_OFICIO_AUTORIZACION", "P_TIPO_DOCUMENTO", "P_CLASIFICACION"};
                 object[] Valores = {    ObjPoliza.IdPoliza,ObjPoliza.Numero_poliza, ObjPoliza.Centro_contable, ObjPoliza.Tipo, 
                                         ObjPoliza.Concepto, ObjPoliza.Fecha, ObjPoliza.Status, ObjPoliza.Tipo_captura, ObjPoliza.Modificacion_usuario,
-                                        ObjPoliza.Cheque_cuenta,ObjPoliza.Cheque_numero,ObjPoliza.Cheque_importe,ObjPoliza.Cedula_numero,ObjPoliza.Beneficiario,ObjPoliza.CFDI};
+                                        ObjPoliza.Cheque_cuenta,ObjPoliza.Cheque_numero,ObjPoliza.Cheque_importe,ObjPoliza.Cedula_numero,ObjPoliza.Beneficiario,ObjPoliza.CFDI,ObjPoliza.Oficio_Autorizacion, ObjPoliza.Tipo_Documento, ObjPoliza.Clasificacion};
                 String[] ParametrosOut = { "p_Bandera" };
-                Cmd = CDDatos.GenerarOracleCommand("UPD_SAF_POLIZAS2", ref Verificador, Parametros, Valores, ParametrosOut);
+                //Cmd = CDDatos.GenerarOracleCommand("UPD_SAF_POLIZAS2", ref Verificador, Parametros, Valores, ParametrosOut);
+                Cmd = CDDatos.GenerarOracleCommand("UPD_SAF_POLIZAS", ref Verificador, Parametros, Valores, ParametrosOut);
             }
             catch (Exception ex)
             {

@@ -6,6 +6,7 @@ using System.Text;
 using System.Web.UI;
 using CapaEntidad;
 using CapaDatos;
+using System.Data.OracleClient;
 
 namespace CapaNegocio
 {
@@ -75,13 +76,29 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void LlenaListpruebas(string SP, ref ListBox lstBox, string parametro1, string parametro2, string valor1, string valor2)
+        {
+            try
+            {
+                OracleDataReader dr = null;
+                List<Comun> Lista = new List<Comun>();
+                CD_Comun CDComun = new CD_Comun();
+                CDComun.LlenaListpruebas(SP, ref lstBox, parametro1, parametro2, valor1, valor2);
+                
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void LlenaList(string SP, ref ListBox DDL, string parametro1, string parametro2, string valor1, string valor2)
         {
             try
             {
                 List<Comun> Lista = new List<Comun>();
                 CD_Comun CDComun = new CD_Comun();
-                CDComun.LlenaCombo(SP, ref Lista, parametro1, parametro2, valor1, valor2);
+                CDComun.LlenaList(SP, ref Lista, parametro1, parametro2, valor1, valor2);
                 DDL.Items.Clear();
                 if (Lista.Count > 0)
                 {
@@ -101,6 +118,8 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+
+
         public void LlenaCombo(string SP, ref DropDownList DDL, string parametro1, string parametro2, string valor1, string valor2)
         {
             try
@@ -424,6 +443,36 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+
+        //public void LlenaList(string SP, ref ListBox DDL, string parametro1, string parametro2, string valor1, string valor2)
+        //{
+        //    try
+        //    {
+        //        List<Comun> Lista = new List<Comun>();
+        //        CD_Comun CDComun = new CD_Comun();
+        //        CDComun.LlenaCombo(SP, ref Lista, parametro1, parametro2, valor1, valor2);
+        //        DDL.Items.Clear();
+        //        if (Lista.Count > 0)
+        //        {
+        //            DDL.DataSource = Lista;
+        //            DDL.DataValueField = "IdStr";
+        //            DDL.DataTextField = "Descripcion";
+
+        //            DDL.DataBind();
+        //        }
+        //        else
+        //        {
+        //            DDL.Items.Add("La opción no contiene datos");
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
+
+
         public void LlenaCombo(string SP, ref ListBox DDL, string parametro1, string parametro2, string valor1, string valor2, ref List<Comun> Etiquetas)
         {
             try

@@ -46,6 +46,20 @@ namespace CapaNegocio
             }
 
         }
+
+        public void PolizaOficiosDatos(Poliza_Oficio objPolizaOficio, ref List<Poliza_Oficio> lstPolizaOficios, ref string Verificador)
+        {
+            try
+            {
+                CD_Poliza_Oficio CDPolizaOficio = new CD_Poliza_Oficio();
+                CDPolizaOficio.PolizaOficiosDatos(objPolizaOficio, ref lstPolizaOficios, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
         public void PolizaCFDIConsultaDatosAdmin(Poliza_CFDI objPolizaCFDI, ref List<Poliza_CFDI> lstPolizasCFDI, string Buscar)
         {
             try
@@ -62,4 +76,37 @@ namespace CapaNegocio
 
 
     }
-}
+    public class CN_Poliza_Oficio
+    {
+        public void PolizaOficioInsertar(Poliza_Oficio objPolizaOficio, string Usuario, List<Poliza_Oficio> lstPolizaOficios, ref string Verificador)
+        {
+            try
+            {
+                CD_Poliza_Oficio CDPolizaOficio = new CD_Poliza_Oficio();
+                CDPolizaOficio.PolizaOficioBorrar(objPolizaOficio, ref Verificador);
+                if (Verificador == "0")
+                {
+                    Verificador = string.Empty;
+                    CDPolizaOficio.PolizaOficioInsertar(objPolizaOficio, Usuario, lstPolizaOficios, ref Verificador);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void PolizaOficiosConsulta(Poliza_Oficio objPolizaOficio, ref List<Poliza_Oficio> lstPolizaOficios, ref string Verificador)
+        {
+            try
+            {
+                CD_Poliza_Oficio CDPolizaOficio = new CD_Poliza_Oficio();
+                CDPolizaOficio.PolizaOficiosDatos(objPolizaOficio, ref lstPolizaOficios, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+    }
+    }

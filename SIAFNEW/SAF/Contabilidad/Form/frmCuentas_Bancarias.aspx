@@ -238,8 +238,8 @@
                             </tr>
                             <tr>
                                 <td class="cuadro_botones" colspan="3" style="width: 30%">
-                                    <asp:Button ID="btnCancelar" runat="server" CssClass="btn2" Height="30px" onclick="btnCancelar_Click" Text="Cancelar" Width="80px" />
-                                    &nbsp;<asp:Button ID="btnGuardar" runat="server" CssClass="btn" Height="30px" onclick="btnGuardar_Click" Text="Guardar" ValidationGroup="GuardaCuentaBancaria" Width="80px" />
+                                    <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-blue-grey" Height="30px" onclick="btnCancelar_Click" Text="Cancelar" Width="80px" />
+                                    &nbsp;<asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-primary" Height="30px" onclick="btnGuardar_Click" Text="Guardar" ValidationGroup="GuardaCuentaBancaria" Width="80px" />
                                 </td>
                             </tr>
                             <tr>

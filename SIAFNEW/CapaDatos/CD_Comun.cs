@@ -155,6 +155,107 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmm);
             }
         }
+
+        public void LlenaList(string SP, ref List<Comun> list, string parametro1, string parametro2, string Valor1, string Valor2)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmm = null;
+            try
+
+            {
+                OracleDataReader dr = null;
+
+
+                string[] Parametros = { parametro1, parametro2 };
+                object[] Valores = { Valor1, Valor2 };
+
+                Cmm = CDDatos.GenerarOracleCommandCursor(SP, ref dr, Parametros, Valores);
+
+                Comun Comun = default(Comun);
+                while (dr.Read())
+                {
+                    Comun = new Comun();
+                    Comun.IdStr = Convert.ToString(dr.GetValue(0));
+                    Comun.Descripcion = Convert.ToString(dr.GetValue(1));
+                    if (dr.FieldCount == 3)
+                    {
+
+                        Comun.EtiquetaDos = Convert.ToString(dr.GetValue(2));
+
+                    }
+                    else if (dr.FieldCount == 4)
+                    {
+
+                        Comun.EtiquetaDos = Convert.ToString(dr.GetValue(2));
+                        Comun.EtiquetaTres = Convert.ToString(dr.GetValue(3));
+                    }
+                    else if (dr.FieldCount == 5)
+                    {
+
+                        Comun.EtiquetaDos = Convert.ToString(dr.GetValue(2));
+                        Comun.EtiquetaTres = Convert.ToString(dr.GetValue(3));
+                        Comun.EtiquetaCuatro = Convert.ToString(dr.GetValue(4));
+                    }
+                    else if (dr.FieldCount == 6)
+                    {
+
+                        Comun.EtiquetaDos = Convert.ToString(dr.GetValue(2));
+                        Comun.EtiquetaTres = Convert.ToString(dr.GetValue(3));
+                        Comun.EtiquetaCuatro = Convert.ToString(dr.GetValue(4));
+                        Comun.EtiquetaCinco = Convert.ToString(dr.GetValue(5));
+                    }
+                    list.Add(Comun);
+                }
+                dr.Close();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmm);
+            }
+        }
+        public void LlenaListpruebas(string SP, ref ListBox lstBox, string parametro1, string parametro2, string Valor1, string Valor2)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmm = null;
+            try
+            {
+                OracleDataReader dr = null;
+                string[] Parametros = { parametro1, parametro2 };
+                object[] Valores = { Valor1, Valor2 };
+                Cmm = CDDatos.GenerarOracleCommandCursor(SP, ref dr, Parametros, Valores);
+                lstBox.Items.Clear();
+                if (dr.FieldCount > 0)
+                {
+                    lstBox.DataSource = dr;
+                    lstBox.DataValueField = "IdStr";
+                    lstBox.DataTextField = "Descripcion";
+                    lstBox.DataBind();
+
+                }
+                else
+                {
+                    lstBox.Items.Add("La opción no contiene datos");
+                }
+
+                dr.Close();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmm);
+            }
+        }
+
+
         public void LlenaCombo(string SP, ref List<Comun> list, string parametro1, string parametro2, string Valor1, string Valor2)
         {
             CD_Datos CDDatos = new CD_Datos();

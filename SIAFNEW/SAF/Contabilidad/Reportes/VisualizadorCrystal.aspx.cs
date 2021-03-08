@@ -56,6 +56,7 @@ namespace SAF.Reportes
                 string parametro2 = Convert.ToString(Request.QueryString["parametro2"]);
                 string parametro3 = Convert.ToString(Request.QueryString["parametro3"]);
                 string parametro4 = Convert.ToString(Request.QueryString["parametro4"]);
+                string enExcel = Convert.ToString(Request.QueryString["enExcel"]);
                 Tipo = Convert.ToString(Request.QueryString["Tipo"]);
 
 

@@ -20,7 +20,7 @@ namespace CapaEntidad
         private string _Tipo_captura;
         private string _Key_poliza;
         private string _Key_adecuacion;
-        private string _Cheque_cuenta;
+        private string _Cheque_cuenta= "00000";
         private string _Cheque_numero;
         private string _Cedula_numero;
         private string _Beneficiario;
@@ -29,6 +29,7 @@ namespace CapaEntidad
         private string _Modificacion_fecha;
         private string _Modificacion_usuario;
         private string _CFDI;
+        private string _Oficio_Autorizacion;
         private bool   _Opcion_Eliminar;
         private bool _Opcion_Eliminar2;
         private bool _Opcion_Modificar;
@@ -43,6 +44,16 @@ namespace CapaEntidad
         private bool _Tiene_CFDI;
         private int _Total_CFDI;
         private string _Mes_Cerrado;
+        private string _Tipo_Documento;
+        private string _Desc_Tipo_Documento;
+        private string _Clasificacion = string.Empty;
+
+
+        public string Clasificacion
+        {
+            get { return _Clasificacion; }
+            set { _Clasificacion = value; }
+        }
         public string  Mes_Cerrado
         {
             get { return _Mes_Cerrado; }
@@ -216,6 +227,23 @@ namespace CapaEntidad
             set { _CFDI = value.Trim(); }
         }
 
+        public string Oficio_Autorizacion
+        {
+            get { return _Oficio_Autorizacion; }
+            set { _Oficio_Autorizacion = value; }
+        }
+
+        public string Tipo_Documento
+        {
+            get { return _Tipo_Documento; }
+            set { _Tipo_Documento = value; }
+        }
+
+        public string Desc_Tipo_Documento
+        {
+            get { return _Desc_Tipo_Documento; }
+            set { _Desc_Tipo_Documento = value; }
+        }
         public bool Tiene_CFDI
         {
             get { return _Tiene_CFDI; }

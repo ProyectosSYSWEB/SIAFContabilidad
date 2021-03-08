@@ -100,6 +100,7 @@
                                 <asp:BoundField DataField="CFDI_Fecha" HeaderText="Fecha" />
                                 <asp:BoundField DataField="CFDI_Nombre" HeaderText="Nombre" />
                                 <asp:BoundField DataField="CFDI_UUID" HeaderText="UUID" />
+                                <asp:BoundField DataField="CFDI_Total" HeaderText="Total" DataFormatString="{0:c}" />
                                 <asp:BoundField HeaderText="Fecha Registro" DataField="Fecha_Captura" />
                                 <asp:BoundField HeaderText="Usuario Registra" DataField="Usuario_Captura" />
                                 <asp:TemplateField HeaderText="Archivos">

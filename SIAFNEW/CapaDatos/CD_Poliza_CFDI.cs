@@ -10,7 +10,7 @@ namespace CapaDatos
     public class CD_Poliza_CFDI
     {
         public void PolizaCFDIInsertar(Poliza_CFDI objPolizaCFDI, List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
-        {                     
+        {
 
             for (int i = 0; i < lstPolizasCFDI.Count; i++)
             {
@@ -41,7 +41,7 @@ namespace CapaDatos
         {
             EliminarCFDIEditar(objPolizaCFDI.IdPoliza, ref Verificador);
             PolizaCFDIInsertar(objPolizaCFDI, lstPolizasCFDI, ref Verificador);
-            
+
         }
         public void EliminarCFDIEditar(int IdPoliza, ref string Verificador)
         {
@@ -73,7 +73,7 @@ namespace CapaDatos
                 OracleDataReader dr = null;
                 String[] Parametros = { "P_ID_POLIZA" };
                 String[] Valores = { Convert.ToString(objPolizaCFDI.IdPoliza) };
-           
+
                 cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Polizas_CFDI", ref dr, Parametros, Valores);
                 while (dr.Read())
                 {
@@ -87,14 +87,14 @@ namespace CapaDatos
                     objPolizaCFDI.Tipo_Gasto = Convert.ToString(dr.GetValue(5));
                     objPolizaCFDI.NombreArchivoXML = Convert.ToString(dr.GetValue(6));
                     objPolizaCFDI.NombreArchivoPDF = Convert.ToString(dr.GetValue(7));
-                    objPolizaCFDI.Ruta_XML= "~/AdjuntosTemp/" + Convert.ToString(dr.GetValue(6));
+                    objPolizaCFDI.Ruta_XML = "~/AdjuntosTemp/" + Convert.ToString(dr.GetValue(6));
                     objPolizaCFDI.Ruta_PDF = "~/AdjuntosTemp/" + Convert.ToString(dr.GetValue(7));
                     objPolizaCFDI.CFDI_UUID = Convert.ToString(dr.GetValue(8));
                     objPolizaCFDI.CFDI_Nombre = Convert.ToString(dr.GetValue(9));
                     objPolizaCFDI.Fecha_Captura = Convert.ToString(dr.GetValue(10));
                     objPolizaCFDI.Usuario_Captura = Convert.ToString(dr.GetValue(11));
-                    objPolizaCFDI.Habilita = (Convert.ToString(dr.GetValue(12))=="S")?true:false;
-                    lstPolizasCFDI.Add(objPolizaCFDI);                    
+                    objPolizaCFDI.Habilita = (Convert.ToString(dr.GetValue(12)) == "S") ? true : false;
+                    lstPolizasCFDI.Add(objPolizaCFDI);
                 }
                 dr.Close();
 
@@ -141,8 +141,94 @@ namespace CapaDatos
                     objPolizaCFDI.Centro_Contable = Convert.ToString(dr.GetValue(12));
                     objPolizaCFDI.Numero_poliza = Convert.ToString(dr.GetValue(13));
                     objPolizaCFDI.Mes_anio = Convert.ToString(dr.GetValue(14));
-
+                    objPolizaCFDI.CFDI_Total = Convert.ToDouble(dr.GetValue(15));
                     lstPolizasCFDI.Add(objPolizaCFDI);
+                }
+                dr.Close();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+
+    }
+    public class CD_Poliza_Oficio
+    {
+        public void PolizaOficioInsertar(Poliza_Oficio objPolizaOficio, string Usuario, List<Poliza_Oficio> lstPolizaOficios, ref string Verificador)
+        {
+
+            for (int i = 0; i < lstPolizaOficios.Count; i++)
+            {
+                CD_Datos CDDatos = new CD_Datos();
+                OracleCommand Cmd = null;
+                try
+                {
+                    String[] Parametros = { "P_ID_POLIZA", "P_OFICIO_NUMERO", "P_OFICIO_FECHA", "P_NOMBRE_ARCHIVO", "P_USUARIO" };
+                    object[] Valores = { objPolizaOficio.IdPoliza_Oficio, lstPolizaOficios[i].Numero_Oficio,  lstPolizaOficios[i].Fecha_Oficio, lstPolizaOficios[i].NombreArchivoOficio, Usuario
+                    };
+                    String[] ParametrosOut = { "p_Bandera" };
+                    Cmd = CDDatos.GenerarOracleCommand("INS_SAF_POLIZAS_OFICIOS", ref Verificador, Parametros, Valores, ParametrosOut);
+
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    CDDatos.LimpiarOracleCommand(ref Cmd);
+                }
+            }
+        }
+
+        public void PolizaOficioBorrar(Poliza_Oficio objPolizaOficio, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_ID_POLIZA" };
+                object[] Valores = { objPolizaOficio.IdPoliza_Oficio };
+                String[] ParametrosOut = { "p_Bandera" };
+                Cmd = CDDatos.GenerarOracleCommand("DEL_SAF_POLIZAS_OFICIOS", ref Verificador, Parametros, Valores, ParametrosOut);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+
+        public void PolizaOficiosDatos(Poliza_Oficio objPolizaOficio, ref List<Poliza_Oficio> lstPolizaOficios, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+
+                OracleDataReader dr = null;
+                String[] Parametros = { "P_ID_POLIZA" };
+                String[] Valores = { Convert.ToString(objPolizaOficio.IdPoliza_Oficio) };
+
+                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Poliza_Oficios", ref dr, Parametros, Valores);
+                while (dr.Read())
+                {
+
+                    objPolizaOficio = new Poliza_Oficio();
+                    objPolizaOficio.Numero_Oficio = Convert.ToString(dr.GetValue(2));
+                    objPolizaOficio.Fecha_Oficio = Convert.ToString(dr.GetValue(3));
+                    objPolizaOficio.Ruta_Oficio = "~/OficiosTemp/" + Convert.ToString(dr.GetValue(4));
+                    lstPolizaOficios.Add(objPolizaOficio);
                 }
                 dr.Close();
 

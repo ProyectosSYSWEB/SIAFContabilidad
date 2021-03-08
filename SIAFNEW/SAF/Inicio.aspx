@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-sm-4">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body" style="min-height:320px">
                     <h5 class="card-title">
                         <img src="images/presupuesto.png" class="auto-style2" />Movimientos</h5>
                     <p class="card-text">Registro y seguimiento del gasto realizado de acuerdo con el presupuesto de egresos asignado.</p>
@@ -22,7 +22,7 @@
         </div>
         <div class="col-sm-4">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body" style="min-height:320px">
                     <h5 class="card-title">
                         <img src="images/pres6.png" class="auto-style2" />
                         Reportes
@@ -41,7 +41,7 @@
         </div>
         <div class="col-sm-4">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body" style="min-height:320px">
                     <h5 class="card-title">
                         <img src="images/pres7.png" class="auto-style2" />Dashboard</h5>
 
