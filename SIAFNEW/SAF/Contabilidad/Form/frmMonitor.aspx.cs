@@ -15,6 +15,8 @@ namespace SAF.Contabilidad.Form
         #region <Variables>
         CN_Comun CNMonitor = new CN_Comun();
         Sesion SesionUsu = new Sesion();
+        string Verificador = string.Empty;
+        CN_Comun CNComun = new CN_Comun();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,7 +30,8 @@ namespace SAF.Contabilidad.Form
         #region <Funciones y Sub>
         private void MonitorConsultaGrid()
         {
-           lblError.Text = string.Empty;
+            //lblError.Text = string.Empty;
+            Verificador = string.Empty;
             grvMonitorCont.DataSource = null;
             grvMonitorCont.DataBind();
             try
@@ -41,8 +44,10 @@ namespace SAF.Contabilidad.Form
             }
             catch (Exception ex)
             {
-               lblError.Text = ex.Message;
-            }            
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+            }
 
         }
         private List<Comun> GetList()
@@ -60,17 +65,19 @@ namespace SAF.Contabilidad.Form
         }
         private void Cargarcombos()
         {
-           lblError.Text = string.Empty;            
+            Verificador = string.Empty;
             try
             {
                 CNMonitor.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref DDLCentro_Contable, "p_usuario", "p_ejercicio", SesionUsu.Usu_Nombre, SesionUsu.Usu_Ejercicio);                
                 DDLCentro_Contable_SelectedIndexChanged(null, null);
-                //CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cuentas_contables_Id", ref ddlCuentas_Contables, "p_ejercicio", "p_centro_contable", SesionUsu.Usu_Ejercicio, Convert.ToString(DDLCentro_Contable.SelectedValue));
-                //CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cuentas_contables_Id", ref ddlCuentas_Contables0, "p_ejercicio", "p_centro_contable", SesionUsu.Usu_Ejercicio, Convert.ToString(DDLCentro_Contable.SelectedValue));
             }
             catch (Exception ex)
             {
-               lblError.Text = ex.Message;
+                //lblError.Text = ex.Message;
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+
             }
         }
         #endregion

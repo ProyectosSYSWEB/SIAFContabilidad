@@ -24,8 +24,8 @@ namespace CapaDatos
             {
                 OracleDataReader dr = null;
                 string Centro_Contable = ObjPoliza.Centro_contable;
-                String[] Parametros = { "p_centro_contable", "p_fecha_inicial", "p_fecha_final", "p_tipo", "p_status", "p_buscar", "p_editor", "p_tipo_captura" };
-                String[] Valores = { ObjPoliza.Centro_contable, FechaInicial, FechaFinal, ObjPoliza.Tipo,ObjPoliza.Status, Buscar, TipoUsu, ObjPoliza.Tipo_captura };
+                String[] Parametros = { "p_centro_contable", "p_fecha_inicial", "p_fecha_final", "p_tipo", "p_status", "p_buscar", "p_editor", "p_tipo_captura", "p_clasifica", "p_ejercicio" };
+                String[] Valores = { ObjPoliza.Centro_contable, FechaInicial, FechaFinal, ObjPoliza.Tipo,ObjPoliza.Status, Buscar, TipoUsu, ObjPoliza.Tipo_captura, ObjPoliza.Clasificacion, Convert.ToString(ObjPoliza.Ejercicio) };
 
                 cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Polizas", ref dr, Parametros, Valores);
 
@@ -72,6 +72,12 @@ namespace CapaDatos
                         ObjPoliza.Opcion_CFDI = true;
                         ObjPoliza.Opcion_CFDI2 = false;
                         ObjPoliza.Desc_Tipo_Documento = Convert.ToString(dr.GetValue(24))=="0"?"+ " + Convert.ToString(dr.GetValue(28)) : "("+Convert.ToString(dr.GetValue(24))+")" + Convert.ToString(dr.GetValue(28));
+                    }
+                    else if (Convert.ToString(dr.GetValue(22)) == "I" && Convert.ToString(dr.GetValue(28)) == "OFICIO")
+                    {
+                        ObjPoliza.Opcion_CFDI = true;
+                        ObjPoliza.Opcion_CFDI2 = false;
+                        ObjPoliza.Desc_Tipo_Documento = Convert.ToString(dr.GetValue(24)) == "0" ? "+ " + Convert.ToString(dr.GetValue(28)) : "(" + Convert.ToString(dr.GetValue(24)) + ")" + Convert.ToString(dr.GetValue(28));
                     }
                     else if (Convert.ToString(dr.GetValue(22)) == "D" && (Convert.ToString(dr.GetValue(28)) == "CFDI" || Convert.ToString(dr.GetValue(28)) == "OFICIO"))
                     {
@@ -269,8 +275,8 @@ namespace CapaDatos
             OracleCommand Cmd = null;
             try
             {
-                String[] Parametros = { "P_ID_POLIZA", "P_NUMERO_POLIZA", "P_FECHA" };
-                object[] Valores = { ObjPoliza.IdPoliza,ObjPoliza.Numero_poliza,ObjPoliza.Fecha };
+                String[] Parametros = { "P_ID_POLIZA", "P_NUMERO_POLIZA", "P_FECHA", "P_CLASIFICACION" };
+                object[] Valores = { ObjPoliza.IdPoliza,ObjPoliza.Numero_poliza,ObjPoliza.Fecha, ObjPoliza.Clasificacion };
                 String[] ParametrosOut = { "p_Bandera", "P_NEW_ID_POLIZA" };
                 Cmd = CDDatos.GenerarOracleCommand("COPIAR_POLIZA", ref Verificador, Parametros, Valores, ParametrosOut);
                 if(Verificador=="0")

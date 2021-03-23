@@ -63,6 +63,26 @@
         .modalBackground_Proy {
             z-index: 1 !important;
         }
+
+        .site_map {
+            position: relative;
+            margin: 0px auto;
+            background-color: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
+            text-shadow: white 0em 0.1em 0em;
+            font-size: 12px;
+            min-height: 30px;
+            max-height: 30px;
+            padding-left: 15px;
+            padding-top: 8px;
+        }
+
+            .site_map a {
+                color: rgb(0, 0, 0);
+
+            }
+
+
     </style>
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
@@ -169,23 +189,11 @@
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
-
-
-                </nav>
-
-                <div class="cuadro_usuario">
-
-                    <asp:DropDownList ID="ddlSistemas" runat="server" CssClass="f11px" Width="140px">
-                    </asp:DropDownList>
-                    <asp:Button ID="btnIr" runat="server" Text="Ir" CssClass="btn4" OnClick="btnIr_Click" />
-
-
-
-                </div>
+                </nav>                
             </div>
         </div>
         <div class="p_info">
-            <div class="c_info">
+            <div class="site_map">
                 <div class="SiteMap">
                     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                         <ContentTemplate>
@@ -204,20 +212,13 @@
 
 
         <div class="content" style="min-height: 420px;">
-
             <div class="container-fluid" style="min-height: 400px;">
                 <asp:ContentPlaceHolder ID="MainContent" runat="server" />
             </div>
-
         </div>
-
-
-
 
         <div class="piePagina" style="width: 100%">
             <footer class="page-footer font-small pt-4" style="background-color: #585858; color: #fff">
-
-
                 <!-- Footer Text -->
                 <div class="container-fluid text-center text-md-left">
 

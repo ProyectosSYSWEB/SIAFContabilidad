@@ -7,29 +7,13 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace SAF.Contabilidad.Form {
-    
-    
-    public partial class frmCuentas_Bancarias {
-        
-        /// <summary>
-        /// Control UpdatePanel18.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel18;
-        
-        /// <summary>
-        /// Control lblError.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblError;
-        
+namespace SAF.Contabilidad.Form
+{
+
+
+    public partial class frmCuentas_Bancarias
+    {
+
         /// <summary>
         /// Control UpdatePanel2.
         /// </summary>
@@ -38,7 +22,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
-        
+
         /// <summary>
         /// Control MultiView1.
         /// </summary>
@@ -47,7 +31,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.MultiView MultiView1;
-        
+
         /// <summary>
         /// Control View1.
         /// </summary>
@@ -56,16 +40,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.View View1;
-        
-        /// <summary>
-        /// Control lblCentros_Contables0.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCentros_Contables0;
-        
+
         /// <summary>
         /// Control UpdatePanel7.
         /// </summary>
@@ -74,7 +49,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel7;
-        
+
         /// <summary>
         /// Control ddlCentros_Contables0.
         /// </summary>
@@ -83,7 +58,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCentros_Contables0;
-        
+
         /// <summary>
         /// Control RequiredFieldValidator8.
         /// </summary>
@@ -92,7 +67,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator8;
-        
+
         /// <summary>
         /// Control btnNuevo.
         /// </summary>
@@ -101,7 +76,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton btnNuevo;
-        
+
         /// <summary>
         /// Control UpdateProgress6.
         /// </summary>
@@ -110,7 +85,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgress6;
-        
+
         /// <summary>
         /// Control UpdatePanel1.
         /// </summary>
@@ -119,7 +94,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
+
         /// <summary>
         /// Control grvCuentas_Bancarias.
         /// </summary>
@@ -128,7 +103,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grvCuentas_Bancarias;
-        
+
         /// <summary>
         /// Control View2.
         /// </summary>
@@ -137,7 +112,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.View View2;
-        
+
         /// <summary>
         /// Control lblCentros_Contables.
         /// </summary>
@@ -146,7 +121,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCentros_Contables;
-        
+
         /// <summary>
         /// Control UpdateProgress1.
         /// </summary>
@@ -155,7 +130,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgress1;
-        
+
         /// <summary>
         /// Control UpdatePanel5.
         /// </summary>
@@ -164,7 +139,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel5;
-        
+
         /// <summary>
         /// Control ddlCentros_Contables.
         /// </summary>
@@ -173,7 +148,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCentros_Contables;
-        
+
         /// <summary>
         /// Control lblCuenta_Contable.
         /// </summary>
@@ -182,7 +157,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCuenta_Contable;
-        
+
         /// <summary>
         /// Control ddlCuentas_Contables.
         /// </summary>
@@ -191,7 +166,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCuentas_Contables;
-        
+
         /// <summary>
         /// Control lblClave.
         /// </summary>
@@ -200,7 +175,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblClave;
-        
+
         /// <summary>
         /// Control txtClave.
         /// </summary>
@@ -209,7 +184,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtClave;
-        
+
         /// <summary>
         /// Control RequiredFieldValidator10.
         /// </summary>
@@ -218,7 +193,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator10;
-        
+
         /// <summary>
         /// Control lblBanco.
         /// </summary>
@@ -227,7 +202,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblBanco;
-        
+
         /// <summary>
         /// Control ddlBancos.
         /// </summary>
@@ -236,7 +211,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlBancos;
-        
+
         /// <summary>
         /// Control lblCuenta_Bancaria.
         /// </summary>
@@ -245,7 +220,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCuenta_Bancaria;
-        
+
         /// <summary>
         /// Control txtCuenta_Bancaria.
         /// </summary>
@@ -254,7 +229,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCuenta_Bancaria;
-        
+
         /// <summary>
         /// Control RequiredFieldValidator11.
         /// </summary>
@@ -263,7 +238,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator11;
-        
+
         /// <summary>
         /// Control lblDescripcion.
         /// </summary>
@@ -272,7 +247,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDescripcion;
-        
+
         /// <summary>
         /// Control txtDescripcion.
         /// </summary>
@@ -281,7 +256,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
-        
+
         /// <summary>
         /// Control RequiredFieldValidator9.
         /// </summary>
@@ -290,7 +265,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator9;
-        
+
         /// <summary>
         /// Control Label7.
         /// </summary>
@@ -299,7 +274,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label7;
-        
+
         /// <summary>
         /// Control txtFecha_Apertura.
         /// </summary>
@@ -308,7 +283,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFecha_Apertura;
-        
+
         /// <summary>
         /// Control lblLocalidad.
         /// </summary>
@@ -317,7 +292,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblLocalidad;
-        
+
         /// <summary>
         /// Control txtLocalidad.
         /// </summary>
@@ -326,7 +301,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtLocalidad;
-        
+
         /// <summary>
         /// Control RequiredFieldValidator12.
         /// </summary>
@@ -335,7 +310,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator12;
-        
+
         /// <summary>
         /// Control lblStatus.
         /// </summary>
@@ -344,7 +319,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblStatus;
-        
+
         /// <summary>
         /// Control rdoBttnStatus.
         /// </summary>
@@ -353,7 +328,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rdoBttnStatus;
-        
+
         /// <summary>
         /// Control btnCancelar.
         /// </summary>
@@ -362,7 +337,7 @@ namespace SAF.Contabilidad.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancelar;
-        
+
         /// <summary>
         /// Control btnGuardar.
         /// </summary>

@@ -8,19 +8,11 @@
         }
     </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-     <div class="mensaje"> 
-       <asp:UpdatePanel ID="UpdatePanel18" runat="server">
-                    <ContentTemplate>
-                        <asp:Label ID="lblError" runat="server" 
-    Text=""></asp:Label>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-     </div>
-    <table class="tabla_contenido">
-        <tr>
-            <td align="center">
-                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">    
+   <div class="container">
+       <div class="row">
+           <div class="col">
+<asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
                         <asp:MultiView ID="MultiView1" runat="server">
                     <asp:View ID="View1" runat="server">
@@ -30,7 +22,7 @@
                                     <table style="width:100%;">                                        
                                         <tr>
                                             <td align="right" class="style1" valign="top">
-                                                <asp:Label ID="lblCentros_Contables0" runat="server" Text="Centro Contable:"></asp:Label>
+                                                Centro Contable
                                             </td>
                                             <td align="left" >
                                                 <asp:UpdatePanel ID="UpdatePanel7" runat="server">
@@ -255,10 +247,7 @@
                 </asp:MultiView>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-                
-            </td>
-            
-        </tr>
-       
-    </table>
+           </div>
+       </div>
+   </div>
 </asp:Content>

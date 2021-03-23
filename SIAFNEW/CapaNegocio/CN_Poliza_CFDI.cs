@@ -86,7 +86,7 @@ namespace CapaNegocio
                 CDPolizaOficio.PolizaOficioBorrar(objPolizaOficio, ref Verificador);
                 if (Verificador == "0")
                 {
-                    Verificador = string.Empty;
+                    //Verificador = string.Empty;
                     CDPolizaOficio.PolizaOficioInsertar(objPolizaOficio, Usuario, lstPolizaOficios, ref Verificador);
                 }
             }

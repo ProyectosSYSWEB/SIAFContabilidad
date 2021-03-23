@@ -227,6 +227,7 @@ namespace CapaDatos
                     objPolizaOficio = new Poliza_Oficio();
                     objPolizaOficio.Numero_Oficio = Convert.ToString(dr.GetValue(2));
                     objPolizaOficio.Fecha_Oficio = Convert.ToString(dr.GetValue(3));
+                    objPolizaOficio.NombreArchivoOficio = Convert.ToString(dr.GetValue(4));
                     objPolizaOficio.Ruta_Oficio = "~/OficiosTemp/" + Convert.ToString(dr.GetValue(4));
                     lstPolizaOficios.Add(objPolizaOficio);
                 }

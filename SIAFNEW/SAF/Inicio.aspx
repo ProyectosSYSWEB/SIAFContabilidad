@@ -6,23 +6,71 @@
             width: 150px;
             height: 140px;
         }
+
+        .scroll_monitor {
+            height: 320px;
+            overflow: auto;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="card">
-                <div class="card-body" style="min-height:320px">
+                <div class="card-body" style="height: 320px">
                     <h5 class="card-title">
                         <img src="images/presupuesto.png" class="auto-style2" />Movimientos</h5>
                     <p class="card-text">Registro y seguimiento del gasto realizado de acuerdo con el presupuesto de egresos asignado.</p>
+                </div>
+                <div class="card-footer text-muted">
                     <a href="Default.aspx?mnu=MOV" class="btn btn-warning btn-rounded">Continuar</a>
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <div class="card">
-                <div class="card-body" style="min-height:320px">
+                <div class="scroll_monitor">
+                    <div class="card-body">
+                        <%--<h5 class="card-title">--%>
+                        <%--<img src="images/pres7.png" class="auto-style2" />Dashboard</h5>--%>
+                         <asp:UpdateProgress ID="updPnlCC" runat="server" AssociatedUpdatePanelID="UpdatePanel11">
+                    <ProgressTemplate>
+                        <asp:Image ID="img5" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
+                        <asp:UpdatePanel ID="UpdatePanel11" runat="server">
+                            <ContentTemplate>
+                                <asp:DropDownList ID="DDLCentro_Contable" runat="server" Width="100%"
+                                    AutoPostBack="True"
+                                    OnSelectedIndexChanged="DDLCentro_Contable_SelectedIndexChanged">
+                                </asp:DropDownList>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                            <ContentTemplate>
+                                <asp:GridView ID="grvMonitorCont" runat="server"
+                                    BorderStyle="None" CellPadding="4" Width="100%"
+                                    GridLines="Vertical" AutoGenerateColumns="False" OnPageIndexChanging="grvMonitorCont_PageIndexChanging"
+                                    PageSize="15" CssClass="mGrid" EmptyDataText="Sin ninguna incidencia">
+                                    <Columns>
+                                        <asp:BoundField DataField="Descripcion" HeaderText="Verificar" />
+                                    </Columns>
+                                    <FooterStyle CssClass="enc" />
+                                    <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                    <SelectedRowStyle CssClass="sel" />
+                                    <HeaderStyle CssClass="enc" />
+                                    <AlternatingRowStyle CssClass="alt" />
+                                </asp:GridView>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
+                </div>
+                <div class="card-footer text-muted"><a href="Contabilidad/Form/frmMonitor.aspx" class="btn btn-warning btn-rounded">Continuar</a></div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-body" style="height: 320px">
                     <h5 class="card-title">
                         <img src="images/pres6.png" class="auto-style2" />
                         Reportes
@@ -30,31 +78,17 @@
                     </h5>
                     <p class="card-text">
                         Balanza de comprobación, anexo de cuentas de balance, mayor auxiliar, entre otros.
-                        <br />
-
-
-                        <br />
                     </p>
-                    <a href="Default.aspx?mnu=REP" class="btn btn-warning btn-rounded">Continuar</a>
                 </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-body" style="min-height:320px">
-                    <h5 class="card-title">
-                        <img src="images/pres7.png" class="auto-style2" />Dashboard</h5>
-
-                    <p class="card-text">Proximamente, representación gráfica de las principales métricas de contabilidad.</p>
-                    <br />
-                    <a href="Contabilidad/Form/frmDashboard.aspx" class="btn btn-warning btn-rounded">Continuar</a>
+                <div class="card-footer text-muted">
+                    <a href="Default.aspx?mnu=REP" class="btn btn-warning btn-rounded">Continuar</a>
                 </div>
             </div>
         </div>
     </div>
     <br />
 
-    <div class="container-fluid">
+    <%--<div class="container-fluid">
         <div class="row">
             <div class="col">
                 <div class="alert alert-warning text-center">
@@ -62,12 +96,12 @@
                 </div>
             </div>
         </div>
-    </div>
-        <asp:HiddenField ID="HiddenField1" runat="server" />
+    </div>--%>
+    <asp:HiddenField ID="HiddenField1" runat="server" />
 
-        <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender" runat="server" TargetControlID="HiddenField1" PopupControlID="Panel3" BackgroundCssClass="modalBackground_Proy">
+    <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender" runat="server" TargetControlID="HiddenField1" PopupControlID="Panel3" BackgroundCssClass="modalBackground_Proy">
     </ajaxToolkit:ModalPopupExtender>
-    <asp:Panel ID="Panel3" runat="server" class="card text-white bg-dark mb-3" style="width:50%; font-size:15px">
+    <asp:Panel ID="Panel3" runat="server" class="card text-white bg-dark mb-3" Style="width: 50%; font-size: 15px">
         <div style="overflow-y: scroll; height: 95%;">
             <div class="card-header">
                 AVISO

@@ -52,7 +52,9 @@ namespace SAF.Contabilidad.Form
             }
             catch (Exception ex)
             {
-                lblError.Text = ex.Message;
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
             }
         }
         private List<Cuentas_Bancarias> GetList()
@@ -72,7 +74,7 @@ namespace SAF.Contabilidad.Form
         }
         private void Cargarcombos()
         {
-            lblError.Text = string.Empty;            
+            //lblError.Text = string.Empty;            
             try
             {
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref ddlCentros_Contables0, "p_usuario", "p_ejercicio", SesionUsu.Usu_Nombre, SesionUsu.Usu_Ejercicio);                
@@ -83,7 +85,9 @@ namespace SAF.Contabilidad.Form
             }
             catch (Exception ex)
             {
-                lblError.Text = ex.Message;
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
             }
         }
         #endregion
@@ -101,7 +105,7 @@ namespace SAF.Contabilidad.Form
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             Verificador = string.Empty;
-            lblError.Text = string.Empty;
+            //lblError.Text = string.Empty;
             try
             {
                 ObjCuentas_Bancarias.Ejercicio =Convert.ToInt32(SesionUsu.Usu_Ejercicio);
@@ -125,24 +129,29 @@ namespace SAF.Contabilidad.Form
 
                 if (Verificador == "0")
                 {
-                    lblError.Text = "Los datos han sido agregados correctamente";
+                    //lblError.Text = "Los datos han sido agregados correctamente";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'Los datos han sido agregados correctamente.');", true);
+
                     btnCancelar_Click(null, null);                   
                     CargarGrid();
                 }
                 else
                 {
-                    lblError.Text = Verificador;
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
                 }
             }
             catch (Exception ex)
             {
-                lblError.Text = ex.Message;
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
             }
         }
 
         protected void ddlCentros_Contables_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lblError.Text = string.Empty;
+            //lblError.Text = string.Empty;
             try
             {
                 //if(SesionUsu.Editar==0||SesionUsu.Editar==1)
@@ -150,7 +159,9 @@ namespace SAF.Contabilidad.Form
             }
             catch (Exception ex)
             {
-                lblError.Text = ex.Message;
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
             }
         }
 
@@ -184,10 +195,11 @@ namespace SAF.Contabilidad.Form
                 SesionUsu.Editar = 1;
                 MultiView1.ActiveViewIndex = 1;
             }
-            catch
-                (Exception ex)
+            catch (Exception ex)
             {
-                lblError.Text = ex.Message;
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
             }
         }
 

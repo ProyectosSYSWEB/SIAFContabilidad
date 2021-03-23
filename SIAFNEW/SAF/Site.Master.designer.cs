@@ -132,24 +132,6 @@ namespace SAF
         protected global::System.Web.UI.WebControls.Button BusyBoxButton1;
 
         /// <summary>
-        /// Control ddlSistemas.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSistemas;
-
-        /// <summary>
-        /// Control btnIr.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnIr;
-
-        /// <summary>
         /// Control UpdatePanel4.
         /// </summary>
         /// <remarks>

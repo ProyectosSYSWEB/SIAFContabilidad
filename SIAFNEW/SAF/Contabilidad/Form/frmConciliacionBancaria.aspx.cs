@@ -1,4 +1,5 @@
-﻿using AjaxControlToolkit;
+﻿
+using AjaxControlToolkit;
 using CapaEntidad;
 using CapaNegocio;
 using System;
@@ -80,7 +81,7 @@ namespace SAF.Contabilidad.Form
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref DDLCentro_Contable, "p_usuario", "p_ejercicio", SesionUsu.Usu_Nombre, SesionUsu.Usu_Ejercicio, ref ListCentroContable);
                 Session["CentrosContab"] = ListCentroContable;
                 //CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Tipo_Conciliacion", ref ddlTipo1, ref ListTipo);
-                CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Tipo_Conciliacion", ref ddlTipo, ref ListTipo);
+                CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Tipo_Conciliacion",  ref ddlTipo, "p_ejercicio", SesionUsu.Usu_Ejercicio, ref ListTipo);
             }
             catch (Exception ex)
             {
@@ -558,6 +559,7 @@ namespace SAF.Contabilidad.Form
         protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtConcepto.Text = string.Empty;
+            txtConcepto.Visible = true;
             lblConcepto.Text = "Concepto";
             trowCheque.Visible = false;
             if (ListTipo[ddlTipo.SelectedIndex].EtiquetaTres == "ANEXO_3")
@@ -568,7 +570,7 @@ namespace SAF.Contabilidad.Form
                 txtDescripcion.Visible = true;
 
             }
-            else if (ListTipo[ddlTipo.SelectedIndex].EtiquetaTres == "ANEXO_4")
+            else if (ListTipo[ddlTipo.SelectedIndex].EtiquetaTres == "ANEXO_4" || ListTipo[ddlTipo.SelectedIndex].EtiquetaTres == "ANEXO_7" || ListTipo[ddlTipo.SelectedIndex].EtiquetaTres == "ANEXO_11")
             {
                 trowFecha.Visible = true;
                 trowPoliza.Visible = true;
@@ -591,6 +593,14 @@ namespace SAF.Contabilidad.Form
                 txtDescripcion.Visible = false;
                 txtConcepto.Text = ddlTipo.SelectedItem.Text + " AL " + ultimoDia.ToShortDateString(); // txtFechaFinal.Text;
 
+            }
+            else if (ListTipo[ddlTipo.SelectedIndex].EtiquetaTres == "ANEXO_10")
+            {
+                trowPoliza.Visible = true;
+                trowFecha.Visible = true;
+                lblObservaciones.Visible = false;
+                txtDescripcion.Visible = false;
+                txtConcepto.Visible = false;
             }
             else
             {
@@ -766,11 +776,17 @@ namespace SAF.Contabilidad.Form
         {
             LinkButton cbi = (LinkButton)(sender);
             GridViewRow row = (GridViewRow)cbi.NamingContainer;
+            string ruta = string.Empty;
             grdConciliacion.SelectedIndex = row.RowIndex;
             int IdConciliacion = Convert.ToInt32(grdConciliacion.SelectedRow.Cells[11].Text);
-            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP_Conciliacion&id=" + grdConciliacion.SelectedRow.Cells[11].Text;
+            if(Convert.ToInt32(SesionUsu.Usu_Ejercicio)>2020)
+                ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP_Conciliacion&id=" + grdConciliacion.SelectedRow.Cells[11].Text;
+            else
+                ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP_Conciliacion2021&id=" + grdConciliacion.SelectedRow.Cells[11].Text;
+
             string _open = "window.open('" + ruta + "', 'miniContenedor', 'toolbar=yes', 'location=no', 'menubar=yes', 'resizable=yes');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+
         }
 
         protected void linkReporteDet_Click(object sender, EventArgs e)
@@ -779,7 +795,7 @@ namespace SAF.Contabilidad.Form
             GridViewRow row = (GridViewRow)cbi.NamingContainer;
             grdConciliacion.SelectedIndex = row.RowIndex;
             string centro_contable = grdConciliacion.SelectedRow.Cells[0].Text;
-            string cta_contable = grdConciliacion.SelectedRow.Cells[9].Text;
+            string cta_contable = grdConciliacion.SelectedRow.Cells[10].Text;
             string elaboro_nombre = grdConciliacion.SelectedRow.Cells[4].Text;
             string vb_nombre = grdConciliacion.SelectedRow.Cells[5].Text;
             string fecha_final = grdConciliacion.SelectedRow.Cells[3].Text;

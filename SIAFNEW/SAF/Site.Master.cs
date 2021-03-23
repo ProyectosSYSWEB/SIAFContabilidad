@@ -36,7 +36,7 @@ namespace SAF
             if (!IsPostBack)
             {
                 SesionUsu.Modifica_Ejercicio = false;
-                CNComun.LlenaCombo("pkg_contratos.Obt_Combo_sistemas", ref ddlSistemas, "p_usuario", SesionUsu.Usu_Nombre, ref Listsistema);
+                //CNComun.LlenaCombo("pkg_contratos.Obt_Combo_sistemas", ref ddlSistemas, "p_usuario", SesionUsu.Usu_Nombre, ref Listsistema);
                 ddlUsu_Ejercicio.SelectedValue = SesionUsu.Usu_Ejercicio;
 
                 
@@ -97,42 +97,7 @@ namespace SAF
         protected void MenuTop_MenuItemClick(object sender, MenuEventArgs e)
         {
             //ScriptManager.RegisterStartupScript(this, typeof(string), "f04", "CerrarPopUp()", true); 
-        }
-
-        protected void btnIr_Click(object sender, EventArgs e)
-        {
-            if (ddlSistemas.SelectedValue != "X")
-            {
-                GenerarToken("btnIr");
-            }
-        }
-
-        protected void lnkMiCuenta_Click(object sender, EventArgs e)
-        {
-            GenerarToken("lnkMiCuenta");
-
-        }
-
-        private void GenerarToken(string solicitud)
-        {
-            Guid Token = Guid.NewGuid();
-            Verificador = String.Empty;
-            ObjUsuario = new Usuario();
-
-
-            ObjUsuario.Token = Convert.ToString(Token);
-            ObjUsuario.CUsuario = SesionUsu.CUsuario;
-
-            CNUsuario.Inserta_Token(ref ObjUsuario, ref Verificador);
-
-            switch (solicitud)
-            {
-                case "btnIr": Response.Redirect(ddlSistemas.SelectedValue + "?token=" + Token, true); break;
-                case "lnkMiCuenta": Response.Redirect("http://sysweb.unach.mx/administrator?token=" + Token, true); break;
-            }
-        }
-
-
+        }  
 
         protected void BusyBoxButton1_Click1(object sender, EventArgs e)
         {

@@ -447,13 +447,13 @@ namespace SAF.Contabilidad.Form
         protected global::System.Web.UI.WebControls.DropDownList ddlCtaCheques;
 
         /// <summary>
-        /// Control UpdatePanel1.
+        /// Control updPnlTipo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.UpdatePanel updPnlTipo;
 
         /// <summary>
         /// Control ddlTipo.
@@ -472,6 +472,15 @@ namespace SAF.Contabilidad.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator6;
+
+        /// <summary>
+        /// Control updPgrTipo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPgrTipo;
 
         /// <summary>
         /// Control updPnlPolizas.
