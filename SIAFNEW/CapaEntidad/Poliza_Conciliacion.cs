@@ -56,6 +56,13 @@ namespace CapaEntidad
             set { _Importe = value; }
         }
 
+        private double _ImporteBanco=0;
+        public double ImporteBanco
+        {
+            get { return _ImporteBanco; }
+            set { _ImporteBanco = value; }
+        }
+
         private string _Descripcion;
         public string Descripcion
         {

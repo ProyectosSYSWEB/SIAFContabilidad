@@ -64,6 +64,7 @@ namespace SAF.Contabilidad.Form
                 List<Cuentas_Bancarias> List = new List<Cuentas_Bancarias>();
                 ObjCuentas_Bancarias.Ejercicio = Convert.ToInt32(SesionUsu.Usu_Ejercicio);
                 ObjCuentas_Bancarias.Centro_Contable = ddlCentros_Contables0.SelectedValue;
+                ObjCuentas_Bancarias.Cuenta_Bancaria = txtBuscar.Text.ToUpper();
                 CNCuentas_Bancarias.Cuentas_BancariasConsultaGrid(ref ObjCuentas_Bancarias, ref List);
                 return List;
             }
@@ -77,10 +78,12 @@ namespace SAF.Contabilidad.Form
             //lblError.Text = string.Empty;            
             try
             {
+                CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Ejercicio_Ctas", ref ddlEjercicio);
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref ddlCentros_Contables0, "p_usuario", "p_ejercicio", SesionUsu.Usu_Nombre, SesionUsu.Usu_Ejercicio);                
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref ddlCentros_Contables, "p_usuario", "p_ejercicio", SesionUsu.Usu_Nombre, SesionUsu.Usu_Ejercicio);                
                 ddlCentros_Contables_SelectedIndexChanged(null, null);
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Bancos", ref ddlBancos);
+                
                 //CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cuentas_contables_Id", ref ddlCuentas_Contables0, "p_ejercicio", "p_centro_contable", SesionUsu.Usu_Ejercicio, Convert.ToString(DDLCentro_Contable.SelectedValue));
             }
             catch (Exception ex)
@@ -108,7 +111,7 @@ namespace SAF.Contabilidad.Form
             //lblError.Text = string.Empty;
             try
             {
-                ObjCuentas_Bancarias.Ejercicio =Convert.ToInt32(SesionUsu.Usu_Ejercicio);
+                ObjCuentas_Bancarias.Ejercicio =Convert.ToInt32(ddlEjercicio.SelectedValue); // Convert.ToInt32(SesionUsu.Usu_Ejercicio);
                 ObjCuentas_Bancarias.Clave = txtClave.Text;
                 ObjCuentas_Bancarias.Centro_Contable = ddlCentros_Contables.SelectedValue;
                 ObjCuentas_Bancarias.Banco = ddlBancos.SelectedValue;
@@ -155,7 +158,7 @@ namespace SAF.Contabilidad.Form
             try
             {
                 //if(SesionUsu.Editar==0||SesionUsu.Editar==1)
-                    CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cuentas_Contables", ref ddlCuentas_Contables, "p_ejercicio", "p_centro_contable", SesionUsu.Usu_Ejercicio, Convert.ToString(ddlCentros_Contables.SelectedValue));                
+                    CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cuentas_Contables_N4", ref ddlCuentas_Contables, "p_ejercicio", "p_centro_contable", ddlEjercicio.SelectedValue, Convert.ToString(ddlCentros_Contables.SelectedValue));                
             }
             catch (Exception ex)
             {
@@ -180,13 +183,13 @@ namespace SAF.Contabilidad.Form
             {
                 ObjCuentas_Bancarias.IdCuenta_Bancaria = Convert.ToInt32(grvCuentas_Bancarias.SelectedRow.Cells[0].Text);
                 CNCuentas_Bancarias.Cuentas_BancariasSelect(ref ObjCuentas_Bancarias, ref Verificador);
+                ddlEjercicio.SelectedValue = Convert.ToString(ObjCuentas_Bancarias.Ejercicio);
                 txtClave.Text = ObjCuentas_Bancarias.Clave;
                 ddlCentros_Contables.SelectedValue = ObjCuentas_Bancarias.Centro_Contable;
-                if (ObjCuentas_Bancarias.Cuenta_Contable != "0")
-                {
-                    ddlCentros_Contables_SelectedIndexChanged(null, null);
+                ddlCentros_Contables_SelectedIndexChanged(null, null);
+                if (ObjCuentas_Bancarias.Cuenta_Contable != "0")                                    
                     ddlCuentas_Contables.SelectedValue = ObjCuentas_Bancarias.Cuenta_Contable;
-                }
+                
                 ddlBancos.SelectedValue = ObjCuentas_Bancarias.Banco;
                 txtCuenta_Bancaria.Text = ObjCuentas_Bancarias.Cuenta_Bancaria;
                 txtDescripcion.Text = ObjCuentas_Bancarias.Descripcion;
@@ -216,6 +219,40 @@ namespace SAF.Contabilidad.Form
             ddlCentros_Contables_SelectedIndexChanged(null, null);
             SesionUsu.Editar = 0;
             MultiView1.ActiveViewIndex = 1;
+        }
+
+        protected void grvCuentas_Bancarias_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            
+            Verificador = string.Empty;
+            try
+            {
+                int fila = e.RowIndex;
+                ObjCuentas_Bancarias.IdCuenta_Bancaria = Convert.ToInt32(grvCuentas_Bancarias.Rows[fila].Cells[0].Text);
+                CNCuentas_Bancarias.Cuentas_BancariasEliminar(ObjCuentas_Bancarias, ref Verificador);
+
+                if (Verificador == "0")
+                    CargarGrid();
+                else
+                {
+
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+
+            }
+        }
+
+        protected void imgbtnBuscar1_Click(object sender, ImageClickEventArgs e)
+        {
+            CargarGrid();
+
         }
     }
 }

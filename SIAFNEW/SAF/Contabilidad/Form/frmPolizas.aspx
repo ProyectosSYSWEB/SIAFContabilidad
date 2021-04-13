@@ -1145,6 +1145,7 @@
                                                 <asp:UpdatePanel ID="updPnlTotCheque" runat="server">
                                                     <ContentTemplate>
                                                         <asp:Label ID="lblTotCheque" runat="server" CssClass="font-weight-bold"></asp:Label>
+                                                        <asp:HiddenField ID="hddnTotCheque" runat="server" />
                                                     </ContentTemplate>
                                                 </asp:UpdatePanel>
                                             </div>

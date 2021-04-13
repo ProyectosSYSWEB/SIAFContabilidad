@@ -46,6 +46,20 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+
+        public void Cuentas_BancariasEliminar(Cuentas_Bancarias ObjCuentas_Bancarias, ref string Verificador)
+        {
+            try
+            {
+                CD_Cuentas_Bancarias CDCuentas_Bancarias = new CD_Cuentas_Bancarias();
+                CDCuentas_Bancarias.Cuentas_BancariasEliminar(ObjCuentas_Bancarias, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void Cuentas_BancariasSelect(ref Cuentas_Bancarias ObjCuentas_Bancarias, ref string Verificador)
         {
             try

@@ -111,6 +111,32 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+
+        public void ValidarTotal(ref Poliza objPoliza, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_ID_POLIZA" };
+                object[] Valores = { objPoliza.IdPoliza };
+                String[] ParametrosOut = { "P_VALIDAR", "P_BANDERA" };
+                Cmd = CDDatos.GenerarOracleCommand("VALIDAR_TOTAL", ref Verificador, Parametros, Valores, ParametrosOut);
+                if (Verificador == "0")
+                {
+                    objPoliza = new Poliza();
+                    objPoliza.ValidaTotal = Convert.ToString(Cmd.Parameters["P_VALIDAR"].Value);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
         public void ConsultarPolizaSel(ref Poliza ObjPoliza, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();

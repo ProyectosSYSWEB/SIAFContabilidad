@@ -7,10 +7,7 @@
             height: 140px;
         }
 
-        .scroll_monitor {
-            height: 320px;
-            overflow: auto;
-        }
+        
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">

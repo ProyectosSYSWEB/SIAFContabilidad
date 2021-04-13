@@ -26,6 +26,20 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+
+        public void ValidarTotal(ref Poliza objPoliza, ref string Verificador)
+        {
+            try
+            {
+                CD_Poliza CDPolizaCFDI = new CD_Poliza();
+                CDPolizaCFDI.ValidarTotal(ref objPoliza, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
         public void ConsultarPolizaSel(ref Poliza ObjPoliza, ref string Verificador)
         {
             try

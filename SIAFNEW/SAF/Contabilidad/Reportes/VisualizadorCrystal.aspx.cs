@@ -394,6 +394,11 @@ namespace SAF.Reportes
                         reportes_dir();
                         report.SetParameterValue(0, id); reporte_PDF();
                         break;
+                    case "RP_Conciliacion2021":
+                        Reporte = "Contabilidad\\Reportes\\RP_Concilliacion_2021.rpt";
+                        reportes_dir();
+                        report.SetParameterValue(0, id); reporte_PDF();
+                        break;
                     case "RP_CFDIS":
                         Reporte = "Contabilidad\\Reportes\\RP_CFDIS.rpt";
                         reportes_dir();

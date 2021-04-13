@@ -15,9 +15,9 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>--%>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col">
+            <div class="col text-center">
                 <asp:UpdateProgress ID="UpdateProgress5" runat="server" AssociatedUpdatePanelID="UpdatePanel11">
                     <ProgressTemplate>
                         <asp:Image ID="Image7" runat="server" Height="30px" ImageUrl="~/images/ajax_loader_gray_512.gif"
@@ -28,15 +28,15 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 Centro Contable
             </div>
-            <div class="col-md-12">
+            <div class="col-md-10">
                 <asp:UpdatePanel ID="UpdatePanel11" runat="server">
                     <ContentTemplate>
-                        <asp:DropDownList ID="DDLCentro_Contable" runat="server" Width="80%"
+                        <asp:DropDownList ID="DDLCentro_Contable" runat="server" Width="100%"
                             AutoPostBack="True"
-                            OnSelectedIndexChanged="DDLCentro_Contable_SelectedIndexChanged" CssClass="auto-style1">
+                            OnSelectedIndexChanged="DDLCentro_Contable_SelectedIndexChanged">
                         </asp:DropDownList>
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -46,7 +46,7 @@
             <div class="col">
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
-                        <div class="scroll">
+                        <div class="card scroll_monitor">
                             <asp:GridView ID="grvMonitorCont" runat="server"
                                 BorderStyle="None" CellPadding="4" Width="100%"
                                 GridLines="Vertical" AutoGenerateColumns="False" OnPageIndexChanging="grvMonitorCont_PageIndexChanging"

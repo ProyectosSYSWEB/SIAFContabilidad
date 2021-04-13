@@ -63,6 +63,33 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
+
+        public void PolizaCFDIConsultaTotCheque(ref Poliza_CFDI objPolizaCFDI, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_ID_POLIZA" };
+                object[] Valores = { objPolizaCFDI.IdPoliza };
+                String[] ParametrosOut = { "P_IMPORTE", "p_Bandera" };
+                Cmd = CDDatos.GenerarOracleCommand("SEL_SAF_IMPORTE_CHEQUE", ref Verificador, Parametros, Valores, ParametrosOut);
+                if (Verificador == "0")
+                {
+                    objPolizaCFDI = new Poliza_CFDI();
+                    objPolizaCFDI.CFDI_Total = Convert.ToDouble(Cmd.Parameters["P_IMPORTE"].Value);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+
+            }
+        }
         public void PolizaCFDIConsultaDatos(Poliza_CFDI objPolizaCFDI, ref List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -208,6 +235,9 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
+
+
+
 
         public void PolizaOficiosDatos(Poliza_Oficio objPolizaOficio, ref List<Poliza_Oficio> lstPolizaOficios, ref string Verificador)
         {

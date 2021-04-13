@@ -17,8 +17,8 @@ namespace CapaDatos
             {
                 OracleDataReader dr = null;
 
-                string[] Parametros = { "p_ejercicio","p_centro_contable" };
-                object[] Valores = { ObjCuentas_Bancarias.Ejercicio, ObjCuentas_Bancarias.Centro_Contable };
+                string[] Parametros = { "p_ejercicio","p_centro_contable", "p_buscar" };
+                object[] Valores = { ObjCuentas_Bancarias.Ejercicio, ObjCuentas_Bancarias.Centro_Contable, ObjCuentas_Bancarias.Cuenta_Bancaria };
 
                 cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Cuentas_Bancarias", ref dr, Parametros, Valores);
                 while (dr.Read())
@@ -107,6 +107,28 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
+
+        public void Cuentas_BancariasEliminar(Cuentas_Bancarias ObjCuentas_Bancarias, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_ID_CUENTA_BANCARIA" };
+                object[] Valores = { ObjCuentas_Bancarias.IdCuenta_Bancaria };
+                String[] ParametrosOut = { "p_Bandera" };
+                Cmd = CDDatos.GenerarOracleCommand("DEL_SAF_CUENTAS_BANCARIAS", ref Verificador, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+
         public void Cuentas_BancariasSelect(ref Cuentas_Bancarias ObjCuentas_Bancarias, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -129,6 +151,7 @@ namespace CapaDatos
                                           "P_FECHA_APERTURA",
                                           "P_LOCALIDAD",
                                           "P_STATUS",
+                                          "P_EJERCICIO",
                                           "P_BANDERA"
                 };
 
@@ -146,6 +169,8 @@ namespace CapaDatos
                     ObjCuentas_Bancarias.Fecha_Apertura = Convert.ToString(Cmd.Parameters["P_FECHA_APERTURA"].Value);
                     ObjCuentas_Bancarias.Localidad = Convert.ToString(Cmd.Parameters["P_LOCALIDAD"].Value);
                     ObjCuentas_Bancarias.Status = Convert.ToChar(Cmd.Parameters["P_STATUS"].Value);
+                    ObjCuentas_Bancarias.Ejercicio = Convert.ToInt32(Cmd.Parameters["P_EJERCICIO"].Value);
+
                 }
 
 

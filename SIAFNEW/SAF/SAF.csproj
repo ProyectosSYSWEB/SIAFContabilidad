@@ -1867,7 +1867,6 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RP_CFDIS.cs</LastGenOutput>
     </EmbeddedResource>
-    <Content Include="Contabilidad\Reportes\RP_Concilliacion2021.rpt" />
     <EmbeddedResource Include="Patrimonio\Reportes\RP-101.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RP-101.cs</LastGenOutput>

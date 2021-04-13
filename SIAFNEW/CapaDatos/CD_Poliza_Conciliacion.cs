@@ -166,10 +166,10 @@ namespace CapaDatos
                 {
                     String[] Parametros = { "P_TIPO",
                     "P_FECHA","P_NUMERO_POLIZA", "P_NUMERO_CHEQUE", "P_IMPORTE","P_CONCEPTO", "P_DESCRIPCION","P_ID_POLIZA_DET",
-                    "P_ID_ENC"};
+                    "P_ID_ENC", "P_IMPORTE_BANCO"};
                     object[] Valores = { lstPolizaDet[i].Tipo,
                                     lstPolizaDet[i].Fecha, lstPolizaDet[i].Numero_Poliza, lstPolizaDet[i].Numero_Cheque, lstPolizaDet[i].Importe, lstPolizaDet[i].Concepto, lstPolizaDet[i].Observaciones, 0,
-                                    IdEnc
+                                    IdEnc,lstPolizaDet[i].ImporteBanco
                     };
                     String[] ParametrosOut = { "P_BANDERA" };
 
@@ -271,7 +271,7 @@ namespace CapaDatos
                     ObjConciliacion.Vb_nombre = Convert.ToString(dr.GetValue(5));
                     ObjConciliacion.Cuenta_contable = Convert.ToInt32(dr.GetValue(1));
                     ObjConciliacion.IdEnc = Convert.ToInt32(dr.GetValue(7));
-                    ObjConciliacion.TotAdj ="("+Convert.ToInt32(dr.GetValue(8))+")Subir";
+                    ObjConciliacion.TotAdj = "<i class='fa fa-upload' aria-hidden='true'></i>(" + Convert.ToInt32(dr.GetValue(8))+")Subir";
                     List.Add(ObjConciliacion);
                 }
                 dr.Close();
@@ -562,6 +562,7 @@ namespace CapaDatos
                     objConciliacion.Fecha = Convert.ToString(dr.GetValue(2));
                     objConciliacion.Numero_Poliza = Convert.ToString(dr.GetValue(3));
                     objConciliacion.Importe = Convert.ToDouble(dr.GetValue(4));
+                    objConciliacion.ImporteBanco = Convert.ToDouble(dr.GetValue(8));
                     objConciliacion.Concepto = Convert.ToString(dr.GetValue(6));
                     objConciliacion.Observaciones = Convert.ToString(dr.GetValue(5));
                     objConciliacion.CveTipo = Convert.ToString(dr.GetValue(7));

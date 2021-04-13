@@ -47,7 +47,7 @@ namespace CapaEntidad
         private string _Tipo_Documento;
         private string _Desc_Tipo_Documento;
         private string _Clasificacion = string.Empty;
-
+        private string _ValidaTotal = "S";
 
         public string Clasificacion
         {
@@ -115,6 +115,11 @@ namespace CapaEntidad
         {
             get { return _Mes_anio.Trim(); }
             set { _Mes_anio = value.Trim(); }
+        }
+        public string ValidaTotal
+        {
+            get { return _ValidaTotal.Trim(); }
+            set { _ValidaTotal = value.Trim(); }
         }
         public string Status
         {

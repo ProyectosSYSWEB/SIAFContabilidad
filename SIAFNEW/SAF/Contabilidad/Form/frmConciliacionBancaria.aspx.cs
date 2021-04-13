@@ -94,7 +94,7 @@ namespace SAF.Contabilidad.Form
         private void CargarGrid()
         {
             Verificador = string.Empty;
-            Int32[] Celdas = new Int32[] { 10, 11 };
+            Int32[] Celdas = new Int32[] { 7,8,9,10,11 };
             grdConciliacion.DataSource = null;
             grdConciliacion.DataBind();
             try
@@ -413,6 +413,7 @@ namespace SAF.Contabilidad.Form
         }
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
+            grdDetalle.EditIndex = -1;
             MultiView1.ActiveViewIndex = 0;
         }
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -560,8 +561,12 @@ namespace SAF.Contabilidad.Form
         {
             txtConcepto.Text = string.Empty;
             txtConcepto.Visible = true;
+            lblConcepto.Visible = true;
             lblConcepto.Text = "Concepto";
+            txtImporteBanco.Visible = false;
+            lblImporteBanco.Visible = false;
             trowCheque.Visible = false;
+            lblImporte.Text = "Importe";
             if (ListTipo[ddlTipo.SelectedIndex].EtiquetaTres == "ANEXO_3")
             {
                 trowFecha.Visible = true;
@@ -586,7 +591,12 @@ namespace SAF.Contabilidad.Form
                 fecha = new DateTime(Convert.ToInt32(SesionUsu.Usu_Ejercicio), Convert.ToInt32(ddlFecha_Fin.SelectedValue), 1);
                 DateTime ultimoDia = fecha.AddMonths(1).AddDays(-1);
 
-
+                if (Convert.ToInt32(SesionUsu.Usu_Ejercicio) > 2020)
+                {
+                    lblImporte.Text = "Importe UNACH 1113";
+                    txtImporteBanco.Visible = true;
+                    lblImporteBanco.Visible = true;
+                }
                 trowPoliza.Visible = false;
                 trowFecha.Visible = false;
                 lblObservaciones.Visible = false;
@@ -600,6 +610,7 @@ namespace SAF.Contabilidad.Form
                 trowFecha.Visible = true;
                 lblObservaciones.Visible = false;
                 txtDescripcion.Visible = false;
+                lblConcepto.Visible = false;
                 txtConcepto.Visible = false;
             }
             else
@@ -671,6 +682,7 @@ namespace SAF.Contabilidad.Form
                     objConciliacion.Numero_Cheque = txtNumCheque.Text;
 
                 objConciliacion.Importe = Convert.ToDouble(txtImporte.Text);
+                objConciliacion.ImporteBanco = Convert.ToDouble(txtImporteBanco.Text);
                 objConciliacion.Concepto = txtConcepto.Text.ToUpper();
                 objConciliacion.Observaciones = txtDescripcion.Text.ToUpper();
                 objConciliacion.Tipo = ddlTipo.SelectedValue;
@@ -734,11 +746,15 @@ namespace SAF.Contabilidad.Form
 
 
             TextBox txt = (TextBox)(row.Cells[6].FindControl("txtImporteAgr"));
+            TextBox txt2 = (TextBox)(row.Cells[7].FindControl("txtImporteBanco"));
 
 
 
             ListPDet[fila].Importe = Convert.ToDouble(txt.Text);  //Convert.ToDouble(((TextBox)(row.Cells[6].Controls[0])).Text);
-            ListPDet[fila].Concepto = Convert.ToString(((TextBox)(row.Cells[7].Controls[0])).Text);
+            ListPDet[fila].Concepto = Convert.ToString(((TextBox)(row.Cells[8].Controls[0])).Text);
+
+            ListPDet[fila].ImporteBanco = Convert.ToDouble(txt2.Text);  //Convert.ToDouble(((TextBox)(row.Cells[6].Controls[0])).Text);
+
 
             grdDetalle.EditIndex = -1;
             Session["ConciliacionDet"] = ListPDet;
@@ -780,9 +796,9 @@ namespace SAF.Contabilidad.Form
             grdConciliacion.SelectedIndex = row.RowIndex;
             int IdConciliacion = Convert.ToInt32(grdConciliacion.SelectedRow.Cells[11].Text);
             if(Convert.ToInt32(SesionUsu.Usu_Ejercicio)>2020)
-                ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP_Conciliacion&id=" + grdConciliacion.SelectedRow.Cells[11].Text;
-            else
                 ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP_Conciliacion2021&id=" + grdConciliacion.SelectedRow.Cells[11].Text;
+            else
+                ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP_Conciliacion&id=" + grdConciliacion.SelectedRow.Cells[11].Text;
 
             string _open = "window.open('" + ruta + "', 'miniContenedor', 'toolbar=yes', 'location=no', 'menubar=yes', 'resizable=yes');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
@@ -910,6 +926,7 @@ namespace SAF.Contabilidad.Form
         {
             List<Poliza_Conciliacion> ListAdj = new List<Poliza_Conciliacion>();
             ListAdj = (List<Poliza_Conciliacion>)Session["DoctosAdj"];
+            modalAdj.Show();
             try
             {
                 int fila = e.RowIndex;

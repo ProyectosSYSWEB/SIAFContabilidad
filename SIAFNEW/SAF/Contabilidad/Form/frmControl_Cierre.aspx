@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="mensaje"> 
+ <div class="mensaje"> 
        <asp:UpdatePanel ID="UpdatePanel18" runat="server">
                     <ContentTemplate>
                         <asp:Label ID="lblError" runat="server" 
@@ -54,6 +54,7 @@
                                                 <td>
                                                     <asp:DropDownList ID="ddlMesGral" runat="server" SelectedValue='<%# Bind("Mes_anio") %>' ValidationGroup="vMesGral">
                                                         <asp:ListItem Value="0">--Seleccionar--</asp:ListItem>
+                                            <asp:ListItem Value="00">Apertura</asp:ListItem>
                                                         <asp:ListItem Value="01">Enero</asp:ListItem>
                                                         <asp:ListItem Value="02">Febrero</asp:ListItem>
                                                         <asp:ListItem Value="03">Marzo</asp:ListItem>
@@ -106,6 +107,7 @@
                                                 <td>
                                                     <asp:DropDownList ID="ddlMesGralD" runat="server" SelectedValue='<%# Bind("Mes_anio") %>' ValidationGroup="vMesGral">
                                                         <asp:ListItem Value="0">--Seleccionar--</asp:ListItem>
+                                                        <asp:ListItem Value="00">Apertura</asp:ListItem>
                                                         <asp:ListItem Value="01">Enero</asp:ListItem>
                                                         <asp:ListItem Value="02">Febrero</asp:ListItem>
                                                         <asp:ListItem Value="03">Marzo</asp:ListItem>

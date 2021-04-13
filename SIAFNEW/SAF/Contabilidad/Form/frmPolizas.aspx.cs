@@ -65,6 +65,11 @@ namespace SAF.Form
 
             if (!IsPostBack)
             {
+                //double importe = 518;
+                //double pruebas = Math.Ceiling(importe);
+
+                //double importe2 = 516.49;
+                //double pruebas2 = Math.Ceiling(importe2);
                 Inicializar();
             }
 
@@ -213,12 +218,12 @@ namespace SAF.Form
 
                     if (grvPolizas.SelectedRow.Cells[16].Text == "S")
                     {
-                        bttnAgregaFactura.Visible = true;
+                        //bttnAgregaFactura.Visible = true;
                         CNComun.HideColumns(grvPolizaCFDI, Celdas);
                     }
                     else
                     {
-                        bttnAgregaFactura.Visible = false;
+                        //bttnAgregaFactura.Visible = false;
                         CNComun.HideColumns(grvPolizaCFDI, Celdas2);
                     }
 
@@ -1387,6 +1392,7 @@ namespace SAF.Form
             string Ruta;
             string NombreArchivo;
             List<Poliza_CFDI> lstPolizasCFDI = new List<Poliza_CFDI>();
+            string VerificadorCFDI = string.Empty;
 
             try
             {
@@ -1494,12 +1500,17 @@ namespace SAF.Form
                                 //ObjPolizaCFDI.CFDI_RFC = listEmisor[0].Attributes["Rfc"].InnerText;
 
                             }
+                            else
+                                VerificadorCFDI = "ERROR";
+
                             if (listComplemento.Count >= 1)
                             {
                                 XmlNodeList listTimbreDigital =
                                 ((XmlElement)listComplemento[0]).GetElementsByTagName("tfd:TimbreFiscalDigital");
                                 ObjPolizaCFDI.CFDI_UUID = listTimbreDigital[0].Attributes["UUID"].InnerText;
                             }
+                            else
+                                VerificadorCFDI = "ERROR";
                         }
 
                     }
@@ -1526,14 +1537,22 @@ namespace SAF.Form
                 }
                 /*Fin Archivo PDF*/
 
+                if (VerificadorCFDI == string.Empty)
+                {
+                    if (Session["PolizasCFDI"] != null)
+                        lstPolizasCFDI = (List<Poliza_CFDI>)Session["PolizasCFDI"];
 
-                if (Session["PolizasCFDI"] != null)
-                    lstPolizasCFDI = (List<Poliza_CFDI>)Session["PolizasCFDI"];
+                    lstPolizasCFDI.Add(ObjPolizaCFDI);
+                    Session["PolizasCFDI"] = lstPolizasCFDI;
+                    CargarGridPolizaCFDI(lstPolizasCFDI);
+                    LimpiaCamposFiscales();
+                }
+                else
+                {
+                    Verificador = "Error en el XML, faltan uno de los siguientes campos: fecha, total, nombre, rfc, UUID (principal)";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
 
-                lstPolizasCFDI.Add(ObjPolizaCFDI);
-                Session["PolizasCFDI"] = lstPolizasCFDI;
-                CargarGridPolizaCFDI(lstPolizasCFDI);
-                LimpiaCamposFiscales();
+                }
 
             }
 
@@ -1609,33 +1628,65 @@ namespace SAF.Form
             /*DATOS CFDI XML*/
             Verificador = string.Empty;
             List<Poliza_CFDI> lstPolizasCFDI = new List<Poliza_CFDI>();
-
+            Poliza objPolizas = new Poliza();
+            double total = 0;
             try
             {
-                if (grvPolizaCFDI.Rows.Count > 1)
+                if (grvPolizaCFDI.Rows.Count >= 1)
                 {
-                    Label lblTot = (Label)grvPolizaCFDI.FooterRow.FindControl("lblGranTotalInt");
+                    Label lblTot = (Label)grvPolizaCFDI.FooterRow.FindControl("lblGranTotalInt");                    
                     double lblTotInt = Convert.ToDouble(lblTot.Text);
-                    if (grvPolizas.SelectedRow.Cells[4].Text == "Egreso" && (lblTotInt < Convert.ToDouble(grvPolizas.SelectedRow.Cells[19].Text)))
+                    lblTotInt = Math.Ceiling(lblTotInt);
+                    objPolizas.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
+                    CNPoliza.ValidarTotal(ref objPolizas, ref Verificador);
+
+                    //grvPolizas.SelectedRow.Cells[19].Text
+                    total = Convert.ToDouble(hddnTotCheque.Value);
+                    if (objPolizas.ValidaTotal=="S" && grvPolizas.SelectedRow.Cells[4].Text == "Egreso" && (lblTotInt < total))
                     {
                         ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, 'El total de los CFDI´s es menor al total del cheque, favor de verificar.');", true);
+                    }
+
+                    else
+                    {
+
+                        if (Session["PolizasCFDI"] != null)
+                            lstPolizasCFDI = (List<Poliza_CFDI>)Session["PolizasCFDI"];
+
+
+                        ObjPolizaCFDI.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
+                        CNPolizaCFDI.PolizaCFDIEditar(ObjPolizaCFDI, lstPolizasCFDI, ref Verificador);
+                        //CNPolizaCFDI.PolizaCFDIInsertar(ObjPolizaCFDI, lstPolizasCFDI, ref Verificador);
+
+                        if (Verificador == "0")
+                        {
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'Los datos han sido agregados correctamente.');", true);
+                            Copiar_a_Adjuntos(lstPolizasCFDI);
+                            SesionUsu.Editar = -1;
+                            MultiView1.ActiveViewIndex = 0;
+                            CargarGrid(0);
+                            filaCentroContable.Visible = true;
+                            filaFechasBusqueda.Visible = true;
+                            filaBusqueda.Visible = true;
+                            pnlPrincipal.Visible = true;
+                        }
+                        else
+                        {
+                            //SesionUsu.Editar = -1;
+                            //MultiView1.ActiveViewIndex = 0;
+                            //CargarGrid(0);
+                            CNComun.VerificaTextoMensajeError(ref Verificador);
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+
+                        }
+
                     }
                 }
                 else
                 {
-
-                    if (Session["PolizasCFDI"] != null)
-                        lstPolizasCFDI = (List<Poliza_CFDI>)Session["PolizasCFDI"];
-
-
-                    ObjPolizaCFDI.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
-                    CNPolizaCFDI.PolizaCFDIEditar(ObjPolizaCFDI, lstPolizasCFDI, ref Verificador);
-                    //CNPolizaCFDI.PolizaCFDIInsertar(ObjPolizaCFDI, lstPolizasCFDI, ref Verificador);
-
+                    CNPolizaCFDI.EliminarCFDIEditar(Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text), ref Verificador);
                     if (Verificador == "0")
                     {
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'Los datos han sido agregados correctamente.');", true);
-                        Copiar_a_Adjuntos(lstPolizasCFDI);
                         SesionUsu.Editar = -1;
                         MultiView1.ActiveViewIndex = 0;
                         CargarGrid(0);
@@ -1644,16 +1695,6 @@ namespace SAF.Form
                         filaBusqueda.Visible = true;
                         pnlPrincipal.Visible = true;
                     }
-                    else
-                    {
-                        //SesionUsu.Editar = -1;
-                        //MultiView1.ActiveViewIndex = 0;
-                        //CargarGrid(0);
-                        CNComun.VerificaTextoMensajeError(ref Verificador);
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
-
-                    }
-
                 }
                 /*FIN DATOS CFDI XML*/
             }
@@ -1693,21 +1734,49 @@ namespace SAF.Form
                 if (grvPolizas.SelectedRow.Cells[20].Text == "CFDI")
                 {
                     pnlPrincipal.Visible = false;
+                    hddnTotCheque.Value = "0";
+
+
+
                     lblNumPolizaCFDI.Text = "# DE PÓLIZA: " + grvPolizas.SelectedRow.Cells[2].Text;
                     if (grvPolizas.SelectedRow.Cells[4].Text == "Egreso")
                     {
+                        Verificador = string.Empty;
+                        ObjPolizaCFDI.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
+                        CNPolizaCFDI.PolizaCFDIConsultaTotCheque(ref ObjPolizaCFDI, ref Verificador);
+
                         lblNumCheque.Visible = true;
                         lblTotCheque.Visible = true;
                         lblNumCheque.Text = "# DE CHEQUE: " + grvPolizas.SelectedRow.Cells[18].Text;
-                        lblTotCheque.Text = "TOTAL DEL CHEQUE: " + grvPolizas.SelectedRow.Cells[19].Text;
+                        if (Verificador == "0")
+                        {
+                            lblTotCheque.Text = "TOTAL DEL CHEQUE: " + ObjPolizaCFDI.CFDI_Total;
+                            hddnTotCheque.Value = Convert.ToString(ObjPolizaCFDI.CFDI_Total);
+                        }
+                        else
+                        {
+                            lblTotCheque.Text = "TOTAL DEL CHEQUE: " + grvPolizas.SelectedRow.Cells[19].Text;
+                            hddnTotCheque.Value = grvPolizas.SelectedRow.Cells[19].Text;
+                        }
                     }
                     //lblTotAbonoPol.Text = "TOTAL ABONO:"+ grvPolizas.SelectedRow.Cells[9].Text;
+                    Verificador = string.Empty;
+                    if (grvPolizas.SelectedRow.Cells[16].Text == "S")
+                        bttnAgregaFactura.Visible = true;
+                    else
+                    {
+                        lblNumPolizaCFDI.Text = "MES CERRADO, NO SE PUEDEN AGREGAR MÁS CFDI'S, # DE PÓLIZA: " + grvPolizas.SelectedRow.Cells[2].Text;
+                        bttnAgregaFactura.Visible = false;
+                    }
+
+
                     ObjPolizaCFDI.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
                     CNPolizaCFDI.PolizaCFDIConsultaDatos(ObjPolizaCFDI, ref lstPolizasCFDI, ref Verificador);
                     if (lstPolizasCFDI.Count > 0)
                     {
                         Session["PolizasCFDI"] = lstPolizasCFDI;
                         CargarGridPolizaCFDI(lstPolizasCFDI);
+
                     }
 
 
@@ -1832,13 +1901,13 @@ namespace SAF.Form
                 if (FileOficio.HasFile)
                 {
                     fileSize = FileOficio.PostedFile.ContentLength;
-                    if (fileSize > 524288)
-                    {
-                        lblMjErrorOficio.Text = "El archivo es demasiado pesado, favor de verificar.";
+                    //if (fileSize > 524288)
+                    //{
+                    //    lblMjErrorOficio.Text = "El archivo es demasiado pesado, favor de verificar.";
 
-                    }
-                    else
-                    {
+                    //}
+                    //else
+                    //{
                         string NombreArchivo = FileOficio.FileName.ToUpper();
                         NombreArchivo = NombreArchivo.Replace(" ", "_");
                         NombreArchivo = NombreArchivo.Replace("%", string.Empty);
@@ -1862,7 +1931,7 @@ namespace SAF.Form
                         Session["PolizaOficios"] = lstOficios;
                         CargarGridPolizaOficios(lstOficios);
                         MultiView1.ActiveViewIndex = 4;
-                    }
+                    //}
 
                 }
                 else

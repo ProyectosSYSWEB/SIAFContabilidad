@@ -770,6 +770,7 @@ namespace CapaNegocio
                 {
                     row.Cells[Convert.ToInt32(Columnas.GetValue(i))].Visible = false;
                 }
+                grdView.FooterRow.Cells[Convert.ToInt32(Columnas.GetValue(i))].Visible = false;
             }
         }
         public void Limpiador_controles(Control control)

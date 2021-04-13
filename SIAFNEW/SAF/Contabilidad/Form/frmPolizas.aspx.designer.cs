@@ -1284,6 +1284,15 @@ namespace SAF.Form
         protected global::System.Web.UI.WebControls.Label lblTotCheque;
 
         /// <summary>
+        /// Control hddnTotCheque.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hddnTotCheque;
+
+        /// <summary>
         /// Control ddlTipo_Beneficiario.
         /// </summary>
         /// <remarks>

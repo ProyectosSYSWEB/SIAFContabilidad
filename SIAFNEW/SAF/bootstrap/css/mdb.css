@@ -2227,9 +2227,11 @@ a.waves-effect, a.waves-light {
       padding-bottom: 0.38rem; }
 
 .btn-link {
-  color: #000;
-  background-color: transparent;
-  box-shadow: none; }
+    /*color: #000;*/
+    background-color: transparent;
+    box-shadow: none;
+    color: #112c53; /*#59698d;*/
+}
   .btn-link:hover, .btn-link:focus, .btn-link:active {
     color: #000;
     background-color: transparent;

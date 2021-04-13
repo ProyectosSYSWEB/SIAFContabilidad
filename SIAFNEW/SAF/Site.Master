@@ -82,6 +82,10 @@
 
             }
 
+            .scroll_monitor {
+            height: 320px;
+            overflow: auto;
+        }
 
     </style>
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
