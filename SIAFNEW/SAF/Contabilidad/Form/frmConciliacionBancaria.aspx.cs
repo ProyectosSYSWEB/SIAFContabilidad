@@ -77,8 +77,8 @@ namespace SAF.Contabilidad.Form
         {
             try
             {
-                CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref DDLCentro_Contable1, "p_usuario", "p_ejercicio", SesionUsu.Usu_Nombre, SesionUsu.Usu_Ejercicio);
-                CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref DDLCentro_Contable, "p_usuario", "p_ejercicio", SesionUsu.Usu_Nombre, SesionUsu.Usu_Ejercicio, ref ListCentroContable);
+                CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref DDLCentro_Contable1, "p_usuario", "p_ejercicio", "p_sistema", SesionUsu.Usu_Nombre, SesionUsu.Usu_Ejercicio, "CONCILIACION");
+                CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref DDLCentro_Contable, "p_usuario", "p_ejercicio", "p_sistema", SesionUsu.Usu_Nombre, SesionUsu.Usu_Ejercicio, "CONCILIACION", ref ListCentroContable);
                 Session["CentrosContab"] = ListCentroContable;
                 //CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Tipo_Conciliacion", ref ddlTipo1, ref ListTipo);
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Tipo_Conciliacion",  ref ddlTipo, "p_ejercicio", SesionUsu.Usu_Ejercicio, ref ListTipo);
@@ -325,6 +325,7 @@ namespace SAF.Contabilidad.Form
             txtImporte.Text = string.Empty;
             txtConcepto.Text = string.Empty;
             txtDescripcion.Text = string.Empty;
+            txtImporteBanco.Text = "0";
             ddlTipo.Focus();
         }
         private string GuardarDatos()
@@ -345,11 +346,19 @@ namespace SAF.Contabilidad.Form
                 objConciliacion.Nombre_archivo = string.Empty;
                 ListPDet = (List<Poliza_Conciliacion>)Session["ConciliacionDet"];
                 if (SesionUsu.Editar == 0)
-                    CNConciliacion.ConciliacionInsertarEnc2(ref objConciliacion, ListPDet, ref Verificador);
+                {
+                    if(ListPDet!=null)
+                        CNConciliacion.ConciliacionInsertarEnc2(ref objConciliacion, ListPDet, ref Verificador);
+                    else
+                        CNConciliacion.ConciliacionInsertarEnc2(ref objConciliacion, null, ref Verificador);
+                }
                 else
                 {
                     objConciliacion.IdEnc = Convert.ToInt32(grdConciliacion.SelectedRow.Cells[11].Text);
-                    CNConciliacion.ConciliacionEditarEnc2(ref objConciliacion, ListPDet, ref Verificador);
+                    if (ListPDet != null)
+                        CNConciliacion.ConciliacionEditarEnc2(ref objConciliacion, ListPDet, ref Verificador);
+                    else
+                        CNConciliacion.ConciliacionEditarEnc2(ref objConciliacion, null, ref Verificador);
                 }
                 return Verificador;
 
@@ -682,7 +691,11 @@ namespace SAF.Contabilidad.Form
                     objConciliacion.Numero_Cheque = txtNumCheque.Text;
 
                 objConciliacion.Importe = Convert.ToDouble(txtImporte.Text);
-                objConciliacion.ImporteBanco = Convert.ToDouble(txtImporteBanco.Text);
+                if (txtImporteBanco.Text == string.Empty)
+                    objConciliacion.ImporteBanco = Convert.ToDouble("0");
+                else
+                    objConciliacion.ImporteBanco = Convert.ToDouble(txtImporteBanco.Text);
+
                 objConciliacion.Concepto = txtConcepto.Text.ToUpper();
                 objConciliacion.Observaciones = txtDescripcion.Text.ToUpper();
                 objConciliacion.Tipo = ddlTipo.SelectedValue;

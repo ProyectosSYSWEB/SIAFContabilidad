@@ -1,47 +1,56 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmControl_Cierre.aspx.cs" Inherits="SAF.Contabilidad.Form.frmControl_Cierre" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
- <div class="mensaje"> 
-       <asp:UpdatePanel ID="UpdatePanel18" runat="server">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">Modulo</div>
+            <div class="col-md-10">
+                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
-                        <asp:Label ID="lblError" runat="server" 
-    Text=""></asp:Label>
+                        <asp:DropDownList ID="ddlModulo" runat="server" OnSelectedIndexChanged="ddlModulo_SelectedIndexChanged" AutoPostBack="True">
+                            <asp:ListItem Value="CONTABILIDAD">POLIZAS</asp:ListItem>
+                            <asp:ListItem Value="CONCILIACION">CONCILIACIÓN BANCARIA</asp:ListItem>
+                        </asp:DropDownList>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-     </div>
-    <table style="width:100%;">
-        <tr>
-            <td width="15%">
-                &nbsp;</td>
-            <td width="70%" align="center">
-                <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
-                    <progresstemplate>
-                        <asp:Image ID="Image86" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
-                    </progresstemplate>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <asp:UpdateProgress ID="updPrgPnl2" runat="server" AssociatedUpdatePanelID="UpdatePanel2">
+                    <ProgressTemplate>
+                        <asp:Image ID="Image2" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                    </ProgressTemplate>
                 </asp:UpdateProgress>
-            </td>
-            <td width="15%">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td width="15%">
-                &nbsp;</td>
-            <td width="70%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
+                    <ProgressTemplate>
+                        <asp:Image ID="Image86" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
-                   <%-- <div class="scroll">--%>
-                        <asp:GridView ID="grvControl_Cierre" runat="server" AutoGenerateColumns="False" 
-                            BorderStyle="None" 
-                            CellPadding="4" GridLines="Vertical" Width="100%" 
-                            onselectedindexchanging="grvControl_Cierre_SelectedIndexChanging" 
-                            PageSize="15" onpageindexchanging="grvControl_Cierre_PageIndexChanging" AllowPaging="True" CssClass="mGrid" OnSelectedIndexChanged="grvControl_Cierre_SelectedIndexChanged"
-                            >                            
+                        <%-- <div class="scroll">--%>
+                        <asp:GridView ID="grvControl_Cierre" runat="server" AutoGenerateColumns="False"
+                            BorderStyle="None"
+                            CellPadding="4" GridLines="Vertical" Width="100%"
+                            OnSelectedIndexChanging="grvControl_Cierre_SelectedIndexChanging"
+                            PageSize="15" OnPageIndexChanging="grvControl_Cierre_PageIndexChanging" AllowPaging="True" CssClass="mGrid" OnSelectedIndexChanged="grvControl_Cierre_SelectedIndexChanged">
                             <Columns>
-                                <asp:BoundField DataField="Id_Control_Cierre" HeaderText="ID" >
+                                <asp:BoundField DataField="Id_Control_Cierre" HeaderText="ID">
                                     <ItemStyle Width="10%" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="CENTRO_CONTABLE" HeaderText="CENTRO CONTABLE" >
+                                <asp:BoundField DataField="CENTRO_CONTABLE" HeaderText="CENTRO CONTABLE">
                                     <ItemStyle Width="30%" />
                                 </asp:BoundField>
                                 <asp:TemplateField HeaderText="CIERRE">
@@ -54,7 +63,7 @@
                                                 <td>
                                                     <asp:DropDownList ID="ddlMesGral" runat="server" SelectedValue='<%# Bind("Mes_anio") %>' ValidationGroup="vMesGral">
                                                         <asp:ListItem Value="0">--Seleccionar--</asp:ListItem>
-                                            <asp:ListItem Value="00">Apertura</asp:ListItem>
+                                                        <asp:ListItem Value="00">Apertura</asp:ListItem>
                                                         <asp:ListItem Value="01">Enero</asp:ListItem>
                                                         <asp:ListItem Value="02">Febrero</asp:ListItem>
                                                         <asp:ListItem Value="03">Marzo</asp:ListItem>
@@ -70,13 +79,13 @@
                                                     </asp:DropDownList>
                                                 </td>
                                                 <td>
-                                                    <asp:Button ID="bttnCierreGeneral" runat="server" CssClass="btn2" Font-Size="X-Small" OnClick="bttnCierreGeneral_Click" Text="CERRAR" ValidationGroup="vMesGral" OnClientClick="return confirm('¿Desea cerrar todos los centros contables?');" />
+                                                    <asp:Button ID="bttnCierreGeneral" runat="server" CssClass="btn_grid btn-mdb-color" Font-Size="X-Small" OnClick="bttnCierreGeneral_Click" Text="CERRAR" ValidationGroup="vMesGral" OnClientClick="return confirm('¿Desea cerrar todos los centros contables?');" />
                                                 </td>
                                             </tr>
                                         </table>
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:DropDownList ID="ddlMes" runat="server" 
+                                        <asp:DropDownList ID="ddlMes" runat="server"
                                             SelectedValue='<%# Bind("Mes_anio") %>' Enabled="False">
                                             <asp:ListItem Value="00">Apertura</asp:ListItem>
                                             <asp:ListItem Value="01">Enero</asp:ListItem>
@@ -123,13 +132,13 @@
                                                     </asp:DropDownList>
                                                 </td>
                                                 <td>
-                                                    <asp:Button ID="bttnCierreGeneralD" runat="server" CssClass="btn2" Font-Size="X-Small" OnClick="bttnCierreGeneralD_Click" Text="CERRAR" ValidationGroup="vMesGralD" OnClientClick="return confirm('¿Desea cerrar todos los centros contables?');" />
+                                                    <asp:Button ID="bttnCierreGeneralD" runat="server" CssClass="btn_grid btn-mdb-color" Font-Size="X-Small" OnClick="bttnCierreGeneralD_Click" Text="CERRAR" ValidationGroup="vMesGralD" OnClientClick="return confirm('¿Desea cerrar todos los centros contables?');" />
                                                 </td>
                                             </tr>
                                         </table>
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:DropDownList ID="ddlMes2" runat="server" Enabled="False" 
+                                        <asp:DropDownList ID="ddlMes2" runat="server" Enabled="False"
                                             SelectedValue='<%# Bind("Cierre_Definitivo") %>'>
                                             <asp:ListItem Value="00">Apertura</asp:ListItem>
                                             <asp:ListItem Value="01">Enero</asp:ListItem>
@@ -153,17 +162,17 @@
                                 <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:LinkButton ID="linkBttnEditar" runat="server" CommandName="Select">Editar</asp:LinkButton>
-                                        <asp:LinkButton ID="linkBttnGuardar" runat="server" CommandName="Update" 
-                                            onclick="linkBttnGuardar_Click" 
-                                            onclientclick="return confirm('¿Desea modificar el registro?');" 
+                                        <asp:LinkButton ID="linkBttnGuardar" runat="server" CommandName="Update"
+                                            OnClick="linkBttnGuardar_Click"
+                                            OnClientClick="return confirm('¿Desea modificar el registro?');"
                                             Visible="False">Guardar</asp:LinkButton>
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" Width="15%" />
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="linkBttnCancelar" runat="server" CommandName="Cancel" 
-                                            onclick="linkBttnCancelar_Click" Visible="False">Cancelar</asp:LinkButton>
+                                        <asp:LinkButton ID="linkBttnCancelar" runat="server" CommandName="Cancel"
+                                            OnClick="linkBttnCancelar_Click" Visible="False">Cancelar</asp:LinkButton>
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" Width="15%" />
                                 </asp:TemplateField>
@@ -171,31 +180,13 @@
                             <FooterStyle CssClass="enc" />
                             <PagerStyle CssClass="enc" HorizontalAlign="Center" />
                             <SelectedRowStyle CssClass="sel" />
-                            <HeaderStyle CssClass="enc" />                                                
-                            <AlternatingRowStyle CssClass="alt" /> 
+                            <HeaderStyle CssClass="enc" />
+                            <AlternatingRowStyle CssClass="alt" />
                         </asp:GridView>
-                       <%-- </div>--%>
+                        <%-- </div>--%>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-            </td>
-            <td width="15%">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td width="15%">
-                &nbsp;</td>
-            <td width="70%">
-                &nbsp;</td>
-            <td width="15%">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td width="15%">
-                &nbsp;</td>
-            <td width="70%">
-                &nbsp;</td>
-            <td width="15%">
-                &nbsp;</td>
-        </tr>
-    </table>
+            </div>
+        </div>
+    </div>
 </asp:Content>

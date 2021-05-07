@@ -1642,7 +1642,7 @@ namespace SAF.Form
 
                     //grvPolizas.SelectedRow.Cells[19].Text
                     total = Convert.ToDouble(hddnTotCheque.Value);
-                    if (objPolizas.ValidaTotal=="S" && grvPolizas.SelectedRow.Cells[4].Text == "Egreso" && (lblTotInt < total))
+                    if (objPolizas.ValidaTotal=="S" && (grvPolizas.SelectedRow.Cells[4].Text == "Egreso" || grvPolizas.SelectedRow.Cells[4].Text == "Diario") && (lblTotInt < total))
                     {
                         ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, 'El total de los CFDI´s es menor al total del cheque, favor de verificar.');", true);
                     }
@@ -1739,7 +1739,7 @@ namespace SAF.Form
 
 
                     lblNumPolizaCFDI.Text = "# DE PÓLIZA: " + grvPolizas.SelectedRow.Cells[2].Text;
-                    if (grvPolizas.SelectedRow.Cells[4].Text == "Egreso")
+                    if (grvPolizas.SelectedRow.Cells[4].Text == "Egreso" || grvPolizas.SelectedRow.Cells[4].Text == "Diario")
                     {
                         Verificador = string.Empty;
                         ObjPolizaCFDI.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);

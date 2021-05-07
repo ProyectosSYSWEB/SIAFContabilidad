@@ -35,7 +35,7 @@ namespace SAF.Contabilidad.Form
         {
             SesionUsu.Usu_Rep = Request.QueryString["P_REP"];
             SesionUsu.Editar = -1;
-            CargarGrid();
+            ddlModulo_SelectedIndexChanged(null, null);
             //MultiView1.ActiveViewIndex = 0;
             //TabContainer1.ActiveTabIndex = 0;
             //ddlFecha_Ini.SelectedValue = System.DateTime.Now.ToString("MM");
@@ -59,7 +59,9 @@ namespace SAF.Contabilidad.Form
             }
             catch (Exception ex)
             {
-                lblError.Text = ex.Message;
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
             }
         }
         private List<Centros_Contables> GetList()
@@ -68,7 +70,7 @@ namespace SAF.Contabilidad.Form
             {
                 List<Centros_Contables> List = new List<Centros_Contables>();
                 objControl_Cierre.Ejercicio =Convert.ToInt32(SesionUsu.Usu_Ejercicio);
-                objControl_Cierre.sistema = SesionUsu.Usu_Rep;
+                objControl_Cierre.sistema = ddlModulo.SelectedValue; //SesionUsu.Usu_Rep;
                 CNControlCierre.Control_CierreConsultaGrid(ref objControl_Cierre, ref List);
                 return List;
             }
@@ -86,7 +88,6 @@ namespace SAF.Contabilidad.Form
 
         protected void grvControl_Cierre_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
         {
-           lblError.Text = string.Empty;
             int v = e.NewSelectedIndex;
             DropDownList DDL = new DropDownList();
             LinkButton linkBttn = new LinkButton();
@@ -129,7 +130,9 @@ namespace SAF.Contabilidad.Form
             }
             catch (Exception ex)
             {
-                lblError.Text = ex.Message;
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
             }
         }
 
@@ -168,17 +171,20 @@ namespace SAF.Contabilidad.Form
                 CNControlCierre.Control_CierreEditar(ref objControl_Cierre, ref Verificador);
                 if (Verificador == "0")
                 {
-                    CargarGrid();
-                    lblError.Text = "El mes del Centro Contable ha sido modificado correctamente.";
+                    CargarGrid();                   
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'El mes del Centro Contable ha sido modificado correctamente.');", true);
                 }
                 else
-                {
-                    lblError.Text = Verificador;
+                {                  
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
                 }
             }
             catch (Exception ex)
             {
-                lblError.Text = ex.Message;
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
             }
         }
 
@@ -202,6 +208,7 @@ namespace SAF.Contabilidad.Form
             {
                 objControl_Cierre.Mes_anio = DDLMesGral.SelectedValue + SesionUsu.Usu_Ejercicio.Substring(2, 2);
                 objControl_Cierre.Ejercicio = Convert.ToInt32(SesionUsu.Usu_Ejercicio);
+                objControl_Cierre.sistema = ddlModulo.SelectedValue;
                 CNControlCierre.Control_CierreGral(ref objControl_Cierre, "C", ref Verificador);
                 if (Verificador == "0")                
                     CargarGrid();                
@@ -227,6 +234,7 @@ namespace SAF.Contabilidad.Form
             {
                 objControl_Cierre.Mes_anio = ddlMesGralD.SelectedValue + SesionUsu.Usu_Ejercicio.Substring(2, 2);
                 objControl_Cierre.Ejercicio = Convert.ToInt32(SesionUsu.Usu_Ejercicio);
+                objControl_Cierre.sistema = ddlModulo.SelectedValue;
                 CNControlCierre.Control_CierreGral(ref objControl_Cierre, "CD", ref Verificador);
                 if (Verificador == "0")
                     CargarGrid();
@@ -244,6 +252,9 @@ namespace SAF.Contabilidad.Form
             }
         }
 
-       
+        protected void ddlModulo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CargarGrid();
+        }
     }
 }

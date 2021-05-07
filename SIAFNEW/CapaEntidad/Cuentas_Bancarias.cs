@@ -98,6 +98,13 @@ namespace CapaEntidad
             set { _Alta_Usuario = value.Trim(); }
         }
 
+        private string _Tipo_Subsidio;
+        public string Tipo_Subsidio
+        {
+            get { return _Tipo_Subsidio.Trim(); }
+            set { _Tipo_Subsidio = value.Trim(); }
+        }
+
         private string _Alta_Fecha;
         public string Alta_Fecha
         {

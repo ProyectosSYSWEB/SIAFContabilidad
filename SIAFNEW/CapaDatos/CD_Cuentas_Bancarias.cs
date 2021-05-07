@@ -58,7 +58,7 @@ namespace CapaDatos
             try
             {
                 String[] Parametros = { "P_EJERCICIO", "P_CLAVE", "P_CENTRO_CONTABLE", "P_BANCO", "P_CUENTA_BANCARIA", "P_CUENTA_CONTABLE",
-                                        "P_DESCRIPCION","P_FECHA_APERTURA","P_LOCALIDAD","P_STATUS","P_ALTA_USUARIO"};
+                    "P_DESCRIPCION", "P_FECHA_APERTURA", "P_LOCALIDAD", "P_STATUS", "P_ALTA_USUARIO", "P_TIPO_SUBSIDIO"};
                 object[] Valores = {    ObjCuentas_Bancarias.Ejercicio, 
                                         ObjCuentas_Bancarias.Clave,
                                         ObjCuentas_Bancarias.Centro_Contable,                                        
@@ -69,8 +69,8 @@ namespace CapaDatos
                                         ObjCuentas_Bancarias.Fecha_Apertura,
                                         ObjCuentas_Bancarias.Localidad,
                                         ObjCuentas_Bancarias.Status,
-                                        ObjCuentas_Bancarias.Alta_Usuario
-                                   
+                                        ObjCuentas_Bancarias.Alta_Usuario,
+                                        ObjCuentas_Bancarias.Tipo_Subsidio
                                    };
                 String[] ParametrosOut = { "p_Bandera"};
                 Cmd = CDDatos.GenerarOracleCommand("INS_SAF_CUENTAS_BANCARIAS", ref Verificador, Parametros, Valores, ParametrosOut);
@@ -92,9 +92,9 @@ namespace CapaDatos
             try
             {
                 String[] Parametros = { "P_ID_CUENTA_BANCARIA", "P_CLAVE", "P_CENTRO_CONTABLE", "P_BANCO", "P_CUENTA_BANCARIA", 
-                                        "P_CUENTA_CONTABLE", "P_DESCRIPCION", "P_FECHA_APERTURA",  "P_LOCALIDAD", "P_STATUS"};
+                                        "P_CUENTA_CONTABLE", "P_DESCRIPCION", "P_FECHA_APERTURA",  "P_LOCALIDAD", "P_STATUS", "P_TIPO_SUBSIDIO"};
                 object[] Valores = { ObjCuentas_Bancarias.IdCuenta_Bancaria, ObjCuentas_Bancarias.Clave, ObjCuentas_Bancarias.Centro_Contable, ObjCuentas_Bancarias.Banco, ObjCuentas_Bancarias.Cuenta_Bancaria,
-                                     ObjCuentas_Bancarias.Cuenta_Contable, ObjCuentas_Bancarias.Descripcion, ObjCuentas_Bancarias.Fecha_Apertura, ObjCuentas_Bancarias.Localidad, ObjCuentas_Bancarias.Status};
+                                     ObjCuentas_Bancarias.Cuenta_Contable, ObjCuentas_Bancarias.Descripcion, ObjCuentas_Bancarias.Fecha_Apertura, ObjCuentas_Bancarias.Localidad, ObjCuentas_Bancarias.Status, ObjCuentas_Bancarias.Tipo_Subsidio};
                 String[] ParametrosOut = { "p_Bandera" };
                 Cmd = CDDatos.GenerarOracleCommand("UPD_SAF_CUENTAS_BANCARIAS", ref Verificador, Parametros, Valores, ParametrosOut);
             }
@@ -152,6 +152,7 @@ namespace CapaDatos
                                           "P_LOCALIDAD",
                                           "P_STATUS",
                                           "P_EJERCICIO",
+                                          "P_TIPO_SUBSIDIO",
                                           "P_BANDERA"
                 };
 
@@ -170,7 +171,7 @@ namespace CapaDatos
                     ObjCuentas_Bancarias.Localidad = Convert.ToString(Cmd.Parameters["P_LOCALIDAD"].Value);
                     ObjCuentas_Bancarias.Status = Convert.ToChar(Cmd.Parameters["P_STATUS"].Value);
                     ObjCuentas_Bancarias.Ejercicio = Convert.ToInt32(Cmd.Parameters["P_EJERCICIO"].Value);
-
+                    ObjCuentas_Bancarias.Tipo_Subsidio = Convert.ToString(Cmd.Parameters["P_TIPO_SUBSIDIO"].Value);
                 }
 
 

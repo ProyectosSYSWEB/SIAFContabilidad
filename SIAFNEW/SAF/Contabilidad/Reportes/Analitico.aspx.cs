@@ -327,7 +327,14 @@ namespace SAF.Form
             string anio = SesionUsu.Usu_Ejercicio.Substring(2, 2);
             if (SesionUsu.Usu_Rep == "RP-001")
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "Vermovtos_cuentas('RP-001'," + SesionUsu.Usu_Ejercicio + ",'" + Convert.ToString(DDLCentro_Contable.SelectedValue) + "','" + Convert.ToString(ddl_cuentas.SelectedValue) + "');", true);
+                string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP-001&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + DDLCentro_Contable.SelectedValue + "&cuenta_contable=" + ddl_cuentas.SelectedValue + "&cuenta_contable_fin=" + ddl_cuentas0.SelectedValue;
+                //string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP-004exc&centro_contable=" + DDLCentro_Contable.SelectedValue + "&mes_inicial=" + FechaInicial + "&mes_final=" + FechaFinal + "&tipo_p=" + ddlTipo2.SelectedValue + "&status=" + ddlStatus2.SelectedValue + "&filtro_busca=" + txtBuscar.Text;
+
+                string _open = "window.open('" + ruta + "', '_newtab');";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+
+
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "Vermovtos_cuentas('RP-001'," + SesionUsu.Usu_Ejercicio + ",'" + Convert.ToString(DDLCentro_Contable.SelectedValue) + "','" + Convert.ToString(ddl_cuentas.SelectedValue) + "','" + ddl_cuentas0.SelectedValue + "');", true);
             }
             if (SesionUsu.Usu_Rep == "RP-002")
             {
@@ -452,7 +459,7 @@ namespace SAF.Form
             string anio = SesionUsu.Usu_Ejercicio.Substring(2, 2);
             if (SesionUsu.Usu_Rep == "RP-001")
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "Vermovtos_cuentas_Exel('RP-001'," + SesionUsu.Usu_Ejercicio + ",'" + Convert.ToString(DDLCentro_Contable.SelectedValue) + "','" + Convert.ToString(ddl_cuentas.SelectedValue) + "');", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "Vermovtos_cuentas_Exel('RP-001'," + SesionUsu.Usu_Ejercicio + ",'" + Convert.ToString(DDLCentro_Contable.SelectedValue) + "','" + Convert.ToString(ddl_cuentas.SelectedValue) +  "','" + ddl_cuentas0.SelectedValue +"');", true);
             }
             if (SesionUsu.Usu_Rep == "RP-012")
             {

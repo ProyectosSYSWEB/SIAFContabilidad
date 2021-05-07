@@ -71,7 +71,7 @@ namespace CapaDatos
             try
             {
                 string[] ParametrosIn = { "P_MES_ANIO", "P_SISTEMA", "P_EJERCICIO", "P_TIPO" };
-                object[] Valores = { ObjControl_Cierre.Mes_anio, "CONTABILIDAD", ObjControl_Cierre.Ejercicio, Tipo };
+                object[] Valores = { ObjControl_Cierre.Mes_anio, ObjControl_Cierre.sistema, ObjControl_Cierre.Ejercicio, Tipo };
                 string[] ParametrosOut ={
                                           "p_Bandera"
                 };

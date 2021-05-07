@@ -51,22 +51,7 @@ namespace CapaDatos
                     ObjPoliza.Opcion_Modificar2 = Convert.ToString(dr.GetValue(21)) == "S" ? true : false;
                     ObjPoliza.Opcion_Copiar = Convert.ToString(dr.GetValue(10)) == "MC" ? (Centro_Contable == "00000" || Convert.ToString(dr.GetValue(21)) == "S") ? false : true : false;
                     ObjPoliza.Opcion_Copiar2 = Convert.ToString(dr.GetValue(10)) == "MC" ? (Centro_Contable == "00000" || Convert.ToString(dr.GetValue(21)) == "S") ? true : false : true;
-                    //if (Convert.ToString(dr.GetValue(22)) == "E" && Convert.ToString(dr.GetValue(23)) == "S")
-                    //{
-                    //    ObjPoliza.Opcion_CFDI = true;
-                    //    ObjPoliza.Opcion_CFDI2 = false;
-                    //}
-                    //else if (Convert.ToString(dr.GetValue(22)) == "D" && Convert.ToString(dr.GetValue(23))=="S")
-                    //{
-                    //    ObjPoliza.Opcion_CFDI = true;
-                    //    ObjPoliza.Opcion_CFDI2 = false;
-
-                    //}
-                    //else
-                    //{
-                    //    ObjPoliza.Opcion_CFDI = false;
-                    //    ObjPoliza.Opcion_CFDI2 = true;
-                    //}
+                  
                     if (Convert.ToString(dr.GetValue(22)) == "E" && (Convert.ToString(dr.GetValue(28)) == "CFDI" || Convert.ToString(dr.GetValue(28)) == "OFICIO"))
                     {
                         ObjPoliza.Opcion_CFDI = true;

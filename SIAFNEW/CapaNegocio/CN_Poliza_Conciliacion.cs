@@ -36,8 +36,11 @@ namespace CapaNegocio
                 CDConciliacion.ConciliacionInsertarEnc2(ref ObjConciliacion, ref Verificador);
                 if (Verificador == "0")
                 {
-                    Verificador = string.Empty;
-                    CDConciliacion.ConciliacionDetInsertar(ObjConciliacion.IdEnc, lstConciliacionDet, ref Verificador);
+                    if (lstConciliacionDet != null)
+                    {
+                        Verificador = string.Empty;
+                        CDConciliacion.ConciliacionDetInsertar(ObjConciliacion.IdEnc, lstConciliacionDet, ref Verificador);
+                    }
                 }
             }
             catch (Exception ex)
@@ -83,8 +86,11 @@ namespace CapaNegocio
                     CDConciliacion.ConciliacionDetEliminar(IdEnc, ref Verificador);
                     if (Verificador == "0")
                     {
-                        Verificador = string.Empty;
-                        CDConciliacion.ConciliacionDetInsertar(IdEnc, lstConciliacionDet, ref Verificador);
+                        if (lstConciliacionDet != null)
+                        {
+                            Verificador = string.Empty;
+                            CDConciliacion.ConciliacionDetInsertar(IdEnc, lstConciliacionDet, ref Verificador);
+                        }
                     }
                 }
             }

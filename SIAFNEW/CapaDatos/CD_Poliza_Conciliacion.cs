@@ -157,33 +157,34 @@ namespace CapaDatos
         }
         public void ConciliacionDetInsertar(int IdEnc, List<Poliza_Conciliacion> lstPolizaDet, ref string Verificador)
         {
-
-            for (int i = 0; i < lstPolizaDet.Count; i++)
-            {
-                CD_Datos CDDatos = new CD_Datos();
-                OracleCommand Cmd = null;
-                try
+           
+                for (int i = 0; i < lstPolizaDet.Count; i++)
                 {
-                    String[] Parametros = { "P_TIPO",
+                    CD_Datos CDDatos = new CD_Datos();
+                    OracleCommand Cmd = null;
+                    try
+                    {
+                        String[] Parametros = { "P_TIPO",
                     "P_FECHA","P_NUMERO_POLIZA", "P_NUMERO_CHEQUE", "P_IMPORTE","P_CONCEPTO", "P_DESCRIPCION","P_ID_POLIZA_DET",
                     "P_ID_ENC", "P_IMPORTE_BANCO"};
-                    object[] Valores = { lstPolizaDet[i].Tipo,
+                        object[] Valores = { lstPolizaDet[i].Tipo,
                                     lstPolizaDet[i].Fecha, lstPolizaDet[i].Numero_Poliza, lstPolizaDet[i].Numero_Cheque, lstPolizaDet[i].Importe, lstPolizaDet[i].Concepto, lstPolizaDet[i].Observaciones, 0,
                                     IdEnc,lstPolizaDet[i].ImporteBanco
                     };
-                    String[] ParametrosOut = { "P_BANDERA" };
+                        String[] ParametrosOut = { "P_BANDERA" };
 
-                    Cmd = CDDatos.GenerarOracleCommand("INS_SAF_CONCILIACION_DET", ref Verificador, Parametros, Valores, ParametrosOut);
+                        Cmd = CDDatos.GenerarOracleCommand("INS_SAF_CONCILIACION_DET", ref Verificador, Parametros, Valores, ParametrosOut);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
+                    finally
+                    {
+                        CDDatos.LimpiarOracleCommand(ref Cmd);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
-                finally
-                {
-                    CDDatos.LimpiarOracleCommand(ref Cmd);
-                }
-            }
+            
         }
 
         public void ConciliacionEditar(Poliza_Conciliacion ObjConciliacion, ref string Verificador)

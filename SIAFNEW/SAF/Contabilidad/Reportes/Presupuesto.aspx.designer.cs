@@ -7,48 +7,39 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace SAF.Contabilidad.Form
+namespace SAF.Contabilidad.Reportes
 {
 
 
-    public partial class frmControl_Cierre
+    public partial class Presupuesto
     {
 
         /// <summary>
-        /// Control UpdatePanel2.
+        /// Control ddlEjercicio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEjercicio;
 
         /// <summary>
-        /// Control ddlModulo.
+        /// Control ddlPInicial.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlModulo;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPInicial;
 
         /// <summary>
-        /// Control updPrgPnl2.
+        /// Control ddlPFinal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress updPrgPnl2;
-
-        /// <summary>
-        /// Control UpdateProgress1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPFinal;
 
         /// <summary>
         /// Control UpdatePanel1.
@@ -60,12 +51,48 @@ namespace SAF.Contabilidad.Form
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
-        /// Control grvControl_Cierre.
+        /// Control imgBttnPDF.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grvControl_Cierre;
+        protected global::System.Web.UI.WebControls.ImageButton imgBttnPDF;
+
+        /// <summary>
+        /// Control imgBttnExcel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgBttnExcel;
+
+        /// <summary>
+        /// Control updPrgReporte.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPrgReporte;
+
+        /// <summary>
+        /// Control updPrgBuscar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPrgBuscar;
+
+        /// <summary>
+        /// Control updPnlRep.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlRep;
     }
 }

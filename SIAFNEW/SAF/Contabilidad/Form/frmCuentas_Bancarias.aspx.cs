@@ -122,6 +122,7 @@ namespace SAF.Contabilidad.Form
                 ObjCuentas_Bancarias.Localidad = txtLocalidad.Text.ToUpper();
                 ObjCuentas_Bancarias.Status=Convert.ToChar(rdoBttnStatus.SelectedValue);
                 ObjCuentas_Bancarias.Alta_Usuario = SesionUsu.Usu_Nombre;
+                ObjCuentas_Bancarias.Tipo_Subsidio = ddlSubsidio.SelectedValue;
                 if (SesionUsu.Editar == 0)
                     CNCuentas_Bancarias.Cuentas_BancariasInsertar(ObjCuentas_Bancarias, ref Verificador);
                 else
@@ -187,6 +188,7 @@ namespace SAF.Contabilidad.Form
                 txtClave.Text = ObjCuentas_Bancarias.Clave;
                 ddlCentros_Contables.SelectedValue = ObjCuentas_Bancarias.Centro_Contable;
                 ddlCentros_Contables_SelectedIndexChanged(null, null);
+                ddlSubsidio.SelectedValue= ObjCuentas_Bancarias.Tipo_Subsidio;
                 if (ObjCuentas_Bancarias.Cuenta_Contable != "0")                                    
                     ddlCuentas_Contables.SelectedValue = ObjCuentas_Bancarias.Cuenta_Contable;
                 
