@@ -20,7 +20,24 @@
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="DDLCentro_Contable1" ErrorMessage="*Centro Contable" InitialValue="00000" ValidationGroup="Nuevo">*</asp:RequiredFieldValidator>
                             </div>
                             <div class="col-md-1">
-                                <asp:ImageButton ID="btnNuevo" runat="server" ImageUrl="http://sysweb.unach.mx/resources/imagenes/nuevo.png" OnClick="btnNuevo_Click" title="Nuevo" ValidationGroup="Nuevo" />
+                                <asp:UpdatePanel ID="updPnlNuevo" runat="server">
+                                    <ContentTemplate>
+                                        <asp:ImageButton ID="btnNuevo" runat="server" ImageUrl="http://sysweb.unach.mx/resources/imagenes/nuevo.png" OnClick="btnNuevo_Click" title="Nuevo" ValidationGroup="Nuevo" />
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <asp:UpdateProgress ID="updPrgNuevo" runat="server"
+                                    AssociatedUpdatePanelID="updPnlNuevo">
+                                    <ProgressTemplate>
+                                        <asp:Image ID="imageNuevo" runat="server"
+                                            AlternateText="Espere un momento, por favor.." Height="30px"
+                                            ImageUrl="~/images/ajax_loader_gray_512.gif"
+                                            ToolTip="Espere un momento, por favor.." Width="30px" />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
                             </div>
                         </div>
                         <div class="row">
@@ -72,8 +89,24 @@
                                 </asp:UpdatePanel>
                             </div>
                             <div class="col-md-1">
-
-                                <asp:ImageButton ID="imgbtnBuscar1" runat="server" CausesValidation="False" ImageUrl="http://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgbtnBuscar1_Click" Style="text-align: right" title="Buscar" ValidationGroup="Buscar" />
+                                <asp:UpdatePanel ID="UpdatePanel11" runat="server">
+                                    <ContentTemplate>
+                                        <asp:ImageButton ID="imgbtnBuscar1" runat="server" CausesValidation="False" ImageUrl="http://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgbtnBuscar1_Click" Style="text-align: right" title="Buscar" ValidationGroup="Buscar" />
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <asp:UpdateProgress ID="updPgr11" runat="server"
+                                    AssociatedUpdatePanelID="UpdatePanel11">
+                                    <ProgressTemplate>
+                                        <asp:Image ID="image11" runat="server"
+                                            AlternateText="Espere un momento, por favor.." Height="30px"
+                                            ImageUrl="~/images/ajax_loader_gray_512.gif"
+                                            ToolTip="Espere un momento, por favor.." Width="30px" />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
                             </div>
                         </div>
                         <div class="row">
@@ -98,43 +131,42 @@
                             <div class="col">
 
                                 <asp:UpdatePanel ID="updPnlGrid" runat="server">
-                            <ContentTemplate>
-                                <asp:GridView ID="grdConciliacion" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontraron datos." Width="100%" OnRowDeleting="grdConciliacion_RowDeleting" OnSelectedIndexChanged="grdConciliacion_SelectedIndexChanged" AllowPaging="True" OnPageIndexChanging="grdConciliacion_PageIndexChanging">
-                                    <Columns>
-                                        <asp:BoundField DataField="Centro_contable" HeaderText="CENTRO CONTABLE" />
-                                        <asp:BoundField DataField="Desc_Cuenta_Contable" HeaderText="CTA. CONT." />
-                                        <asp:BoundField DataField="Fecha_inicial" HeaderText="PERIODO INICIAL" />
-                                        <asp:BoundField DataField="Fecha_final" HeaderText="PERIODO FINAL" />
-                                        <asp:BoundField DataField="Elaboro_nombre" HeaderText="ELABORO" />
-                                        <asp:BoundField DataField="Vb_nombre" HeaderText="VB" />
-                                        <asp:TemplateField HeaderText="ACCIONES">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="linkBttnAdj" runat="server" CssClass="btn btn-mdb-color" OnClick="linkBttnAdj_Click" Text='<%# Bind("TotAdj") %>'></asp:LinkButton>
-                                                <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Select" CssClass="btn btn-link"><i class="fa fa-pencil-square-o  fa-2x" aria-hidden="true"></i><%--Editar--%></asp:LinkButton>
-                                                &nbsp;<asp:LinkButton ID="linkReporteEnc" runat="server" CssClass="btn btn-link" OnClick="linkReporteEnc_Click"><i class="fa fa-print fa-2x" aria-hidden="true"></i><%--PDF--%></asp:LinkButton>
-                                                &nbsp;<asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" CssClass="btn btn-link" OnClientClick="return confirm('¿Desea eliminar el registro?');"><i class="fa fa-trash fa-2x" aria-hidden="true"></i><%--Eliminar--%></asp:LinkButton>
-                                            </ItemTemplate>
-                                            <ItemStyle HorizontalAlign="Center" />
-                                        </asp:TemplateField>
-                                        <asp:TemplateField ShowHeader="False">
-                                        </asp:TemplateField>
-                                        <asp:TemplateField>
-                                            <ItemStyle HorizontalAlign="Center" />
-                                        </asp:TemplateField>
-                                        <asp:TemplateField ShowHeader="False">
-                                            <ItemStyle HorizontalAlign="Center" />
-                                        </asp:TemplateField>
-                                        <asp:BoundField DataField="Cuenta_Contable" />
-                                        <asp:BoundField DataField="IdEnc" />
-                                    </Columns>
-                                    <FooterStyle CssClass="enc" />
-                                    <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                    <SelectedRowStyle CssClass="sel" />
-                                    <HeaderStyle CssClass="enc" />
-                                    <AlternatingRowStyle CssClass="alt" />
-                                </asp:GridView>
-                                 </ContentTemplate>
-                        </asp:UpdatePanel>
+                                    <ContentTemplate>
+                                        <asp:GridView ID="grdConciliacion" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontraron datos." Width="100%" OnRowDeleting="grdConciliacion_RowDeleting" OnSelectedIndexChanged="grdConciliacion_SelectedIndexChanged" AllowPaging="True" OnPageIndexChanging="grdConciliacion_PageIndexChanging">
+                                            <Columns>
+                                                <asp:BoundField DataField="Centro_contable" HeaderText="CENTRO CONTABLE" />
+                                                <asp:BoundField DataField="Desc_Cuenta_Contable" HeaderText="CTA. CONT." />
+                                                <asp:BoundField DataField="Fecha_inicial" HeaderText="PERIODO INICIAL" />
+                                                <asp:BoundField DataField="Fecha_final" HeaderText="PERIODO FINAL" />
+                                                <asp:BoundField DataField="Elaboro_nombre" HeaderText="ELABORO" />
+                                                <asp:BoundField DataField="Vb_nombre" HeaderText="VB" />
+                                                <asp:TemplateField HeaderText="ACCIONES">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="linkBttnAdj" runat="server" CssClass="btn btn-mdb-color" OnClick="linkBttnAdj_Click" Text='<%# Bind("TotAdj") %>'></asp:LinkButton>
+                                                        <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Select" CssClass="btn btn-link"><i class="fa fa-pencil-square-o  fa-2x" aria-hidden="true"></i><%--Editar--%></asp:LinkButton>
+                                                        &nbsp;<asp:LinkButton ID="linkReporteEnc" runat="server" CssClass="btn btn-link" OnClick="linkReporteEnc_Click"><i class="fa fa-print fa-2x" aria-hidden="true"></i><%--PDF--%></asp:LinkButton>
+                                                        &nbsp;<asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" CssClass="btn btn-link" OnClientClick="return confirm('¿Desea eliminar el registro?');"><i class="fa fa-trash fa-2x" aria-hidden="true"></i><%--Eliminar--%></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Center" />
+                                                </asp:TemplateField>
+                                                <asp:TemplateField ShowHeader="False"></asp:TemplateField>
+                                                <asp:TemplateField>
+                                                    <ItemStyle HorizontalAlign="Center" />
+                                                </asp:TemplateField>
+                                                <asp:TemplateField ShowHeader="False">
+                                                    <ItemStyle HorizontalAlign="Center" />
+                                                </asp:TemplateField>
+                                                <asp:BoundField DataField="Cuenta_Contable" />
+                                                <asp:BoundField DataField="IdEnc" />
+                                            </Columns>
+                                            <FooterStyle CssClass="enc" />
+                                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                            <SelectedRowStyle CssClass="sel" />
+                                            <HeaderStyle CssClass="enc" />
+                                            <AlternatingRowStyle CssClass="alt" />
+                                        </asp:GridView>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
                             </div>
                         </div>
                         <asp:HiddenField ID="hddnEdoCta" runat="server" />
@@ -359,8 +391,9 @@
                                                             </ContentTemplate>
                                                         </asp:UpdatePanel>
                                                     </div>
-                                                    <div class="col-md-2">                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="ddlTipo" ErrorMessage="* Tipo" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
-</div>
+                                                    <div class="col-md-2">
+                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="ddlTipo" ErrorMessage="* Tipo" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
+                                                    </div>
                                                     <div class="col-2">
                                                         <asp:UpdateProgress ID="updPgrTipo" runat="server" AssociatedUpdatePanelID="updPnlTipo">
                                                             <ProgressTemplate>
