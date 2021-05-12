@@ -495,6 +495,12 @@
       <DependentUpon>RP-005.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Contabilidad\Reportes\RP-012-2 - Copia.cs">
+      <DependentUpon>RP-012-2 - Copia.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Contabilidad\Reportes\RP-012-2_Polizas.cs">
       <DependentUpon>RP-012-2_Polizas.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1640,6 +1646,10 @@
     <EmbeddedResource Include="Contabilidad\Reportes\RP-005.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RP-005.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contabilidad\Reportes\RP-012-2 - Copia.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RP-012-2 - Copia.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Contabilidad\Reportes\RP-013_ORIGINAL.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

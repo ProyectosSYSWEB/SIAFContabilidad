@@ -539,7 +539,7 @@
                                                     </asp:BoundField>
                                                     <asp:TemplateField>
                                                         <ItemTemplate>
-                                                            <asp:LinkButton ID="linkBttnEditar" runat="server" CommandName="Select" Visible='<%# Bind("Opcion_Modificar") %>' CssClass="btn_grid btn-info" Width="100px"><i class="fa fa-file"></i> Ver Póliza</asp:LinkButton>
+                                                            <asp:LinkButton ID="linkBttnEditar" runat="server" CommandName="Select" Visible='<%# Bind("Opcion_Modificar") %>' CssClass="btn_grid btn-mdb-color">Editar</asp:LinkButton>
                                                             <asp:LinkButton ID="lblEditar" runat="server" Visible='<%# Bind("Opcion_Modificar2") %>' CssClass="btn_grid btn-secondary btn_grid-lg disabled">Editar</asp:LinkButton>
                                                             <%--<asp:Label ID="lblEditar" runat="server" ForeColor="#6B696B" Text="Editar" Visible='<%# Bind("Opcion_Modificar2") %>' CssClass="btn btn-blue-grey"></asp:Label>--%>
                                                         </ItemTemplate>
@@ -634,7 +634,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row">
-                                                                                                                                <div class="col-md-2">Clasificación</div>
+                                                                <div class="col-md-2">Clasificación</div>
                                                                 <div class="col-md-3">
                                                                     <asp:DropDownList ID="ddlClasificaCopia" runat="server">
                                                                         <asp:ListItem Value="X">--SELECCIONAR--</asp:ListItem>
@@ -914,6 +914,7 @@
                                                                     <asp:DropDownList ID="ddlTipo_Captura" runat="server" Enabled="False" Width="100%">
                                                                         <asp:ListItem Value="MG">Manual Generada</asp:ListItem>
                                                                         <asp:ListItem Value="AC">Automática de Cédula</asp:ListItem>
+                                                                        <asp:ListItem Value="AR">Automática de Reclasificación</asp:ListItem>
                                                                         <asp:ListItem Value="MC">Manual Capturada</asp:ListItem>
                                                                         <asp:ListItem Value="AN">Automática de Nómina</asp:ListItem>
                                                                         <asp:ListItem Value="AP">Automática de Presupuesto</asp:ListItem>
@@ -1125,8 +1126,8 @@
                             </asp:View>
                             <asp:View ID="View4" runat="server">
                                 <div class="card wizard-card ct-wizard-orange">
-                                    <div class="container">
-                                        <div class="row alert alert-info">
+                                    <div class="container-fluid">
+                                        <div class="row alert alert-dark">
                                             <div class="col-md-4">
                                                 <asp:UpdatePanel ID="UpdatePanel50" runat="server">
                                                     <ContentTemplate>
@@ -1220,7 +1221,7 @@
                                                 </asp:UpdatePanel>
                                             </div>
                                             <div class="col-md-1">
-                                                <asp:Button ID="bttnAgregaFactura" runat="server" CssClass="btn btn-blue-grey" Font-Size="Smaller" OnClick="bttnAgregaFactura_Click" Text="Agregar" ValidationGroup="CFDI" />
+                                                <asp:Button ID="bttnAgregaFactura" runat="server" CssClass="btn btn-blue-grey" OnClick="bttnAgregaFactura_Click" Text="Agregar" ValidationGroup="CFDI" />
                                             </div>
                                         </div>
                                         <%--<div class="row">

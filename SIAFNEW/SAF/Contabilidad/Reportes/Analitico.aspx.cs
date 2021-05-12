@@ -421,6 +421,7 @@ namespace SAF.Form
                     else
                     {
                         //ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP-012-2&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + Convert.ToString(DDLCentro_Contable.SelectedValue) + Convert.ToString(DDLCentro_Contable0.SelectedValue) + "&mes_inicial=" + txtmes_final.Text + "&mes_final=" + txtmes_final.Text + "&tipo_rep=" + ddlTipo.SelectedValue;
+                        
                         ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP-012-2&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + Convert.ToString(DDLCentro_Contable.SelectedValue) + Convert.ToString(DDLCentro_Contable0.SelectedValue) + "&mes_inicial=" + txtmes_inicial.SelectedValue + "&mes_final=" + txtmes_final.SelectedValue + "&tipo_rep=" + ddlTipo.SelectedValue;
 
                     }
