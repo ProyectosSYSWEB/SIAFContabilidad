@@ -69,7 +69,7 @@ namespace CapaEntidad
             set { _Ruta_PDF = value.Trim(); }
         }
 
-        private string _Ruta_XML;
+        private string _Ruta_XML = string.Empty;
         public string Ruta_XML
         {
             get { return _Ruta_XML.Trim(); }

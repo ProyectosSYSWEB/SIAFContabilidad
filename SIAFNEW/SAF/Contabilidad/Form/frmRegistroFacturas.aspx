@@ -231,7 +231,7 @@
                                             <Columns>
                                                 <asp:BoundField DataField="Beneficiario_Tipo" HeaderText="Tipo" />
                                                 <asp:BoundField DataField="Tipo_Gasto" HeaderText="Tipo Gasto" />
-                                                <asp:BoundField DataField="CFDI_Folio" HeaderText="CFDI Folio" />
+<%--                                                <asp:BoundField DataField="CFDI_Folio" HeaderText="CFDI Folio" />--%>
                                                 <asp:BoundField DataField="CFDI_UUID" HeaderText="CFDI UUID" />
                                                 <asp:BoundField DataField="CFDI_Fecha" HeaderText="CFDI Fecha" />
                                                 <asp:BoundField DataField="CFDI_Nombre" HeaderText="Proveedor" />

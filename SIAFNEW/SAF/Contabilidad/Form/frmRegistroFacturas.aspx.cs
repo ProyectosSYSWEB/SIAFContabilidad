@@ -103,14 +103,26 @@ namespace SAF.Contabilidad.Form
             }
         }
 
-        protected void grvPolizaCFDI_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-
-        }
+     
 
         protected void grvPolizaCFDI_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
+            List<Poliza_CFDI> lstPolizasCFDI = new List<Poliza_CFDI>();
+            lstPolizasCFDI = (List<Poliza_CFDI>)Session["PolizasCFDI"];
+            try
+            {
 
+                grvPolizaCFDI.PageIndex = 0;
+                grvPolizaCFDI.PageIndex = e.NewPageIndex;
+                CargarGridPolizaCFDI(lstPolizasCFDI);
+            }
+
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+            }
         }
 
         protected void btnNuevo_Click(object sender, ImageClickEventArgs e)
@@ -143,7 +155,7 @@ namespace SAF.Contabilidad.Form
                 ObjPolizaCFDI.Tipo_Gasto = ddlTipoGasto2.SelectedValue;
                 ObjPolizaCFDI.Fecha_Captura = FechaActual.ToString("dd/MM/yyyy");
                 ObjPolizaCFDI.Usuario_Captura = SesionUsu.Usu_Nombre;
-                ObjPolizaCFDI.CFDI_Folio = txtFolio.Text;
+                ObjPolizaCFDI.CFDI_UUID = txtFolio.Text;
                 ObjPolizaCFDI.CFDI_Fecha = txtFecha.Text;
                 ObjPolizaCFDI.CFDI_Total = Convert.ToDouble(txtImporte.Text);
                 ObjPolizaCFDI.CFDI_Nombre = txtProveedor.Text.ToUpper();
@@ -196,7 +208,7 @@ namespace SAF.Contabilidad.Form
         {
             grvPolizaCFDI.DataSource = null;
             grvPolizaCFDI.DataBind();
-            Int32[] Celdas = new Int32[] { 11, 12 };
+            Int32[] Celdas = new Int32[] { 10, 11 };
             Int32[] Celdas2 = new Int32[] { 10, 11, 12 };
             try
             {
@@ -211,13 +223,10 @@ namespace SAF.Contabilidad.Form
                     Label lblTot = (Label)grvPolizaCFDI.FooterRow.FindControl("lblGranTotal");
                     Label lblTotInt = (Label)grvPolizaCFDI.FooterRow.FindControl("lblGranTotalInt");
 
-
                     lblTot.Text = TotalPagos.ToString("C");
                     lblTotInt.Text = Convert.ToString(TotalPagos);
-
-
-
                 }
+                CNComun.HideColumns(grvPolizaCFDI, Celdas);
 
             }
             catch (Exception ex)
@@ -234,7 +243,20 @@ namespace SAF.Contabilidad.Form
             GridViewRow row = (GridViewRow)cbi.NamingContainer;
             grvPolizas.SelectedIndex = row.RowIndex;
             MultiView1.ActiveViewIndex = 1;
+            LimpiarCampos();
         }
+
+        protected void LimpiarCampos()
+        {
+            ddlTipoBeneficiario2.SelectedIndex = 0;
+            ddlTipoGasto2.SelectedIndex = 0;
+            txtFecha.Text = string.Empty;
+            ddlProveedor.SelectedIndex = 0;
+            ddlProveedor_SelectedIndexChanged(null, null);
+            grvPolizaCFDI.DataSource = null;
+            grvPolizaCFDI.DataBind();
+        }
+
 
         protected void linkBttnBuscar_Click(object sender, EventArgs e)
         {
@@ -306,6 +328,28 @@ namespace SAF.Contabilidad.Form
                 }
                 /*FIN DATOS CFDI XML*/
             }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+            }
+        }
+
+        protected void grvPolizaCFDI_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            List<Poliza_CFDI> lstPolizasCFDI = new List<Poliza_CFDI>();
+            lstPolizasCFDI = (List<Poliza_CFDI>)Session["PolizasCFDI"];
+            try
+            {
+                int fila = e.RowIndex;
+                int pagina = grvPolizaCFDI.PageSize * grvPolizaCFDI.PageIndex;
+                fila = pagina + fila;
+                lstPolizasCFDI.RemoveAt(fila);
+                Session["PolizasCFDI"] = lstPolizasCFDI;
+                CargarGridPolizaCFDI(lstPolizasCFDI);
+            }
+
             catch (Exception ex)
             {
                 Verificador = ex.Message;

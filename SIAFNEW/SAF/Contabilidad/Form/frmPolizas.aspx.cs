@@ -1873,7 +1873,6 @@ namespace SAF.Form
                 CNComun.VerificaTextoMensajeError(ref Verificador);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
             }
-
         }
 
         protected void btnNuevo_Click(object sender, EventArgs e)
