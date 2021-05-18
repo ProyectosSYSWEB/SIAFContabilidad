@@ -624,7 +624,7 @@
                                                                 <div class="col-md-2">Nueva Fecha</div>
                                                                 <div class="col-md-10">
                                                                     <asp:TextBox ID="txtFecha_Copia" runat="server"
-                                                                        CssClass="box" Width="95px" OnTextChanged="txtFecha_Copia_TextChanged"
+                                                                        Width="95px" OnTextChanged="txtFecha_Copia_TextChanged"
                                                                         AutoPostBack="True"></asp:TextBox>
 
                                                                     <img alt="Ver calendario"
@@ -783,7 +783,7 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col">
-                                            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0"
+                                            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="1"
                                                 CssClass="ajax__myTab" Width="100%">
                                                 <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                                                     <HeaderTemplate>

@@ -183,6 +183,43 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        public void PolizasSinComprobar(Poliza objPoliza, ref List<Poliza> lstPolizas/*, string Buscar*/)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+
+                OracleDataReader dr = null;
+                String[] Parametros = { "p_centro_contable", "p_mes" };
+                String[] Valores = { objPoliza.Centro_contable, objPoliza.Mes_anio };
+
+                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Polizas_sin_comprobar", ref dr, Parametros, Valores);
+                while (dr.Read())
+                {
+
+                    objPoliza = new Poliza();
+                    objPoliza.IdPoliza = Convert.ToInt32(dr.GetValue(0));
+                    objPoliza.Centro_contable = Convert.ToString(dr.GetValue(3));
+                    objPoliza.Desc_Tipo_Documento = Convert.ToString(dr.GetValue(26));
+                    objPoliza.Numero_poliza = Convert.ToString(dr.GetValue(2));
+                    objPoliza.Fecha= Convert.ToString(dr.GetValue(7));
+                    objPoliza.Concepto = Convert.ToString(dr.GetValue(27));
+                    objPoliza.Tot_Cargo = Convert.ToDouble(dr.GetValue(28));
+                    lstPolizas.Add(objPoliza);
+                }
+                dr.Close();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
 
     }
     public class CD_Poliza_Oficio

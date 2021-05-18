@@ -18,16 +18,16 @@
                 <asp:DropDownList ID="ddlTipo_Beneficiario" runat="server" Width="100%">
                 </asp:DropDownList>
             </div>
-            <div class="col-md-2 text-right">
+            <div class="col-md-1">
                 Tipo Gasto
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <asp:DropDownList ID="ddlTipo_Gasto" runat="server" Width="100%">
                 </asp:DropDownList>
             </div>
-             <div class="col-md-2 text-right">
+             <div class="col-md-1">
                  Mes</div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <asp:DropDownList ID="ddlMes" runat="server" Width="100%">
                     <asp:ListItem Value="00">--TODOS--</asp:ListItem>
                     <asp:ListItem Value="01">ENERO</asp:ListItem>
@@ -98,6 +98,7 @@
                                 <asp:BoundField DataField="Beneficiario_Tipo" HeaderText="Tipo Beneficiario" />
                                 <asp:BoundField DataField="CFDI_Folio" HeaderText="Folio" />
                                 <asp:BoundField DataField="CFDI_Fecha" HeaderText="Fecha" />
+                                <asp:BoundField DataField="CFDI_RFC" HeaderText="RFC" />
                                 <asp:BoundField DataField="CFDI_Nombre" HeaderText="Nombre" />
                                 <asp:BoundField DataField="CFDI_UUID" HeaderText="UUID" />
                                 <asp:BoundField DataField="CFDI_Total" HeaderText="Total" DataFormatString="{0:c}" />

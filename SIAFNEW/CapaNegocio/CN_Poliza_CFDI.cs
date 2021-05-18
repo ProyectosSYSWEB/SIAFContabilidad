@@ -104,6 +104,19 @@ namespace CapaNegocio
 
         }
 
+        public void PolizasSinComprobar(Poliza objPoliza, ref List<Poliza> lstPolizas/*, string Buscar*/)
+        {
+            try
+            {
+                CD_Poliza_CFDI CDPolizaCFDI = new CD_Poliza_CFDI();
+                CDPolizaCFDI.PolizasSinComprobar(objPoliza, ref lstPolizas/*, Buscar*/);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
 
     }
     public class CN_Poliza_Oficio

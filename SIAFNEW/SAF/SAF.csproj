@@ -127,6 +127,7 @@
     <Content Include="Contabilidad\Form\frmMinistraciones_GC.aspx" />
     <Content Include="Contabilidad\Form\frmPolizas2.aspx" />
     <Content Include="Contabilidad\Form\frmPolizas_Old.aspx" />
+    <Content Include="Contabilidad\Form\frmRegistroFacturas.aspx" />
     <Content Include="Contabilidad\Reportes\Presupuesto.aspx" />
     <Content Include="Contabilidad\Reportes\CajaGral.aspx" />
     <Content Include="Inicio.aspx" />
@@ -456,6 +457,13 @@
     </Compile>
     <Compile Include="Contabilidad\Form\frmPolizas_Old.aspx.designer.cs">
       <DependentUpon>frmPolizas_Old.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contabilidad\Form\frmRegistroFacturas.aspx.cs">
+      <DependentUpon>frmRegistroFacturas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\Form\frmRegistroFacturas.aspx.designer.cs">
+      <DependentUpon>frmRegistroFacturas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contabilidad\Reportes\Presupuesto.aspx.cs">
       <DependentUpon>Presupuesto.aspx</DependentUpon>
@@ -807,12 +815,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RP-012-2-Grupoexc2.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Contabilidad\Reportes\RP-012-2.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RP-012-2.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Contabilidad\Reportes\RP-012.cs">
@@ -1812,10 +1814,6 @@
     <EmbeddedResource Include="Contabilidad\Reportes\RP-012-2-Grupoexc2.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RP-012-2-Grupoexc2.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Contabilidad\Reportes\RP-012-2.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>RP-012-2.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Contabilidad\Reportes\RP-012.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
