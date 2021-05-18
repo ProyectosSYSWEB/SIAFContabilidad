@@ -96,7 +96,7 @@
                                                             <ItemStyle HorizontalAlign="Right" /></asp:BoundField>
                                                         <asp:TemplateField ShowHeader="False">
                                                             <ItemTemplate>
-                                                                <asp:LinkButton ID="linkBttnAgregar" runat="server" CausesValidation="False" CommandName="Select" CssClass="btn btn-blue-grey" Text="Agregar" OnClick="linkBttnAgregar_Click"></asp:LinkButton>
+                                                                <asp:LinkButton ID="linkBttnAgregar" runat="server" CausesValidation="False" CommandName="Select" CssClass="btn btn-blue-grey" OnClick="linkBttnAgregar_Click"><%# Eval("Clasificacion") %></asp:LinkButton>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
                                                         <asp:TemplateField ShowHeader="False">

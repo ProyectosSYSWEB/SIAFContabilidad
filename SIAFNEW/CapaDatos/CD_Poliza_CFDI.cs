@@ -89,7 +89,7 @@ namespace CapaDatos
                 String[] Parametros = { "P_ID_POLIZA" };
                 object[] Valores = { IdPoliza };
                 String[] ParametrosOut = { "p_Bandera" };
-                Cmd = CDDatos.GenerarOracleCommand("DEL_SAF_CFDIS_EXTRAS", ref Verificador, Parametros, Valores, ParametrosOut);
+                Cmd = CDDatos.GenerarOracleCommand("DEL_SAF_POLIZAS_CFDI_EXTRAS", ref Verificador, Parametros, Valores, ParametrosOut);
             }
             catch (Exception ex)
             {
@@ -264,8 +264,9 @@ namespace CapaDatos
                     objPoliza.Fecha= Convert.ToString(dr.GetValue(4));
                     objPoliza.Concepto = Convert.ToString(dr.GetValue(5));
                     objPoliza.Tot_Cargo = Convert.ToDouble(dr.GetValue(6));
+                    objPoliza.Clasificacion = "("+Convert.ToString(dr.GetValue(7))+") REGISTRO(S)";
                     lstPolizas.Add(objPoliza);
-                }
+                } 
                 dr.Close();
 
             }
