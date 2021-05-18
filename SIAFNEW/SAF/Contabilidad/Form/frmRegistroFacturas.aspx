@@ -225,6 +225,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
+                                         <asp:UpdatePanel ID="updPnlPolizasCFDI" runat="server">
+                                            <ContentTemplate>
                                         <asp:GridView ID="grvPolizaCFDI" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No existen documentos." OnPageIndexChanging="grvPolizaCFDI_PageIndexChanging" OnRowDeleting="grvPolizaCFDI_RowDeleting" ShowFooter="True" ShowHeaderWhenEmpty="True" Width="100%">
                                             <Columns>
                                                 <asp:BoundField DataField="Beneficiario_Tipo" HeaderText="Tipo" />
@@ -265,6 +267,8 @@
                                             <PagerStyle CssClass="enc" HorizontalAlign="Center" />
                                             <SelectedRowStyle CssClass="sel" />
                                         </asp:GridView>
+                                                </ContentTemplate>
+                                             </asp:UpdatePanel>
                                     </div>
                                 </div>
                                 <div class="row">

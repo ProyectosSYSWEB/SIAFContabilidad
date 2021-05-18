@@ -84,7 +84,7 @@ namespace SAF.Contabilidad.Form
             try
             {
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Proveedores", ref ddlProveedor);
-         
+
 
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Tipo_Beneficiario", ref ddlTipoBeneficiario2);
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Tipo_Gasto", ref ddlTipoGasto2);
@@ -134,40 +134,54 @@ namespace SAF.Contabilidad.Form
             string NombreArchivo;
             List<Poliza_CFDI> lstPolizasCFDI = new List<Poliza_CFDI>();
             string VerificadorCFDI = string.Empty;
+            DateTime FechaActual = DateTime.Today;
 
             try
             {
+
+                ObjPolizaCFDI.Beneficiario_Tipo = ddlTipoBeneficiario2.SelectedValue;
+                ObjPolizaCFDI.Tipo_Gasto = ddlTipoGasto2.SelectedValue;
+                ObjPolizaCFDI.Fecha_Captura = FechaActual.ToString("dd/MM/yyyy");
+                ObjPolizaCFDI.Usuario_Captura = SesionUsu.Usu_Nombre;
+                ObjPolizaCFDI.CFDI_Folio = txtFolio.Text;
+                ObjPolizaCFDI.CFDI_Fecha = txtFecha.Text;
+                ObjPolizaCFDI.CFDI_Total = Convert.ToDouble(txtImporte.Text);
+                ObjPolizaCFDI.CFDI_Nombre = txtProveedor.Text.ToUpper();
+                ObjPolizaCFDI.CFDI_RFC = txtRFC.Text;
+
+
                 if (FileFactura.HasFile)
                 {
                     NombreArchivo = FileFactura.FileName.ToUpper();
                     if (NombreArchivo.Contains(".XML"))
                     {
-                        DateTime FechaActual = DateTime.Today;
-                        Ruta = Path.Combine(Server.MapPath("~/AdjuntosTemp"), grvPolizas.SelectedRow.Cells[0].Text + "-" + DDLCentro_Contable.SelectedValue + "-" + grvPolizas.SelectedRow.Cells[2].Text + "-" + NombreArchivo);
+                        Ruta = Path.Combine(Server.MapPath("~/AdjuntosExtras"), grvPolizas.SelectedRow.Cells[0].Text + "-" + DDLCentro_Contable.SelectedValue + "-" + grvPolizas.SelectedRow.Cells[3].Text + "-" + NombreArchivo);
                         FileFactura.SaveAs(Ruta);
-                        ObjPolizaCFDI.Beneficiario_Tipo = ddlTipoBeneficiario2.SelectedValue;
-                        ObjPolizaCFDI.Tipo_Gasto = ddlTipoGasto2.SelectedValue;
-                        ObjPolizaCFDI.NombreArchivoXML = grvPolizas.SelectedRow.Cells[17].Text + "-" + DDLCentro_Contable.SelectedValue + "-" + grvPolizas.SelectedRow.Cells[2].Text + "-" + NombreArchivo;
-                        ObjPolizaCFDI.Fecha_Captura = FechaActual.ToString("dd/MM/yyyy");
-                        ObjPolizaCFDI.Usuario_Captura = SesionUsu.Usu_Nombre;
-                        ObjPolizaCFDI.CFDI_Folio = txtFolio.Text;
-                        ObjPolizaCFDI.CFDI_Fecha = txtFecha.Text;
-                        ObjPolizaCFDI.CFDI_Total = Convert.ToDouble(txtImporte.Text);
-                        ObjPolizaCFDI.CFDI_Nombre = txtProveedor.Text.ToUpper();
-                        ObjPolizaCFDI.CFDI_RFC = txtRFC.Text;
-                        //ObjPolizaCFDI.CFDI_UUID
-
-                        ObjPolizaCFDI.Ruta_XML = "~/AdjuntosTemp/" + ObjPolizaCFDI.NombreArchivoXML;
-
-                        if (Session["PolizasCFDI"] != null)
-                            lstPolizasCFDI = (List<Poliza_CFDI>)Session["PolizasCFDI"];
-
-                        lstPolizasCFDI.Add(ObjPolizaCFDI);
-                        Session["PolizasCFDI"] = lstPolizasCFDI;
-                        CargarGridPolizaCFDI(lstPolizasCFDI);
+                        ObjPolizaCFDI.NombreArchivoXML = grvPolizas.SelectedRow.Cells[0].Text + "-" + DDLCentro_Contable.SelectedValue + "-" + grvPolizas.SelectedRow.Cells[3].Text + "-" + NombreArchivo;
+                        ObjPolizaCFDI.Ruta_XML = "~/AdjuntosExtras/" + ObjPolizaCFDI.NombreArchivoXML;
                     }
-
                 }
+
+
+                else if (FileFacturaPDF.HasFile)
+                {
+                    NombreArchivo = FileFacturaPDF.FileName.ToUpper();
+                    if (NombreArchivo.Contains(".PDF"))
+                    {
+                        Ruta = Path.Combine(Server.MapPath("~/AdjuntosExtras"), grvPolizas.SelectedRow.Cells[0].Text + "-" + DDLCentro_Contable.SelectedValue + "-" + grvPolizas.SelectedRow.Cells[3].Text + "-" + NombreArchivo);
+                        FileFacturaPDF.SaveAs(Ruta);
+                        ObjPolizaCFDI.NombreArchivoPDF = grvPolizas.SelectedRow.Cells[0].Text + "-" + DDLCentro_Contable.SelectedValue + "-" + grvPolizas.SelectedRow.Cells[3].Text + "-" + NombreArchivo;
+                        ObjPolizaCFDI.Ruta_PDF = "~/AdjuntosExtras/" + ObjPolizaCFDI.NombreArchivoPDF;
+                    }
+                }
+
+                    if (Session["PolizasCFDI"] != null)
+                        lstPolizasCFDI = (List<Poliza_CFDI>)Session["PolizasCFDI"];
+
+                    lstPolizasCFDI.Add(ObjPolizaCFDI);
+                    Session["PolizasCFDI"] = lstPolizasCFDI;
+                    CargarGridPolizaCFDI(lstPolizasCFDI);
+                
             }
 
             catch (Exception ex)
@@ -201,7 +215,7 @@ namespace SAF.Contabilidad.Form
                     lblTot.Text = TotalPagos.ToString("C");
                     lblTotInt.Text = Convert.ToString(TotalPagos);
 
-                    
+
 
                 }
 
@@ -262,13 +276,13 @@ namespace SAF.Contabilidad.Form
                     if (Verificador == "0")
                     {
                         ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'Los datos han sido agregados correctamente.');", true);
-                        
+
                         SesionUsu.Editar = -1;
                         MultiView1.ActiveViewIndex = 0;
-                        CargarGridPolizas();                       
-                        
-                        
-                        
+                        CargarGridPolizas();
+
+
+
                     }
                     else
                     {
