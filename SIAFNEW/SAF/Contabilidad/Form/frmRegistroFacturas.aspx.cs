@@ -103,7 +103,7 @@ namespace SAF.Contabilidad.Form
             }
         }
 
-     
+
 
         protected void grvPolizaCFDI_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
@@ -187,13 +187,14 @@ namespace SAF.Contabilidad.Form
                     }
                 }
 
-                    if (Session["PolizasCFDI"] != null)
-                        lstPolizasCFDI = (List<Poliza_CFDI>)Session["PolizasCFDI"];
+                if (Session["PolizasCFDI"] != null)
+                    lstPolizasCFDI = (List<Poliza_CFDI>)Session["PolizasCFDI"];
 
-                    lstPolizasCFDI.Add(ObjPolizaCFDI);
-                    Session["PolizasCFDI"] = lstPolizasCFDI;
-                    CargarGridPolizaCFDI(lstPolizasCFDI);
-                
+                lstPolizasCFDI.Add(ObjPolizaCFDI);
+                Session["PolizasCFDI"] = lstPolizasCFDI;
+                CargarGridPolizaCFDI(lstPolizasCFDI);
+                LimpiarCampos();
+
             }
 
             catch (Exception ex)
@@ -244,6 +245,14 @@ namespace SAF.Contabilidad.Form
             grvPolizas.SelectedIndex = row.RowIndex;
             MultiView1.ActiveViewIndex = 1;
             LimpiarCampos();
+            List<Poliza_CFDI> lstPolizasCFDI = new List<Poliza_CFDI>();
+            ObjPolizaCFDI.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
+            CNPolizaCFDI.PolizaCFDIConsultaDatos(ObjPolizaCFDI, ref lstPolizasCFDI, ref Verificador);
+            if (lstPolizasCFDI.Count > 0)
+            {
+                Session["PolizasCFDI"] = lstPolizasCFDI;
+                CargarGridPolizaCFDI(lstPolizasCFDI);
+            }
         }
 
         protected void LimpiarCampos()

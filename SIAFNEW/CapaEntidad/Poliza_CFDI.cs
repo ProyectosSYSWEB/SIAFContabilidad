@@ -48,7 +48,7 @@ namespace CapaEntidad
             set { _Numero_poliza = value.Trim(); }
         }
 
-        private string _NombreArchivoXML;
+        private string _NombreArchivoXML = string.Empty;
         public string NombreArchivoXML
         {
             get { return _NombreArchivoXML.Trim(); }
