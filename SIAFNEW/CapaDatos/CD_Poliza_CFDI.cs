@@ -200,12 +200,12 @@ namespace CapaDatos
 
                     objPoliza = new Poliza();
                     objPoliza.IdPoliza = Convert.ToInt32(dr.GetValue(0));
-                    objPoliza.Centro_contable = Convert.ToString(dr.GetValue(3));
-                    objPoliza.Desc_Tipo_Documento = Convert.ToString(dr.GetValue(26));
-                    objPoliza.Numero_poliza = Convert.ToString(dr.GetValue(2));
-                    objPoliza.Fecha= Convert.ToString(dr.GetValue(7));
-                    objPoliza.Concepto = Convert.ToString(dr.GetValue(27));
-                    objPoliza.Tot_Cargo = Convert.ToDouble(dr.GetValue(28));
+                    objPoliza.Centro_contable = Convert.ToString(dr.GetValue(1));
+                    objPoliza.Desc_Tipo_Documento = Convert.ToString(dr.GetValue(2));
+                    objPoliza.Numero_poliza = Convert.ToString(dr.GetValue(3));
+                    objPoliza.Fecha= Convert.ToString(dr.GetValue(4));
+                    objPoliza.Concepto = Convert.ToString(dr.GetValue(5));
+                    objPoliza.Tot_Cargo = Convert.ToDouble(dr.GetValue(6));
                     lstPolizas.Add(objPoliza);
                 }
                 dr.Close();

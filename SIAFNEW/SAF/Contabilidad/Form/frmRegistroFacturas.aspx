@@ -92,7 +92,8 @@
                                                         <asp:BoundField DataField="Numero_poliza" HeaderText="# Póliza" />
                                                         <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
                                                         <asp:BoundField DataField="Concepto" HeaderText="Desc Partida" />
-                                                        <asp:BoundField DataField="Tot_Cargo" HeaderText="Importe" />
+                                                        <asp:BoundField DataField="Tot_Cargo" HeaderText="Importe" DataFormatString="{0:c}" >
+                                                            <ItemStyle HorizontalAlign="Right" /></asp:BoundField>
                                                         <asp:TemplateField ShowHeader="False">
                                                             <ItemTemplate>
                                                                 <asp:LinkButton ID="linkBttnAgregar" runat="server" CausesValidation="False" CommandName="Select" CssClass="btn btn-blue-grey" Text="Agregar" OnClick="linkBttnAgregar_Click"></asp:LinkButton>
@@ -190,7 +191,6 @@
                                                     </div>
                                                     <div class="input-group-append">
                                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="FileFactura" ErrorMessage="Archivo incorrecto, debe ser un XML" ValidationExpression="(.*?)\.(xml|XML)$" ValidationGroup="CFDI"></asp:RegularExpressionValidator>
-                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*Archivo XML" ControlToValidate="FileFactura" Text="* Requerido" ValidationGroup="CFDI"></asp:RequiredFieldValidator>
                                                     </div>
                                                 </div>
                                             </ContentTemplate>

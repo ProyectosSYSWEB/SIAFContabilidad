@@ -91,6 +91,7 @@ namespace SAF.Contabilidad.Form
 
 
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref DDLCentro_Contable, "p_usuario", "p_ejercicio", SesionUsu.Usu_Nombre, SesionUsu.Usu_Ejercicio);
+                DDLCentro_Contable.SelectedIndex = 1;
             }
             catch (Exception ex)
             {
