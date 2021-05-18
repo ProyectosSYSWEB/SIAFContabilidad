@@ -155,11 +155,22 @@ namespace SAF.Contabilidad.Form
                 ObjPolizaCFDI.Tipo_Gasto = ddlTipoGasto2.SelectedValue;
                 ObjPolizaCFDI.Fecha_Captura = FechaActual.ToString("dd/MM/yyyy");
                 ObjPolizaCFDI.Usuario_Captura = SesionUsu.Usu_Nombre;
-                ObjPolizaCFDI.CFDI_UUID = txtFolio.Text;
                 ObjPolizaCFDI.CFDI_Fecha = txtFecha.Text;
                 ObjPolizaCFDI.CFDI_Total = Convert.ToDouble(txtImporte.Text);
-                ObjPolizaCFDI.CFDI_Nombre = txtProveedor.Text.ToUpper();
-                ObjPolizaCFDI.CFDI_RFC = txtRFC.Text;
+                ObjPolizaCFDI.Tipo_Docto = ddlTipoDocto.SelectedValue;
+                if (ddlTipoDocto.SelectedValue == "F")
+                {
+                    ObjPolizaCFDI.CFDI_UUID = txtFolio.Text;
+                    ObjPolizaCFDI.CFDI_Nombre = txtProveedor.Text.ToUpper();
+                    ObjPolizaCFDI.CFDI_RFC = txtRFC.Text;
+                }
+                else
+                {
+                    ObjPolizaCFDI.CFDI_UUID = string.Empty;
+                    ObjPolizaCFDI.CFDI_Nombre = string.Empty;
+                    ObjPolizaCFDI.CFDI_RFC = string.Empty;
+
+                }
 
 
                 if (FileFactura.HasFile)
@@ -175,7 +186,7 @@ namespace SAF.Contabilidad.Form
                 }
 
 
-                else if (FileFacturaPDF.HasFile)
+                if (FileFacturaPDF.HasFile)
                 {
                     NombreArchivo = FileFacturaPDF.FileName.ToUpper();
                     if (NombreArchivo.Contains(".PDF"))
@@ -209,7 +220,7 @@ namespace SAF.Contabilidad.Form
         {
             grvPolizaCFDI.DataSource = null;
             grvPolizaCFDI.DataBind();
-            Int32[] Celdas = new Int32[] { 10, 11 };
+            Int32[] Celdas = new Int32[] { 11, 12 };
             Int32[] Celdas2 = new Int32[] { 10, 11, 12 };
             try
             {
@@ -243,16 +254,20 @@ namespace SAF.Contabilidad.Form
             LinkButton cbi = (LinkButton)(sender);
             GridViewRow row = (GridViewRow)cbi.NamingContainer;
             grvPolizas.SelectedIndex = row.RowIndex;
-            MultiView1.ActiveViewIndex = 1;
+            
             LimpiarCampos();
+            grvPolizaCFDI.DataSource = null;
+            grvPolizaCFDI.DataBind();
+            Session["PolizasCFDI"] = null;
             List<Poliza_CFDI> lstPolizasCFDI = new List<Poliza_CFDI>();
             ObjPolizaCFDI.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
-            CNPolizaCFDI.PolizaCFDIConsultaDatos(ObjPolizaCFDI, ref lstPolizasCFDI, ref Verificador);
+            CNPolizaCFDI.PolizaCFDIExtrasConsultaDatos(ObjPolizaCFDI, ref lstPolizasCFDI, ref Verificador);
             if (lstPolizasCFDI.Count > 0)
             {
                 Session["PolizasCFDI"] = lstPolizasCFDI;
                 CargarGridPolizaCFDI(lstPolizasCFDI);
             }
+            MultiView1.ActiveViewIndex = 1;
         }
 
         protected void LimpiarCampos()
@@ -260,10 +275,12 @@ namespace SAF.Contabilidad.Form
             ddlTipoBeneficiario2.SelectedIndex = 0;
             ddlTipoGasto2.SelectedIndex = 0;
             txtFecha.Text = string.Empty;
+            txtFolio.Text = string.Empty;
+            txtProveedor.Text = string.Empty;
             ddlProveedor.SelectedIndex = 0;
             ddlProveedor_SelectedIndexChanged(null, null);
-            grvPolizaCFDI.DataSource = null;
-            grvPolizaCFDI.DataBind();
+            //grvPolizaCFDI.DataSource = null;
+            //grvPolizaCFDI.DataBind();
         }
 
 
@@ -362,6 +379,23 @@ namespace SAF.Contabilidad.Form
                 Verificador = ex.Message;
                 CNComun.VerificaTextoMensajeError(ref Verificador);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+            }
+        }
+
+       
+        protected void ddlTipoDocto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlTipoDocto.SelectedValue == "R")
+            {
+                fileXML.Visible = false;
+                colUUID1.Visible = false;
+                //colUUID2.Visible = false;
+            }
+            else
+            {
+                fileXML.Visible = true;
+                colUUID1.Visible = true;
+                //colUUID2.Visible = true;
             }
         }
     }

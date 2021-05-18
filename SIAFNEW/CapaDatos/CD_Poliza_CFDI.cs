@@ -47,10 +47,10 @@ namespace CapaDatos
                 try
                 {
                     String[] Parametros = { "P_ID_POLIZA", "P_NOMBRE_ARCHIVO_XML", "P_NOMBRE_ARCHIVO_PDF", "P_BENEF_TIPO",
-                                        "P_CFDI_FOLIO", "P_CFDI_FECHA", "P_CFDI_TOTAL", "P_CFDI_RFC","P_TIPO_GASTO","P_CFDI_UUID","P_CFDI_NOMBRE", "P_FECHA_CAPTURA", "P_USUARIO_CAPTURA" };
+                                        "P_CFDI_FECHA", "P_CFDI_TOTAL", "P_CFDI_RFC","P_TIPO_GASTO","P_CFDI_UUID","P_CFDI_NOMBRE", "P_FECHA_CAPTURA", "P_USUARIO_CAPTURA", "P_TIPO_DOCTO" };
                     object[] Valores = {    objPolizaCFDI.IdPoliza, lstPolizasCFDI[i].NombreArchivoXML,  lstPolizasCFDI[i].NombreArchivoPDF, lstPolizasCFDI[i].Beneficiario_Tipo,
-                    lstPolizasCFDI[i].CFDI_Folio, lstPolizasCFDI[i].CFDI_Fecha,   lstPolizasCFDI[i].CFDI_Total, lstPolizasCFDI[i].CFDI_RFC, lstPolizasCFDI[i].Tipo_Gasto,lstPolizasCFDI[i].CFDI_UUID,lstPolizasCFDI[i].CFDI_Nombre,
-                        lstPolizasCFDI[i].Fecha_Captura,lstPolizasCFDI[i].Usuario_Captura};
+                    lstPolizasCFDI[i].CFDI_Fecha,   lstPolizasCFDI[i].CFDI_Total, lstPolizasCFDI[i].CFDI_RFC, lstPolizasCFDI[i].Tipo_Gasto,lstPolizasCFDI[i].CFDI_UUID,lstPolizasCFDI[i].CFDI_Nombre,
+                    lstPolizasCFDI[i].Fecha_Captura,lstPolizasCFDI[i].Usuario_Captura, lstPolizasCFDI[i].Tipo_Docto};
                     String[] ParametrosOut = { "p_Bandera" };
                     Cmd = CDDatos.GenerarOracleCommand("INS_SAF_POLIZAS_CFDI_EXTRAS", ref Verificador, Parametros, Valores, ParametrosOut);
 
@@ -223,6 +223,7 @@ namespace CapaDatos
                     objPolizaCFDI.CFDI_Nombre = Convert.ToString(dr.GetValue(9));
                     objPolizaCFDI.Fecha_Captura = Convert.ToString(dr.GetValue(10));
                     objPolizaCFDI.Usuario_Captura = Convert.ToString(dr.GetValue(11));
+                    objPolizaCFDI.Tipo_Docto = Convert.ToString(dr.GetValue(12));
                     lstPolizasCFDI.Add(objPolizaCFDI);
                 }
                 dr.Close();
@@ -310,6 +311,7 @@ namespace CapaDatos
                     objPoliza.Concepto = Convert.ToString(dr.GetValue(5));
                     objPoliza.Tot_Cargo = Convert.ToDouble(dr.GetValue(6));
                     objPoliza.Clasificacion = "("+Convert.ToString(dr.GetValue(7))+") Registro(s)";
+                    objPoliza.Tot_Comprobado = Convert.ToDouble(dr.GetValue(8));
                     lstPolizas.Add(objPoliza);
                 } 
                 dr.Close();

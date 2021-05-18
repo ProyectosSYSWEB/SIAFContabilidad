@@ -109,7 +109,7 @@ namespace CapaNegocio
             try
             {
                 CD_Poliza_CFDI CDPolizaCFDI = new CD_Poliza_CFDI();
-                CDPolizaCFDI.PolizaCFDIConsultaDatos(objPolizaCFDI, ref lstPolizasCFDI, ref Verificador);
+                CDPolizaCFDI.PolizaCFDIExtrasConsultaDatos(objPolizaCFDI, ref lstPolizasCFDI, ref Verificador);
             }
             catch (Exception ex)
             {

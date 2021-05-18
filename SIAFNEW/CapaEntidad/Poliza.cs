@@ -39,6 +39,7 @@ namespace CapaEntidad
         private double _Cheque_importe;
         private double _Tot_Cargo;
         private double _Tot_Abono;
+        private double _Tot_Comprobado;
         private bool _Opcion_CFDI;
         private bool _Opcion_CFDI2;
         private bool _Tiene_CFDI;
@@ -220,6 +221,12 @@ namespace CapaEntidad
         {
             get { return _Tot_Cargo; }
             set { _Tot_Cargo = value; }
+        }
+
+        public double Tot_Comprobado
+        {
+            get { return _Tot_Comprobado; }
+            set { _Tot_Comprobado = value; }
         }
         public double Tot_Abono
         {

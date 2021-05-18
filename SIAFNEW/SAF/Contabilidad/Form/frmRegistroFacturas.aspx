@@ -23,9 +23,9 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                  
-                                   
-                                    
+
+
+
                                     <div class="col-md-2">
                                         Mes
                                     </div>
@@ -92,16 +92,14 @@
                                                         <asp:BoundField DataField="Numero_poliza" HeaderText="# Póliza" />
                                                         <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
                                                         <asp:BoundField DataField="Concepto" HeaderText="Desc Partida" />
-                                                        <asp:BoundField DataField="Tot_Cargo" HeaderText="Importe" DataFormatString="{0:c}" >
+                                                        <asp:BoundField DataField="Tot_Cargo" HeaderText="$ por Comprobar" DataFormatString="{0:c}">
+                                                            <ItemStyle HorizontalAlign="Right" />
+                                                        </asp:BoundField>
+                                                        <asp:BoundField DataField="Tot_Comprobado" DataFormatString="{0:c}" HeaderText="$ Comprobado" >
                                                             <ItemStyle HorizontalAlign="Right" /></asp:BoundField>
                                                         <asp:TemplateField ShowHeader="False">
                                                             <ItemTemplate>
                                                                 <asp:LinkButton ID="linkBttnAgregar" runat="server" CausesValidation="False" CommandName="Select" CssClass="btn btn-blue-grey" OnClick="linkBttnAgregar_Click"><%# Eval("Clasificacion") %></asp:LinkButton>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-                                                        <asp:TemplateField ShowHeader="False">
-                                                            <ItemTemplate>
-                                                                <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Delete" CssClass="btn btn-blue-grey" Text="Eliminar"></asp:LinkButton>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
                                                     </Columns>
@@ -120,65 +118,89 @@
                                     <div class="col-md-2">
                                         Tipo Beneficiario
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-4">
                                         <asp:DropDownList ID="ddlTipoBeneficiario2" runat="server" Width="100%">
                                         </asp:DropDownList>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*Tipo Beneficiario" ControlToValidate="ddlTipoBeneficiario2" ValidationGroup="CFDI" InitialValue="0">*Requerido</asp:RequiredFieldValidator>
                                     </div>
-                                    <div class="col-md-1">
+                                    <div class="col-md-2">
                                         Tipo Gasto
                                     </div>
                                     <div class="col-md-4">
                                         <asp:DropDownList ID="ddlTipoGasto2" runat="server" Width="100%">
                                         </asp:DropDownList>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*Tipo Gasto" ControlToValidate="ddlTipoGasto2" ValidationGroup="CFDI" InitialValue="0">*Requerido</asp:RequiredFieldValidator>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">Tipo Docto</div>
+                                    <div class="col-md-4">
+                                        <asp:DropDownList ID="ddlTipoDocto" runat="server" Width="100%" OnSelectedIndexChanged="ddlTipoDocto_SelectedIndexChanged" AutoPostBack="True">
+                                            <asp:ListItem Value="F">Factura</asp:ListItem>
+                                            <asp:ListItem Value="R">Recibo</asp:ListItem>
+                                        </asp:DropDownList>
                                     </div>
                                     <div class="col-md-1">Fecha</div>
                                     <div class="col-md-2">
-                                        <asp:TextBox ID="txtFecha" runat="server" Width="85%"></asp:TextBox>
+                                        <asp:TextBox ID="txtFecha" runat="server" Width="100%"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-2">
                                         <ajaxToolkit:CalendarExtender ID="CalendarExtenderFecha" runat="server" TargetControlID="txtFecha" PopupButtonID="imgCalendario" BehaviorID="_content_CalendarExtenderFecha" />
                                         <asp:ImageButton ID="imgCalendario" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
                                         <asp:Label ID="lblRFecha" runat="server" ForeColor="Red"></asp:Label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*Fecha" ControlToValidate="txtFecha" ValidationGroup="CFDI">*Requerido</asp:RequiredFieldValidator>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2">
                                         Proveedor
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-10">
                                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                             <ContentTemplate>
                                                 <asp:DropDownList ID="ddlProveedor" runat="server" Width="100%" OnSelectedIndexChanged="ddlProveedor_SelectedIndexChanged" AutoPostBack="True" CssClass="select2"></asp:DropDownList>
-                                                <asp:TextBox ID="txtProveedor" runat="server" Width="100%" Visible="False" AutoPostBack="True"></asp:TextBox>
+                                                <asp:TextBox ID="txtProveedor" runat="server" Width="100%" Visible="False" AutoPostBack="True" PlaceHolder="Nombre del Proveedor"></asp:TextBox>
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
 
                                     </div>
-                                    <div class="col-md-1">
+                                </div>
+                                <div class="row" id="colUUID1" runat="server">
+                                    <div class="col-md-2">
                                         RFC
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         <asp:UpdatePanel ID="updPnlRFC" runat="server">
                                             <ContentTemplate>
                                                 <asp:TextBox ID="txtRFC" runat="server" AutoPostBack="True"></asp:TextBox>
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-md-2">
                                         Folio Fiscal
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <asp:TextBox ID="txtFolio" runat="server" Width="100%"></asp:TextBox>
+
                                     </div>
                                     <div class="col-md-1">
-                                        Importe
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*UUID" ControlToValidate="txtFolio" ValidationGroup="CFDI">*Requerido</asp:RequiredFieldValidator>
                                     </div>
-                                    <div class="col-md-3">
-                                        <asp:TextBox ID="txtImporte" runat="server" Width="100%"></asp:TextBox>
-                                    </div>                                    
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-2">
+                                        Importe
+                                    </div>
+                                    <div class="col-md-2">
+                                        <asp:TextBox ID="txtImporte" runat="server" Width="100%"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtImporte" ErrorMessage="*Importe" ValidationGroup="CFDI">*Requerido</asp:RequiredFieldValidator>
+                                        &nbsp;
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6" id="fileXML" runat="server">
                                         <asp:UpdatePanel ID="UpdatePanel8" runat="server">
                                             <ContentTemplate>
                                                 <div class="input-group mb-3">
@@ -225,50 +247,51 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                         <asp:UpdatePanel ID="updPnlPolizasCFDI" runat="server">
+                                        <asp:UpdatePanel ID="updPnlPolizasCFDI" runat="server">
                                             <ContentTemplate>
-                                        <asp:GridView ID="grvPolizaCFDI" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No existen documentos." OnPageIndexChanging="grvPolizaCFDI_PageIndexChanging" OnRowDeleting="grvPolizaCFDI_RowDeleting" ShowFooter="True" ShowHeaderWhenEmpty="True" Width="100%">
-                                            <Columns>
-                                                <asp:BoundField DataField="Beneficiario_Tipo" HeaderText="Tipo" />
-                                                <asp:BoundField DataField="Tipo_Gasto" HeaderText="Tipo Gasto" />
-<%--                                                <asp:BoundField DataField="CFDI_Folio" HeaderText="CFDI Folio" />--%>
-                                                <asp:BoundField DataField="CFDI_UUID" HeaderText="CFDI UUID" />
-                                                <asp:BoundField DataField="CFDI_Fecha" HeaderText="CFDI Fecha" />
-                                                <asp:BoundField DataField="CFDI_Nombre" HeaderText="Proveedor" />
-                                                <asp:BoundField DataField="CFDI_RFC" HeaderText="CFDI RFC" />
-                                                <asp:TemplateField HeaderText="CFDI Total">
-                                                    <EditItemTemplate>
-                                                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("CFDI_Total") %>'></asp:TextBox>
-                                                    </EditItemTemplate>
-                                                    <FooterTemplate>
-                                                        <asp:Label ID="lblGranTotal" runat="server" Font-Bold="True" Font-Size="Medium" Text="0"></asp:Label>
-                                                        <asp:Label ID="lblGranTotalInt" runat="server" Text="0" Visible="False"></asp:Label>
-                                                    </FooterTemplate>
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("CFDI_Total") %>'></asp:Label>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="XML">
-                                                    <ItemTemplate>
-                                                        <asp:HyperLink ID="linkArchivoXML" runat="server" NavigateUrl='<%# Bind("Ruta_XML") %>' Target="_blank">Ver</asp:HyperLink>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="PDF">
-                                                    <ItemTemplate>
-                                                        <asp:HyperLink ID="linkArchivoPDF" runat="server" NavigateUrl='<%# Bind("Ruta_PDF") %>' Target="_blank">Ver</asp:HyperLink>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:CommandField ShowDeleteButton="True" />
-                                                <asp:BoundField DataField="Fecha_Captura" />
-                                                <asp:BoundField DataField="Usuario_Captura" />
-                                            </Columns>
-                                            <FooterStyle CssClass="enc" />
-                                            <HeaderStyle CssClass="enc" />
-                                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                            <SelectedRowStyle CssClass="sel" />
-                                        </asp:GridView>
-                                                </ContentTemplate>
-                                             </asp:UpdatePanel>
+                                                <asp:GridView ID="grvPolizaCFDI" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No existen documentos." OnPageIndexChanging="grvPolizaCFDI_PageIndexChanging" OnRowDeleting="grvPolizaCFDI_RowDeleting" ShowFooter="True" ShowHeaderWhenEmpty="True" Width="100%">
+                                                    <Columns>
+                                                        <asp:BoundField DataField="Tipo_Docto" HeaderText="Tipo Docto" />
+                                                        <asp:BoundField DataField="Beneficiario_Tipo" HeaderText="Tipo" />
+                                                        <asp:BoundField DataField="Tipo_Gasto" HeaderText="Tipo Gasto" />
+                                                        <%--                                                <asp:BoundField DataField="CFDI_Folio" HeaderText="CFDI Folio" />--%>
+                                                        <asp:BoundField DataField="CFDI_UUID" HeaderText="CFDI UUID" />
+                                                        <asp:BoundField DataField="CFDI_Fecha" HeaderText="CFDI Fecha" />
+                                                        <asp:BoundField DataField="CFDI_Nombre" HeaderText="Proveedor" />
+                                                        <asp:BoundField DataField="CFDI_RFC" HeaderText="CFDI RFC" />
+                                                        <asp:TemplateField HeaderText="CFDI Total">
+                                                            <EditItemTemplate>
+                                                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("CFDI_Total") %>'></asp:TextBox>
+                                                            </EditItemTemplate>
+                                                            <FooterTemplate>
+                                                                <asp:Label ID="lblGranTotal" runat="server" Font-Bold="True" Font-Size="Medium" Text="0"></asp:Label>
+                                                                <asp:Label ID="lblGranTotalInt" runat="server" Text="0" Visible="False"></asp:Label>
+                                                            </FooterTemplate>
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("CFDI_Total") %>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="XML">
+                                                            <ItemTemplate>
+                                                                <asp:HyperLink ID="linkArchivoXML" runat="server" NavigateUrl='<%# Bind("Ruta_XML") %>' Target="_blank">Ver</asp:HyperLink>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="PDF">
+                                                            <ItemTemplate>
+                                                                <asp:HyperLink ID="linkArchivoPDF" runat="server" NavigateUrl='<%# Bind("Ruta_PDF") %>' Target="_blank">Ver</asp:HyperLink>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:CommandField ShowDeleteButton="True" />
+                                                        <asp:BoundField DataField="Fecha_Captura" />
+                                                        <asp:BoundField DataField="Usuario_Captura" />
+                                                    </Columns>
+                                                    <FooterStyle CssClass="enc" />
+                                                    <HeaderStyle CssClass="enc" />
+                                                    <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                    <SelectedRowStyle CssClass="sel" />
+                                                </asp:GridView>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
                                     </div>
                                 </div>
                                 <div class="row">

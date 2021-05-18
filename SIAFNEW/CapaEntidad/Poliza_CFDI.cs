@@ -132,6 +132,13 @@ namespace CapaEntidad
             set { _Tipo_Gasto = value.Trim(); }
         }
 
+        private string _Tipo_Docto;
+        public string Tipo_Docto
+        {
+            get { return _Tipo_Docto.Trim(); }
+            set { _Tipo_Docto = value.Trim(); }
+        }
+
         private string _Fecha_Captura;
         public string Fecha_Captura
         {
