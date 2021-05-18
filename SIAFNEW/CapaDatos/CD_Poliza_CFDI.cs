@@ -37,12 +37,70 @@ namespace CapaDatos
                 }
             }
         }
+        public void PolizaCFDIExtraInsertar(Poliza_CFDI objPolizaCFDI, List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
+        {
+
+            for (int i = 0; i < lstPolizasCFDI.Count; i++)
+            {
+                CD_Datos CDDatos = new CD_Datos();
+                OracleCommand Cmd = null;
+                try
+                {
+                    String[] Parametros = { "P_ID_POLIZA", "P_NOMBRE_ARCHIVO_XML", "P_NOMBRE_ARCHIVO_PDF", "P_BENEF_TIPO",
+                                        "P_CFDI_FOLIO", "P_CFDI_FECHA", "P_CFDI_TOTAL", "P_CFDI_RFC","P_TIPO_GASTO","P_CFDI_UUID","P_CFDI_NOMBRE", "P_FECHA_CAPTURA", "P_USUARIO_CAPTURA" };
+                    object[] Valores = {    objPolizaCFDI.IdPoliza, lstPolizasCFDI[i].NombreArchivoXML,  lstPolizasCFDI[i].NombreArchivoPDF, lstPolizasCFDI[i].Beneficiario_Tipo,
+                    lstPolizasCFDI[i].CFDI_Folio, lstPolizasCFDI[i].CFDI_Fecha,   lstPolizasCFDI[i].CFDI_Total, lstPolizasCFDI[i].CFDI_RFC, lstPolizasCFDI[i].Tipo_Gasto,lstPolizasCFDI[i].CFDI_UUID,lstPolizasCFDI[i].CFDI_Nombre,
+                        lstPolizasCFDI[i].Fecha_Captura,lstPolizasCFDI[i].Usuario_Captura};
+                    String[] ParametrosOut = { "p_Bandera" };
+                    Cmd = CDDatos.GenerarOracleCommand("INS_SAF_POL_EXTRA_CFDI", ref Verificador, Parametros, Valores, ParametrosOut);
+
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    CDDatos.LimpiarOracleCommand(ref Cmd);
+                }
+            }
+        }
+
         public void PolizaCFDIEditar(Poliza_CFDI objPolizaCFDI, List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
         {
             EliminarCFDIEditar(objPolizaCFDI.IdPoliza, ref Verificador);
             PolizaCFDIInsertar(objPolizaCFDI, lstPolizasCFDI, ref Verificador);
 
         }
+
+        public void PolizaCFDIExtraEditar(Poliza_CFDI objPolizaCFDI, List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
+        {
+            EliminarCFDIExtra(objPolizaCFDI.IdPoliza, ref Verificador);
+            PolizaCFDIExtraInsertar(objPolizaCFDI, lstPolizasCFDI, ref Verificador);
+
+        }
+
+        public void EliminarCFDIExtra(int IdPoliza, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_ID_POLIZA" };
+                object[] Valores = { IdPoliza };
+                String[] ParametrosOut = { "p_Bandera" };
+                Cmd = CDDatos.GenerarOracleCommand("DEL_SAF_CFDIS_EXTRAS", ref Verificador, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+
         public void EliminarCFDIEditar(int IdPoliza, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();

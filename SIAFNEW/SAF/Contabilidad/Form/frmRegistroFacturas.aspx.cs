@@ -284,7 +284,6 @@ namespace SAF.Contabilidad.Form
                     lblTotInt = Math.Ceiling(lblTotInt);
                     objPolizas.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
 
-                    //grvPolizas.SelectedRow.Cells[19].Text
 
 
                     if (Session["PolizasCFDI"] != null)
@@ -292,8 +291,7 @@ namespace SAF.Contabilidad.Form
 
 
                     ObjPolizaCFDI.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
-                    CNPolizaCFDI.PolizaCFDIEditar(ObjPolizaCFDI, lstPolizasCFDI, ref Verificador);
-                    //CNPolizaCFDI.PolizaCFDIInsertar(ObjPolizaCFDI, lstPolizasCFDI, ref Verificador);
+                    CNPolizaCFDI.PolizaCFDIExtraEditar(ObjPolizaCFDI, lstPolizasCFDI, ref Verificador);
 
                     if (Verificador == "0")
                     {

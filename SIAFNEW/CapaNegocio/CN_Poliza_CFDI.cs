@@ -21,12 +21,39 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+
+        public void PolizaCFDIExtraInsertar(Poliza_CFDI objPolizaCFDI, List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
+        {
+            try
+            {
+                CD_Poliza_CFDI CDPolizaCFDI = new CD_Poliza_CFDI();
+                CDPolizaCFDI.PolizaCFDIExtraInsertar(objPolizaCFDI, lstPolizasCFDI, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void PolizaCFDIEditar(Poliza_CFDI objPolizaCFDI, List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
         {
             try
             {
                 CD_Poliza_CFDI CDPolizaCFDI = new CD_Poliza_CFDI();
                 CDPolizaCFDI.PolizaCFDIEditar(objPolizaCFDI, lstPolizasCFDI, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void PolizaCFDIExtraEditar(Poliza_CFDI objPolizaCFDI, List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
+        {
+            try
+            {
+                CD_Poliza_CFDI CDPolizaCFDI = new CD_Poliza_CFDI();
+                CDPolizaCFDI.PolizaCFDIExtraEditar(objPolizaCFDI, lstPolizasCFDI, ref Verificador);
             }
             catch (Exception ex)
             {
