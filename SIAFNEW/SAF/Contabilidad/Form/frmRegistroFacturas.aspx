@@ -31,6 +31,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <asp:DropDownList ID="ddlMes" runat="server" Width="100%">
+                                            <asp:ListItem Value="00">TODOS</asp:ListItem>
                                             <asp:ListItem Value="01">ENERO</asp:ListItem>
                                             <asp:ListItem Value="02">FEBRERO</asp:ListItem>
                                             <asp:ListItem Value="03">MARZO</asp:ListItem>
@@ -84,19 +85,51 @@
                                     <div class="col">
                                         <asp:UpdatePanel ID="updPnlPolizas" runat="server">
                                             <ContentTemplate>
-                                                <asp:GridView ID="grvPolizas" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No existen documentos." ShowFooter="True" ShowHeaderWhenEmpty="True" Width="100%">
+                                                <asp:GridView ID="grvPolizas" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No existen documentos." ShowFooter="True" ShowHeaderWhenEmpty="True" Width="100%" OnPageIndexChanging="grvPolizas_PageIndexChanging">
                                                     <Columns>
                                                         <asp:BoundField DataField="IdPoliza" HeaderText="Id" />
+                                                        <asp:BoundField DataField="Partida" HeaderText="Partida" />
                                                         <asp:BoundField DataField="Centro_Contable" HeaderText="Centro Contable" />
                                                         <asp:BoundField DataField="Desc_Tipo_Documento" HeaderText="Tipo" />
                                                         <asp:BoundField DataField="Numero_poliza" HeaderText="# Póliza" />
                                                         <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
-                                                        <asp:BoundField DataField="Concepto" HeaderText="Desc Partida" />
-                                                        <asp:BoundField DataField="Tot_Cargo" HeaderText="$ por Comprobar" DataFormatString="{0:c}">
+                                                        <asp:TemplateField HeaderText="Desc Partida">
+                                                            <EditItemTemplate>
+                                                                <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Concepto") %>'></asp:TextBox>
+                                                            </EditItemTemplate>
+                                                            <FooterTemplate>
+                                                                TOTALES:
+                                                            </FooterTemplate>
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="Label3" runat="server" Text='<%# Bind("Concepto") %>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="$ por Comprobar">
+                                                            <EditItemTemplate>
+                                                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Tot_Cargo") %>'></asp:TextBox>
+                                                            </EditItemTemplate>
+                                                            <FooterTemplate>
+                                                                <asp:Label ID="lblTotPorComprobar" runat="server" Text="0"></asp:Label>
+                                                            </FooterTemplate>
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lblPorComprobar" runat="server" Text='<%# Bind("Tot_Cargo") %>'></asp:Label>
+                                                            </ItemTemplate>
+                                                            <FooterStyle HorizontalAlign="Right" />
                                                             <ItemStyle HorizontalAlign="Right" />
-                                                        </asp:BoundField>
-                                                        <asp:BoundField DataField="Tot_Comprobado" DataFormatString="{0:c}" HeaderText="$ Comprobado" >
-                                                            <ItemStyle HorizontalAlign="Right" /></asp:BoundField>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="$ Comprobado">
+                                                            <EditItemTemplate>
+                                                                <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("Tot_Comprobado") %>'></asp:TextBox>
+                                                            </EditItemTemplate>
+                                                            <FooterTemplate>
+                                                                <asp:Label ID="lblTotComprobado" runat="server" Text="0"></asp:Label>
+                                                            </FooterTemplate>
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lblComprobado" runat="server" Text='<%# Bind("Tot_Comprobado") %>'></asp:Label>
+                                                            </ItemTemplate>
+                                                            <FooterStyle HorizontalAlign="Right" />
+                                                            <ItemStyle HorizontalAlign="Right" />
+                                                        </asp:TemplateField>
                                                         <asp:TemplateField ShowHeader="False">
                                                             <ItemTemplate>
                                                                 <asp:LinkButton ID="linkBttnAgregar" runat="server" CausesValidation="False" CommandName="Select" CssClass="btn btn-blue-grey" OnClick="linkBttnAgregar_Click"><%# Eval("Clasificacion") %></asp:LinkButton>
@@ -158,13 +191,26 @@
                                         Proveedor
                                     </div>
                                     <div class="col-md-10">
-                                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                        <asp:UpdatePanel ID="updPnlProveedor" runat="server">
                                             <ContentTemplate>
                                                 <asp:DropDownList ID="ddlProveedor" runat="server" Width="100%" OnSelectedIndexChanged="ddlProveedor_SelectedIndexChanged" AutoPostBack="True" CssClass="select2"></asp:DropDownList>
                                                 <asp:TextBox ID="txtProveedor" runat="server" Width="100%" Visible="False" AutoPostBack="True" PlaceHolder="Nombre del Proveedor"></asp:TextBox>
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
 
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <asp:UpdateProgress ID="updPgrProveedor" runat="server"
+                                            AssociatedUpdatePanelID="updPnlProveedor">
+                                            <ProgressTemplate>
+                                                <asp:Image ID="imgPgrProveedor" runat="server"
+                                                    AlternateText="Espere un momento, por favor.." Height="50px"
+                                                    ImageUrl="http://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                                    ToolTip="Espere un momento, por favor.." Width="50px" />
+                                            </ProgressTemplate>
+                                        </asp:UpdateProgress>
                                     </div>
                                 </div>
                                 <div class="row" id="colUUID1" runat="server">
@@ -174,7 +220,7 @@
                                     <div class="col-md-3">
                                         <asp:UpdatePanel ID="updPnlRFC" runat="server">
                                             <ContentTemplate>
-                                                <asp:TextBox ID="txtRFC" runat="server" AutoPostBack="True"></asp:TextBox>
+                                                <asp:TextBox ID="txtRFC" runat="server" AutoPostBack="True" Width="100%"></asp:TextBox>
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
                                     </div>
@@ -183,10 +229,10 @@
                                     </div>
                                     <div class="col-md-4">
                                         <asp:TextBox ID="txtFolio" runat="server" Width="100%"></asp:TextBox>
-
+                                        <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender1" runat="server" TargetControlID="txtFolio" Mask="CCCCCCCC-CCCC-CCCC-CCCC-CCCCCCCCCCCC" />
                                     </div>
                                     <div class="col-md-1">
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*UUID" ControlToValidate="txtFolio" ValidationGroup="CFDI">*Requerido</asp:RequiredFieldValidator>
+                                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*UUID" ControlToValidate="txtFolio" ValidationGroup="CFDI">*Requerido</asp:RequiredFieldValidator>--%>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -199,6 +245,12 @@
                                         &nbsp;
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col alert alert-warning">
+                                        IMPORTANTE: Si no cuenta con el PDF ó XML, puede emitir este paso.
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-md-6" id="fileXML" runat="server">
                                         <asp:UpdatePanel ID="UpdatePanel8" runat="server">

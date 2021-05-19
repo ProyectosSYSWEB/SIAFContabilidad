@@ -22,12 +22,12 @@ namespace CapaNegocio
             }
         }
 
-        public void PolizaCFDIExtraInsertar(Poliza_CFDI objPolizaCFDI, List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
+        public void PolizaCFDIExtraInsertar(Poliza objPoliza, List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
         {
             try
             {
                 CD_Poliza_CFDI CDPolizaCFDI = new CD_Poliza_CFDI();
-                CDPolizaCFDI.PolizaCFDIExtraInsertar(objPolizaCFDI, lstPolizasCFDI, ref Verificador);
+                CDPolizaCFDI.PolizaCFDIExtraInsertar(objPoliza, lstPolizasCFDI, ref Verificador);
             }
             catch (Exception ex)
             {
@@ -48,12 +48,25 @@ namespace CapaNegocio
             }
         }
 
-        public void PolizaCFDIExtraEditar(Poliza_CFDI objPolizaCFDI, List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
+        public void PolizaCFDIExtraEditar(Poliza objPoliza, List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
         {
             try
             {
                 CD_Poliza_CFDI CDPolizaCFDI = new CD_Poliza_CFDI();
-                CDPolizaCFDI.PolizaCFDIExtraEditar(objPolizaCFDI, lstPolizasCFDI, ref Verificador);
+                CDPolizaCFDI.PolizaCFDIExtraEditar(objPoliza, lstPolizasCFDI, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void EliminarCFDIExtra(int IdPoliza, ref string Verificador)
+        {
+            try
+            {
+                CD_Poliza_CFDI CDPolizaCFDI = new CD_Poliza_CFDI();
+                CDPolizaCFDI.EliminarCFDIExtra(IdPoliza, ref Verificador);
             }
             catch (Exception ex)
             {

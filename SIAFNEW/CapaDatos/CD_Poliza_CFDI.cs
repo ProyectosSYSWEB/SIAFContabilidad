@@ -37,7 +37,7 @@ namespace CapaDatos
                 }
             }
         }
-        public void PolizaCFDIExtraInsertar(Poliza_CFDI objPolizaCFDI, List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
+        public void PolizaCFDIExtraInsertar(Poliza objPoliza, List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
         {
 
             for (int i = 0; i < lstPolizasCFDI.Count; i++)
@@ -47,12 +47,12 @@ namespace CapaDatos
                 try
                 {
                     String[] Parametros = { "P_ID_POLIZA", "P_NOMBRE_ARCHIVO_XML", "P_NOMBRE_ARCHIVO_PDF", "P_BENEF_TIPO",
-                                        "P_CFDI_FECHA", "P_CFDI_TOTAL", "P_CFDI_RFC","P_TIPO_GASTO","P_CFDI_UUID","P_CFDI_NOMBRE", "P_FECHA_CAPTURA", "P_USUARIO_CAPTURA", "P_TIPO_DOCTO" };
-                    object[] Valores = {    objPolizaCFDI.IdPoliza, lstPolizasCFDI[i].NombreArchivoXML,  lstPolizasCFDI[i].NombreArchivoPDF, lstPolizasCFDI[i].Beneficiario_Tipo,
+                                        "P_CFDI_FECHA", "P_CFDI_TOTAL", "P_CFDI_RFC","P_TIPO_GASTO","P_CFDI_UUID","P_CFDI_NOMBRE", "P_FECHA_CAPTURA", "P_USUARIO_CAPTURA", "P_TIPO_DOCTO", "P_PARTIDA" };
+                    object[] Valores = { objPoliza.IdPoliza, lstPolizasCFDI[i].NombreArchivoXML,  lstPolizasCFDI[i].NombreArchivoPDF, lstPolizasCFDI[i].Beneficiario_Tipo,
                     lstPolizasCFDI[i].CFDI_Fecha,   lstPolizasCFDI[i].CFDI_Total, lstPolizasCFDI[i].CFDI_RFC, lstPolizasCFDI[i].Tipo_Gasto,lstPolizasCFDI[i].CFDI_UUID,lstPolizasCFDI[i].CFDI_Nombre,
-                    lstPolizasCFDI[i].Fecha_Captura,lstPolizasCFDI[i].Usuario_Captura, lstPolizasCFDI[i].Tipo_Docto};
+                    lstPolizasCFDI[i].Fecha_Captura,lstPolizasCFDI[i].Usuario_Captura, lstPolizasCFDI[i].Tipo_Docto, objPoliza.Partida };
                     String[] ParametrosOut = { "p_Bandera" };
-                    Cmd = CDDatos.GenerarOracleCommand("INS_SAF_POLIZAS_CFDI_EXTRAS", ref Verificador, Parametros, Valores, ParametrosOut);
+                    Cmd = CDDatos.GenerarOracleCommand("INS_SAF_POLIZAS_CFDI_EXTRAS2", ref Verificador, Parametros, Valores, ParametrosOut);
 
                 }
                 catch (Exception ex)
@@ -73,23 +73,23 @@ namespace CapaDatos
 
         }
 
-        public void PolizaCFDIExtraEditar(Poliza_CFDI objPolizaCFDI, List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
+        public void PolizaCFDIExtraEditar(Poliza objPoliza, List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
         {
-            EliminarCFDIExtra(objPolizaCFDI.IdPoliza, ref Verificador);
-            PolizaCFDIExtraInsertar(objPolizaCFDI, lstPolizasCFDI, ref Verificador);
+            EliminarCFDIExtra(objPoliza, ref Verificador);
+            PolizaCFDIExtraInsertar(objPoliza, lstPolizasCFDI, ref Verificador);
 
         }
 
-        public void EliminarCFDIExtra(int IdPoliza, ref string Verificador)
+        public void EliminarCFDIExtra(Poliza objPoliza, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
             OracleCommand Cmd = null;
             try
             {
-                String[] Parametros = { "P_ID_POLIZA" };
-                object[] Valores = { IdPoliza };
+                String[] Parametros = { "P_ID_POLIZA", "P_PARTIDA" };
+                object[] Valores = { objPoliza.IdPoliza, objPoliza.Partida };
                 String[] ParametrosOut = { "p_Bandera" };
-                Cmd = CDDatos.GenerarOracleCommand("DEL_SAF_POLIZAS_CFDI_EXTRAS", ref Verificador, Parametros, Valores, ParametrosOut);
+                Cmd = CDDatos.GenerarOracleCommand("DEL_SAF_POLIZAS_CFDI_EXTRAS2", ref Verificador, Parametros, Valores, ParametrosOut);
             }
             catch (Exception ex)
             {
@@ -312,6 +312,7 @@ namespace CapaDatos
                     objPoliza.Tot_Cargo = Convert.ToDouble(dr.GetValue(6));
                     objPoliza.Clasificacion = "("+Convert.ToString(dr.GetValue(7))+") Registro(s)";
                     objPoliza.Tot_Comprobado = Convert.ToDouble(dr.GetValue(8));
+                    objPoliza.Partida = Convert.ToString(dr.GetValue(9));
                     lstPolizas.Add(objPoliza);
                 } 
                 dr.Close();

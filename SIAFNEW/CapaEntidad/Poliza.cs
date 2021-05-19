@@ -49,7 +49,13 @@ namespace CapaEntidad
         private string _Desc_Tipo_Documento;
         private string _Clasificacion = string.Empty;
         private string _ValidaTotal = "S";
+        private string _Partida;
 
+        public string Partida
+        {
+            get { return _Partida; }
+            set { _Partida = value; }
+        }
         public string Clasificacion
         {
             get { return _Clasificacion; }
