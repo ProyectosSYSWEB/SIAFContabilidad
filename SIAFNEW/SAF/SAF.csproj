@@ -119,6 +119,7 @@
     <Content Include="Adquisiciones\Form\FRMEditar_solicitud.aspx" />
     <Content Include="Configuracion\frmConfiguracionForms.aspx" />
     <Content Include="Contabilidad\Form\frmAdmin_CFDI.aspx" />
+    <Content Include="Contabilidad\Form\frmComprobaciones.aspx" />
     <Content Include="Contabilidad\Form\frmConciliacionBancaria2.aspx" />
     <Content Include="Contabilidad\Form\frmConciliacionBancaria.aspx" />
     <Content Include="Contabilidad\Form\FRMCuentas_contables.aspx" />
@@ -402,6 +403,13 @@
     <Compile Include="Contabilidad\Form\frmAdmin_CFDI.aspx.designer.cs">
       <DependentUpon>frmAdmin_CFDI.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Contabilidad\Form\frmComprobaciones.aspx.cs">
+      <DependentUpon>frmComprobaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\Form\frmComprobaciones.aspx.designer.cs">
+      <DependentUpon>frmComprobaciones.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Contabilidad\Form\frmConciliacionBancaria2.aspx.cs">
       <DependentUpon>frmConciliacionBancaria2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -579,6 +587,12 @@
       <DependentUpon>RP-022_3.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\Reportes\RP-024.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RP-024.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Contabilidad\Reportes\RP-Cedulasxls.cs">
@@ -1696,6 +1710,10 @@
     <EmbeddedResource Include="Contabilidad\Reportes\RP-022_3.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RP-022_3.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contabilidad\Reportes\RP-024.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RP-024.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Contabilidad\Reportes\RP-Cedulasxls.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

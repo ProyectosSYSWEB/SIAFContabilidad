@@ -16,14 +16,14 @@ namespace SAF.Contabilidad.Reportes {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class RP_005 : ReportClass {
+    public class RP_024 : ReportClass {
         
-        public RP_005() {
+        public RP_024() {
         }
         
         public override string ResourceName {
             get {
-                return "RP-005.rpt";
+                return "RP-024.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace SAF.Contabilidad.Reportes {
         
         public override string FullResourceName {
             get {
-                return "SAF.Contabilidad.Reportes.RP-005.rpt";
+                return "SAF.Contabilidad.Reportes.RP-024.rpt";
             }
             set {
                 // Do nothing
@@ -50,7 +50,7 @@ namespace SAF.Contabilidad.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section ReportHeaderSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section1 {
             get {
                 return this.ReportDefinition.Sections[0];
             }
@@ -58,7 +58,7 @@ namespace SAF.Contabilidad.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section PageHeaderSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section2 {
             get {
                 return this.ReportDefinition.Sections[1];
             }
@@ -66,7 +66,7 @@ namespace SAF.Contabilidad.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section PageHeaderSection7 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
@@ -74,7 +74,7 @@ namespace SAF.Contabilidad.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section PageHeaderSection6 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,73 +82,17 @@ namespace SAF.Contabilidad.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section PageHeaderSection3 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
             get {
                 return this.ReportDefinition.Sections[4];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section PageHeaderSection5 {
-            get {
-                return this.ReportDefinition.Sections[5];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section PageHeaderSection4 {
-            get {
-                return this.ReportDefinition.Sections[6];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section DetailSection1 {
-            get {
-                return this.ReportDefinition.Sections[7];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section ReportFooterSection1 {
-            get {
-                return this.ReportDefinition.Sections[8];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section PageFooterSection1 {
-            get {
-                return this.ReportDefinition.Sections[9];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_1P_ejercicio {
-            get {
-                return this.DataDefinition.ParameterFields[0];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ID {
-            get {
-                return this.DataDefinition.ParameterFields[1];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedRP_005 : Component, ICachedReport {
+    public class CachedRP_024 : Component, ICachedReport {
         
-        public CachedRP_005() {
+        public CachedRP_024() {
         }
         
         [Browsable(false)]
@@ -185,7 +129,7 @@ namespace SAF.Contabilidad.Reportes {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            RP_005 rpt = new RP_005();
+            RP_024 rpt = new RP_024();
             rpt.Site = this.Site;
             return rpt;
         }

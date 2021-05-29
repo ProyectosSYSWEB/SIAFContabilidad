@@ -193,7 +193,7 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
-        public void PolizaCFDIExtrasConsultaDatos(Poliza_CFDI objPolizaCFDI, ref List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
+        public void PolizaCFDIExtrasConsultaDatos(Poliza_CFDI objPolizaCFDI, int idPoliza, string Partida, ref List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
             OracleCommand cmm = null;
@@ -201,10 +201,10 @@ namespace CapaDatos
             {
 
                 OracleDataReader dr = null;
-                String[] Parametros = { "P_ID_POLIZA" };
-                String[] Valores = { Convert.ToString(objPolizaCFDI.IdPoliza) };
+                String[] Parametros = { "P_ID_POLIZA", "P_PARTIDA" };
+                String[] Valores = { Convert.ToString(idPoliza), Partida };
 
-                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Polizas_CFDI_Extras", ref dr, Parametros, Valores);
+                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Polizas_CFDI_Extras2", ref dr, Parametros, Valores);
                 while (dr.Read())
                 {
 
@@ -327,6 +327,46 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        public void PolizasPorComprobar(Poliza objPoliza, ref List<Poliza> lstPolizas/*, string Buscar*/)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+
+                OracleDataReader dr = null;
+                String[] Parametros = { "p_centro_contable", "p_mes" };
+                String[] Valores = { objPoliza.Centro_contable, objPoliza.Mes_anio };
+
+                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Polizas_por_comprobar", ref dr, Parametros, Valores);
+                while (dr.Read())
+                {
+
+                    objPoliza = new Poliza();
+                    objPoliza.IdPoliza = Convert.ToInt32(dr.GetValue(0));
+                    objPoliza.Centro_contable = Convert.ToString(dr.GetValue(1));
+                    objPoliza.Desc_Tipo_Documento = Convert.ToString(dr.GetValue(2));
+                    objPoliza.Numero_poliza = Convert.ToString(dr.GetValue(3));
+                    objPoliza.Fecha = Convert.ToString(dr.GetValue(4));
+                    objPoliza.Tot_Cargo = Convert.ToDouble(dr.GetValue(5));
+                    objPoliza.Clasificacion = "(" + Convert.ToString(dr.GetValue(6)) + ") Registro(s)";
+                    objPoliza.Tot_Comprobado = Convert.ToDouble(dr.GetValue(7));
+                    objPoliza.Mes_anio = Convert.ToString(dr.GetValue(8));
+                    //objPoliza.Partida = Convert.ToString(dr.GetValue(9));
+                    lstPolizas.Add(objPoliza);
+                }
+                dr.Close();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
 
     }
     public class CD_Poliza_Oficio
@@ -417,6 +457,39 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        public void PolizaPartidasDatos(Poliza_CFDI objPoliza, ref List<Poliza_CFDI> lstPartidas, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+
+                OracleDataReader dr = null;
+                String[] Parametros = { "P_ID_POLIZA" };
+                String[] Valores = { Convert.ToString(objPoliza.IdPoliza) };
+
+                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Poliza_Partidas", ref dr, Parametros, Valores);
+                while (dr.Read())
+                {
+
+                    objPoliza = new Poliza_CFDI();
+                    objPoliza.Partida = Convert.ToString(dr.GetValue(0));
+                    objPoliza.Importe_Partida = Convert.ToDouble(dr.GetValue(1));
+                    lstPartidas.Add(objPoliza);
+                }
+                dr.Close();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+
 
     }
 }

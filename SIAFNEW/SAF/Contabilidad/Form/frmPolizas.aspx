@@ -56,6 +56,11 @@
                 width: 30px;
                 height: 30px;
             }
+
+        .scroll_monitor {
+            height: 320px;
+            overflow: auto;
+        }
     </style>
 
 
@@ -317,7 +322,7 @@
                                     <asp:Label ID="lblStatus0" runat="server" Text="Status" Visible="False"></asp:Label>
                                 </div>
                                 <div class="col-md-2">
-                                    <asp:DropDownList ID="ddlStatus0" runat="server" Visible="False">
+                                    <asp:DropDownList ID="ddlStatus0" runat="server" Visible="False" Width="100%">
                                         <asp:ListItem Value="A">Aplicado</asp:ListItem>
                                         <asp:ListItem Value="N">No Aplicado</asp:ListItem>
                                     </asp:DropDownList>
@@ -329,7 +334,7 @@
                                     <asp:UpdatePanel ID="UpdatePanel23" runat="server">
                                         <ContentTemplate>
                                             <asp:DropDownList ID="ddlFecha_Ini" runat="server" AutoPostBack="True"
-                                                OnSelectedIndexChanged="ddlFecha_Ini_SelectedIndexChanged">
+                                                OnSelectedIndexChanged="ddlFecha_Ini_SelectedIndexChanged" Width="100%">
                                                 <asp:ListItem Value="01">Enero</asp:ListItem>
                                                 <asp:ListItem Value="02">Febrero</asp:ListItem>
                                                 <asp:ListItem Value="03">Marzo</asp:ListItem>
@@ -348,14 +353,14 @@
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-1">
                                     Mes Final
                                 </div>
-                                <div class="col-md-1">
+                                <div class="col-md-2">
                                     <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                         <ContentTemplate>
                                             <asp:DropDownList ID="ddlFecha_Fin" runat="server" AutoPostBack="True"
-                                                OnSelectedIndexChanged="ddlFecha_Fin_SelectedIndexChanged1">
+                                                OnSelectedIndexChanged="ddlFecha_Fin_SelectedIndexChanged1" Width="100%">
                                                 <asp:ListItem Value="01">Enero</asp:ListItem>
                                                 <asp:ListItem Value="02">Febrero</asp:ListItem>
                                                 <asp:ListItem Value="03">Marzo</asp:ListItem>
@@ -374,13 +379,13 @@
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
                                 </div>
-                                <div class="col-md-1 text-right">
+                                <div class="col-md-1">
                                     <asp:Label ID="lblTipo1" runat="server" Text="Tipo"></asp:Label>
                                 </div>
                                 <div class="col-md-1">
                                     <asp:UpdatePanel ID="UpdatePanel41" runat="server">
                                         <ContentTemplate>
-                                            <asp:DropDownList ID="ddlTipo2" runat="server" AutoPostBack="True"
+                                            <asp:DropDownList ID="ddlTipo2" runat="server" AutoPostBack="True" Width="100%"
                                                 OnSelectedIndexChanged="ddlTipo2_SelectedIndexChanged">
                                                 <asp:ListItem Value="T">Todos</asp:ListItem>
                                                 <asp:ListItem Value="E">Egreso</asp:ListItem>
@@ -391,14 +396,14 @@
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
                                 </div>
-                                <div class="col-md-1 text-right">
+                                <div class="col-md-1">
                                     <asp:Label ID="lblStatus2" runat="server" Text="Status"></asp:Label>
                                 </div>
                                 <div class="col-md-2">
                                     <asp:UpdatePanel ID="UpdatePanel42" runat="server">
                                         <ContentTemplate>
                                             <asp:DropDownList ID="ddlStatus2" runat="server" AutoPostBack="True"
-                                                OnSelectedIndexChanged="ddlStatus2_SelectedIndexChanged">
+                                                OnSelectedIndexChanged="ddlStatus2_SelectedIndexChanged" Width="100%">
                                                 <asp:ListItem Value="T">Todos</asp:ListItem>
                                                 <asp:ListItem Value="A">Aplicado</asp:ListItem>
                                                 <asp:ListItem Value="N">No Aplicado</asp:ListItem>
@@ -517,80 +522,82 @@
                                             <asp:LinkButton ID="linkBttnNuevo" runat="server" CssClass="btn btn-mdb-color" OnClick="linkBttnNuevo_Click"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo</asp:LinkButton>
                                             </div>
                                          </div>--%>
-                                    <div class="row">
-                                        <div class="col">
-                                            <asp:GridView ID="grvPolizas" runat="server" AllowPaging="True" AutoGenerateColumns="False" BorderStyle="None" BorderWidth="1px" CellPadding="4" CssClass="mGrid" EmptyDataText="No hay registros para mostrar" GridLines="Vertical" OnPageIndexChanging="grvPolizas_PageIndexChanging" OnRowDeleting="grvPolizas_RowDeleting" OnSelectedIndexChanged="grvPolizas_SelectedIndexChanged" PageSize="25" Width="100%" ShowHeaderWhenEmpty="True">
-                                                <Columns>
-                                                    <asp:BoundField DataField="IdPoliza" />
-                                                    <asp:BoundField DataField="CENTRO_CONTABLE" HeaderText="CENTRO CONTABLE" />
-                                                    <asp:BoundField DataField="NUMERO_POLIZA" HeaderText="# PÓLIZA" />
-                                                    <asp:BoundField DataField="Cedula_numero" HeaderText="# CEDULA" />
-                                                    <asp:BoundField DataField="TIPO" HeaderText="TIPO" />
-                                                    <asp:BoundField DataField="FECHA" DataFormatString="{0:d}" HeaderText="FECHA" />
-                                                    <asp:BoundField DataField="STATUS" HeaderText="STATUS" />
-                                                    <asp:BoundField DataField="CONCEPTO" HeaderText="CONCEPTO" />
-                                                    <asp:BoundField DataField="TOT_CARGO" DataFormatString="{0:c}" HeaderText="CARGO">
-                                                        <HeaderStyle HorizontalAlign="Right" />
-                                                        <ItemStyle HorizontalAlign="Right" />
-                                                    </asp:BoundField>
-                                                    <asp:BoundField DataField="TOT_ABONO" DataFormatString="{0:c}" HeaderText="ABONO">
-                                                        <HeaderStyle HorizontalAlign="Right" />
-                                                        <ItemStyle HorizontalAlign="Right" />
-                                                    </asp:BoundField>
-                                                    <asp:TemplateField>
-                                                        <ItemTemplate>
-                                                            <asp:LinkButton ID="linkBttnEditar" runat="server" CommandName="Select" Visible='<%# Bind("Opcion_Modificar") %>' CssClass="btn_grid btn-mdb-color">Editar</asp:LinkButton>
-                                                            <asp:LinkButton ID="lblEditar" runat="server" Visible='<%# Bind("Opcion_Modificar2") %>' CssClass="btn_grid btn-secondary btn_grid-lg disabled">Editar</asp:LinkButton>
-                                                            <%--<asp:Label ID="lblEditar" runat="server" ForeColor="#6B696B" Text="Editar" Visible='<%# Bind("Opcion_Modificar2") %>' CssClass="btn btn-blue-grey"></asp:Label>--%>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField>
-                                                        <ItemTemplate>
-                                                            <asp:LinkButton ID="linkBttnEliminar" runat="server" CssClass="btn_grid btn-mdb-color" CommandName="Delete" OnClientClick="return confirm('¿Desea eliminar la Póliza?');" Visible='<%# Bind("Opcion_Eliminar") %>'>Borrar</asp:LinkButton>
-                                                            <asp:LinkButton ID="lblEliminar" runat="server" Visible='<%# Bind("Opcion_Eliminar2") %>' CssClass="btn_grid btn-secondary btn-lg disabled">Borrar</asp:LinkButton>
-                                                            <%--<asp:Label ID="lblEliminar" runat="server" ForeColor="#6B696B" Text="Borrar" Visible='<%# Bind("Opcion_Eliminar2") %>' CssClass="btn btn-blue-grey"></asp:Label>--%>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField>
-                                                        <ItemTemplate>
-                                                            <asp:LinkButton ID="linkBttnImprimir" runat="server" OnClick="linkBttnImprimir_Click" CssClass="btn_grid btn-mdb-color">Imprimir</asp:LinkButton>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField>
-                                                        <ItemTemplate>
-                                                            <asp:LinkButton ID="linkBttnCopiar" runat="server" CssClass="btn_grid btn-mdb-color" OnClick="linkBttnCopiar_Click" ToolTip="Permite clonar una Póliza" Visible='<%# Bind("Opcion_Copiar") %>'>Copiar</asp:LinkButton>
-                                                            <asp:LinkButton ID="lblCopiar" runat="server" Visible='<%# Bind("Opcion_Copiar2") %>' CssClass="btn_grid btn-secondary btn-lg disabled">Copiar</asp:LinkButton>
-                                                            <%--<asp:Label ID="lblCopiar" runat="server" ForeColor="#6B696B" Text="Copiar" Visible='<%# Bind("Opcion_Copiar2") %>' CssClass="btn btn-secondary btn-lg disabled"></asp:Label>--%>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField>
-                                                        <ItemTemplate>
-                                                            <asp:LinkButton ID="linkBttnCFDI" runat="server" Visible='<%# Bind("Opcion_CFDI") %>' CssClass="btn_grid btn-mdb-color" Width="75px" OnClick="linkBttnCFDI_Click"><%# Eval("Desc_Tipo_Documento") %></asp:LinkButton>
-                                                            <asp:LinkButton ID="linkBttnCFDI2" runat="server" Visible='<%# Bind("Opcion_CFDI2") %>' CssClass="btn_grid btn-secondary disabled" Width="75px">S/N</asp:LinkButton>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField>
-                                                        <ItemTemplate>
-                                                            <asp:Image ID="imgCFDI" runat="server" ImageUrl="~/images/Activo.PNG" Visible='<%# Bind("Tiene_CFDI") %>' />
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:BoundField DataField="Mes_Cerrado" />
-                                                    <asp:BoundField DataField="Mes_anio" />
-                                                    <asp:BoundField DataField="Cheque_numero" />
-                                                    <asp:BoundField DataField="Cheque_importe" />
-                                                    <asp:BoundField DataField="Tipo_Documento" />
-                                                </Columns>
-                                                <EmptyDataRowStyle ForeColor="#CC9900" />
-                                                <FooterStyle CssClass="enc" />
-                                                <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                <SelectedRowStyle CssClass="sel" />
-                                                <HeaderStyle CssClass="enc" />
-                                                <AlternatingRowStyle CssClass="alt" />
-                                            </asp:GridView>
-                                            <%--<asp:HiddenField ID="hddnModalOficios" runat="server" />--%>
-                                            <asp:HiddenField ID="hddnModalCopia" runat="server" />
-                                            <%--<ajaxToolkit:ModalPopupExtender ID="modalOficios" runat="server" TargetControlID="hddnModalOficios" BackgroundCssClass="modalBackground_Proy" PopupControlID="pnlOficios" CancelControlID="bttnSalirModal"></ajaxToolkit:ModalPopupExtender>--%>
-                                            <ajaxToolkit:ModalPopupExtender ID="modalCopia" runat="server" TargetControlID="hddnModalCopia" BackgroundCssClass="modalBackground_Proy" PopupControlID="pnlCopiaPoliza" CancelControlID="btnCancelarCopia"></ajaxToolkit:ModalPopupExtender>
+                                    <div class="scroll_monitor">
+                                        <div class="row">
+                                            <div class="col">
+                                                <asp:GridView ID="grvPolizas" runat="server" AllowPaging="True" AutoGenerateColumns="False" BorderStyle="None" BorderWidth="1px" CellPadding="4" CssClass="mGrid" EmptyDataText="No hay registros para mostrar" GridLines="Vertical" OnPageIndexChanging="grvPolizas_PageIndexChanging" OnRowDeleting="grvPolizas_RowDeleting" OnSelectedIndexChanged="grvPolizas_SelectedIndexChanged" PageSize="25" Width="100%" ShowHeaderWhenEmpty="True">
+                                                    <Columns>
+                                                        <asp:BoundField DataField="IdPoliza" />
+                                                        <asp:BoundField DataField="CENTRO_CONTABLE" HeaderText="CENTRO CONTABLE" />
+                                                        <asp:BoundField DataField="NUMERO_POLIZA" HeaderText="# PÓLIZA" />
+                                                        <asp:BoundField DataField="Cedula_numero" HeaderText="# CEDULA" />
+                                                        <asp:BoundField DataField="TIPO" HeaderText="TIPO" />
+                                                        <asp:BoundField DataField="FECHA" DataFormatString="{0:d}" HeaderText="FECHA" />
+                                                        <asp:BoundField DataField="STATUS" HeaderText="STATUS" />
+                                                        <asp:BoundField DataField="CONCEPTO" HeaderText="CONCEPTO" />
+                                                        <asp:BoundField DataField="TOT_CARGO" DataFormatString="{0:c}" HeaderText="CARGO">
+                                                            <HeaderStyle HorizontalAlign="Right" />
+                                                            <ItemStyle HorizontalAlign="Right" />
+                                                        </asp:BoundField>
+                                                        <asp:BoundField DataField="TOT_ABONO" DataFormatString="{0:c}" HeaderText="ABONO">
+                                                            <HeaderStyle HorizontalAlign="Right" />
+                                                            <ItemStyle HorizontalAlign="Right" />
+                                                        </asp:BoundField>
+                                                        <asp:TemplateField>
+                                                            <ItemTemplate>
+                                                                <asp:LinkButton ID="linkBttnEditar" runat="server" CommandName="Select" Visible='<%# Bind("Opcion_Modificar") %>' CssClass="btn_grid btn-mdb-color">Editar</asp:LinkButton>
+                                                                <asp:LinkButton ID="lblEditar" runat="server" Visible='<%# Bind("Opcion_Modificar2") %>' CssClass="btn_grid btn-secondary btn_grid-lg disabled">Editar</asp:LinkButton>
+                                                                <%--<asp:Label ID="lblEditar" runat="server" ForeColor="#6B696B" Text="Editar" Visible='<%# Bind("Opcion_Modificar2") %>' CssClass="btn btn-blue-grey"></asp:Label>--%>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField>
+                                                            <ItemTemplate>
+                                                                <asp:LinkButton ID="linkBttnEliminar" runat="server" CssClass="btn_grid btn-mdb-color" CommandName="Delete" OnClientClick="return confirm('¿Desea eliminar la Póliza?');" Visible='<%# Bind("Opcion_Eliminar") %>'>Borrar</asp:LinkButton>
+                                                                <asp:LinkButton ID="lblEliminar" runat="server" Visible='<%# Bind("Opcion_Eliminar2") %>' CssClass="btn_grid btn-secondary btn-lg disabled">Borrar</asp:LinkButton>
+                                                                <%--<asp:Label ID="lblEliminar" runat="server" ForeColor="#6B696B" Text="Borrar" Visible='<%# Bind("Opcion_Eliminar2") %>' CssClass="btn btn-blue-grey"></asp:Label>--%>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField>
+                                                            <ItemTemplate>
+                                                                <asp:LinkButton ID="linkBttnImprimir" runat="server" OnClick="linkBttnImprimir_Click" CssClass="btn_grid btn-mdb-color">Imprimir</asp:LinkButton>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField>
+                                                            <ItemTemplate>
+                                                                <asp:LinkButton ID="linkBttnCopiar" runat="server" CssClass="btn_grid btn-mdb-color" OnClick="linkBttnCopiar_Click" ToolTip="Permite clonar una Póliza" Visible='<%# Bind("Opcion_Copiar") %>'>Copiar</asp:LinkButton>
+                                                                <asp:LinkButton ID="lblCopiar" runat="server" Visible='<%# Bind("Opcion_Copiar2") %>' CssClass="btn_grid btn-secondary btn-lg disabled">Copiar</asp:LinkButton>
+                                                                <%--<asp:Label ID="lblCopiar" runat="server" ForeColor="#6B696B" Text="Copiar" Visible='<%# Bind("Opcion_Copiar2") %>' CssClass="btn btn-secondary btn-lg disabled"></asp:Label>--%>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField>
+                                                            <ItemTemplate>
+                                                                <asp:LinkButton ID="linkBttnCFDI" runat="server" Visible='<%# Bind("Opcion_CFDI") %>' CssClass="btn_grid btn-mdb-color" Width="75px" OnClick="linkBttnCFDI_Click"><%# Eval("Desc_Tipo_Documento") %></asp:LinkButton>
+                                                                <asp:LinkButton ID="linkBttnCFDI2" runat="server" Visible='<%# Bind("Opcion_CFDI2") %>' CssClass="btn_grid btn-secondary disabled" Width="75px">S/N</asp:LinkButton>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField>
+                                                            <ItemTemplate>
+                                                                <asp:Image ID="imgCFDI" runat="server" ImageUrl="~/images/Activo.PNG" Visible='<%# Bind("Tiene_CFDI") %>' />
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:BoundField DataField="Mes_Cerrado" />
+                                                        <asp:BoundField DataField="Mes_anio" />
+                                                        <asp:BoundField DataField="Cheque_numero" />
+                                                        <asp:BoundField DataField="Cheque_importe" />
+                                                        <asp:BoundField DataField="Tipo_Documento" />
+                                                    </Columns>
+                                                    <EmptyDataRowStyle ForeColor="#CC9900" />
+                                                    <FooterStyle CssClass="enc" />
+                                                    <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                    <SelectedRowStyle CssClass="sel" />
+                                                    <HeaderStyle CssClass="enc" />
+                                                    <AlternatingRowStyle CssClass="alt" />
+                                                </asp:GridView>
+                                                <%--<asp:HiddenField ID="hddnModalOficios" runat="server" />--%>
+                                                <asp:HiddenField ID="hddnModalCopia" runat="server" />
+                                                <%--<ajaxToolkit:ModalPopupExtender ID="modalOficios" runat="server" TargetControlID="hddnModalOficios" BackgroundCssClass="modalBackground_Proy" PopupControlID="pnlOficios" CancelControlID="bttnSalirModal"></ajaxToolkit:ModalPopupExtender>--%>
+                                                <ajaxToolkit:ModalPopupExtender ID="modalCopia" runat="server" TargetControlID="hddnModalCopia" BackgroundCssClass="modalBackground_Proy" PopupControlID="pnlCopiaPoliza" CancelControlID="btnCancelarCopia"></ajaxToolkit:ModalPopupExtender>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -619,7 +626,7 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="card wizard-card ct-wizard-orange">
-                                                        <div class="container">
+                                                        <div class="container-fluid">
                                                             <div class="row">
                                                                 <div class="col-md-2">Nueva Fecha</div>
                                                                 <div class="col-md-10">
@@ -1308,7 +1315,7 @@
                                     <div class="modal-body">
                                         <div class="card wizard-card ct-wizard-orange">
                                             <br />
-                                            <div class="container">
+                                            <div class="container-fluid">
                                                 <div class="row">
                                                     <div class="col-md-2">
                                                         # Oficio

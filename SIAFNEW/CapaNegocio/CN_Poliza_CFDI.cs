@@ -61,12 +61,12 @@ namespace CapaNegocio
             }
         }
 
-        public void EliminarCFDIExtra(int IdPoliza, ref string Verificador)
+        public void EliminarCFDIExtra(Poliza objPoliza, ref string Verificador)
         {
             try
             {
                 CD_Poliza_CFDI CDPolizaCFDI = new CD_Poliza_CFDI();
-                CDPolizaCFDI.EliminarCFDIExtra(IdPoliza, ref Verificador);
+                CDPolizaCFDI.EliminarCFDIExtra(objPoliza, ref Verificador);
             }
             catch (Exception ex)
             {
@@ -117,12 +117,12 @@ namespace CapaNegocio
 
         }
 
-        public void PolizaCFDIExtrasConsultaDatos(Poliza_CFDI objPolizaCFDI, ref List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
+        public void PolizaCFDIExtrasConsultaDatos(Poliza_CFDI objPolizaCFDI, int idPoliza, string Partida, ref List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
         {
             try
             {
                 CD_Poliza_CFDI CDPolizaCFDI = new CD_Poliza_CFDI();
-                CDPolizaCFDI.PolizaCFDIExtrasConsultaDatos(objPolizaCFDI, ref lstPolizasCFDI, ref Verificador);
+                CDPolizaCFDI.PolizaCFDIExtrasConsultaDatos(objPolizaCFDI, idPoliza, Partida, ref lstPolizasCFDI, ref Verificador);
             }
             catch (Exception ex)
             {
@@ -137,6 +137,20 @@ namespace CapaNegocio
             {
                 CD_Poliza_Oficio CDPolizaOficio = new CD_Poliza_Oficio();
                 CDPolizaOficio.PolizaOficiosDatos(objPolizaOficio, ref lstPolizaOficios, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+
+        public void PolizaPartidasDatos(Poliza_CFDI objPoliza, ref List<Poliza_CFDI> lstPartidas, ref string Verificador)
+        {
+            try
+            {
+                CD_Poliza_Oficio CDPolizaOficio = new CD_Poliza_Oficio();
+                CDPolizaOficio.PolizaPartidasDatos(objPoliza, ref lstPartidas, ref Verificador);
             }
             catch (Exception ex)
             {
@@ -164,6 +178,20 @@ namespace CapaNegocio
             {
                 CD_Poliza_CFDI CDPolizaCFDI = new CD_Poliza_CFDI();
                 CDPolizaCFDI.PolizasSinComprobar(objPoliza, ref lstPolizas/*, Buscar*/);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+
+        public void PolizasPorComprobar(Poliza objPoliza, ref List<Poliza> lstPolizas/*, string Buscar*/)
+        {
+            try
+            {
+                CD_Poliza_CFDI CDPolizaCFDI = new CD_Poliza_CFDI();
+                CDPolizaCFDI.PolizasPorComprobar(objPoliza, ref lstPolizas/*, Buscar*/);
             }
             catch (Exception ex)
             {

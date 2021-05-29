@@ -88,7 +88,8 @@
                                                 <asp:GridView ID="grvPolizas" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No existen documentos." ShowFooter="True" ShowHeaderWhenEmpty="True" Width="100%" OnPageIndexChanging="grvPolizas_PageIndexChanging">
                                                     <Columns>
                                                         <asp:BoundField DataField="IdPoliza" HeaderText="Id" />
-                                                        <asp:BoundField DataField="Partida" HeaderText="Partida" />
+                                                        <asp:BoundField DataField="Partida" HeaderText="Partida" >
+                                                            <ItemStyle BackColor="#999999" Font-Bold="True" Font-Size="12px" ForeColor="Black" HorizontalAlign="Center" /></asp:BoundField>
                                                         <asp:BoundField DataField="Centro_Contable" HeaderText="Centro Contable" />
                                                         <asp:BoundField DataField="Desc_Tipo_Documento" HeaderText="Tipo" />
                                                         <asp:BoundField DataField="Numero_poliza" HeaderText="# Póliza" />
@@ -98,7 +99,7 @@
                                                                 <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Concepto") %>'></asp:TextBox>
                                                             </EditItemTemplate>
                                                             <FooterTemplate>
-                                                                TOTALES:
+                                                                <asp:Label ID="Label4" runat="server" Font-Bold="True" Font-Size="13px" Text="T O T A L"></asp:Label>
                                                             </FooterTemplate>
                                                             <ItemTemplate>
                                                                 <asp:Label ID="Label3" runat="server" Text='<%# Bind("Concepto") %>'></asp:Label>
@@ -109,7 +110,7 @@
                                                                 <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Tot_Cargo") %>'></asp:TextBox>
                                                             </EditItemTemplate>
                                                             <FooterTemplate>
-                                                                <asp:Label ID="lblTotPorComprobar" runat="server" Text="0"></asp:Label>
+                                                                <asp:Label ID="lblTotPorComprobar" runat="server" Text="0" Font-Bold="True" Font-Size="13px"></asp:Label>
                                                             </FooterTemplate>
                                                             <ItemTemplate>
                                                                 <asp:Label ID="lblPorComprobar" runat="server" Text='<%# Bind("Tot_Cargo") %>'></asp:Label>
@@ -122,7 +123,7 @@
                                                                 <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("Tot_Comprobado") %>'></asp:TextBox>
                                                             </EditItemTemplate>
                                                             <FooterTemplate>
-                                                                <asp:Label ID="lblTotComprobado" runat="server" Text="0"></asp:Label>
+                                                                <asp:Label ID="lblTotComprobado" runat="server" Text="0" Font-Bold="True" Font-Size="13px"></asp:Label>
                                                             </FooterTemplate>
                                                             <ItemTemplate>
                                                                 <asp:Label ID="lblComprobado" runat="server" Text='<%# Bind("Tot_Comprobado") %>'></asp:Label>
@@ -132,11 +133,11 @@
                                                         </asp:TemplateField>
                                                         <asp:TemplateField ShowHeader="False">
                                                             <ItemTemplate>
-                                                                <asp:LinkButton ID="linkBttnAgregar" runat="server" CausesValidation="False" CommandName="Select" CssClass="btn btn-blue-grey" OnClick="linkBttnAgregar_Click"><%# Eval("Clasificacion") %></asp:LinkButton>
+                                                                <asp:LinkButton ID="linkBttnAgregar" runat="server" style="width:100px;font-size: 11px;" CausesValidation="False" CommandName="Select" CssClass="btn btn-blue-grey" OnClick="linkBttnAgregar_Click"><%# Eval("Clasificacion") %></asp:LinkButton>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
                                                     </Columns>
-                                                    <FooterStyle CssClass="enc" />
+                                                    <FooterStyle Font-Bold="True" Font-Size="Large" />
                                                     <HeaderStyle CssClass="enc" />
                                                     <PagerStyle CssClass="enc" HorizontalAlign="Center" />
                                                     <SelectedRowStyle CssClass="sel" />
@@ -145,6 +146,14 @@
                                         </asp:UpdatePanel>
                                     </div>
                                 </div>
+                                <div class="row">
+                                        <div class="col text-right">
+                                            <asp:ImageButton ID="ImageButton1" runat="server"
+                                                ImageUrl="http://sysweb.unach.mx/resources/imagenes/pdf.png" OnClick="imgBttnPdf" title="Reporte PDF" />
+                                            &nbsp;<asp:ImageButton ID="ImageButton3" runat="server"
+                                                ImageUrl="http://sysweb.unach.mx/resources/imagenes/excel.png" OnClick="imgBttnExcel" title="Reporte Excel" />
+                                        </div>
+                                    </div>
                             </asp:View>
                             <asp:View ID="View2" runat="server">
                                 <div class="row">
@@ -168,10 +177,15 @@
                                 <div class="row">
                                     <div class="col-md-2">Tipo Docto</div>
                                     <div class="col-md-4">
-                                        <asp:DropDownList ID="ddlTipoDocto" runat="server" Width="100%" OnSelectedIndexChanged="ddlTipoDocto_SelectedIndexChanged" AutoPostBack="True">
+                                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                            <ContentTemplate>
+<asp:DropDownList ID="ddlTipoDocto" runat="server" Width="100%" OnSelectedIndexChanged="ddlTipoDocto_SelectedIndexChanged" AutoPostBack="True">
                                             <asp:ListItem Value="F">Factura</asp:ListItem>
                                             <asp:ListItem Value="R">Recibo</asp:ListItem>
                                         </asp:DropDownList>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                        
                                     </div>
                                     <div class="col-md-1">Fecha</div>
                                     <div class="col-md-2">
@@ -274,7 +288,7 @@
                                         </asp:UpdatePanel>
                                     </div>
                                     <div class="col-md-5">
-                                        <asp:UpdatePanel ID="UpdatePanel11" runat="server">
+                                        <asp:UpdatePanel ID="updPnlArchivos" runat="server" UpdateMode="Conditional">
                                             <ContentTemplate>
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
@@ -298,30 +312,57 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col text-center">
+                                        <asp:UpdateProgress ID="updPgrPolizasCFDI" runat="server"
+                                            AssociatedUpdatePanelID="updPnlPolizasCFDI">
+                                            <ProgressTemplate>
+                                                <asp:Image ID="imgPolizasCFDI" runat="server"
+                                                    AlternateText="Espere un momento, por favor.." Height="50px"
+                                                    ImageUrl="http://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                                    ToolTip="Espere un momento, por favor.." Width="50px" />
+                                            </ProgressTemplate>
+                                        </asp:UpdateProgress>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col">
                                         <asp:UpdatePanel ID="updPnlPolizasCFDI" runat="server">
                                             <ContentTemplate>
-                                                <asp:GridView ID="grvPolizaCFDI" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No existen documentos." OnPageIndexChanging="grvPolizaCFDI_PageIndexChanging" OnRowDeleting="grvPolizaCFDI_RowDeleting" ShowFooter="True" ShowHeaderWhenEmpty="True" Width="100%">
+                                                <asp:GridView ID="grvPolizaCFDI" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No existen documentos." OnPageIndexChanging="grvPolizaCFDI_PageIndexChanging" OnRowDeleting="grvPolizaCFDI_RowDeleting" ShowFooter="True" ShowHeaderWhenEmpty="True" Width="100%" OnRowCancelingEdit="grvPolizaCFDI_RowCancelingEdit" OnRowEditing="grvPolizaCFDI_RowEditing" OnRowUpdating="grvPolizaCFDI_RowUpdating">
                                                     <Columns>
-                                                        <asp:BoundField DataField="Tipo_Docto" HeaderText="Tipo Docto" />
-                                                        <asp:BoundField DataField="Beneficiario_Tipo" HeaderText="Tipo" />
-                                                        <asp:BoundField DataField="Tipo_Gasto" HeaderText="Tipo Gasto" />
+                                                        <asp:BoundField DataField="Tipo_Docto" HeaderText="Tipo Docto" ReadOnly="True" />
+                                                        <asp:BoundField DataField="Beneficiario_Tipo" HeaderText="Tipo" ReadOnly="True" />
+                                                        <asp:BoundField DataField="Tipo_Gasto" HeaderText="Tipo Gasto" ReadOnly="True" />
                                                         <%--                                                <asp:BoundField DataField="CFDI_Folio" HeaderText="CFDI Folio" />--%>
                                                         <asp:BoundField DataField="CFDI_UUID" HeaderText="CFDI UUID" />
                                                         <asp:BoundField DataField="CFDI_Fecha" HeaderText="CFDI Fecha" />
-                                                        <asp:BoundField DataField="CFDI_Nombre" HeaderText="Proveedor" />
-                                                        <asp:BoundField DataField="CFDI_RFC" HeaderText="CFDI RFC" />
+                                                        <asp:TemplateField HeaderText="Proveedor">
+                                                            <EditItemTemplate>
+                                                                <%--<asp:Label ID="Label1" runat="server" Text='<%# Eval("CFDI_Nombre") %>'></asp:Label>--%>
+                                                                <asp:UpdatePanel ID="updPnlProveedor2" runat="server">
+                                            <ContentTemplate>
+                                                <asp:DropDownList ID="ddlProveedor2" runat="server" Width="100%" AutoPostBack="True" CssClass="select2"></asp:DropDownList>
+                                                <asp:TextBox ID="txtProveedor2" runat="server" Width="100%" Visible="False" AutoPostBack="True" PlaceHolder="Nombre del Proveedor"></asp:TextBox>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                                            </EditItemTemplate>
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("CFDI_Nombre") %>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:BoundField DataField="CFDI_RFC" HeaderText="CFDI RFC" ReadOnly="True" />
                                                         <asp:TemplateField HeaderText="CFDI Total">
                                                             <EditItemTemplate>
-                                                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("CFDI_Total") %>'></asp:TextBox>
+                                                                <asp:TextBox ID="txtTotal" runat="server" Text='<%# Bind("CFDI_Total") %>'></asp:TextBox>
                                                             </EditItemTemplate>
                                                             <FooterTemplate>
                                                                 <asp:Label ID="lblGranTotal" runat="server" Font-Bold="True" Font-Size="Medium" Text="0"></asp:Label>
                                                                 <asp:Label ID="lblGranTotalInt" runat="server" Text="0" Visible="False"></asp:Label>
                                                             </FooterTemplate>
                                                             <ItemTemplate>
-                                                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("CFDI_Total") %>'></asp:Label>
+                                                                <asp:Label ID="lblTotal" runat="server" Text='<%# Bind("CFDI_Total") %>'></asp:Label>
                                                             </ItemTemplate>
+                                                            <ItemStyle HorizontalAlign="Right" />
                                                         </asp:TemplateField>
                                                         <asp:TemplateField HeaderText="XML">
                                                             <ItemTemplate>
@@ -333,6 +374,7 @@
                                                                 <asp:HyperLink ID="linkArchivoPDF" runat="server" NavigateUrl='<%# Bind("Ruta_PDF") %>' Target="_blank">Ver</asp:HyperLink>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
+                                                        <asp:CommandField ShowEditButton="True" />
                                                         <asp:CommandField ShowDeleteButton="True" />
                                                         <asp:BoundField DataField="Fecha_Captura" />
                                                         <asp:BoundField DataField="Usuario_Captura" />
@@ -354,6 +396,19 @@
                                                 &nbsp;<asp:Button ID="btnGuardarCFDI" runat="server" CssClass="btn btn-primary" Text="Guardar" ValidationGroup="Poliza" OnClick="btnGuardarCFDI_Click" />
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <asp:UpdateProgress ID="updPgrGuardarCFDI" runat="server"
+                                            AssociatedUpdatePanelID="updPnlGuardarCFDI">
+                                            <ProgressTemplate>
+                                                <asp:Image ID="imgGuardar" runat="server"
+                                                    AlternateText="Espere un momento, por favor.." Height="50px"
+                                                    ImageUrl="http://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                                    ToolTip="Espere un momento, por favor.." Width="50px" />
+                                            </ProgressTemplate>
+                                        </asp:UpdateProgress>
                                     </div>
                                 </div>
                                 </div>

@@ -13,7 +13,7 @@ namespace CapaEntidad
         private string _Centro_contable;
         private string _Tipo;
         private string _Subsistema;
-        private string _Concepto;
+        private string _Concepto=string.Empty;
         private string _Fecha;
         private string _Mes_anio;
         private string _Status;

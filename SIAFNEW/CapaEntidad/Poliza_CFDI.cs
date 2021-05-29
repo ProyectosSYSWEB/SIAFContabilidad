@@ -104,6 +104,21 @@ namespace CapaEntidad
             set { _CFDI_Total = value; }
         }
 
+
+        public double _Importe_Partida;
+        public double Importe_Partida
+        {
+            get { return _Importe_Partida; }
+            set { _Importe_Partida = value; }
+        }
+
+        private string _Partida;
+        public string Partida
+        {
+            get { return _Partida.Trim(); }
+            set { _Partida = value.Trim(); }
+        }
+
         private string _CFDI_RFC;
         public string CFDI_RFC
         {
@@ -132,7 +147,7 @@ namespace CapaEntidad
             set { _Tipo_Gasto = value.Trim(); }
         }
 
-        private string _Tipo_Docto;
+        private string _Tipo_Docto=string.Empty;
         public string Tipo_Docto
         {
             get { return _Tipo_Docto.Trim(); }

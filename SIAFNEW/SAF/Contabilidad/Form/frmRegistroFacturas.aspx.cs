@@ -42,7 +42,7 @@ namespace SAF.Contabilidad.Form
 
             try
             {
-                List<Poliza> List = new List<Poliza>();               
+                List<Poliza> List = new List<Poliza>();
                 ObjPoliza.Centro_contable = DDLCentro_Contable.SelectedValue;
                 ObjPoliza.Mes_anio = ddlMes.SelectedValue;
                 CNPolizaCFDI.PolizasSinComprobar(ObjPoliza, ref List/*, txtBuscar.Text*/);
@@ -127,7 +127,7 @@ namespace SAF.Contabilidad.Form
         {
             grvPolizas.DataSource = null;
             grvPolizas.DataBind();
-            //Int32[] Celdas = new Int32[] { 11, 12 };
+            Int32[] Columnas = new Int32[] { 0 };
             try
             {
                 double TotalPorComprobar;
@@ -149,7 +149,7 @@ namespace SAF.Contabilidad.Form
 
                     //lblTotInt.Text = Convert.ToString(TotalPorComprobar);
                 }
-                //CNComun.HideColumns(grvPolizaCFDI, Celdas);
+                //CNComun.HideColumns(grvPolizas, Columnas);
 
             }
             catch (Exception ex)
@@ -228,7 +228,7 @@ namespace SAF.Contabilidad.Form
             List<Poliza_CFDI> lstPolizasCFDI = new List<Poliza_CFDI>();
             string VerificadorCFDI = string.Empty;
             DateTime FechaActual = DateTime.Today;
-
+            updPnlArchivos.Update();
             try
             {
 
@@ -239,16 +239,23 @@ namespace SAF.Contabilidad.Form
                 ObjPolizaCFDI.CFDI_Fecha = txtFecha.Text;
                 ObjPolizaCFDI.CFDI_Total = Convert.ToDouble(txtImporte.Text);
                 ObjPolizaCFDI.Tipo_Docto = ddlTipoDocto.SelectedValue;
+
+                if (ddlProveedor.SelectedValue == "X")
+                    ObjPolizaCFDI.CFDI_Nombre = txtProveedor.Text.ToUpper();
+                else
+                    ObjPolizaCFDI.CFDI_Nombre = ddlProveedor.SelectedValue;
+
+
+
                 if (ddlTipoDocto.SelectedValue == "F")
                 {
                     ObjPolizaCFDI.CFDI_UUID = txtFolio.Text;
-                    ObjPolizaCFDI.CFDI_Nombre = txtProveedor.Text.ToUpper();
                     ObjPolizaCFDI.CFDI_RFC = txtRFC.Text;
                 }
                 else
                 {
                     ObjPolizaCFDI.CFDI_UUID = string.Empty;
-                    ObjPolizaCFDI.CFDI_Nombre = string.Empty;
+                    //ObjPolizaCFDI.CFDI_Nombre = string.Empty;
                     ObjPolizaCFDI.CFDI_RFC = string.Empty;
 
                 }
@@ -301,7 +308,7 @@ namespace SAF.Contabilidad.Form
         {
             grvPolizaCFDI.DataSource = null;
             grvPolizaCFDI.DataBind();
-            Int32[] Celdas = new Int32[] { 11, 12 };
+            Int32[] Celdas = new Int32[] { 12, 13 };
             Int32[] Celdas2 = new Int32[] { 10, 11, 12 };
             try
             {
@@ -335,14 +342,14 @@ namespace SAF.Contabilidad.Form
             LinkButton cbi = (LinkButton)(sender);
             GridViewRow row = (GridViewRow)cbi.NamingContainer;
             grvPolizas.SelectedIndex = row.RowIndex;
-            
+
             LimpiarCampos();
             grvPolizaCFDI.DataSource = null;
             grvPolizaCFDI.DataBind();
             Session["PolizasCFDI"] = null;
             List<Poliza_CFDI> lstPolizasCFDI = new List<Poliza_CFDI>();
             ObjPolizaCFDI.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
-            CNPolizaCFDI.PolizaCFDIExtrasConsultaDatos(ObjPolizaCFDI, ref lstPolizasCFDI, ref Verificador);
+            CNPolizaCFDI.PolizaCFDIExtrasConsultaDatos(ObjPolizaCFDI, Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text), Convert.ToString(grvPolizas.SelectedRow.Cells[1].Text), ref lstPolizasCFDI, ref Verificador);
             if (lstPolizasCFDI.Count > 0)
             {
                 Session["PolizasCFDI"] = lstPolizasCFDI;
@@ -372,6 +379,7 @@ namespace SAF.Contabilidad.Form
 
         protected void btnCancelarCFDI_Click(object sender, EventArgs e)
         {
+            grvPolizaCFDI.EditIndex = -1;
             MultiView1.ActiveViewIndex = 0;
         }
 
@@ -379,6 +387,7 @@ namespace SAF.Contabilidad.Form
         {
             /*DATOS CFDI XML*/
             Verificador = string.Empty;
+            grvPolizaCFDI.EditIndex = -1;
             List<Poliza_CFDI> lstPolizasCFDI = new List<Poliza_CFDI>();
             //Poliza objPolizas = new Poliza();
             double total = 0;
@@ -390,7 +399,7 @@ namespace SAF.Contabilidad.Form
                     double lblTotInt = Convert.ToDouble(lblTot.Text);
                     lblTotInt = Math.Ceiling(lblTotInt);
                     ObjPoliza.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
-                    ObjPoliza.Partida= Convert.ToString(grvPolizas.SelectedRow.Cells[1].Text);
+                    ObjPoliza.Partida = Convert.ToString(grvPolizas.SelectedRow.Cells[1].Text);
 
 
                     if (Session["PolizasCFDI"] != null)
@@ -398,7 +407,7 @@ namespace SAF.Contabilidad.Form
 
 
                     //ObjPolizaCFDI.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
-                    
+
                     CNPolizaCFDI.PolizaCFDIExtraEditar(ObjPoliza, lstPolizasCFDI, ref Verificador);
 
                     if (Verificador == "0")
@@ -424,7 +433,10 @@ namespace SAF.Contabilidad.Form
                 }
                 else
                 {
-                    CNPolizaCFDI.EliminarCFDIExtra(Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text), ref Verificador);
+                    ObjPoliza.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
+                    ObjPoliza.Partida = Convert.ToString(grvPolizas.SelectedRow.Cells[1].Text);
+
+                    CNPolizaCFDI.EliminarCFDIExtra(ObjPoliza, ref Verificador);
                     if (Verificador == "0")
                     {
                         SesionUsu.Editar = -1;
@@ -464,7 +476,7 @@ namespace SAF.Contabilidad.Form
             }
         }
 
-       
+
         protected void ddlTipoDocto_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ddlTipoDocto.SelectedValue == "R")
@@ -486,6 +498,77 @@ namespace SAF.Contabilidad.Form
             grvPolizas.PageIndex = 0;
             grvPolizas.PageIndex = e.NewPageIndex;
             CargarGridPolizas();
+        }
+
+        protected void grvPolizaCFDI_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            List<Poliza_CFDI> lstPolizasCFDI = new List<Poliza_CFDI>();
+            lstPolizasCFDI = (List<Poliza_CFDI>)Session["PolizasCFDI"];
+            try
+            {
+                grvPolizaCFDI.EditIndex = e.NewEditIndex;
+                Session["PolizasCFDI"] = lstPolizasCFDI;
+                CargarGridPolizaCFDI(lstPolizasCFDI);
+
+                //((DropDownList)grvInventarioAgregado.Rows[e.NewEditIndex].FindControl("DDLUnidadMedida")).Enabled = true;
+                //((TextBox)grvInventarioAgregado.Rows[e.NewEditIndex].FindControl("txtCantidad")).Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+            }
+        }
+
+        protected void grvPolizaCFDI_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            List<Poliza_CFDI> lstPolizasCFDI = new List<Poliza_CFDI>();
+            lstPolizasCFDI = (List<Poliza_CFDI>)Session["PolizasCFDI"];
+            grvPolizaCFDI.EditIndex = -1;
+            CargarGridPolizaCFDI(lstPolizasCFDI);
+        }
+
+        protected void grvPolizaCFDI_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            List<Poliza_CFDI> lstPolizasCFDI = new List<Poliza_CFDI>();
+            lstPolizasCFDI = (List<Poliza_CFDI>)Session["PolizasCFDI"];
+            try
+            {
+                int fila = e.RowIndex;
+                int pagina = grvPolizaCFDI.PageSize * grvPolizaCFDI.PageIndex;
+                fila = pagina + fila;
+
+                GridViewRow row = grvPolizaCFDI.Rows[e.RowIndex];
+                lstPolizasCFDI[e.RowIndex].CFDI_UUID = Convert.ToString(((TextBox)(row.Cells[3].Controls[0])).Text);
+                lstPolizasCFDI[e.RowIndex].CFDI_Fecha = Convert.ToString(((TextBox)(row.Cells[4].Controls[0])).Text);
+                //lstPolizasCFDI[e.RowIndex].CFDI_Nombre = Convert.ToString(((TextBox)(row.Cells[5].Controls[0])).Text);
+                //lstPolizasCFDI[e.RowIndex].CFDI_RFC = Convert.ToString(((TextBox)(row.Cells[6].Controls[0])).Text);
+                TextBox txt = (TextBox)(row.Cells[7].FindControl("txtTotal"));
+
+
+                lstPolizasCFDI[e.RowIndex].CFDI_Total = Convert.ToDouble(txt.Text);
+
+                grvPolizaCFDI.EditIndex = -1;
+                Session["PolizasCFDI"] = lstPolizasCFDI;
+                CargarGridPolizaCFDI(lstPolizasCFDI);
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+            }
+        }
+
+        protected void imgBttnPdf(object sender, ImageClickEventArgs e)
+        {
+
+        }
+
+        protected void imgBttnExcel(object sender, ImageClickEventArgs e)
+        {
+
         }
     }
 }

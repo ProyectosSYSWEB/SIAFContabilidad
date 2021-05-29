@@ -114,6 +114,24 @@ namespace SAF.Contabilidad.Form
         protected global::System.Web.UI.WebControls.GridView grvPolizas;
 
         /// <summary>
+        /// Control ImageButton1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ImageButton1;
+
+        /// <summary>
+        /// Control ImageButton3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ImageButton3;
+
+        /// <summary>
         /// Control View2.
         /// </summary>
         /// <remarks>
@@ -157,6 +175,15 @@ namespace SAF.Contabilidad.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
+
+        /// <summary>
+        /// Control UpdatePanel1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
         /// Control ddlTipoDocto.
@@ -348,13 +375,13 @@ namespace SAF.Contabilidad.Form
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
 
         /// <summary>
-        /// Control UpdatePanel11.
+        /// Control updPnlArchivos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel11;
+        protected global::System.Web.UI.UpdatePanel updPnlArchivos;
 
         /// <summary>
         /// Control FileFacturaPDF.
@@ -382,6 +409,15 @@ namespace SAF.Contabilidad.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button bttnAgregaFactura;
+
+        /// <summary>
+        /// Control updPgrPolizasCFDI.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPgrPolizasCFDI;
 
         /// <summary>
         /// Control updPnlPolizasCFDI.
@@ -427,5 +463,14 @@ namespace SAF.Contabilidad.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGuardarCFDI;
+
+        /// <summary>
+        /// Control updPgrGuardarCFDI.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPgrGuardarCFDI;
     }
 }
