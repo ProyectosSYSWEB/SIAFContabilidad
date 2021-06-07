@@ -38,7 +38,7 @@
         }
     </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">    
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:UpdateProgress ID="UpdateProgress1" runat="server">
     </asp:UpdateProgress>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -259,12 +259,12 @@
                     </asp:UpdatePanel>
                 </asp:View>
                 <asp:View ID="View4" runat="server">
-                    <table style="width: 100%;">
-                        <tr>
-                            <td class="style1">
-                                <asp:Label ID="Label4" runat="server" Text="Centro Contable:"></asp:Label>
-                            </td>
-                            <td>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-2">
+                                Centro Contable
+                            </div>
+                            <div class="col-md-10">
                                 <asp:UpdatePanel ID="UpdatePanel12" runat="server">
                                     <ContentTemplate>
                                         <asp:DropDownList ID="DDLCentro_Contable_v" runat="server"
@@ -273,28 +273,30 @@
                                         </asp:DropDownList>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
-                            </td>
-                            <td>&nbsp;
-                            <asp:UpdateProgress ID="UpdateProgress6" runat="server"
-                                AssociatedUpdatePanelID="UpdatePanel12">
-                                <ProgressTemplate>
-                                    <asp:Image ID="Image1q3" runat="server"
-                                        AlternateText="Espere un momento, por favor.." Height="30px"
-                                        ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
-                                        ToolTip="Espere un momento, por favor.." Width="30px" />
-                                </ProgressTemplate>
-                            </asp:UpdateProgress>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="style1">
-                                <asp:Label ID="Label1" runat="server" Text="Mes:"></asp:Label>
-                            </td>
-                            <td>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <asp:UpdateProgress ID="UpdateProgress6" runat="server"
+                                    AssociatedUpdatePanelID="UpdatePanel12">
+                                    <ProgressTemplate>
+                                        <asp:Image ID="Image1q3" runat="server"
+                                            AlternateText="Espere un momento, por favor.." Height="30px"
+                                            ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                            ToolTip="Espere un momento, por favor.." Width="30px" />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                Mes
+                            </div>
+                            <div class="col-md-3">
                                 <asp:UpdatePanel ID="UpdatePanel13" runat="server">
                                     <ContentTemplate>
                                         <asp:DropDownList ID="ddlmes" runat="server" AutoPostBack="True"
-                                            OnSelectedIndexChanged="txtmes_inicial_SelectedIndexChanged" Width="200px">
+                                            OnSelectedIndexChanged="txtmes_inicial_SelectedIndexChanged" Width="100%">
                                             <asp:ListItem Value="01">ENERO</asp:ListItem>
                                             <asp:ListItem Value="02">FEBRERO</asp:ListItem>
                                             <asp:ListItem Value="03">MARZO</asp:ListItem>
@@ -310,8 +312,8 @@
                                         </asp:DropDownList>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
-                            </td>
-                            <td>
+                            </div>
+                            <div class="col-md-1">
                                 <asp:UpdateProgress ID="UpdateProgress7" runat="server"
                                     AssociatedUpdatePanelID="UpdatePanel13">
                                     <ProgressTemplate>
@@ -321,22 +323,20 @@
                                             ToolTip="Espere un momento, por favor.." Width="30px" />
                                     </ProgressTemplate>
                                 </asp:UpdateProgress>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="style1">
-                                <asp:Label ID="Label2" runat="server" Text="Tipo:"></asp:Label>
-                            </td>
-                            <td>
+                            </div>
+                            <div class="col-md-1">
+                                Tipo
+                            </div>
+                            <div class="col-md-4">
                                 <asp:UpdatePanel ID="UpdatePanel14" runat="server">
                                     <ContentTemplate>
                                         <asp:DropDownList ID="ddltipo" runat="server" AutoPostBack="True"
-                                            OnSelectedIndexChanged="ddltipo_SelectedIndexChanged" Width="200px">
+                                            OnSelectedIndexChanged="ddltipo_SelectedIndexChanged" Width="100%">
                                         </asp:DropDownList>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
-                            </td>
-                            <td>
+                            </div>
+                            <div class="col-md-1">
                                 <asp:UpdateProgress ID="UpdateProgress8" runat="server"
                                     AssociatedUpdatePanelID="UpdatePanel14">
                                     <ProgressTemplate>
@@ -346,34 +346,30 @@
                                             ToolTip="Espere un momento, por favor.." Width="30px" />
                                     </ProgressTemplate>
                                 </asp:UpdateProgress>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="style1">
-                                <asp:Label ID="Label5" runat="server" Text="# Poliza:"></asp:Label>
-                            </td>
-                            <td colspan="2">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                # Poliza
+                            </div>
+                            <div class="col-md-10">
                                 <asp:DropDownList ID="ddlnumero_poliza" runat="server" Width="100%"
                                     OnSelectedIndexChanged="ddlnumero_poliza_SelectedIndexChanged">
                                 </asp:DropDownList>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="style1">&nbsp;</td>
-                            <td colspan="2">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" class="cuadro_botones">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-right">
                                 <asp:UpdatePanel ID="UpdatePanel11" runat="server">
                                     <ContentTemplate>
                                         <asp:ImageButton ID="btnAceptar_v" runat="server"
                                             ImageUrl="https://sysweb.unach.mx/resources/imagenes/pdf.png" OnClick="btnAceptar_v_Click" />
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
                                 <asp:UpdateProgress ID="UpdateProgress5" runat="server"
                                     AssociatedUpdatePanelID="UpdatePanel11">
                                     <ProgressTemplate>
@@ -383,9 +379,9 @@
                                             ToolTip="Espere un momento, por favor.." Width="30px" />
                                     </ProgressTemplate>
                                 </asp:UpdateProgress>
-                            </td>
-                        </tr>
-                    </table>
+                            </div>
+                        </div>
+                    </div>
                 </asp:View>
                 <asp:View ID="View5" runat="server">
                     <asp:UpdatePanel ID="UpdatePanel101" runat="server">

@@ -35,6 +35,18 @@ namespace CapaNegocio
             }
         }
 
+        public void PolizaCFDIGuardar(Poliza_CFDI objPolizaCFDI, ref string Verificador)
+        {
+            try
+            {
+                CD_Poliza_CFDI CDPolizaCFDI = new CD_Poliza_CFDI();
+                CDPolizaCFDI.PolizaCFDIGuardar(objPolizaCFDI, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void PolizaCFDIEditar(Poliza_CFDI objPolizaCFDI, List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
         {
             try
@@ -116,6 +128,8 @@ namespace CapaNegocio
             }
 
         }
+
+
 
         public void PolizaCFDIExtrasConsultaDatos(Poliza_CFDI objPolizaCFDI, int idPoliza, string Partida, ref List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
         {

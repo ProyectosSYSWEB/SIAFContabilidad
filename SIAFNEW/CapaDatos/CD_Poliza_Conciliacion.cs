@@ -567,6 +567,7 @@ namespace CapaDatos
                     objConciliacion.Concepto = Convert.ToString(dr.GetValue(6));
                     objConciliacion.Observaciones = Convert.ToString(dr.GetValue(5));
                     objConciliacion.CveTipo = Convert.ToString(dr.GetValue(7));
+                    objConciliacion.Numero_Cheque = Convert.ToString(dr.GetValue(9));
                     lstConciliacionDet.Add(objConciliacion);
                 }
                 dr.Close();

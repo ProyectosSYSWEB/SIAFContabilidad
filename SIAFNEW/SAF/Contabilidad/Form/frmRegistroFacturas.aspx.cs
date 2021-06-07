@@ -165,8 +165,6 @@ namespace SAF.Contabilidad.Form
             try
             {
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Proveedores", ref ddlProveedor);
-
-
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Tipo_Beneficiario", ref ddlTipoBeneficiario2);
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Tipo_Gasto", ref ddlTipoGasto2);
 

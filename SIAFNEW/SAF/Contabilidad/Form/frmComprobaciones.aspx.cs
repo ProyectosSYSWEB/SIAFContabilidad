@@ -169,7 +169,7 @@ namespace SAF.Contabilidad.Form
                         XmlDocument xDoc = new XmlDocument();
                         Ruta = Path.Combine(Server.MapPath("~/AdjuntosTemp"), grvPolizas.SelectedRow.Cells[9].Text + "-" + DDLCentro_Contable.SelectedValue + "-" + grvPolizas.SelectedRow.Cells[3].Text + "-" + NombreArchivo);
                         FileFactura.SaveAs(Ruta);
-
+                        ObjPolizaCFDI.Tipo_Docto = "FACTURA";
                         ObjPolizaCFDI.Beneficiario_Tipo = ddlTipo_Beneficiario.SelectedValue;
                         ObjPolizaCFDI.Tipo_Gasto = ddlTipo_Gasto.SelectedValue;
                         ObjPolizaCFDI.NombreArchivoXML = grvPolizas.SelectedRow.Cells[9].Text + "-" + DDLCentro_Contable.SelectedValue + "-" + grvPolizas.SelectedRow.Cells[3].Text + "-" + NombreArchivo;

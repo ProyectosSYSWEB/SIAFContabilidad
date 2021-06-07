@@ -14,6 +14,13 @@ namespace CapaEntidad
             set { _IdPoliza_CFDI = value; }
         }
 
+        private int _Id_CFDI;
+        public int Id_CFDI
+        {
+            get { return _Id_CFDI; }
+            set { _Id_CFDI = value; }
+        }
+
         private string _Ejercicio;
         public string Ejercicio
         {
@@ -196,6 +203,27 @@ namespace CapaEntidad
         {
             get { return _Fecha_Oficio; }
             set { _Fecha_Oficio = value; }
+        }
+
+        private double _Importe_Oficio;
+        public double Importe_Oficio
+        {
+            get { return _Importe_Oficio; }
+            set { _Importe_Oficio = value; }
+        }
+
+        private string _Proveedor;
+        public string Proveedor
+        {
+            get { return _Proveedor; }
+            set { _Proveedor = value; }
+        }
+
+        private string _RFC;
+        public string RFC
+        {
+            get { return _RFC; }
+            set { _RFC = value; }
         }
 
         private string _NombreArchivoOficio = string.Empty;

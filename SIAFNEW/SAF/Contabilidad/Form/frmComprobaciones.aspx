@@ -224,6 +224,9 @@
                                 <asp:GridView ID="grvPolizaCFDI" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No existen documentos." ShowFooter="True" ShowHeaderWhenEmpty="True" Width="100%">
                                     <Columns>
                                         <asp:TemplateField>
+                                            <AlternatingItemTemplate>
+                                                lklkl
+                                            </AlternatingItemTemplate>
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="linkBtnnAgregar" runat="server" CssClass="btn btn-blue-grey" OnClick="linkBtnnAgregar_Click" >+ Partida</asp:LinkButton>
                                                 <asp:GridView ID="grdPartidas" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%">
@@ -249,31 +252,31 @@
                                             <ItemStyle VerticalAlign="Top" />
                                             
 </asp:BoundField>
-                                        <asp:BoundField DataField="CFDI_Folio" HeaderText="CFDI Folio" >
+                                        <asp:BoundField DataField="CFDI_Folio" HeaderText="Folio" >
                                             
 
                                             <ItemStyle VerticalAlign="Top" />
                                             
 </asp:BoundField>
-                                        <asp:BoundField DataField="CFDI_UUID" HeaderText="CFDI UUID" >
+                                        <asp:BoundField DataField="CFDI_UUID" HeaderText="UUID" >
                                             
 
                                             <ItemStyle VerticalAlign="Top" />
                                             
 </asp:BoundField>
-                                        <asp:BoundField DataField="CFDI_Fecha" HeaderText="CFDI Fecha" >                                        
+                                        <asp:BoundField DataField="CFDI_Fecha" HeaderText="Fecha" >                                        
                                             
 
                                             <ItemStyle VerticalAlign="Top" />
                                             
 </asp:BoundField>
-                                        <asp:BoundField DataField="CFDI_RFC" HeaderText="CFDI RFC" ReadOnly="True" >
+                                        <asp:BoundField DataField="CFDI_RFC" HeaderText="RFC" ReadOnly="True" >
                                             
 
                                             <ItemStyle VerticalAlign="Top" />
                                             
 </asp:BoundField>
-                                        <asp:TemplateField HeaderText="CFDI Total">
+                                        <asp:TemplateField HeaderText="Total">
                                             <EditItemTemplate>
                                                 <asp:TextBox ID="txtTotal" runat="server" Text='<%# Bind("CFDI_Total") %>'></asp:TextBox>
                                             </EditItemTemplate>
@@ -290,13 +293,19 @@
                                             <ItemTemplate>
                                                 <asp:HyperLink ID="linkArchivoXML" runat="server" NavigateUrl='<%# Bind("Ruta_XML") %>' Target="_blank">Ver</asp:HyperLink>
                                             </ItemTemplate>
+                                            <ItemStyle VerticalAlign="Top" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="PDF">
                                             <ItemTemplate>
                                                 <asp:HyperLink ID="linkArchivoPDF" runat="server" NavigateUrl='<%# Bind("Ruta_PDF") %>' Target="_blank">Ver</asp:HyperLink>
                                             </ItemTemplate>
+                                            <ItemStyle VerticalAlign="Top" />
                                         </asp:TemplateField>
-                                        <asp:CommandField ShowDeleteButton="True" />
+                                        <asp:TemplateField ShowHeader="False">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="linkBttnEliminar" runat="server" CausesValidation="False" CommandName="Delete" Text="Eliminar"></asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                         <asp:BoundField DataField="Fecha_Captura" />
                                         <asp:BoundField DataField="Usuario_Captura" />
                                     </Columns>
