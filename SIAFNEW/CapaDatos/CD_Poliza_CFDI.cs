@@ -149,6 +149,27 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
+        public void EliminarCFDI(int IdCFDI, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_ID_CFDI" };
+                object[] Valores = { IdCFDI };
+                String[] ParametrosOut = { "P_BANDERA" };
+                Cmd = CDDatos.GenerarOracleCommand("DEL_SAF_CFDI", ref Verificador, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+
 
         public void PolizaCFDIConsultaTotCheque(ref Poliza_CFDI objPolizaCFDI, ref string Verificador)
         {
@@ -409,8 +430,8 @@ namespace CapaDatos
                 OracleCommand Cmd = null;
                 try
                 {
-                    String[] Parametros = { "P_ID_POLIZA", "P_OFICIO_NUMERO", "P_OFICIO_FECHA", "P_NOMBRE_ARCHIVO", "P_USUARIO", "P_PROVEEDOR", "P_RFC", "P_IMPORTE" };
-                    object[] Valores = { objPolizaOficio.IdPoliza_Oficio, lstPolizaOficios[i].Numero_Oficio,  lstPolizaOficios[i].Fecha_Oficio, lstPolizaOficios[i].NombreArchivoOficio, Usuario, lstPolizaOficios[i].Proveedor, lstPolizaOficios[i].RFC, lstPolizaOficios[i].Importe_Oficio
+                    String[] Parametros = { "P_ID_POLIZA", "P_OFICIO_NUMERO", "P_OFICIO_FECHA", "P_NOMBRE_ARCHIVO", "P_USUARIO", "P_PROVEEDOR", "P_RFC", "P_IMPORTE", "P_TIPO_DOCTO" };
+                    object[] Valores = { objPolizaOficio.IdPoliza_Oficio, lstPolizaOficios[i].Numero_Oficio,  lstPolizaOficios[i].Fecha_Oficio, lstPolizaOficios[i].NombreArchivoOficio, Usuario, lstPolizaOficios[i].Proveedor, lstPolizaOficios[i].RFC, lstPolizaOficios[i].Importe_Oficio,lstPolizaOficios[i].Tipo_Docto_Oficio
                     };
                     String[] ParametrosOut = { "p_Bandera" };
                     Cmd = CDDatos.GenerarOracleCommand("INS_SAF_POLIZAS_OFICIOS", ref Verificador, Parametros, Valores, ParametrosOut);
@@ -475,6 +496,7 @@ namespace CapaDatos
                     objPolizaOficio.RFC = Convert.ToString(dr.GetValue(9));
                     objPolizaOficio.NombreArchivoOficio = Convert.ToString(dr.GetValue(4));
                     objPolizaOficio.Ruta_Oficio = "~/OficiosTemp/" + Convert.ToString(dr.GetValue(4));
+                    objPolizaOficio.Tipo_Docto_Oficio = Convert.ToString(dr.GetValue(10));
                     lstPolizaOficios.Add(objPolizaOficio);
                 }
                 dr.Close();

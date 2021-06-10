@@ -131,6 +131,11 @@
     <Content Include="Contabilidad\Form\frmRegistroFacturas.aspx" />
     <Content Include="Contabilidad\Reportes\Presupuesto.aspx" />
     <Content Include="Contabilidad\Reportes\CajaGral.aspx" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Inicio.aspx" />
     <Content Include="Inicio.html" />
     <Content Include="Patrimonio\Form\Encuesta_Patrimonio.html" />
@@ -268,6 +273,10 @@
     <Content Include="Presupuesto\Form\FRMDocumento.aspx" />
     <Content Include="Presupuesto\Catalogos\frmCapitulos.html" />
     <Content Include="Presupuesto\Reportes\frmReportes.aspx" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Calendario\calendar_date_select.js" />
     <Content Include="Scripts\Calendario\format_spanish.js" />
     <Content Include="Scripts\Calendario\Validacion.js" />
@@ -279,6 +288,12 @@
     <Content Include="Scripts\images\left2.gif" />
     <Content Include="Scripts\images\right1.gif" />
     <Content Include="Scripts\images\right2.gif" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Scripts\jquery-1.9.0.intellisense.js" />
+    <Content Include="Scripts\jquery-1.9.0.js" />
+    <Content Include="Scripts\jquery-1.9.0.min.js" />
     <Content Include="Scripts\jquery\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jsGeneral.js" />
     <Content Include="Scripts\JSreportes.js" />
@@ -1744,6 +1759,7 @@
     <None Include="Properties\PublishProfiles\gava78546.pubxml" />
     <None Include="Properties\PublishProfiles\Perfil1.pubxml" />
     <Content Include="Scripts\jquery\jquery-3.1.1.min.map" />
+    <Content Include="Scripts\jquery-1.9.0.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />

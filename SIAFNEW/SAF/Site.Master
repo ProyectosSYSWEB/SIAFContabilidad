@@ -18,7 +18,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://sysweb.unach.mx/ingresos/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-
+    <script src="../../Scripts/bootbox.min.js"></script>
 
     <%--PARA EL POP UP--%>
     <script type="text/javascript" src="https://sysweb.unach.mx/resources/js/index.js" charset="iso-8859-1"></script>
@@ -216,6 +216,7 @@
 
 
         <div class="content" style="min-height: 420px;">
+
             <div class="container-fluid" style="min-height: 400px;">
                 <asp:ContentPlaceHolder ID="MainContent" runat="server" />
             </div>

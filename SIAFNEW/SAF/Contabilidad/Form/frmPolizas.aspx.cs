@@ -109,6 +109,7 @@ namespace SAF.Form
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Clasificacion", ref ddlClasifica, "p_tipo_usuario", "p_centro_contable", SesionUsu.Usu_TipoUsu, DDLCentro_Contable.SelectedValue);
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Clasificacion", ref ddlClasificaIni, "p_tipo_usuario", "p_centro_contable", SesionUsu.Usu_TipoUsu, DDLCentro_Contable.SelectedValue);
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Clasificacion", ref ddlClasificaCopia, "p_tipo_usuario", "p_centro_contable", SesionUsu.Usu_TipoUsu, DDLCentro_Contable.SelectedValue);
+                CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Proveedores", ref ddlProveedor);
                 //CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Tipo_Docto", ref ddlTipoDocto, "p_tipo_usuario", "p_tipo", SesionUsu.Usu_TipoUsu,DDLCentro_Contable.SelectedValue);
                 Session["CentrosContab"] = ListCentroContable;
                 ddlClasificaIni.Items.Remove(new ListItem("--SELECCIONAR--", "X"));
@@ -1786,7 +1787,10 @@ namespace SAF.Form
                 }
                 else
                 {
-                    CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Proveedores", ref ddlProveedor);
+                    rowProveedor.Visible = false;
+                    ddlProveedor.SelectedIndex = 0;
+                    txtRFC.Text = string.Empty;
+                    
 
                     ObjPolizaOficio.IdPoliza_Oficio = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
                     CNPolizaOficio.PolizaOficiosConsulta(ObjPolizaOficio, ref lstPolizaOficios, ref Verificador);
@@ -1799,6 +1803,7 @@ namespace SAF.Form
                     txtOficio.Text = string.Empty;
                     txtFechaOficio.Text = string.Empty;
                     txtImporte.Text = "0";
+                    DDLTipoDoctoOficio.SelectedIndex = 0;
                     ddlProveedor.SelectedIndex = 0;
                     txtRFC.Text = string.Empty;
                     pnlPrincipal.Visible = true;
@@ -1835,7 +1840,7 @@ namespace SAF.Form
             pnlPrincipal.Visible = true;
             SesionUsu.Editar = -1;
             //MultiView1.ActiveViewIndex = 0;
-            //CargarGrid(0);
+            CargarGrid(0);
 
 
         }
@@ -1918,7 +1923,7 @@ namespace SAF.Form
                     NombreArchivo = NombreArchivo.Replace(" ", "_");
                     NombreArchivo = NombreArchivo.Replace("%", string.Empty);
                     NombreArchivo = grvPolizas.SelectedRow.Cells[17].Text + "-" + DDLCentro_Contable.SelectedValue + "-" + grvPolizas.SelectedRow.Cells[2].Text + "-" + NombreArchivo;
-
+                    objPolizaOficio.Tipo_Docto_Oficio = DDLTipoDoctoOficio.SelectedValue;
                     objPolizaOficio.Numero_Oficio = txtOficio.Text;
                     objPolizaOficio.Fecha_Oficio = txtFechaOficio.Text;
                     objPolizaOficio.Importe_Oficio =Convert.ToDouble(txtImporte.Text);
@@ -2285,14 +2290,25 @@ namespace SAF.Form
 
         protected void grvPolizaCFDI_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
+            List<Poliza_CFDI> lstPolizasCFDI = new List<Poliza_CFDI>();
             try
             {
                 int fila = e.RowIndex;
                 int pagina = grvPolizaCFDI.PageSize * grvPolizaCFDI.PageIndex;
                 fila = pagina + fila;
-                lstPolizasCFDI.RemoveAt(fila);
-                Session["PolizasCFDI"] = lstPolizasCFDI;
-                CargarGridPolizaCFDI(lstPolizasCFDI);
+
+                CNPolizaCFDI.EliminarCFDI(Convert.ToInt32(grvPolizaCFDI.Rows[fila].Cells[13].Text), ref Verificador);
+                if (Verificador == "0")
+                {
+                    ObjPolizaCFDI.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
+                    CNPolizaCFDI.PolizaCFDIConsultaDatos(ObjPolizaCFDI, ref lstPolizasCFDI, ref Verificador);
+                    CargarGridPolizaCFDI(lstPolizasCFDI);
+                }
+                else
+                {
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+                }
             }
 
             catch (Exception ex)
@@ -2302,5 +2318,34 @@ namespace SAF.Form
                 ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
             }
         }
+
+        protected void DDLTipoDoctoOficio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (DDLTipoDoctoOficio.SelectedValue == "PROVEEDOR")
+                rowProveedor.Visible = true;
+            else
+                rowProveedor.Visible = false;
+        }
+
+     
+        //protected void grvPolizaCFDI_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        //{
+        //    try
+        //    {
+        //        int fila = e.RowIndex;
+        //        int pagina = grvPolizaCFDI.PageSize * grvPolizaCFDI.PageIndex;
+        //        fila = pagina + fila;
+        //        lstPolizasCFDI.RemoveAt(fila);
+        //        Session["PolizasCFDI"] = lstPolizasCFDI;
+        //        CargarGridPolizaCFDI(lstPolizasCFDI);
+        //    }
+
+        //    catch (Exception ex)
+        //    {
+        //        Verificador = ex.Message;
+        //        CNComun.VerificaTextoMensajeError(ref Verificador);
+        //        ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+        //    }
+        //}
     }
 }

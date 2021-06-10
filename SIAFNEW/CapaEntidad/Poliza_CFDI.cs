@@ -239,5 +239,13 @@ namespace CapaEntidad
             get { return _Ruta_Oficio.Trim(); }
             set { _Ruta_Oficio = value.Trim(); }
         }
+
+        private string _Tipo_Docto_Oficio = string.Empty;
+        public string Tipo_Docto_Oficio
+        {
+            get { return _Tipo_Docto_Oficio.Trim(); }
+            set { _Tipo_Docto_Oficio = value.Trim(); }
+        }
+
     }
 }
