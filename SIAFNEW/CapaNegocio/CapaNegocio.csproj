@@ -54,6 +54,7 @@
     <Compile Include="CN_Cuentas_Bancarias.cs" />
     <Compile Include="CN_Cuentas_contables.cs" />
     <Compile Include="CN_Cuentas_Mayor.cs" />
+    <Compile Include="CN_Empleado.cs" />
     <Compile Include="CN_Informativa.cs" />
     <Compile Include="CN_Ministracion.cs" />
     <Compile Include="CN_Mnu.cs" />

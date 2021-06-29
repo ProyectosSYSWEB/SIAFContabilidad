@@ -111,6 +111,18 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void EliminarCFDIS(Poliza_CFDI ObjPolizaCFDI, ref string Verificador)
+        {
+            try
+            {
+                CD_Poliza_CFDI CDPolizaCFDI = new CD_Poliza_CFDI();
+                CDPolizaCFDI.EliminarCFDIS(ObjPolizaCFDI, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
         public void PolizaCFDIConsultaTotCheque(ref Poliza_CFDI objPolizaCFDI, ref string Verificador)
         {
@@ -260,5 +272,19 @@ namespace CapaNegocio
             }
 
         }
+        public void ConsultaEmpleado(ref Poliza_Oficio objEmpleado, ref string Verificador)
+        {
+            try
+            {
+                CD_Poliza_Oficio CDPolizaOficio = new CD_Poliza_Oficio();
+                //CDPolizaOficio.PolizaOficiosDatos(ref objPolizaOficio, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+
     }
-    }
+}

@@ -182,7 +182,7 @@ namespace CapaEntidad
             set { _Centro_Contable = value.Trim(); }
         }
     }
-    public class Poliza_Oficio
+    public class Poliza_Oficio:Empleado
     {
         private int _IdPoliza_Oficio;
         public int IdPoliza_Oficio
@@ -217,7 +217,8 @@ namespace CapaEntidad
         {
             get { return _Proveedor; }
             set { _Proveedor = value; }
-        }
+        }    
+
 
         private string _RFC;
         public string RFC

@@ -18,6 +18,7 @@ namespace CapaEntidad
         private int _Columna;
         private string _Usu_Rep;
         private int _Editar;
+        private int _EditarCFDI;
         private string _ip;
         private string _mac_address;
         private string _id_sistema;
@@ -72,6 +73,12 @@ namespace CapaEntidad
         {
             get { return _Editar; }
             set { _Editar = value; }
+        }
+
+        public int EditarCFDI
+        {
+            get { return _EditarCFDI; }
+            set { _EditarCFDI = value; }
         }
         public string Titular
         {

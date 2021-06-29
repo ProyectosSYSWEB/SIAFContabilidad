@@ -16,14 +16,14 @@ namespace SAF.Contabilidad.Reportes {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class RP_Volante_T : ReportClass {
+    public class RP_Volante_T7 : ReportClass {
         
-        public RP_Volante_T() {
+        public RP_Volante_T7() {
         }
         
         public override string ResourceName {
             get {
-                return "RP-Volante_T.rpt";
+                return "RP-Volante_T7.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace SAF.Contabilidad.Reportes {
         
         public override string FullResourceName {
             get {
-                return "SAF.Contabilidad.Reportes.RP-Volante_T.rpt";
+                return "SAF.Contabilidad.Reportes.RP-Volante_T7.rpt";
             }
             set {
                 // Do nothing
@@ -114,7 +114,7 @@ namespace SAF.Contabilidad.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_1P {
+        public CrystalDecisions.Shared.IParameterField Parameter_1P_ejercicio {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -122,7 +122,7 @@ namespace SAF.Contabilidad.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_2P {
+        public CrystalDecisions.Shared.IParameterField Parameter_3P_numero_poliza {
             get {
                 return this.DataDefinition.ParameterFields[1];
             }
@@ -130,25 +130,17 @@ namespace SAF.Contabilidad.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_3P {
+        public CrystalDecisions.Shared.IParameterField Parameter_4P_Tipo_volante {
             get {
                 return this.DataDefinition.ParameterFields[2];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_4P {
-            get {
-                return this.DataDefinition.ParameterFields[3];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedRP_Volante_T : Component, ICachedReport {
+    public class CachedRP_Volante_T7 : Component, ICachedReport {
         
-        public CachedRP_Volante_T() {
+        public CachedRP_Volante_T7() {
         }
         
         [Browsable(false)]
@@ -185,7 +177,7 @@ namespace SAF.Contabilidad.Reportes {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            RP_Volante_T rpt = new RP_Volante_T();
+            RP_Volante_T7 rpt = new RP_Volante_T7();
             rpt.Site = this.Site;
             return rpt;
         }

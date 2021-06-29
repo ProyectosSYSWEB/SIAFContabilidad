@@ -170,6 +170,26 @@ namespace CapaDatos
             }
         }
 
+        public void EliminarCFDIS(Poliza_CFDI ObjPolizaCFDI, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_ID_POLIZA" };
+                object[] Valores = { ObjPolizaCFDI.IdPoliza };
+                String[] ParametrosOut = { "P_BANDERA" };
+                Cmd = CDDatos.GenerarOracleCommand("DEL_SAF_CFDIS", ref Verificador, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
 
         public void PolizaCFDIConsultaTotCheque(ref Poliza_CFDI objPolizaCFDI, ref string Verificador)
         {
@@ -430,8 +450,9 @@ namespace CapaDatos
                 OracleCommand Cmd = null;
                 try
                 {
-                    String[] Parametros = { "P_ID_POLIZA", "P_OFICIO_NUMERO", "P_OFICIO_FECHA", "P_NOMBRE_ARCHIVO", "P_USUARIO", "P_PROVEEDOR", "P_RFC", "P_IMPORTE", "P_TIPO_DOCTO" };
-                    object[] Valores = { objPolizaOficio.IdPoliza_Oficio, lstPolizaOficios[i].Numero_Oficio,  lstPolizaOficios[i].Fecha_Oficio, lstPolizaOficios[i].NombreArchivoOficio, Usuario, lstPolizaOficios[i].Proveedor, lstPolizaOficios[i].RFC, lstPolizaOficios[i].Importe_Oficio,lstPolizaOficios[i].Tipo_Docto_Oficio
+                    String[] Parametros = { "P_ID_POLIZA", "P_OFICIO_NUMERO", "P_OFICIO_FECHA", "P_NOMBRE_ARCHIVO", "P_USUARIO", "P_PROVEEDOR", "P_RFC", "P_IMPORTE", "P_TIPO_DOCTO", "P_NOMBRE_EMPLEADO", "P_TIPO_EMPLEADO", "P_PLAZA_EMPLEADO" };
+                    object[] Valores = { objPolizaOficio.IdPoliza_Oficio, lstPolizaOficios[i].Numero_Oficio,  lstPolizaOficios[i].Fecha_Oficio, lstPolizaOficios[i].NombreArchivoOficio, Usuario, lstPolizaOficios[i].Proveedor, lstPolizaOficios[i].RFC, lstPolizaOficios[i].Importe_Oficio,lstPolizaOficios[i].Tipo_Docto_Oficio,
+                    lstPolizaOficios[i].Nombre,lstPolizaOficios[i].Tipo_Personal,lstPolizaOficios[i].Numero_Plaza
                     };
                     String[] ParametrosOut = { "p_Bandera" };
                     Cmd = CDDatos.GenerarOracleCommand("INS_SAF_POLIZAS_OFICIOS", ref Verificador, Parametros, Valores, ParametrosOut);
@@ -497,6 +518,9 @@ namespace CapaDatos
                     objPolizaOficio.NombreArchivoOficio = Convert.ToString(dr.GetValue(4));
                     objPolizaOficio.Ruta_Oficio = "~/OficiosTemp/" + Convert.ToString(dr.GetValue(4));
                     objPolizaOficio.Tipo_Docto_Oficio = Convert.ToString(dr.GetValue(10));
+                    objPolizaOficio.Nombre = Convert.ToString(dr.GetValue(11));
+                    objPolizaOficio.Tipo_Personal = Convert.ToString(dr.GetValue(12));
+                    objPolizaOficio.Numero_Plaza = Convert.ToString(dr.GetValue(13));
                     lstPolizaOficios.Add(objPolizaOficio);
                 }
                 dr.Close();
@@ -511,6 +535,42 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        //public void ConsultaEmpleado(ref Poliza_Oficio objEmpleado, ref string Verificador)
+        //{
+        //    CD_Datos CDDatos = new CD_Datos();
+        //    OracleCommand Cmd = null;
+        //    try
+        //    {
+        //        string[] ParametrosIn = { "P_PLAZA",
+        //                                  "P_TIPO_PERSONAL"};
+        //        object[] Valores = { objEmpleado.PlazaEmpleado,
+        //                             objEmpleado.TipoEmpleado};
+        //        string[] ParametrosOut ={
+
+        //                                  "p_PATERNO",
+        //                                  "p_MATERNO" ,
+        //                                  "p_NOMBRES",
+        //                                  "P_BANDERA"
+        //        };
+
+        //        Cmd = CDDatos.GenerarOracleCommand("OBT_EMPLEADO", ref Verificador, ParametrosIn, Valores, ParametrosOut);
+        //        if (Verificador == "0")
+        //        {
+        //            objEmpleado = new Poliza_Oficio();
+        //            objEmpleado.Empleado = Convert.ToString(Cmd.Parameters["p_NOMBRES"].Value)+ Convert.ToString(Cmd.Parameters["p_PATERNO"].Value)+ Convert.ToString(Cmd.Parameters["p_MATERNO"].Value);
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        CDDatos.LimpiarOracleCommand(ref Cmd);
+        //    }
+        //}
+
         public void PolizaPartidasDatos(Poliza_CFDI objPoliza, ref List<Poliza_CFDI> lstPartidas, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();

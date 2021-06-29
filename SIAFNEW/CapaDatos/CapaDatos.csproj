@@ -56,6 +56,7 @@
     <Compile Include="CD_Cuentas_contables.cs" />
     <Compile Include="CD_Cuentas_Mayor.cs" />
     <Compile Include="CD_Datos.cs" />
+    <Compile Include="CD_Empleado.cs" />
     <Compile Include="CD_Informativa.cs" />
     <Compile Include="CD_Ministracion.cs" />
     <Compile Include="CD_Mnu.cs" />

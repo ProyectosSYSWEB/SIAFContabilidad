@@ -417,6 +417,7 @@ namespace SAF.Reportes
                         report.SetParameterValue(0, parametro1);
                         report.SetParameterValue(1, parametro2);
                         report.SetParameterValue(2, parametro3);
+                        report.SetParameterValue(3, parametro4);
                         reporte_PDF();
                         break;
                     case "RP_CFDISxls":
@@ -425,6 +426,7 @@ namespace SAF.Reportes
                         report.SetParameterValue(0, parametro1);
                         report.SetParameterValue(1, parametro2);
                         report.SetParameterValue(2, parametro3);
+                        report.SetParameterValue(3, parametro4);
                         reporte_XLS();
                         break;
                     case "RP_Cedulas":

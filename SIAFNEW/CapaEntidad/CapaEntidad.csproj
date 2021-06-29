@@ -47,6 +47,7 @@
     <Compile Include="Bienes.cs" />
     <Compile Include="Centros_Contables.cs" />
     <Compile Include="Centros_Trabajo.cs" />
+    <Compile Include="Empleado.cs" />
     <Compile Include="Ministracion.cs" />
     <Compile Include="Poliza_Conciliacion.cs" />
     <Compile Include="Configuracion_forms.cs" />

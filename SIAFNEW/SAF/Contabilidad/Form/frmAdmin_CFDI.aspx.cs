@@ -126,14 +126,14 @@ namespace SAF.Contabilidad.Form
 
         protected void imgBttnPDF_Click(object sender, ImageClickEventArgs e)
         {
-            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP_CFDIS&parametro1=" + ddlTipo_Gasto.SelectedValue+ "&parametro2=" + ddlTipo_Beneficiario.SelectedValue + "&parametro3=" + txtBuscar.Text;
+            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP_CFDIS&parametro1=" + ddlTipo_Gasto.SelectedValue+ "&parametro2=" + ddlTipo_Beneficiario.SelectedValue + "&parametro3=" + txtBuscar.Text + "&parametro4=" + SesionUsu.Usu_Ejercicio; 
             string _open = "window.open('" + ruta + "', 'miniContenedor', 'toolbar=yes', 'location=no', 'menubar=yes', 'resizable=yes');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
         }
 
         protected void imgBttnExcel_Click(object sender, ImageClickEventArgs e)
         {
-            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP_CFDISxls&parametro1=" + ddlTipo_Gasto.SelectedValue + "&parametro2=" + ddlTipo_Beneficiario.SelectedValue + "&parametro3=" + txtBuscar.Text;
+            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP_CFDISxls&parametro1=" + ddlTipo_Gasto.SelectedValue + "&parametro2=" + ddlTipo_Beneficiario.SelectedValue + "&parametro3=" + txtBuscar.Text + "&parametro4=" + SesionUsu.Usu_Ejercicio;
             string _open = "window.open('" + ruta + "', 'miniContenedor', 'toolbar=yes', 'location=no', 'menubar=yes', 'resizable=yes');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
         }

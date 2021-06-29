@@ -119,6 +119,7 @@
     <Content Include="Adquisiciones\Form\FRMEditar_solicitud.aspx" />
     <Content Include="Configuracion\frmConfiguracionForms.aspx" />
     <Content Include="Contabilidad\Form\frmAdmin_CFDI.aspx" />
+    <Content Include="Contabilidad\Form\frmCatEmpleados.aspx" />
     <Content Include="Contabilidad\Form\frmComprobaciones.aspx" />
     <Content Include="Contabilidad\Form\frmConciliacionBancaria2.aspx" />
     <Content Include="Contabilidad\Form\frmConciliacionBancaria.aspx" />
@@ -418,6 +419,13 @@
     <Compile Include="Contabilidad\Form\frmAdmin_CFDI.aspx.designer.cs">
       <DependentUpon>frmAdmin_CFDI.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Contabilidad\Form\frmCatEmpleados.aspx.cs">
+      <DependentUpon>frmCatEmpleados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\Form\frmCatEmpleados.aspx.designer.cs">
+      <DependentUpon>frmCatEmpleados.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Contabilidad\Form\frmComprobaciones.aspx.cs">
       <DependentUpon>frmComprobaciones.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -656,6 +664,24 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RP-Volante_T.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\Reportes\RP-Volante_T6-2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RP-Volante_T6-2.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\Reportes\RP-Volante_T6.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RP-Volante_T6.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\Reportes\RP-Volante_T7.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RP-Volante_T7.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Contabilidad\Reportes\RP_CFDISxls.cs">
@@ -1988,6 +2014,18 @@
     <EmbeddedResource Include="Contabilidad\Reportes\RP-Volante_T2.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RP-Volante_T2.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contabilidad\Reportes\RP-Volante_T6-2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RP-Volante_T6-2.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contabilidad\Reportes\RP-Volante_T6.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RP-Volante_T6.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contabilidad\Reportes\RP-Volante_T7.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RP-Volante_T7.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Contabilidad\Reportes\RP_CFDISxls.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
