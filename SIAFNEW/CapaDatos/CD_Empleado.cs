@@ -17,8 +17,8 @@ namespace CapaDatos
             {
 
                 OracleDataReader dr = null;
-                String[] Parametros = { "p_Nombre", "p_Paterno", "p_Materno" };
-                Object[] Valores = { objEmpleado.Nombre, objEmpleado.Paterno, objEmpleado.Materno };
+                String[] Parametros = { "p_Nombre", "p_Paterno", "p_Materno", "p_tipo_personal" };
+                Object[] Valores = { objEmpleado.Nombre, objEmpleado.Paterno, objEmpleado.Materno, objEmpleado.Tipo_Personal };
 
                 cmm = CDDatos.GenerarOracleCommandCursor("PKG_CONTABILIDAD.Obt_Grid_Empleados", ref dr, Parametros, Valores);
 
@@ -29,6 +29,8 @@ namespace CapaDatos
                     objEmpleado.Dependencia = Convert.ToString(dr[1]);
                     objEmpleado.Numero_Plaza = Convert.ToString(dr[2]);
                     objEmpleado.Tipo_Personal = Convert.ToString(dr[3]);
+                    objEmpleado.Correo_UNACH = Convert.ToString(dr[5]);
+                    objEmpleado.Nomina = Convert.ToString(dr[6]);
                     lstEmpleados.Add(objEmpleado);
 
                 }

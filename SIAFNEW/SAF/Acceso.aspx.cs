@@ -229,7 +229,7 @@ namespace SAF.Contabilidad
 
 
                 string Autorizado = jObject.GetValue("valido").ToString();
-                string Nombre = jObject.GetValue("gecos").ToString();
+                //string Nombre = jObject.GetValue("gecos").ToString();
 
                 string Usu = txtUsario.Text;
                 //if(1==1)

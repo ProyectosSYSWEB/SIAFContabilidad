@@ -292,7 +292,7 @@ namespace SAF.Reportes
                     case "RP-Diario-Generalxls":
                         Reporte = "Contabilidad\\Reportes\\RP-Diario-Generalxls.rpt";
                         reportes_dir();
-                        report.SetParameterValue(0, mes_inicial); report.SetParameterValue(1, mes_final); report.SetParameterValue(2, Ejercicio); report.SetParameterValue(3, centro_contable); reporte_XLS();
+                        report.SetParameterValue(0, mes_inicial); report.SetParameterValue(1, mes_final); report.SetParameterValue(2, Ejercicio); report.SetParameterValue(3, centro_contable); reporte_GranXLS();
                         break;
                     case "RP-Mayor-General":
                         Reporte = "Contabilidad\\Reportes\\RP-Mayor-General.rpt";
@@ -488,9 +488,21 @@ namespace SAF.Reportes
             connectionInfo.UserID = "SAF";
             connectionInfo.Password = "DSIA2014";
             SetDBLogonForReport(connectionInfo, report);
-            report.ExportToHttpResponse(ExportFormatType.ExcelWorkbook, Response, false, Tipo );
+            report.ExportToHttpResponse(ExportFormatType.ExcelRecord, Response, false, Tipo );
             CR_Reportes.ReportSource = report;
                
+        }
+
+        private void reporte_GranXLS()
+        {
+            report.PrintOptions.PaperSize = PaperSize.PaperLetter;
+            connectionInfo.ServerName = "dsia";
+            connectionInfo.UserID = "SAF";
+            connectionInfo.Password = "DSIA2014";
+            SetDBLogonForReport(connectionInfo, report);
+            report.ExportToHttpResponse(ExportFormatType.ExcelWorkbook, Response, false, Tipo);
+            CR_Reportes.ReportSource = report;
+
         }
         private void SetDBLogonForReport(ConnectionInfo connectionInfo, ReportDocument reportDocument)
         {

@@ -228,7 +228,7 @@
                                                 lklkl
                                             </AlternatingItemTemplate>
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="linkBtnnAgregar" runat="server" CssClass="btn btn-blue-grey" OnClick="linkBtnnAgregar_Click" >+ Partida</asp:LinkButton>
+                                                <asp:LinkButton ID="linkBtnnAgregar" runat="server" CssClass="btn btn-blue-grey" OnClick="linkBtnnAgregar_Click">+ Partida</asp:LinkButton>
                                                 <asp:GridView ID="grdPartidas" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%">
                                                     <Columns>
                                                         <asp:BoundField DataField="Partida" HeaderText="PARTIDA" />
@@ -240,42 +240,42 @@
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:BoundField DataField="Tipo_Docto" HeaderText="Tipo Docto" ReadOnly="True" />
-                                        <asp:BoundField DataField="Beneficiario_Tipo" HeaderText="Tipo" ReadOnly="True" >
-                                            
+                                        <asp:BoundField DataField="Beneficiario_Tipo" HeaderText="Tipo" ReadOnly="True">
+
 
                                             <ItemStyle VerticalAlign="Top" />
-                                            
-</asp:BoundField>
-                                        <asp:BoundField DataField="Tipo_Gasto" HeaderText="Tipo Gasto" ReadOnly="True" >
-                                            
+
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Tipo_Gasto" HeaderText="Tipo Gasto" ReadOnly="True">
+
 
                                             <ItemStyle VerticalAlign="Top" />
-                                            
-</asp:BoundField>
-                                        <asp:BoundField DataField="CFDI_Folio" HeaderText="Folio" >
-                                            
+
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="CFDI_Folio" HeaderText="Folio">
+
 
                                             <ItemStyle VerticalAlign="Top" />
-                                            
-</asp:BoundField>
-                                        <asp:BoundField DataField="CFDI_UUID" HeaderText="UUID" >
-                                            
+
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="CFDI_UUID" HeaderText="UUID">
+
 
                                             <ItemStyle VerticalAlign="Top" />
-                                            
-</asp:BoundField>
-                                        <asp:BoundField DataField="CFDI_Fecha" HeaderText="Fecha" >                                        
-                                            
+
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="CFDI_Fecha" HeaderText="Fecha">
+
 
                                             <ItemStyle VerticalAlign="Top" />
-                                            
-</asp:BoundField>
-                                        <asp:BoundField DataField="CFDI_RFC" HeaderText="RFC" ReadOnly="True" >
-                                            
+
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="CFDI_RFC" HeaderText="RFC" ReadOnly="True">
+
 
                                             <ItemStyle VerticalAlign="Top" />
-                                            
-</asp:BoundField>
+
+                                        </asp:BoundField>
                                         <asp:TemplateField HeaderText="Total">
                                             <EditItemTemplate>
                                                 <asp:TextBox ID="txtTotal" runat="server" Text='<%# Bind("CFDI_Total") %>'></asp:TextBox>

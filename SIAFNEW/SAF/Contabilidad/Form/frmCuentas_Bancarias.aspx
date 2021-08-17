@@ -1,74 +1,62 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmCuentas_Bancarias.aspx.cs" Inherits="SAF.Contabilidad.Form.frmCuentas_Bancarias" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <style type="text/css">
-        .style1 {
-            width: 150px;
-            text-align: left;
-        }
-    </style>
+    <script src="../../Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <link href="../../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col">
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
                         <asp:MultiView ID="MultiView1" runat="server">
                             <asp:View ID="View1" runat="server">
-                                <table style="width: 100%;">
-                                    <tr>
-                                        <td align="center">
-                                            <table style="width: 100%;">
-                                                <tr>
-                                                    <td align="right" class="style1" valign="top">Centro Contable
-                                                    </td>
-                                                    <td align="left">
-                                                        <asp:UpdatePanel ID="UpdatePanel7" runat="server">
-                                                            <ContentTemplate>
-                                                                <asp:DropDownList ID="ddlCentros_Contables0" runat="server" AutoPostBack="True">
-                                                                </asp:DropDownList>
-                                                                <br />
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server"
-                                                                    ControlToValidate="ddlCentros_Contables0" ErrorMessage="*Requerido"
-                                                                    InitialValue="00000" ValidationGroup="CuentaBancaria"></asp:RequiredFieldValidator>
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
-                                                    </td>
-                                                    <td class="derecha">
-                                                        <asp:ImageButton ID="btnNuevo" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/nuevo.png" OnClick="btnNuevo_Click" />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td align="right" class="style1" valign="top">Buscar</td>
-                                                    <td align="left">
-                                                        <asp:TextBox ID="txtBuscar" runat="server" Width="100%"></asp:TextBox>
-                                                    </td>
-                                                    <td class="derecha">
-                                                        <asp:ImageButton ID="imgbtnBuscar1" runat="server" CausesValidation="False" ImageUrl="http://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgbtnBuscar1_Click" Style="text-align: right" title="Buscar" ValidationGroup="Buscar" />
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            Centro Contable
+                                        </div>
+                                        <div class="col-md-9">
+                                            <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+                                                <ContentTemplate>
+                                                    <asp:DropDownList ID="ddlCentros_Contables0" runat="server" AutoPostBack="True" Width="100%" OnSelectedIndexChanged="ddlCentros_Contables0_SelectedIndexChanged">
+                                                    </asp:DropDownList>
+                                                    <br />
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server"
+                                                        ControlToValidate="ddlCentros_Contables0" ErrorMessage="*Requerido"
+                                                        InitialValue="00000" ValidationGroup="CuentaBancaria"></asp:RequiredFieldValidator>
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <asp:ImageButton ID="btnNuevo" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/nuevo.png" OnClick="btnNuevo_Click" />
+                                        </div>
+                                    </div>
+                                    <%--<div class="row">
+                                        <div class="col-md-11">
+                                            <asp:TextBox ID="txtBuscar" runat="server" Width="100%"></asp:TextBox>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <asp:ImageButton ID="imgbtnBuscar1" runat="server" CausesValidation="False" ImageUrl="http://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgbtnBuscar1_Click" Style="text-align: right" title="Buscar" ValidationGroup="Buscar" />
+                                        </div>
+                                    </div>--%>
+                                    <div class="row">
+                                        <div class="col text-center">
                                             <asp:UpdateProgress ID="UpdateProgress6" runat="server"
                                                 AssociatedUpdatePanelID="UpdatePanel1">
-                                                <ProgressTemplate>
-                                                    <asp:Image ID="Image8" runat="server"
+                                                <ProgressTemplate><asp:Image ID="Image8" runat="server"
                                                         AlternateText="Espere un momento, por favor.." Height="50px"
                                                         ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
-                                                        ToolTip="Espere un momento, por favor.." Width="50px" />
-                                                </ProgressTemplate>
+                                                        ToolTip="Espere un momento, por favor.." Width="50px" /></ProgressTemplate>
                                             </asp:UpdateProgress>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
                                             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                                 <ContentTemplate>
-                                                    <asp:GridView ID="grvCuentas_Bancarias" runat="server" AllowPaging="True"
+                                                    <asp:GridView ID="grvCuentas_Bancarias" runat="server"
                                                         AutoGenerateColumns="False" BorderStyle="None" BorderWidth="1px" CellPadding="4"
                                                         GridLines="Vertical"
                                                         OnPageIndexChanging="grvCuentas_Bancarias_PageIndexChanging"
@@ -84,11 +72,7 @@
                                                             <asp:BoundField DataField="DESCRIPCION" HeaderText="Descripcion" />
                                                             <asp:BoundField DataField="FECHA_APERTURA" HeaderText="Fecha Apertura" />
                                                             <asp:CommandField SelectText="Editar" ShowSelectButton="True" />
-                                                            <asp:TemplateField ShowHeader="False">
-                                                                <ItemTemplate>
-                                                                    <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" OnClientClick="return confirm('¿Desea eliminar la cuenta?');" Text="Eliminar"></asp:LinkButton>
-                                                                </ItemTemplate>
-                                                            </asp:TemplateField>
+                                                            <asp:TemplateField ShowHeader="False"><ItemTemplate><asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" OnClientClick="return confirm('¿Desea eliminar la cuenta?');" Text="Eliminar"></asp:LinkButton></ItemTemplate></asp:TemplateField>
                                                         </Columns>
                                                         <FooterStyle CssClass="enc" />
                                                         <PagerStyle CssClass="enc" HorizontalAlign="Center" />
@@ -98,23 +82,31 @@
                                                     </asp:GridView>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </asp:View>
                             <asp:View ID="View2" runat="server">
                                 <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <asp:UpdateProgress ID="updPgrEjercicio" runat="server" AssociatedUpdatePanelID="updPnlEjercicio">
+                                                <ProgressTemplate><asp:Image ID="img1" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." Width="50px" /></ProgressTemplate>
+                                            </asp:UpdateProgress>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-2">
                                             Ejercicio
                                         </div>
                                         <div class="col-md-10">
-                                            <asp:DropDownList ID="ddlEjercicio" runat="server">
-                                                <asp:ListItem></asp:ListItem>
-                                            </asp:DropDownList>
+                                            <asp:UpdatePanel ID="updPnlEjercicio" runat="server">
+                                                <ContentTemplate>
+                                                    <asp:DropDownList ID="ddlEjercicio" runat="server" OnSelectedIndexChanged="ddlEjercicio_SelectedIndexChanged" AutoPostBack="True">
+                                                        <asp:ListItem></asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -131,9 +123,7 @@
                                         </div>
                                         <div class="col-md-1">
                                             <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel5">
-                                                <ProgressTemplate>
-                                                    <asp:Image ID="Image7" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." Width="50px" />
-                                                </ProgressTemplate>
+                                                <ProgressTemplate><asp:Image ID="Image7" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." Width="50px" /></ProgressTemplate>
                                             </asp:UpdateProgress>
                                         </div>
                                     </div>
@@ -186,7 +176,7 @@
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server"
                                                 ControlToValidate="txtCuenta_Bancaria" ErrorMessage="RequiredFieldValidator"
                                                 ValidationGroup="GuardaCuentaBancaria">*Requerido</asp:RequiredFieldValidator>
-                                       </div>
+                                        </div>
                                         <div class="col-md-1">Descripción</div>
                                         <div class="col-md-5">
                                             <asp:TextBox ID="txtDescripcion" runat="server" Width="100%"></asp:TextBox>
@@ -196,7 +186,7 @@
                                                 ControlToValidate="txtDescripcion" ErrorMessage="RequiredFieldValidator"
                                                 ValidationGroup="GuardaCuentaBancaria">*Requerido</asp:RequiredFieldValidator>
                                         </div>
-                                    </div>                                    
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-2">Localidad</div>
                                         <div class="col-md-9">
@@ -214,7 +204,7 @@
                                             <asp:TextBox ID="txtFecha_Apertura" runat="server" Enabled="False" Width="80px"></asp:TextBox>
                                             <ajaxToolkit:CalendarExtender ID="CalendarExtenderFApertura" runat="server" TargetControlID="txtFecha_Apertura" PopupButtonID="imgCalendarioApertura" BehaviorID="_content_CalendarExtenderApertura" />
                                             <asp:ImageButton ID="imgCalendarioApertura" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
-                                        </div>                                    
+                                        </div>
                                         <div class="col-md-2">Status</div>
                                         <div class="col-md-4">
                                             <asp:RadioButtonList ID="rdoBttnStatus" runat="server"
@@ -238,4 +228,17 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        function Ctas_Bancarias() {
+
+            $('#<%= grvCuentas_Bancarias.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvCuentas_Bancarias.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": true,
+                "ordering": false
+            });
+
+        }
+    </script>
+
 </asp:Content>

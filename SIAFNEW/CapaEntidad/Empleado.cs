@@ -14,6 +14,13 @@ namespace CapaEntidad
             set { _Nombre = value; }
         }
 
+        private string _Correo_UNACH;
+        public string Correo_UNACH
+        {
+            get { return _Correo_UNACH; }
+            set { _Correo_UNACH = value; }
+        }
+
         private string _Paterno;
         public string Paterno
         {
@@ -33,6 +40,13 @@ namespace CapaEntidad
         {
             get { return _Dependencia; }
             set { _Dependencia = value; }
+        }
+
+        private string _Nomina;
+        public string Nomina
+        {
+            get { return _Nomina; }
+            set { _Nomina = value; }
         }
 
         private string _Tipo_Personal;

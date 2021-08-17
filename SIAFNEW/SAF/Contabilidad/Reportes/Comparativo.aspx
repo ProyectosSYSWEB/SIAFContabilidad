@@ -1,49 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Comparativo.aspx.cs" Inherits="SAF.Contabilidad.Reportes.WebForm1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <style type="text/css">
-        .style1 {
-            width: 138px;
-        }
-
-        .auto-style1 {
-            width: 40%;
-            text-align: center;
-        }
-
-        .auto-style2 {
-            width: 8%;
-        }
-
-        .auto-style4 {
-            width: 156px;
-        }
-
-        .auto-style5 {
-            width: 740px;
-        }
-
-        .auto-style7 {
-            width: 134px;
-        }
-
-        .auto-style8 {
-            width: 239px;
-            text-align: right;
-        }
-
-        .auto-style9 {
-            width: 740px;
-            text-align: right;
-        }
-    </style>
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:UpdateProgress ID="UpdateProgress1" runat="server">
-    </asp:UpdateProgress>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-
             <asp:MultiView ID="MultiView1" runat="server">
                 <asp:View ID="View1" runat="server">
                     <table style="width: 100%;">
@@ -149,7 +111,7 @@
                         <ContentTemplate>
                             <div class="container">
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col text-center">
                                         <asp:UpdateProgress ID="UpdateProgress4" runat="server"
                                             AssociatedUpdatePanelID="UpdatePanel8">
                                             <ProgressTemplate>
@@ -209,12 +171,12 @@
                                     <div class="col-md-2">
                                         <asp:UpdatePanel ID="UpdatePanel9" runat="server">
                                             <ContentTemplate>
-                                                <asp:Label ID="lblCentro_Contable" runat="server" Text="Centro Contable:"
+                                                <asp:Label ID="lblCentro_Contable" runat="server" Text="Centro Contable"
                                                     Visible="False"></asp:Label>
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
                                     </div>
-                                    <div class="col-md-9">
+                                    <div class="col-md-10">
                                         <asp:UpdatePanel ID="UpdatePanel10" runat="server">
                                             <ContentTemplate>
                                                 <asp:DropDownList ID="DDLCentro_Contable" runat="server" Visible="False"
@@ -223,10 +185,10 @@
                                                 </asp:DropDownList>
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
+                                    </div>          
                                     </div>
-                                </div>
                                 <div class="row">
-                                    <div class="col-md-11">
+                                    <div class="col-md-1">
                                         <asp:UpdateProgress ID="UpdateProgress9" runat="server" AssociatedUpdatePanelID="UpdatePanel10">
                                             <ProgressTemplate>
                                                 <asp:Image ID="Image1q6" runat="server" AlternateText="Espere un momento, por favor.." Height="30px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." Width="30px" />
@@ -236,7 +198,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <asp:Label ID="lblcuenta1" runat="server" Text="Cuenta Contable:"
+                                        <asp:Label ID="lblcuenta1" runat="server" Text="Cuenta Contable"
                                             Visible="False"></asp:Label>
                                     </div>
                                     <div class="col-md-9">
@@ -245,7 +207,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-11 text-right">
+                                    <div class="col text-right">
                                         <asp:UpdatePanel ID="UpdatePanel8" runat="server">
                                             <ContentTemplate>
                                                 <asp:ImageButton ID="btnAceptar0" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/pdf.png" OnClick="btnAceptar0_Click" />
@@ -369,7 +331,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col">
+                            <div class="col text-center">
                                 <asp:UpdateProgress ID="UpdateProgress5" runat="server"
                                     AssociatedUpdatePanelID="UpdatePanel11">
                                     <ProgressTemplate>

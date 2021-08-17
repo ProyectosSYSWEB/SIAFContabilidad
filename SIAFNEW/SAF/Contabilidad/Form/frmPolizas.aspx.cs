@@ -109,9 +109,9 @@ namespace SAF.Form
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref DDLCentro_Contable, "p_usuario", "p_ejercicio", SesionUsu.Usu_Nombre, SesionUsu.Usu_Ejercicio, ref ListCentroContable);
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Tipo_Beneficiario", ref ddlTipo_Beneficiario);
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Tipo_Gasto", ref ddlTipo_Gasto);
-                CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Clasificacion", ref ddlClasifica, "p_tipo_usuario", "p_centro_contable", SesionUsu.Usu_TipoUsu, DDLCentro_Contable.SelectedValue);
+                //CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Clasificacion", ref ddlClasifica, "p_tipo_usuario", "p_centro_contable", SesionUsu.Usu_TipoUsu, DDLCentro_Contable.SelectedValue);
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Clasificacion", ref ddlClasificaIni, "p_tipo_usuario", "p_centro_contable", SesionUsu.Usu_TipoUsu, DDLCentro_Contable.SelectedValue);
-                CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Clasificacion", ref ddlClasificaCopia, "p_tipo_usuario", "p_centro_contable", SesionUsu.Usu_TipoUsu, DDLCentro_Contable.SelectedValue);
+                //CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Clasificacion", ref ddlClasificaCopia, "p_tipo_usuario", "p_centro_contable", SesionUsu.Usu_TipoUsu, DDLCentro_Contable.SelectedValue);
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Proveedores", ref ddlProveedor);
                 //CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Tipo_Docto", ref ddlTipoDocto, "p_tipo_usuario", "p_tipo", SesionUsu.Usu_TipoUsu,DDLCentro_Contable.SelectedValue);
                 Session["CentrosContab"] = ListCentroContable;
@@ -268,14 +268,20 @@ namespace SAF.Form
         {
             grdOficios.DataSource = null;
             grdOficios.DataBind();
-            //Int32[] Celdas = new Int32[] { 11, 12 };
+            Int32[] Celdas = new Int32[] { 10 };
             //Int32[] Celdas2 = new Int32[] { 10, 11, 12 };
             try
             {
                 DataTable dt = new DataTable();
                 grdOficios.DataSource = ListPoliza_Oficio;
                 grdOficios.DataBind();
-
+                if (ListPoliza_Oficio.Count() > 0)
+                {
+                    if (grvPolizas.SelectedRow.Cells[16].Text == "N")
+                    {
+                        CNComun.HideColumns(grdOficios, Celdas);
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -288,6 +294,8 @@ namespace SAF.Form
 
         private void LimpiaGrid()
         {
+            //List<Poliza> dt = new List<Poliza>();
+            //grvPolizas.DataSource = dt;
             grvPolizas.DataSource = null;
             grvPolizas.DataBind();
         }
@@ -661,11 +669,17 @@ namespace SAF.Form
 
         protected void DDLCentro_Contable_SelectedIndexChanged(object sender, EventArgs e)
         {
+            CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Clasificacion", ref ddlClasifica, "p_tipo_usuario", "p_centro_contable", SesionUsu.Usu_TipoUsu, DDLCentro_Contable.SelectedValue);
+            //CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Clasificacion", ref ddlClasificaIni, "p_tipo_usuario", "p_centro_contable", SesionUsu.Usu_TipoUsu, DDLCentro_Contable.SelectedValue);
+            CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Clasificacion", ref ddlClasificaCopia, "p_tipo_usuario", "p_centro_contable", SesionUsu.Usu_TipoUsu, DDLCentro_Contable.SelectedValue);
+
             if (SesionUsu.Editar == 0 || SesionUsu.Editar == 1)
             {
                 Select_Programa();
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cheque_Cuenta", ref ddlCheque_Cuenta, "p_ejercicio", "p_centro_contable", SesionUsu.Usu_Ejercicio, DDLCentro_Contable.SelectedValue);
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_List_Cuentas_Contables_Id", ref ddlCuentas_Contables, "p_ejercicio", "p_centro_contable", SesionUsu.Usu_Ejercicio, Convert.ToString(DDLCentro_Contable.SelectedValue), ref ListCuentas);
+
+
                 Session["Cuentas"] = ListCuentas;
                 DateTime fechaIni = new DateTime();
                 DateTime fechaFin = new DateTime();
@@ -770,7 +784,7 @@ namespace SAF.Form
                     ddlClasifica.SelectedValue = ObjPoliza.Clasificacion;
 
                     lblIniPoliza.Text = ObjPoliza.Numero_poliza.Substring(0, 3);
-                    txtNumero_Poliza.Text = ObjPoliza.Numero_poliza.Substring(3, 4);
+                    txtNumero_Poliza.Text = ObjPoliza.Numero_poliza.Substring(3);
 
                     DateTime fecha = Convert.ToDateTime(txtFecha.Text);
                     //string Ini = fecha.ToString("MM");
@@ -1777,6 +1791,7 @@ namespace SAF.Form
             lblNumCheque.Visible = false;
             lblTotCheque.Visible = false;
             lblNumPolizaCFDI.Text = string.Empty;
+            lblMsjOficios.Text = string.Empty;
             //lblTotAbonoPol.Text = string.Empty;
             LinkButton cbi = (LinkButton)(sender);
             GridViewRow row = (GridViewRow)cbi.NamingContainer;
@@ -1869,6 +1884,15 @@ namespace SAF.Form
                         Session["PolizaOficios"] = lstPolizaOficios;
                         CargarGridPolizaOficios(lstPolizaOficios);
                     }
+
+                    if (grvPolizas.SelectedRow.Cells[16].Text == "S")
+                        bttnAgregarOficio.Visible = true; //bttnAgregaFactura.Visible = true;
+                    else
+                    {
+                        lblMsjOficios.Text = "MES CERRADO, NO SE PUEDEN AGREGAR MÁS DOCUMENTOS";
+                        bttnAgregarOficio.Visible = false; //bttnAgregaFactura.Visible = false;
+                    }
+
 
                     txtOficio.Text = string.Empty;
                     txtFechaOficio.Text = string.Empty;

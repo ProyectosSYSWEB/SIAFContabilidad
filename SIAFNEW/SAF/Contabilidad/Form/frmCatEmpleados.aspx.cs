@@ -21,6 +21,10 @@ namespace SAF.Contabilidad.Form
         protected void Page_Load(object sender, EventArgs e)
         {
             SesionUsu = (Sesion)Session["Usuario"];
+            //if (!IsPostBack)
+            //    inicializar();
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "Grid", "Empleados();", true);
         }
 
         protected void linkBttnBuscarEmpleado_Click(object sender, EventArgs e)
@@ -57,6 +61,7 @@ namespace SAF.Contabilidad.Form
                 objEmpleado.Nombre = txtNombre.Text.ToUpper();
                 objEmpleado.Paterno = txtPaterno.Text.ToUpper();
                 objEmpleado.Materno = txtMaterno.Text.ToUpper();
+                objEmpleado.Tipo_Personal = ddlTipoPersonal.SelectedValue;
                 CNEmpleado.ConsultarEmpleados(objEmpleado, ref ListEmpleados);
                 return ListEmpleados;
             }

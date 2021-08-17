@@ -26,6 +26,10 @@ namespace SAF.Contabilidad.Form
             {
                 Inicializar();
             }
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridCuentas", "Ctas_Bancarias();", true);
+
+            
         }
 
         #region <Funciones y Sub>
@@ -64,7 +68,7 @@ namespace SAF.Contabilidad.Form
                 List<Cuentas_Bancarias> List = new List<Cuentas_Bancarias>();
                 ObjCuentas_Bancarias.Ejercicio = Convert.ToInt32(SesionUsu.Usu_Ejercicio);
                 ObjCuentas_Bancarias.Centro_Contable = ddlCentros_Contables0.SelectedValue;
-                ObjCuentas_Bancarias.Cuenta_Bancaria = txtBuscar.Text.ToUpper();
+                ObjCuentas_Bancarias.Cuenta_Bancaria = string.Empty; //txtBuscar.Text.ToUpper();
                 CNCuentas_Bancarias.Cuentas_BancariasConsultaGrid(ref ObjCuentas_Bancarias, ref List);
                 return List;
             }
@@ -256,5 +260,22 @@ namespace SAF.Contabilidad.Form
             CargarGrid();
 
         }
+
+        protected void ddlEjercicio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                //if(SesionUsu.Editar==0||SesionUsu.Editar==1)
+                CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cuentas_Contables_N4", ref ddlCuentas_Contables, "p_ejercicio", "p_centro_contable", ddlEjercicio.SelectedValue, Convert.ToString(ddlCentros_Contables.SelectedValue));
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+            }
+        }
+
+      
     }
 }
