@@ -15,7 +15,7 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>--%>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col text-center">
                 <asp:UpdateProgress ID="UpdateProgress5" runat="server" AssociatedUpdatePanelID="UpdatePanel11">
@@ -28,15 +28,38 @@
             </div>
         </div>
         <div class="row">
+            <div class="col text-center">
+                <asp:UpdateProgress ID="updPgr12" runat="server" AssociatedUpdatePanelID="UpdatePanel2">
+                    <ProgressTemplate>
+                        <asp:Image ID="img12" runat="server" Height="50px" ImageUrl="~/images/ajax_loader_gray_512.gif"
+                            Width="50px" AlternateText="Espere un momento, por favor.."
+                            ToolTip="Espere un momento, por favor.." />
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-2">
                 Centro Contable
             </div>
-            <div class="col-md-10">
+            <div class="col-md-6">
                 <asp:UpdatePanel ID="UpdatePanel11" runat="server">
                     <ContentTemplate>
                         <asp:DropDownList ID="DDLCentro_Contable" runat="server" Width="100%"
                             AutoPostBack="True"
                             OnSelectedIndexChanged="DDLCentro_Contable_SelectedIndexChanged">
+                        </asp:DropDownList>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>        
+            <div class="col-md-1">
+                Filtro
+            </div>
+            <div class="col-md-3">
+                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                    <ContentTemplate>
+                        <asp:DropDownList ID="DDLFiltro" runat="server" Width="100%"
+                            AutoPostBack="True" OnSelectedIndexChanged="DDLFiltro_SelectedIndexChanged">
                         </asp:DropDownList>
                     </ContentTemplate>
                 </asp:UpdatePanel>

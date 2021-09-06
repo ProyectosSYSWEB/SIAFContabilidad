@@ -853,6 +853,18 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void MonitorGrupo(string Usuario, string Sistema, string Centro_Contable, string Grupo, ref List<Comun> List)
+        {
+            try
+            {
+                CD_Comun CDMonitor = new CD_Comun();
+                CDMonitor.MonitorGrupo(Usuario, Sistema, Centro_Contable, Grupo, ref List);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void Monitor_Patrimonio(string Centro_Contable, ref List<Comun> List)
         {
             try

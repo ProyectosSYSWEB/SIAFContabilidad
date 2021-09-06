@@ -908,6 +908,36 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        public void MonitorGrupo(string Usuario, string Sistema, string Centro_Contable, string Grupo, ref List<Comun> List)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+                OracleDataReader dr = null;
+
+                String[] Parametros = { "p_usuario", "p_id_sistema", "p_centro_contable", "p_grupo" };
+                String[] Valores = { Usuario, Sistema, Centro_Contable, Grupo };
+
+                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Monitor_Grupo", ref dr, Parametros, Valores);
+                while (dr.Read())
+                {
+                    Comun objMonitor = new Comun();
+                    objMonitor.Descripcion = Convert.ToString(dr.GetValue(1));
+                    List.Add(objMonitor);
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+
         public void Monitor_Patrimonio(string Centro_Contable, ref List<Comun> List)
         {
             CD_Datos CDDatos = new CD_Datos();

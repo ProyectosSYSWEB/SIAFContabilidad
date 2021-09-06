@@ -4,6 +4,8 @@
 
     <link href="https://sysweb.unach.mx/INGRESOS/Scripts/select2/css/select2.min.css" type="text/css" rel="stylesheet" />
     <script src="https://sysweb.unach.mx/INGRESOS/Scripts/select2/js/select2.min.js"></script>
+    <script src="../../Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <link href="../../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
 
 
     <style type="text/css">
@@ -61,6 +63,7 @@
             height: 320px;
             overflow: auto;
         }
+
         .auto-style1 {
             margin-bottom: 12;
         }
@@ -298,15 +301,15 @@
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
 
-                                    <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server"
+                                    <asp:RequiredFieldValidator ID="reqNuevo" runat="server"
                                         ControlToValidate="DDLCentro_Contable" ErrorMessage="*Requerido"
-                                        InitialValue="00000" ValidationGroup="Nuevo"></asp:RequiredFieldValidator>--%>
+                                        InitialValue="00000" ValidationGroup="Nuevo"></asp:RequiredFieldValidator>
                                 </div>
                                 <div class="col-sm-1 col-sm-1 text-right">
                                     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                         <ContentTemplate>
-                                            <%--<asp:LinkButton ID="linkBttnNuevo" runat="server" CssClass="btn btn-mdb-color" OnClick="linkBttnNuevo_Click"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo</asp:LinkButton>--%>
-                                            <asp:ImageButton ID="btnNuevo" runat="server" ImageUrl="http://sysweb.unach.mx/resources/imagenes/nuevo.png" OnClick="btnNuevo_Click" title="Nuevo" ValidationGroup="Nuevo" />
+                                            <asp:LinkButton ID="linkBttnNuevo" runat="server" CssClass="btn btn-mdb-color" OnClick="linkBttnNuevo_Click" ValidationGroup="Nuevo"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo</asp:LinkButton>
+                                            <%--<asp:ImageButton ID="btnNuevo" runat="server" ImageUrl="http://sysweb.unach.mx/resources/imagenes/nuevo.png" OnClick="btnNuevo_Click" title="Nuevo" ValidationGroup="Nuevo" />--%>
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
                                 </div>
@@ -490,7 +493,7 @@
                                         <div class="input-group-prepend">
                                             <asp:UpdatePanel ID="UpdatePanel9" runat="server">
                                                 <ContentTemplate>
-                                                    <asp:LinkButton ID="linkBttnBuscar" runat="server" OnClick="linkBttnBuscar_Click" CssClass="btn btn-primary" ValidationGroup="Nuevo"><i class="fa fa-search" aria-hidden="true"></i> Buscar</asp:LinkButton>
+                                                    <asp:LinkButton ID="linkBttnBuscar" runat="server" OnClick="linkBttnBuscar_Click" CssClass="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> Ver Pólizas</asp:LinkButton>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </div>
@@ -558,100 +561,97 @@
                     <ContentTemplate>
                         <asp:MultiView ID="MultiView1" runat="server">
                             <asp:View ID="View1" runat="server">
-                                <div class="container-fluid">
-                                    <%--<div class="row enc">
-                                        <div class="col text-right">
-                                            <asp:LinkButton ID="linkBttnNuevo" runat="server" CssClass="btn btn-mdb-color" OnClick="linkBttnNuevo_Click"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo</asp:LinkButton>
-                                            </div>
-                                         </div>--%>
-                                    <div class="scroll_monitor">
-                                        <div class="row">
-                                            <div class="col">
-                                                <asp:GridView ID="grvPolizas" runat="server" AllowPaging="True" AutoGenerateColumns="False" BorderStyle="None" BorderWidth="1px" CellPadding="4" CssClass="mGrid" EmptyDataText="No hay registros para mostrar" GridLines="Vertical" OnPageIndexChanging="grvPolizas_PageIndexChanging" OnRowDeleting="grvPolizas_RowDeleting" OnSelectedIndexChanged="grvPolizas_SelectedIndexChanged" PageSize="25" Width="100%" ShowHeaderWhenEmpty="True">
-                                                    <Columns>
-                                                        <asp:BoundField DataField="IdPoliza" />
-                                                        <asp:BoundField DataField="CENTRO_CONTABLE" HeaderText="CENTRO CONTABLE" />
-                                                        <asp:BoundField DataField="NUMERO_POLIZA" HeaderText="# PÓLIZA" />
-                                                        <asp:BoundField DataField="Cedula_numero" HeaderText="# CEDULA" />
-                                                        <asp:BoundField DataField="TIPO" HeaderText="TIPO" />
-                                                        <asp:BoundField DataField="FECHA" DataFormatString="{0:d}" HeaderText="FECHA" />
-                                                        <asp:BoundField DataField="STATUS" HeaderText="STATUS" />
-                                                        <asp:BoundField DataField="CONCEPTO" HeaderText="CONCEPTO" />
-                                                        <asp:BoundField DataField="TOT_CARGO" DataFormatString="{0:c}" HeaderText="CARGO">
-                                                            <HeaderStyle HorizontalAlign="Right" />
-                                                            <ItemStyle HorizontalAlign="Right" />
-                                                        </asp:BoundField>
-                                                        <asp:BoundField DataField="TOT_ABONO" DataFormatString="{0:c}" HeaderText="ABONO">
-                                                            <HeaderStyle HorizontalAlign="Right" />
-                                                            <ItemStyle HorizontalAlign="Right" />
-                                                        </asp:BoundField>
-                                                        <asp:TemplateField>
-                                                            <ItemTemplate>
-                                                                <asp:LinkButton ID="linkBttnEditar" runat="server" CommandName="Select" Visible='<%# Bind("Opcion_Modificar") %>' CssClass="btn_grid btn-mdb-color">Editar</asp:LinkButton>
-                                                                <asp:LinkButton ID="lblEditar" runat="server" Visible='<%# Bind("Opcion_Modificar2") %>' CssClass="btn_grid btn-secondary btn_grid-lg disabled">Editar</asp:LinkButton>
-                                                                <%--<asp:Label ID="lblEditar" runat="server" ForeColor="#6B696B" Text="Editar" Visible='<%# Bind("Opcion_Modificar2") %>' CssClass="btn btn-blue-grey"></asp:Label>--%>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-                                                        <asp:TemplateField>
-                                                            <ItemTemplate>
-                                                                <asp:LinkButton ID="linkBttnEliminar" runat="server" CssClass="btn_grid btn-mdb-color" CommandName="Delete" OnClientClick="return confirm('¿Desea eliminar la Póliza?');" Visible='<%# Bind("Opcion_Eliminar") %>'>Borrar</asp:LinkButton>
-                                                                <asp:LinkButton ID="lblEliminar" runat="server" Visible='<%# Bind("Opcion_Eliminar2") %>' CssClass="btn_grid btn-secondary btn-lg disabled">Borrar</asp:LinkButton>
-                                                                <%--<asp:Label ID="lblEliminar" runat="server" ForeColor="#6B696B" Text="Borrar" Visible='<%# Bind("Opcion_Eliminar2") %>' CssClass="btn btn-blue-grey"></asp:Label>--%>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-                                                        <asp:TemplateField>
-                                                            <ItemTemplate>
-                                                                <asp:LinkButton ID="linkBttnImprimir" runat="server" OnClick="linkBttnImprimir_Click" CssClass="btn_grid btn-mdb-color">Imprimir</asp:LinkButton>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-                                                        <asp:TemplateField>
-                                                            <ItemTemplate>
-                                                                <asp:LinkButton ID="linkBttnCopiar" runat="server" CssClass="btn_grid btn-mdb-color" OnClick="linkBttnCopiar_Click" ToolTip="Permite clonar una Póliza" Visible='<%# Bind("Opcion_Copiar") %>'>Copiar</asp:LinkButton>
-                                                                <asp:LinkButton ID="lblCopiar" runat="server" Visible='<%# Bind("Opcion_Copiar2") %>' CssClass="btn_grid btn-secondary btn-lg disabled">Copiar</asp:LinkButton>
-                                                                <%--<asp:Label ID="lblCopiar" runat="server" ForeColor="#6B696B" Text="Copiar" Visible='<%# Bind("Opcion_Copiar2") %>' CssClass="btn btn-secondary btn-lg disabled"></asp:Label>--%>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-                                                        <asp:TemplateField>
-                                                            <ItemTemplate>
-                                                                <asp:LinkButton ID="linkBttnCFDI" runat="server" Visible='<%# Bind("Opcion_CFDI") %>' CssClass="btn_grid btn-mdb-color" Width="75px" OnClick="linkBttnCFDI_Click"><%# Eval("Desc_Tipo_Documento") %></asp:LinkButton>
-                                                                <asp:LinkButton ID="linkBttnCFDI2" runat="server" Visible='<%# Bind("Opcion_CFDI2") %>' CssClass="btn_grid btn-secondary disabled" Width="75px">S/N</asp:LinkButton>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-                                                        <asp:TemplateField>
-                                                            <ItemTemplate>
-                                                                <asp:Image ID="imgCFDI" runat="server" ImageUrl="~/images/Activo.PNG" Visible='<%# Bind("Tiene_CFDI") %>' />
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-                                                        <asp:BoundField DataField="Mes_Cerrado" />
-                                                        <asp:BoundField DataField="Mes_anio" />
-                                                        <asp:BoundField DataField="Cheque_numero" />
-                                                        <asp:BoundField DataField="Cheque_importe" />
-                                                        <asp:BoundField DataField="Tipo_Documento" />
-                                                    </Columns>
-                                                    <EmptyDataRowStyle ForeColor="#CC9900" />
-                                                    <FooterStyle CssClass="enc" />
-                                                    <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                    <SelectedRowStyle CssClass="sel" />
-                                                    <HeaderStyle CssClass="enc" />
-                                                    <AlternatingRowStyle CssClass="alt" />
-                                                </asp:GridView>
-                                                <%--<asp:HiddenField ID="hddnModalOficios" runat="server" />--%>
-                                                <asp:HiddenField ID="hddnModalCopia" runat="server" />
-                                                <%--<ajaxToolkit:ModalPopupExtender ID="modalOficios" runat="server" TargetControlID="hddnModalOficios" BackgroundCssClass="modalBackground_Proy" PopupControlID="pnlOficios" CancelControlID="bttnSalirModal"></ajaxToolkit:ModalPopupExtender>--%>
-                                                <ajaxToolkit:ModalPopupExtender ID="modalCopia" runat="server" TargetControlID="hddnModalCopia" BackgroundCssClass="modalBackground_Proy" PopupControlID="pnlCopiaPoliza" CancelControlID="btnCancelarCopia"></ajaxToolkit:ModalPopupExtender>
-                                            </div>
-                                        </div>
+                                <div class="row alert alert-danger" runat="server" id="divErrorTot" visible="false">
+                                    <div class="col">La consulta excede los 2000 registros, favor de realizar filtros para un correcto funcionamiento.</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <asp:GridView ID="grvPolizas" runat="server" AutoGenerateColumns="False" BorderStyle="None" BorderWidth="1px" CellPadding="4" CssClass="mGrid" EmptyDataText="No hay registros para mostrar" GridLines="Vertical" OnPageIndexChanging="grvPolizas_PageIndexChanging" OnRowDeleting="grvPolizas_RowDeleting" OnSelectedIndexChanged="grvPolizas_SelectedIndexChanged" PageSize="25" Width="100%" ShowHeaderWhenEmpty="True">
+                                            <Columns>
+                                                <asp:BoundField DataField="IdPoliza" />
+                                                <asp:BoundField DataField="CENTRO_CONTABLE" HeaderText="CENTRO CONTABLE" />
+                                                <asp:BoundField DataField="NUMERO_POLIZA" HeaderText="# PÓLIZA" />
+                                                <asp:BoundField DataField="Cedula_numero" HeaderText="# CEDULA" />
+                                                <asp:BoundField DataField="TIPO" HeaderText="TIPO" />
+                                                <asp:BoundField DataField="FECHA" DataFormatString="{0:d}" HeaderText="FECHA" />
+                                                <asp:BoundField DataField="STATUS" HeaderText="STATUS">
+                                                    <ItemStyle Width="10%" />
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="CONCEPTO" HeaderText="CONCEPTO">
+                                                    <HeaderStyle Width="85%" />
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="TOT_CARGO" DataFormatString="{0:c}" HeaderText="CARGO">
+                                                    <HeaderStyle HorizontalAlign="Right" />
+                                                    <ItemStyle HorizontalAlign="Right" />
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="TOT_ABONO" DataFormatString="{0:c}" HeaderText="ABONO">
+                                                    <HeaderStyle HorizontalAlign="Right" />
+                                                    <ItemStyle HorizontalAlign="Right" />
+                                                </asp:BoundField>
+                                                <asp:TemplateField>
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="linkBttnEditar" runat="server" CommandName="Select" Visible='<%# Bind("Opcion_Modificar") %>' CssClass="btn_grid btn-mdb-color" Width="100%">Editar</asp:LinkButton>
+                                                        <asp:LinkButton ID="lblEditar" runat="server" Visible='<%# Bind("Opcion_Modificar2") %>' CssClass="btn_grid btn-secondary btn_grid-lg disabled" Width="100%">Editar</asp:LinkButton>
+                                                        <%--<asp:Label ID="lblEditar" runat="server" ForeColor="#6B696B" Text="Editar" Visible='<%# Bind("Opcion_Modificar2") %>' CssClass="btn btn-blue-grey"></asp:Label>--%>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField>
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="linkBttnEliminar" runat="server" CssClass="btn_grid btn-mdb-color" CommandName="Delete" Width="100%" OnClientClick="return confirm('¿Desea eliminar la Póliza?');" Visible='<%# Bind("Opcion_Eliminar") %>'>Borrar</asp:LinkButton>
+                                                        <asp:LinkButton ID="lblEliminar" runat="server" Visible='<%# Bind("Opcion_Eliminar2") %>' Width="100%" CssClass="btn_grid btn-secondary btn-lg disabled">Borrar</asp:LinkButton>
+                                                        <%--<asp:Label ID="lblEliminar" runat="server" ForeColor="#6B696B" Text="Borrar" Visible='<%# Bind("Opcion_Eliminar2") %>' CssClass="btn btn-blue-grey"></asp:Label>--%>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField>
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="linkBttnImprimir" runat="server" OnClick="linkBttnImprimir_Click" Width="100%" CssClass="btn_grid btn-mdb-color">Imprimir</asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField>
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="linkBttnCopiar" runat="server" CssClass="btn_grid btn-mdb-color" Width="100%" OnClick="linkBttnCopiar_Click" ToolTip="Permite clonar una Póliza" Visible='<%# Bind("Opcion_Copiar") %>'>Copiar</asp:LinkButton>
+                                                        <asp:LinkButton ID="lblCopiar" runat="server" Visible='<%# Bind("Opcion_Copiar2") %>' Width="100%" CssClass="btn_grid btn-secondary btn-lg disabled">Copiar</asp:LinkButton>
+                                                        <%--<asp:Label ID="lblCopiar" runat="server" ForeColor="#6B696B" Text="Copiar" Visible='<%# Bind("Opcion_Copiar2") %>' CssClass="btn btn-secondary btn-lg disabled"></asp:Label>--%>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField>
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="linkBttnCFDI" runat="server" Visible='<%# Bind("Opcion_CFDI") %>' Width="100%" CssClass="btn_grid btn-mdb-color" OnClick="linkBttnCFDI_Click"><%# Eval("Desc_Tipo_Documento") %></asp:LinkButton>
+                                                        <asp:LinkButton ID="linkBttnCFDI2" runat="server" Visible='<%# Bind("Opcion_CFDI2") %>' Width="100%" CssClass="btn_grid btn-secondary disabled">S/N</asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField>
+                                                    <ItemTemplate>
+                                                        <asp:Image ID="imgCFDI" runat="server" ImageUrl="~/images/Activo.PNG" Visible='<%# Bind("Tiene_CFDI") %>' />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:BoundField DataField="Mes_Cerrado" />
+                                                <asp:BoundField DataField="Mes_anio" />
+                                                <asp:BoundField DataField="Cheque_numero" />
+                                                <asp:BoundField DataField="Cheque_importe" />
+                                                <asp:BoundField DataField="Tipo_Documento" />
+                                            </Columns>
+                                            <FooterStyle CssClass="enc" />
+                                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                            <SelectedRowStyle CssClass="sel" />
+                                            <HeaderStyle CssClass="enc" />
+                                            <AlternatingRowStyle CssClass="alt" />
+                                        </asp:GridView>
+                                        <%--<asp:HiddenField ID="hddnModalOficios" runat="server" />--%>
+                                        <asp:HiddenField ID="hddnModalCopia" runat="server" />
+                                        <%--<ajaxToolkit:ModalPopupExtender ID="modalOficios" runat="server" TargetControlID="hddnModalOficios" BackgroundCssClass="modalBackground_Proy" PopupControlID="pnlOficios" CancelControlID="bttnSalirModal"></ajaxToolkit:ModalPopupExtender>--%>
+                                        <ajaxToolkit:ModalPopupExtender ID="modalCopia" runat="server" TargetControlID="hddnModalCopia" BackgroundCssClass="modalBackground_Proy" PopupControlID="pnlCopiaPoliza" CancelControlID="btnCancelarCopia"></ajaxToolkit:ModalPopupExtender>
                                     </div>
-                                    <div class="row">
-                                        <div class="col text-right">
-                                            <asp:ImageButton ID="ImageButton1" runat="server"
-                                                ImageUrl="http://sysweb.unach.mx/resources/imagenes/pdf.png" OnClick="imgBttnPdf" title="Reporte PDF" />
-                                            &nbsp;<asp:ImageButton ID="ImageButton4" runat="server"
-                                                ImageUrl="http://sysweb.unach.mx/resources/imagenes/pdf2.png" OnClick="ImageButton4_Click" title="Reporte/Lote" ValidationGroup="RepLotes" />
-                                            &nbsp;<asp:ImageButton ID="ImageButton3" runat="server"
-                                                ImageUrl="http://sysweb.unach.mx/resources/imagenes/excel.png" OnClick="imgBttnExcel" title="Reporte Excel" />
-                                            &nbsp;<asp:ImageButton ID="imgBttnExcelLotes" runat="server" ImageUrl="http://sysweb.unach.mx/resources/imagenes/EXCEL2.png" OnClick="imgBttnExcelLotes_Click" title="Reporte Excel" ValidationGroup="RepLotes" />
-                                        </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-right">
+                                        <asp:ImageButton ID="ImageButton1" runat="server"
+                                            ImageUrl="http://sysweb.unach.mx/resources/imagenes/pdf.png" OnClick="imgBttnPdf" title="Reporte PDF" />
+                                        &nbsp;<asp:ImageButton ID="ImageButton4" runat="server"
+                                            ImageUrl="http://sysweb.unach.mx/resources/imagenes/pdf2.png" OnClick="ImageButton4_Click" title="Reporte/Lote" ValidationGroup="RepLotes" />
+                                        &nbsp;<asp:ImageButton ID="ImageButton3" runat="server"
+                                            ImageUrl="http://sysweb.unach.mx/resources/imagenes/excel.png" OnClick="imgBttnExcel" title="Reporte Excel" />
+                                        &nbsp;<asp:ImageButton ID="imgBttnExcelLotes" runat="server" ImageUrl="http://sysweb.unach.mx/resources/imagenes/EXCEL2.png" OnClick="imgBttnExcelLotes_Click" title="Reporte Excel" ValidationGroup="RepLotes" />
                                     </div>
                                 </div>
                                 <asp:Panel ID="pnlCopiaPoliza" runat="server" CssClass="TituloModalPopupMsg">
@@ -1125,7 +1125,7 @@
                                                             </div>
                                                             <div class="row" style="height: 500px; overflow-y: scroll;">
                                                                 <div class="col">
-                                                                    <asp:GridView ID="grvPolizas_Detalle" runat="server" AutoGenerateColumns="False" CssClass="mGrid table table-striped" OnRowCancelingEdit="grvPolizas_Detalle_RowCancelingEdit" OnRowDeleting="grvPolizas_Detalle_RowDeleting" OnRowEditing="grvPolizas_Detalle_RowEditing" OnRowUpdating="EditaRegistro" OnSelectedIndexChanged="grvPolizas_Detalle_SelectedIndexChanged" Width="100%">
+                                                                    <asp:GridView ID="grvPolizas_Detalle" runat="server" AutoGenerateColumns="False" CssClass="mGrid" OnRowCancelingEdit="grvPolizas_Detalle_RowCancelingEdit" OnRowDeleting="grvPolizas_Detalle_RowDeleting" OnRowEditing="grvPolizas_Detalle_RowEditing" OnRowUpdating="EditaRegistro" OnSelectedIndexChanged="grvPolizas_Detalle_SelectedIndexChanged" Width="100%">
                                                                         <AlternatingRowStyle CssClass="alt" />
                                                                         <Columns>
                                                                             <asp:BoundField DataField="IdCuenta_Contable" HeaderText="IdCuenta_Contable" ReadOnly="True" />
@@ -1626,9 +1626,9 @@
                                                                                     <asp:CommandField ShowSelectButton="True" />
                                                                                 </Columns>
                                                                                 <FooterStyle CssClass="enc" />
-                                                                            <HeaderStyle CssClass="enc" />
-                                                                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                                            <SelectedRowStyle CssClass="sel" />
+                                                                                <HeaderStyle CssClass="enc" />
+                                                                                <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                                                <SelectedRowStyle CssClass="sel" />
                                                                             </asp:GridView>
                                                                         </ContentTemplate>
                                                                     </asp:UpdatePanel>
@@ -1760,8 +1760,8 @@
     </div>
 
     <script type="text/javascript">
-        function Autocomplete() {
-            $(".select2").select2();
+        function FiltCtasContables() {
+            $('#<%= DDLCentro_Contable.ClientID %>').select2();
         };
 
         function msg() {
@@ -1773,7 +1773,25 @@
                     return false;
                 }
             });
-        }
+        };
+
+        function Polizas() {
+            //$('input[type=search]').val('');
+            $('#<%= grvPolizas.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvPolizas.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": true
+            });
+        };
+
+        function DetallePoliza() {
+            //$('input[type=search]').val('');
+            $('#<%= grvPolizas_Detalle.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvPolizas_Detalle.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": true,
+                "ordering": false
+            });
+        };
+
 
     </script>
 </asp:Content>

@@ -60,6 +60,15 @@ namespace SAF.Form
         protected global::System.Web.UI.WebControls.DropDownList DDLCentro_Contable;
 
         /// <summary>
+        /// Control reqNuevo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqNuevo;
+
+        /// <summary>
         /// Control UpdatePanel2.
         /// </summary>
         /// <remarks>
@@ -69,13 +78,13 @@ namespace SAF.Form
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
 
         /// <summary>
-        /// Control btnNuevo.
+        /// Control linkBttnNuevo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnNuevo;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnNuevo;
 
         /// <summary>
         /// Control filaFechas.
@@ -436,6 +445,15 @@ namespace SAF.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.View View1;
+
+        /// <summary>
+        /// Control divErrorTot.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divErrorTot;
 
         /// <summary>
         /// Control grvPolizas.

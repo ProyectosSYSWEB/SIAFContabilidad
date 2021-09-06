@@ -9,7 +9,7 @@ using CapaEntidad;
 using CapaNegocio;
 
 namespace SAF.Rep
-{      
+{
     public partial class FRMCuentas_contables : System.Web.UI.Page
     {
 
@@ -25,8 +25,8 @@ namespace SAF.Rep
         private static List<Comun> ListConceptos = new List<Comun>();
         private static List<Comun> Listcodigo = new List<Comun>(); //En tu declaración de variables
         int guar_continue;
-       
-        #endregion      
+
+        #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
             SesionUsu = (Sesion)Session["Usuario"];
@@ -35,8 +35,14 @@ namespace SAF.Rep
                 //SesionUsu.Editar = -1;
                 inicializar();
                 cargarcombos();
-                
+                DDLCentro_Contable_SelectedIndexChanged1(null, null);
+                ScriptManager.RegisterStartupScript(this, GetType(), "Grid", "CuentasContablesInicio();", true);
             }
+            else
+                ScriptManager.RegisterStartupScript(this, GetType(), "Grid", "CuentasContables();", true);
+
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridPolizas", "Polizas();", true);
         }
         private void CargarGrid()
         {
@@ -49,14 +55,14 @@ namespace SAF.Rep
                 grdcuentas_contables.DataBind();
                 if (SesionUsu.Usu_TipoUsu == "2" || SesionUsu.Usu_TipoUsu == "3")
                 {
-                  
+
                 }
                 else
                 {
                     Celdas = new Int32[] { 5, 6, 7 };
                 }
 
-                
+
                 if (grdcuentas_contables.Rows.Count > 0)
                     CNComun.HideColumns(grdcuentas_contables, Celdas);
 
@@ -66,6 +72,21 @@ namespace SAF.Rep
                 lblError.Text = ex.Message;
             }
         }
+        private void CargarGridCOG()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                grdCatCOG.DataSource = dt;
+                grdCatCOG.DataSource = GetListCOG();
+                grdCatCOG.DataBind();
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = ex.Message;
+            }
+        }
+
         private List<cuentas_contables> GetList()
         {
             try
@@ -74,8 +95,9 @@ namespace SAF.Rep
 
                 Objcuentas_contables.ejercicio = SesionUsu.Usu_Ejercicio;
                 Objcuentas_contables.centro_contable = DDLCentro_Contable.SelectedValue;
-                Objcuentas_contables.cuenta_mayor = ddlCuenta_Mayor.SelectedValue;              
-                CNcuentas_contables.ConsultarCuentas_contables(ref Objcuentas_contables,TXTbuscar.Text, ref List);
+                Objcuentas_contables.cuenta_mayor = ddlCuenta_Mayor.SelectedValue;
+                //CNcuentas_contables.ConsultarCuentas_contables(ref Objcuentas_contables,TXTbuscar.Text, ref List);
+                CNcuentas_contables.ConsultarCuentas_contables(ref Objcuentas_contables, "", ref List);
 
                 return List;
             }
@@ -84,6 +106,21 @@ namespace SAF.Rep
                 throw new Exception(ex.Message);
             }
         }
+        private List<cuentas_contables> GetListCOG()
+        {
+            try
+            {
+                List<cuentas_contables> List = new List<cuentas_contables>();
+                CNcuentas_contables.ConsultarCatCOG(ref List);
+
+                return List;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         protected void inicializar()
         {
             BTN_continuar.Visible = false;
@@ -95,17 +132,17 @@ namespace SAF.Rep
             Label15.Visible = false;
             DDLSubdependencia.Visible = false;
             CargarGrid();
-           
+
 
         }
 
         protected void cargarcombos()
         {
-            CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref DDLCentro_Contable, "P_USUARIO","p_ejercicio", SesionUsu.Usu_Nombre, SesionUsu.Usu_Ejercicio );
+            CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref DDLCentro_Contable, "P_USUARIO", "p_ejercicio", SesionUsu.Usu_Nombre, SesionUsu.Usu_Ejercicio);
             //CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref DDLCentro_Contable);
             CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cuentas_Mayor", ref ddlCuenta_Mayor, ref Listcodigo);
-            
-                
+
+
         }
 
         protected void ddlCuentas_Contables_SelectedIndexChanged(object sender, EventArgs e)
@@ -118,7 +155,7 @@ namespace SAF.Rep
 
         }
 
-      
+
 
         protected void DDLCentro_Contable_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -128,8 +165,8 @@ namespace SAF.Rep
             }
 
 
-            txtcuenta_contable.Text =Listcodigo[ddlCuenta_Mayor.SelectedIndex].EtiquetaDos + ".00000.00000.00000";
-            txtdescripcion.Text = Listcodigo[ddlCuenta_Mayor.SelectedIndex].EtiquetaTres; 
+            txtcuenta_contable.Text = Listcodigo[ddlCuenta_Mayor.SelectedIndex].EtiquetaDos + ".00000.00000.00000";
+            txtdescripcion.Text = Listcodigo[ddlCuenta_Mayor.SelectedIndex].EtiquetaTres;
         }
 
         //protected void grdcuentas_contables_SelectedIndexChanged(object sender, EventArgs e)
@@ -191,26 +228,26 @@ namespace SAF.Rep
             Label15.Visible = false;
             DDLSubdependencia.Visible = false;
             DDLCentro_Contable.Enabled = true;
-            ddlCuenta_Mayor.Enabled = true ;
+            ddlCuenta_Mayor.Enabled = true;
         }
         private void GuardarDatos()
         {
-            txtcuenta_contable.Text = txt1.Text + "." + txt2.Text + "." + txt3.Text + "." + txt4.Text ;
+            txtcuenta_contable.Text = txt1.Text + "." + txt2.Text + "." + txt3.Text + "." + txt4.Text;
             lblError.Text = string.Empty;
-           // Objcuentas_contables.id  = grdcuentas_contables.Rows[grdcuentas_contables.SelectedIndex].Cells[0].Text;
+            // Objcuentas_contables.id  = grdcuentas_contables.Rows[grdcuentas_contables.SelectedIndex].Cells[0].Text;
             Objcuentas_contables = new cuentas_contables();
             Objcuentas_contables.ejercicio = SesionUsu.Usu_Ejercicio;
             Objcuentas_contables.centro_contable = DDLCentro_Contable.SelectedValue;
-            Objcuentas_contables.cuenta_contable = txtcuenta_contable.Text ;
+            Objcuentas_contables.cuenta_contable = txtcuenta_contable.Text;
             Objcuentas_contables.descripcion = txtdescripcion.Text;
             Objcuentas_contables.tipo = txttipo.SelectedValue;
             Objcuentas_contables.clasificacion = ddlclasificacion.SelectedValue;
             Objcuentas_contables.nivel = ddlnivel.SelectedValue;
             Objcuentas_contables.status = ddlstatus.SelectedValue;
             Objcuentas_contables.usuario = SesionUsu.Usu_Nombre;
-            Objcuentas_contables.cuenta_mayor = ddlCuenta_Mayor.SelectedValue.ToString();   
-  
-            
+            Objcuentas_contables.cuenta_mayor = ddlCuenta_Mayor.SelectedValue.ToString();
+
+
             try
             {
 
@@ -220,7 +257,7 @@ namespace SAF.Rep
                     CNcuentas_contables.insertar_cuenta_contable(ref Objcuentas_contables, ref Verificador);
 
                     ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "confirmacion();", true);
-                   
+
 
                 }
                 else
@@ -243,7 +280,7 @@ namespace SAF.Rep
                     else
                     {
                         lblError.Text = "Se agrego correctamente el registro";
-                        
+
                     }
 
                 }
@@ -260,12 +297,12 @@ namespace SAF.Rep
             lblError.Text = string.Empty;
             CargarGrid();
         }
-       
+
         protected void BTNver_reporte_Click(object sender, ImageClickEventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "VerCatalogo_Cuentas('RP-003'," + SesionUsu.Usu_Ejercicio + ",'" + Convert.ToString(DDLCentro_Contable.SelectedValue) + "','" + ddlCuenta_Mayor.SelectedValue + "');", true);
-           
-      
+
+
         }
 
         protected void DDLCentro_Contable_SelectedIndexChanged1(object sender, EventArgs e)
@@ -277,25 +314,25 @@ namespace SAF.Rep
         }
 
 
-         protected void index_linbtn(object sender)
+        protected void index_linbtn(object sender)
         {
             LinkButton cbi = (LinkButton)(sender);
             GridViewRow row = (GridViewRow)cbi.NamingContainer;
             grdcuentas_contables.SelectedIndex = row.RowIndex;
-             Objcuentas_contables.id = grdcuentas_contables.SelectedRow.Cells[0].Text;
-            
+            Objcuentas_contables.id = grdcuentas_contables.SelectedRow.Cells[0].Text;
+
         }
 
         protected void LinkButton1_Click(object sender, EventArgs e)
-        {           
+        {
             try
             {
                 lblError.Text = string.Empty;
                 index_linbtn(sender);
-                Objcuentas_contables.id = grdcuentas_contables.SelectedRow.Cells[0].Text;            
-                Verificador = string.Empty;       
+                Objcuentas_contables.id = grdcuentas_contables.SelectedRow.Cells[0].Text;
+                Verificador = string.Empty;
                 CNcuentas_contables.Eliminar_cuenta_contable(ref Objcuentas_contables, ref Verificador);
-                
+
                 if (Verificador != "0")
                 {
                     lblError.Text = Verificador;
@@ -314,8 +351,8 @@ namespace SAF.Rep
             {
                 lblError.Text = ex.Message;
             }
-       
-        
+
+
 
 
         }
@@ -328,19 +365,19 @@ namespace SAF.Rep
 
             index_linbtn(sender);
             SesionUsu.Editar = 0;
-           
+
             MultiViewcuentas_contables.ActiveViewIndex = 0;
-            int nivel_cuenta= Convert.ToInt32( grdcuentas_contables.SelectedRow.Cells[4].Text) ;
+            int nivel_cuenta = Convert.ToInt32(grdcuentas_contables.SelectedRow.Cells[5].Text);
             if (nivel_cuenta < 4)
             {
                 nivel_cuenta = nivel_cuenta + 1;
                 txt4.Enabled = true;
                 txtdescripcion.Text = string.Empty;
             }
-           
-            txtcuenta_contable.Text= grdcuentas_contables.SelectedRow.Cells[1].Text;
-            ddlnivel.SelectedValue  =Convert.ToString( nivel_cuenta );
-            if (nivel_cuenta==2)
+
+            txtcuenta_contable.Text = grdcuentas_contables.SelectedRow.Cells[2].Text;
+            ddlnivel.SelectedValue = Convert.ToString(nivel_cuenta);
+            if (nivel_cuenta == 2)
             {
                 txttipo.SelectedValue = "AC";
                 ddlclasificacion.Enabled = true;
@@ -358,7 +395,7 @@ namespace SAF.Rep
                 ddlclasificacion.Enabled = false;
                 txttipo.SelectedValue = "AC";
                 ddlclasificacion.SelectedValue = "ESP";
-                habil_cuenta( );
+                habil_cuenta();
                 txt3.Enabled = true;
             }
             if (nivel_cuenta == 4)
@@ -366,19 +403,19 @@ namespace SAF.Rep
                 ddlclasificacion.Enabled = false;
                 txttipo.SelectedValue = "AF";
                 ddlclasificacion.SelectedValue = "ESP";
-                habil_cuenta( );
+                habil_cuenta();
                 txt4.Enabled = true;
                 txtdescripcion.Text = string.Empty;
                 BTN_continuar.Visible = true;
             }
-           
-           
-            
+
+
+
 
         }
         protected void habil_cuenta()
         {
-             
+
             txt1.Text = txtcuenta_contable.Text.Substring(0, 4);
             txt2.Text = txtcuenta_contable.Text.Substring(5, 5);
             txt3.Text = txtcuenta_contable.Text.Substring(11, 5);
@@ -399,7 +436,7 @@ namespace SAF.Rep
         protected void DDLSubdependencia_SelectedIndexChanged(object sender, EventArgs e)
         {
             string cadena = txtcuenta_contable.Text;
-            txtcuenta_contable.Text = cadena.Substring(0,11) + DDLSubdependencia.SelectedValue + ".00000";
+            txtcuenta_contable.Text = cadena.Substring(0, 11) + DDLSubdependencia.SelectedValue + ".00000";
 
             txtdescripcion.Text = DDLSubdependencia.SelectedItem.Text.Substring(8);
             habil_cuenta();
@@ -413,7 +450,7 @@ namespace SAF.Rep
 
         protected void txt1_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void txt2_TextChanged(object sender, EventArgs e)
@@ -474,10 +511,10 @@ namespace SAF.Rep
                 Objcuentas_contables.ejercicio = SesionUsu.Usu_Ejercicio;
                 Objcuentas_contables.centro_contable = DDLCentro_Contable.SelectedValue;
                 Objcuentas_contables.tipo = "T";
-                Objcuentas_contables.cuenta_contable = grdcuentas_contables.SelectedRow.Cells[1].Text;
-                Objcuentas_contables.nivel = grdcuentas_contables.SelectedRow.Cells[4].Text;
-                Objcuentas_contables.buscar = txtBuscar0.Text;
-                CNcuentas_contables.PolizaConsultaGrid(ref Objcuentas_contables,  ref List);
+                Objcuentas_contables.cuenta_contable = grdcuentas_contables.SelectedRow.Cells[2].Text;
+                Objcuentas_contables.nivel = grdcuentas_contables.SelectedRow.Cells[5].Text;
+                Objcuentas_contables.buscar = "";/*txtBuscar0.Text;*/
+                CNcuentas_contables.PolizaConsultaGrid(ref Objcuentas_contables, ref List);
 
                 return List;
             }
@@ -502,7 +539,7 @@ namespace SAF.Rep
             LinkButton cbi = (LinkButton)(sender);
             GridViewRow row = (GridViewRow)cbi.NamingContainer;
             grvPolizas.SelectedIndex = row.RowIndex;
-            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP-005&Ejercicio="+SesionUsu.Usu_Ejercicio+"&id="+ grvPolizas.SelectedRow.Cells[0].Text;
+            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP-005&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&id=" + grvPolizas.SelectedRow.Cells[0].Text;
             string _open = "window.open('" + ruta + "', '_newtab');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
 
@@ -559,7 +596,7 @@ namespace SAF.Rep
                     ddlCuenta_Mayor.Enabled = false;
                     txttipo.Enabled = false;
                     ddlclasificacion.Enabled = false;
-                    if (grdcuentas_contables.SelectedRow.Cells[4].Text == "3")
+                    if (grdcuentas_contables.SelectedRow.Cells[5].Text == "3")
                         DDLSubdependencia.Visible = true;
 
                 }
@@ -612,6 +649,100 @@ namespace SAF.Rep
             txtdescripcion.Text = Listcodigo[ddlCuenta_Mayor.SelectedIndex].EtiquetaTres;
             habil_cuenta();
             txt1.Enabled = true;
+
+        }
+
+        protected void linkBttnCat_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CargarGridCOG();
+                ScriptManager.RegisterStartupScript(this, GetType(), "GridCOG", "CatCOG();", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupCOG", "$('#modalCOG').modal('show')", true);
+
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+
+            }
+        }
+
+        protected void linkBttnActualizar_Click(object sender, EventArgs e)
+        {
+            cuentas_contables objCta = new cuentas_contables();
+            Verificador = string.Empty;
+            try
+            {
+                objCta.ejercicio = SesionUsu.Usu_Ejercicio;
+                CNcuentas_contables.CuentasContables_ActDesc(objCta, ref Verificador);
+                if (Verificador == "0")
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'Las cuentas fueron actualizadas correctamente.');", true);
+                }
+                else
+                {
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+            }
+        }
+
+        protected void grdCatCOG_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            grdCatCOG.EditIndex = e.NewEditIndex;
+            CargarGridCOG();
+        }
+
+        protected void grdCatCOG_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            Verificador = string.Empty;
+            int fila = e.RowIndex;
+            GridViewRow row = grdCatCOG.Rows[e.RowIndex];
+            try
+            {
+                cuentas_contables objCtas = new cuentas_contables();
+                //objCtas.cuenta_mayor = Convert.ToString(row.Cells[0].Text);
+                //objCtas.natura = Convert.ToString(row.Cells[1].Text);
+                //objCtas.descripcion = Convert.ToString(row.Cells[2].Text);
+                TextBox txtStatus = (TextBox)(row.Cells[2].FindControl("txtStatus"));
+                objCtas.status = txtStatus.Text;
+                CNcuentas_contables.Editar_Catalogo_COG(objCtas, ref Verificador);
+                if (Verificador == "0")
+                {
+                    grdCatCOG.EditIndex = -1;
+                    CargarGridCOG();
+                }
+                else
+                {
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);
+                }
+
+                ScriptManager.RegisterStartupScript(this, GetType(), "GridCOG", "CatCOG();", true);
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);
+
+            }
+        }
+
+        protected void grdCatCOG_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            grdCatCOG.EditIndex = -1;
+            CargarGridCOG();
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridCOG", "CatCOG();", true);
 
         }
     }

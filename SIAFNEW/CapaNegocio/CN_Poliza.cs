@@ -27,6 +27,20 @@ namespace CapaNegocio
             }
         }
 
+        public void PolizaConsultaGrid_Min(ref Poliza ObjPoliza, String FechaInicial, String FechaFinal, String Buscar, String TipoUsu, ref List<Poliza> List)
+        {
+            try
+            {
+                CD_Poliza CDPoliza = new CD_Poliza();
+                CDPoliza.PolizaConsultaGrid_Min(ref ObjPoliza, FechaInicial, FechaFinal, Buscar, TipoUsu, ref List);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void ValidarTotal(ref Poliza objPoliza, ref string Verificador)
         {
             try

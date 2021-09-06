@@ -60,7 +60,7 @@ namespace SAF.Form
                 }
                 else if ((Request.Params["__EVENTTARGET"] == this.txtBuscar.UniqueID))
                 {
-                    this.btnNuevo.Focus();
+                    this.linkBttnNuevo.Focus();
                     //this.linkBttnBuscar.Focus(); //this.imgbtnBuscar.Focus();
                 }
 
@@ -76,7 +76,8 @@ namespace SAF.Form
                 Inicializar();
             }
 
-            ScriptManager.RegisterStartupScript(this, GetType(), "CtasContables", "FiltCtasContables();", true);
+            //ScriptManager.RegisterStartupScript(this, GetType(), "CtasContables", "FiltCtasContables();", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridPolizas", "Polizas();", true);
 
 
         }
@@ -301,6 +302,7 @@ namespace SAF.Form
         }
         private List<Poliza> GetList()
         {
+            divErrorTot.Visible = false;
             try
             {
                 List<Poliza> List = new List<Poliza>();
@@ -313,7 +315,17 @@ namespace SAF.Form
                 string FechaInicial = "01/" + ddlFecha_Ini.SelectedValue + "/" + SesionUsu.Usu_Ejercicio;
                 int DiaFinal = System.DateTime.DaysInMonth(Convert.ToInt32(SesionUsu.Usu_Ejercicio), Convert.ToInt32(ddlFecha_Fin.SelectedValue));
                 string FechaFinal = DiaFinal + "/" + ddlFecha_Fin.SelectedValue + "/" + SesionUsu.Usu_Ejercicio;
-                CNPoliza.PolizaConsultaGrid(ref ObjPoliza, FechaInicial, FechaFinal, txtBuscar.Text.ToUpper(), SesionUsu.Usu_TipoUsu, ref List);
+                //CNPoliza.PolizaConsultaGrid(ref ObjPoliza, FechaInicial, FechaFinal, txtBuscar.Text.ToUpper(), SesionUsu.Usu_TipoUsu, ref List);
+                if(Convert.ToInt32(SesionUsu.Usu_Ejercicio)>=2021)
+                    CNPoliza.PolizaConsultaGrid_Min(ref ObjPoliza, FechaInicial, FechaFinal, txtBuscar.Text.ToUpper(), SesionUsu.Usu_TipoUsu, ref List);
+                else
+                    CNPoliza.PolizaConsultaGrid(ref ObjPoliza, FechaInicial, FechaFinal, txtBuscar.Text.ToUpper(), SesionUsu.Usu_TipoUsu, ref List);
+                if (List.Count > 2000)
+                {
+                    List = null;
+                    divErrorTot.Visible = true;
+
+                }
                 return List;
             }
             catch (Exception ex)
@@ -363,7 +375,7 @@ namespace SAF.Form
             filaFechasBusqueda.Visible = true;
             filaFechas.Visible = false;
             filaBusqueda.Visible = true;
-            btnNuevo.Visible = true;
+            linkBttnNuevo.Visible = true;
             //linkBttnNuevo.Visible = true;
             DDLCentro_Contable.Enabled = true;
             DateTime fecha = Convert.ToDateTime(txtFecha.Text);
@@ -646,7 +658,7 @@ namespace SAF.Form
         {
             txtBuscar.Visible = true;
             linkBttnBuscar.Visible = true;
-            btnNuevo.Visible = true;
+            linkBttnNuevo.Visible = true;
             //linkBttnNuevo.Visible = true;
             filaFechas.Visible = false;
             filaFechasBusqueda.Visible = true;
@@ -759,7 +771,7 @@ namespace SAF.Form
         {
             //lblError.Text = string.Empty;
             DDLCentro_Contable.Enabled = false;
-            LimpiaCampos(); // btnNuevo_Click(null, null);
+            LimpiaCampos(); // linkBttnNuevo_Click(null, null);
             try
             {
                 ObjPoliza.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);   // Convert.ToInt32(DataBinder.Eval(sender, "CommandArgument").ToString());
@@ -1304,7 +1316,7 @@ namespace SAF.Form
 
         protected void LimpiaCampos()
         {
-            btnNuevo.Visible = false;
+            linkBttnNuevo.Visible = false;
             //linkBttnNuevo.Visible = false;
             pnlPrincipal.Visible = true;
             filaFechas.Visible = true;
@@ -2025,7 +2037,7 @@ namespace SAF.Form
             }
         }
 
-        protected void btnNuevo_Click(object sender, EventArgs e)
+        protected void linkBttnNuevo_Click(object sender, EventArgs e)
         {
             string MesCC = VerificaMes();
             if (Convert.ToInt32(MesCC) > 12)
@@ -2224,18 +2236,18 @@ namespace SAF.Form
                 CargarGrid(0);
         }
 
-        protected void linkBttnNuevo_Click(object sender, EventArgs e)
-        {
-            string MesCC = VerificaMes();
-            if (Convert.ToInt32(MesCC) > 12)
-                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, 'Ejercicio Cerrado.');", true);
-            else
-            {
-                LimpiaCampos();
-                DDLCentro_Contable.Enabled = false;
-                //DDLCentro_Contable_SelectedIndexChanged(null, null);
-            }
-        }
+        //protected void linkBttnNuevo_Click(object sender, EventArgs e)
+        //{
+        //    string MesCC = VerificaMes();
+        //    if (Convert.ToInt32(MesCC) > 12)
+        //        ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, 'Ejercicio Cerrado.');", true);
+        //    else
+        //    {
+        //        LimpiaCampos();
+        //        DDLCentro_Contable.Enabled = false;
+        //        DDLCentro_Contable_SelectedIndexChanged(null, null);
+        //    }
+        //}
 
         protected void ddlProveedor_SelectedIndexChanged(object sender, EventArgs e)
         {

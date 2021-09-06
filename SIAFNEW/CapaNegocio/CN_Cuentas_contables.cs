@@ -37,6 +37,23 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void ConsultarCatCOG(ref List<cuentas_contables> List)
+        {
+            try
+            {
+
+                CD_Cuentas_contables CDcuentas_contables = new CD_Cuentas_contables();
+                CDcuentas_contables.ConsultarCatCOG(ref List);
+
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void Consultarcuenta_contable(ref cuentas_contables objcuentas_contables, ref string Verificador)
         {
             try
@@ -63,12 +80,39 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+
+        public void CuentasContables_ActDesc(cuentas_contables objcuentas_contables, ref string Verificador)
+        {
+            try
+            {
+
+                CD_Cuentas_contables CDcuenta = new CD_Cuentas_contables();
+                CDcuenta.CuentasContables_ActDesc(objcuentas_contables, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void Editar_cuentas_contables(ref cuentas_contables objcuentas_contables, ref string Verificador)
         {
             try
             {
                 CD_Cuentas_contables cdcuenta = new CD_Cuentas_contables();
                 cdcuenta.Editar_cuentas_contables(ref objcuentas_contables, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void Editar_Catalogo_COG(cuentas_contables objcuentas_contables, ref string Verificador)
+        {
+            try
+            {
+                CD_Cuentas_contables cdcuenta = new CD_Cuentas_contables();
+                cdcuenta.Editar_Catalogo_COG(objcuentas_contables, ref Verificador);
             }
             catch (Exception ex)
             {

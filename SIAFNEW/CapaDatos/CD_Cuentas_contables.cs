@@ -71,7 +71,7 @@ namespace CapaDatos
                     Objcuentas_contables.nivel = Convert.ToString(dr[2]);
                     if (Convert.ToString(dr[2]) == "4") { Objcuentas_contables.bandera = true; } else { Objcuentas_contables.bandera = false; }
                     Objcuentas_contables.cuenta_contable  = Convert.ToString(dr[5]);
-                    
+                    Objcuentas_contables.centro_contable = Convert.ToString(dr[7]);
                     List.Add(Objcuentas_contables);
 
                 }
@@ -88,6 +88,37 @@ namespace CapaDatos
             }
         }
 
+        public void ConsultarCatCOG(ref List<cuentas_contables> List)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            cuentas_contables Objcuentas_contables;
+            try
+            {
+
+                OracleDataReader dr = null;
+                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_COG", ref dr);
+                while (dr.Read())
+                {
+                    Objcuentas_contables = new cuentas_contables();
+                    Objcuentas_contables.cuenta_mayor = Convert.ToString(dr[0]);
+                    Objcuentas_contables.descripcion = Convert.ToString(dr[1]);
+                    Objcuentas_contables.natura = Convert.ToString(dr[2]);
+                    Objcuentas_contables.status = Convert.ToString(dr[3]);
+                    List.Add(Objcuentas_contables);
+                }
+
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
 
         public void Consultarcuenta(ref cuentas_contables Objcuentas_contables, ref string Verificador)
         {
@@ -146,6 +177,27 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
+
+        public void CuentasContables_ActDesc(cuentas_contables objcuentas_contables, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_EJERCICIO" };
+                object[] Valores = { Convert.ToInt32(objcuentas_contables.ejercicio) };
+                String[] ParametrosOut = { "p_Bandera" };
+                Cmd = CDDatos.GenerarOracleCommand("ACT_DESC_CTAS", ref Verificador, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
         public void Eliminar_cuenta_contable(ref cuentas_contables objcuentas_contables, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -194,6 +246,27 @@ namespace CapaDatos
             }
         }
 
+
+        public void Editar_Catalogo_COG(cuentas_contables objcuentas_contables, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_MAYOR", "P_COG", "P_NOMBRE", "P_STATUS" };
+                object[] Valores = { objcuentas_contables.cuenta_mayor, objcuentas_contables.natura, objcuentas_contables.descripcion, objcuentas_contables.status };
+                String[] ParametrosOut = { "P_BANDERA" };
+                Cmd = CDDatos.GenerarOracleCommand("UPD_SAF_CATALOGO_COG", ref Verificador, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
 
 
 

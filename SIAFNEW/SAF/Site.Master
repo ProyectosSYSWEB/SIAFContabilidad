@@ -79,14 +79,12 @@
 
             .site_map a {
                 color: rgb(0, 0, 0);
-
             }
 
-            .scroll_monitor {
+        .scroll_monitor {
             height: 320px;
             overflow: auto;
         }
-
     </style>
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
@@ -109,14 +107,14 @@
         <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #18386b;">
             <div class="top-line" style="width: 100%">
                 <div class="d-flex justify-content-between">
-                    <div class="d-flex justify-content-start">
+                    <div class="d-flex justify-content-start  text-white">
                         <a href="https://sysweb.unach.mx/DSIA/">
-                            <img id="imgSYSWEB" src="https://sysweb.unach.mx/resources/imagenes/sysweb2018230.png" class="img-fluid d-none d-sm-none d-md-block" alt="Responsive image" style="cursor: pointer; height: 60px" />
+                            <img id="imgSYSWEB" src="https://sysweb.unach.mx/resources/imagenes/sysweb2018230.png" class="img-fluid d-none d-sm-none d-md-block" alt="Responsive image" style="cursor: pointer; height: 50px" />
                         </a>
                     </div>
                     <div class="text-center text-white">
                         <h6>Sistema Integral de Administración y Finanzas</h6>
-                        <h4>SIAF-Contabilidad</h4>
+                        <h6>SIAF-Contabilidad</h6>
                     </div>
                     <div class="d-flex justify-content-end">
                     </div>
@@ -193,7 +191,7 @@
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
-                </nav>                
+                </nav>
             </div>
         </div>
         <div class="p_info">

@@ -240,6 +240,7 @@ namespace SAF.Contabilidad.Reportes
                 case "RP-Diario-General":
                     //ruta = "VisualizadorCrystal.aspx?Tipo=RP-Diario-Generalxls&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + DDLCentro_Contable.SelectedValue;
                     ruta = "http://148.222.11.45/Contabilidad/Contabilidad/Reportes/VisualizadorCrystal.aspx?Tipo=RP-Diario-Generalxls&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + DDLCentro_Contable.SelectedValue;
+                    //148.222.11.45/Contabilidad/Contabilidad/Reportes/VisualizadorCrystal.aspx?Tipo=RP-Diario-Generalxls&mes_inicial=00&mes_final=01&Ejercicio=2021&centro_contable=00000
                     //_open = "window.open('" + ruta + "', '_newtab');";
                     //ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
                     Response.Redirect(ruta);

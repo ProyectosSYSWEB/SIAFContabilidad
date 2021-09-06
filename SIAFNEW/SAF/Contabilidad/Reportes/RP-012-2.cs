@@ -16,14 +16,14 @@ namespace SAF.Contabilidad.Reportes {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class RP_Diario_Generalxls : ReportClass {
+    public class RP_012_2 : ReportClass {
         
-        public RP_Diario_Generalxls() {
+        public RP_012_2() {
         }
         
         public override string ResourceName {
             get {
-                return "RP-Diario-Generalxls.rpt";
+                return "RP-012-2.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace SAF.Contabilidad.Reportes {
         
         public override string FullResourceName {
             get {
-                return "SAF.Contabilidad.Reportes.RP-Diario-Generalxls.rpt";
+                return "SAF.Contabilidad.Reportes.RP-012-2.rpt";
             }
             set {
                 // Do nothing
@@ -66,7 +66,7 @@ namespace SAF.Contabilidad.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section DetailSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection2 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
@@ -74,7 +74,7 @@ namespace SAF.Contabilidad.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section ReportFooterSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection1 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,7 +82,7 @@ namespace SAF.Contabilidad.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section PageFooterSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section DetailSection1 {
             get {
                 return this.ReportDefinition.Sections[4];
             }
@@ -90,7 +90,39 @@ namespace SAF.Contabilidad.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_1P_Fecha_i {
+        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
+            get {
+                return this.ReportDefinition.Sections[5];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection2 {
+            get {
+                return this.ReportDefinition.Sections[6];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.CrystalReports.Engine.Section ReportFooterSection1 {
+            get {
+                return this.ReportDefinition.Sections[7];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.CrystalReports.Engine.Section PageFooterSection1 {
+            get {
+                return this.ReportDefinition.Sections[8];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_1P_Ejercicio {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -98,7 +130,7 @@ namespace SAF.Contabilidad.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_2P_Fecha_f {
+        public CrystalDecisions.Shared.IParameterField Parameter_2P_Centro_contable {
             get {
                 return this.DataDefinition.ParameterFields[1];
             }
@@ -106,7 +138,7 @@ namespace SAF.Contabilidad.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_3P_Ejercicio {
+        public CrystalDecisions.Shared.IParameterField Parameter_4P_Mes_inicio {
             get {
                 return this.DataDefinition.ParameterFields[2];
             }
@@ -114,17 +146,25 @@ namespace SAF.Contabilidad.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_4P_Centro_contable {
+        public CrystalDecisions.Shared.IParameterField Parameter_5P_Mes_fin {
             get {
                 return this.DataDefinition.ParameterFields[3];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_3P_Reporte {
+            get {
+                return this.DataDefinition.ParameterFields[4];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedRP_Diario_Generalxls : Component, ICachedReport {
+    public class CachedRP_012_2 : Component, ICachedReport {
         
-        public CachedRP_Diario_Generalxls() {
+        public CachedRP_012_2() {
         }
         
         [Browsable(false)]
@@ -161,7 +201,7 @@ namespace SAF.Contabilidad.Reportes {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            RP_Diario_Generalxls rpt = new RP_Diario_Generalxls();
+            RP_012_2 rpt = new RP_012_2();
             rpt.Site = this.Site;
             return rpt;
         }
