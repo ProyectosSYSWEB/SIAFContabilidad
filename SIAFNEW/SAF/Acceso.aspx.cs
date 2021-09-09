@@ -35,49 +35,47 @@ namespace SAF.Contabilidad
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            if (!IsPostBack)
-            {
+            //if (!IsPostBack)
+            //{
 
-                Token = Convert.ToString(Request.QueryString["Token"]);
+            //    Token = Convert.ToString(Request.QueryString["Token"]);
 
-                //if (!IsPostBack)
-                //{
-                if (Token != null)
-                {
+                
+            //    if (Token != null)
+            //    {
 
-                    try
-                    {
-                        Verificador = "-1";
+            //        try
+            //        {
+            //            Verificador = "-1";
 
-                        Usuario = new Usuario();
-                        Usuario.Token = Token;
-                        CNUsuario.ValidarToken(ref Usuario, ref Verificador);
+            //            Usuario = new Usuario();
+            //            Usuario.Token = Token;
+            //            CNUsuario.ValidarToken(ref Usuario, ref Verificador);
 
-                        if (Verificador == "0")
-                        {
-                            txtUsario.Text = Usuario.CUsuario;
-                            txtPassword.Text = Usuario.Password;
+            //            if (Verificador == "0")
+            //            {
+            //                txtUsario.Text = Usuario.CUsuario;
+            //                txtPassword.Text = Usuario.Password;
 
-                            btnLogin_Click(null, null);
-                        }
-                        else lblError.Text = "El Token no es válido";
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new Exception(ex.Message + ".-ValidarToken");
-                    }
+            //                btnLogin_Click(null, null);
+            //            }
+            //            else lblError.Text = "El Token no es válido";
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            throw new Exception(ex.Message + ".-ValidarToken");
+            //        }
 
-                }
-                else
-                {
+            //    }
+            //    else
+            //    {
 
-                    if ((Request.QueryString["Usuario"] != null) && (Request.QueryString["Ejercicio"] != null))
-                    {
-                        txtUsario.Text = Request.QueryString["Usuario"];
-                    }
-                }
-                //}
-            }
+            //        if ((Request.QueryString["Usuario"] != null) && (Request.QueryString["Ejercicio"] != null))
+            //        {
+            //            txtUsario.Text = Request.QueryString["Usuario"];
+            //        }
+            //    }
+            //}
 
         }
         protected void btnLogin2_Click(object sender, EventArgs e)
@@ -177,7 +175,6 @@ namespace SAF.Contabilidad
             {
                 Usuario.Correo_UNACH = txtUsario.Text.ToUpper();
                 Usuario.Password = txtPassword.Text.ToUpper();
-                //CNUsuario.ValidarUsuario(ref Usuario, ref Verificador);
                 CNUsuario.ObtenerUsuario(ref Usuario, ref Verificador);
                 if (Verificador == "0")
                 {

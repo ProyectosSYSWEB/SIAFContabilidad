@@ -8,7 +8,7 @@ using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
 using CrystalDecisions.Web;
 using CrystalDecisions.ReportSource;
-
+using System.IO;
 
 namespace SAF.Reportes
 {
@@ -456,7 +456,6 @@ namespace SAF.Reportes
             }
             finally
             {
-
                 report.Close();
                 report.Dispose();
                 CR_Reportes.Dispose();
@@ -501,9 +500,32 @@ namespace SAF.Reportes
             connectionInfo.Password = "DSIA2014";
             SetDBLogonForReport(connectionInfo, report);
             report.ExportToHttpResponse(ExportFormatType.ExcelWorkbook, Response, false, Tipo);
+            //report.ExportToDisk(ExportFormatType.ExcelRecord, "report.xlsx");
             CR_Reportes.ReportSource = report;
+        }
+
+        private void reporte_GranXLS2()
+        {
+            string FileName = "ExcelExport.xlsx";
+            //string directoryPath ="Contabilidad\\Reportes\\";
+            //string Path = directoryPath + FileName;
+
+            p = new System.Web.UI.Page();
+            report.Load(p.Server.MapPath("~") + "\\" + Reporte);
+
+            string Ruta = Path.Combine(Server.MapPath("~/Adjuntos"), FileName);
+
+            report.PrintOptions.PaperSize = PaperSize.PaperLetter;
+            connectionInfo.ServerName = "dsia";
+            connectionInfo.UserID = "SAF";
+            connectionInfo.Password = "DSIA2014";
+            SetDBLogonForReport(connectionInfo, report);
+            report.ExportToDisk(ExportFormatType.Excel, Ruta);
+            //report.ExportToHttpResponse(ExportFormatType.ExcelWorkbook, Response, false, Tipo);
+            //CR_Reportes.ReportSource = report;
 
         }
+
         private void SetDBLogonForReport(ConnectionInfo connectionInfo, ReportDocument reportDocument)
         {
             try

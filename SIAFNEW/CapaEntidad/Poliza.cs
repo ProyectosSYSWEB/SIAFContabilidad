@@ -50,7 +50,7 @@ namespace CapaEntidad
         private string _Clasificacion = string.Empty;
         private string _ValidaTotal = "S";
         private string _Partida;
-
+        private int _IdCedula;
         public string Partida
         {
             get { return _Partida; }
@@ -82,6 +82,12 @@ namespace CapaEntidad
         {
             get { return _IdPoliza; }
             set { _IdPoliza = value; }
+        }
+
+        public int IdCedula
+        {
+            get { return _IdCedula; }
+            set { _IdCedula = value; }
         }
         public int Ejercicio
         {

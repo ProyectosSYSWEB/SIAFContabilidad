@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Comparativo.aspx.cs" Inherits="SAF.Contabilidad.Reportes.WebForm1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -185,8 +184,8 @@
                                                 </asp:DropDownList>
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
-                                    </div>          
                                     </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-1">
                                         <asp:UpdateProgress ID="UpdateProgress9" runat="server" AssociatedUpdatePanelID="UpdatePanel10">
@@ -468,5 +467,10 @@
 
         </ContentTemplate>
     </asp:UpdatePanel>
+    <script type="text/javascript">
+        function Reporte(ruta) {
+            window.open(ruta, '_blank');
+        };
+    </script>
 
 </asp:Content>

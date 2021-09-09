@@ -36,11 +36,7 @@ namespace SAF
             if (!IsPostBack)
             {
                 SesionUsu.Modifica_Ejercicio = false;
-                //CNComun.LlenaCombo("pkg_contratos.Obt_Combo_sistemas", ref ddlSistemas, "p_usuario", SesionUsu.Usu_Nombre, ref Listsistema);
                 ddlUsu_Ejercicio.SelectedValue = SesionUsu.Usu_Ejercicio;
-
-                
-
             }
 
             if (SesionUsu.Modifica_Ejercicio == true)

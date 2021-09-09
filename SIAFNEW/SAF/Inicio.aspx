@@ -6,8 +6,6 @@
             width: 150px;
             height: 140px;
         }
-
-        
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -30,11 +28,13 @@
                     <div class="card-body">
                         <%--<h5 class="card-title">--%>
                         <%--<img src="images/pres7.png" class="auto-style2" />Dashboard</h5>--%>
-                         <asp:UpdateProgress ID="updPnlCC" runat="server" AssociatedUpdatePanelID="UpdatePanel11">
-                    <ProgressTemplate>
-                        <asp:Image ID="img5" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
-                    </ProgressTemplate>
-                </asp:UpdateProgress>
+                        <div class="text-center">
+                            <asp:UpdateProgress ID="updPnlCC" runat="server" AssociatedUpdatePanelID="UpdatePanel11">
+                                <ProgressTemplate>
+                                    <asp:Image ID="img5" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                                </ProgressTemplate>
+                            </asp:UpdateProgress>
+                        </div>
                         <asp:UpdatePanel ID="UpdatePanel11" runat="server">
                             <ContentTemplate>
                                 <asp:DropDownList ID="DDLCentro_Contable" runat="server" Width="100%"
@@ -98,7 +98,7 @@
 
     <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender" runat="server" TargetControlID="HiddenField1" PopupControlID="Panel3" BackgroundCssClass="modalBackground_Proy">
     </ajaxToolkit:ModalPopupExtender>
-    <asp:Panel ID="Panel3" runat="server" class="card text-white bg-dark mb-3" Style="width: 50%; font-size: 15px">
+    <asp:Panel ID="Panel3" runat="server" class="card text-white bg-dark mb-3" Style="width: 50%; font-size: 16px">
         <div style="overflow-y: scroll; height: 95%;">
             <div class="card-header">
                 AVISO

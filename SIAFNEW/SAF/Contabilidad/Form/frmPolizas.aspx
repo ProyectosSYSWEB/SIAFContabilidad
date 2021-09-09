@@ -364,8 +364,9 @@
                                 <div class="col-sm-2">
                                     <asp:UpdatePanel ID="UpdatePanel23" runat="server">
                                         <ContentTemplate>
-                                            <asp:DropDownList ID="ddlFecha_Ini" runat="server" AutoPostBack="True"
-                                                OnSelectedIndexChanged="ddlFecha_Ini_SelectedIndexChanged" Width="100%">
+                                            <asp:DropDownList ID="ddlFecha_Ini" runat="server"
+                                                OnSelectedIndexChanged="ddlFecha_Ini_SelectedIndexChanged"    onChange="FechaInicio();"                                             
+                                                Width="100%">
                                                 <asp:ListItem Value="01">Enero</asp:ListItem>
                                                 <asp:ListItem Value="02">Febrero</asp:ListItem>
                                                 <asp:ListItem Value="03">Marzo</asp:ListItem>
@@ -390,8 +391,8 @@
                                 <div class="col-md-2">
                                     <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                         <ContentTemplate>
-                                            <asp:DropDownList ID="ddlFecha_Fin" runat="server" AutoPostBack="True"
-                                                OnSelectedIndexChanged="ddlFecha_Fin_SelectedIndexChanged1" Width="100%">
+                                            <asp:DropDownList ID="ddlFecha_Fin" runat="server" 
+                                                   onChange="FechaFinal();"  Width="100%">
                                                 <asp:ListItem Value="01">Enero</asp:ListItem>
                                                 <asp:ListItem Value="02">Febrero</asp:ListItem>
                                                 <asp:ListItem Value="03">Marzo</asp:ListItem>
@@ -571,7 +572,14 @@
                                                 <asp:BoundField DataField="IdPoliza" />
                                                 <asp:BoundField DataField="CENTRO_CONTABLE" HeaderText="CENTRO CONTABLE" />
                                                 <asp:BoundField DataField="NUMERO_POLIZA" HeaderText="# PÓLIZA" />
-                                                <asp:BoundField DataField="Cedula_numero" HeaderText="# CEDULA" />
+                                                <asp:TemplateField HeaderText="# CEDULA">
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Cedula_numero") %>'></asp:TextBox>
+                                                    </EditItemTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="LinkButton2" runat="server" OnClientClick= '<%# "Redirect(" + Eval("IdCedula") + ");" %>'><%# Eval("Cedula_numero") %></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
                                                 <asp:BoundField DataField="TIPO" HeaderText="TIPO" />
                                                 <asp:BoundField DataField="FECHA" DataFormatString="{0:d}" HeaderText="FECHA" />
                                                 <asp:BoundField DataField="STATUS" HeaderText="STATUS">
@@ -1760,8 +1768,36 @@
     </div>
 
     <script type="text/javascript">
+
+        function FechaInicio() {
+            <%--$('#<%= ddlFecha_Fin.ClientID %>').val() = $('#<%= ddlFecha_Ini.ClientID %>').val();--%>
+
+            var cod = document.getElementById("ctl00_MainContent_ddlFecha_Ini").value;
+            
+
+            document.getElementById("ctl00_MainContent_ddlFecha_Fin").value = cod;
+
+            $('#<%= grvPolizas.ClientID %>').dataTable().fnClearTable();
+            $('#<%= grvPolizas.ClientID %>').dataTable().fnDraw();
+            $('#<%= grvPolizas.ClientID %>').dataTable().fnDestroy();
+
+        };
+        
+       
+        function FechaFinal() {
+            $('#<%= grvPolizas.ClientID %>').dataTable().fnClearTable();
+            $('#<%= grvPolizas.ClientID %>').dataTable().fnDraw();
+            $('#<%= grvPolizas.ClientID %>').dataTable().fnDestroy();
+        };
+
         function FiltCtasContables() {
             $('#<%= DDLCentro_Contable.ClientID %>').select2();
+        };
+
+        
+        function Redirect(Id) {
+            url = "http://sysweb.unach.mx/SIAF_Presupuesto/Presupuesto/Reportes/VisualizadorCrystal.aspx?Tipo=RP-002&id=" + Id;
+            window.open(url, '_blank');
         };
 
         function msg() {

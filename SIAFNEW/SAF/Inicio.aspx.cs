@@ -33,7 +33,7 @@ namespace SAF
             {
                 busca_informativa();
                 Cargarcombos();
-                //Inicializar();
+                //MonitorConsultaGrid();
             }
         }
         private void busca_informativa()
@@ -73,6 +73,7 @@ namespace SAF
             try
             {
                 CNMonitor.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref DDLCentro_Contable, "p_usuario", "p_ejercicio", SesionUsu.Usu_Nombre, SesionUsu.Usu_Ejercicio);
+                //this.DDLCentro_Contable.Items.Insert(0, new ListItem("-- Seleccionar --", "X"));
                 DDLCentro_Contable_SelectedIndexChanged(null, null);
             }
             catch (Exception ex)
@@ -111,7 +112,8 @@ namespace SAF
             try
             {
                 List<Comun> List = new List<Comun>();
-                CNMonitor.Monitor(SesionUsu.Usu_Nombre, "15830", DDLCentro_Contable.SelectedValue, ref List);
+                //CNMonitor.Monitor(SesionUsu.Usu_Nombre, "15830", DDLCentro_Contable.SelectedValue, ref List);
+                CNMonitor.MonitorContabilidad(SesionUsu.Usu_Nombre, "15830", DDLCentro_Contable.SelectedValue, ref List);
                 return List;
             }
             catch (Exception ex)

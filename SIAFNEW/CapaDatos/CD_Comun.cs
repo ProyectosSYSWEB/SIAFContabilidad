@@ -890,7 +890,7 @@ namespace CapaDatos
                 String[] Parametros = { "p_usuario", "p_id_sistema", "p_centro_contable" };
                 String[] Valores = { Usuario, Sistema, Centro_Contable};
 
-                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Monitor", ref dr, Parametros, Valores);
+                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Monitor2", ref dr, Parametros, Valores);
                 while (dr.Read())
                 {
                     Comun objMonitor = new Comun();
@@ -908,6 +908,38 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        public void MonitorContabilidad(string Usuario, string Sistema, string Centro_Contable, ref List<Comun> List)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+                OracleDataReader dr = null;
+
+                //String[] Parametros = { "p_usuario", "p_id_sistema", "p_centro_contable" };
+                //String[] Valores = { Usuario, Sistema, Centro_Contable };
+                String[] Parametros = { "p_centro_contable" };
+                String[] Valores = { Centro_Contable };
+
+                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Monitor_Contabilidad", ref dr, Parametros, Valores);
+                while (dr.Read())
+                {
+                    Comun objMonitor = new Comun();
+                    objMonitor.Descripcion = Convert.ToString(dr.GetValue(1));
+                    List.Add(objMonitor);
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+
         public void MonitorGrupo(string Usuario, string Sistema, string Centro_Contable, string Grupo, ref List<Comun> List)
         {
             CD_Datos CDDatos = new CD_Datos();
