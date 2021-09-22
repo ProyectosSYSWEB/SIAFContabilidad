@@ -63,6 +63,7 @@ namespace SAF.Contabilidad.Form
                 }
             }
             ScriptManager.RegisterStartupScript(this, GetType(), "Cuentas_Contables", "Autocomplete();", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridDetalle", "Detalle();", true);
 
         }
         #region <Funciones y Sub>

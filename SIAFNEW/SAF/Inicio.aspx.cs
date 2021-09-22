@@ -45,17 +45,18 @@ namespace SAF
                 Objinformativa.usuario = SesionUsu.Usu_Nombre;
                 Objinformativa.ejercicio = SesionUsu.Usu_Ejercicio;
                 CNInformativa.Consultar_Mensajes(SesionUsu.Usu_Nombre, 15361, ref lstComun);
-              
-                    if (lstComun.Count >= 1)
+
+                if (lstComun.Count >= 1)
+                {
+                    lblMsg_Observaciones.Text = string.Empty;
+                    foreach (Comun lst in lstComun)
                     {
-                        lblMsg_Observaciones.Text = string.Empty;
-                        foreach (Comun lst in lstComun)
-                        {
-                            lblMsg_Observaciones.Text = lblMsg_Observaciones.Text+ "<br />" + lst.Descripcion;
-                        }
-                        ModalPopupExtender.Show();
+                        lblMsg_Observaciones.Text = lblMsg_Observaciones.Text + "<br />" + lst.Descripcion;
                     }
-               
+                    //ModalPopupExtender.Show();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupAviso", "$('#modalAviso').modal('show')", true);
+                }
+
             }
             catch (Exception ex)
             {
@@ -124,7 +125,8 @@ namespace SAF
 
         protected void btnSi_Click(object sender, EventArgs e)
         {
-            ModalPopupExtender.Hide();
+            //ModalPopupExtender.Hide();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupAviso", "$('#modalAviso').modal('show')", true);
         }
         protected void DDLCentro_Contable_SelectedIndexChanged(object sender, EventArgs e)
         {

@@ -35,6 +35,8 @@ namespace SAF.Contabilidad.Form
                 MultiView1.ActiveViewIndex = 0;
                 inicializar();
             }
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridMensajes", "Mensajes();", true);            
         }
         private void CargarGrid()
         {
@@ -59,7 +61,7 @@ namespace SAF.Contabilidad.Form
                 List<cuentas_contables> List = new List<cuentas_contables>();
                 Objinformativa.centro_contable = DDLCentro_Contable.SelectedValue ;
                 Objinformativa.usuario  = SesionUsu.Usu_Nombre;                
-                CNinformativa.ConsultarInformativa(ref Objinformativa, txtbusca.Text, ref List);
+                CNinformativa.ConsultarInformativa(ref Objinformativa, string.Empty, ref List);
                 
 
                 return List;
@@ -75,7 +77,7 @@ namespace SAF.Contabilidad.Form
         }
         protected void limpiar()
         {
-            txtbusca.Text = string.Empty;
+            //txtbusca.Text = string.Empty;
             txtobservacion.Text = string.Empty;
             txtFecha_final.Text = string.Empty;
             txtFecha_inicial.Text = string.Empty;

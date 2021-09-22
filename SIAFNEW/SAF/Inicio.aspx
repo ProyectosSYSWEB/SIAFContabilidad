@@ -96,9 +96,9 @@
     </div>--%>
     <asp:HiddenField ID="HiddenField1" runat="server" />
 
-    <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender" runat="server" TargetControlID="HiddenField1" PopupControlID="Panel3" BackgroundCssClass="modalBackground_Proy">
-    </ajaxToolkit:ModalPopupExtender>
-    <asp:Panel ID="Panel3" runat="server" class="card text-white bg-dark mb-3" Style="width: 50%; font-size: 16px">
+    <%-- <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender" runat="server" TargetControlID="HiddenField1" PopupControlID="Panel3" BackgroundCssClass="modalBackground_Proy">
+    </ajaxToolkit:ModalPopupExtender>--%>
+    <%--<asp:Panel ID="Panel3" runat="server" class="card text-white bg-dark mb-3" Style="width: 50%; font-size: 16px">
         <div style="overflow-y: scroll; height: 95%;">
             <div class="card-header">
                 AVISO
@@ -122,6 +122,35 @@
                 </div>
             </div>
         </div>
-    </asp:Panel>
+    </asp:Panel>--%>
+
+
+
+
+    <div class="modal fade" id="modalAviso" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modOficios">Aviso</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <asp:UpdatePanel ID="UpdatePanel9" runat="server">
+                                    <ContentTemplate>
+                                        <asp:Label ID="lblMsg_Observaciones" runat="server" Text="Una mentalidad positiva te ayuda a triunfar. Piensa bien, para vivir mejor" Font-Size="12px"></asp:Label>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </asp:Content>

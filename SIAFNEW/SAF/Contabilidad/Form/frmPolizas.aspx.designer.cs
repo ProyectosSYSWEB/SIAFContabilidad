@@ -852,6 +852,15 @@ namespace SAF.Form
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RFVBeneficiario;
 
         /// <summary>
+        /// Control rowIngreso.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl rowIngreso;
+
+        /// <summary>
         /// Control txtCedula_Numero.
         /// </summary>
         /// <remarks>
@@ -861,22 +870,22 @@ namespace SAF.Form
         protected global::System.Web.UI.WebControls.TextBox txtCedula_Numero;
 
         /// <summary>
-        /// Control ddlClasifica.
+        /// Control ddlNumCedula.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlClasifica;
+        protected global::System.Web.UI.WebControls.DropDownList ddlNumCedula;
 
         /// <summary>
-        /// Control reqClasifica.
+        /// Control reqCed.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqClasifica;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqCed;
 
         /// <summary>
         /// Control rowPrograma.
@@ -933,13 +942,13 @@ namespace SAF.Form
         protected global::System.Web.UI.WebControls.DropDownList ddlTipo_Captura;
 
         /// <summary>
-        /// Control reqTipoCap.
+        /// Control ddlClasifica.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqTipoCap;
+        protected global::System.Web.UI.WebControls.DropDownList ddlClasifica;
 
         /// <summary>
         /// Control UpdatePanel12.
@@ -967,6 +976,24 @@ namespace SAF.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNumero_Poliza;
+
+        /// <summary>
+        /// Control reqTipoCap.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqTipoCap;
+
+        /// <summary>
+        /// Control reqClasifica.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqClasifica;
 
         /// <summary>
         /// Control RegularExpressionValidator101.

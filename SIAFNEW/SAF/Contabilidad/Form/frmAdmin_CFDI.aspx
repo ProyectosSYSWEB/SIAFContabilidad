@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmAdmin_CFDI.aspx.cs" Inherits="SAF.Contabilidad.Form.frmAdmin_CFDI" %>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid">
         <div class="row">
@@ -6,8 +7,8 @@
                 Centro Contable
             </div>
             <div class="col-md-10">
-                        <asp:DropDownList ID="DDLCentro_Contable" runat="server" Width="100%">
-                        </asp:DropDownList>
+                <asp:DropDownList ID="DDLCentro_Contable" runat="server" Width="100%">
+                </asp:DropDownList>
             </div>
         </div>
         <div class="row">
@@ -25,8 +26,9 @@
                 <asp:DropDownList ID="ddlTipo_Gasto" runat="server" Width="100%">
                 </asp:DropDownList>
             </div>
-             <div class="col-md-1">
-                 Mes</div>
+            <div class="col-md-1">
+                Mes
+            </div>
             <div class="col-md-3">
                 <asp:DropDownList ID="ddlMes" runat="server" Width="100%">
                     <asp:ListItem Value="00">--TODOS--</asp:ListItem>
@@ -51,17 +53,17 @@
             </div>
             <div class="col-md-9">
                 <asp:TextBox ID="txtBuscar" runat="server" CssClass="textbuscar" Width="100%" PlaceHolder="Folio/Nombre/UUID"></asp:TextBox>
-                </div>
+            </div>
             <div class="col-md-1">
-                        <asp:UpdatePanel ID="updPnlBuscar" runat="server">
-                            <ContentTemplate>
-                                <%--<button runat="server" id="imgbtnBuscar" onserverclick="imgbtnBuscar_Click" class="btn-buscar btn-primary" validationgroup="Buscar">
+                <asp:UpdatePanel ID="updPnlBuscar" runat="server">
+                    <ContentTemplate>
+                        <%--<button runat="server" id="imgbtnBuscar" onserverclick="imgbtnBuscar_Click" class="btn-buscar btn-primary" validationgroup="Buscar">
                                     <i class="fa fa-search" aria-hidden="true"></i>
                                 </button>--%>
-                                
-                                <asp:ImageButton ID="imgbtnBuscar" runat="server" CausesValidation="False" ImageUrl="http://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgbtnBuscar_Click" Style="text-align: right" title="Buscar" />
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
+
+                        <asp:ImageButton ID="imgbtnBuscar" runat="server" CausesValidation="False" ImageUrl="http://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgbtnBuscar_Click" Style="text-align: right" title="Buscar" />
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
         </div>
         <div class="row">
@@ -106,16 +108,6 @@
                                 <asp:BoundField HeaderText="Usuario Registra" DataField="Usuario_Captura" />
                                 <asp:TemplateField HeaderText="Archivos">
                                     <FooterTemplate>
-                                        <table>
-                                            <tr>
-                                                <td>
-                                                    <asp:ImageButton ID="imgBttnPDF" runat="server" ImageUrl="http://sysweb.unach.mx/resources/imagenes/pdf.png" title="Reporte PDF" OnClick="imgBttnPDF_Click" />
-                                                </td>
-                                                <td>
-                                                    <asp:ImageButton ID="imgBttnExcel" runat="server" ImageUrl="http://sysweb.unach.mx/resources/imagenes/excel.png" title="Reporte Excel" OnClick="imgBttnExcel_Click" />
-                                                </td>
-                                            </tr>
-                                        </table>
                                     </FooterTemplate>
                                     <ItemTemplate>
                                         <asp:HyperLink ID="linkArchivoXML" runat="server" NavigateUrl='<%# Bind("Ruta_XML") %>' Target="_blank">XML</asp:HyperLink>
@@ -132,6 +124,17 @@
                         </asp:GridView>
                     </ContentTemplate>
                 </asp:UpdatePanel>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-10">
+            </div>
+            <div class="col-md-1 text-right">
+                <asp:ImageButton ID="imgBttnPDF" runat="server" ImageUrl="http://sysweb.unach.mx/resources/imagenes/pdf.png" title="Reporte PDF" OnClick="imgBttnPDF_Click" />
+            </div>
+            <div class="col-md-1 text-right">
+                <asp:ImageButton ID="imgBttnExcel" runat="server" ImageUrl="http://sysweb.unach.mx/resources/imagenes/excel.png" title="Reporte Excel" OnClick="imgBttnExcel_Click" />
             </div>
         </div>
     </div>

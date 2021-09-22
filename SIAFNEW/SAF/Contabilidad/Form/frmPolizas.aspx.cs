@@ -38,6 +38,7 @@ namespace SAF.Form
         List<cuentas_contables> ListCC = new List<cuentas_contables>();
         List<Comun> ListCuentas = new List<Comun>();
         List<Empleado> ListEmpleados = new List<Empleado>();
+        List<Comun> ListCedulas = new List<Comun>();
         private static List<Comun> ListCentroContable = new List<Comun>();
         #endregion
 
@@ -78,6 +79,7 @@ namespace SAF.Form
 
             //ScriptManager.RegisterStartupScript(this, GetType(), "CtasContables", "FiltCtasContables();", true);
             ScriptManager.RegisterStartupScript(this, GetType(), "GridPolizas", "Polizas();", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "NumCedulas", "FiltNumCedulas();", true);
 
 
         }
@@ -541,8 +543,13 @@ namespace SAF.Form
                     ObjPoliza.Modificacion_usuario = SesionUsu.Usu_Nombre;
                     ObjPoliza.Cheque_cuenta = ddlCheque_Cuenta.SelectedValue; //"00000"; //ddlCheque_Cuenta.SelectedValue;
                     ObjPoliza.Cheque_numero = txtCheque_Numero.Text;
-                    ObjPoliza.Cheque_importe = (txtCheque_Importe.Text.Length > 0) ? Convert.ToDouble(txtCheque_Importe.Text) : Convert.ToDouble("0");
-                    ObjPoliza.Cedula_numero = txtCedula_Numero.Text;
+                    ObjPoliza.Cheque_importe = (txtCheque_Importe.Text.Length > 0) ? Convert.ToDouble(txtCheque_Importe.Text) : Convert.ToDouble("0");                    
+                    ObjPoliza.Cedula_numero = ddlNumCedula.SelectedValue; //txtCedula_Numero.Text;
+                    if(ObjPoliza.Cedula_numero.Length == 18)
+                    {
+                        ListCedulas = (List<Comun>)Session["Cedulas"];
+                        ObjPoliza.IdCedula = Convert.ToInt32(ListCedulas[ddlNumCedula.SelectedIndex].EtiquetaDos);
+                    }
                     ObjPoliza.Beneficiario = txtBeneficiario.Text;
                     //ObjPoliza.Tipo_Documento = rdoBtnnTipoDocto.SelectedValue; // == "CFDI" ? "CFDI" : rdoBtnnTipoDocto.SelectedValue == "OFICIO" ? "OFICIO" : "";
                     ObjPoliza.Tipo_Documento = ddlTipoDocto.SelectedValue;
@@ -791,7 +798,22 @@ namespace SAF.Form
                     ddlCheque_Cuenta.SelectedValue = ObjPoliza.Cheque_cuenta;
                     txtCheque_Numero.Text = ObjPoliza.Cheque_numero;
                     txtCheque_Importe.Text = Convert.ToString(ObjPoliza.Cheque_importe);
-                    txtCedula_Numero.Text = ObjPoliza.Cedula_numero;
+                    if (ObjPoliza.Cedula_numero.Length == 18)
+                    {
+                        ddlNumCedula.Visible = true;
+                        txtCedula_Numero.Visible = false;
+                        //CNComun.LlenaCombo("PKG_CONTABILIDAD.Obt_Combo_Num_Cedula", ref ddlNumCedula, "p_ejercicio", "p_centro_contable", "p_mes_anio", "p_editar", "p_num_cedula", SesionUsu.Usu_Ejercicio, DDLCentro_Contable.SelectedValue, txtFecha.Text.Substring(3, 2) + SesionUsu.Usu_Ejercicio.Substring(2), Convert.ToString(SesionUsu.Editar), ObjPoliza.Cedula_numero, ref ListCedulas);
+                        CNComun.LlenaCombo("PKG_CONTABILIDAD.Obt_Combo_Num_Cedula", ref ddlNumCedula, "p_ejercicio", "p_centro_contable", "p_mes_anio", "p_editar", "p_num_cedula", "p_tipo", SesionUsu.Usu_Ejercicio, DDLCentro_Contable.SelectedValue, txtFecha.Text.Substring(3, 2) + SesionUsu.Usu_Ejercicio.Substring(2), Convert.ToString(SesionUsu.Editar), "", ddlTipo0.SelectedValue, ref ListCedulas);
+
+                        Session["Cedulas"] = ListCedulas;
+                        ddlNumCedula.SelectedValue = ObjPoliza.Cedula_numero;
+                    }
+                    else
+                    {
+                        ddlNumCedula.Visible = false;
+                        txtCedula_Numero.Visible = true;
+                        txtCedula_Numero.Text = ObjPoliza.Cedula_numero;
+                    }
                     txtBeneficiario.Text = ObjPoliza.Beneficiario;
                     ddlClasifica.SelectedValue = ObjPoliza.Clasificacion;
 
@@ -1058,24 +1080,21 @@ namespace SAF.Form
             rowCFDI.Visible = true;
             CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Tipo_Docto", ref ddlTipoDocto, "p_tipo_usuario", "p_tipo", SesionUsu.Usu_TipoUsu, ddlTipo0.SelectedValue);
 
-            //chkIncluyeCFDI.Checked = false;
-            //rdoBtnnTipoDocto.SelectedValue = "N";
+            rowIngreso.Visible = true;
             ddlTipoDocto.SelectedIndex = 0;
             if (ddlTipo0.SelectedValue == "E")
             {
-                //pnlEgreso.Visible = true;
                 rowEgreso.Visible = true;
                 rowEgreso2.Visible = true;
                 rowEgreso3.Visible = true;
             }
+            else if (ddlTipo0.SelectedValue == "I")
+            {
+                rowIngreso.Visible = false;
+                rowEgreso.Visible = false;
+            }
             else
             {
-                //if (ddlTipo0.SelectedValue == "I")
-                //{
-                //    ddlTipoDocto.Items.RemoveAt(int index);
-                //    rowCFDI.Visible = false;
-                //}
-
                 rowEgreso.Visible = false;
                 rowEgreso2.Visible = false;
                 rowEgreso3.Visible = false;
@@ -1084,8 +1103,14 @@ namespace SAF.Form
                 txtCheque_Importe.Text = string.Empty;
                 txtCedula_Numero.Text = string.Empty;
                 txtBeneficiario.Text = string.Empty;
-
             }
+
+            if (txtFecha.Text!=string.Empty)
+            {
+                CNComun.LlenaCombo("PKG_CONTABILIDAD.Obt_Combo_Num_Cedula", ref ddlNumCedula, "p_ejercicio", "p_centro_contable", "p_mes_anio", "p_editar", "p_num_cedula", "p_tipo", SesionUsu.Usu_Ejercicio, DDLCentro_Contable.SelectedValue, txtFecha.Text.Substring(3, 2) + SesionUsu.Usu_Ejercicio.Substring(2), Convert.ToString(SesionUsu.Editar), "", ddlTipo0.SelectedValue, ref ListCedulas);
+                Session["Cedulas"] = ListCedulas;
+            }
+
         }
         protected void btnSi_Click(object sender, EventArgs e)
         {
@@ -1318,7 +1343,6 @@ namespace SAF.Form
         {
             linkBttnNuevo.Visible = false;
             //linkBttnNuevo.Visible = false;
-            pnlPrincipal.Visible = true;
             filaFechas.Visible = true;
             filaFechasBusqueda.Visible = false;
             filaBusqueda.Visible = false;
@@ -1331,6 +1355,7 @@ namespace SAF.Form
             ddlCheque_Cuenta.SelectedValue = "00000";
             txtCheque_Numero.Text = string.Empty;
             txtCheque_Importe.Text = string.Empty;
+            pnlPrincipal.Visible = true;
             txtCedula_Numero.Text = string.Empty;
             txtBeneficiario.Text = string.Empty;
             lblTotal_Cargos.Text = string.Empty;
@@ -1344,10 +1369,12 @@ namespace SAF.Form
             //}
 
             //rdoBtnnTipoDocto.SelectedValue = "N";
+            SesionUsu.Editar = 0;
+
             ddlTipo0_SelectedIndexChanged(null, null);
             ddlTipoDocto.SelectedIndex = 0;
             ddlClasifica.SelectedIndex = 0;
-            SesionUsu.Editar = 0;
+            
             Session["PolizaDet"] = null;
             Session["PolizasCFDI"] = null;
             lblNumPolizaCFDI.Text = string.Empty;
@@ -2047,7 +2074,15 @@ namespace SAF.Form
                 LimpiaCampos();
                 DDLCentro_Contable.Enabled = false;
                 DDLCentro_Contable_SelectedIndexChanged(null, null);
+                //CNComun.LlenaCombo("PKG_CONTABILIDAD.Obt_Combo_Num_Cedula", ref ddlNumCedula, "p_ejercicio", "p_centro_contable", "p_mes_anio", "p_editar", "p_num_cedula", "p_tipo", SesionUsu.Usu_Ejercicio, DDLCentro_Contable.SelectedValue, txtFecha.Text.Substring(3,2)+SesionUsu.Usu_Ejercicio.Substring(2), Convert.ToString(SesionUsu.Editar), "",ddlTipo0.SelectedValue, ref ListCedulas);
+                //Session["Cedulas"] = ListCedulas;
+                ddlNumCedula.Visible = true;
+                txtCedula_Numero.Visible = false;
+                CNComun.LlenaCombo("PKG_CONTABILIDAD.Obt_Combo_Num_Cedula", ref ddlNumCedula, "p_ejercicio", "p_centro_contable", "p_mes_anio", "p_editar", "p_num_cedula", "p_tipo", SesionUsu.Usu_Ejercicio, DDLCentro_Contable.SelectedValue, txtFecha.Text.Substring(3, 2) + SesionUsu.Usu_Ejercicio.Substring(2), Convert.ToString(SesionUsu.Editar), "", ddlTipo0.SelectedValue, ref ListCedulas);
+                Session["Cedulas"] = ListCedulas;
+
             }
+            //ddlTipo0_SelectedIndexChanged(null, null);
         }
 
         protected void bttnAgregarOficio_Click(object sender, EventArgs e)

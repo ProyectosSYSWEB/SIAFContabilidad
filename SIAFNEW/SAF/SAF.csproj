@@ -939,6 +939,12 @@
     <Compile Include="Contabilidad\Reportes\RP_Concilliacion.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Contabilidad\Reportes\RP_Concilliacion_2021.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RP_Concilliacion_2021.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Inicio.aspx.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1465,6 +1471,10 @@
     <Content Include="Contabilidad\Reportes\RP_Concentrado_Conciliacion.rpt" />
     <Content Include="Contabilidad\Reportes\RP_ConcentradoANX.rpt" />
     <Content Include="Contabilidad\Reportes\RP_Concilliacion.rpt" />
+    <EmbeddedResource Include="Contabilidad\Reportes\RP_Concilliacion_2021.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RP_Concilliacion_2021.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="images\.DS_Store" />
     <None Include="images\arrows.svg" />
     <Content Include="packages.config" />

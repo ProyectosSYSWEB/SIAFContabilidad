@@ -3,6 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script src="../../Scripts/select2/js/select2.min.js"></script>
     <link href="../../Scripts/select2/css/select2.min.css" type="text/css" rel="stylesheet" />
+    <script src="../../Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <link href="../../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -254,7 +256,7 @@
                                             Encabezado
                                         </HeaderTemplate>
                                         <ContentTemplate>
-                                            <div class="container">
+                                            <div class="container-fluid">
                                                 <div class="row">
                                                     <div class="col-md-2">
                                                         Mes Inicial
@@ -378,7 +380,7 @@
                                         <ContentTemplate>
                                             <asp:DropDownList ID="ddlCtaCheques" runat="server" Visible="False" Width="100%">
                                             </asp:DropDownList>
-                                            <div class="container">
+                                            <div class="container-fluid">
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         Tipo
@@ -500,7 +502,7 @@
                                                     <div class="col">
                                                         <asp:UpdatePanel ID="UpdatePanel9" runat="server">
                                                             <ContentTemplate>
-                                                                <asp:GridView ID="grdDetalle" runat="server" AutoGenerateColumns="False" CssClass="mGrid" OnRowDeleting="grdDetalle_RowDeleting" Width="100%" OnRowEditing="grdDetalle_RowEditing" OnRowUpdating="grdDetalle_RowUpdating" AllowPaging="True" OnRowCancelingEdit="grdDetalle_RowCancelingEdit" OnPageIndexChanging="grdDetalle_PageIndexChanging">
+                                                                <asp:GridView ID="grdDetalle" runat="server" AutoGenerateColumns="False" CssClass="mGrid" OnRowDeleting="grdDetalle_RowDeleting" Width="100%" OnRowEditing="grdDetalle_RowEditing" OnRowUpdating="grdDetalle_RowUpdating" OnRowCancelingEdit="grdDetalle_RowCancelingEdit" OnPageIndexChanging="grdDetalle_PageIndexChanging">
                                                                     <AlternatingRowStyle CssClass="alt" />
                                                                     <Columns>
                                                                         <asp:BoundField DataField="CveTipo" ReadOnly="True">
@@ -561,10 +563,25 @@
                         </div>
                         <div class="row">
                             <div class="col text-right">
-
-                                <asp:Button ID="btnCancelar" runat="server" CausesValidation="False" CssClass="btn btn-blue-grey" OnClick="btnCancelar_Click" Text="Salir" />
-                                &nbsp;&nbsp;<asp:Button ID="btnGuardar_Continuar" runat="server" CssClass="btn btn-primary" OnClick="btnGuardar_Continuar_Click" Text="Guardar" ValidationGroup="Guardar" />
-
+                                <asp:UpdatePanel ID="updPnlGuardar" runat="server">
+                                    <ContentTemplate>
+                                        <asp:Button ID="btnCancelar" runat="server" CausesValidation="False" CssClass="btn btn-blue-grey" OnClick="btnCancelar_Click" Text="Salir" />
+                                        &nbsp;&nbsp;<asp:Button ID="btnGuardar_Continuar" runat="server" CssClass="btn btn-primary" OnClick="btnGuardar_Continuar_Click" Text="Guardar" ValidationGroup="Guardar" />
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <asp:UpdateProgress ID="updPgrGuardar" runat="server"
+                                    AssociatedUpdatePanelID="updPnlGuardar">
+                                    <ProgressTemplate>
+                                        <asp:Image ID="imgBuscar" runat="server"
+                                            AlternateText="Espere un momento, por favor.." Height="50px"
+                                            ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                            ToolTip="Espere un momento, por favor.." Width="50px" Style="text-align: center" />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
                             </div>
                         </div>
                     </div>
@@ -573,7 +590,15 @@
         </ContentTemplate>
     </asp:UpdatePanel>
 
-    <script type="text/javascript">
+    <script type="text/javascript">        
+        function Detalle() {
+            $('#<%= grdDetalle.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdDetalle.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": false
+            });
+        };
+
+
         function CambiaText() {
             alert("paso");
         };
