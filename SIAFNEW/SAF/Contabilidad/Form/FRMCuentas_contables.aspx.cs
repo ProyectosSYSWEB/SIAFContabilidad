@@ -86,6 +86,20 @@ namespace SAF.Rep
                 lblError.Text = ex.Message;
             }
         }
+        private void CargarGridProyectos()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                grdCatProyectos.DataSource = dt;
+                grdCatProyectos.DataSource = GetListCOG();
+                grdCatProyectos.DataBind();
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = ex.Message;
+            }
+        }
 
         private List<cuentas_contables> GetList()
         {
@@ -658,8 +672,7 @@ namespace SAF.Rep
             {
                 CargarGridCOG();
                 ScriptManager.RegisterStartupScript(this, GetType(), "GridCOG", "CatCOG();", true);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupCOG", "$('#modalCOG').modal('show')", true);
-
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupCOG", "$('#modalCOG').modal('show')", true);               
             }
             catch (Exception ex)
             {
@@ -673,19 +686,23 @@ namespace SAF.Rep
         protected void linkBttnActualizar_Click(object sender, EventArgs e)
         {
             cuentas_contables objCta = new cuentas_contables();
+            int Total = 0;
             Verificador = string.Empty;
+            lblMsj.Text = string.Empty;
             try
             {
                 objCta.ejercicio = SesionUsu.Usu_Ejercicio;
-                CNcuentas_contables.CuentasContables_ActDesc(objCta, ref Verificador);
+                CNcuentas_contables.CuentasContables_ActDesc(objCta, ref Total, ref Verificador);
                 if (Verificador == "0")
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'Las cuentas fueron actualizadas correctamente.');", true);
+                    lblMsj.Text = "Se actualizaron "+Total+" registros.";
+                    //ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'Las cuentas fueron actualizadas correctamente.');", true);
                 }
                 else
                 {
                     CNComun.VerificaTextoMensajeError(ref Verificador);
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+                    lblMsj.Text = Verificador;
+                    //ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
                 }
             }
             catch (Exception ex)
@@ -745,5 +762,42 @@ namespace SAF.Rep
             ScriptManager.RegisterStartupScript(this, GetType(), "GridCOG", "CatCOG();", true);
 
         }
+
+        protected void linkCatNiv_Click(object sender, EventArgs e)
+        {
+            CargarGridCatNiv2_3();
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridCOG", "CatCOG();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupCOG", "$('#modalCOG').modal('show')", true);
+        }
+        protected void linkActNiv_Click(object sender, EventArgs e)
+        {
+            cuentas_contables objCta = new cuentas_contables();
+            int Total = 0;
+            Verificador = string.Empty;
+            lblMsj.Text = string.Empty;
+            try
+            {
+                objCta.ejercicio = SesionUsu.Usu_Ejercicio;
+                CNcuentas_contables.CuentasContables_ActDescNiv2_3(objCta, ref Total, ref Verificador);
+                if (Verificador == "0")
+                {
+                    lblMsj.Text = "Se actualizaron " + Total + " registros de niveles 2 y 3.";
+                    //ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'Las cuentas fueron actualizadas correctamente.');", true);
+                }
+                else
+                {
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    lblMsj.Text = Verificador;
+                    //ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+            }
+        }
+
     }
 }

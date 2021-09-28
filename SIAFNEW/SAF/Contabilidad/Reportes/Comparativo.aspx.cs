@@ -239,12 +239,12 @@ namespace SAF.Contabilidad.Reportes
                     ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_concentrado_ingresos('RP-015exc','" + SesionUsu.Usu_Ejercicio + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "');", true);
                     break;
                 case "RP-Diario-General":
-                    ruta = "http://148.222.11.45/Contabilidad/Contabilidad/Reportes/VisualizadorCrystal.aspx?Tipo=RP-Diario-Generalxls&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + DDLCentro_Contable.SelectedValue;
-                    //ruta = "VisualizadorCrystal.aspx?Tipo=RP-Diario-Generalxls&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + DDLCentro_Contable.SelectedValue;
-                    //_open = "window.open('" + ruta + "', '_newtab');";
-                    //ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+                    //ruta = "http://148.222.11.45/Contabilidad/Contabilidad/Reportes/VisualizadorCrystal.aspx?Tipo=RP-Diario-Generalxls&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + DDLCentro_Contable.SelectedValue;
+                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-Diario-Generalxls&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + DDLCentro_Contable.SelectedValue;
+                    _open = "window.open('" + ruta + "', '_newtab');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
                     //Response.Redirect(ruta, false);
-                    ScriptManager.RegisterStartupScript(this, GetType(), "VerReporte", "Reporte('" + ruta + "');", true);
+                    //ScriptManager.RegisterStartupScript(this, GetType(), "VerReporte", "Reporte('" + ruta + "');", true);
                     break;    
                 case "RP-Resumen-de-cuentas":
                     ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_resumen_de_cuetas('RP-Resumen-de-cuentasxls','" + SesionUsu.Usu_Ejercicio + "','" + DDLCentro_Contable.SelectedValue + "','" + ddlcuenta1.SelectedValue + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "');", true);

@@ -322,7 +322,7 @@ namespace SAF.Form
                     CNPoliza.PolizaConsultaGrid_Min(ref ObjPoliza, FechaInicial, FechaFinal, txtBuscar.Text.ToUpper(), SesionUsu.Usu_TipoUsu, ref List);
                 else
                     CNPoliza.PolizaConsultaGrid(ref ObjPoliza, FechaInicial, FechaFinal, txtBuscar.Text.ToUpper(), SesionUsu.Usu_TipoUsu, ref List);
-                if (List.Count > 2000)
+                if (List.Count >= 2000)
                 {
                     List = null;
                     divErrorTot.Visible = true;
@@ -543,15 +543,17 @@ namespace SAF.Form
                     ObjPoliza.Modificacion_usuario = SesionUsu.Usu_Nombre;
                     ObjPoliza.Cheque_cuenta = ddlCheque_Cuenta.SelectedValue; //"00000"; //ddlCheque_Cuenta.SelectedValue;
                     ObjPoliza.Cheque_numero = txtCheque_Numero.Text;
-                    ObjPoliza.Cheque_importe = (txtCheque_Importe.Text.Length > 0) ? Convert.ToDouble(txtCheque_Importe.Text) : Convert.ToDouble("0");                    
-                    ObjPoliza.Cedula_numero = ddlNumCedula.SelectedValue; //txtCedula_Numero.Text;
-                    if(ObjPoliza.Cedula_numero.Length == 18)
+                    ObjPoliza.Cheque_importe = (txtCheque_Importe.Text.Length > 0) ? Convert.ToDouble(txtCheque_Importe.Text) : Convert.ToDouble("0");
+                    if (ddlTipo0.SelectedValue != "I")
                     {
-                        ListCedulas = (List<Comun>)Session["Cedulas"];
-                        ObjPoliza.IdCedula = Convert.ToInt32(ListCedulas[ddlNumCedula.SelectedIndex].EtiquetaDos);
+                        ObjPoliza.Cedula_numero = ddlNumCedula.SelectedValue; //txtCedula_Numero.Text;
+                        if (ObjPoliza.Cedula_numero.Length == 18)
+                        {
+                            ListCedulas = (List<Comun>)Session["Cedulas"];
+                            ObjPoliza.IdCedula = Convert.ToInt32(ListCedulas[ddlNumCedula.SelectedIndex].EtiquetaDos);
+                        }
                     }
                     ObjPoliza.Beneficiario = txtBeneficiario.Text;
-                    //ObjPoliza.Tipo_Documento = rdoBtnnTipoDocto.SelectedValue; // == "CFDI" ? "CFDI" : rdoBtnnTipoDocto.SelectedValue == "OFICIO" ? "OFICIO" : "";
                     ObjPoliza.Tipo_Documento = ddlTipoDocto.SelectedValue;
                     ObjPoliza.Clasificacion = ddlClasifica.SelectedValue;
                     //ObjPoliza.CFDI = rdoBtnnTipoDocto.SelectedValue == "CFDI" ? "S" : "N";

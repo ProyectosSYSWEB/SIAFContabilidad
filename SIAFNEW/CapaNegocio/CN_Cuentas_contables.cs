@@ -81,19 +81,34 @@ namespace CapaNegocio
             }
         }
 
-        public void CuentasContables_ActDesc(cuentas_contables objcuentas_contables, ref string Verificador)
+        public void CuentasContables_ActDesc(cuentas_contables objcuentas_contables, ref int Total, ref string Verificador)
         {
             try
             {
 
                 CD_Cuentas_contables CDcuenta = new CD_Cuentas_contables();
-                CDcuenta.CuentasContables_ActDesc(objcuentas_contables, ref Verificador);
+                CDcuenta.CuentasContables_ActDesc(objcuentas_contables, ref Total, ref Verificador);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
+
+        public void CuentasContables_ActDescNiv2_3(cuentas_contables objcuentas_contables, ref int Total, ref string Verificador)
+        {
+            try
+            {
+
+                CD_Cuentas_contables CDcuenta = new CD_Cuentas_contables();
+                CDcuenta.CuentasContables_ActDescNiv2_3(objcuentas_contables, ref Total, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void Editar_cuentas_contables(ref cuentas_contables objcuentas_contables, ref string Verificador)
         {
             try

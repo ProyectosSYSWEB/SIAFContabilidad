@@ -178,7 +178,7 @@ namespace CapaDatos
             }
         }
 
-        public void CuentasContables_ActDesc(cuentas_contables objcuentas_contables, ref string Verificador)
+        public void CuentasContables_ActDesc(cuentas_contables objcuentas_contables, ref int Total, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
             OracleCommand Cmd = null;
@@ -186,8 +186,30 @@ namespace CapaDatos
             {
                 String[] Parametros = { "P_EJERCICIO" };
                 object[] Valores = { Convert.ToInt32(objcuentas_contables.ejercicio) };
-                String[] ParametrosOut = { "p_Bandera" };
+                String[] ParametrosOut = { "P_TOT_ACTUALIZADO", "P_BANDERA" };
                 Cmd = CDDatos.GenerarOracleCommand("ACT_DESC_CTAS", ref Verificador, Parametros, Valores, ParametrosOut);
+                Total = Convert.ToInt32(Cmd.Parameters["P_TOT_ACTUALIZADO"].Value);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+        public void CuentasContables_ActDescNiv2_3(cuentas_contables objcuentas_contables, ref int Total, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_EJERCICIO" };
+                object[] Valores = { Convert.ToInt32(objcuentas_contables.ejercicio) };
+                String[] ParametrosOut = { "P_TOT_ACTUALIZADO", "P_BANDERA" };
+                Cmd = CDDatos.GenerarOracleCommand("UPD_DESC_CTAS", ref Verificador, Parametros, Valores, ParametrosOut);
+                Total = Convert.ToInt32(Cmd.Parameters["P_TOT_ACTUALIZADO"].Value);
             }
             catch (Exception ex)
             {

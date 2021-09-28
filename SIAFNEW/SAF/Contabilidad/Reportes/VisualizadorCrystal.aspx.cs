@@ -499,7 +499,7 @@ namespace SAF.Reportes
             connectionInfo.UserID = "SAF";
             connectionInfo.Password = "DSIA2014";
             SetDBLogonForReport(connectionInfo, report);
-            report.ExportToHttpResponse(ExportFormatType.ExcelWorkbook, Response, false, Tipo);
+            report.ExportToHttpResponse(ExportFormatType.ExcelWorkbook, Response, true, Tipo);
             //report.ExportToDisk(ExportFormatType.ExcelRecord, "report.xlsx");
             CR_Reportes.ReportSource = report;
         }
