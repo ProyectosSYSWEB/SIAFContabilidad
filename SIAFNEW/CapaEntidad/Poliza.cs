@@ -22,7 +22,7 @@ namespace CapaEntidad
         private string _Key_adecuacion;
         private string _Cheque_cuenta= "00000";
         private string _Cheque_numero;
-        private string _Cedula_numero;
+        private string _Cedula_numero=string.Empty;
         private string _Beneficiario;
         private string _Alta_fecha;
         private string _Alta_usuario;

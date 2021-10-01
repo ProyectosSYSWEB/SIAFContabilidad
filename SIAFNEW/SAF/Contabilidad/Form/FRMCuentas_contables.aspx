@@ -5,6 +5,102 @@
     <link href="../../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
 
     <style type="text/css">
+        section {
+            float: left;
+            width: 100%;
+            background: #43cea2; /* fallback for old browsers */
+            background: -webkit-linear-gradient(to left, #185a9d, #43cea2); /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to left, #185a9d, #43cea2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            padding: 30px 0;
+        }
+
+        .card {
+            -moz-box-direction: normal;
+            -moz-box-orient: vertical;
+            background-color: #fff;
+            border-radius: 0.25rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            margin-bottom: 1px;
+            border: none;
+        }
+
+        .card-header:first-child {
+            border-radius: 0;
+        }
+
+        .card-header {
+            background-color: #f7f7f9;
+            margin-bottom: 0;
+            padding: 20px 1.25rem;
+            border: none;
+        }
+
+            .card-header a i {
+                float: left;
+                font-size: 25px;
+                padding: 5px 0;
+                margin: 0 25px 0 0px;
+                color: #195C9D;
+            }
+
+            .card-header i {
+                float: right;
+                font-size: 30px;
+                width: 1%;
+                margin-top: 8px;
+                margin-right: 10px;
+            }
+
+            .card-header a {
+                width: 97%;
+                float: left;
+                color: #565656;
+            }
+
+            .card-header p {
+                margin: 0;
+            }
+
+            .card-header h3 {
+                margin: 0 0 0px;
+                font-size: 20px;
+                font-family: 'Slabo 27px', serif;
+                font-weight: bold;
+                color: #3fc199;
+            }
+
+        .card-block {
+            -moz-box-flex: 1;
+            flex: 1 1 auto;
+            padding: 20px;
+            color: #232323;
+            box-shadow: inset 0px 4px 5px rgba(0,0,0,0.1);
+            border-top: 1px soild #000;
+            border-radius: 0;
+        }
+
+        .panel-group {
+            margin-bottom: 20px;
+        }
+
+            .panel-group .panel {
+                margin-bottom: 0;
+                border-radius: 4px;
+            }
+
+        .panel-default {
+            border-color: #ddd;
+        }
+
+            .panel-default > .panel-heading {
+                color: #333;
+                background-color: #f5f5f5;
+                border-color: #ddd;
+            }
+
+
         .nav-tabs .nav-link {
             border: 1px solid #f8f9fa;
             border-top-left-radius: .25rem;
@@ -77,7 +173,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Catálogo</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="Pestania2">
                         <a class="nav-link" id="pago-tdc" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Actualizar Cuentas</a>
                     </li>
                 </ul>
@@ -131,7 +227,7 @@
                                 </div>
                             </div>
 
-                            
+
                             <div class="row">
                                 <div class="col text-center">
                                     <asp:UpdateProgress ID="UpdateProgress1" runat="server"
@@ -175,202 +271,184 @@
                                 <ContentTemplate>
                                     <asp:MultiView ID="MultiViewcuentas_contables" runat="server">
                                         <asp:View ID="View1" runat="server">
-                                            <div class="container-fluid">
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                        <asp:UpdatePanel ID="UpdatePanel17" runat="server">
-                                                            <ContentTemplate>
-                                                                <asp:Label ID="Label15" runat="server" Text="Subdependencia"></asp:Label>
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
-                                                    </div>
-                                                    <div class="col-md-10">
-                                                        <asp:UpdatePanel ID="UpdatePanel5" runat="server">
-                                                            <ContentTemplate>
-                                                                <asp:DropDownList ID="DDLSubdependencia" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DDLSubdependencia_SelectedIndexChanged"
-                                                                    Width="100%">
-                                                                </asp:DropDownList>
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
-                                                    </div>
-                                                </div>
-                                                <div class="row note note-warning">
-                                                    <div class="col-md-2">
-                                                        <p>Cuenta Contable</p>
-                                                    </div>
-                                                    <div class="col-md-10">
 
-                                                        <asp:TextBox ID="txtcuenta_contable" runat="server" MaxLength="22"
-                                                            Width="420px" Visible="False"></asp:TextBox>
-                                                    </div>
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <asp:UpdatePanel ID="UpdatePanel17" runat="server">
+                                                        <ContentTemplate>
+                                                            <asp:Label ID="Label15" runat="server" Text="Subdependencia"></asp:Label>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                        Nivel1
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <asp:UpdatePanel ID="UpdatePanel7" runat="server">
-                                                            <ContentTemplate>
-                                                                <asp:TextBox ID="txt1" runat="server" Enabled="False" MaxLength="4"
-                                                                    OnTextChanged="txt1_TextChanged" CssClass="form-control">0000</asp:TextBox>
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        Nivel2
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <asp:UpdatePanel ID="UpdatePanel4" runat="server">
-                                                            <ContentTemplate>
-                                                                <asp:TextBox ID="txt2" runat="server" Enabled="False" MaxLength="5"
-                                                                    OnTextChanged="txt2_TextChanged" CssClass="form-control">00000</asp:TextBox>
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                        Nivel 3
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <asp:UpdatePanel ID="UpdatePanel15" runat="server">
-                                                            <ContentTemplate>
-                                                                <asp:TextBox ID="txt3" runat="server" OnTextChanged="TextBox3_TextChanged"
-                                                                    Enabled="False" MaxLength="5" CssClass="form-control">00000</asp:TextBox>
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        Nivel 4
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <asp:UpdatePanel ID="UpdatePanel16" runat="server">
-                                                            <ContentTemplate>
-                                                                <asp:TextBox ID="txt4" runat="server" Enabled="False" MaxLength="5"
-                                                                    OnTextChanged="txt4_TextChanged" AutoPostBack="True" CssClass="form-control">00000</asp:TextBox>
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                        Descripción
-                                                    </div>
-                                                    <div class="col-md-10">
-                                                        <asp:TextBox ID="txtdescripcion" runat="server" CssClass="form-control"></asp:TextBox>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                        <asp:Label ID="Label5" runat="server" Text="Tipo"></asp:Label>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <asp:DropDownList ID="txttipo" runat="server" AutoPostBack="True"
-                                                            OnSelectedIndexChanged="DDLCentro_Contable_SelectedIndexChanged"
-                                                            Enabled="False" CssClass="form-control">
-                                                            <asp:ListItem Value="AF">AFECTABLE</asp:ListItem>
-                                                            <asp:ListItem Value="AC">ACUMULABLE</asp:ListItem>
-                                                        </asp:DropDownList>
-
-                                                    </div>
-
-                                                    <div class="col-md-2">
-                                                        <asp:Label ID="Label9" runat="server" Text="Status:"></asp:Label>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <asp:DropDownList ID="ddlstatus" runat="server"
-                                                            OnSelectedIndexChanged="ddlMayor_SelectedIndexChanged" Enabled="False" CssClass="form-control">
-                                                            <asp:ListItem Value="A">ALTA</asp:ListItem>
-                                                            <asp:ListItem Value="B">BAJA</asp:ListItem>
-                                                        </asp:DropDownList>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                        <asp:Label ID="Label12" runat="server" Text="Clasificación"></asp:Label>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <asp:UpdatePanel ID="UpdatePanel6" runat="server">
-                                                            <ContentTemplate>
-                                                                <asp:DropDownList ID="ddlclasificacion" runat="server" AutoPostBack="True" CssClass="form-control">
-                                                                    <asp:ListItem Value="DET">DETALLE</asp:ListItem>
-                                                                    <asp:ListItem Value="ESP">ESPECIFICA</asp:ListItem>
-                                                                </asp:DropDownList>
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
-
-                                                    </div>
-
-                                                    <div class="col-md-2">
-
-                                                        <asp:Label ID="Label13" runat="server" Text="Nivel:"></asp:Label>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <asp:UpdatePanel ID="UpdatePanel150" runat="server">
-                                                            <ContentTemplate>
-                                                                <asp:DropDownList ID="ddlnivel" runat="server" AutoPostBack="True"
-                                                                    Enabled="False"
-                                                                    OnSelectedIndexChanged="DDLCentro_Contable_SelectedIndexChanged" CssClass="form-control">
-                                                                    <asp:ListItem Value="1">NIVEL 1</asp:ListItem>
-                                                                    <asp:ListItem Value="2">NIVEL 2</asp:ListItem>
-                                                                    <asp:ListItem Value="3">NIVEL 3</asp:ListItem>
-                                                                    <asp:ListItem Value="4">NIVEL 4</asp:ListItem>
-                                                                    <asp:ListItem Value="5">NIVEL 5</asp:ListItem>
-                                                                </asp:DropDownList>
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col text-right">
-                                                        <asp:UpdatePanel ID="UpdatePanel8" runat="server">
-                                                            <ContentTemplate>
-                                                                <asp:Button ID="BTN_Guardar" runat="server" OnClick="BTN_Guardar_Click"
-                                                                    Text="Guardar" CssClass="btn btn-primary" />
-                                                                &nbsp;
-                                    <asp:Button ID="BTN_continuar" runat="server" OnClick="BTN_continuar_Click"
-                                        Text="Guardar y Continuar" Visible="False" CssClass="btn btn-info" />
-                                                                &nbsp;
-                                    <asp:Button ID="BTN_Cancelar" runat="server" OnClick="BTN_Cancelar_Click"
-                                        Text="Cancelar" CssClass="btn btn-blue-grey" />
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col text-center">
-                                                        <asp:UpdateProgress ID="UpdateProgress3" runat="server"
-                                                            AssociatedUpdatePanelID="UpdatePanel8">
-                                                            <ProgressTemplate>
-                                                                <asp:Image ID="Image2q" runat="server"
-                                                                    AlternateText="Espere un momento, por favor.." Height="50px"
-                                                                    ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
-                                                                    ToolTip="Espere un momento, por favor.." Width="50px" />
-                                                            </ProgressTemplate>
-                                                        </asp:UpdateProgress>
-                                                    </div>
+                                                <div class="col-md-10">
+                                                    <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                                                        <ContentTemplate>
+                                                            <asp:DropDownList ID="DDLSubdependencia" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DDLSubdependencia_SelectedIndexChanged"
+                                                                Width="100%">
+                                                            </asp:DropDownList>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
                                                 </div>
                                             </div>
+                                            <div class="row note note-warning">
+                                                <div class="col-md-2">
+                                                    <p>Cuenta Contable</p>
+                                                </div>
+                                                <div class="col-md-10">
+
+                                                    <asp:TextBox ID="txtcuenta_contable" runat="server" MaxLength="22"
+                                                        Width="420px" Visible="False"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    Nivel1
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+                                                        <ContentTemplate>
+                                                            <asp:TextBox ID="txt1" runat="server" Enabled="False" MaxLength="4"
+                                                                OnTextChanged="txt1_TextChanged" CssClass="form-control">0000</asp:TextBox>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    Nivel2
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                                                        <ContentTemplate>
+                                                            <asp:TextBox ID="txt2" runat="server" Enabled="False" MaxLength="5"
+                                                                OnTextChanged="txt2_TextChanged" CssClass="form-control">00000</asp:TextBox>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    Nivel 3
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <asp:UpdatePanel ID="UpdatePanel15" runat="server">
+                                                        <ContentTemplate>
+                                                            <asp:TextBox ID="txt3" runat="server" OnTextChanged="TextBox3_TextChanged"
+                                                                Enabled="False" MaxLength="5" CssClass="form-control">00000</asp:TextBox>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    Nivel 4
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <asp:UpdatePanel ID="UpdatePanel16" runat="server">
+                                                        <ContentTemplate>
+                                                            <asp:TextBox ID="txt4" runat="server" Enabled="False" MaxLength="5"
+                                                                OnTextChanged="txt4_TextChanged" AutoPostBack="True" CssClass="form-control">00000</asp:TextBox>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    Descripción
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <asp:TextBox ID="txtdescripcion" runat="server" CssClass="form-control"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <asp:Label ID="Label5" runat="server" Text="Tipo"></asp:Label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <asp:DropDownList ID="txttipo" runat="server" AutoPostBack="True"
+                                                        OnSelectedIndexChanged="DDLCentro_Contable_SelectedIndexChanged"
+                                                        Enabled="False" CssClass="form-control">
+                                                        <asp:ListItem Value="AF">AFECTABLE</asp:ListItem>
+                                                        <asp:ListItem Value="AC">ACUMULABLE</asp:ListItem>
+                                                    </asp:DropDownList>
+
+                                                </div>
+
+                                                <div class="col-md-2">
+                                                    <asp:Label ID="Label9" runat="server" Text="Status:"></asp:Label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <asp:DropDownList ID="ddlstatus" runat="server"
+                                                        OnSelectedIndexChanged="ddlMayor_SelectedIndexChanged" Enabled="False" CssClass="form-control">
+                                                        <asp:ListItem Value="A">ALTA</asp:ListItem>
+                                                        <asp:ListItem Value="B">BAJA</asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <asp:Label ID="Label12" runat="server" Text="Clasificación"></asp:Label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+                                                        <ContentTemplate>
+                                                            <asp:DropDownList ID="ddlclasificacion" runat="server" AutoPostBack="True" CssClass="form-control">
+                                                                <asp:ListItem Value="DET">DETALLE</asp:ListItem>
+                                                                <asp:ListItem Value="ESP">ESPECIFICA</asp:ListItem>
+                                                            </asp:DropDownList>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+
+                                                </div>
+
+                                                <div class="col-md-2">
+
+                                                    <asp:Label ID="Label13" runat="server" Text="Nivel:"></asp:Label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <asp:UpdatePanel ID="UpdatePanel150" runat="server">
+                                                        <ContentTemplate>
+                                                            <asp:DropDownList ID="ddlnivel" runat="server" AutoPostBack="True"
+                                                                Enabled="False"
+                                                                OnSelectedIndexChanged="DDLCentro_Contable_SelectedIndexChanged" CssClass="form-control">
+                                                                <asp:ListItem Value="1">NIVEL 1</asp:ListItem>
+                                                                <asp:ListItem Value="2">NIVEL 2</asp:ListItem>
+                                                                <asp:ListItem Value="3">NIVEL 3</asp:ListItem>
+                                                                <asp:ListItem Value="4">NIVEL 4</asp:ListItem>
+                                                                <asp:ListItem Value="5">NIVEL 5</asp:ListItem>
+                                                            </asp:DropDownList>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col text-right">
+                                                    <asp:UpdatePanel ID="UpdatePanel8" runat="server">
+                                                        <ContentTemplate>
+                                                            <asp:Button ID="BTN_Guardar" runat="server" OnClick="BTN_Guardar_Click"
+                                                                Text="Guardar" CssClass="btn btn-primary" />
+                                                            &nbsp;
+                                    <asp:Button ID="BTN_continuar" runat="server" OnClick="BTN_continuar_Click"
+                                        Text="Guardar y Continuar" Visible="False" CssClass="btn btn-info" />
+                                                            &nbsp;
+                                    <asp:Button ID="BTN_Cancelar" runat="server" OnClick="BTN_Cancelar_Click"
+                                        Text="Cancelar" CssClass="btn btn-blue-grey" />
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col text-center">
+                                                    <asp:UpdateProgress ID="UpdateProgress3" runat="server"
+                                                        AssociatedUpdatePanelID="UpdatePanel8">
+                                                        <ProgressTemplate>
+                                                            <asp:Image ID="Image2q" runat="server"
+                                                                AlternateText="Espere un momento, por favor.." Height="50px"
+                                                                ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                                                ToolTip="Espere un momento, por favor.." Width="50px" />
+                                                        </ProgressTemplate>
+                                                    </asp:UpdateProgress>
+                                                </div>
+                                            </div>
+
                                         </asp:View>
                                         <asp:View ID="View2" runat="server">
-                                            <%--<div class="row">
-                        <div class="col-md-2">
-                            <asp:Label ID="Label10" runat="server" Text="Buscar"></asp:Label>
-                        </div>
-                        <div class="col-md-10">
-                            <asp:UpdatePanel ID="UpdatePanel10" runat="server">
-                                <ContentTemplate>
-                                    <div class="input-group mb-3">
-                                        <asp:TextBox ID="TXTbuscar" runat="server" CssClass="form-control"></asp:TextBox>
-                                        <div class="input-group-append">
-                                            <asp:ImageButton ID="BTNbuscar" runat="server" class="" Height="38px"
-                                                ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="BTNbuscar_Click" Width="39px" />
-                                        </div>
-                                    </div>
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
-                        </div>
-                    </div>--%>
                                             <div class="row">
                                                 <div class="col text-center">
                                                     <asp:UpdateProgress ID="UpdateProgress5" runat="server"
@@ -457,31 +535,6 @@
                                         <asp:View ID="View3" runat="server">
                                             <asp:UpdatePanel ID="UpdatePanel12" runat="server">
                                                 <ContentTemplate>
-                                                    <%--                                <div class="row">
-                                    <div class="col-md-2">
-                                        <asp:Label ID="lblBuscar" runat="server" Text="# de Póliza/Concepto"></asp:Label>
-                                    </div>
-                                    <div class="col-md-9">                                       
-                                        <asp:TextBox ID="txtBuscar0" runat="server" AutoPostBack="True" OnTextChanged="txtBuscar0_TextChanged" CssClass="form-control" Width="100%"></asp:TextBox>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <asp:UpdatePanel ID="UpdatePanel13" runat="server">
-                                            <ContentTemplate>
-                                                <asp:ImageButton ID="imgbtnBuscar" runat="server" CausesValidation="False" Height="38px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgbtnBuscar_Click" Width="39px" />
-                                            </ContentTemplate>
-                                        </asp:UpdatePanel>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col text-center">
-                                        <asp:UpdateProgress ID="UpdateProgress6" runat="server" AssociatedUpdatePanelID="UpdatePanel13">
-                                            <ProgressTemplate>
-                                                <asp:Image ID="Image2q0" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." Width="50px" />
-                                            </ProgressTemplate>
-                                        </asp:UpdateProgress>
-                                    </div>
-                                </div>--%>
-
                                                     <div class="row">
                                                         <div class="col">
                                                             <asp:GridView ID="grvPolizas" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" EmptyDataText="No hay registros para mostrar" Font-Size="11px" ForeColor="Black" GridLines="Vertical" Width="100%" OnPageIndexChanging="grvPolizas_PageIndexChanging" CssClass="mGrid">
@@ -529,157 +582,239 @@
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
-
                     </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="pago-tdc">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    Actualizar cuentas, de acuerdo a la matriz COG.   
-                                </div>
-                                <div class="col-md-1">
-                                    <asp:UpdatePanel ID="updPnlActualizar" runat="server">
-                                        <ContentTemplate>
-                                    <asp:LinkButton ID="linkBttnActualizar" runat="server" CssClass="btn btn-warning" OnClick="linkBttnActualizar_Click">Actualizar</asp:LinkButton>
-                                             </ContentTemplate>
-                                    </asp:UpdatePanel>
-                                </div>
-                                <div class="col-md-2">
-                                    <asp:UpdatePanel ID="updPnlCatCOG" runat="server">
-                                        <ContentTemplate>
-                                            <asp:LinkButton ID="linkBttnCat" runat="server" CssClass="btn btn-blue-grey" OnClick="linkBttnCat_Click">Ver Catálogo</asp:LinkButton>
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
-                                </div>
-                            </div>
-                            <hr />
-                            <div class="row">
-                                <div class="col-md-9">
-                                    Actualizar cuentas niveles 2 y 3.
-                                </div>
-                                <div class="col-md-1">
-                                    <asp:UpdatePanel ID="updPnlActCatNiv" runat="server">
-                                        <ContentTemplate>
-                                    <asp:LinkButton ID="linkActNiv" runat="server" CssClass="btn btn-warning" OnClick="linkActNiv_Click">Actualizar</asp:LinkButton>
-                                            </ContentTemplate>
-                                        </asp:UpdatePanel>
-                                </div>
-                                <div class="col-md-2">
-                                    <asp:UpdatePanel ID="updPnlCatNiv" runat="server">
-                                        <ContentTemplate>
-                                            <asp:LinkButton ID="linkCatNiv" runat="server" CssClass="btn btn-blue-grey disabled" OnClick="linkCatNiv_Click">Ver Catálogo</asp:LinkButton>
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
-                                </div>
-                            </div>
-                            <hr />
-                            <div class="row">
-                                <div class="col text-center">
-                                    <asp:UpdateProgress ID="updPgrCatCOG" runat="server"
-                                        AssociatedUpdatePanelID="updPnlCatCOG">
-                                        <ProgressTemplate>
-                                            <asp:Image ID="imgCatCOG" runat="server"
-                                                AlternateText="Espere un momento, por favor.." Height="50px"
-                                                ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
-                                                ToolTip="Espere un momento, por favor.." Width="50px" Style="text-align: center" />
-                                        </ProgressTemplate>
-                                    </asp:UpdateProgress>
-                                </div>
-                            </div>
-                             <div class="row">
-                                    <div class="col text-center">
-                                        <asp:UpdateProgress ID="updPgrActualizar" runat="server" AssociatedUpdatePanelID="updPnlActualizar">
-                                            <ProgressTemplate>
-                                                <asp:Image ID="imgPgrActualizar" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." Width="50px" />
-                                            </ProgressTemplate>
-                                        </asp:UpdateProgress>
-                                        <asp:UpdateProgress ID="updPgrCatNiv" runat="server" AssociatedUpdatePanelID="updPnlActCatNiv">
-                                            <ProgressTemplate>
-                                                <asp:Image ID="imgActCatNiv" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." Width="50px" />
-                                            </ProgressTemplate>
-                                        </asp:UpdateProgress>
+                    <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="home-profile">
+                        <div id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="card">
+                                <div class="card-header" role="tab" id="headingOne">
+                                    <div class="mb-0">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
+                                            <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                            <h3>Matriz COG</h3>
+                                            <p>Se actualizaran las cuentas con la leyenda REVISAR, de acuerdo al siguiente catálogo.</p>
+                                        </a>
+                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
                                     </div>
                                 </div>
-                            <div class="row alert alert-warning">
-                                <div class="col">
-                                    <asp:UpdatePanel ID="UpdatePanel19" runat="server">
-                                        <ContentTemplate>
-                                            <asp:Label ID="lblMsj" runat="server" Text=""></asp:Label>
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
-                                    <%--<asp:UpdateProgress ID="UpdateProgress6" runat="server"
-                                        AssociatedUpdatePanelID="updPnlCatCOG">
-                                        <ProgressTemplate>
-                                            <asp:Image ID="imgCatCOG" runat="server"
-                                                AlternateText="Espere un momento, por favor.." Height="50px"
-                                                ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
-                                                ToolTip="Espere un momento, por favor.." Width="50px" Style="text-align: center" />
-                                        </ProgressTemplate>
-                                    </asp:UpdateProgress>--%>
+
+                                <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="">
+                                    <div class="card-block">
+                                        <div class="row">
+                                            <div class="col text-right">
+                                                <asp:UpdatePanel ID="updPnlActualizar" runat="server">
+                                                    <ContentTemplate>
+                                                        <asp:LinkButton ID="linkBttnActualizar" runat="server" CssClass="btn btn-warning" OnClick="linkBttnActualizar_Click">Actualizar</asp:LinkButton>
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <asp:UpdateProgress ID="updPgrActualizar" runat="server" AssociatedUpdatePanelID="updPnlActualizar">
+                                                    <ProgressTemplate>
+                                                        <asp:Image ID="imgPgrActualizar" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." Width="50px" />
+                                                    </ProgressTemplate>
+                                                </asp:UpdateProgress>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <asp:UpdatePanel ID="UpdatePanel10" runat="server">
+                                                    <ContentTemplate>
+                                                        <asp:GridView ID="grdCatCOG" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" OnRowCancelingEdit="grdCatCOG_RowCancelingEdit" OnRowEditing="grdCatCOG_RowEditing" OnRowUpdating="grdCatCOG_RowUpdating">
+                                                            <Columns>
+                                                                <asp:BoundField HeaderText="MAYOR" DataField="cuenta_mayor" ReadOnly="True" />
+                                                                <asp:BoundField HeaderText="COG" DataField="natura" ReadOnly="True" />
+                                                                <asp:BoundField HeaderText="NOMBRE" DataField="descripcion" ReadOnly="True">
+                                                                    <ItemStyle Width="75%" />
+                                                                </asp:BoundField>
+                                                                <asp:TemplateField HeaderText="STATUS">
+                                                                    <HeaderTemplate>
+                                                                        <asp:Button ID="bttnAgregar" runat="server" CssClass="btn btn-blue-grey" Font-Size="X-Small" Text="AGREGAR" OnClick="bttnAgregar_Click" />
+                                                                    </HeaderTemplate>
+                                                                    <EditItemTemplate>
+                                                                        <asp:TextBox ID="txtStatus" runat="server" Width="50px" Text='<%# Bind("status") %>'></asp:TextBox>
+                                                                    </EditItemTemplate>
+                                                                    <ItemTemplate>
+                                                                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("status") %>'></asp:Label>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:CommandField ShowEditButton="True" />
+                                                            </Columns>
+                                                            <FooterStyle CssClass="enc" />
+                                                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                            <SelectedRowStyle CssClass="sel" />
+                                                            <HeaderStyle CssClass="enc" />
+                                                            <AlternatingRowStyle CssClass="alt" />
+                                                        </asp:GridView>
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" role="tab" id="headingTwo">
+                                    <div class="mb-0">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
+                                            <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                            <h3>Catálogo proyectos/fuentes/dependencias</h3>
+                                            <p>Se actualizaran las cuentas con la leyenda REVISAR, de acuerdo al siguiente catálogo.</p>
+                                        </a>
+                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false">
+                                    <div class="card-block">
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                                Tipo
+                                            </div>
+                                            <div class="col-md-10">
+                                                <asp:UpdatePanel ID="updPnlTipoCat" runat="server">
+                                                    <ContentTemplate>
+                                                        <asp:DropDownList ID="ddlTipoCat" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlTipoCat_SelectedIndexChanged">
+                                                            <asp:ListItem Value="P">Proyectos</asp:ListItem>
+                                                            <asp:ListItem Value="F">Fuentes</asp:ListItem>
+                                                            <asp:ListItem Value="D">Dependencias</asp:ListItem>
+                                                            <asp:ListItem Value="N">2do nivel</asp:ListItem>
+                                                        </asp:DropDownList>
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <asp:UpdatePanel ID="updPnlActCatNiv" runat="server">
+                                                    <ContentTemplate>
+                                                        <asp:LinkButton ID="linkActNiv" runat="server" CssClass="btn btn-warning" OnClick="linkActNiv_Click">Actualizar</asp:LinkButton>
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
+                                            </div>
+                                            <asp:UpdateProgress ID="updPgrCatNiv" runat="server" AssociatedUpdatePanelID="updPnlActCatNiv">
+                                                <ProgressTemplate>
+                                                    <asp:Image ID="imgActCatNiv" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." Width="50px" />
+                                                </ProgressTemplate>
+                                            </asp:UpdateProgress>
+                                            <div class="row alert alert-warning">
+                                                <div class="col">
+                                                    <asp:UpdatePanel ID="UpdatePanel19" runat="server">
+                                                        <ContentTemplate>
+                                                            <asp:Label ID="lblMsj" runat="server" Text=""></asp:Label>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col text-center">
+                                                <asp:UpdateProgress ID="updPgrTipoCat" runat="server"
+                                                    AssociatedUpdatePanelID="updPnlTipoCat">
+                                                    <ProgressTemplate>
+                                                        <asp:Image ID="imgTipoCat" runat="server"
+                                                            AlternateText="Espere un momento, por favor.." Height="50px"
+                                                            ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                                            ToolTip="Espere un momento, por favor.." Width="50px" Style="text-align: center" />
+                                                    </ProgressTemplate>
+                                                </asp:UpdateProgress>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col text-center">
+                                                <asp:UpdateProgress ID="updPgrCat" runat="server"
+                                                    AssociatedUpdatePanelID="UpdatePanel20">
+                                                    <ProgressTemplate>
+                                                        <asp:Image ID="imgCat" runat="server"
+                                                            AlternateText="Espere un momento, por favor.." Height="50px"
+                                                            ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                                            ToolTip="Espere un momento, por favor.." Width="50px" Style="text-align: center" />
+                                                    </ProgressTemplate>
+                                                </asp:UpdateProgress>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <asp:UpdatePanel ID="UpdatePanel20" runat="server">
+                                                    <ContentTemplate>
+                                                        <asp:GridView ID="grdCatalogos" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" OnRowCancelingEdit="grdCatalogos_RowCancelingEdit" OnRowEditing="grdCatalogos_RowEditing" OnRowUpdating="grdCatalogos_RowUpdating" OnRowDeleting="grdCatalogos_RowDeleting">
+                                                            <Columns>
+                                                                <asp:BoundField HeaderText="CVE" DataField="Etiqueta" />
+                                                                <asp:BoundField HeaderText="DESCRIPCIÓN" DataField="EtiquetaDos">
+                                                                    <ItemStyle Width="75%" />
+                                                                </asp:BoundField>
+                                                                <asp:TemplateField HeaderText="STATUS">
+                                                                    <HeaderTemplate>
+                                                                        <%--<asp:Button ID="bttnAgregarCatCta" runat="server" CssClass="btn btn-blue-grey" Font-Size="X-Small" Text="AGREGAR" OnClick="bttnAgregarCatCta_Click" />--%>
+                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCat">Agregar</button>
+                                                                    </HeaderTemplate>
+                                                                    <EditItemTemplate>
+                                                                        <asp:TextBox ID="txtStatus" runat="server" Width="50px" Text='<%# Bind("EtiquetaTres") %>'></asp:TextBox>
+                                                                    </EditItemTemplate>
+                                                                    <ItemTemplate>
+                                                                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("EtiquetaTres") %>'></asp:Label>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:CommandField ShowEditButton="True" />
+                                                                <asp:TemplateField>
+                                                                    <ItemTemplate>
+                                                                        <asp:LinkButton ID="linkBttnEliminarCat" runat="server" CssClass="btn_grid btn-mdb-color" CommandName="Delete" Width="100%" OnClientClick="return confirm('¿Desea eliminar el registro?');">Borrar</asp:LinkButton>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                            </Columns>
+                                                            <FooterStyle CssClass="enc" />
+                                                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                            <SelectedRowStyle CssClass="sel" />
+                                                            <HeaderStyle CssClass="enc" />
+                                                            <AlternatingRowStyle CssClass="alt" />
+                                                        </asp:GridView>
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <%--<asp:Image ID="Image1" runat="server" ImageUrl='~/Imagenes/recibo3.png' Text="No"  Visible='<%# Bind("VISIBLE2") %>'/>--%>
             </div>
+
         </div>
 
     </div>
-
 
     <div class="modal fade" id="modalCOG" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modCOG">Matriz COG</h5>
+                    <h5 class="modal-title" id="modEmp">Agregar</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="scroll_monitor">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <asp:UpdateProgress ID="updPgrGridCatCOG" runat="server" AssociatedUpdatePanelID="UpdatePanel10">
-                                        <ProgressTemplate>
-                                            <asp:Image ID="imgCOG" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" AlternateText="Espere un momento, por favor.."
-                                                ToolTip="Espere un momento, por favor.." Width="50px" Height="50px" />
-                                        </ProgressTemplate>
-                                    </asp:UpdateProgress>
-                                </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-2">Mayor</div>
+                            <div class="col-md-4">
+                                <asp:TextBox ID="txtMayor" runat="server" Width="100%"></asp:TextBox>
                             </div>
-                            <div class="row">
-                                <div class="col font-weight-bold">
-                                    <asp:UpdatePanel ID="UpdatePanel10" runat="server">
-                                        <ContentTemplate>
-                                            <asp:GridView ID="grdCatCOG" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" OnRowCancelingEdit="grdCatCOG_RowCancelingEdit" OnRowEditing="grdCatCOG_RowEditing" OnRowUpdating="grdCatCOG_RowUpdating">
-                                                <Columns>
-                                                    <asp:BoundField HeaderText="MAYOR" DataField="cuenta_mayor" ReadOnly="True" />
-                                                    <asp:BoundField HeaderText="COG" DataField="natura" ReadOnly="True" />
-                                                    <asp:BoundField HeaderText="NOMBRE" DataField="descripcion" ReadOnly="True">
-                                                        <ItemStyle Width="75%" />
-                                                    </asp:BoundField>
-                                                    <asp:TemplateField HeaderText="STATUS">
-                                                        <EditItemTemplate>
-                                                            <asp:TextBox ID="txtStatus" runat="server" Width="50px" Text='<%# Bind("status") %>'></asp:TextBox>
-                                                        </EditItemTemplate>
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="Label1" runat="server" Text='<%# Bind("status") %>'></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:CommandField ShowEditButton="True" />
-                                                </Columns>
-                                                <FooterStyle CssClass="enc" />
-                                                <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                <SelectedRowStyle CssClass="sel" />
-                                                <HeaderStyle CssClass="enc" />
-                                                <AlternatingRowStyle CssClass="alt" />
-                                            </asp:GridView>
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
-                                </div>
+                            <div class="col-md-2">COG</div>
+                            <div class="col-md-4">
+                                <asp:TextBox ID="txtCOG" runat="server" Width="100%"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">Descripción</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <asp:TextBox ID="txtDescripcionCOG" runat="server" Width="100%"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-right">
+                                <asp:Button ID="bttnGuardarCOG" runat="server" Text="Guardar" CssClass="btn btn-info" OnClick="bttnGuardarCOG_Click" />
                             </div>
                         </div>
                     </div>
@@ -688,57 +823,54 @@
         </div>
     </div>
 
-<div class="modal fade" id="modalCtasNiv2_3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalCat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modCtasNiv2_3">Matriz COG</h5>
+                    <h5 class="modal-title" id="modCat">Agregar</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="scroll_monitor">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <asp:UpdateProgress ID="UpdateProgress6" runat="server" AssociatedUpdatePanelID="UpdatePanel10">
-                                        <ProgressTemplate>
-                                            <asp:Image ID="imgCtasNiv2_3" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" AlternateText="Espere un momento, por favor.."
-                                                ToolTip="Espere un momento, por favor.." Width="50px" Height="50px" />
-                                        </ProgressTemplate>
-                                    </asp:UpdateProgress>
-                                </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-2">Cve</div>
+                            <div class="col-md-4">
+                                <asp:TextBox ID="txtCve" runat="server" Width="100%"></asp:TextBox>
                             </div>
-                            <div class="row">
-                                <div class="col font-weight-bold">
-                                    <asp:UpdatePanel ID="UpdatePanel20" runat="server">
-                                        <ContentTemplate>
-                                            <asp:GridView ID="grdCatProyectos" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" OnRowCancelingEdit="grdCatCOG_RowCancelingEdit" OnRowEditing="grdCatCOG_RowEditing" OnRowUpdating="grdCatCOG_RowUpdating">
-                                                <Columns>
-                                                    <asp:BoundField HeaderText="MAYOR" DataField="cuenta_mayor" ReadOnly="True" />
-                                                    <asp:BoundField HeaderText="NOMBRE" DataField="descripcion" ReadOnly="True">
-                                                        <ItemStyle Width="75%" />
-                                                    </asp:BoundField>
-                                                    <asp:TemplateField HeaderText="STATUS">
-                                                        <EditItemTemplate>
-                                                            <asp:TextBox ID="txtStatus" runat="server" Width="50px" Text='<%# Bind("status") %>'></asp:TextBox>
-                                                        </EditItemTemplate>
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="Label1" runat="server" Text='<%# Bind("status") %>'></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:CommandField ShowEditButton="True" />
-                                                </Columns>
-                                                <FooterStyle CssClass="enc" />
-                                                <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                <SelectedRowStyle CssClass="sel" />
-                                                <HeaderStyle CssClass="enc" />
-                                                <AlternatingRowStyle CssClass="alt" />
-                                            </asp:GridView>
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
-                                </div>
+                            <div class="col-md-2">Status</div>
+                            <div class="col-md-4">
+                                <asp:DropDownList ID="ddlStatusCat" runat="server">
+                                    <asp:ListItem Value="A">Activo</asp:ListItem>
+                                    <asp:ListItem Value="B">Baja</asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">Descripción</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <asp:TextBox ID="txtDescCat" runat="server" Width="100%"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-right">
+                                <asp:UpdatePanel ID="updPnlAgCat" runat="server">
+                                    <ContentTemplate>
+                                        <asp:Button ID="bttnAgregarCat" runat="server" Text="Guardar" CssClass="btn btn-info" OnClick="bttnAgregarCat_Click" />
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col alert alert-danger">
+                                <asp:UpdatePanel ID="UpdatePanel21" runat="server">
+                                    <ContentTemplate>
+                                        <asp:Label ID="lblErrorCat" runat="server" Text=""></asp:Label>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
                             </div>
                         </div>
                     </div>
@@ -746,6 +878,8 @@
             </div>
         </div>
     </div>
+
+
 
     <script type="text/javascript">       
         function CuentasContables() {
@@ -785,8 +919,8 @@
             });
         };
 
-        function CatProyectos() {
-            $('#<%= grdCatProyectos.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdCatProyectos.ClientID %>').find("tr:first"))).DataTable({
+        function Catalogos() {
+            $('#<%= grdCatalogos.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdCatalogos.ClientID %>').find("tr:first"))).DataTable({
                 "destroy": true,
                 "ordering": false,
                 "bStateSave": false,
@@ -794,6 +928,9 @@
             });
         };
 
-        
+        function OcultarPestania() {
+            $('#Pestania2').hide();
+        }
+
     </script>
 </asp:Content>

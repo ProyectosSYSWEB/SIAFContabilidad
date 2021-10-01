@@ -1348,13 +1348,13 @@
                                                         </div>
                                                     </ContentTemplate>
                                                     <Triggers>
-                                                        <asp:PostBackTrigger ControlID="bttnAgregaFactura0" />
+                                                        <asp:PostBackTrigger ControlID="bttnAgregaFactura" />
                                                     </Triggers>
                                                 </asp:UpdatePanel>
                                             </div>
                                             <div class="col-md-2">
-                                                <asp:Button ID="bttnAgregaFactura" runat="server" CssClass="btn btn-blue-grey" OnClick="bttnAgregaFactura_Click" Text="Agregar" ValidationGroup="CFDI" Visible="false" />
-                                                <asp:Button ID="bttnAgregaFactura0" runat="server" CssClass="btn btn-primary" OnClick="bttnAgregaFactura0_Click" Text="Agregar" ValidationGroup="CFDI" />
+                                                <asp:Button ID="bttnAgregaFactura" runat="server" CssClass="btn btn-blue-grey" OnClick="bttnAgregaFactura_Click" Text="Agregar" ValidationGroup="CFDI" />
+                                                <%--<asp:Button ID="bttnAgregaFactura0" runat="server" CssClass="btn btn-primary" OnClick="bttnAgregaFactura0_Click" Text="Agregar" ValidationGroup="CFDI" Visible="false"  />--%>
                                             </div>
                                         </div>
                                         <%--<div class="row">
@@ -1436,8 +1436,8 @@
                                             <div class="col text-right">
                                                 <asp:UpdatePanel ID="updPnlGuardarCFDI" runat="server">
                                                     <ContentTemplate>
-                                                        <asp:Button ID="btnCancelarCFDI" runat="server" CausesValidation="False" CssClass="btn btn-blue-grey" OnClick="btnCancelarCFDI_Click" Text="Regresar" />
-                                                        &nbsp;<asp:Button ID="btnGuardarCFDI" runat="server" CssClass="btn btn-primary" OnClick="btnGuardarCFDI_Click" Text="Guardar" ValidationGroup="Poliza" Visible="False" />
+                                                        <asp:Button ID="btnCancelarCFDI" runat="server" CausesValidation="False" CssClass="btn btn-blue-grey" OnClick="btnCancelarCFDI_Click" Text="Salir" />
+                                                        &nbsp;<asp:Button ID="btnGuardarCFDI" runat="server" CssClass="btn btn-primary" OnClick="btnGuardarCFDI_Click" Text="Guardar" ValidationGroup="Poliza" />
                                                     </ContentTemplate>
                                                 </asp:UpdatePanel>
                                             </div>
@@ -1546,9 +1546,7 @@
                                                     </asp:UpdateProgress>
                                                 </div>
                                             </div>
-
                                             <div class="alert alert-dark" id="rowEmpleado" runat="server" visible="false">
-
                                                 <div class="row">
                                                     <div class="col-md-10">
                                                         <h6 class="font-weight-bold">IMPORTANTE:</h6>
@@ -1584,99 +1582,7 @@
                                                         <asp:RequiredFieldValidator ID="reqNumPlaza" runat="server" ControlToValidate="lblNumPlaza" ErrorMessage="*Requerido" ValidationGroup="GuardarOficio"></asp:RequiredFieldValidator>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <asp:HiddenField ID="hddnCatEmpleados" runat="server" />
-                                            <ajaxToolkit:ModalPopupExtender ID="modalCatEmpleados" runat="server" PopupControlID="pnlCatEmpleados" TargetControlID="hddnCatEmpleados" BackgroundCssClass="modalBackground_Proy" CancelControlID="bttnSalirCatEmp"></ajaxToolkit:ModalPopupExtender>
-                                            <asp:Panel ID="pnlCatEmpleados" runat="server" CssClass="TituloModalPopupMsg" Height="250px">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        Empleados
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="row">
-                                                            <div class="col-md-3">
-                                                                <asp:TextBox ID="txtNombre" runat="server" Width="100%" placeholder="Nombre(s)"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="reqNombre" runat="server" ErrorMessage="*Nombre requerido" Text="* Requerido" ValidationGroup="buscaEmpleado" ControlToValidate="txtNombre"></asp:RequiredFieldValidator>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <asp:TextBox ID="txtPaterno" runat="server" Width="100%" placeholder="Primer Apellido"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="reqPaterno" runat="server" ErrorMessage="*Primer apellido requerido" Text="* Requerido" ValidationGroup="buscaEmpleado" ControlToValidate="txtPaterno"></asp:RequiredFieldValidator>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <asp:TextBox ID="txtMaterno" runat="server" Width="100%" placeholder="Segundo Apellido"></asp:TextBox>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <asp:UpdatePanel ID="updPnlBuscarEmp" runat="server">
-                                                                    <ContentTemplate>
-                                                                        <asp:LinkButton ID="linkBttnBuscarEmpleado" runat="server" CssClass="btn btn-primary" OnClick="linkBttnBuscarEmpleado_Click" ValidationGroup="buscaEmpleado" Width="100%"><i class="fa fa-search"></i> Buscar</asp:LinkButton>
-                                                                    </ContentTemplate>
-                                                                </asp:UpdatePanel>
-                                                            </div>
-                                                            <div class="col-md-1">
-                                                                <asp:Button ID="bttnSalirCatEmp" runat="server" CssClass="btn btn-blue-grey" Text="Salir" />
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col text-center">
-                                                                <asp:UpdateProgress ID="updPgrBuscarEmp" runat="server"
-                                                                    AssociatedUpdatePanelID="updPnlBuscarEmp">
-                                                                    <ProgressTemplate>
-                                                                        <asp:Image ID="imgBuscarEmp" runat="server"
-                                                                            AlternateText="Espere un momento, por favor.." Height="50px"
-                                                                            ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
-                                                                            ToolTip="Espere un momento, por favor.." />
-                                                                    </ProgressTemplate>
-                                                                </asp:UpdateProgress>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <asp:UpdateProgress ID="updPgrGridEmp" runat="server"
-                                                                    AssociatedUpdatePanelID="UpdatePanel14">
-                                                                    <ProgressTemplate>
-                                                                        <asp:Image ID="imgGridEmp" runat="server"
-                                                                            AlternateText="Espere un momento, por favor.." Height="50px"
-                                                                            ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
-                                                                            ToolTip="Espere un momento, por favor.." />
-                                                                    </ProgressTemplate>
-                                                                </asp:UpdateProgress>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="scroll_monitor">
-                                                                    <asp:UpdatePanel ID="UpdatePanel14" runat="server">
-                                                                        <ContentTemplate>
-                                                                            <asp:GridView ID="grdCatEmpleados" Width="100%" runat="server" AutoGenerateColumns="False" CssClass="mGrid" OnSelectedIndexChanged="grdCatEmpleados_SelectedIndexChanged" EmptyDataText="No se encontraron datos...">
-                                                                                <Columns>
-                                                                                    <asp:BoundField DataField="Dependencia" HeaderText="DEPCIA" />
-                                                                                    <asp:BoundField DataField="Nombre" HeaderText="NOMBRE" />
-                                                                                    <asp:BoundField DataField="Tipo_Personal" HeaderText="TIPO PERSONAL" />
-                                                                                    <asp:BoundField DataField="Numero_Plaza" HeaderText="# PLAZA" />
-                                                                                    <asp:BoundField DataField="NOMINA" HeaderText="ÚLTIMO PAGO (AÑO/MES)" />
-                                                                                    <asp:CommandField ShowSelectButton="True" />
-                                                                                </Columns>
-                                                                                <FooterStyle CssClass="enc" />
-                                                                                <HeaderStyle CssClass="enc" />
-                                                                                <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                                                <SelectedRowStyle CssClass="sel" />
-                                                                            </asp:GridView>
-                                                                        </ContentTemplate>
-                                                                    </asp:UpdatePanel>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <%--<div class="row">
-                                                            <div class="col text-right" style="left: 0px; top: -2px">
-                                                                <asp:Button ID="bttnSalirCatEmp" runat="server" CssClass="btn btn-blue-grey" Text="Salir" />
-                                                                <asp:Button ID="bttnAgregarEmp" runat="server" CssClass="btn btn-primary" Text="Agregar Empleado" />
-                                                            </div>
-                                                        </div>--%>
-                                                    </div>
-                                                </div>
-                                            </asp:Panel>
-
+                                            </div>                                         
                                             <div class="row" id="rowProveedor" runat="server" visible="false">
                                                 <div class="col-md-2">
                                                     Proveedor
@@ -1716,7 +1622,6 @@
                                                     <asp:Button ID="bttnAgregarOficio" runat="server" Text="Agregar" CssClass="btn btn-primary" OnClick="bttnAgregarOficio_Click" ValidationGroup="GuardarOficio" />
                                                 </div>
                                             </div>
-
                                             <div class="row">
                                                 <div class="col text-center">
                                                     <asp:UpdatePanel ID="UpdatePanel6" runat="server">
@@ -1755,8 +1660,6 @@
                                                     <asp:Label ID="lblMjErrorOficio" runat="server" Text=""></asp:Label>
                                                 </div>
                                             </div>
-
-                                            <br />
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -1789,8 +1692,103 @@
                 </asp:UpdatePanel>
             </div>
         </div>
+        <div class="modal fade" id="modalEmp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modEmp">Empleados</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="scroll_monitor">
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <asp:TextBox ID="txtNombre" runat="server" Width="100%" placeholder="Nombre(s)"></asp:TextBox>
+                                                                        <asp:RequiredFieldValidator ID="reqNombre" runat="server" ErrorMessage="*Nombre requerido" Text="* Requerido" ValidationGroup="buscaEmpleado" ControlToValidate="txtNombre"></asp:RequiredFieldValidator>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <asp:TextBox ID="txtPaterno" runat="server" Width="100%" placeholder="Primer Apellido"></asp:TextBox>
+                                                                        <asp:RequiredFieldValidator ID="reqPaterno" runat="server" ErrorMessage="*Primer apellido requerido" Text="* Requerido" ValidationGroup="buscaEmpleado" ControlToValidate="txtPaterno"></asp:RequiredFieldValidator>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-9">
+                                                                        <asp:TextBox ID="txtMaterno" runat="server" Width="100%" placeholder="Segundo Apellido"></asp:TextBox>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <asp:UpdatePanel ID="updPnlBuscarEmp" runat="server">
+                                                                            <ContentTemplate>
+                                                                                <asp:LinkButton ID="linkBttnBuscarEmpleado" runat="server" CssClass="btn btn-primary" OnClick="linkBttnBuscarEmpleado_Click" ValidationGroup="buscaEmpleado" Width="100%"><i class="fa fa-search"></i> Buscar</asp:LinkButton>
+                                                                            </ContentTemplate>
+                                                                        </asp:UpdatePanel>
+                                                                    </div>
+                                                                </div>
+                                                                <%--<div class="row">
+                                                                    <div class="col-md-1">
+                                                                        <asp:Button ID="bttnSalirCatEmp" runat="server" CssClass="btn btn-blue-grey" Text="Salir" />
+                                                                    </div>
+                                                                </div>--%>
+                                                                <div class="row">
+                                                                    <div class="col text-center">
+                                                                        <asp:UpdateProgress ID="updPgrBuscarEmp" runat="server"
+                                                                            AssociatedUpdatePanelID="updPnlBuscarEmp">
+                                                                            <ProgressTemplate>
+                                                                                <asp:Image ID="imgBuscarEmp" runat="server"
+                                                                                    AlternateText="Espere un momento, por favor.." Height="50px"
+                                                                                    ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                                                                    ToolTip="Espere un momento, por favor.." />
+                                                                            </ProgressTemplate>
+                                                                        </asp:UpdateProgress>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <asp:UpdateProgress ID="updPgrGridEmp" runat="server"
+                                                                            AssociatedUpdatePanelID="UpdatePanel14">
+                                                                            <ProgressTemplate>
+                                                                                <asp:Image ID="imgGridEmp" runat="server"
+                                                                                    AlternateText="Espere un momento, por favor.." Height="50px"
+                                                                                    ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                                                                    ToolTip="Espere un momento, por favor.." />
+                                                                            </ProgressTemplate>
+                                                                        </asp:UpdateProgress>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <div class="scroll_monitor">
+                                                                            <asp:UpdatePanel ID="UpdatePanel14" runat="server">
+                                                                                <ContentTemplate>
+                                                                                    <asp:GridView ID="grdCatEmpleados" Width="100%" runat="server" AutoGenerateColumns="False" CssClass="mGrid" OnSelectedIndexChanged="grdCatEmpleados_SelectedIndexChanged" EmptyDataText="No se encontraron datos...">
+                                                                                        <Columns>
+                                                                                            <asp:BoundField DataField="Dependencia" HeaderText="DEPCIA" />
+                                                                                            <asp:BoundField DataField="Nombre" HeaderText="NOMBRE" />
+                                                                                            <asp:BoundField DataField="Tipo_Personal" HeaderText="TIPO PERSONAL" />
+                                                                                            <asp:BoundField DataField="Numero_Plaza" HeaderText="# PLAZA" />
+                                                                                            <asp:BoundField DataField="NOMINA" HeaderText="ÚLTIMO PAGO (AÑO/MES)" />
+                                                                                            <asp:CommandField ShowSelectButton="True" />
+                                                                                        </Columns>
+                                                                                        <FooterStyle CssClass="enc" />
+                                                                                        <HeaderStyle CssClass="enc" />
+                                                                                        <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                                                        <SelectedRowStyle CssClass="sel" />
+                                                                                    </asp:GridView>
+                                                                                </ContentTemplate>
+                                                                            </asp:UpdatePanel>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
     </div>
-
+    
     <script type="text/javascript">
 
         function FiltNumCedulas() {
@@ -1843,7 +1841,7 @@
             //$('input[type=search]').val('');
             $('#<%= grvPolizas.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvPolizas.ClientID %>').find("tr:first"))).DataTable({
                 "destroy": true,
-                "stateSave": true
+                "stateSave": false
             });
         };
 
@@ -1855,6 +1853,18 @@
                 "ordering": false
             });
         };
+
+
+        function PolizaCFDI() {
+            //$('input[type=search]').val('');
+            $('#<%= grvPolizaCFDI.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvPolizaCFDI.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": false,
+                "ordering": false
+            });
+        };
+
+
 
 
     </script>

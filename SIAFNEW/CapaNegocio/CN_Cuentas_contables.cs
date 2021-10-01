@@ -8,6 +8,34 @@ namespace CapaNegocio
 {
     public  class CN_Cuentas_contables
     {
+        public void InsertarCatCtas(Comun obComun, ref string Verificador)
+        {
+            try
+            {
+
+                CD_Cuentas_contables CDCatCtas = new CD_Cuentas_contables();
+                CDCatCtas.InsertarCatCtas(obComun, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void EliminarCatCtas(Comun obComun, ref string Verificador)
+        {
+            try
+            {
+
+                CD_Cuentas_contables CDCatCtas = new CD_Cuentas_contables();
+                CDCatCtas.EliminarCatCtas(obComun, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void PolizaConsultaGrid(ref cuentas_contables Objcuentas_contables, ref List<cuentas_contables> List)
         {
             try
@@ -47,6 +75,18 @@ namespace CapaNegocio
 
 
 
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void ConsultarCatalogos(Comun objCat, ref List<Comun> List)
+        {
+            try
+            {
+                CD_Cuentas_contables CDcuentas_contables = new CD_Cuentas_contables();
+                CDcuentas_contables.ConsultarCatalogos(objCat, ref List);
             }
             catch (Exception ex)
             {

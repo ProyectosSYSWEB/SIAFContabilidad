@@ -25,6 +25,7 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+
         public void LlenaCombo(string SP, ref DropDownList DDL)
         {
             try

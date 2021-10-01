@@ -8,6 +8,51 @@ namespace CapaDatos
 {
     public class CD_Cuentas_contables
     {
+        public void InsertarCatCtas(Comun objComun, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_TIPO", "P_CVE", "P_DESCRIPCION", "P_STATUS" };
+                object[] Valores = { objComun.Etiqueta, objComun.EtiquetaDos, objComun.EtiquetaTres, objComun.EtiquetaCuatro };
+                String[] ParametrosOut = { "P_BANDERA" };
+
+                Cmd = CDDatos.GenerarOracleCommand("INS_TEMP_CAT_CTAS", ref Verificador, Parametros, Valores, ParametrosOut);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+
+        }
+        public void EliminarCatCtas(Comun objComun, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_TIPO", "P_CVE" };
+                object[] Valores = { objComun.Etiqueta, objComun.EtiquetaDos };
+                String[] ParametrosOut = { "P_BANDERA" };
+
+                Cmd = CDDatos.GenerarOracleCommand("DEL_TEMP_CAT_CTAS", ref Verificador, Parametros, Valores, ParametrosOut);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
         public void PolizaConsultaGrid(ref cuentas_contables Objcuentas_contables, ref List<cuentas_contables> List)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -16,8 +61,8 @@ namespace CapaDatos
             {
                 OracleDataReader dr = null;
                 string Centro_Contable = Objcuentas_contables.centro_contable;
-                String[] Parametros = { "p_ejercicio","p_centro_contable", "p_tipo", "p_cuenta_contable", "p_nivel", "p_buscar" };
-                String[] Valores = { Objcuentas_contables.ejercicio, Objcuentas_contables.centro_contable, Objcuentas_contables.tipo, Objcuentas_contables.cuenta_contable, Objcuentas_contables.nivel, Objcuentas_contables.buscar  };
+                String[] Parametros = { "p_ejercicio", "p_centro_contable", "p_tipo", "p_cuenta_contable", "p_nivel", "p_buscar" };
+                String[] Valores = { Objcuentas_contables.ejercicio, Objcuentas_contables.centro_contable, Objcuentas_contables.tipo, Objcuentas_contables.cuenta_contable, Objcuentas_contables.nivel, Objcuentas_contables.buscar };
 
                 cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Polizas_CC", ref dr, Parametros, Valores);
 
@@ -33,7 +78,7 @@ namespace CapaDatos
                     Objcuentas_contables.concepto = Convert.ToString(dr.GetValue(6));
                     Objcuentas_contables.Tot_Cargo = Convert.ToDouble(dr.GetValue(19));
                     Objcuentas_contables.Tot_Abono = Convert.ToDouble(dr.GetValue(20));
-                    
+
                     List.Add(Objcuentas_contables);
                 }
                 dr.Close();
@@ -55,7 +100,7 @@ namespace CapaDatos
             {
 
                 OracleDataReader dr = null;
-                String[] Parametros = { "p_ejercicio", "p_centro_contable", "p_cuenta_mayor", "p_buscar"};
+                String[] Parametros = { "p_ejercicio", "p_centro_contable", "p_cuenta_mayor", "p_buscar" };
                 Object[] Valores = { Objcuentas_contables.ejercicio, Objcuentas_contables.centro_contable, Objcuentas_contables.cuenta_mayor, buscar };
                 //String[] ParametrosOut = { "p_dependencia", "p_evento", "p_descripcion", "p_fecha_inicial", "p_fecha_final", "p_nivel" };
 
@@ -70,7 +115,7 @@ namespace CapaDatos
                     Objcuentas_contables.natura = Convert.ToString(dr[4]);
                     Objcuentas_contables.nivel = Convert.ToString(dr[2]);
                     if (Convert.ToString(dr[2]) == "4") { Objcuentas_contables.bandera = true; } else { Objcuentas_contables.bandera = false; }
-                    Objcuentas_contables.cuenta_contable  = Convert.ToString(dr[5]);
+                    Objcuentas_contables.cuenta_contable = Convert.ToString(dr[5]);
                     Objcuentas_contables.centro_contable = Convert.ToString(dr[7]);
                     List.Add(Objcuentas_contables);
 
@@ -119,6 +164,39 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        public void ConsultarCatalogos(Comun objCat, ref List<Comun> List)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            Comun objComun;
+            try
+            {
+
+                OracleDataReader dr = null;
+                String[] Parametros = { "p_tipo" };
+                Object[] Valores = { objCat.Etiqueta };
+
+                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Catalogos_Ctas", ref dr, Parametros, Valores);
+                while (dr.Read())
+                {
+                    objComun = new Comun();
+                    objComun.Etiqueta = Convert.ToString(dr[0]);
+                    objComun.EtiquetaDos = Convert.ToString(dr[1]);
+                    objComun.EtiquetaTres = Convert.ToString(dr[2]);
+                    List.Add(objComun);
+                }
+
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
 
         public void Consultarcuenta(ref cuentas_contables Objcuentas_contables, ref string Verificador)
         {
@@ -128,7 +206,7 @@ namespace CapaDatos
             {
                 string[] ParametrosIn = { "p_id" };
                 object[] Valores = { Objcuentas_contables.id };
-                string[] ParametrosOut = { "P_CENTRO_CONTABLE", "P_CUENTA", "P_DESCRIPCION", "P_TIPO", "P_CLASIFICACION", "P_NIVEL", "P_STATUS", "P_ID_CUENTA_MAYOR", "p_bandera"};
+                string[] ParametrosOut = { "P_CENTRO_CONTABLE", "P_CUENTA", "P_DESCRIPCION", "P_TIPO", "P_CLASIFICACION", "P_NIVEL", "P_STATUS", "P_ID_CUENTA_MAYOR", "p_bandera" };
 
                 Cmd = CDDatos.GenerarOracleCommand("SEL_SAF_CUENTAS_CONTABLES", ref Verificador, ParametrosIn, Valores, ParametrosOut);
                 if (Verificador == "0")
@@ -141,7 +219,7 @@ namespace CapaDatos
                     Objcuentas_contables.clasificacion = Convert.ToString(Cmd.Parameters["p_clasificacion"].Value);
                     Objcuentas_contables.nivel = Convert.ToString(Cmd.Parameters["p_nivel"].Value);
                     Objcuentas_contables.status = Convert.ToString(Cmd.Parameters["p_status"].Value);
-                    Objcuentas_contables.cuenta_mayor = Convert.ToString(Cmd.Parameters["p_id_cuenta_mayor"].Value);                    
+                    Objcuentas_contables.cuenta_mayor = Convert.ToString(Cmd.Parameters["p_id_cuenta_mayor"].Value);
                 }
             }
             catch (Exception ex)
@@ -162,7 +240,7 @@ namespace CapaDatos
             try
             {
                 String[] Parametros = { "P_EJERCICIO", "P_CENTRO_CONTABLE", "P_CUENTA", "P_DESCRIPCION", "P_TIPO", "P_CLASIFICACION", "P_NIVEL", "P_STATUS", "P_ID_CUENTA_MAYOR", "P_ALTA_USUARIO" };
-                object[] Valores = { Convert.ToInt32( objcuentas_contables.ejercicio), objcuentas_contables.centro_contable, objcuentas_contables.cuenta_contable, objcuentas_contables.descripcion, objcuentas_contables.tipo, objcuentas_contables.clasificacion, Convert.ToInt32( objcuentas_contables.nivel), objcuentas_contables.status, Convert.ToInt32( objcuentas_contables.cuenta_mayor),objcuentas_contables.usuario };
+                object[] Valores = { Convert.ToInt32(objcuentas_contables.ejercicio), objcuentas_contables.centro_contable, objcuentas_contables.cuenta_contable, objcuentas_contables.descripcion, objcuentas_contables.tipo, objcuentas_contables.clasificacion, Convert.ToInt32(objcuentas_contables.nivel), objcuentas_contables.status, Convert.ToInt32(objcuentas_contables.cuenta_mayor), objcuentas_contables.usuario };
                 String[] ParametrosOut = { "p_Bandera" };
 
                 Cmd = CDDatos.GenerarOracleCommand("INS_saf_cuentas_contables", ref Verificador, Parametros, Valores, ParametrosOut);
@@ -253,7 +331,7 @@ namespace CapaDatos
             {
                 String[] Parametros = { "P_CENTRO_CONTABLE", "P_CUENTA", "P_DESCRIPCION", "P_TIPO", "P_CLASIFICACION", "P_NIVEL", "P_STATUS", "P_ID_CUENTA_MAYOR", "P_ID" };
 
-                object[] Valores = { objcuentas_contables.centro_contable, objcuentas_contables.cuenta_contable, objcuentas_contables.descripcion, objcuentas_contables.tipo, objcuentas_contables.clasificacion, Convert.ToInt32( objcuentas_contables.nivel), objcuentas_contables.status,Convert.ToInt32( objcuentas_contables.cuenta_mayor),Convert.ToInt32( objcuentas_contables.id )};
+                object[] Valores = { objcuentas_contables.centro_contable, objcuentas_contables.cuenta_contable, objcuentas_contables.descripcion, objcuentas_contables.tipo, objcuentas_contables.clasificacion, Convert.ToInt32(objcuentas_contables.nivel), objcuentas_contables.status, Convert.ToInt32(objcuentas_contables.cuenta_mayor), Convert.ToInt32(objcuentas_contables.id) };
 
                 String[] ParametrosOut = { "p_Bandera" };
                 Cmd = CDDatos.GenerarOracleCommand("UPD_SAF_CUENTAS_CONTABLES", ref Verificador, Parametros, Valores, ParametrosOut);
