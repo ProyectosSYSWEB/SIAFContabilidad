@@ -34,7 +34,7 @@
                                 <asp:UpdateProgress ID="updPrgNuevo" runat="server"
                                     AssociatedUpdatePanelID="updPnlNuevo">
                                     <ProgressTemplate>
-                                        <asp:Image ID="imageNuevo" runat="server"
+                                        <asp:Image ID="imgNuevo" runat="server"
                                             AlternateText="Espere un momento, por favor.." Height="30px"
                                             ImageUrl="~/images/ajax_loader_gray_512.gif"
                                             ToolTip="Espere un momento, por favor.." Width="30px" />
@@ -70,7 +70,7 @@
                             <div class="col-md-2">
                                 Periodo Final
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                     <ContentTemplate>
                                         <asp:DropDownList ID="ddlFecha_Fin1" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlFecha_Fin1_SelectedIndexChanged">
@@ -90,10 +90,11 @@
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 <asp:UpdatePanel ID="UpdatePanel11" runat="server">
                                     <ContentTemplate>
-                                        <asp:ImageButton ID="imgbtnBuscar1" runat="server" CausesValidation="False" ImageUrl="http://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgbtnBuscar1_Click" Style="text-align: right" title="Buscar" ValidationGroup="Buscar" />
+                                        <%--<asp:ImageButton ID="imgbtnBuscar1" runat="server" CausesValidation="False" ImageUrl="http://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgbtnBuscar1_Click" Style="text-align: right" title="Buscar" ValidationGroup="Buscar" />--%>
+                                        <asp:LinkButton ID="linkBttnBuscar" runat="server" CssClass="btn btn-primary" CausesValidation="False" ValidationGroup="Buscar" OnClick="linkBttnBuscar_Click">Ver Conciliaciones</asp:LinkButton>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
@@ -129,15 +130,21 @@
                                 </asp:UpdateProgress>
                             </div>
                         </div>
-                        <div class="row card">
+                        <div class="row">
                             <div class="col">
-
                                 <asp:UpdatePanel ID="updPnlGrid" runat="server">
                                     <ContentTemplate>
-                                        <asp:GridView ID="grdConciliacion" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontraron datos." Width="100%" OnRowDeleting="grdConciliacion_RowDeleting" OnSelectedIndexChanged="grdConciliacion_SelectedIndexChanged" AllowPaging="True" OnPageIndexChanging="grdConciliacion_PageIndexChanging">
+                                        <asp:GridView ID="grdConciliacion" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontraron datos." Width="100%" OnRowDeleting="grdConciliacion_RowDeleting" OnSelectedIndexChanged="grdConciliacion_SelectedIndexChanged" OnPageIndexChanging="grdConciliacion_PageIndexChanging">
                                             <Columns>
-                                                <asp:BoundField DataField="Centro_contable" HeaderText="CENTRO CONTABLE" />
-                                                <asp:BoundField DataField="Desc_Cuenta_Contable" HeaderText="CTA. CONT." />
+                                                <asp:BoundField DataField="Centro_contable" HeaderText="C.C." />
+                                                <asp:TemplateField HeaderText="CTA. CONT.">
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Desc_Cuenta_Contable") %>'></asp:TextBox>
+                                                    </EditItemTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("Desc_Cuenta_Contable") %>' ToolTip="JJJ"></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
                                                 <asp:BoundField DataField="Fecha_inicial" HeaderText="PERIODO INICIAL" />
                                                 <asp:BoundField DataField="Fecha_final" HeaderText="PERIODO FINAL" />
                                                 <asp:BoundField DataField="Elaboro_nombre" HeaderText="ELABORO" />
@@ -145,9 +152,9 @@
                                                 <asp:TemplateField HeaderText="ACCIONES">
                                                     <ItemTemplate>
                                                         <asp:LinkButton ID="linkBttnAdj" runat="server" CssClass="btn btn-mdb-color" OnClick="linkBttnAdj_Click" Text='<%# Bind("TotAdj") %>'></asp:LinkButton>
-                                                        <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Select" CssClass="btn btn-link"><i class="fa fa-pencil-square-o  fa-2x" aria-hidden="true"></i><%--Editar--%></asp:LinkButton>
-                                                        &nbsp;<asp:LinkButton ID="linkReporteEnc" runat="server" CssClass="btn btn-link" OnClick="linkReporteEnc_Click"><i class="fa fa-print fa-2x" aria-hidden="true"></i><%--PDF--%></asp:LinkButton>
-                                                        &nbsp;<asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" CssClass="btn btn-link" OnClientClick="return confirm('¿Desea eliminar el registro?');"><i class="fa fa-trash fa-2x" aria-hidden="true"></i><%--Eliminar--%></asp:LinkButton>
+                                                        <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Select" CssClass="btn btn-mdb-color"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><%--Editar--%></asp:LinkButton>
+                                                        &nbsp;<asp:LinkButton ID="linkReporteEnc" runat="server" CssClass="btn btn-mdb-color" OnClick="linkReporteEnc_Click"><i class="fa fa-print" aria-hidden="true"></i><%--PDF--%></asp:LinkButton>
+                                                        &nbsp;<asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" CssClass="btn btn-mdb-color" OnClientClick="return confirm('¿Desea eliminar el registro?');"><i class="fa fa-trash" aria-hidden="true"></i><%--Eliminar--%></asp:LinkButton>
                                                     </ItemTemplate>
                                                     <ItemStyle HorizontalAlign="Center" />
                                                 </asp:TemplateField>
@@ -378,176 +385,80 @@
                                             Detalle
                                         </HeaderTemplate>
                                         <ContentTemplate>
-                                            <asp:DropDownList ID="ddlCtaCheques" runat="server" Visible="False" Width="100%">
-                                            </asp:DropDownList>
-                                            <div class="container-fluid">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        Tipo
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <asp:UpdatePanel ID="updPnlTipo" runat="server">
-                                                            <ContentTemplate>
-                                                                <asp:DropDownList ID="ddlTipo" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged" TabIndex="1" Width="100%">
-                                                                </asp:DropDownList>
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="ddlTipo" ErrorMessage="* Tipo" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
-                                                    </div>
-                                                    <div class="col-2">
-                                                        <asp:UpdateProgress ID="updPgrTipo" runat="server" AssociatedUpdatePanelID="updPnlTipo">
-                                                            <ProgressTemplate>
-                                                                <asp:Image ID="img5" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
-                                                            </ProgressTemplate>
-                                                        </asp:UpdateProgress>
-                                                    </div>
+                                            <div class="row">
+                                                <div class="col text-center">
+                                                    <asp:UpdateProgress ID="upPgrNuevo" runat="server"
+                                                        AssociatedUpdatePanelID="upPnlNuevo">
+                                                        <ProgressTemplate>
+                                                            <asp:Image ID="imgNuevo2" runat="server"
+                                                                AlternateText="Espere un momento, por favor.." Height="30px"
+                                                                ImageUrl="~/images/ajax_loader_gray_512.gif"
+                                                                ToolTip="Espere un momento, por favor.." Width="30px" />
+                                                        </ProgressTemplate>
+                                                    </asp:UpdateProgress>
                                                 </div>
-                                                <asp:UpdatePanel ID="updPnlPolizas" runat="server">
-                                                    <ContentTemplate>
-                                                        <div id="trowPoliza" class="row" runat="server">
-                                                            <div class="col-md-3">
-                                                                # de Póliza
-                                                            </div>
-                                                            <div class="col-md-9">
-                                                                <asp:TextBox ID="txtNumPoliza" runat="server" TabIndex="2" onkeypress="if (event.keyCode==13) return false;"></asp:TextBox>
-                                                            </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col text-right">
+                                                    <asp:UpdatePanel ID="upPnlNuevo" runat="server">
+                                                        <ContentTemplate>
+                                                            <asp:LinkButton ID="linkBttnNuevo" runat="server" CssClass="btn btn-warning" OnClick="linkBttnNuevo_Click"><i class="fa fa-plus-square" aria-hidden="true"></i> Agregar</asp:LinkButton>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <asp:UpdatePanel ID="UpdatePanel12" runat="server">
+                                                                <ContentTemplate>
+                                                                    <asp:GridView ID="grdDetalle" runat="server" AutoGenerateColumns="False" CssClass="mGrid" OnRowDeleting="grdDetalle_RowDeleting" Width="100%" OnRowEditing="grdDetalle_RowEditing" OnRowUpdating="grdDetalle_RowUpdating" OnRowCancelingEdit="grdDetalle_RowCancelingEdit" OnPageIndexChanging="grdDetalle_PageIndexChanging" EmptyDataText="No se encontraron datos." OnSelectedIndexChanged="grdDetalle_SelectedIndexChanged">
+                                                                        <AlternatingRowStyle CssClass="alt" />
+                                                                        <Columns>
+                                                                            <asp:BoundField DataField="CveTipo" ReadOnly="True">
+                                                                                <ItemStyle Font-Bold="True" ForeColor="#3366CC" />
+                                                                            </asp:BoundField>
+                                                                            <asp:BoundField DataField="DescTipo" HeaderText="Descripción" ReadOnly="True">
+                                                                                <ItemStyle Font-Bold="True" />
+                                                                            </asp:BoundField>
+                                                                            <asp:BoundField DataField="Tipo" HeaderText="Tipo" ReadOnly="True" />
+                                                                            <asp:BoundField DataField="Fecha" HeaderText="Fecha" ReadOnly="True" />
+                                                                            <asp:BoundField DataField="Numero_Poliza" HeaderText="# Póliza" ReadOnly="True" />
+                                                                            <asp:BoundField DataField="Numero_Cheque" HeaderText="# Cheque" ReadOnly="True" />
+                                                                            <asp:TemplateField HeaderText="Importe">
+                                                                                <EditItemTemplate>
+                                                                                    <asp:TextBox ID="txtImporteAgr" runat="server" Text='<%# Bind("Importe") %>' onkeyup="mascara(this,'C2');"></asp:TextBox>
+                                                                                </EditItemTemplate>
+                                                                                <ItemTemplate>
+                                                                                    <asp:Label ID="lblImporteAgr" runat="server" Text='<%# Bind("Importe", "{0:c}") %>'></asp:Label>
+                                                                                </ItemTemplate>
+                                                                            </asp:TemplateField>
+                                                                            <asp:TemplateField HeaderText="Importe 2">
+                                                                                <EditItemTemplate>
+                                                                                    <asp:TextBox ID="txtImporteBanco" runat="server" Text='<%# Bind("ImporteBanco") %>' onkeyup="mascara(this,'C2');"></asp:TextBox>
+                                                                                </EditItemTemplate>
+                                                                                <ItemTemplate>
+                                                                                    <asp:Label ID="lblImporteBanco" runat="server" Text='<%# Bind("ImporteBanco", "{0:c}") %>'></asp:Label>
+                                                                                </ItemTemplate>
+                                                                            </asp:TemplateField>
+                                                                            <asp:BoundField DataField="Concepto" HeaderText="Concepto" />
+                                                                            <asp:BoundField DataField="Observaciones" HeaderText="Observaciones" ReadOnly="True" />
+                                                                            <asp:CommandField SelectText="Editar" ShowSelectButton="True" />
+                                                                            <asp:TemplateField ShowHeader="False">
+                                                                                <ItemTemplate>
+                                                                                    <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Delete" OnClientClick="return confirm('¿Desea eliminar el registro?');" Text="Eliminar"></asp:LinkButton>
+                                                                                </ItemTemplate>
+                                                                            </asp:TemplateField>
+                                                                        </Columns>
+                                                                        <FooterStyle CssClass="enc" />
+                                                                        <HeaderStyle CssClass="enc" />
+                                                                        <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                                        <SelectedRowStyle CssClass="sel" />
+                                                                    </asp:GridView>
+                                                                </ContentTemplate>
+                                                            </asp:UpdatePanel>
                                                         </div>
-                                                    </ContentTemplate>
-                                                </asp:UpdatePanel>
-
-                                                <asp:UpdatePanel ID="updPnlCheque" runat="server">
-                                                    <ContentTemplate>
-                                                        <div id="trowCheque" class="row" runat="server">
-                                                            <div class="col-md-3"># de Cheque</div>
-                                                            <div class="col-md-9">
-                                                                <asp:TextBox ID="txtNumCheque" runat="server" TabIndex="3" onkeypress="if (event.keyCode==13) return false;"></asp:TextBox>
-                                                            </div>
-                                                        </div>
-                                                    </ContentTemplate>
-                                                </asp:UpdatePanel>
-
-
-                                                <asp:UpdatePanel ID="UpdatePanel7" runat="server">
-                                                    <ContentTemplate>
-                                                        <div id="trowFecha" class="row" runat="server">
-                                                            <div class="col-md-3">
-                                                                Fecha
-                                                            </div>
-                                                            <div class="col-md-9">
-                                                                <asp:TextBox ID="txtFecha" runat="server" CssClass="box" Width="95px" TabIndex="4" onkeypress="if (event.keyCode==13) return false;"></asp:TextBox>
-                                                                <ajaxToolkit:CalendarExtender ID="CalendarExtenderFecha" runat="server" BehaviorID="_content_CalendarExtenderFecha" PopupButtonID="imgCalendario" TargetControlID="txtFecha" />
-                                                                <asp:ImageButton ID="imgCalendario" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtFecha" ErrorMessage="* Fecha Inicial" ValidationGroup="Agregar">*</asp:RequiredFieldValidator>
-                                                            </div>
-                                                        </div>
-                                                    </ContentTemplate>
-                                                </asp:UpdatePanel>
-
-
-
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <asp:Label ID="lblImporte" runat="server" Text="Importe"></asp:Label>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <asp:TextBox ID="txtImporte" runat="server" TabIndex="5" onkeyup="mascara(this,'C');" onkeypress="if (event.keyCode==13) return false;"></asp:TextBox>
-                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="txtImporte" ErrorMessage="* Importe" ValidationGroup="Agregar">*</asp:RequiredFieldValidator>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <asp:Label ID="lblImporteBanco" runat="server" Text="Importe Banco"></asp:Label>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <asp:TextBox ID="txtImporteBanco" runat="server" TabIndex="5" onkeyup="mascara(this,'C');" onkeypress="if (event.keyCode==13) return false;"></asp:TextBox>
-                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="txtImporteBanco" ErrorMessage="* Importe" ValidationGroup="Agregar">*</asp:RequiredFieldValidator>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <asp:UpdatePanel ID="UpdatePanel5" runat="server">
-                                                            <ContentTemplate>
-                                                                <asp:Label ID="lblConcepto" runat="server" Text="Concepto"></asp:Label>
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <asp:UpdatePanel ID="UpdatePanel10" runat="server">
-                                                            <ContentTemplate>
-                                                                <asp:TextBox ID="txtConcepto" runat="server" Width="100%" TabIndex="6" onkeypress="if (event.keyCode==13) return false;"></asp:TextBox>
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <asp:UpdatePanel ID="UpdatePanel6" runat="server">
-                                                            <ContentTemplate>
-                                                                <asp:Label ID="lblObservaciones" runat="server" Text="Observaciones"></asp:Label>
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <asp:UpdatePanel ID="updPnlDescripcion" runat="server">
-                                                            <ContentTemplate>
-                                                                <asp:TextBox ID="txtDescripcion" runat="server" Height="58px" TextMode="MultiLine" TabIndex="7" onkeypress="if (event.keyCode==13) return false;"></asp:TextBox>
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <asp:Button ID="bttnAgregar" runat="server" CssClass="btn btn-info" OnClick="bttnAgregar_Click" Text="Agregar" Font-Size="X-Small" ValidationGroup="Agregar" TabIndex="7" Style="height: 33px" SkinID="8" />
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <asp:UpdatePanel ID="UpdatePanel9" runat="server">
-                                                            <ContentTemplate>
-                                                                <asp:GridView ID="grdDetalle" runat="server" AutoGenerateColumns="False" CssClass="mGrid" OnRowDeleting="grdDetalle_RowDeleting" Width="100%" OnRowEditing="grdDetalle_RowEditing" OnRowUpdating="grdDetalle_RowUpdating" OnRowCancelingEdit="grdDetalle_RowCancelingEdit" OnPageIndexChanging="grdDetalle_PageIndexChanging">
-                                                                    <AlternatingRowStyle CssClass="alt" />
-                                                                    <Columns>
-                                                                        <asp:BoundField DataField="CveTipo" ReadOnly="True">
-                                                                            <ItemStyle Font-Bold="True" ForeColor="#3366CC" />
-                                                                        </asp:BoundField>
-                                                                        <asp:BoundField DataField="DescTipo" HeaderText="Descripción" ReadOnly="True">
-                                                                            <ItemStyle Font-Bold="True" />
-                                                                        </asp:BoundField>
-                                                                        <asp:BoundField DataField="Tipo" HeaderText="Tipo" ReadOnly="True" />
-                                                                        <asp:BoundField DataField="Fecha" HeaderText="Fecha" ReadOnly="True" />
-                                                                        <asp:BoundField DataField="Numero_Poliza" HeaderText="# Póliza" ReadOnly="True" />
-                                                                        <asp:BoundField DataField="Numero_Cheque" HeaderText="# Cheque" ReadOnly="True" />
-                                                                        <asp:TemplateField HeaderText="Importe">
-                                                                            <EditItemTemplate>
-                                                                                <asp:TextBox ID="txtImporteAgr" runat="server" Text='<%# Bind("Importe") %>' onkeyup="mascara(this,'C2');"></asp:TextBox>
-                                                                            </EditItemTemplate>
-                                                                            <ItemTemplate>
-                                                                                <asp:Label ID="lblImporteAgr" runat="server" Text='<%# Bind("Importe", "{0:c}") %>'></asp:Label>
-                                                                            </ItemTemplate>
-                                                                        </asp:TemplateField>
-                                                                        <asp:TemplateField HeaderText="Importe 2">
-                                                                            <EditItemTemplate>
-                                                                                <asp:TextBox ID="txtImporteBanco" runat="server" Text='<%# Bind("ImporteBanco") %>' onkeyup="mascara(this,'C2');"></asp:TextBox>
-                                                                            </EditItemTemplate>
-                                                                            <ItemTemplate>
-                                                                                <asp:Label ID="lblImporteBanco" runat="server" Text='<%# Bind("ImporteBanco", "{0:c}") %>'></asp:Label>
-                                                                            </ItemTemplate>
-                                                                        </asp:TemplateField>
-                                                                        <asp:BoundField DataField="Concepto" HeaderText="Concepto" />
-                                                                        <asp:BoundField DataField="Observaciones" HeaderText="Observaciones" ReadOnly="True" />
-                                                                        <asp:CommandField ShowEditButton="True" />
-                                                                        <asp:TemplateField ShowHeader="False">
-                                                                            <ItemTemplate>
-                                                                                <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Delete" OnClientClick="return confirm('¿Desea eliminar el registro?');" Text="Eliminar"></asp:LinkButton>
-                                                                            </ItemTemplate>
-                                                                        </asp:TemplateField>
-                                                                    </Columns>
-                                                                    <FooterStyle CssClass="enc" />
-                                                                    <HeaderStyle CssClass="enc" />
-                                                                    <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                                    <SelectedRowStyle CssClass="sel" />
-                                                                </asp:GridView>
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -589,8 +500,190 @@
             </asp:MultiView>
         </ContentTemplate>
     </asp:UpdatePanel>
+    <div class="modal fade" id="modalConciliacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modOficios">Detalle</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <asp:UpdatePanel ID="UpdatePanel9" runat="server">
+                                    <ContentTemplate>
+                                        <%--<asp:Label ID="lblMsg_Observaciones" runat="server" Text="Una mentalidad positiva te ayuda a triunfar. Piensa bien, para vivir mejor" Font-Size="12px"></asp:Label>--%>
+                                        <asp:DropDownList ID="ddlCtaCheques" runat="server" Visible="False" Width="100%">
+                                        </asp:DropDownList>
+                                        <div class="container-fluid" style="font-size: 12px">
+                                            <div class="row">
+                                                <div class="col text-center">
+                                                    <asp:UpdateProgress ID="updPgrTipo" runat="server" AssociatedUpdatePanelID="updPnlTipo">
+                                                        <ProgressTemplate>
+                                                            <asp:Image ID="img5" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                                                        </ProgressTemplate>
+                                                    </asp:UpdateProgress>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    Tipo
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <asp:UpdatePanel ID="updPnlTipo" runat="server">
+                                                        <ContentTemplate>
+                                                            <asp:DropDownList ID="ddlTipo" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged" TabIndex="1" Width="100%">
+                                                            </asp:DropDownList>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="ddlTipo" ErrorMessage="* Tipo" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
+                                                </div>
+                                            </div>
+                                            <asp:UpdatePanel ID="updPnlPolizas" runat="server">
+                                                <ContentTemplate>
+                                                    <div id="trowPoliza" runat="server">
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                # de Póliza
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <asp:TextBox ID="txtNumPoliza" runat="server" TabIndex="2" onkeypress="if (event.keyCode==13) return false;"></asp:TextBox>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
+
+                                            <asp:UpdatePanel ID="updPnlCheque" runat="server">
+                                                <ContentTemplate>
+                                                    <div id="trowCheque" class="row" runat="server">
+                                                        <div class="col-md-3"># Cheque</div>
+                                                        <div class="col-md-9">
+                                                            <asp:TextBox ID="txtNumCheque" runat="server" TabIndex="3" onkeypress="if (event.keyCode==13) return false;"></asp:TextBox>
+                                                        </div>
+                                                    </div>
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
+
+
+                                            <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+                                                <ContentTemplate>
+                                                    <div id="trowFecha" class="row" runat="server">
+                                                        <div class="col-md-3">
+                                                            Fecha
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <asp:TextBox ID="txtFecha" runat="server" CssClass="box" Width="95px" TabIndex="4" onkeypress="if (event.keyCode==13) return false;"></asp:TextBox>
+                                                            <ajaxToolkit:CalendarExtender ID="CalendarExtenderFecha" runat="server" BehaviorID="_content_CalendarExtenderFecha" PopupButtonID="imgCalendario" TargetControlID="txtFecha" />
+                                                            <asp:ImageButton ID="imgCalendario" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtFecha" ErrorMessage="* Fecha Inicial" ValidationGroup="Agregar">*</asp:RequiredFieldValidator>
+                                                        </div>
+                                                    </div>
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
+
+
+
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <asp:Label ID="lblImporte" runat="server" Text="Importe"></asp:Label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <asp:TextBox ID="txtImporte" runat="server" TabIndex="5" Width="100%" onkeyup="mascara(this,'C');" onkeypress="if (event.keyCode==13) return false;"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="txtImporte" ErrorMessage="* Importe" ValidationGroup="Agregar">*</asp:RequiredFieldValidator>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <asp:Label ID="lblImporteBanco" runat="server" Text="Importe Banco"></asp:Label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <asp:TextBox ID="txtImporteBanco" runat="server" TabIndex="5" Width="100%" onkeyup="mascara(this,'C');" onkeypress="if (event.keyCode==13) return false;"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="txtImporteBanco" ErrorMessage="* Importe" ValidationGroup="Agregar">*</asp:RequiredFieldValidator>
+                                                </div>
+                                            </div>
+                                            <hr />
+
+                                            <div class="row">
+                                                <div class="col">
+                                                    <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                                                        <ContentTemplate>
+                                                            <asp:Label ID="lblConcepto" runat="server" Text="Concepto"></asp:Label>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <asp:UpdatePanel ID="UpdatePanel10" runat="server">
+                                                        <ContentTemplate>
+                                                            <asp:TextBox ID="txtConcepto" runat="server" Width="100%" TabIndex="6" onkeypress="if (event.keyCode==13) return false;"></asp:TextBox>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="row">
+                                                <div class="col">
+                                                    <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+                                                        <ContentTemplate>
+                                                            <asp:Label ID="lblObservaciones" runat="server" Text="Observaciones"></asp:Label>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <asp:UpdatePanel ID="updPnlDescripcion" runat="server">
+                                                        <ContentTemplate>
+                                                            <asp:TextBox ID="txtDescripcion" runat="server" Height="58px" TextMode="MultiLine" TabIndex="7" onkeypress="if (event.keyCode==13) return false;"></asp:TextBox>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </div>
+                                            </div>
+                                            <asp:UpdateProgress ID="updPgrBotones" runat="server" AssociatedUpdatePanelID="updPnlBotones">
+                                                        <ProgressTemplate>
+                                                            <asp:Image ID="imgPrecargaBotones" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                                                        </ProgressTemplate>
+                                                    </asp:UpdateProgress>
+                                            <div class="row">
+                                                <div class="col text-right">
+                                                    <asp:UpdatePanel ID="updPnlBotones" runat="server">
+                                                        <ContentTemplate>
+                                                    <asp:Button ID="bttnModificar" runat="server" CssClass="btn btn-info" Text="Modificar" OnClick="bttnModificar_Click" Visible="false"/>
+                                                    <asp:Button ID="bttnAgregar" runat="server" CssClass="btn btn-info" OnClick="bttnAgregar_Click" Text="Agregar" ValidationGroup="Agregar" TabIndex="7" />
+                                                    <asp:Button ID="bttnSalirModal" runat="server" CssClass="btn btn-blue-grey" Text="Salir" Font-Size="X-Small" data-dismiss="modal" aria-label="Close" />
+                                                             </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
 
     <script type="text/javascript">        
+        function Conciliacion() {
+            $('#<%= grdConciliacion.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdConciliacion.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": false
+            });
+        };
+
+
         function Detalle() {
             $('#<%= grdDetalle.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdDetalle.ClientID %>').find("tr:first"))).DataTable({
                 "destroy": true,

@@ -63,6 +63,7 @@ namespace SAF.Contabilidad.Form
                 }
             }
             ScriptManager.RegisterStartupScript(this, GetType(), "Cuentas_Contables", "Autocomplete();", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridConciliacion", "Conciliacion();", true);
             ScriptManager.RegisterStartupScript(this, GetType(), "GridDetalle", "Detalle();", true);
 
         }
@@ -302,13 +303,13 @@ namespace SAF.Contabilidad.Form
                     DDLCentro_Contable.SelectedValue = DDLCentro_Contable1.SelectedValue;
                     DDLCentro_Contable_SelectedIndexChanged(null, null);
                 }
-                txtFecha.Text = string.Empty;
-                txtNumPoliza.Text = string.Empty;
-                txtImporte.Text = string.Empty;
-                txtConcepto.Text = string.Empty;
-                txtDescripcion.Text = string.Empty;
-                ddlTipo.SelectedIndex = 0;
-                ddlTipo_SelectedIndexChanged(null, null);
+                //txtFecha.Text = string.Empty;
+                //txtNumPoliza.Text = string.Empty;
+                //txtImporte.Text = string.Empty;
+                //txtConcepto.Text = string.Empty;
+                //txtDescripcion.Text = string.Empty;
+                //ddlTipo.SelectedIndex = 0;
+                //ddlTipo_SelectedIndexChanged(null, null);
                
             }
             catch (Exception ex)
@@ -385,11 +386,14 @@ namespace SAF.Contabilidad.Form
             MultiView1.ActiveViewIndex = 1;
             TabContainer2.ActiveTabIndex = 0;
             LimpiarCampos();
-            //ddlTipo.SelectedIndex=0;
-            //ddlTipo_SelectedIndexChanged(null, null);
-            //ddlFecha_Fin.SelectedValue = "";
-            //TabContainer2.Tabs[1].Enabled = false;
-            //TabContainer2.Tabs[1].Enabled = true;
+            ddlTipo.Enabled = true;
+            txtNumPoliza.Text = string.Empty;
+            txtNumCheque.Text = string.Empty;
+            txtFecha.Text = string.Empty;
+            txtImporte.Text = string.Empty;
+            txtConcepto.Text = string.Empty;
+            txtDescripcion.Text = string.Empty;
+
 
         }
         protected void DDLCentro_Contable_SelectedIndexChanged(object sender, EventArgs e)
@@ -1025,6 +1029,86 @@ namespace SAF.Contabilidad.Form
         protected void ddlFecha_Fin_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void linkBttnNuevo_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupConciliacion", "$('#modalConciliacion').modal('show')", true);
+            bttnModificar.Visible = false;
+            bttnAgregar.Visible = true;
+        }
+
+        protected void linkBttnBuscar_Click(object sender, EventArgs e)
+        {
+            CargarGrid();
+        }
+
+        protected void grdDetalle_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<Poliza_Conciliacion> lstConciliacionDet = new List<Poliza_Conciliacion>();
+            lstConciliacionDet = (List<Poliza_Conciliacion>)Session["ConciliacionDet"];
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupConciliacion", "$('#modalConciliacion').modal('show')", true);
+
+            //objConciliacion.IdEnc = Convert.ToInt32(grdDetalle[fila].Cells[11].Text);
+
+
+            //CNConciliacion.ConciliacionDetConsultaGrid(objConciliacion, ref lstConciliacionDet);
+            if (lstConciliacionDet.Count > 0)
+            {
+                ddlTipo.SelectedValue=lstConciliacionDet[grdDetalle.SelectedIndex].Tipo;
+                ddlTipo_SelectedIndexChanged(null, null);
+                ddlTipo.Enabled = false;
+                txtNumPoliza.Text = lstConciliacionDet[grdDetalle.SelectedIndex].Numero_Poliza;
+                txtNumCheque.Text = lstConciliacionDet[grdDetalle.SelectedIndex].Numero_Cheque;
+                txtFecha.Text = lstConciliacionDet[grdDetalle.SelectedIndex].Fecha;
+                txtImporte.Text = Convert.ToString(lstConciliacionDet[grdDetalle.SelectedIndex].Importe);
+                txtConcepto.Text = lstConciliacionDet[grdDetalle.SelectedIndex].Concepto;
+                txtDescripcion.Text = lstConciliacionDet[grdDetalle.SelectedIndex].Observaciones;
+
+                bttnModificar.Visible = true;
+                bttnAgregar.Visible = false;
+
+
+            }
+            
+                
+
+
+        }
+
+        protected void bttnModificar_Click(object sender, EventArgs e)
+        {
+            int Fila = -1;
+            List<Poliza_Conciliacion> ListPDet = new List<Poliza_Conciliacion>();
+
+            Fila = grdDetalle.SelectedIndex;
+            try
+            {
+                if (Session["ConciliacionDet"] != null)
+                    ListPDet = (List<Poliza_Conciliacion>)Session["ConciliacionDet"];
+
+                //txtNumPoliza.Text = lstConciliacionDet[grdDetalle.SelectedIndex].Numero_Poliza;
+                //txtNumCheque.Text = lstConciliacionDet[grdDetalle.SelectedIndex].Numero_Cheque;
+                //txtFecha.Text = lstConciliacionDet[grdDetalle.SelectedIndex].Fecha;
+                //txtImporte.Text = Convert.ToString(lstConciliacionDet[grdDetalle.SelectedIndex].Importe);
+                //txtConcepto.Text = lstConciliacionDet[grdDetalle.SelectedIndex].Concepto;
+                //txtDescripcion.Text = lstConciliacionDet[grdDetalle.SelectedIndex].Observaciones;
+
+                ListPDet[Fila].NumeroPoliza = txtNumPoliza.Text;
+                ListPDet[Fila].Numero_Cheque = txtNumPoliza.Text;
+                ListPDet[Fila].Fecha = txtFecha.Text;
+                ListPDet[Fila].Importe = Convert.ToDouble(txtImporte.Text);
+                ListPDet[Fila].Concepto = txtConcepto.Text;
+                ListPDet[Fila].Observaciones = txtDescripcion.Text;
+                CargarGridConcDet(ListPDet);
+                Session["ConciliacionDet"] = ListPDet;
+                //    CargarGridPolizasAgregadas(ListPDet);
+
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
 

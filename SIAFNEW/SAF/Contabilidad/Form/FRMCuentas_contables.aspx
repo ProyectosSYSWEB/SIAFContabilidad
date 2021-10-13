@@ -608,8 +608,17 @@
                                                 </asp:UpdatePanel>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row alert alert-warning">
                                             <div class="col">
+                                                <asp:UpdatePanel ID="UpdatePanel24" runat="server">
+                                                    <ContentTemplate>
+                                                        <asp:Label ID="lblMsj2" runat="server" Text=""></asp:Label>
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col text-center">
                                                 <asp:UpdateProgress ID="updPgrActualizar" runat="server" AssociatedUpdatePanelID="updPnlActualizar">
                                                     <ProgressTemplate>
                                                         <asp:Image ID="imgPgrActualizar" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." Width="50px" />
@@ -621,17 +630,14 @@
                                             <div class="col">
                                                 <asp:UpdatePanel ID="UpdatePanel10" runat="server">
                                                     <ContentTemplate>
-                                                        <asp:GridView ID="grdCatCOG" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" OnRowCancelingEdit="grdCatCOG_RowCancelingEdit" OnRowEditing="grdCatCOG_RowEditing" OnRowUpdating="grdCatCOG_RowUpdating">
+                                                        <asp:GridView ID="grdCatCOG" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" OnRowCancelingEdit="grdCatCOG_RowCancelingEdit" OnRowEditing="grdCatCOG_RowEditing" OnRowUpdating="grdCatCOG_RowUpdating" OnRowDeleting="grdCatCOG_RowDeleting">
                                                             <Columns>
-                                                                <asp:BoundField HeaderText="MAYOR" DataField="cuenta_mayor" ReadOnly="True" />
-                                                                <asp:BoundField HeaderText="COG" DataField="natura" ReadOnly="True" />
-                                                                <asp:BoundField HeaderText="NOMBRE" DataField="descripcion" ReadOnly="True">
+                                                                <asp:BoundField HeaderText="MAYOR" DataField="cuenta_mayor" />
+                                                                <asp:BoundField HeaderText="COG" DataField="natura" />
+                                                                <asp:BoundField HeaderText="NOMBRE" DataField="descripcion">
                                                                     <ItemStyle Width="75%" />
                                                                 </asp:BoundField>
-                                                                <asp:TemplateField HeaderText="STATUS">
-                                                                    <HeaderTemplate>
-                                                                        <asp:Button ID="bttnAgregar" runat="server" CssClass="btn btn-blue-grey" Font-Size="X-Small" Text="AGREGAR" OnClick="bttnAgregar_Click" />
-                                                                    </HeaderTemplate>
+                                                                <asp:TemplateField>
                                                                     <EditItemTemplate>
                                                                         <asp:TextBox ID="txtStatus" runat="server" Width="50px" Text='<%# Bind("status") %>'></asp:TextBox>
                                                                     </EditItemTemplate>
@@ -639,7 +645,15 @@
                                                                         <asp:Label ID="Label1" runat="server" Text='<%# Bind("status") %>'></asp:Label>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
-                                                                <asp:CommandField ShowEditButton="True" />
+
+                                                                <asp:TemplateField>
+                                                                    <HeaderTemplate>
+                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCOG">Agregar</button>
+                                                                    </HeaderTemplate>
+                                                                    <ItemTemplate>
+                                                                        <asp:LinkButton ID="linkBttnEliminarCOG" runat="server" CommandName="Delete" Width="100%" OnClientClick="return confirm('¿Desea eliminar el registro?');">Eliminar</asp:LinkButton>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
                                                             </Columns>
                                                             <FooterStyle CssClass="enc" />
                                                             <PagerStyle CssClass="enc" HorizontalAlign="Center" />
@@ -690,21 +704,24 @@
                                                     </ContentTemplate>
                                                 </asp:UpdatePanel>
                                             </div>
-                                            <asp:UpdateProgress ID="updPgrCatNiv" runat="server" AssociatedUpdatePanelID="updPnlActCatNiv">
-                                                <ProgressTemplate>
-                                                    <asp:Image ID="imgActCatNiv" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." Width="50px" />
-                                                </ProgressTemplate>
-                                            </asp:UpdateProgress>
-                                            <div class="row alert alert-warning">
-                                                <div class="col">
-                                                    <asp:UpdatePanel ID="UpdatePanel19" runat="server">
-                                                        <ContentTemplate>
-                                                            <asp:Label ID="lblMsj" runat="server" Text=""></asp:Label>
-                                                        </ContentTemplate>
-                                                    </asp:UpdatePanel>
-                                                </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col text-center">
+                                                <asp:UpdateProgress ID="updPgrCatNiv" runat="server" AssociatedUpdatePanelID="updPnlActCatNiv">
+                                                    <ProgressTemplate>
+                                                        <asp:Image ID="imgActCatNiv" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." Width="50px" />
+                                                    </ProgressTemplate>
+                                                </asp:UpdateProgress>
                                             </div>
-
+                                        </div>
+                                        <div class="row alert alert-warning">
+                                            <div class="col">
+                                                <asp:UpdatePanel ID="UpdatePanel19" runat="server">
+                                                    <ContentTemplate>
+                                                        <asp:Label ID="lblMsj" runat="server" Text=""></asp:Label>
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col text-center">
@@ -736,17 +753,13 @@
                                             <div class="col">
                                                 <asp:UpdatePanel ID="UpdatePanel20" runat="server">
                                                     <ContentTemplate>
-                                                        <asp:GridView ID="grdCatalogos" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" OnRowCancelingEdit="grdCatalogos_RowCancelingEdit" OnRowEditing="grdCatalogos_RowEditing" OnRowUpdating="grdCatalogos_RowUpdating" OnRowDeleting="grdCatalogos_RowDeleting">
+                                                        <asp:GridView ID="grdCatalogos" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" OnRowCancelingEdit="grdCatalogos_RowCancelingEdit1" OnRowEditing="grdCatalogos_RowEditing1" OnRowUpdating="grdCatalogos_RowUpdating1" OnRowDeleting="grdCatalogos_RowDeleting">
                                                             <Columns>
                                                                 <asp:BoundField HeaderText="CVE" DataField="Etiqueta" />
                                                                 <asp:BoundField HeaderText="DESCRIPCIÓN" DataField="EtiquetaDos">
                                                                     <ItemStyle Width="75%" />
                                                                 </asp:BoundField>
                                                                 <asp:TemplateField HeaderText="STATUS">
-                                                                    <HeaderTemplate>
-                                                                        <%--<asp:Button ID="bttnAgregarCatCta" runat="server" CssClass="btn btn-blue-grey" Font-Size="X-Small" Text="AGREGAR" OnClick="bttnAgregarCatCta_Click" />--%>
-                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCat">Agregar</button>
-                                                                    </HeaderTemplate>
                                                                     <EditItemTemplate>
                                                                         <asp:TextBox ID="txtStatus" runat="server" Width="50px" Text='<%# Bind("EtiquetaTres") %>'></asp:TextBox>
                                                                     </EditItemTemplate>
@@ -754,10 +767,12 @@
                                                                         <asp:Label ID="Label1" runat="server" Text='<%# Bind("EtiquetaTres") %>'></asp:Label>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
-                                                                <asp:CommandField ShowEditButton="True" />
                                                                 <asp:TemplateField>
+                                                                    <HeaderTemplate>
+                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCat">Agregar</button>
+                                                                    </HeaderTemplate>
                                                                     <ItemTemplate>
-                                                                        <asp:LinkButton ID="linkBttnEliminarCat" runat="server" CssClass="btn_grid btn-mdb-color" CommandName="Delete" Width="100%" OnClientClick="return confirm('¿Desea eliminar el registro?');">Borrar</asp:LinkButton>
+                                                                        <asp:LinkButton ID="linkBttnEliminarCat" runat="server" CommandName="Delete" Width="100%" OnClientClick="return confirm('¿Desea eliminar el registro?');">Eliminar</asp:LinkButton>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
                                                             </Columns>
@@ -777,11 +792,10 @@
                         </div>
                     </div>
                 </div>
+
             </div>
 
         </div>
-
-    </div>
 
     <div class="modal fade" id="modalCOG" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -805,16 +819,49 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col">Descripción</div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
+                            <div class="col-md-2">Descrip</div>
+                            <div class="col-md-10">
                                 <asp:TextBox ID="txtDescripcionCOG" runat="server" Width="100%"></asp:TextBox>
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-md-2">Status</div>
+                            <div class="col-md-10">
+                                <asp:DropDownList ID="ddlStatusCOG" runat="server">
+                                    <asp:ListItem Value="A">Activo</asp:ListItem>
+                                    <asp:ListItem Value="B">Baja</asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col text-right">
-                                <asp:Button ID="bttnGuardarCOG" runat="server" Text="Guardar" CssClass="btn btn-info" OnClick="bttnGuardarCOG_Click" />
+                                <asp:UpdatePanel ID="UpdatePanel23" runat="server">
+                                    <ContentTemplate>
+                                        <asp:Button ID="bttnGuardarCOG" runat="server" Text="Guardar" CssClass="btn btn-info" OnClick="bttnGuardarCOG_Click" />
+
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                        <div class="col text-center">
+                            <asp:UpdateProgress ID="UpdateProgress23" runat="server"
+                                AssociatedUpdatePanelID="UpdatePanel23">
+                                <ProgressTemplate>
+                                    <asp:Image ID="imgGuardarCOG" runat="server"
+                                        AlternateText="Espere un momento, por favor.." Height="50px"
+                                        ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                        ToolTip="Espere un momento, por favor.." Width="50px" Style="text-align: center" />
+                                </ProgressTemplate>
+                            </asp:UpdateProgress>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <asp:UpdatePanel ID="UpdatePanel22" runat="server">
+                                    <ContentTemplate>
+                                        <asp:Label ID="lblErrorCOG" runat="server" Text=""></asp:Label>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
                             </div>
                         </div>
                     </div>
@@ -922,8 +969,8 @@
         function Catalogos() {
             $('#<%= grdCatalogos.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdCatalogos.ClientID %>').find("tr:first"))).DataTable({
                 "destroy": true,
+                "stateSave": true,
                 "ordering": false,
-                "bStateSave": false,
                 "lengthMenu": [[7, 14, 21, -1], [7, 14, 21, "All"]]
             });
         };

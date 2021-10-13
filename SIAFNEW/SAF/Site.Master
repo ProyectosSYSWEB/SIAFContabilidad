@@ -48,6 +48,10 @@
     <%--TERMINA PARA EL POP UP--%>
 
     <style>
+        .ajax__myTab .ajax__tab_body a {
+            color: #fff !important;
+        }
+
         .p_info {
             background-color: #fff;
             width: 100%;

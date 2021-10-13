@@ -6,7 +6,7 @@ using CapaDatos;
 using CapaEntidad;
 namespace CapaNegocio
 {
-    public  class CN_Cuentas_contables
+    public class CN_Cuentas_contables
     {
         public void InsertarCatCtas(Comun obComun, ref string Verificador)
         {
@@ -36,12 +36,26 @@ namespace CapaNegocio
             }
         }
 
+        public void EliminarCatCOG(cuentas_contables obComun, ref string Verificador)
+        {
+            try
+            {
+
+                CD_Cuentas_contables CDCatCtas = new CD_Cuentas_contables();
+                CDCatCtas.EliminarCatCOG(obComun, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void PolizaConsultaGrid(ref cuentas_contables Objcuentas_contables, ref List<cuentas_contables> List)
         {
             try
             {
                 CD_Cuentas_contables CDcuenta_contable = new CD_Cuentas_contables();
-                CDcuenta_contable.PolizaConsultaGrid(ref Objcuentas_contables,  ref List);
+                CDcuenta_contable.PolizaConsultaGrid(ref Objcuentas_contables, ref List);
 
             }
             catch (Exception ex)
@@ -81,6 +95,37 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+
+        public void InsertarCatCOG(Comun objCatCog, ref string Verificador)
+        {
+            try
+            {
+
+                CD_Cuentas_contables CDcuentas_contables = new CD_Cuentas_contables();
+                CDcuentas_contables.InsertarCatCOG(objCatCog, ref Verificador);
+
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void EditarCatCta(Comun objCatCog, ref string Verificador)
+        {
+            try
+            {
+                CD_Cuentas_contables cdcuenta = new CD_Cuentas_contables();
+                cdcuenta.EditarCatCta(objCatCog, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void ConsultarCatalogos(Comun objCat, ref List<Comun> List)
         {
             try
@@ -99,7 +144,7 @@ namespace CapaNegocio
             try
             {
                 CD_Cuentas_contables CDcuenta = new CD_Cuentas_contables();
-                CDcuenta.Consultarcuenta(ref  objcuentas_contables, ref Verificador);
+                CDcuenta.Consultarcuenta(ref objcuentas_contables, ref Verificador);
 
             }
             catch (Exception ex)
@@ -107,7 +152,7 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
-        public  void insertar_cuenta_contable(ref cuentas_contables objcuentas_contables, ref string Verificador)
+        public void insertar_cuenta_contable(ref cuentas_contables objcuentas_contables, ref string Verificador)
         {
             try
             {

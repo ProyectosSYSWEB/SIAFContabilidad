@@ -721,20 +721,20 @@ namespace SAF.Rep
             cuentas_contables objCta = new cuentas_contables();
             int Total = 0;
             Verificador = string.Empty;
-            lblMsj.Text = string.Empty;
+            lblMsj2.Text = string.Empty;
             try
             {
                 objCta.ejercicio = SesionUsu.Usu_Ejercicio;
                 CNcuentas_contables.CuentasContables_ActDesc(objCta, ref Total, ref Verificador);
                 if (Verificador == "0")
                 {
-                    lblMsj.Text = "Se actualizaron " + Total + " registros.";
+                    lblMsj2.Text = "Se actualizaron " + Total + " registros.";
                     //ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'Las cuentas fueron actualizadas correctamente.');", true);
                 }
                 else
                 {
                     CNComun.VerificaTextoMensajeError(ref Verificador);
-                    lblMsj.Text = Verificador;
+                    lblMsj2.Text = Verificador;
                     //ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
                 }
             }
@@ -742,7 +742,7 @@ namespace SAF.Rep
             {
                 Verificador = ex.Message;
                 CNComun.VerificaTextoMensajeError(ref Verificador);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+                lblMsj2.Text = Verificador;
             }
         }
 
@@ -760,9 +760,9 @@ namespace SAF.Rep
             try
             {
                 cuentas_contables objCtas = new cuentas_contables();
-                //objCtas.cuenta_mayor = Convert.ToString(row.Cells[0].Text);
-                //objCtas.natura = Convert.ToString(row.Cells[1].Text);
-                //objCtas.descripcion = Convert.ToString(row.Cells[2].Text);
+                objCtas.cuenta_mayor = Convert.ToString(row.Cells[0].Text);
+                objCtas.natura = Convert.ToString(row.Cells[1].Text);
+                objCtas.descripcion = Convert.ToString(row.Cells[2].Text);
                 TextBox txtStatus = (TextBox)(row.Cells[2].FindControl("txtStatus"));
                 objCtas.status = txtStatus.Text;
                 CNcuentas_contables.Editar_Catalogo_COG(objCtas, ref Verificador);
@@ -837,32 +837,33 @@ namespace SAF.Rep
         {
             CargarGridCatalogos();
         }
-
-        protected void grdCatalogos_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-        {
-
-        }
-
-        protected void grdCatalogos_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-
-        }
-
-        protected void grdCatalogos_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        {
-
-        }
-
+       
         protected void bttnGuardarCOG_Click(object sender, EventArgs e)
         {
             Verificador = string.Empty;
+            lblErrorCOG.Text = string.Empty;
+            Comun objCatCta = new Comun();
             try
             {
-                //CNComun.insertar_datos_sesion
-            }
-            catch (Exception)
-            {
+                objCatCta.Etiqueta = txtMayor.Text.ToUpper();
+                objCatCta.EtiquetaDos = txtCOG.Text.ToUpper();
+                objCatCta.EtiquetaTres = txtDescripcionCOG.Text.ToUpper();
+                objCatCta.EtiquetaCuatro = ddlStatusCOG.SelectedValue;
+                CNcuentas_contables.InsertarCatCOG(objCatCta, ref Verificador);
+                if (Verificador == "0")
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupCOG", "$('#modalCOG').modal('hide')", true);
+                    CargarGridCOG();
+                }
+                else
+                    lblErrorCOG.Text = Verificador;
 
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                lblErrorCat.Text = Verificador;
             }
         }
 
@@ -942,6 +943,87 @@ namespace SAF.Rep
                 //modalOficios.Show();
             }
         }
+        protected void grdCatCOG_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            lblMsj2.Text = string.Empty;
+            Verificador = string.Empty;
+            cuentas_contables objCatCOG = new cuentas_contables();
+            try
+            {
+                int fila = e.RowIndex;
+                objCatCOG.cuenta_mayor = grdCatCOG.Rows[fila].Cells[0].Text;
+                objCatCOG.natura = grdCatCOG.Rows[fila].Cells[1].Text;
+                CNcuentas_contables.EliminarCatCOG(objCatCOG, ref Verificador);
 
+                if (Verificador == "0")
+                    CargarGridCOG();
+                else
+                {
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    lblMsj2.Text = Verificador;
+
+                }
+                //modalOficios.Show();
+            }
+            catch (Exception ex)
+            {
+                //lblError.Text = ex.Message;
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                lblMsj2.Text = Verificador;
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+
+                //lblMjErrorOficio.Text = Verificador;
+                //modalOficios.Show();
+            }
+        }
+
+        protected void grdCatalogos_RowUpdating1(object sender, GridViewUpdateEventArgs e)
+        {
+            Verificador = string.Empty;
+            int fila = e.RowIndex;
+            GridViewRow row = grdCatalogos.Rows[e.RowIndex];
+            try
+            {
+                Comun objCat = new Comun();
+                objCat.Etiqueta = Convert.ToString(row.Cells[0].Text);
+                objCat.EtiquetaDos = Convert.ToString(row.Cells[1].Text);
+                TextBox txtStatus = (TextBox)(row.Cells[2].FindControl("txtStatus"));
+                objCat.EtiquetaTres = txtStatus.Text;
+                CNcuentas_contables.EditarCatCta(objCat, ref Verificador);
+                if (Verificador == "0")
+                {
+                    grdCatalogos.EditIndex = -1;
+                    CargarGridCatalogos();
+                }
+                else
+                {
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);
+                }
+
+                ScriptManager.RegisterStartupScript(this, GetType(), "GridCOG", "CatCOG();", true);
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);
+
+            }
+        }
+
+        protected void grdCatalogos_RowEditing1(object sender, GridViewEditEventArgs e)
+        {
+            grdCatalogos.EditIndex = e.NewEditIndex;
+            CargarGridCatalogos();
+        }
+
+        protected void grdCatalogos_RowCancelingEdit1(object sender, GridViewCancelEditEventArgs e)
+        {
+            grdCatalogos.EditIndex = -1;
+            CargarGridCatalogos();
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridCatalogos", "Catalogos();", true);
+        }
     }
 }

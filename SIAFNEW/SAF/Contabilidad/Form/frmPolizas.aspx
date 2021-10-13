@@ -1841,7 +1841,7 @@
             //$('input[type=search]').val('');
             $('#<%= grvPolizas.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvPolizas.ClientID %>').find("tr:first"))).DataTable({
                 "destroy": true,
-                "stateSave": false
+                "stateSave": true
             });
         };
 
