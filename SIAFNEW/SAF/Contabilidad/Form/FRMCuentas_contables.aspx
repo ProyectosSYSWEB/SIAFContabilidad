@@ -375,7 +375,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <asp:DropDownList ID="ddlstatus" runat="server"
-                                                        OnSelectedIndexChanged="ddlMayor_SelectedIndexChanged" Enabled="False" CssClass="form-control">
+                                                        Enabled="False" CssClass="form-control">
                                                         <asp:ListItem Value="A">ALTA</asp:ListItem>
                                                         <asp:ListItem Value="B">BAJA</asp:ListItem>
                                                     </asp:DropDownList>
@@ -618,6 +618,18 @@
                                             </div>
                                         </div>
                                         <div class="row">
+                                            <div class="col-md-2">
+                                                Cta de Mayor
+                                            </div>
+                                            <div class="col-md-10">
+                                                <asp:UpdatePanel ID="UpdatePanel25" runat="server">
+                                                    <ContentTemplate>
+                                                        <asp:DropDownList ID="ddlMayor" runat="server" Width="100%" onChange="cboCatCog();"></asp:DropDownList>
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
+                                            </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col text-center">
                                                 <asp:UpdateProgress ID="updPgrActualizar" runat="server" AssociatedUpdatePanelID="updPnlActualizar">
                                                     <ProgressTemplate>
@@ -797,187 +809,191 @@
 
         </div>
 
-    <div class="modal fade" id="modalCOG" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modEmp">Agregar</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-2">Mayor</div>
-                            <div class="col-md-4">
-                                <asp:TextBox ID="txtMayor" runat="server" Width="100%"></asp:TextBox>
+        <div class="modal fade" id="modalCOG" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modEmp">Agregar</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-2">Mayor</div>
+                                <div class="col-md-4">
+                                    <asp:TextBox ID="txtMayor" runat="server" Width="100%"></asp:TextBox>
+                                </div>
+                                <div class="col-md-2">COG</div>
+                                <div class="col-md-4">
+                                    <asp:TextBox ID="txtCOG" runat="server" Width="100%"></asp:TextBox>
+                                </div>
                             </div>
-                            <div class="col-md-2">COG</div>
-                            <div class="col-md-4">
-                                <asp:TextBox ID="txtCOG" runat="server" Width="100%"></asp:TextBox>
+                            <div class="row">
+                                <div class="col-md-2">Descrip</div>
+                                <div class="col-md-10">
+                                    <asp:TextBox ID="txtDescripcionCOG" runat="server" Width="100%"></asp:TextBox>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">Descrip</div>
-                            <div class="col-md-10">
-                                <asp:TextBox ID="txtDescripcionCOG" runat="server" Width="100%"></asp:TextBox>
+                            <div class="row">
+                                <div class="col-md-2">Status</div>
+                                <div class="col-md-10">
+                                    <asp:DropDownList ID="ddlStatusCOG" runat="server">
+                                        <asp:ListItem Value="A">Activo</asp:ListItem>
+                                        <asp:ListItem Value="B">Baja</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">Status</div>
-                            <div class="col-md-10">
-                                <asp:DropDownList ID="ddlStatusCOG" runat="server">
-                                    <asp:ListItem Value="A">Activo</asp:ListItem>
-                                    <asp:ListItem Value="B">Baja</asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col text-right">
-                                <asp:UpdatePanel ID="UpdatePanel23" runat="server">
-                                    <ContentTemplate>
-                                        <asp:Button ID="bttnGuardarCOG" runat="server" Text="Guardar" CssClass="btn btn-info" OnClick="bttnGuardarCOG_Click" />
+                            <div class="row">
+                                <div class="col text-right">
+                                    <asp:UpdatePanel ID="UpdatePanel23" runat="server">
+                                        <ContentTemplate>
+                                            <asp:Button ID="bttnGuardarCOG" runat="server" Text="Guardar" CssClass="btn btn-info" OnClick="bttnGuardarCOG_Click" />
 
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col text-center">
-                            <asp:UpdateProgress ID="UpdateProgress23" runat="server"
-                                AssociatedUpdatePanelID="UpdatePanel23">
-                                <ProgressTemplate>
-                                    <asp:Image ID="imgGuardarCOG" runat="server"
-                                        AlternateText="Espere un momento, por favor.." Height="50px"
-                                        ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
-                                        ToolTip="Espere un momento, por favor.." Width="50px" Style="text-align: center" />
-                                </ProgressTemplate>
-                            </asp:UpdateProgress>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <asp:UpdatePanel ID="UpdatePanel22" runat="server">
-                                    <ContentTemplate>
-                                        <asp:Label ID="lblErrorCOG" runat="server" Text=""></asp:Label>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
+                            <div class="col text-center">
+                                <asp:UpdateProgress ID="UpdateProgress23" runat="server"
+                                    AssociatedUpdatePanelID="UpdatePanel23">
+                                    <ProgressTemplate>
+                                        <asp:Image ID="imgGuardarCOG" runat="server"
+                                            AlternateText="Espere un momento, por favor.." Height="50px"
+                                            ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                            ToolTip="Espere un momento, por favor.." Width="50px" Style="text-align: center" />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <asp:UpdatePanel ID="UpdatePanel22" runat="server">
+                                        <ContentTemplate>
+                                            <asp:Label ID="lblErrorCOG" runat="server" Text=""></asp:Label>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="modal fade" id="modalCat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modCat">Agregar</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-2">Cve</div>
-                            <div class="col-md-4">
-                                <asp:TextBox ID="txtCve" runat="server" Width="100%"></asp:TextBox>
+        <div class="modal fade" id="modalCat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modCat">Agregar</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-2">Cve</div>
+                                <div class="col-md-4">
+                                    <asp:TextBox ID="txtCve" runat="server" Width="100%"></asp:TextBox>
+                                </div>
+                                <div class="col-md-2">Status</div>
+                                <div class="col-md-4">
+                                    <asp:DropDownList ID="ddlStatusCat" runat="server">
+                                        <asp:ListItem Value="A">Activo</asp:ListItem>
+                                        <asp:ListItem Value="B">Baja</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
                             </div>
-                            <div class="col-md-2">Status</div>
-                            <div class="col-md-4">
-                                <asp:DropDownList ID="ddlStatusCat" runat="server">
-                                    <asp:ListItem Value="A">Activo</asp:ListItem>
-                                    <asp:ListItem Value="B">Baja</asp:ListItem>
-                                </asp:DropDownList>
+                            <div class="row">
+                                <div class="col">Descripción</div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">Descripción</div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <asp:TextBox ID="txtDescCat" runat="server" Width="100%"></asp:TextBox>
+                            <div class="row">
+                                <div class="col">
+                                    <asp:TextBox ID="txtDescCat" runat="server" Width="100%"></asp:TextBox>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col text-right">
-                                <asp:UpdatePanel ID="updPnlAgCat" runat="server">
-                                    <ContentTemplate>
-                                        <asp:Button ID="bttnAgregarCat" runat="server" Text="Guardar" CssClass="btn btn-info" OnClick="bttnAgregarCat_Click" />
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
+                            <div class="row">
+                                <div class="col text-right">
+                                    <asp:UpdatePanel ID="updPnlAgCat" runat="server">
+                                        <ContentTemplate>
+                                            <asp:Button ID="bttnAgregarCat" runat="server" Text="Guardar" CssClass="btn btn-info" OnClick="bttnAgregarCat_Click" />
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col alert alert-danger">
-                                <asp:UpdatePanel ID="UpdatePanel21" runat="server">
-                                    <ContentTemplate>
-                                        <asp:Label ID="lblErrorCat" runat="server" Text=""></asp:Label>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
+                            <div class="row">
+                                <div class="col alert alert-danger">
+                                    <asp:UpdatePanel ID="UpdatePanel21" runat="server">
+                                        <ContentTemplate>
+                                            <asp:Label ID="lblErrorCat" runat="server" Text=""></asp:Label>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
 
-    <script type="text/javascript">       
-        function CuentasContables() {
-            //$('input[type=search]').val('');
-            $('#<%= grdcuentas_contables.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdcuentas_contables.ClientID %>').find("tr:first"))).DataTable({
-                "destroy": true,
-                "stateSave": true,
-                "ordering": false,
-                "lengthMenu": [[15, 30, 45, -1], [15, 30, 45, "All"]]
-            });
-        };
+        <script type="text/javascript">       
+            function CuentasContables() {
+                //$('input[type=search]').val('');
+                $('#<%= grdcuentas_contables.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdcuentas_contables.ClientID %>').find("tr:first"))).DataTable({
+                    "destroy": true,
+                    "stateSave": true,
+                    "ordering": false,
+                    "lengthMenu": [[15, 30, 45, -1], [15, 30, 45, "All"]]
+                });
+            };
+            function CuentasContablesInicio() {
+                //$('input[type=search]').val('');
+                $('#<%= grdcuentas_contables.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdcuentas_contables.ClientID %>').find("tr:first"))).DataTable({
+                    "destroy": true,
+                    "stateSave": false,
+                    "ordering": false,
+                    "lengthMenu": [[15, 30, 45, -1], [15, 30, 45, "All"]]
+                });
+            };
+            function CatCOG() {
+                $('#<%= grdCatCOG.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdCatCOG.ClientID %>').find("tr:first"))).DataTable({
+                    "destroy": true,
+                    "ordering": false,
+                    "bStateSave": false,
+                    "bFilter": true,
+                    "lengthMenu": [[7, 14, 21, -1], [7, 14, 21, "All"]]
+                });
+            };
+            function Polizas() {
+                //$('input[type=search]').val('');
+                $('#<%= grvPolizas.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvPolizas.ClientID %>').find("tr:first"))).DataTable({
+                    "destroy": true,
+                    "stateSave": true,
+                    "ordering": false
+                });
+            };
+            function Catalogos() {
+                $('#<%= grdCatalogos.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdCatalogos.ClientID %>').find("tr:first"))).DataTable({
+                    "destroy": true,
+                    "stateSave": true,
+                    "ordering": false,
+                    "lengthMenu": [[7, 14, 21, -1], [7, 14, 21, "All"]]
+                });
+            };
+            function OcultarPestania() {
+                $('#Pestania2').hide();
+            };
+            function cboCatCog() {
+                var table = $('#<%= grdCatCOG.ClientID %>').DataTable();
+                var selectedValue = $('#<%= ddlMayor.ClientID %>').val();
+                table.search(selectedValue).draw();
 
-        function CuentasContablesInicio() {
-            //$('input[type=search]').val('');
-            $('#<%= grdcuentas_contables.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdcuentas_contables.ClientID %>').find("tr:first"))).DataTable({
-                "destroy": true,
-                "stateSave": false,
-                "ordering": false,
-                "lengthMenu": [[15, 30, 45, -1], [15, 30, 45, "All"]]
-            });
-        };
+                
+            };
 
-        function CatCOG() {
-            $('#<%= grdCatCOG.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdCatCOG.ClientID %>').find("tr:first"))).DataTable({
-                "destroy": true,
-                "ordering": false,
-                "bStateSave": false,
-                "lengthMenu": [[7, 14, 21, -1], [7, 14, 21, "All"]]
-            });
-        };
-        function Polizas() {
-            //$('input[type=search]').val('');
-            $('#<%= grvPolizas.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvPolizas.ClientID %>').find("tr:first"))).DataTable({
-                "destroy": true,
-                "stateSave": true,
-                "ordering": false
-            });
-        };
-
-        function Catalogos() {
-            $('#<%= grdCatalogos.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdCatalogos.ClientID %>').find("tr:first"))).DataTable({
-                "destroy": true,
-                "stateSave": true,
-                "ordering": false,
-                "lengthMenu": [[7, 14, 21, -1], [7, 14, 21, "All"]]
-            });
-        };
-
-        function OcultarPestania() {
-            $('#Pestania2').hide();
-        }
-
-    </script>
+        </script>
 </asp:Content>

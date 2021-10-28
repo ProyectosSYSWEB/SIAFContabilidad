@@ -71,6 +71,8 @@ namespace SAF.Contabilidad.Form
         private void Inicializar()
         {
             MultiView1.ActiveViewIndex = 0;
+            ddlFecha_Ini1.SelectedValue = System.DateTime.Now.ToString("MM");
+            ddlFecha_Fin1.SelectedValue = System.DateTime.Now.ToString("MM");
             Cargarcombos();
             CargarGrid();
             //ScriptManager.RegisterStartupScript(this, GetType(), "Materias", "FiltMat();", true);
@@ -96,7 +98,7 @@ namespace SAF.Contabilidad.Form
         private void CargarGrid()
         {
             Verificador = string.Empty;
-            Int32[] Celdas = new Int32[] { 7,8,9,10,11 };
+            Int32[] Celdas = new Int32[] { 8,9,10,11,12 };
             grdConciliacion.DataSource = null;
             grdConciliacion.DataBind();
             try
@@ -241,44 +243,14 @@ namespace SAF.Contabilidad.Form
         {
             grdDetalle.DataSource = null;
             grdDetalle.DataBind();
-            Int32[] Celdas = new Int32[] { 0, 2 };
+            Int32[] Celdas = new Int32[] { 2 };
             try
             {
                 DataTable dt = new DataTable();
-                grdDetalle.DataSource = lstPolizasDet;
+                List<Poliza_Conciliacion> SortedList = lstPolizasDet.OrderBy(o => o.CveTipo).ToList();
+                grdDetalle.DataSource = SortedList;
                 grdDetalle.DataBind();
-
-                CNComun.HideColumns(grdDetalle, Celdas);
-                //CNComun.HideColumns()
-                //for (int i = 0; i < grdDetalle.Rows.Count; i++)
-                //{
-
-                //    foreach (GridViewRow row in grdDetalle.Rows)
-                //    {
-                //        //if(row.Cells[2].Text== "1192")
-                //        //    row.BackColor = System.Drawing.Color.LightGray;
-                //        row.ForeColor = System.Drawing.Color.Black; ;
-                //        if (row.Cells[1].Text == "1189")
-                //        {
-                //            row.BackColor = System.Drawing.Color.LightSlateGray; //SALDO DE BALANZA (ANEXO 1)
-                //            row.ForeColor = System.Drawing.Color.White;
-                //        }
-                //        else if (row.Cells[1].Text == "1191")
-                //            row.BackColor = System.Drawing.Color.LightGray; //SALDO SEGÚN EDO DE CTA. (ANEXO 2)
-                //        else if (row.Cells[1].Text == "1192")
-                //            row.BackColor = System.Drawing.Color.LightBlue; //CARGA UNACH - NO ABONA BANCOS (ANEXO 3)
-                //        else if (row.Cells[1].Text == "1190")
-                //            row.BackColor = System.Drawing.Color.LightSteelBlue; //ABONA UNACH - NO CARGA BANCOS (ANEXO 4)
-                //        else if (row.Cells[1].Text == "1193")
-                //            row.BackColor = System.Drawing.Color.Beige; //CARGA BANCOS - NO ABONA UNACH (ANEXO 5)
-                //        else if (row.Cells[1].Text == "1194")
-                //            row.BackColor = System.Drawing.Color.LightYellow; //ABONA BANCOS - NO CARGA UNACH (ANEXO 6)
-
-
-
-                //    }
-                //}
-
+                CNComun.HideColumns(grdDetalle, Celdas);                
             }
             catch (Exception ex)
             {
@@ -328,7 +300,7 @@ namespace SAF.Contabilidad.Form
             txtConcepto.Text = string.Empty;
             txtDescripcion.Text = string.Empty;
             txtImporteBanco.Text = "0";
-            ddlTipo.Focus();
+            //ddlTipo.Focus();
         }
         private string GuardarDatos()
         {
@@ -356,7 +328,7 @@ namespace SAF.Contabilidad.Form
                 }
                 else
                 {
-                    objConciliacion.IdEnc = Convert.ToInt32(grdConciliacion.SelectedRow.Cells[11].Text);
+                    objConciliacion.IdEnc = Convert.ToInt32(grdConciliacion.SelectedRow.Cells[12].Text);
                     if (ListPDet != null)
                         CNConciliacion.ConciliacionEditarEnc2(ref objConciliacion, ListPDet, ref Verificador);
                     else
@@ -462,7 +434,7 @@ namespace SAF.Contabilidad.Form
                 //objConciliacion.Elaboro_nombre = Convert.ToString(grdConciliacion.SelectedRow.Cells[4].Text);
                 //objConciliacion.Vb_nombre = Convert.ToString(grdConciliacion.SelectedRow.Cells[5].Text);
                 //Poliza_Conciliacion objConciliacionResp = new Poliza_Conciliacion();
-                objConciliacion.IdEnc = Convert.ToInt32(grdConciliacion.SelectedRow.Cells[11].Text);
+                objConciliacion.IdEnc = Convert.ToInt32(grdConciliacion.SelectedRow.Cells[12].Text);
                 CNConciliacion.ConsultarConciliacionEncSel2(ref objConciliacion, ref Verificador);
                 if (Verificador == "0")
                 {
@@ -479,12 +451,12 @@ namespace SAF.Contabilidad.Form
                     txtVB_Puesto.Text = objConciliacion.Vb_puesto;
                     ddlTipo.SelectedIndex = 0;
                     ddlTipo_SelectedIndexChanged(null, null);
-                    objConciliacion.IdEnc = Convert.ToInt32(grdConciliacion.SelectedRow.Cells[11].Text);
+                    objConciliacion.IdEnc = Convert.ToInt32(grdConciliacion.SelectedRow.Cells[12].Text);
                     List<Poliza_Conciliacion> lstConciliacionDet = new List<Poliza_Conciliacion>();
                     CNConciliacion.ConciliacionDetConsultaGrid(objConciliacion, ref lstConciliacionDet);
                     if (lstConciliacionDet.Count > 0)
                     {
-                        Session["ConciliacionDet"] = lstConciliacionDet;
+                        Session["ConciliacionDet"] = lstConciliacionDet;                        
                         CargarGridConcDet(lstConciliacionDet);
 
                     }
@@ -679,10 +651,6 @@ namespace SAF.Contabilidad.Form
             List<Poliza_Conciliacion> ListPDet = new List<Poliza_Conciliacion>();
             try
             {
-                //if (ddlCtaCheques.SelectedValue=="La opción no contiene datos")
-                //    objConciliacion.Cuenta_Cheques = "0";
-                //else
-                //    objConciliacion.Cuenta_Cheques = ddlCtaCheques.SelectedValue;
 
                 objConciliacion.Fecha = txtFecha.Text;
                 if (txtNumPoliza.Text == string.Empty)
@@ -812,11 +780,11 @@ namespace SAF.Contabilidad.Form
             GridViewRow row = (GridViewRow)cbi.NamingContainer;
             string ruta = string.Empty;
             grdConciliacion.SelectedIndex = row.RowIndex;
-            int IdConciliacion = Convert.ToInt32(grdConciliacion.SelectedRow.Cells[11].Text);
+            int IdConciliacion = Convert.ToInt32(grdConciliacion.SelectedRow.Cells[12].Text);
             if(Convert.ToInt32(SesionUsu.Usu_Ejercicio)>2020)
-                ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP_Conciliacion2021&id=" + grdConciliacion.SelectedRow.Cells[11].Text;
+                ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP_Conciliacion2021&id=" + grdConciliacion.SelectedRow.Cells[12].Text;
             else
-                ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP_Conciliacion&id=" + grdConciliacion.SelectedRow.Cells[11].Text;
+                ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP_Conciliacion&id=" + grdConciliacion.SelectedRow.Cells[12].Text;
 
             string _open = "window.open('" + ruta + "', 'miniContenedor', 'toolbar=yes', 'location=no', 'menubar=yes', 'resizable=yes');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
@@ -834,7 +802,7 @@ namespace SAF.Contabilidad.Form
             string vb_nombre = grdConciliacion.SelectedRow.Cells[5].Text;
             string fecha_final = grdConciliacion.SelectedRow.Cells[3].Text;
             string fecha_inicial = grdConciliacion.SelectedRow.Cells[2].Text;
-            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP_Conciliacion&id=" + grdConciliacion.SelectedRow.Cells[11].Text;
+            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP_Conciliacion&id=" + grdConciliacion.SelectedRow.Cells[12].Text;
             //string ruta = "//sysweb.unach.mx/sysreportes/home/ReporteConciliacionAnexos?p1=" + centro_contable + "&p2=" + cta_contable + "&p3=" + SesionUsu.Usu_Ejercicio + "&p4=" + elaboro_nombre + "&p5=" + fecha_final + "&p6=" + fecha_inicial + "&p7=" + vb_nombre;
             string _open = "window.open('" + ruta + "', 'miniContenedor', 'toolbar=yes', 'location=no', 'menubar=yes', 'resizable=yes');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
@@ -913,7 +881,7 @@ namespace SAF.Contabilidad.Form
             try
             {
                 List<Poliza_Conciliacion> ListAdj = new List<Poliza_Conciliacion>();
-                objConciliacion.IdEnc = Convert.ToInt32(grdConciliacion.SelectedRow.Cells[11].Text);
+                objConciliacion.IdEnc = Convert.ToInt32(grdConciliacion.SelectedRow.Cells[12].Text);
                 ListAdj = (List<Poliza_Conciliacion>)Session["DoctosAdj"];
                 CNConciliacion.PolizaAdjInsertar(objConciliacion, ListAdj, ref Verificador);
                 if (Verificador == "0")
@@ -977,7 +945,7 @@ namespace SAF.Contabilidad.Form
             grdDoctos.DataBind();
             try
             {
-                objConciliacion.IdEnc = Convert.ToInt32(grdConciliacion.SelectedRow.Cells[11].Text);
+                objConciliacion.IdEnc = Convert.ToInt32(grdConciliacion.SelectedRow.Cells[12].Text);
                 CNConciliacion.ConciliacionAdjConsultaGrid(objConciliacion, ref ListAdj);
                 Session["DoctosAdj"] = ListAdj;
                 CargarGridAdjuntos(ListAdj);
@@ -1034,8 +1002,12 @@ namespace SAF.Contabilidad.Form
         protected void linkBttnNuevo_Click(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupConciliacion", "$('#modalConciliacion').modal('show')", true);
+            ddlTipo.Enabled = true;
             bttnModificar.Visible = false;
             bttnAgregar.Visible = true;
+            ddlTipo.SelectedIndex = 0;
+            ddlTipo_SelectedIndexChanged(null, null);
+            LimpiarCamposDet();
         }
 
         protected void linkBttnBuscar_Click(object sender, EventArgs e)
@@ -1055,13 +1027,22 @@ namespace SAF.Contabilidad.Form
             //CNConciliacion.ConciliacionDetConsultaGrid(objConciliacion, ref lstConciliacionDet);
             if (lstConciliacionDet.Count > 0)
             {
-                ddlTipo.SelectedValue=lstConciliacionDet[grdDetalle.SelectedIndex].Tipo;
+                try
+                {
+                    ddlTipo.SelectedValue = lstConciliacionDet[grdDetalle.SelectedIndex].Tipo;
+                }
+                catch
+                {
+                    ddlTipo.SelectedIndex = 0;
+                }
                 ddlTipo_SelectedIndexChanged(null, null);
+
                 ddlTipo.Enabled = false;
                 txtNumPoliza.Text = lstConciliacionDet[grdDetalle.SelectedIndex].Numero_Poliza;
                 txtNumCheque.Text = lstConciliacionDet[grdDetalle.SelectedIndex].Numero_Cheque;
                 txtFecha.Text = lstConciliacionDet[grdDetalle.SelectedIndex].Fecha;
                 txtImporte.Text = Convert.ToString(lstConciliacionDet[grdDetalle.SelectedIndex].Importe);
+                txtImporteBanco .Text = Convert.ToString(lstConciliacionDet[grdDetalle.SelectedIndex].ImporteBanco);
                 txtConcepto.Text = lstConciliacionDet[grdDetalle.SelectedIndex].Concepto;
                 txtDescripcion.Text = lstConciliacionDet[grdDetalle.SelectedIndex].Observaciones;
 
@@ -1098,10 +1079,13 @@ namespace SAF.Contabilidad.Form
                 ListPDet[Fila].Numero_Cheque = txtNumPoliza.Text;
                 ListPDet[Fila].Fecha = txtFecha.Text;
                 ListPDet[Fila].Importe = Convert.ToDouble(txtImporte.Text);
+                ListPDet[Fila].ImporteBanco = Convert.ToDouble(txtImporteBanco.Text);
                 ListPDet[Fila].Concepto = txtConcepto.Text;
                 ListPDet[Fila].Observaciones = txtDescripcion.Text;
                 CargarGridConcDet(ListPDet);
                 Session["ConciliacionDet"] = ListPDet;
+
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupConciliacion", "$('#modalConciliacion').modal('hide')", true);
                 //    CargarGridPolizasAgregadas(ListPDet);
 
             }

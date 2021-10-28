@@ -30,7 +30,7 @@ namespace SAF
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
-            //SesionUsu = (Sesion)Session["Usuario"]; 
+
             Inicializar();
            
             if (!IsPostBack)

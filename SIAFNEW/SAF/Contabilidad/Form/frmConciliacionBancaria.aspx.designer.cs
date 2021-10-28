@@ -528,6 +528,15 @@ namespace SAF.Contabilidad.Form
         protected global::System.Web.UI.WebControls.LinkButton linkBttnNuevo;
 
         /// <summary>
+        /// Control updPgrl12.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPgrl12;
+
+        /// <summary>
         /// Control UpdatePanel12.
         /// </summary>
         /// <remarks>

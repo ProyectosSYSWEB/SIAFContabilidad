@@ -81,7 +81,7 @@ namespace SAF.Form
             ScriptManager.RegisterStartupScript(this, GetType(), "GridPolizas", "Polizas();", true);
             ScriptManager.RegisterStartupScript(this, GetType(), "NumCedulas", "FiltNumCedulas();", true);
             ScriptManager.RegisterStartupScript(this, GetType(), "GridCFDIS", "PolizaCFDI();", true);
-            
+
 
         }
 
@@ -534,113 +534,121 @@ namespace SAF.Form
 
                 if (Validado == "Z")
                 {
-                    ObjPoliza.Ejercicio = Convert.ToInt32(SesionUsu.Usu_Ejercicio);
-                    ObjPoliza.Numero_poliza = lblIniPoliza.Text + txtNumero_Poliza.Text;
-                    ObjPoliza.Centro_contable = DDLCentro_Contable.SelectedValue;
-                    ObjPoliza.Tipo = ddlTipo0.SelectedValue;
-                    ObjPoliza.Fecha = txtFecha.Text;
-                    ObjPoliza.Status = (Math.Abs(Convert.ToDouble(lblTotal_Cargos.Text)) != Math.Abs(Convert.ToDouble(lblTotal_Abonos.Text))) ? "N" : "A"; //ddlStatus0.SelectedValue;
-                    ObjPoliza.Tipo_captura = ddlTipo_Captura.SelectedValue;
-                    ObjPoliza.Alta_usuario = SesionUsu.Usu_Nombre;
-                    ObjPoliza.Modificacion_usuario = SesionUsu.Usu_Nombre;
-                    ObjPoliza.Cheque_cuenta = ddlCheque_Cuenta.SelectedValue; //"00000"; //ddlCheque_Cuenta.SelectedValue;
-                    ObjPoliza.Cheque_numero = txtCheque_Numero.Text;
-                    ObjPoliza.Cheque_importe = (txtCheque_Importe.Text.Length > 0) ? Convert.ToDouble(txtCheque_Importe.Text) : Convert.ToDouble("0");
-                    if (ddlTipo0.SelectedValue != "I")
+                    if ((lblIniPoliza.Text + txtNumero_Poliza.Text).Length == 7)
                     {
-                        ObjPoliza.Cedula_numero = ddlNumCedula.SelectedValue; //txtCedula_Numero.Text;
-                        if (ObjPoliza.Cedula_numero.Length == 18)
-                        {
-                            ListCedulas = (List<Comun>)Session["Cedulas"];
-                            ObjPoliza.IdCedula = Convert.ToInt32(ListCedulas[ddlNumCedula.SelectedIndex].EtiquetaDos);
-                        }
-                    }
-                    ObjPoliza.Beneficiario = txtBeneficiario.Text;
-                    ObjPoliza.Tipo_Documento = ddlTipoDocto.SelectedValue;
-                    ObjPoliza.Clasificacion = ddlClasifica.SelectedValue;
-                    //ObjPoliza.CFDI = rdoBtnnTipoDocto.SelectedValue == "CFDI" ? "S" : "N";
-                    ObjPoliza.CFDI = ddlTipoDocto.SelectedValue == "CFDI" ? "S" : "N";
-                    //ObjPoliza.Oficio_Autorizacion = rdoBtnnTipoDocto.SelectedValue == "OFICIO" ? "S" : "N";
-                    ObjPoliza.Oficio_Autorizacion = ddlTipoDocto.SelectedValue == "OFICIO" ? "S" : "N";
-
-                    if (DDLCentro_Contable.SelectedValue == "72103")
-                    {
+                        ObjPoliza.Ejercicio = Convert.ToInt32(SesionUsu.Usu_Ejercicio);
+                        ObjPoliza.Numero_poliza = lblIniPoliza.Text + txtNumero_Poliza.Text;
+                        ObjPoliza.Centro_contable = DDLCentro_Contable.SelectedValue;
+                        ObjPoliza.Tipo = ddlTipo0.SelectedValue;
+                        ObjPoliza.Fecha = txtFecha.Text;
+                        ObjPoliza.Status = (Math.Abs(Convert.ToDouble(lblTotal_Cargos.Text)) != Math.Abs(Convert.ToDouble(lblTotal_Abonos.Text))) ? "N" : "A"; //ddlStatus0.SelectedValue;
+                        ObjPoliza.Tipo_captura = ddlTipo_Captura.SelectedValue;
+                        ObjPoliza.Alta_usuario = SesionUsu.Usu_Nombre;
+                        ObjPoliza.Modificacion_usuario = SesionUsu.Usu_Nombre;
+                        ObjPoliza.Cheque_cuenta = ddlCheque_Cuenta.SelectedValue; //"00000"; //ddlCheque_Cuenta.SelectedValue;
+                        ObjPoliza.Cheque_numero = txtCheque_Numero.Text;
+                        ObjPoliza.Cheque_importe = (txtCheque_Importe.Text.Length > 0) ? Convert.ToDouble(txtCheque_Importe.Text) : Convert.ToDouble("0");
                         if (ddlTipo0.SelectedValue != "I")
-                            ObjPoliza.Concepto = ddlprograma.SelectedValue + "»" + txtConcepto.Text;
+                        {
+                            ObjPoliza.Cedula_numero = ddlNumCedula.SelectedValue; //txtCedula_Numero.Text;
+                            if (ObjPoliza.Cedula_numero.Length == 18)
+                            {
+                                ListCedulas = (List<Comun>)Session["Cedulas"];
+                                ObjPoliza.IdCedula = Convert.ToInt32(ListCedulas[ddlNumCedula.SelectedIndex].EtiquetaDos);
+                            }
+                        }
+                        ObjPoliza.Beneficiario = txtBeneficiario.Text;
+                        ObjPoliza.Tipo_Documento = ddlTipoDocto.SelectedValue;
+                        ObjPoliza.Clasificacion = ddlClasifica.SelectedValue;
+                        //ObjPoliza.CFDI = rdoBtnnTipoDocto.SelectedValue == "CFDI" ? "S" : "N";
+                        ObjPoliza.CFDI = ddlTipoDocto.SelectedValue == "CFDI" ? "S" : "N";
+                        //ObjPoliza.Oficio_Autorizacion = rdoBtnnTipoDocto.SelectedValue == "OFICIO" ? "S" : "N";
+                        ObjPoliza.Oficio_Autorizacion = ddlTipoDocto.SelectedValue == "OFICIO" ? "S" : "N";
+
+                        if (DDLCentro_Contable.SelectedValue == "72103")
+                        {
+                            if (ddlTipo0.SelectedValue != "I")
+                                ObjPoliza.Concepto = ddlprograma.SelectedValue + "»" + txtConcepto.Text;
+                            else
+                                ObjPoliza.Concepto = txtConcepto.Text;
+                        }
                         else
                             ObjPoliza.Concepto = txtConcepto.Text;
-                    }
-                    else
-                        ObjPoliza.Concepto = txtConcepto.Text;
 
 
 
 
-                    if (SesionUsu.Editar == 0)
-                    {
-
-                        CNPoliza.PolizaInsertar(ref ObjPoliza, ref Verificador);
-                        if (Verificador == "0")
+                        if (SesionUsu.Editar == 0)
                         {
-                            ListPDet = (List<Poliza_Detalle>)Session["PolizaDet"];
-                            CNPolizaDet.PolizaDetInsertar(ListPDet, ObjPoliza.IdPoliza, /*grvPolizas_Detalle,*/ ref Verificador);
+
+                            CNPoliza.PolizaInsertar(ref ObjPoliza, ref Verificador);
                             if (Verificador == "0")
                             {
-                                SesionUsu.Editar = -1;
-                                MultiView1.ActiveViewIndex = 0;
-                                InicializaCamposGuardar();
-                                CargarGrid(0);
-                                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'Los datos han sido agregados correctamente.');", true);
+                                ListPDet = (List<Poliza_Detalle>)Session["PolizaDet"];
+                                CNPolizaDet.PolizaDetInsertar(ListPDet, ObjPoliza.IdPoliza, /*grvPolizas_Detalle,*/ ref Verificador);
+                                if (Verificador == "0")
+                                {
+                                    SesionUsu.Editar = -1;
+                                    MultiView1.ActiveViewIndex = 0;
+                                    InicializaCamposGuardar();
+                                    CargarGrid(0);
+                                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'Los datos han sido agregados correctamente.');", true);
+                                }
+                                else
+                                {
+                                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+                                    //lblError.Text = Verificador;
+                                }
                             }
                             else
                             {
                                 CNComun.VerificaTextoMensajeError(ref Verificador);
                                 ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+                                //ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "VerPoliza('RP-005'," + SesionUsu.Usu_Ejercicio + ", '" + grvPolizas.SelectedRow.Cells[0].Text + "');", true);
+
+                                //lblError.Text = Verificador;
+
+                            }
+                        }
+
+                        else if (SesionUsu.Editar == 1)
+                        {
+                            ObjPoliza.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
+                            CNPoliza.PolizaEditar(ref ObjPoliza, ref Verificador);
+                            if (Verificador == "0")
+                            {
+                                ListPDet = (List<Poliza_Detalle>)Session["PolizaDet"];
+                                CNPolizaDet.PolizaDetInsertar(ListPDet, ObjPoliza.IdPoliza, /*grvPolizas_Detalle,*/ ref Verificador);
+                                if (Verificador == "0")
+                                {
+                                    SesionUsu.Editar = -1;
+                                    MultiView1.ActiveViewIndex = 0;
+                                    InicializaCamposGuardar();
+                                    CargarGrid(0);
+                                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'Los datos han sido modificados correctamente.');", true);
+                                }
+                                else
+                                {
+                                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+                                }
+                            }
+                            else
+                            {
+                                CNComun.VerificaTextoMensajeError(ref Verificador);
+                                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+                                //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);
                                 //lblError.Text = Verificador;
                             }
                         }
-                        else
-                        {
-                            CNComun.VerificaTextoMensajeError(ref Verificador);
-                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
-                            //ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "VerPoliza('RP-005'," + SesionUsu.Usu_Ejercicio + ", '" + grvPolizas.SelectedRow.Cells[0].Text + "');", true);
-
-                            //lblError.Text = Verificador;
-
-                        }
                     }
-
-                    else if (SesionUsu.Editar == 1)
+                    else
                     {
-                        ObjPoliza.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
-                        CNPoliza.PolizaEditar(ref ObjPoliza, ref Verificador);
-                        if (Verificador == "0")
-                        {
-                            ListPDet = (List<Poliza_Detalle>)Session["PolizaDet"];
-                            CNPolizaDet.PolizaDetInsertar(ListPDet, ObjPoliza.IdPoliza, /*grvPolizas_Detalle,*/ ref Verificador);
-                            if (Verificador == "0")
-                            {
-                                SesionUsu.Editar = -1;
-                                MultiView1.ActiveViewIndex = 0;
-                                InicializaCamposGuardar();
-                                CargarGrid(0);
-                                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'Los datos han sido modificados correctamente.');", true);
-                            }
-                            else
-                            {
-                                CNComun.VerificaTextoMensajeError(ref Verificador);
-                                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
-                            }
-                        }
-                        else
-                        {
-                            CNComun.VerificaTextoMensajeError(ref Verificador);
-                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
-                            //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);
-                            //lblError.Text = Verificador;
-                        }
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, 'Error en el número de póliza, favor de verificar.');", true);
                     }
                 }
+               
                 else
                     ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Validado + "');", true);
 
@@ -821,12 +829,24 @@ namespace SAF.Form
                     txtBeneficiario.Text = ObjPoliza.Beneficiario;
                     ddlClasifica.SelectedValue = ObjPoliza.Clasificacion;
 
-                    lblIniPoliza.Text = ObjPoliza.Numero_poliza.Substring(0, 3);
-                    txtNumero_Poliza.Text = ObjPoliza.Numero_poliza.Substring(3);
+
 
                     DateTime fecha = Convert.ToDateTime(txtFecha.Text);
                     //string Ini = fecha.ToString("MM");
                     SesionUsu.MesActivo = fecha.ToString("MM");
+
+                    if (SesionUsu.MesActivo == ObjPoliza.Numero_poliza.Substring(0, 2))
+                    {
+                        lblIniPoliza.Text = ObjPoliza.Numero_poliza.Substring(0, 3);
+                        txtNumero_Poliza.Text = ObjPoliza.Numero_poliza.Substring(3);
+                    }
+                    else
+                    {
+                        lblIniPoliza.Text = SesionUsu.MesActivo; //ObjPoliza.Numero_poliza.Substring(0, 3);
+                        txtNumero_Poliza.Text = ObjPoliza.Numero_poliza.Substring(3);
+                    }
+
+
                     //chkIncluyeCFDI.Checked = ObjPoliza.CFDI == "S" ? true : false;
                     if (ObjPoliza.CFDI == "S")
                         ddlTipoDocto.SelectedValue = "CFDI"; //rdoBtnnTipoDocto.SelectedValue = "CFDI";
@@ -1887,7 +1907,7 @@ namespace SAF.Form
                     //lblTotAbonoPol.Text = "TOTAL ABONO:"+ grvPolizas.SelectedRow.Cells[9].Text;
                     Verificador = string.Empty;
                     if (grvPolizas.SelectedRow.Cells[16].Text == "S")
-                       bttnAgregaFactura.Visible = true; //bttnAgregaFactura0.Visible = true; 
+                        bttnAgregaFactura.Visible = true; //bttnAgregaFactura0.Visible = true; 
                     else
                     {
                         lblNumPolizaCFDI.Text = "MES CERRADO, NO SE PUEDEN AGREGAR MÁS CFDI'S, # DE PÓLIZA: " + grvPolizas.SelectedRow.Cells[2].Text;

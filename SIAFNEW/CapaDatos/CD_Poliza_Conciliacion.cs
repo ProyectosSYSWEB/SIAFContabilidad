@@ -273,6 +273,7 @@ namespace CapaDatos
                     ObjConciliacion.Cuenta_contable = Convert.ToInt32(dr.GetValue(1));
                     ObjConciliacion.IdEnc = Convert.ToInt32(dr.GetValue(7));
                     ObjConciliacion.TotAdj = "<i class='fa fa-upload' aria-hidden='true'></i>(" + Convert.ToInt32(dr.GetValue(8))+")Subir";
+                    ObjConciliacion.RowNum= Convert.ToInt32(dr.GetValue(9));
                     List.Add(ObjConciliacion);
                 }
                 dr.Close();

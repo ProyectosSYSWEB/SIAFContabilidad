@@ -179,6 +179,8 @@ namespace SAF.Rep
             CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref DDLCentro_Contable, "P_USUARIO", "p_ejercicio", SesionUsu.Usu_Nombre, SesionUsu.Usu_Ejercicio);
             //CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref DDLCentro_Contable);
             CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cuentas_Mayor", ref ddlCuenta_Mayor, ref Listcodigo);
+            CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cuentas_Mayor_COG", ref ddlMayor);
+            
 
 
         }
@@ -190,6 +192,7 @@ namespace SAF.Rep
 
         protected void ddlMayor_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ScriptManager.RegisterStartupScript(this, GetType(), "cboCatCog", "cboCatCog();", true);
 
         }
 

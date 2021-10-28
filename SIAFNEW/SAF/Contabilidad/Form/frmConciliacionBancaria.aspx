@@ -5,6 +5,16 @@
     <link href="../../Scripts/select2/css/select2.min.css" type="text/css" rel="stylesheet" />
     <script src="../../Scripts/DataTables/jquery.dataTables.min.js"></script>
     <link href="../../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <style>
+        #tooltip {
+        background: #333;
+        color: white;
+        font-weight: bold;
+        padding: 4px 8px;
+        font-size: 13px;
+        border-radius: 4px;
+      }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -12,6 +22,8 @@
             <asp:MultiView ID="MultiView1" runat="server">
                 <asp:View ID="View1" runat="server">
                     <div class="container-fluid">
+                          <%--<a href="#" data-toggle="tooltip" title="Hooray!">Hover over me</a>--%>
+
                         <div class="row">
                             <div class="col-md-2">
                                 Centro Contable
@@ -49,7 +61,7 @@
                             <div class="col-md-4">
                                 <asp:UpdatePanel ID="UpdatePanel23" runat="server">
                                     <ContentTemplate>
-                                        <asp:DropDownList ID="ddlFecha_Ini1" runat="server" AutoPostBack="True" onChange="CambiaFechaFin(this.value);">
+                                        <asp:DropDownList ID="ddlFecha_Ini1" runat="server" AutoPostBack="true">
                                             <asp:ListItem Value="01">Enero</asp:ListItem>
                                             <asp:ListItem Value="02">Febrero</asp:ListItem>
                                             <asp:ListItem Value="03">Marzo</asp:ListItem>
@@ -73,7 +85,7 @@
                             <div class="col-md-2">
                                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                     <ContentTemplate>
-                                        <asp:DropDownList ID="ddlFecha_Fin1" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlFecha_Fin1_SelectedIndexChanged">
+                                        <asp:DropDownList ID="ddlFecha_Fin1" runat="server" AutoPostBack="true">
                                             <asp:ListItem Value="01">Enero</asp:ListItem>
                                             <asp:ListItem Value="02">Febrero</asp:ListItem>
                                             <asp:ListItem Value="03">Marzo</asp:ListItem>
@@ -136,13 +148,14 @@
                                     <ContentTemplate>
                                         <asp:GridView ID="grdConciliacion" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontraron datos." Width="100%" OnRowDeleting="grdConciliacion_RowDeleting" OnSelectedIndexChanged="grdConciliacion_SelectedIndexChanged" OnPageIndexChanging="grdConciliacion_PageIndexChanging">
                                             <Columns>
-                                                <asp:BoundField DataField="Centro_contable" HeaderText="C.C." />
-                                                <asp:TemplateField HeaderText="CTA. CONT.">
+                                                <asp:BoundField DataField="RowNum" HeaderText="#" />
+                                                <asp:BoundField DataField="Centro_contable" HeaderText="CC" />
+                                                <asp:TemplateField HeaderText="CTA CONT">
                                                     <EditItemTemplate>
                                                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Desc_Cuenta_Contable") %>'></asp:TextBox>
                                                     </EditItemTemplate>
                                                     <ItemTemplate>
-                                                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("Desc_Cuenta_Contable") %>' ToolTip="JJJ"></asp:Label>
+                                                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("Desc_Cuenta_Contable") %>' data-toggle="tooltip" data-placement="top" title="Tooltip on top"></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:BoundField DataField="Fecha_inicial" HeaderText="PERIODO INICIAL" />
@@ -151,12 +164,12 @@
                                                 <asp:BoundField DataField="Vb_nombre" HeaderText="VB" />
                                                 <asp:TemplateField HeaderText="ACCIONES">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="linkBttnAdj" runat="server" CssClass="btn btn-mdb-color" OnClick="linkBttnAdj_Click" Text='<%# Bind("TotAdj") %>'></asp:LinkButton>
-                                                        <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Select" CssClass="btn btn-mdb-color"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><%--Editar--%></asp:LinkButton>
-                                                        &nbsp;<asp:LinkButton ID="linkReporteEnc" runat="server" CssClass="btn btn-mdb-color" OnClick="linkReporteEnc_Click"><i class="fa fa-print" aria-hidden="true"></i><%--PDF--%></asp:LinkButton>
-                                                        &nbsp;<asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" CssClass="btn btn-mdb-color" OnClientClick="return confirm('¿Desea eliminar el registro?');"><i class="fa fa-trash" aria-hidden="true"></i><%--Eliminar--%></asp:LinkButton>
+                                                        <asp:LinkButton ID="linkBttnAdj" runat="server" CssClass="btn btn-mdb-color" OnClick="linkBttnAdj_Click" Font-Size="11px" Text='<%# Bind("TotAdj") %>'></asp:LinkButton>
+                                                        <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Select" CssClass="btn btn-mdb-color" Font-Size="11px"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</asp:LinkButton>
+                                                        &nbsp;<asp:LinkButton ID="linkReporteEnc" runat="server" CssClass="btn btn-mdb-color" OnClick="linkReporteEnc_Click" Font-Size="11px"><i class="fa fa-print" aria-hidden="true"></i> PDF</asp:LinkButton>
+                                                        &nbsp;<asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" CssClass="btn btn-mdb-color"  Font-Size="11px" OnClientClick="return confirm('¿Desea eliminar el registro?');"><i class="fa fa-trash" aria-hidden="true"></i> Borrar</asp:LinkButton>
                                                     </ItemTemplate>
-                                                    <ItemStyle HorizontalAlign="Center" />
+                                                    <ItemStyle HorizontalAlign="Center" Width="25%" />
                                                 </asp:TemplateField>
                                                 <asp:TemplateField ShowHeader="False"></asp:TemplateField>
                                                 <asp:TemplateField>
@@ -408,12 +421,24 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col">
+                            <div class="col text-center">
+                                <asp:UpdateProgress ID="updPgrl12" runat="server"
+                                    AssociatedUpdatePanelID="UpdatePanel12">
+                                    <ProgressTemplate>
+                                        <asp:Image ID="Image112" runat="server"
+                                            AlternateText="Espere un momento, por favor.." Height="30px"
+                                            ImageUrl="~/images/ajax_loader_gray_512.gif"
+                                            ToolTip="Espere un momento, por favor.." Width="30px" />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                            </div>
+                        </div>
+                                            
                                                     <div class="row">
                                                         <div class="col">
                                                             <asp:UpdatePanel ID="UpdatePanel12" runat="server">
                                                                 <ContentTemplate>
-                                                                    <asp:GridView ID="grdDetalle" runat="server" AutoGenerateColumns="False" CssClass="mGrid" OnRowDeleting="grdDetalle_RowDeleting" Width="100%" OnRowEditing="grdDetalle_RowEditing" OnRowUpdating="grdDetalle_RowUpdating" OnRowCancelingEdit="grdDetalle_RowCancelingEdit" OnPageIndexChanging="grdDetalle_PageIndexChanging" EmptyDataText="No se encontraron datos." OnSelectedIndexChanged="grdDetalle_SelectedIndexChanged">
+                                                                    <asp:GridView ID="grdDetalle" runat="server" AutoGenerateColumns="False" CssClass="mGrid" OnRowDeleting="grdDetalle_RowDeleting" Width="100%" EmptyDataText="No se encontraron datos." OnSelectedIndexChanged="grdDetalle_SelectedIndexChanged">
                                                                         <AlternatingRowStyle CssClass="alt" />
                                                                         <Columns>
                                                                             <asp:BoundField DataField="CveTipo" ReadOnly="True">
@@ -444,10 +469,14 @@
                                                                             </asp:TemplateField>
                                                                             <asp:BoundField DataField="Concepto" HeaderText="Concepto" />
                                                                             <asp:BoundField DataField="Observaciones" HeaderText="Observaciones" ReadOnly="True" />
-                                                                            <asp:CommandField SelectText="Editar" ShowSelectButton="True" />
                                                                             <asp:TemplateField ShowHeader="False">
                                                                                 <ItemTemplate>
-                                                                                    <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Delete" OnClientClick="return confirm('¿Desea eliminar el registro?');" Text="Eliminar"></asp:LinkButton>
+                                                                                    <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Select" CssClass="btn btn-blue-grey" Text="Editar"></asp:LinkButton>
+                                                                                </ItemTemplate>
+                                                                            </asp:TemplateField>
+                                                                            <asp:TemplateField ShowHeader="False">
+                                                                                <ItemTemplate>
+                                                                                    <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Delete" OnClientClick="return confirm('¿Desea eliminar el registro?');" Text="Eliminar" CssClass="btn btn-blue-grey"></asp:LinkButton>
                                                                                 </ItemTemplate>
                                                                             </asp:TemplateField>
                                                                         </Columns>
@@ -460,8 +489,7 @@
                                                             </asp:UpdatePanel>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
+                                               
                                         </ContentTemplate>
                                     </ajaxToolkit:TabPanel>
                                 </ajaxToolkit:TabContainer>
@@ -676,10 +704,14 @@
 
 
     <script type="text/javascript">        
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
         function Conciliacion() {
             $('#<%= grdConciliacion.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdConciliacion.ClientID %>').find("tr:first"))).DataTable({
                 "destroy": true,
-                "stateSave": false
+                "stateSave": true
             });
         };
 
@@ -724,6 +756,8 @@
                 Valor = Valor.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 e.value = Valor;
             }
-        }
+        };
+
+       
     </script>
 </asp:Content>

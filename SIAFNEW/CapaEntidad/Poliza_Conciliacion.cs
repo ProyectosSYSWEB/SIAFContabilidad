@@ -21,6 +21,13 @@ namespace CapaEntidad
             set { _TotAdj = value; }
         }
 
+        private int _RowNum;
+        public int RowNum
+        {
+            get { return _RowNum; }
+            set { _RowNum = value; }
+        }
+
         private int _Ejercicio;
         public int Ejercicio
         {
