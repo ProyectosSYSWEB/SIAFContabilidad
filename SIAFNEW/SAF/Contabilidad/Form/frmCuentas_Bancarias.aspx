@@ -17,7 +17,7 @@
                                         <div class="col-md-2">
                                             Centro Contable
                                         </div>
-                                        <div class="col-md-9">
+                                        <div class="col-md-10">
                                             <asp:UpdatePanel ID="UpdatePanel7" runat="server">
                                                 <ContentTemplate>
                                                     <asp:DropDownList ID="ddlCentros_Contables0" runat="server" AutoPostBack="True" Width="100%" OnSelectedIndexChanged="ddlCentros_Contables0_SelectedIndexChanged">
@@ -29,9 +29,21 @@
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </div>
-                                        <div class="col-md-1">
-                                            <asp:ImageButton ID="btnNuevo" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/nuevo.png" OnClick="btnNuevo_Click" />
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            Dependencia
                                         </div>
+                                        <div class="col-md-10">
+                                            <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                                                <ContentTemplate>
+                                                    <asp:DropDownList ID="ddlDependencia0" runat="server" Width="100%" OnSelectedIndexChanged="ddlDependencia0_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
+                                        </div>
+                                        <%-- <div class="col-md-1">
+                                            <asp:ImageButton ID="btnNuevo" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/nuevo.png" OnClick="btnNuevo_Click" />
+                                        </div>--%>
                                     </div>
                                     <%--<div class="row">
                                         <div class="col-md-11">
@@ -45,10 +57,12 @@
                                         <div class="col text-center">
                                             <asp:UpdateProgress ID="UpdateProgress6" runat="server"
                                                 AssociatedUpdatePanelID="UpdatePanel1">
-                                                <ProgressTemplate><asp:Image ID="Image8" runat="server"
+                                                <ProgressTemplate>
+                                                    <asp:Image ID="Image8" runat="server"
                                                         AlternateText="Espere un momento, por favor.." Height="50px"
                                                         ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
-                                                        ToolTip="Espere un momento, por favor.." Width="50px" /></ProgressTemplate>
+                                                        ToolTip="Espere un momento, por favor.." Width="50px" />
+                                                </ProgressTemplate>
                                             </asp:UpdateProgress>
                                         </div>
                                     </div>
@@ -60,19 +74,31 @@
                                                         AutoGenerateColumns="False" BorderStyle="None" BorderWidth="1px" CellPadding="4"
                                                         GridLines="Vertical"
                                                         OnPageIndexChanging="grvCuentas_Bancarias_PageIndexChanging"
-                                                        OnSelectedIndexChanged="grvCuentas_Bancarias_SelectedIndexChanged" CssClass="mGrid" OnRowDeleting="grvCuentas_Bancarias_RowDeleting" Width="100%">
+                                                        OnSelectedIndexChanged="grvCuentas_Bancarias_SelectedIndexChanged" CssClass="mGrid" OnRowDeleting="grvCuentas_Bancarias_RowDeleting" Width="100%" ShowHeaderWhenEmpty="True">
                                                         <Columns>
                                                             <asp:BoundField DataField="IdCuenta_Bancaria" HeaderText="Id" />
                                                             <asp:BoundField DataField="EJERCICIO" HeaderText="Ejercicio" />
+                                                            <asp:BoundField DataField="CENTRO_CONTABLE" HeaderText="Contab">
+                                                                <ItemStyle BackColor="#3366FF" Font-Bold="True" ForeColor="White" />
+                                                            </asp:BoundField>
+                                                            <asp:BoundField DataField="DEPENDENCIA" HeaderText="Depcia">
+                                                                <ItemStyle BackColor="#666666" Font-Bold="True" ForeColor="White" />
+                                                            </asp:BoundField>
                                                             <asp:BoundField DataField="CLAVE" HeaderText="Clave" />
-                                                            <asp:BoundField DataField="CENTRO_CONTABLE" HeaderText="Centro Contable" />
                                                             <asp:BoundField DataField="BANCO" HeaderText="Banco" />
                                                             <asp:BoundField DataField="CUENTA_BANCARIA" HeaderText="Cuenta Bancaria" />
                                                             <asp:BoundField DataField="CUENTA_CONTABLE" HeaderText="Cuenta Contable" />
                                                             <asp:BoundField DataField="DESCRIPCION" HeaderText="Descripcion" />
                                                             <asp:BoundField DataField="FECHA_APERTURA" HeaderText="Fecha Apertura" />
                                                             <asp:CommandField SelectText="Editar" ShowSelectButton="True" />
-                                                            <asp:TemplateField ShowHeader="False"><ItemTemplate><asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" OnClientClick="return confirm('¿Desea eliminar la cuenta?');" Text="Eliminar"></asp:LinkButton></ItemTemplate></asp:TemplateField>
+                                                            <asp:TemplateField ShowHeader="False">
+                                                                <HeaderTemplate>
+                                                                    <asp:LinkButton ID="linkBttnNuevo" runat="server" CssClass="btn btn-primary" OnClick="linkBttnNuevo_Click">Nuevo</asp:LinkButton>
+                                                                </HeaderTemplate>
+                                                                <ItemTemplate>
+                                                                    <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" OnClientClick="return confirm('¿Desea eliminar la cuenta?');" Text="Eliminar"></asp:LinkButton>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
                                                         </Columns>
                                                         <FooterStyle CssClass="enc" />
                                                         <PagerStyle CssClass="enc" HorizontalAlign="Center" />
@@ -91,7 +117,9 @@
                                     <div class="row">
                                         <div class="col text-center">
                                             <asp:UpdateProgress ID="updPgrEjercicio" runat="server" AssociatedUpdatePanelID="updPnlEjercicio">
-                                                <ProgressTemplate><asp:Image ID="img1" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." Width="50px" /></ProgressTemplate>
+                                                <ProgressTemplate>
+                                                    <asp:Image ID="img1" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." Width="50px" />
+                                                </ProgressTemplate>
                                             </asp:UpdateProgress>
                                         </div>
                                     </div>
@@ -113,17 +141,41 @@
                                         <div class="col-md-2">
                                             Centro Contable
                                         </div>
-                                        <div class="col-md-9">
+                                        <div class="col-md-10">
                                             <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                                                 <ContentTemplate>
                                                     <asp:DropDownList ID="ddlCentros_Contables" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlCentros_Contables_SelectedIndexChanged" Width="100%">
                                                     </asp:DropDownList>
+                                                    <asp:RequiredFieldValidator ID="reqCentrosContab" runat="server" ControlToValidate="ddlCentros_Contables" ErrorMessage="* Centros Contable" InitialValue="00000" ValidationGroup="GuardaCuentaBancaria">*Requerido</asp:RequiredFieldValidator>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </div>
-                                        <div class="col-md-1">
-                                            <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel5">
-                                                <ProgressTemplate><asp:Image ID="Image7" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." Width="50px" /></ProgressTemplate>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            Dependencia
+                                        </div>
+                                        <div class="col-md-10">
+                                            <asp:UpdatePanel ID="updPnlDepcia" runat="server">
+                                                <ContentTemplate>
+                                                    <asp:DropDownList ID="ddlDependencia" runat="server" Width="100%"></asp:DropDownList>
+                                                    <asp:RequiredFieldValidator ID="reqDepcia" runat="server" ControlToValidate="ddlDependencia" ErrorMessage="* Dependencia" InitialValue="00000" ValidationGroup="GuardaCuentaBancaria">*Requerido</asp:RequiredFieldValidator>
+
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="UpdatePanel5">
+                                                <ProgressTemplate>
+                                                    <asp:Image ID="Image7" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." Width="50px" />
+                                                </ProgressTemplate>
+                                            </asp:UpdateProgress>
+                                            <asp:UpdateProgress ID="updPgrDepcia" runat="server" AssociatedUpdatePanelID="updPnlDepcia">
+                                                <ProgressTemplate>
+                                                    <asp:Image ID="imgDepcia" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." Width="50px" />
+                                                </ProgressTemplate>
                                             </asp:UpdateProgress>
                                         </div>
                                     </div>
@@ -154,7 +206,7 @@
                                     <div class="row">
                                         <div class="col-md-2">Clave</div>
                                         <div class="col-md-3">
-                                            <asp:TextBox ID="txtClave" runat="server"></asp:TextBox>
+                                            <asp:TextBox ID="txtClave" runat="server" MaxLength="5"></asp:TextBox>
                                         </div>
                                         <div class="col-md-1">
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server"

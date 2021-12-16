@@ -40,7 +40,7 @@ namespace SAF.Contabilidad
 
             //    Token = Convert.ToString(Request.QueryString["Token"]);
 
-                
+
             //    if (Token != null)
             //    {
 
@@ -209,24 +209,23 @@ namespace SAF.Contabilidad
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
+
+            var client = new RestClient("http://ldapm.unach.mx/authldap.php");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Username", "ldapru");
+            request.AddHeader("Password", "01#lDhyr983wry");
+            request.AddHeader("Authorization", "Basic bGRhcHJ1OjAxI2xEaHlyOTgzd3J5");
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddParameter("ldapuser", txtUsario.Text);
+            request.AddParameter("ldappasswd", txtPassword.Text);
+            IRestResponse response = client.Execute(request);
+
+            var jObject = JObject.Parse(response.Content);
+
             try
             {
-                var client = new RestClient("http://ldapm.unach.mx/authldap.php");
-                client.Timeout = -1;
-                var request = new RestRequest(Method.POST);
-                request.AddHeader("Username", "ldapru");
-                request.AddHeader("Password", "01#lDhyr983wry");
-                request.AddHeader("Authorization", "Basic bGRhcHJ1OjAxI2xEaHlyOTgzd3J5");
-                request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-                request.AddParameter("ldapuser", txtUsario.Text);
-                request.AddParameter("ldappasswd", txtPassword.Text);
-                IRestResponse response = client.Execute(request);
-
-                var jObject = JObject.Parse(response.Content);
-
-
                 string Autorizado = jObject.GetValue("valido").ToString();
-                //string Nombre = jObject.GetValue("gecos").ToString();
 
                 string Usu = txtUsario.Text;
                 //if(1==1)
@@ -241,6 +240,8 @@ namespace SAF.Contabilidad
                 else
                     lblError.Text = "No fue posible realizar la autenticación, correo o contraseña no validos.";
             }
+
+
             catch (Exception ex)
             {
                 lblError.Text = "No fue posible realizar la autenticación, correo o contraseña no validos.";
@@ -258,14 +259,14 @@ namespace SAF.Contabilidad
                 //Usuario.Password = txtPasswordAnt.Text.ToUpper();
 
 
-              
-                    Guid Token = Guid.NewGuid();
-                    Verificador = String.Empty;
-                    ObjUsuario.Token = Convert.ToString(Token);
-                    ObjUsuario.CUsuario = txtUsuarioAnt.Text.ToUpper();
-                    CNUsuario.Inserta_Token(ref ObjUsuario, ref Verificador);
-                    Response.Redirect("https://sysweb.unach.mx/actualiza_correo/frmactualiza_datos.aspx?token=" + Token + "&sistema=15830", true);
-              
+
+                Guid Token = Guid.NewGuid();
+                Verificador = String.Empty;
+                ObjUsuario.Token = Convert.ToString(Token);
+                ObjUsuario.CUsuario = txtUsuarioAnt.Text.ToUpper();
+                CNUsuario.Inserta_Token(ref ObjUsuario, ref Verificador);
+                Response.Redirect("https://sysweb.unach.mx/actualiza_correo/frmactualiza_datos.aspx?token=" + Token + "&sistema=15830", true);
+
 
 
             }

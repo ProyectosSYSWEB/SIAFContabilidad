@@ -555,6 +555,42 @@ namespace SAF.Contabilidad.Form
         protected global::System.Web.UI.WebControls.GridView grdDetalle;
 
         /// <summary>
+        /// Control lblTot113.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTot113;
+
+        /// <summary>
+        /// Control lblTotBancos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotBancos;
+
+        /// <summary>
+        /// Control hddnTot113.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hddnTot113;
+
+        /// <summary>
+        /// Control hddnTotBancos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hddnTotBancos;
+
+        /// <summary>
         /// Control ValidationSummary2.
         /// </summary>
         /// <remarks>

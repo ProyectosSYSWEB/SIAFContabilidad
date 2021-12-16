@@ -217,6 +217,34 @@ namespace CapaDatos
 
             }
         }
+
+        public void PolizaCFDIValidar(ref Poliza_CFDI objPolizaCFDI, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_ID_POLIZA", "P_UUID" };
+                object[] Valores = { objPolizaCFDI.IdPoliza, objPolizaCFDI.CFDI_UUID };
+                String[] ParametrosOut = { "P_NUM_CFDI", "P_DESCRIPCION", "P_BANDERA" };
+                Cmd = CDDatos.GenerarOracleCommand("OBT_CFDI", ref Verificador, Parametros, Valores, ParametrosOut);
+                if (Verificador == "0")
+                {
+                    objPolizaCFDI = new Poliza_CFDI();
+                    objPolizaCFDI.CFDI_Existe = Convert.ToInt32(Cmd.Parameters["P_NUM_CFDI"].Value);
+                    objPolizaCFDI.CFDI_Observaciones = Convert.ToString(Cmd.Parameters["P_DESCRIPCION"].Value);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+
+            }
+        }
         public void PolizaCFDIConsultaDatos(Poliza_CFDI objPolizaCFDI, ref List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();

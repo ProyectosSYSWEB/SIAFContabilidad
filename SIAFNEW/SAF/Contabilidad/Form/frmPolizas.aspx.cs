@@ -80,6 +80,7 @@ namespace SAF.Form
             //ScriptManager.RegisterStartupScript(this, GetType(), "CtasContables", "FiltCtasContables();", true);
             ScriptManager.RegisterStartupScript(this, GetType(), "GridPolizas", "Polizas();", true);
             ScriptManager.RegisterStartupScript(this, GetType(), "NumCedulas", "FiltNumCedulas();", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "ComboProveedores", "Proveedores();", true);
             ScriptManager.RegisterStartupScript(this, GetType(), "GridCFDIS", "PolizaCFDI();", true);
 
 
@@ -239,13 +240,14 @@ namespace SAF.Form
                 if (ListPolizaCFDI.Count() > 0)
                 {
                     TotalPagos = ListPolizaCFDI.Sum(item => Convert.ToDouble(item.CFDI_Total));
+                    lblGranTotalInt.Text = Convert.ToString(TotalPagos);
+                    lblGranTotal.Text = Convert.ToString(TotalPagos.ToString("C"));
+                    //Label lblTot = (Label)grvPolizaCFDI.FooterRow.FindControl("lblGranTotal");
+                    //Label lblTotInt = (Label)grvPolizaCFDI.FooterRow.FindControl("lblGranTotalInt");
 
-                    Label lblTot = (Label)grvPolizaCFDI.FooterRow.FindControl("lblGranTotal");
-                    Label lblTotInt = (Label)grvPolizaCFDI.FooterRow.FindControl("lblGranTotalInt");
 
-
-                    lblTot.Text = TotalPagos.ToString("C");
-                    lblTotInt.Text = Convert.ToString(TotalPagos);
+                    //lblTot.Text = TotalPagos.ToString("C");
+                    //lblTotInt.Text = Convert.ToString(TotalPagos);
 
                     if (grvPolizas.SelectedRow.Cells[16].Text == "S")
                     {
@@ -846,18 +848,18 @@ namespace SAF.Form
                         txtNumero_Poliza.Text = ObjPoliza.Numero_poliza.Substring(3);
                     }
 
+                    ddlTipoDocto.SelectedValue = ObjPoliza.Tipo_Documento;
 
                     //chkIncluyeCFDI.Checked = ObjPoliza.CFDI == "S" ? true : false;
-                    if (ObjPoliza.CFDI == "S")
-                        ddlTipoDocto.SelectedValue = "CFDI"; //rdoBtnnTipoDocto.SelectedValue = "CFDI";
-                    else if (ObjPoliza.Oficio_Autorizacion == "S")
-                        ddlTipoDocto.SelectedValue = "OFICIO";  //rdoBtnnTipoDocto.SelectedValue = "OFICIO";
-                    else
-                    {
+                    //if (ObjPoliza.CFDI == "S")
+                    //    ddlTipoDocto.SelectedValue = "CFDI"; //rdoBtnnTipoDocto.SelectedValue = "CFDI";
+                    //else if (ObjPoliza.Oficio_Autorizacion == "S")
+                    //    ddlTipoDocto.SelectedValue = "OFICIO";  //rdoBtnnTipoDocto.SelectedValue = "OFICIO";
+                    //else
+                    //{
 
-                        ddlTipoDocto.SelectedValue = ObjPoliza.Tipo_Documento;
-                        //ddlTipoDocto.SelectedValue = "N";  //rdoBtnnTipoDocto.SelectedValue = "N";
-                    }
+                    //    ddlTipoDocto.SelectedValue = ObjPoliza.Tipo_Documento;
+                    //}
 
 
                     //txtFecha.Text = ObjPoliza.Fecha;
@@ -1534,17 +1536,20 @@ namespace SAF.Form
             string Ruta;
             string NombreArchivo;
             List<Poliza_CFDI> lstPolizasCFDI = new List<Poliza_CFDI>();
+            Poliza_CFDI objCFDI = new Poliza_CFDI();
             string VerificadorCFDI = string.Empty;
-
+            lblErrorCFDI.Text = string.Empty;
+            lblErrorCFDI.Visible = false;
             try
             {
                 if (FileFactura.HasFile)
                 {
                     NombreArchivo = FileFactura.FileName.ToUpper();
+                    NombreArchivo=NombreArchivo.Replace("&", "");
+                    NombreArchivo = NombreArchivo.Replace(" ", "_");
                     if (NombreArchivo.Contains(".XML"))
                     {
                         DateTime FechaActual = DateTime.Today;
-
                         XmlDocument xDoc = new XmlDocument();
                         Ruta = Path.Combine(Server.MapPath("~/AdjuntosTemp"), grvPolizas.SelectedRow.Cells[17].Text + "-" + DDLCentro_Contable.SelectedValue + "-" + grvPolizas.SelectedRow.Cells[2].Text + "-" + NombreArchivo);
                         FileFactura.SaveAs(Ruta);
@@ -1555,6 +1560,7 @@ namespace SAF.Form
                         ObjPolizaCFDI.Fecha_Captura = FechaActual.ToString("dd/MM/yyyy");
                         ObjPolizaCFDI.Usuario_Captura = SesionUsu.Usu_Nombre;
                         ObjPolizaCFDI.Ruta_XML = "~/AdjuntosTemp/" + ObjPolizaCFDI.NombreArchivoXML;
+
 
                         xDoc.Load(Ruta);
                         XmlNodeList datos = xDoc.GetElementsByTagName("cfdi:Comprobante");
@@ -1650,6 +1656,7 @@ namespace SAF.Form
                                 XmlNodeList listTimbreDigital =
                                 ((XmlElement)listComplemento[0]).GetElementsByTagName("tfd:TimbreFiscalDigital");
                                 ObjPolizaCFDI.CFDI_UUID = listTimbreDigital[0].Attributes["UUID"].InnerText;
+                                objCFDI.CFDI_UUID = listTimbreDigital[0].Attributes["UUID"].InnerText;
                             }
                             else
                                 VerificadorCFDI = "ERROR";
@@ -1681,13 +1688,27 @@ namespace SAF.Form
 
                 if (VerificadorCFDI == string.Empty)
                 {
-                    if (Session["PolizasCFDI"] != null)
-                        lstPolizasCFDI = (List<Poliza_CFDI>)Session["PolizasCFDI"];
+                    objCFDI.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
+                    CNPolizaCFDI.PolizaCFDIValidar(ref objCFDI, ref Verificador);
+                    if (objCFDI.CFDI_Existe == 0 && Verificador=="0")
+                    {
+                        if (Session["PolizasCFDI"] != null)
+                            lstPolizasCFDI = (List<Poliza_CFDI>)Session["PolizasCFDI"];
 
-                    lstPolizasCFDI.Add(ObjPolizaCFDI);
-                    Session["PolizasCFDI"] = lstPolizasCFDI;
-                    CargarGridPolizaCFDI(lstPolizasCFDI);
-                    LimpiaCamposFiscales();
+                        lstPolizasCFDI.Add(ObjPolizaCFDI);
+                        Session["PolizasCFDI"] = lstPolizasCFDI;
+                        CargarGridPolizaCFDI(lstPolizasCFDI);
+                        LimpiaCamposFiscales();
+                    }
+                    else
+                    {
+                        Verificador = objCFDI.CFDI_Observaciones;
+                        CNComun.VerificaTextoMensajeError(ref Verificador);
+                        //ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, 'ESTE CFDI YA EXISTE EN EL " + Verificador  + "');", true);
+                        lblErrorCFDI.Visible = true;
+                        lblErrorCFDI.Text = "ESTE CFDI YA EXISTE EN EL " + Verificador;
+
+                    }
                 }
                 else
                 {
@@ -1769,6 +1790,7 @@ namespace SAF.Form
         {
             /*DATOS CFDI XML*/
             Verificador = string.Empty;
+            Verificador2 = string.Empty;
             List<Poliza_CFDI> lstPolizasCFDI = new List<Poliza_CFDI>();
             Poliza objPolizas = new Poliza();
             double total = 0;
@@ -1776,14 +1798,16 @@ namespace SAF.Form
             {
                 if (grvPolizaCFDI.Rows.Count >= 1)
                 {
-                    Label lblTot = (Label)grvPolizaCFDI.FooterRow.FindControl("lblGranTotalInt");
-                    double lblTotInt = Convert.ToDouble(lblTot.Text);
+                    //Label lblTot = (Label)grvPolizaCFDI.FooterRow.FindControl("lblGranTotalInt");
+                    //double lblTotInt = Convert.ToDouble(lblTot.Text);
+                    double lblTotInt = Convert.ToDouble(lblGranTotalInt.Text);
                     lblTotInt = Math.Ceiling(lblTotInt);
                     objPolizas.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
                     CNPoliza.ValidarTotal(ref objPolizas, ref Verificador);
 
                     //grvPolizas.SelectedRow.Cells[19].Text
                     total = Convert.ToDouble(hddnTotCheque.Value);
+                    total = total - 10;
                     if (objPolizas.ValidaTotal == "S" && (grvPolizas.SelectedRow.Cells[4].Text == "Egreso" || grvPolizas.SelectedRow.Cells[4].Text == "Diario") && (lblTotInt < total))
                     {
                         ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, 'El total de los CFDI´s es menor al total del cheque, favor de verificar.');", true);
@@ -1814,11 +1838,9 @@ namespace SAF.Form
                         }
                         else
                         {
-                            //SesionUsu.Editar = -1;
-                            //MultiView1.ActiveViewIndex = 0;
-                            //CargarGrid(0);
+                            CNPolizaCFDI.EliminarCFDIEditar(Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text), ref Verificador2);
                             CNComun.VerificaTextoMensajeError(ref Verificador);
-                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + " " + Verificador2 + "');", true);
 
                         }
 

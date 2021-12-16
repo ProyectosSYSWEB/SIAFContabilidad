@@ -45,6 +45,7 @@ namespace SAF.Rep
             ScriptManager.RegisterStartupScript(this, GetType(), "GridPolizas", "Polizas();", true);
             ScriptManager.RegisterStartupScript(this, GetType(), "GridCOG", "CatCOG();", true);
             ScriptManager.RegisterStartupScript(this, GetType(), "GridCatalogos", "Catalogos();", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridCatalogos2", "Catalogos2();", true);
 
         }
         private void CargarGrid()
@@ -97,6 +98,21 @@ namespace SAF.Rep
                 grdCatalogos.DataSource = dt;
                 grdCatalogos.DataSource = GetListCatalogos();
                 grdCatalogos.DataBind();
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = ex.Message;
+            }
+        }
+
+        private void CargarGridCatalogos2()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                grdCatalogos2.DataSource = dt;
+                grdCatalogos2.DataSource = GetListCatalogos();
+                grdCatalogos2.DataBind();
             }
             catch (Exception ex)
             {
@@ -180,7 +196,7 @@ namespace SAF.Rep
             //CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref DDLCentro_Contable);
             CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cuentas_Mayor", ref ddlCuenta_Mayor, ref Listcodigo);
             CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cuentas_Mayor_COG", ref ddlMayor);
-            
+
 
 
         }
@@ -755,6 +771,64 @@ namespace SAF.Rep
             CargarGridCOG();
         }
 
+        protected void linkBttnEditarCOG_Click(object sender, EventArgs e)
+        {
+            LinkButton cbi = (LinkButton)(sender);
+            GridViewRow row = (GridViewRow)cbi.NamingContainer;
+            grdCatCOG.SelectedIndex = row.RowIndex;
+            Verificador = string.Empty;
+
+            cuentas_contables objCta = new cuentas_contables();
+            objCta.cuenta_mayor = Convert.ToString(grdCatCOG.SelectedRow.Cells[0].Text);
+            objCta.natura = Convert.ToString(grdCatCOG.SelectedRow.Cells[1].Text);
+            CNcuentas_contables.ObtCatCOG(ref objCta, ref Verificador);
+            if (Verificador == "0")
+            {
+                txtMayor.Text = Convert.ToString(grdCatCOG.SelectedRow.Cells[0].Text);
+                txtCOG.Text = Convert.ToString(grdCatCOG.SelectedRow.Cells[1].Text);
+
+                txtMayor.Enabled = false;
+                txtCOG.Enabled = false;
+                txtDescripcionCOG.Text = objCta.descripcion;
+                ddlStatusCOG.SelectedValue = objCta.status;
+            }
+        }
+
+        //protected void grdCatCOG_SelectedIndexChanged(object sender, GridViewEditEventArgs e)
+        //{
+        //    grdCatCOG.EditIndex = e.NewEditIndex;
+        //    CargarGridCOG();
+        //}
+
+        protected void grdCatCOG_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            Verificador = string.Empty;
+            txtMayor.Enabled = true;
+            txtCOG.Enabled = true;
+            cuentas_contables objCta = new cuentas_contables();
+            objCta.cuenta_mayor = Convert.ToString(grdCatCOG.SelectedRow.Cells[0].Text);
+            objCta.natura = Convert.ToString(grdCatCOG.SelectedRow.Cells[1].Text);
+            CNcuentas_contables.ObtCatCOG(ref objCta, ref Verificador);
+            if (Verificador == "0")
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupCOG", "$('#modalCOG').modal('show')", true);
+                txtMayor.Text = Convert.ToString(grdCatCOG.SelectedRow.Cells[0].Text);
+                txtCOG.Text = Convert.ToString(grdCatCOG.SelectedRow.Cells[1].Text);
+
+                txtMayor.Enabled = false;
+                txtCOG.Enabled = false;
+                txtDescripcionCOG.Text = objCta.descripcion;
+                ddlStatusCOG.SelectedValue = objCta.status;
+            }
+            else
+            {
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);
+            }
+
+        }
+
         protected void grdCatCOG_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             Verificador = string.Empty;
@@ -799,11 +873,119 @@ namespace SAF.Rep
 
         }
 
+        protected void linkBttnAgregarCOG_Click(object sender, EventArgs e)
+        {
+            LinkButton cbi = (LinkButton)(sender);
+            GridViewRow row = (GridViewRow)cbi.NamingContainer;
+            grdCatCOG.SelectedIndex = row.RowIndex;
+            //LinkButton linkBttnAgregarReg = (LinkButton)(grdCatCOG.HeaderRow.Cells[5].FindControl("linkBttnAgregarCOG"));
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupCOG", "$('#modalCOG').modal('show')", true);
+            bttnGuardarCOG.Visible = true;
+            bttnEditarCOG.Visible = false;
+        }
+
+        protected void linkBttnAgregarCat2_Click(object sender, EventArgs e)
+        {
+            LinkButton cbi = (LinkButton)(sender);
+            GridViewRow row = (GridViewRow)cbi.NamingContainer;
+            grdCatalogos2.SelectedIndex = row.RowIndex;
+
+            if (ddlTipoCat.SelectedValue == "N")
+                rowCta2.Visible = true;
+            else
+                rowCta2.Visible = false;
+
+            bttnAgregarCat.Visible = true;
+            bttnModificarCat.Visible = true;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupCOG", "$('#modalCat').modal('show')", true);
+        }
+
         protected void linkCatNiv_Click(object sender, EventArgs e)
         {
             //CargarGridCatNiv2_3();
             //ScriptManager.RegisterStartupScript(this, GetType(), "GridCOG", "CatCOG();", true);
             //ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupCOG", "$('#modalCOG').modal('show')", true);
+        }
+
+        protected void grdCatalogos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Verificador = string.Empty;
+            if (ddlTipoCat.SelectedValue == "N")
+                rowCta2.Visible = true;
+            else
+                rowCta2.Visible = false;
+
+            rowCta2.Visible = false;
+            txtCve.Enabled = true;
+            bttnAgregarCat.Visible = false;
+            bttnModificarCat.Visible = true;
+            cuentas_contables objCta = new cuentas_contables();
+            objCta.tipo = ddlTipoCat.SelectedValue;
+            objCta.natura = Convert.ToString(grdCatalogos.SelectedRow.Cells[0].Text);
+            objCta.concepto = "";
+            CNcuentas_contables.ObtCatalogo(ref objCta, ref Verificador);
+            if (Verificador == "0")
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupCat", "$('#modalCat').modal('show')", true);
+                txtCve.Enabled = false;
+                txtCve.Text = Convert.ToString(grdCatalogos.SelectedRow.Cells[0].Text);
+                txtDescCat.Text = objCta.descripcion;
+                ddlStatusCat.SelectedValue = objCta.status;               
+            }
+            else
+            {
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+            }
+        }
+        protected void linkBttnAgregarCat_Click(object sender, EventArgs e)
+        {
+            LinkButton cbi = (LinkButton)(sender);
+            GridViewRow row = (GridViewRow)cbi.NamingContainer;
+            grdCatalogos.SelectedIndex = row.RowIndex;
+            if (ddlTipoCat.SelectedValue == "N")
+                rowCta2.Visible = true;
+            else
+                rowCta2.Visible = false;
+
+            bttnAgregarCat.Visible = true;
+            bttnModificarCat.Visible = false;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupCOG", "$('#modalCat').modal('show')", true);
+        }
+
+        protected void grdCatalogos2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Verificador = string.Empty;
+            rowCta2.Visible = true;
+            txtCve.Enabled = true;
+            bttnAgregarCat.Visible = false;
+            bttnModificarCat.Visible = true;
+            if (ddlTipoCat.SelectedValue == "N")
+                rowCta2.Visible = true;
+            else
+                rowCta2.Visible = false;
+
+            cuentas_contables objCta = new cuentas_contables();
+            objCta.tipo = ddlTipoCat.SelectedValue;
+            objCta.natura = Convert.ToString(grdCatalogos2.SelectedRow.Cells[0].Text);
+            objCta.concepto = Convert.ToString(grdCatalogos2.SelectedRow.Cells[1].Text);
+            CNcuentas_contables.ObtCatalogo(ref objCta, ref Verificador);
+            if (Verificador == "0")
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupCat", "$('#modalCat').modal('show')", true);
+                txtCve.Enabled = false;
+                txtCta2.Enabled = false;
+                txtCve.Text = Convert.ToString(grdCatalogos2.SelectedRow.Cells[0].Text);
+                txtCta2.Text = Convert.ToString(grdCatalogos2.SelectedRow.Cells[1].Text);
+                txtDescCat.Text = objCta.descripcion;
+                ddlStatusCat.SelectedValue = objCta.status;
+            }
+            else
+            {
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+            }
         }
 
         protected void linkActNiv_Click(object sender, EventArgs e)
@@ -838,9 +1020,20 @@ namespace SAF.Rep
 
         protected void ddlTipoCat_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CargarGridCatalogos();
+            if (ddlTipoCat.SelectedValue == "N")
+            {
+                grdCatalogos2.Visible = true;
+                grdCatalogos.Visible = false;
+                CargarGridCatalogos2();
+            }
+            else
+            {
+                grdCatalogos2.Visible = false;
+                grdCatalogos.Visible = true;
+                CargarGridCatalogos();
+            }
         }
-       
+
         protected void bttnGuardarCOG_Click(object sender, EventArgs e)
         {
             Verificador = string.Empty;
@@ -870,6 +1063,36 @@ namespace SAF.Rep
             }
         }
 
+        protected void bttnEditarCOG_Click(object sender, EventArgs e)
+        {
+            Verificador = string.Empty;
+            lblErrorCOG.Text = string.Empty;
+            Comun objCatCta = new Comun();
+            bttnGuardarCOG.Visible = false;
+            bttnEditarCOG.Visible = true;
+            try
+            {
+                objCatCta.Etiqueta = txtMayor.Text.ToUpper();
+                objCatCta.EtiquetaDos = txtCOG.Text.ToUpper();
+                objCatCta.EtiquetaTres = txtDescripcionCOG.Text.ToUpper();
+                objCatCta.EtiquetaCuatro = ddlStatusCOG.SelectedValue;
+                CNcuentas_contables.EditarCatCOG(objCatCta, ref Verificador);
+                if (Verificador == "0")
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupCOG", "$('#modalCOG').modal('hide')", true);
+                    CargarGridCOG();
+                }
+                else
+                    lblErrorCOG.Text = Verificador;
+
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                lblErrorCat.Text = Verificador;
+            }
+        }
 
         protected void bttnAgregarCatCta_Click(object sender, EventArgs e)
         {
@@ -889,13 +1112,16 @@ namespace SAF.Rep
         {
             Verificador = string.Empty;
             lblErrorCat.Text = string.Empty;
-            Comun objCatCta = new Comun();
+            cuentas_contables objCatCta = new cuentas_contables();
             try
             {
-                objCatCta.Etiqueta = ddlTipoCat.SelectedValue;
-                objCatCta.EtiquetaDos = txtCve.Text.ToUpper();
-                objCatCta.EtiquetaTres = txtDescCat.Text.ToUpper();
-                objCatCta.EtiquetaCuatro=ddlStatusCat.SelectedValue;
+                objCatCta.tipo = ddlTipoCat.SelectedValue;
+                objCatCta.natura = txtCve.Text.ToUpper();
+                if (ddlTipoCat.SelectedValue == "N")
+                    objCatCta.concepto=txtCta2.Text.ToUpper();
+
+                objCatCta.descripcion = txtDescCat.Text.ToUpper();
+                objCatCta.status = ddlStatusCat.SelectedValue;
                 CNcuentas_contables.InsertarCatCtas(objCatCta, ref Verificador);
                 if (Verificador == "0")
                 {
@@ -911,6 +1137,53 @@ namespace SAF.Rep
                 Verificador = ex.Message;
                 CNComun.VerificaTextoMensajeError(ref Verificador);
                 lblErrorCat.Text = Verificador;
+            }
+        }
+        protected void bttnModificarCat_Click(object sender, EventArgs e)
+        {
+            Verificador = string.Empty;
+            cuentas_contables objCat = new cuentas_contables();
+            //objCat.na = Convert.ToString(grdCatalogos.SelectedRow.Cells[0].Text);
+
+            try
+            {
+                
+                objCat.tipo = ddlTipoCat.SelectedValue;//ddlTipoCat.SelectedValue;
+                                                       //txtCve.Text;
+                if (ddlTipoCat.SelectedValue == "N")
+                {
+                    objCat.natura = Convert.ToString(grdCatalogos2.SelectedRow.Cells[0].Text);
+                    objCat.concepto = Convert.ToString(grdCatalogos2.SelectedRow.Cells[1].Text);
+                }
+                else
+                {
+                    objCat.natura = Convert.ToString(grdCatalogos.SelectedRow.Cells[0].Text);
+                    objCat.concepto = string.Empty;
+                }
+
+
+                objCat.descripcion = txtDescCat.Text.ToUpper();
+                objCat.status = ddlStatusCat.SelectedValue;
+                CNcuentas_contables.EditarCatCta(objCat, ref Verificador);
+                if (Verificador == "0")
+                {                    
+                    CargarGridCatalogos();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupCOG", "$('#modalCat').modal('hide')", true);
+                }
+                else
+                {
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);
+                }
+
+                ScriptManager.RegisterStartupScript(this, GetType(), "GridCOG", "CatCOG();", true);
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);
+
             }
         }
         protected void grdCatalogos_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -980,7 +1253,6 @@ namespace SAF.Rep
                 //modalOficios.Show();
             }
         }
-
         protected void grdCatalogos_RowUpdating1(object sender, GridViewUpdateEventArgs e)
         {
             Verificador = string.Empty;
@@ -993,7 +1265,7 @@ namespace SAF.Rep
                 objCat.EtiquetaDos = Convert.ToString(row.Cells[1].Text);
                 TextBox txtStatus = (TextBox)(row.Cells[2].FindControl("txtStatus"));
                 objCat.EtiquetaTres = txtStatus.Text;
-                CNcuentas_contables.EditarCatCta(objCat, ref Verificador);
+                //CNcuentas_contables.EditarCatCta(objCat, ref Verificador);
                 if (Verificador == "0")
                 {
                     grdCatalogos.EditIndex = -1;

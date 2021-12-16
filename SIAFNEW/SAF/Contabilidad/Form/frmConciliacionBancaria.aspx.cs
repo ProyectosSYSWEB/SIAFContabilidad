@@ -243,14 +243,16 @@ namespace SAF.Contabilidad.Form
         {
             grdDetalle.DataSource = null;
             grdDetalle.DataBind();
-            Int32[] Celdas = new Int32[] { 2 };
+            Int32[] Celdas = new Int32[] { 2, 12, 13 };
             try
             {
                 DataTable dt = new DataTable();
+
                 List<Poliza_Conciliacion> SortedList = lstPolizasDet.OrderBy(o => o.CveTipo).ToList();
                 grdDetalle.DataSource = SortedList;
                 grdDetalle.DataBind();
-                CNComun.HideColumns(grdDetalle, Celdas);                
+                CNComun.HideColumns(grdDetalle, Celdas);
+                Sumatoria(grdDetalle, Celdas);                
             }
             catch (Exception ex)
             {
@@ -259,6 +261,45 @@ namespace SAF.Contabilidad.Form
                 ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
             }
         }
+
+        private void Sumatoria(GridView grdView, Int32[] Columnas)
+        {
+            hddnTot113.Value = "0";
+            hddnTotBancos.Value = "0";
+            decimal unach_1113 = 0;
+            decimal bancos = 0;
+
+            //for (int i = 0; i < Columnas.Length; i++)
+            //{
+                //grdView.HeaderRow.Cells[Convert.ToInt32(Columnas.GetValue(i))].Visible = false;
+                foreach (GridViewRow row in grdView.Rows)
+                {
+                    if (row.Cells[0].Text == "ANEXO_1" || row.Cells[0].Text == "ANEXO_11" || row.Cells[0].Text == "ANEXO_9")
+                    {
+                        unach_1113 = unach_1113 + Convert.ToDecimal(row.Cells[12].Text);
+                        bancos = bancos + Convert.ToDecimal(row.Cells[13].Text);
+                    }
+                    else if (row.Cells[0].Text == "ANEXO_1" || row.Cells[0].Text == "ANEXO_7" || row.Cells[0].Text == "ANEXO_8" || row.Cells[0].Text == "ANEXO_10")
+                    {
+                        if (row.Cells[0].Text == "ANEXO_7")
+                            bancos = bancos - Convert.ToDecimal(row.Cells[12].Text);
+                        else
+                            bancos = bancos + Convert.ToDecimal(row.Cells[12].Text);
+                    }
+
+                    //row.Cells[Convert.ToInt32(Columnas.GetValue(i))].Visible = false;
+                }
+                //grdView.FooterRow.Cells[Convert.ToInt32(Columnas.GetValue(i))].Visible = false;
+                lblTot113.Text = string.Format("{0:C}", unach_1113);
+                lblTotBancos.Text = string.Format("{0:C}", bancos);
+
+                hddnTot113.Value = Convert.ToString(unach_1113);
+                hddnTotBancos.Value = Convert.ToString(bancos);
+            //}
+
+
+        }
+
         private void LimpiarCampos()
         {
             Verificador = string.Empty;
@@ -365,6 +406,8 @@ namespace SAF.Contabilidad.Form
             txtImporte.Text = string.Empty;
             txtConcepto.Text = string.Empty;
             txtDescripcion.Text = string.Empty;
+            hddnTot113.Value = "0";
+            hddnTotBancos.Value = "0";
 
 
         }
@@ -426,14 +469,9 @@ namespace SAF.Contabilidad.Form
             TabContainer2.ActiveTabIndex = 0;
             try
             {
-                //objConciliacion.Ejercicio = Convert.ToInt32(SesionUsu.Usu_Ejercicio);
-                //objConciliacion.Centro_contable = Convert.ToInt32(grdConciliacion.SelectedRow.Cells[0].Text);
-                //objConciliacion.Cuenta_contable = Convert.ToInt32(grdConciliacion.SelectedRow.Cells[10].Text);
-                //objConciliacion.Fecha_inicial = Convert.ToString(grdConciliacion.SelectedRow.Cells[2].Text);
-                //objConciliacion.Fecha_final = Convert.ToString(grdConciliacion.SelectedRow.Cells[3].Text);
-                //objConciliacion.Elaboro_nombre = Convert.ToString(grdConciliacion.SelectedRow.Cells[4].Text);
-                //objConciliacion.Vb_nombre = Convert.ToString(grdConciliacion.SelectedRow.Cells[5].Text);
-                //Poliza_Conciliacion objConciliacionResp = new Poliza_Conciliacion();
+                hddnTot113.Value = "0";
+                hddnTotBancos.Value = "0";
+
                 objConciliacion.IdEnc = Convert.ToInt32(grdConciliacion.SelectedRow.Cells[12].Text);
                 CNConciliacion.ConsultarConciliacionEncSel2(ref objConciliacion, ref Verificador);
                 if (Verificador == "0")
@@ -486,7 +524,7 @@ namespace SAF.Contabilidad.Form
                 int fila = e.RowIndex;
                 //objConciliacion.Id = Convert.ToInt32(grdConciliacion.Rows[fila].Cells[0].Text);
 
-                objConciliacion.IdEnc = Convert.ToInt32(grdConciliacion.Rows[fila].Cells[11].Text);
+                objConciliacion.IdEnc = Convert.ToInt32(grdConciliacion.Rows[fila].Cells[12].Text);
                 CNConciliacion.ConciliacionEliminar(objConciliacion, ref Verificador);
                 if (Verificador == "0")
                     CargarGrid();
@@ -618,33 +656,39 @@ namespace SAF.Contabilidad.Form
         }
         protected void btnGuardar_Continuar_Click(object sender, EventArgs e)
         {
-            //if (SesionUsu.Editar==0)
-            if (Convert.ToInt32(ddlFecha_Ini.SelectedValue) >= Convert.ToInt32(SesionUsu.MesActivo))
+            if (grdDetalle.Rows.Count >= 1)
             {
-                string conErrores = GuardarDatos();
-                if (conErrores == "0")
+                if (Convert.ToDecimal(hddnTot113.Value) == Convert.ToDecimal(hddnTotBancos.Value))
                 {
-                    txtFecha.Text = string.Empty;
-                    //txtFecha_Final.Text = string.Empty;
-                    txtNumPoliza.Text = string.Empty;
-                    txtImporte.Text = string.Empty;
-                    //hddnIdPolizaDet.Value = "0";
-                    MultiView1.ActiveViewIndex = 0;
-                    CargarGrid();
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'Registro guardado correctamente.');", true);
+                    if (Convert.ToInt32(ddlFecha_Ini.SelectedValue) >= Convert.ToInt32(SesionUsu.MesActivo))
+                    {
+                        string conErrores = GuardarDatos();
+                        if (conErrores == "0")
+                        {
+                            txtFecha.Text = string.Empty;
+                            //txtFecha_Final.Text = string.Empty;
+                            txtNumPoliza.Text = string.Empty;
+                            txtImporte.Text = string.Empty;
+                            //hddnIdPolizaDet.Value = "0";
+                            MultiView1.ActiveViewIndex = 0;
+                            CargarGrid();
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'Registro guardado correctamente.');", true);
+                        }
+                        else
+                        {
+                            CNComun.VerificaTextoMensajeError(ref Verificador);
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+                        }
+                    }
+
+                    else
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, 'El mes seleccionado ya esta cerrado, favor de verificar.');", true);
                 }
                 else
-                {
-                    CNComun.VerificaTextoMensajeError(ref Verificador);
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
-                }
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, 'Conciliación descuadrada, favor de verificar.');", true);
             }
-
             else
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, 'El mes seleccionado ya esta cerrado, favor de verificar.');", true);
-
-            }
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, 'Falta agregar detalle, favor de verificar.');", true);
         }
         protected void bttnAgregar_Click(object sender, EventArgs e)
         {
@@ -699,8 +743,8 @@ namespace SAF.Contabilidad.Form
             try
             {
                 int fila = e.RowIndex;
-                int pagina = grdDetalle.PageSize * grdDetalle.PageIndex;
-                fila = pagina + fila;
+                //int pagina = grdDetalle.PageSize * grdDetalle.PageIndex;
+                //fila = pagina + fila;
                 //ListPDet = ListPDet.OrderBy(x => x.CveTipo).ToList();
                 ListPDet.RemoveAt(fila);
                 Session["ConciliacionDet"] = ListPDet;

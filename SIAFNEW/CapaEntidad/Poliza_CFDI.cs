@@ -104,11 +104,25 @@ namespace CapaEntidad
             set { _CFDI_Fecha = value.Trim(); }
         }
 
+        private string _CFDI_Observaciones;
+        public string CFDI_Observaciones
+        {
+            get { return _CFDI_Observaciones.Trim(); }
+            set { _CFDI_Observaciones = value.Trim(); }
+        }
+
         private double _CFDI_Total;
         public double CFDI_Total
         {
             get { return _CFDI_Total; }
             set { _CFDI_Total = value; }
+        }
+
+        private int _CFDI_Existe;
+        public int CFDI_Existe
+        {
+            get { return _CFDI_Existe; }
+            set { _CFDI_Existe = value; }
         }
 
 

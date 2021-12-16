@@ -8,14 +8,14 @@ namespace CapaDatos
 {
     public class CD_Cuentas_contables
     {
-        public void InsertarCatCtas(Comun objComun, ref string Verificador)
+        public void InsertarCatCtas(cuentas_contables objCat, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
             OracleCommand Cmd = null;
             try
             {
-                String[] Parametros = { "P_TIPO", "P_CVE", "P_DESCRIPCION", "P_STATUS" };
-                object[] Valores = { objComun.Etiqueta, objComun.EtiquetaDos, objComun.EtiquetaTres, objComun.EtiquetaCuatro };
+                String[] Parametros = { "P_TIPO", "P_CVE", "P_CVE2", "P_DESCRIPCION", "P_STATUS" };
+                object[] Valores = { objCat.tipo, objCat.natura, objCat.concepto, objCat.descripcion, objCat.status };
                 String[] ParametrosOut = { "P_BANDERA" };
 
                 Cmd = CDDatos.GenerarOracleCommand("INS_TEMP_CAT_CTAS", ref Verificador, Parametros, Valores, ParametrosOut);
@@ -55,6 +55,29 @@ namespace CapaDatos
 
         }
 
+        public void EditarCatCOG(Comun objComun, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_MAYOR", "P_COG", "P_DESCRIPCION", "P_STATUS" };
+                object[] Valores = { objComun.Etiqueta, objComun.EtiquetaDos, objComun.EtiquetaTres, objComun.EtiquetaCuatro };
+                String[] ParametrosOut = { "P_BANDERA" };
+
+                Cmd = CDDatos.GenerarOracleCommand("UPD_CAT_COG", ref Verificador, Parametros, Valores, ParametrosOut);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+
+        }
         public void EliminarCatCtas(Comun objComun, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -99,7 +122,6 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
-
         public void PolizaConsultaGrid(ref cuentas_contables Objcuentas_contables, ref List<cuentas_contables> List)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -179,7 +201,6 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
-
         public void ConsultarCatCOG(ref List<cuentas_contables> List)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -222,14 +243,24 @@ namespace CapaDatos
                 OracleDataReader dr = null;
                 String[] Parametros = { "p_tipo" };
                 Object[] Valores = { objCat.Etiqueta };
-
+                string Tipo = objCat.Etiqueta;
                 cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Catalogos_Ctas", ref dr, Parametros, Valores);
                 while (dr.Read())
                 {
-                    objComun = new Comun();
-                    objComun.Etiqueta = Convert.ToString(dr[0]);
-                    objComun.EtiquetaDos = Convert.ToString(dr[1]);
-                    objComun.EtiquetaTres = Convert.ToString(dr[2]);
+                    objComun = new Comun();                    
+                    if (Tipo == "N")
+                    {
+                        objComun.Etiqueta = Convert.ToString(dr[0]);
+                        objComun.EtiquetaDos = Convert.ToString(dr[1]);
+                        objComun.EtiquetaTres = Convert.ToString(dr[2]);
+                        objComun.EtiquetaCuatro = Convert.ToString(dr[3]);
+                    }
+                    else
+                    {
+                        objComun.Etiqueta = Convert.ToString(dr[0]);
+                        objComun.EtiquetaDos = Convert.ToString(dr[1]);
+                        objComun.EtiquetaTres = Convert.ToString(dr[2]);
+                    }
                     List.Add(objComun);
                 }
 
@@ -244,7 +275,6 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
-
         public void Consultarcuenta(ref cuentas_contables Objcuentas_contables, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -278,8 +308,6 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
-
-
         public void insertar_cuenta_contable(ref cuentas_contables objcuentas_contables, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -302,7 +330,6 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
-
         public void CuentasContables_ActDesc(cuentas_contables objcuentas_contables, ref int Total, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -367,9 +394,6 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
-
-
-
         public void Editar_cuentas_contables(ref cuentas_contables objcuentas_contables, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -392,8 +416,6 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
-
-
         public void Editar_Catalogo_COG(cuentas_contables objcuentas_contables, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -414,17 +436,93 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
-
-        public void EditarCatCta(Comun objCatCta, ref string Verificador)
+        public void EditarCatCta(cuentas_contables objCatCta, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
             OracleCommand Cmd = null;
             try
             {
-                String[] Parametros = { "P_MAYOR", "P_COG", "P_NOMBRE", "P_STATUS" };
-                object[] Valores = { objCatCta.Etiqueta, objCatCta.EtiquetaDos, objCatCta.EtiquetaTres, objCatCta.EtiquetaCuatro };
+                String[] Parametros = { "P_TIPO", "P_CVE", "P_CVE2", "P_DESCRIPCION", "P_STATUS" };
+                object[] Valores = { objCatCta.tipo, objCatCta.natura, objCatCta.concepto, objCatCta.descripcion, objCatCta.status };
                 String[] ParametrosOut = { "P_BANDERA" };
                 Cmd = CDDatos.GenerarOracleCommand("UPD_TEMP_CAT_CTAS", ref Verificador, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+        public void ObtCatCOG(ref cuentas_contables objCuenta, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            try
+            {
+
+
+                string[] ParametrosIn = {
+                                          "P_MAYOR",
+                                          "P_COG"
+                };
+                object[] Valores = { objCuenta.cuenta_mayor, objCuenta.natura
+                };
+                string[] ParametrosOut ={
+                                          "P_NOMBRE_DEL_COG",
+                                          "P_STATUS",
+                                          "P_BANDERA"
+                };
+                Cmd = CDDatos.GenerarOracleCommand("OBT_CATALOGO_COG", ref Verificador, ParametrosIn, Valores, ParametrosOut);
+                if (Verificador == "0")
+                {
+                    objCuenta = new cuentas_contables();
+                    objCuenta.descripcion = Convert.ToString(Cmd.Parameters["P_NOMBRE_DEL_COG"].Value);
+                    objCuenta.status = Convert.ToString(Cmd.Parameters["P_STATUS"].Value);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+        public void ObtCatalogo(ref cuentas_contables objCuenta, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            try
+            {
+
+
+                string[] ParametrosIn = {
+                                          "P_TIPO",
+                                          "P_PROYECTO",
+                                          "P_CVE2"
+                };
+                object[] Valores = { objCuenta.tipo, objCuenta.natura, objCuenta.concepto
+                };
+                string[] ParametrosOut ={
+                                          "P_DESCRIPCION",
+                                          "P_STATUS",
+                                          "P_BANDERA"
+                };
+                Cmd = CDDatos.GenerarOracleCommand("OBT_DESC_CATALOGO_CUENTAS", ref Verificador, ParametrosIn, Valores, ParametrosOut);
+                if (Verificador == "0")
+                {
+                    objCuenta = new cuentas_contables();
+                    objCuenta.descripcion = Convert.ToString(Cmd.Parameters["P_DESCRIPCION"].Value);
+                    objCuenta.status = Convert.ToString(Cmd.Parameters["P_STATUS"].Value);
+                }
+
+
             }
             catch (Exception ex)
             {

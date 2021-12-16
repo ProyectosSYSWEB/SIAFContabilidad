@@ -434,11 +434,11 @@
                             </div>
                         </div>
                                             
-                                                    <div class="row">
+                                                    <div class="row" style="height: 400px; overflow-y: scroll;">
                                                         <div class="col">
                                                             <asp:UpdatePanel ID="UpdatePanel12" runat="server">
                                                                 <ContentTemplate>
-                                                                    <asp:GridView ID="grdDetalle" runat="server" AutoGenerateColumns="False" CssClass="mGrid" OnRowDeleting="grdDetalle_RowDeleting" Width="100%" EmptyDataText="No se encontraron datos." OnSelectedIndexChanged="grdDetalle_SelectedIndexChanged">
+                                                                    <asp:GridView ID="grdDetalle" runat="server" AutoGenerateColumns="False" CssClass="mGrid"  OnRowDeleting="grdDetalle_RowDeleting" Width="100%" EmptyDataText="No se encontraron datos." OnSelectedIndexChanged="grdDetalle_SelectedIndexChanged">
                                                                         <AlternatingRowStyle CssClass="alt" />
                                                                         <Columns>
                                                                             <asp:BoundField DataField="CveTipo" ReadOnly="True">
@@ -479,6 +479,8 @@
                                                                                     <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Delete" OnClientClick="return confirm('¿Desea eliminar el registro?');" Text="Eliminar" CssClass="btn btn-blue-grey"></asp:LinkButton>
                                                                                 </ItemTemplate>
                                                                             </asp:TemplateField>
+                                                                            <asp:BoundField DataField="Importe" HeaderText="Importe" />
+                                                                            <asp:BoundField DataField="ImporteBanco" />
                                                                         </Columns>
                                                                         <FooterStyle CssClass="enc" />
                                                                         <HeaderStyle CssClass="enc" />
@@ -489,7 +491,19 @@
                                                             </asp:UpdatePanel>
                                                         </div>
                                                     </div>
-                                               
+                                            <div class="row" style="background-color:#595959; color:white">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-2" style="font-weight:bold; font-size:16px">TOTAL UNACH 1113:</div>
+                                                <div class="col-md-2 text-left">
+                                                    <asp:Label ID="lblTot113" runat="server" style="font-weight:bold; font-size:16px"></asp:Label>
+                                                </div>
+                                                <div class="col-md-2" style="font-weight:bold; font-size:16px">TOTAL BANCOS:</div>
+                                                <div class="col-md-2 text-left">
+                                                    <asp:Label ID="lblTotBancos" runat="server" style="font-weight:bold; font-size:16px"></asp:Label>
+                                                </div>
+                                                <asp:HiddenField ID="hddnTot113" runat="server" />
+                                                <asp:HiddenField ID="hddnTotBancos" runat="server" />
+                                            </div>
                                         </ContentTemplate>
                                     </ajaxToolkit:TabPanel>
                                 </ajaxToolkit:TabContainer>

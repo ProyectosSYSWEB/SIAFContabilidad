@@ -17,8 +17,8 @@ namespace CapaDatos
             {
                 OracleDataReader dr = null;
 
-                string[] Parametros = { "p_ejercicio","p_centro_contable", "p_buscar" };
-                object[] Valores = { ObjCuentas_Bancarias.Ejercicio, ObjCuentas_Bancarias.Centro_Contable, ObjCuentas_Bancarias.Cuenta_Bancaria };
+                string[] Parametros = { "p_ejercicio","p_centro_contable","p_dependencia","p_buscar" };
+                object[] Valores = { ObjCuentas_Bancarias.Ejercicio, ObjCuentas_Bancarias.Centro_Contable, ObjCuentas_Bancarias.Dependencia, ObjCuentas_Bancarias.Cuenta_Bancaria };
 
                 cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Cuentas_Bancarias", ref dr, Parametros, Valores);
                 while (dr.Read())
@@ -57,11 +57,12 @@ namespace CapaDatos
             OracleCommand Cmd = null;
             try
             {
-                String[] Parametros = { "P_EJERCICIO", "P_CLAVE", "P_CENTRO_CONTABLE", "P_BANCO", "P_CUENTA_BANCARIA", "P_CUENTA_CONTABLE",
+                String[] Parametros = { "P_EJERCICIO", "P_CLAVE", "P_CENTRO_CONTABLE", "P_DEPENDENCIA", "P_BANCO", "P_CUENTA_BANCARIA", "P_CUENTA_CONTABLE",
                     "P_DESCRIPCION", "P_FECHA_APERTURA", "P_LOCALIDAD", "P_STATUS", "P_ALTA_USUARIO", "P_TIPO_SUBSIDIO"};
                 object[] Valores = {    ObjCuentas_Bancarias.Ejercicio, 
                                         ObjCuentas_Bancarias.Clave,
-                                        ObjCuentas_Bancarias.Centro_Contable,                                        
+                                        ObjCuentas_Bancarias.Centro_Contable,
+                                        ObjCuentas_Bancarias.Dependencia,
                                         ObjCuentas_Bancarias.Banco,
                                         ObjCuentas_Bancarias.Cuenta_Bancaria,
                                         ObjCuentas_Bancarias.Cuenta_Contable,
@@ -91,9 +92,10 @@ namespace CapaDatos
             OracleCommand Cmd = null;
             try
             {
-                String[] Parametros = { "P_ID_CUENTA_BANCARIA", "P_CLAVE", "P_CENTRO_CONTABLE", "P_BANCO", "P_CUENTA_BANCARIA", 
+                String[] Parametros = { "P_ID_CUENTA_BANCARIA", "P_CLAVE", "P_CENTRO_CONTABLE", "P_DEPENDENCIA", "P_BANCO", "P_CUENTA_BANCARIA", 
                                         "P_CUENTA_CONTABLE", "P_DESCRIPCION", "P_FECHA_APERTURA",  "P_LOCALIDAD", "P_STATUS", "P_TIPO_SUBSIDIO"};
-                object[] Valores = { ObjCuentas_Bancarias.IdCuenta_Bancaria, ObjCuentas_Bancarias.Clave, ObjCuentas_Bancarias.Centro_Contable, ObjCuentas_Bancarias.Banco, ObjCuentas_Bancarias.Cuenta_Bancaria,
+                object[] Valores = { ObjCuentas_Bancarias.IdCuenta_Bancaria, ObjCuentas_Bancarias.Clave, ObjCuentas_Bancarias.Centro_Contable, ObjCuentas_Bancarias.Dependencia,
+                    ObjCuentas_Bancarias.Banco, ObjCuentas_Bancarias.Cuenta_Bancaria,
                                      ObjCuentas_Bancarias.Cuenta_Contable, ObjCuentas_Bancarias.Descripcion, ObjCuentas_Bancarias.Fecha_Apertura, ObjCuentas_Bancarias.Localidad, ObjCuentas_Bancarias.Status, ObjCuentas_Bancarias.Tipo_Subsidio};
                 String[] ParametrosOut = { "p_Bandera" };
                 Cmd = CDDatos.GenerarOracleCommand("UPD_SAF_CUENTAS_BANCARIAS", ref Verificador, Parametros, Valores, ParametrosOut);

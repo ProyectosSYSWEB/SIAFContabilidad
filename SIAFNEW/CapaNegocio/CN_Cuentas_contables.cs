@@ -8,13 +8,13 @@ namespace CapaNegocio
 {
     public class CN_Cuentas_contables
     {
-        public void InsertarCatCtas(Comun obComun, ref string Verificador)
+        public void InsertarCatCtas(cuentas_contables objCta, ref string Verificador)
         {
             try
             {
 
                 CD_Cuentas_contables CDCatCtas = new CD_Cuentas_contables();
-                CDCatCtas.InsertarCatCtas(obComun, ref Verificador);
+                CDCatCtas.InsertarCatCtas(objCta, ref Verificador);
             }
             catch (Exception ex)
             {
@@ -95,6 +95,39 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void ObtCatCOG(ref cuentas_contables objCatCog, ref string Verificador)
+        {
+            try
+            {
+
+                CD_Cuentas_contables CDCtas = new CD_Cuentas_contables();
+                CDCtas.ObtCatCOG(ref objCatCog, ref Verificador);
+
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void ObtCatalogo(ref cuentas_contables objCatalogo, ref string Verificador)
+        {
+            try
+            {
+
+                CD_Cuentas_contables CDCtas = new CD_Cuentas_contables();
+                CDCtas.ObtCatalogo(ref objCatalogo, ref Verificador);
+
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
         public void InsertarCatCOG(Comun objCatCog, ref string Verificador)
         {
@@ -113,7 +146,24 @@ namespace CapaNegocio
             }
         }
 
-        public void EditarCatCta(Comun objCatCog, ref string Verificador)
+        public void EditarCatCOG(Comun objCatCog, ref string Verificador)
+        {
+            try
+            {
+
+                CD_Cuentas_contables CDcuentas_contables = new CD_Cuentas_contables();
+                CDcuentas_contables.EditarCatCOG(objCatCog, ref Verificador);
+
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void EditarCatCta(cuentas_contables objCatCog, ref string Verificador)
         {
             try
             {

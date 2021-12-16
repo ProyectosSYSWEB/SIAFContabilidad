@@ -69,7 +69,6 @@ namespace CapaDatos
             }
 
         }
-
         public void ConciliacionEditarEnc(ref Poliza_Conciliacion ObjConciliacion, ref string Verificador)
         {
 
@@ -124,7 +123,6 @@ namespace CapaDatos
             }
 
         }
-
         public void ConciliacionInsertar(Poliza_Conciliacion ObjConciliacion, List<Poliza_Conciliacion> lstPolizaDet,  ref string Verificador)
         {
             
@@ -186,7 +184,6 @@ namespace CapaDatos
                 }
             
         }
-
         public void ConciliacionEditar(Poliza_Conciliacion ObjConciliacion, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -212,7 +209,6 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
-
         public void ConciliacionConsultaGrid(Poliza_Conciliacion ObjConciliacion, ref List<Poliza_Conciliacion> List)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -287,7 +283,6 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
-
         public void ConciliacionAdjConsultaGrid(Poliza_Conciliacion ObjConciliacion, ref List<Poliza_Conciliacion> List)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -317,8 +312,6 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
-
-
         public void Polizas_ConciliacionConsultaGrid(Poliza_Detalle ObjPolizaDet, ref List<Poliza_Detalle> List)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -351,7 +344,6 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
-
         public void ConsultarConciliacionSel(Poliza_Conciliacion ObjConciliacion, ref Poliza_Conciliacion ObjRespConciliacion, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -402,7 +394,6 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
-
         public void ConsultarConciliacionEncSel(ref Poliza_Conciliacion ObjConciliacion, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -504,47 +495,7 @@ namespace CapaDatos
             {
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
-        }
-
-        //public void ConciliacionDetConsultaGrid(Poliza_Conciliacion objConciliacion, ref List<Poliza_Conciliacion>lstConciliacionDet)
-        //{
-        //    CD_Datos CDDatos = new CD_Datos();
-        //    OracleCommand cmm = null;
-        //    try
-        //    {
-        //        OracleDataReader dr = null;
-        //        String[] Parametros = { "P_EJERCICIO", "P_CENTRO_CONTABLE", "P_CUENTA",
-        //        "P_ELABORO_NOMBRE","P_VB_NOMBRE", "P_FECHA_INICIAL", "P_FECHA_FINAL"
-        //        };
-        //        String[] Valores = { Convert.ToString(objConciliacion.Ejercicio), Convert.ToString(objConciliacion.Centro_contable), Convert.ToString(objConciliacion.Cuenta_contable),
-        //        objConciliacion.Elaboro_nombre, objConciliacion.Vb_nombre, objConciliacion.Fecha_inicial, objConciliacion.Fecha_final
-        //        };
-        //        cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Conciliacion_Detalle", ref dr, Parametros, Valores);
-
-        //        while (dr.Read())
-        //        {
-        //            objConciliacion = new Poliza_Conciliacion();
-        //            objConciliacion.DescTipo = Convert.ToString(dr.GetValue(0));
-        //            objConciliacion.Tipo = Convert.ToString(dr.GetValue(1));
-        //            objConciliacion.Fecha = Convert.ToString(dr.GetValue(2));
-        //            objConciliacion.Numero_Poliza = Convert.ToString(dr.GetValue(3));
-        //            objConciliacion.Importe = Convert.ToDouble(dr.GetValue(4));
-        //            objConciliacion.Concepto = Convert.ToString(dr.GetValue(6));
-        //            objConciliacion.Observaciones = Convert.ToString(dr.GetValue(5));
-        //            objConciliacion.CveTipo = Convert.ToString(dr.GetValue(7));
-        //            lstConciliacionDet.Add(objConciliacion);
-        //        }
-        //        dr.Close();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
-        //    finally
-        //    {
-        //        CDDatos.LimpiarOracleCommand(ref cmm);
-        //    }
-        //}
+        }        
         public void ConciliacionDetConsultaGrid(Poliza_Conciliacion objConciliacion, ref List<Poliza_Conciliacion> lstConciliacionDet)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -582,7 +533,6 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
-
         public void ConciliacionEliminar(Poliza_Conciliacion ObjConciliacion, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -636,7 +586,6 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
-
         public void PolizaAdjEliminar(Poliza_Conciliacion ObjConciliacion, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -663,7 +612,6 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
-
         public void PolizaAdjInsertar(Poliza_Conciliacion objConciliacion, List<Poliza_Conciliacion> lstAdjuntos, ref string Verificador)
         {
 

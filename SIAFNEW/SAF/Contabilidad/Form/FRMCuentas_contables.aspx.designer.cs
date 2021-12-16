@@ -663,6 +663,24 @@ namespace SAF.Rep
         protected global::System.Web.UI.WebControls.GridView grdCatalogos;
 
         /// <summary>
+        /// Control grdCatalogos2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdCatalogos2;
+
+        /// <summary>
+        /// Control UpdatePanel26.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel26;
+
+        /// <summary>
         /// Control txtMayor.
         /// </summary>
         /// <remarks>
@@ -670,6 +688,15 @@ namespace SAF.Rep
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtMayor;
+
+        /// <summary>
+        /// Control UpdatePanel27.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel27;
 
         /// <summary>
         /// Control txtCOG.
@@ -681,6 +708,15 @@ namespace SAF.Rep
         protected global::System.Web.UI.WebControls.TextBox txtCOG;
 
         /// <summary>
+        /// Control UpdatePanel28.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel28;
+
+        /// <summary>
         /// Control txtDescripcionCOG.
         /// </summary>
         /// <remarks>
@@ -688,6 +724,15 @@ namespace SAF.Rep
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDescripcionCOG;
+
+        /// <summary>
+        /// Control UpdatePanel29.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel29;
 
         /// <summary>
         /// Control ddlStatusCOG.
@@ -717,6 +762,15 @@ namespace SAF.Rep
         protected global::System.Web.UI.WebControls.Button bttnGuardarCOG;
 
         /// <summary>
+        /// Control bttnEditarCOG.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button bttnEditarCOG;
+
+        /// <summary>
         /// Control UpdateProgress23.
         /// </summary>
         /// <remarks>
@@ -744,6 +798,15 @@ namespace SAF.Rep
         protected global::System.Web.UI.WebControls.Label lblErrorCOG;
 
         /// <summary>
+        /// Control UpdatePanel30.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel30;
+
+        /// <summary>
         /// Control txtCve.
         /// </summary>
         /// <remarks>
@@ -753,6 +816,42 @@ namespace SAF.Rep
         protected global::System.Web.UI.WebControls.TextBox txtCve;
 
         /// <summary>
+        /// Control rowCta2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl rowCta2;
+
+        /// <summary>
+        /// Control UpdatePanel33.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel33;
+
+        /// <summary>
+        /// Control txtCta2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCta2;
+
+        /// <summary>
+        /// Control UpdatePanel31.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel31;
+
+        /// <summary>
         /// Control ddlStatusCat.
         /// </summary>
         /// <remarks>
@@ -760,6 +859,15 @@ namespace SAF.Rep
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlStatusCat;
+
+        /// <summary>
+        /// Control UpdatePanel32.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel32;
 
         /// <summary>
         /// Control txtDescCat.
@@ -780,6 +888,15 @@ namespace SAF.Rep
         protected global::System.Web.UI.UpdatePanel updPnlAgCat;
 
         /// <summary>
+        /// Control bttnModificarCat.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button bttnModificarCat;
+
+        /// <summary>
         /// Control bttnAgregarCat.
         /// </summary>
         /// <remarks>
@@ -787,6 +904,15 @@ namespace SAF.Rep
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button bttnAgregarCat;
+
+        /// <summary>
+        /// Control updPgrAgCat.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPgrAgCat;
 
         /// <summary>
         /// Control UpdatePanel21.
