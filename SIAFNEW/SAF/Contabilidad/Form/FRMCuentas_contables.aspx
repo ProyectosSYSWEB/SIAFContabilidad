@@ -1086,10 +1086,19 @@
                 $('#Pestania2').hide();
             };
             function cboCatCog() {
+               <%-- var table = $('#<%= grdCatCOG.ClientID %>').DataTable();
+                var selectedValue = $('#<%= ddlMayor.ClientID %>').val();
+                table.search(selectedValue).draw();--%>
+
+
                 var table = $('#<%= grdCatCOG.ClientID %>').DataTable();
                 var selectedValue = $('#<%= ddlMayor.ClientID %>').val();
-                table.search(selectedValue).draw();
-
+                if (selectedValue != "00") {
+                    table.columns(0).search(selectedValue).draw();
+                }
+                else {
+                    table.columns(0).search("").draw();
+                }
 
             };
 

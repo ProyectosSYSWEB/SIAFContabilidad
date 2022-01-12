@@ -953,7 +953,7 @@
                                                                     </asp:DropDownList>
                                                                 </div>
                                                                 <div class="col-md-1">
-                                                                    <asp:RequiredFieldValidator ID="reqCed" runat="server" ControlToValidate="ddlNumCedula" ErrorMessage="*# Cédula" ValidationGroup="Poliza" InitialValue="0">*Requerido</asp:RequiredFieldValidator>
+                                                                    <asp:RequiredFieldValidator ID="reqCed" runat="server" ControlToValidate="ddlNumCedula" ErrorMessage="*# Cédula" ValidationGroup="Poliza" InitialValue="000000000000000000">*Requerido</asp:RequiredFieldValidator>
                                                                 </div>
                                                             </div>
                                                             <div class="row" id="rowPrograma" runat="server">

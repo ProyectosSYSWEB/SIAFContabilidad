@@ -99,6 +99,14 @@
                                                                     <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" OnClientClick="return confirm('¿Desea eliminar la cuenta?');" Text="Eliminar"></asp:LinkButton>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
+                                                            <asp:TemplateField>
+                                                                <EditItemTemplate>
+                                                                    <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                                                                </EditItemTemplate>
+                                                                <ItemTemplate>
+                                                                    <asp:LinkButton ID="linBttnClonar" runat="server" OnClick="linBttnClonar_Click">Clonar</asp:LinkButton>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
                                                         </Columns>
                                                         <FooterStyle CssClass="enc" />
                                                         <PagerStyle CssClass="enc" HorizontalAlign="Center" />
@@ -141,7 +149,7 @@
                                         <div class="col-md-2">
                                             Centro Contable
                                         </div>
-                                        <div class="col-md-10">
+                                        <div class="col-md-9">
                                             <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                                                 <ContentTemplate>
                                                     <asp:DropDownList ID="ddlCentros_Contables" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlCentros_Contables_SelectedIndexChanged" Width="100%">
@@ -150,12 +158,19 @@
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </div>
+                                        <div class="col-md-1">
+                                            <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="UpdatePanel5">
+                                                <ProgressTemplate>
+                                                    <asp:Image ID="Image7" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." Width="50px" />
+                                                </ProgressTemplate>
+                                            </asp:UpdateProgress>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-2">
                                             Dependencia
                                         </div>
-                                        <div class="col-md-10">
+                                        <div class="col-md-9">
                                             <asp:UpdatePanel ID="updPnlDepcia" runat="server">
                                                 <ContentTemplate>
                                                     <asp:DropDownList ID="ddlDependencia" runat="server" Width="100%"></asp:DropDownList>
@@ -164,14 +179,7 @@
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="UpdatePanel5">
-                                                <ProgressTemplate>
-                                                    <asp:Image ID="Image7" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." Width="50px" />
-                                                </ProgressTemplate>
-                                            </asp:UpdateProgress>
+                                        <div class="col-md-1">
                                             <asp:UpdateProgress ID="updPgrDepcia" runat="server" AssociatedUpdatePanelID="updPnlDepcia">
                                                 <ProgressTemplate>
                                                     <asp:Image ID="imgDepcia" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." Width="50px" />

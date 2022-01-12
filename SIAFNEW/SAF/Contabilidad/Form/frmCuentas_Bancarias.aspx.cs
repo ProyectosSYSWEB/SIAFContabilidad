@@ -167,7 +167,7 @@ namespace SAF.Contabilidad.Form
             {
                 //if(SesionUsu.Editar==0||SesionUsu.Editar==1)
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Dependencias", ref ddlDependencia, "p_centro_contable", "p_ejercicio", ddlCentros_Contables.SelectedValue, ddlEjercicio.SelectedValue);
-                CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cuentas_Contables_N4", ref ddlCuentas_Contables, "p_ejercicio", "p_centro_contable", ddlEjercicio.SelectedValue, Convert.ToString(ddlCentros_Contables.SelectedValue));                
+                CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cuentas_Bancos", ref ddlCuentas_Contables, "p_ejercicio", "p_centro_contable", ddlEjercicio.SelectedValue, Convert.ToString(ddlCentros_Contables.SelectedValue));                
             }
             catch (Exception ex)
             {
@@ -196,10 +196,12 @@ namespace SAF.Contabilidad.Form
                 txtClave.Text = ObjCuentas_Bancarias.Clave;
                 ddlCentros_Contables.SelectedValue = ObjCuentas_Bancarias.Centro_Contable;
                 ddlCentros_Contables_SelectedIndexChanged(null, null);
+                ddlDependencia.SelectedValue = ObjCuentas_Bancarias.Dependencia;
                 ddlSubsidio.SelectedValue= ObjCuentas_Bancarias.Tipo_Subsidio;
                 if (ObjCuentas_Bancarias.Cuenta_Contable != "0")                                    
                     ddlCuentas_Contables.SelectedValue = ObjCuentas_Bancarias.Cuenta_Contable;
                 
+
                 ddlBancos.SelectedValue = ObjCuentas_Bancarias.Banco;
                 txtCuenta_Bancaria.Text = ObjCuentas_Bancarias.Cuenta_Bancaria;
                 txtDescripcion.Text = ObjCuentas_Bancarias.Descripcion;
@@ -298,6 +300,17 @@ namespace SAF.Contabilidad.Form
             ddlCentros_Contables_SelectedIndexChanged(null, null);
             SesionUsu.Editar = 0;
             MultiView1.ActiveViewIndex = 1;
+        }
+
+        protected void linBttnClonar_Click(object sender, EventArgs e)
+        {
+            LinkButton cbi = (LinkButton)(sender);
+            GridViewRow row = (GridViewRow)cbi.NamingContainer;
+            grvCuentas_Bancarias.SelectedIndex = row.RowIndex;
+            grvCuentas_Bancarias_SelectedIndexChanged(null, null);
+            ddlDependencia.SelectedValue = "00000";
+            SesionUsu.Editar = 0;
+            txtClave.Text = string.Empty;
         }
     }
 }

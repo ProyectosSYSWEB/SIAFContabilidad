@@ -951,6 +951,12 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Contabilidad\Reportes\RP-compara-02-detalle.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RP-compara-02-detalle.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Contabilidad\Reportes\RP-Diario-Generalxls.cs">
       <DependentUpon>RP-Diario-Generalxls.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -997,6 +1003,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RP-Volante_T7.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\Reportes\RPT-PRESUP_COMPARATIVO_CUENTA.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPT-PRESUP_COMPARATIVO_CUENTA.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\Reportes\RPT-PRESUP_COMPARATIVO_GRUPO.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPT-PRESUP_COMPARATIVO_GRUPO.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Contabilidad\Reportes\RP_CFDISxls.cs">
@@ -1571,6 +1589,18 @@
     <Content Include="Contabilidad\Reportes\RP_Concentrado_Conciliacion.rpt" />
     <Content Include="Contabilidad\Reportes\RP_ConcentradoANX.rpt" />
     <Content Include="Contabilidad\Reportes\RP_Concilliacion.rpt" />
+    <EmbeddedResource Include="Contabilidad\Reportes\RP-compara-02-detalle.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RP-compara-02-detalle.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contabilidad\Reportes\RPT-PRESUP_COMPARATIVO_CUENTA.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPT-PRESUP_COMPARATIVO_CUENTA.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contabilidad\Reportes\RPT-PRESUP_COMPARATIVO_GRUPO.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPT-PRESUP_COMPARATIVO_GRUPO.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Contabilidad\Reportes\RP_Concilliacion_2021.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RP_Concilliacion_2021.cs</LastGenOutput>

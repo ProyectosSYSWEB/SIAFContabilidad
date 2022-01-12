@@ -848,7 +848,14 @@ namespace SAF.Form
                         txtNumero_Poliza.Text = ObjPoliza.Numero_poliza.Substring(3);
                     }
 
-                    ddlTipoDocto.SelectedValue = ObjPoliza.Tipo_Documento;
+                    try
+                    {
+                        ddlTipoDocto.SelectedValue = ObjPoliza.Tipo_Documento;
+                    }
+                    catch
+                    {
+                        ddlTipoDocto.SelectedValue = "X";
+                    }
 
                     //chkIncluyeCFDI.Checked = ObjPoliza.CFDI == "S" ? true : false;
                     //if (ObjPoliza.CFDI == "S")
@@ -2135,6 +2142,8 @@ namespace SAF.Form
                 DDLCentro_Contable_SelectedIndexChanged(null, null);
                 //CNComun.LlenaCombo("PKG_CONTABILIDAD.Obt_Combo_Num_Cedula", ref ddlNumCedula, "p_ejercicio", "p_centro_contable", "p_mes_anio", "p_editar", "p_num_cedula", "p_tipo", SesionUsu.Usu_Ejercicio, DDLCentro_Contable.SelectedValue, txtFecha.Text.Substring(3,2)+SesionUsu.Usu_Ejercicio.Substring(2), Convert.ToString(SesionUsu.Editar), "",ddlTipo0.SelectedValue, ref ListCedulas);
                 //Session["Cedulas"] = ListCedulas;
+                ddlTipo0.SelectedIndex = 0;
+                ddlTipo0_SelectedIndexChanged(null, null);
                 ddlNumCedula.Visible = true;
                 txtCedula_Numero.Visible = false;
                 CNComun.LlenaCombo("PKG_CONTABILIDAD.Obt_Combo_Num_Cedula", ref ddlNumCedula, "p_ejercicio", "p_centro_contable", "p_mes_anio", "p_editar", "p_num_cedula", "p_tipo", SesionUsu.Usu_Ejercicio, DDLCentro_Contable.SelectedValue, txtFecha.Text.Substring(3, 2) + SesionUsu.Usu_Ejercicio.Substring(2), Convert.ToString(SesionUsu.Editar), "", ddlTipo0.SelectedValue, ref ListCedulas);
@@ -2166,7 +2175,8 @@ namespace SAF.Form
                     string NombreArchivo = FileOficio.FileName.ToUpper();
                     NombreArchivo = NombreArchivo.Replace(" ", "_");
                     NombreArchivo = NombreArchivo.Replace("%", string.Empty);
-                    NombreArchivo = grvPolizas.SelectedRow.Cells[17].Text + "-" + DDLCentro_Contable.SelectedValue + "-" + grvPolizas.SelectedRow.Cells[2].Text + "-" + NombreArchivo;
+                    NombreArchivo = grvPolizas.SelectedRow.Cells[0].Text +"-"+ grvPolizas.SelectedRow.Cells[17].Text + "-" + DDLCentro_Contable.SelectedValue + "-" + grvPolizas.SelectedRow.Cells[2].Text + "-" + NombreArchivo;
+                    //grvPolizas.SelectedRow.Cells[0].Text +mes_anio+centro_contable+numero_poliza
                     objPolizaOficio.Tipo_Docto_Oficio = DDLTipoDoctoOficio.SelectedValue;
                     objPolizaOficio.Numero_Oficio = txtOficio.Text;
                     objPolizaOficio.Fecha_Oficio = txtFechaOficio.Text;
