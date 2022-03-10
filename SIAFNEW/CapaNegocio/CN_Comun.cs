@@ -884,12 +884,12 @@ namespace CapaNegocio
             }
         }
 
-        public void MonitorContabilidad(string Usuario, string Sistema, string Centro_Contable, ref List<Comun> List)
+        public void MonitorContabilidad(string Usuario, string Sistema, string Centro_Contable, string Ejercicio, ref List<Comun> List)
         {
             try
             {
                 CD_Comun CDMonitor = new CD_Comun();
-                CDMonitor.MonitorContabilidad(Usuario, Sistema, Centro_Contable, ref List);
+                CDMonitor.MonitorContabilidad(Usuario, Sistema, Centro_Contable, Ejercicio, ref List);
             }
             catch (Exception ex)
             {
@@ -902,6 +902,18 @@ namespace CapaNegocio
             {
                 CD_Comun CDMonitor = new CD_Comun();
                 CDMonitor.MonitorGrupo(Usuario, Sistema, Centro_Contable, Grupo, ref List);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void MonitorDetalle(string Centro_Contable, string Ejercicio, string Clave, ref List<Comun> List)
+        {
+            try
+            {
+                CD_Comun CDMonitor = new CD_Comun();
+                CDMonitor.MonitorDetalle(Centro_Contable, Ejercicio, Clave, ref List);
             }
             catch (Exception ex)
             {

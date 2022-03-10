@@ -16,14 +16,14 @@ namespace SAF.Contabilidad.Reportes {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class RP_compara_02_detalle : ReportClass {
+    public class RP_compara_04exc : ReportClass {
         
-        public RP_compara_02_detalle() {
+        public RP_compara_04exc() {
         }
         
         public override string ResourceName {
             get {
-                return "RP-compara-02-detalle.rpt";
+                return "RP-compara-04exc.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace SAF.Contabilidad.Reportes {
         
         public override string FullResourceName {
             get {
-                return "SAF.Contabilidad.Reportes.RP-compara-02-detalle.rpt";
+                return "SAF.Contabilidad.Reportes.RP-compara-04exc.rpt";
             }
             set {
                 // Do nothing
@@ -50,7 +50,7 @@ namespace SAF.Contabilidad.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section1 {
+        public CrystalDecisions.CrystalReports.Engine.Section ReportHeaderSection1 {
             get {
                 return this.ReportDefinition.Sections[0];
             }
@@ -58,7 +58,7 @@ namespace SAF.Contabilidad.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section2 {
+        public CrystalDecisions.CrystalReports.Engine.Section PageHeaderSection1 {
             get {
                 return this.ReportDefinition.Sections[1];
             }
@@ -66,7 +66,7 @@ namespace SAF.Contabilidad.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
+        public CrystalDecisions.CrystalReports.Engine.Section DetailSection1 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
@@ -74,7 +74,7 @@ namespace SAF.Contabilidad.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
+        public CrystalDecisions.CrystalReports.Engine.Section ReportFooterSection1 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,7 +82,7 @@ namespace SAF.Contabilidad.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
+        public CrystalDecisions.CrystalReports.Engine.Section PageFooterSection1 {
             get {
                 return this.ReportDefinition.Sections[4];
             }
@@ -90,7 +90,7 @@ namespace SAF.Contabilidad.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_SP1_EJERCICIO {
+        public CrystalDecisions.Shared.IParameterField Parameter_1P_ejercicio {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -98,7 +98,7 @@ namespace SAF.Contabilidad.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_SP2_CUENTA {
+        public CrystalDecisions.Shared.IParameterField Parameter_2P_CUENTA {
             get {
                 return this.DataDefinition.ParameterFields[1];
             }
@@ -106,25 +106,17 @@ namespace SAF.Contabilidad.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_SP3_MESANIO {
+        public CrystalDecisions.Shared.IParameterField Parameter_3P_MES {
             get {
                 return this.DataDefinition.ParameterFields[2];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_SP4_NIVEL4 {
-            get {
-                return this.DataDefinition.ParameterFields[3];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedRP_compara_02_detalle : Component, ICachedReport {
+    public class CachedRP_compara_04exc : Component, ICachedReport {
         
-        public CachedRP_compara_02_detalle() {
+        public CachedRP_compara_04exc() {
         }
         
         [Browsable(false)]
@@ -161,7 +153,7 @@ namespace SAF.Contabilidad.Reportes {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            RP_compara_02_detalle rpt = new RP_compara_02_detalle();
+            RP_compara_04exc rpt = new RP_compara_04exc();
             rpt.Site = this.Site;
             return rpt;
         }

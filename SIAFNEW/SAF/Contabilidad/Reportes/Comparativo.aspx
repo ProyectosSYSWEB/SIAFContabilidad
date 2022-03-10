@@ -7,47 +7,30 @@
         <ContentTemplate>
             <asp:MultiView ID="MultiView1" runat="server">
                 <asp:View ID="View1" runat="server">
-                    <table style="width: 100%;">
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="izquierda">
-                                <asp:Label ID="Label3" runat="server" Text="Cuenta Contable:"></asp:Label>
-                            </td>
-                            <td>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-2">Cuenta Contable</div>
+                            <div class="col-md-10">
                                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                                     <ContentTemplate>
                                         <asp:DropDownList ID="ddl_cuentas" runat="server"
-                                            OnSelectedIndexChanged="ddl_cuentas_SelectedIndexChanged" Width="296px">
+                                            OnSelectedIndexChanged="ddl_cuentas_SelectedIndexChanged" Width="100%">
                                         </asp:DropDownList>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="izquierda">
-                                <asp:Label ID="lbl_f_ini" runat="server" Style="text-align: right"
-                                    Text="Mes Inicial:"></asp:Label>
-                            </td>
-                            <td>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <asp:Label ID="lbl_f_ini" runat="server" Text="Mes Inicial"></asp:Label></div>
+                            <div class="col-md-10">
                                 <asp:DropDownList ID="txtmes_inicial" runat="server"
                                     OnSelectedIndexChanged="txtmes_inicial_SelectedIndexChanged">
                                 </asp:DropDownList>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="cuadro_botones">
-                                <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-                                    <ContentTemplate>
-                                        <asp:ImageButton ID="btnAceptar" runat="server"
-                                            ImageUrl="https://sysweb.unach.mx/resources/imagenes/pdf.png" OnClick="btnAceptar_Click" Width="51px" />
-                                        <asp:ImageButton ID="xls" runat="server"
-                                            ImageUrl="https://sysweb.unach.mx/resources/imagenes/excel.png"
-                                            Style="text-align: center" Width="49px" OnClick="xls_Click" />
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
                                 <asp:UpdateProgress ID="UpdateProgress2" runat="server"
                                     AssociatedUpdatePanelID="UpdatePanel3">
                                     <ProgressTemplate>
@@ -57,9 +40,22 @@
                                             ToolTip="Espere un momento, por favor.." Width="30px" />
                                     </ProgressTemplate>
                                 </asp:UpdateProgress>
-                            </td>
-                        </tr>
-                    </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-right">
+                                <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                                    <ContentTemplate>
+                                        <asp:ImageButton ID="btnAceptar" runat="server"
+                                            ImageUrl="https://sysweb.unach.mx/resources/imagenes/pdf.png" OnClick="btnAceptar_Click" Width="51px" />
+                                        <asp:ImageButton ID="xls" runat="server"
+                                            ImageUrl="https://sysweb.unach.mx/resources/imagenes/excel.png"
+                                            Style="text-align: center" Width="49px" OnClick="xls_Click" />
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                    </div>
                 </asp:View>
                 <asp:View ID="View2" runat="server">
                     <asp:UpdatePanel ID="UpdatePanel5" runat="server">
@@ -210,7 +206,11 @@
                                         <asp:UpdatePanel ID="UpdatePanel8" runat="server">
                                             <ContentTemplate>
                                                 <asp:ImageButton ID="btnAceptar0" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/pdf.png" OnClick="btnAceptar0_Click" />
+
+                                                <asp:ImageButton ID="imgBttnLotesPDF" runat="server" ImageUrl="http://sysweb.unach.mx/resources/imagenes/pdf2.png" OnClick="imgBttnLotesPDF_Click" title="Reporte/Lote" ValidationGroup="RepLotes" Visible="False" />
+
                                                 <asp:ImageButton ID="btn_excel" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/excel.png" OnClick="btn_excel_Click" Style="text-align: center" />
+                                                <asp:ImageButton ID="imgBttnLotesExcel" runat="server" ImageUrl="http://sysweb.unach.mx/resources/imagenes/EXCEL2.png" OnClick="imgBttnExcelLotes_Click" title="Reporte Excel" ValidationGroup="RepLotes" Visible="False" />
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
                                     </div>

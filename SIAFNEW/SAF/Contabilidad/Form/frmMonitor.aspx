@@ -42,7 +42,7 @@
             <div class="col-md-2">
                 Centro Contable
             </div>
-            <div class="col-md-6">
+            <div class="col-md-10">
                 <asp:UpdatePanel ID="UpdatePanel11" runat="server">
                     <ContentTemplate>
                         <asp:DropDownList ID="DDLCentro_Contable" runat="server" Width="100%"
@@ -52,10 +52,10 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>        
-            <div class="col-md-1">
+            <div class="col-md-2">
                 Filtro
             </div>
-            <div class="col-md-3">
+            <div class="col-md-10">
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
                         <asp:DropDownList ID="DDLFiltro" runat="server" Width="100%"
@@ -69,7 +69,7 @@
             <div class="col">
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
-                        <div class="card scroll_monitor">
+                        <div class="scroll_monitor">
                             <asp:GridView ID="grvMonitorCont" runat="server"
                                 BorderStyle="None" CellPadding="4" Width="100%"
                                 GridLines="Vertical" AutoGenerateColumns="False" OnPageIndexChanging="grvMonitorCont_PageIndexChanging"
@@ -81,7 +81,7 @@
                                 <PagerStyle CssClass="enc" HorizontalAlign="Center" />
                                 <SelectedRowStyle CssClass="sel" />
                                 <HeaderStyle CssClass="enc" />
-                                <AlternatingRowStyle CssClass="alt" />
+                                <AlternatingRowStyle CssClass="alt" Font-Size="14px" />
                             </asp:GridView>
                         </div>
                     </ContentTemplate>

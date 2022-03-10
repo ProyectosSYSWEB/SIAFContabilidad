@@ -109,7 +109,7 @@ namespace CapaDatos
                 String[] Parametros = { "p_centro_contable", "p_fecha_inicial", "p_fecha_final", "p_tipo", "p_status", "p_buscar", "p_editor", "p_tipo_captura", "p_clasifica", "p_ejercicio" };
                 String[] Valores = { ObjPoliza.Centro_contable, FechaInicial, FechaFinal, ObjPoliza.Tipo, ObjPoliza.Status, Buscar, TipoUsu, ObjPoliza.Tipo_captura, ObjPoliza.Clasificacion, Convert.ToString(ObjPoliza.Ejercicio) };
 
-                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Polizas_Min", ref dr, Parametros, Valores);
+                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Polizas_Min2", ref dr, Parametros, Valores);
 
                 //if (dr. <= 2000)
                 //{

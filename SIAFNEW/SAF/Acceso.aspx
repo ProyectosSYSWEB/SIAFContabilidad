@@ -71,7 +71,9 @@
                             <div id="listUser" class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-at"></i></span>
                             </div>
-                            <asp:TextBox ID="txtUsario" placeholder="Correo UNACH" runat="server" CssClass="form-control" data-toggle="tooltip" data-placement="top" title="Tooltip on top"></asp:TextBox><br />
+                       
+                                    <asp:TextBox ID="txtUsario" placeholder="Correo UNACH" runat="server" CssClass="form-control" data-toggle="tooltip" data-placement="top" title="Tooltip on top"></asp:TextBox><br />
+                                                   
                         </div>
                         <div class="form-group input-group">
                             <div id="divPassword" class="input-group-prepend">

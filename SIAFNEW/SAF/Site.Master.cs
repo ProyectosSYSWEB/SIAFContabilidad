@@ -35,16 +35,42 @@ namespace SAF
            
             if (!IsPostBack)
             {
-                SesionUsu.Modifica_Ejercicio = false;
-                ddlUsu_Ejercicio.SelectedValue = SesionUsu.Usu_Ejercicio;
+                //SesionUsu.Modifica_Ejercicio = false;
+                if(SesionUsu.Usu_Ejercicio=="2022")
+                    CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Ejercicios", ref ddlUsu_Ejercicio, "p_tipo_usuario", "C0NTR4");
+                else
+                    CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Ejercicios", ref ddlUsu_Ejercicio);
+
+
+
+                if (SesionUsu.Modifica_Ejercicio == true)
+                {
+                    ddlUsu_Ejercicio.SelectedValue = SesionUsu.Usu_Ejercicio;
+                    SesionUsu.Modifica_Ejercicio = false;
+                    SesionUsu.Inicio = false;
+                }
+
+                else if (SesionUsu.Inicio == true)
+                {
+                    ddlUsu_Ejercicio.SelectedValue = SesionUsu.Usu_Ejercicio;
+
+                }
             }
 
-            if (SesionUsu.Modifica_Ejercicio == true)
-            {
-                ddlUsu_Ejercicio.SelectedValue = SesionUsu.Usu_Ejercicio;
-                SesionUsu.Modifica_Ejercicio = false;
-            }
+            //if (SesionUsu.Modifica_Ejercicio == true)
+            //{
+            //    ddlUsu_Ejercicio.SelectedValue = SesionUsu.Usu_Ejercicio;
+            //    SesionUsu.Modifica_Ejercicio = false;
+            //    SesionUsu.Inicio = false;
+            //}
 
+            //else if (SesionUsu.Inicio == true)
+            //{
+            //    ddlUsu_Ejercicio.SelectedValue = SesionUsu.Usu_Ejercicio;
+                
+            //}
+            //else
+            //    ddlUsu_Ejercicio.SelectedValue = SesionUsu.Usu_Ejercicio;
 
 
         }

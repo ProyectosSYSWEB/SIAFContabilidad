@@ -14,7 +14,7 @@ namespace SAF.Reportes
 {
     public partial class VisualizadorCrystal : System.Web.UI.Page
     {
-       
+
         private ReportDocument report = new ReportDocument();
         private System.Web.UI.Page p;
         ConnectionInfo connectionInfo = new ConnectionInfo();
@@ -22,20 +22,20 @@ namespace SAF.Reportes
         String Reporte = "";
         protected void Page_Load(object sender, EventArgs e)
         {
-            rptVisor();            
+            rptVisor();
         }
         private void rptVisor()
         {
             try
-            {        
-                
+            {
+
                 int Ejercicio = Convert.ToInt32(Request.QueryString["Ejercicio"]);
                 string centro_contable = Convert.ToString(Request.QueryString["centro_contable"]);
                 string cuenta_contable = Convert.ToString(Request.QueryString["cuenta_contable"]);
                 string cuenta_contable_fin = Convert.ToString(Request.QueryString["cuenta_contable_fin"]);
                 string mes_inicial = Convert.ToString(Request.QueryString["mes_inicial"]);
                 string mes_final = Convert.ToString(Request.QueryString["mes_final"]);
-                string cuenta_mayor= Convert.ToString(Request.QueryString["cuenta_mayor"]);
+                string cuenta_mayor = Convert.ToString(Request.QueryString["cuenta_mayor"]);
                 string tipo_p = Convert.ToString(Request.QueryString["tipo_p"]);
                 string poliza = Convert.ToString(Request.QueryString["poliza"]);
                 string sistema = Convert.ToString(Request.QueryString["sistema"]);
@@ -61,14 +61,14 @@ namespace SAF.Reportes
                 Tipo = Convert.ToString(Request.QueryString["Tipo"]);
 
 
-                
-                string  caseSwitch = Tipo;
+
+                string caseSwitch = Tipo;
                 switch (caseSwitch)
                 {
                     case "RP-001":
                         Reporte = "Contabilidad\\Reportes\\RP-001.rpt";
                         reportes_dir();
-                        report.SetParameterValue(0, Ejercicio); report.SetParameterValue(1, centro_contable); report.SetParameterValue(2, cuenta_contable); report.SetParameterValue(3, cuenta_contable_fin);  reporte_PDF();
+                        report.SetParameterValue(0, Ejercicio); report.SetParameterValue(1, centro_contable); report.SetParameterValue(2, cuenta_contable); report.SetParameterValue(3, cuenta_contable_fin); reporte_PDF();
                         break;
                     case "RP-002":
                         Reporte = "Contabilidad\\Reportes\\RP-002.rpt";
@@ -87,9 +87,9 @@ namespace SAF.Reportes
                         break;
                     case "RP-004":
                         Reporte = "Contabilidad\\Reportes\\RP-004.rpt";
-                       reportes_dir();
+                        reportes_dir();
                         report.SetParameterValue(0, centro_contable); report.SetParameterValue(1, mes_inicial); report.SetParameterValue(2, mes_final); report.SetParameterValue(3, tipo_p); report.SetParameterValue(4, status); report.SetParameterValue(5, filtro_busca); reporte_PDF();
-                        break;                        
+                        break;
                     case "RP-004exc":
                         Reporte = "Contabilidad\\Reportes\\RP-004.rpt";
                         reportes_dir();
@@ -147,7 +147,7 @@ namespace SAF.Reportes
                     case "RP-012exc":
                         Reporte = "Contabilidad\\Reportes\\RP-012exc.rpt";
                         reportes_dir();
-                        report.SetParameterValue(0, Ejercicio); report.SetParameterValue(1, centro_contable); report.SetParameterValue(2, cuenta_mayor); report.SetParameterValue(3, mes_inicial); report.SetParameterValue(4, mes_final); report.SetParameterValue(5, nivel); reporte_XLS();
+                        report.SetParameterValue(0, Ejercicio); report.SetParameterValue(1, centro_contable); report.SetParameterValue(2, cuenta_mayor); report.SetParameterValue(3, mes_inicial); report.SetParameterValue(4, mes_final); report.SetParameterValue(5, nivel); reporte_GranXLS();
                         break;
                     case "RP-012-2":
                         Reporte = "Contabilidad\\Reportes\\RP-012-2.rpt";
@@ -157,7 +157,7 @@ namespace SAF.Reportes
                     case "RP-012-2_Polizas":
                         Reporte = "Contabilidad\\Reportes\\RP-012-2_Polizas.rpt";
                         reportes_dir();
-                        report.SetParameterValue(0, Ejercicio); report.SetParameterValue(1, centro_contable); report.SetParameterValue(2, tipo_rep); report.SetParameterValue(3, mes_inicial); report.SetParameterValue(4, mes_final);  report.SetParameterValue(5, cuenta_contable); reporte_PDF();
+                        report.SetParameterValue(0, Ejercicio); report.SetParameterValue(1, centro_contable); report.SetParameterValue(2, tipo_rep); report.SetParameterValue(3, mes_inicial); report.SetParameterValue(4, mes_final); report.SetParameterValue(5, cuenta_contable); reporte_PDF();
                         break;
                     case "RP-012-2-Grupo":
                         Reporte = "Contabilidad\\Reportes\\RP-012-2-Grupo.rpt";
@@ -238,21 +238,30 @@ namespace SAF.Reportes
                         reportes_dir();
                         report.SetParameterValue(0, mes_inicial); report.SetParameterValue(1, mes_final); report.SetParameterValue(2, Ejercicio); reporte_XLS();
                         break;
-
                     case "RP-compara-01":
                         Reporte = "Contabilidad\\Reportes\\RP-compara-01.rpt";
-                        reportes_dir();
-                        report.SetParameterValue(0, Ejercicio); report.SetParameterValue(1, cuenta_contable); report.SetParameterValue(2, mes_inicial); reporte_PDF();                        
-                        break;
+                        reportes_dir();                       
+                            report.SetParameterValue(0, Ejercicio); report.SetParameterValue(1, cuenta_contable); report.SetParameterValue(2, mes_inicial); reporte_PDF();                        
+                        break;                   
                     case "RP-compara-02":
                         Reporte = "Contabilidad\\Reportes\\RP-compara-02.rpt";
                         reportes_dir();
                         report.SetParameterValue(0, Ejercicio); report.SetParameterValue(1, cuenta_contable); report.SetParameterValue(2, mes_inicial); reporte_PDF();
                         break;
+                    case "RP-compara-02xls":
+                        Reporte = "Contabilidad\\Reportes\\RP-compara-02.rpt";
+                        reportes_dir();
+                        report.SetParameterValue(0, Ejercicio); report.SetParameterValue(1, cuenta_contable); report.SetParameterValue(2, mes_inicial); reporte_XLS();
+                        break;
                     case "RP-compara-04":
                         Reporte = "Contabilidad\\Reportes\\RP-compara-04.rpt";
                         reportes_dir();
                         report.SetParameterValue(0, Ejercicio); report.SetParameterValue(1, cuenta_contable); report.SetParameterValue(2, mes_inicial); reporte_PDF();
+                        break;
+                    case "RP-compara-04xls":
+                        Reporte = "Contabilidad\\Reportes\\RP-compara-04exc.rpt";
+                        reportes_dir();
+                        report.SetParameterValue(0, Ejercicio); report.SetParameterValue(1, cuenta_contable); report.SetParameterValue(2, mes_inicial); reporte_XLS();
                         break;
                     case "RP-compara-05":
                         Reporte = "Contabilidad\\Reportes\\RP-compara-05.rpt";
@@ -297,7 +306,7 @@ namespace SAF.Reportes
                     case "RP-Mayor-General":
                         Reporte = "Contabilidad\\Reportes\\RP-Mayor-General.rpt";
                         reportes_dir();
-                        report.SetParameterValue(0, Ejercicio); reporte_XLS();
+                        report.SetParameterValue(0, Ejercicio); reporte_GranXLS();
                         break;
                     case "RP-Resumen-de-cuentas":
                         Reporte = "Contabilidad\\Reportes\\RP-Resumen-de-cuentas.rpt";
@@ -317,7 +326,7 @@ namespace SAF.Reportes
                     case "RP-019":
                         Reporte = "Contabilidad\\Reportes\\RP-019.rpt";
                         reportes_dir();
-                        report.SetParameterValue(0, Ejercicio); report.SetParameterValue(0, mes_inicial); report.SetParameterValue(1, mes_final); report.SetParameterValue(2, Ejercicio ); reporte_PDF();
+                        report.SetParameterValue(0, Ejercicio); report.SetParameterValue(0, mes_inicial); report.SetParameterValue(1, mes_final); report.SetParameterValue(2, Ejercicio); reporte_PDF();
                         break;
                     case "RP-019xls":
                         Reporte = "Contabilidad\\Reportes\\RP-019.rpt";
@@ -333,7 +342,17 @@ namespace SAF.Reportes
                     case "RP-020xls":
                         Reporte = "Contabilidad\\Reportes\\RP-020.rpt";
                         reportes_dir();
-                        report.SetParameterValue(0, Ejercicio); report.SetParameterValue(0, mes_inicial); report.SetParameterValue(1, mes_final); report.SetParameterValue(2, Ejercicio); reporte_XLS(); 
+                        report.SetParameterValue(0, Ejercicio); report.SetParameterValue(0, mes_inicial); report.SetParameterValue(1, mes_final); report.SetParameterValue(2, Ejercicio); reporte_XLS();
+                        break;
+                    case "RP-020-det":
+                        Reporte = "Contabilidad\\Reportes\\RP-020-det.rpt";
+                        reportes_dir();
+                        report.SetParameterValue(0, Ejercicio); report.SetParameterValue(0, mes_inicial); report.SetParameterValue(1, mes_final); report.SetParameterValue(2, Ejercicio); reporte_PDF();
+                        break;
+                    case "RP-020-detxls":
+                        Reporte = "Contabilidad\\Reportes\\RP-020-det.rpt";
+                        reportes_dir();
+                        report.SetParameterValue(0, Ejercicio); report.SetParameterValue(0, mes_inicial); report.SetParameterValue(1, mes_final); report.SetParameterValue(2, Ejercicio); reporte_XLS();
                         break;
                     case "RP-021":
                         Reporte = "Contabilidad\\Reportes\\RP-021.rpt";
@@ -352,7 +371,7 @@ namespace SAF.Reportes
                         break;
                     case "RP-023exc":
                         Reporte = "Contabilidad\\Reportes\\RP-023exc.rpt";
-                        reportes_dir();                        
+                        reportes_dir();
                         report.SetParameterValue(0, Ejercicio); report.SetParameterValue(1, centro_contable); report.SetParameterValue(2, cuenta_mayor); report.SetParameterValue(3, mes_inicial); report.SetParameterValue(4, mes_final); report.SetParameterValue(5, nivel); reporte_XLS();
                         break;
                     case "RP-compara-06":
@@ -475,10 +494,10 @@ namespace SAF.Reportes
             connectionInfo.UserID = "SAF";
             connectionInfo.Password = "DSIA2014";
             SetDBLogonForReport(connectionInfo, report);
-            
-            report.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, false, Tipo );
+
+            report.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, false, Tipo);
             CR_Reportes.ReportSource = report;
-               
+
         }
         private void reporte_XLS()
         {
@@ -487,9 +506,9 @@ namespace SAF.Reportes
             connectionInfo.UserID = "SAF";
             connectionInfo.Password = "DSIA2014";
             SetDBLogonForReport(connectionInfo, report);
-            report.ExportToHttpResponse(ExportFormatType.ExcelRecord, Response, false, Tipo );
+            report.ExportToHttpResponse(ExportFormatType.ExcelRecord, Response, false, Tipo);
             CR_Reportes.ReportSource = report;
-               
+
         }
 
         private void reporte_GranXLS()
@@ -546,4 +565,4 @@ namespace SAF.Reportes
             }
         }
     }
-  }
+}

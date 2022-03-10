@@ -908,7 +908,7 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
-        public void MonitorContabilidad(string Usuario, string Sistema, string Centro_Contable, ref List<Comun> List)
+        public void MonitorContabilidad(string Usuario, string Sistema, string Centro_Contable, string Ejercicio, ref List<Comun> List)
         {
             CD_Datos CDDatos = new CD_Datos();
             OracleCommand cmm = null;
@@ -918,8 +918,8 @@ namespace CapaDatos
 
                 //String[] Parametros = { "p_usuario", "p_id_sistema", "p_centro_contable" };
                 //String[] Valores = { Usuario, Sistema, Centro_Contable };
-                String[] Parametros = { "p_centro_contable" };
-                String[] Valores = { Centro_Contable };
+                String[] Parametros = { "P_CENTRO_CONTABLE", "P_EJERCICIO" };
+                String[] Valores = { Centro_Contable, Ejercicio };
 
                 cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Monitor_Contabilidad", ref dr, Parametros, Valores);
                 while (dr.Read())
@@ -969,6 +969,36 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        public void MonitorDetalle(string Centro_Contable, string Ejercicio, string Clave, ref List<Comun> List)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+                OracleDataReader dr = null;
+
+                String[] Parametros = { "p_centro_contable", "p_ejercicio", "p_clave" };
+                String[] Valores = { Centro_Contable, Ejercicio, Clave };
+
+                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Detalle_Monitor", ref dr, Parametros, Valores);
+                while (dr.Read())
+                {
+                    Comun objMonitor = new Comun();
+                    objMonitor.Descripcion = Convert.ToString(dr.GetValue(2));
+                    List.Add(objMonitor);
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+
 
         public void Monitor_Patrimonio(string Centro_Contable, ref List<Comun> List)
         {

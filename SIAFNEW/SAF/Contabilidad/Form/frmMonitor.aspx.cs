@@ -55,7 +55,7 @@ namespace SAF.Contabilidad.Form
             try
             {
                 List<Comun> List = new List<Comun>();
-                CNMonitor.MonitorGrupo(SesionUsu.Usu_Nombre, "15830", DDLCentro_Contable.SelectedValue, DDLFiltro.SelectedValue, ref List);                
+                CNMonitor.MonitorDetalle(DDLCentro_Contable.SelectedValue, SesionUsu.Usu_Ejercicio, DDLFiltro.SelectedValue, ref List);                
                 return List;
             }
             catch (Exception ex)
@@ -68,7 +68,6 @@ namespace SAF.Contabilidad.Form
             Verificador = string.Empty;
             try
             {
-                CNMonitor.LlenaCombo("pkg_contabilidad.Obt_Combo_Gpos_Monitor", ref DDLFiltro, "p_centro_contable", "00000");
                 CNMonitor.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref DDLCentro_Contable, "p_usuario", "p_ejercicio", SesionUsu.Usu_Nombre, SesionUsu.Usu_Ejercicio);                
                 DDLCentro_Contable_SelectedIndexChanged(null, null);
             }
@@ -92,6 +91,7 @@ namespace SAF.Contabilidad.Form
 
         protected void DDLCentro_Contable_SelectedIndexChanged(object sender, EventArgs e)
         {
+            CNMonitor.LlenaCombo("pkg_contabilidad.Obt_Grid_Monitor_Contabilidad", ref DDLFiltro, "p_centro_contable", "p_ejercicio", DDLCentro_Contable.SelectedValue, SesionUsu.Usu_Ejercicio);
             MonitorConsultaGrid();
         }
 

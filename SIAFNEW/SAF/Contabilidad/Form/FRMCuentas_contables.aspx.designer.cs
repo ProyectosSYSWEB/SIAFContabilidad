@@ -258,6 +258,51 @@ namespace SAF.Rep
         protected global::System.Web.UI.WebControls.TextBox txt4;
 
         /// <summary>
+        /// Control updPnlBuscarBien.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlBuscarBien;
+
+        /// <summary>
+        /// Control linkBttnBuscarBien.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnBuscarBien;
+
+        /// <summary>
+        /// Control updPgrBuscarBien.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPgrBuscarBien;
+
+        /// <summary>
+        /// Control UpdatePanel34.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel34;
+
+        /// <summary>
+        /// Control ddlDescripcion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlDescripcion;
+
+        /// <summary>
         /// Control txtdescripcion.
         /// </summary>
         /// <remarks>

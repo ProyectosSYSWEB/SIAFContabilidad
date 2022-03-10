@@ -23,6 +23,8 @@ namespace CapaEntidad
         private string _mac_address;
         private string _id_sistema;
         private bool _Modifica_Ejercicio;
+        private bool _Inicio;
+        
         private string _Status;
         private string _Correo_UNACH;
         private string _Nombre_Completo;
@@ -131,6 +133,11 @@ namespace CapaEntidad
         {
             get { return _Modifica_Ejercicio; }
             set { _Modifica_Ejercicio = value; }
+        }
+        public bool Inicio
+        {
+            get { return _Inicio; }
+            set { _Inicio = value; }
         }
 
 

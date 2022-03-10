@@ -16,6 +16,7 @@ namespace SAF.Rep
         #region <Variables>
         Int32[] Celdas = new Int32[] { 0 };
         string Verificador = string.Empty;
+        string cta_mayor = string.Empty;
         CN_Usuario CNUsuario = new CN_Usuario();
         Usuario Usuario = new Usuario();
         Sesion SesionUsu = new Sesion();
@@ -23,6 +24,7 @@ namespace SAF.Rep
         CN_Cuentas_contables CNcuentas_contables = new CN_Cuentas_contables();
         cuentas_contables Objcuentas_contables = new cuentas_contables();
         private static List<Comun> ListConceptos = new List<Comun>();
+        private static List<Comun> ListBienes = new List<Comun>();
         private static List<Comun> Listcodigo = new List<Comun>(); //En tu declaración de variables
         int guar_continue;
 
@@ -46,6 +48,8 @@ namespace SAF.Rep
             ScriptManager.RegisterStartupScript(this, GetType(), "GridCOG", "CatCOG();", true);
             ScriptManager.RegisterStartupScript(this, GetType(), "GridCatalogos", "Catalogos();", true);
             ScriptManager.RegisterStartupScript(this, GetType(), "GridCatalogos2", "Catalogos2();", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "Bienes", "FiltBienes();", true);
+
 
         }
         private void CargarGrid()
@@ -296,7 +300,13 @@ namespace SAF.Rep
             Objcuentas_contables.ejercicio = SesionUsu.Usu_Ejercicio;
             Objcuentas_contables.centro_contable = DDLCentro_Contable.SelectedValue;
             Objcuentas_contables.cuenta_contable = txtcuenta_contable.Text;
+            cta_mayor = txt1.Text;
+            //if (ddlnivel.SelectedValue == "4" && (cta_mayor == "5518" || cta_mayor == "5515" || cta_mayor == "1263" || cta_mayor == "1241" || cta_mayor == "1242" || cta_mayor == "1243" || cta_mayor == "1244" || cta_mayor == "1245" || cta_mayor == "1246" || cta_mayor == "1247" || cta_mayor == "1248" || cta_mayor == "1251" || cta_mayor == "1252" || cta_mayor == "1253" || cta_mayor == "1254" || cta_mayor == "1293"))
+            //    Objcuentas_contables.descripcion = ddlDescripcion.Items.ToString();
+            //else
+                
             Objcuentas_contables.descripcion = txtdescripcion.Text;
+
             Objcuentas_contables.tipo = txttipo.SelectedValue;
             Objcuentas_contables.clasificacion = ddlclasificacion.SelectedValue;
             Objcuentas_contables.nivel = ddlnivel.SelectedValue;
@@ -421,6 +431,12 @@ namespace SAF.Rep
             ddlCuenta_Mayor.Enabled = false;
             Label15.Visible = false;
             DDLSubdependencia.Visible = false;
+            //txtdescripcion.Visible = true;
+            linkBttnBuscarBien.Visible = false;
+            ddlDescripcion.Visible = false;
+            ddlDescripcion.Items.Clear();
+            this.ddlDescripcion.Items.Insert(0, new ListItem("---SELECCIONAR---", "0"));
+
 
             index_linbtn(sender);
             SesionUsu.Editar = 0;
@@ -456,6 +472,7 @@ namespace SAF.Rep
                 ddlclasificacion.SelectedValue = "ESP";
                 habil_cuenta();
                 txt3.Enabled = true;
+
             }
             if (nivel_cuenta == 4)
             {
@@ -466,6 +483,20 @@ namespace SAF.Rep
                 txt4.Enabled = true;
                 txtdescripcion.Text = string.Empty;
                 BTN_continuar.Visible = true;
+                //string mayor = grdcuentas_contables.SelectedRow.Cells[2].Text.Substring(0, 4);
+                cta_mayor = grdcuentas_contables.SelectedRow.Cells[2].Text.Substring(0, 4);
+                if (cta_mayor == "5518" || cta_mayor == "5515" || cta_mayor == "1263" || cta_mayor == "1241" || cta_mayor == "1242" || cta_mayor == "1243" ||
+                    cta_mayor == "1244" || cta_mayor == "1245" || cta_mayor == "1246" || cta_mayor == "1247" || cta_mayor == "1248" || cta_mayor == "1251" ||
+                    cta_mayor == "1252" || cta_mayor == "1253" || cta_mayor == "1254" || cta_mayor == "1293")
+                {
+                    //txtdescripcion.Visible = false;
+                    linkBttnBuscarBien.Visible = true;
+                    ddlDescripcion.Visible = true;
+                    ListBienes.Clear();
+                    CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Bienes", ref ddlDescripcion, "p_cta_mayor", "p_nivel3", "p_edicion", cta_mayor, null, "0", ref ListBienes);
+                    Session["Bienes"] = ListBienes;
+
+                }
             }
 
 
@@ -529,6 +560,8 @@ namespace SAF.Rep
             GuardarDatos();
             txt4.Text = "00000";
             txtdescripcion.Text = string.Empty;
+            ddlDescripcion.Items.Clear();
+            this.ddlDescripcion.Items.Insert(0, new ListItem("---SELECCIONAR---", "0"));
         }
 
         protected void LinkButton2_Click(object sender, EventArgs e)
@@ -627,6 +660,10 @@ namespace SAF.Rep
             LinkButton cbi = (LinkButton)(sender);
             GridViewRow row = (GridViewRow)cbi.NamingContainer;
             grdcuentas_contables.SelectedIndex = row.RowIndex;
+            ddlDescripcion.Items.Clear();
+            linkBttnBuscarBien.Visible = false;
+            this.ddlDescripcion.Items.Insert(0, new ListItem("---SELECCIONAR---", "0"));
+
             try
             {
                 lblError.Text = string.Empty;
@@ -643,7 +680,10 @@ namespace SAF.Rep
                     DDLCentro_Contable.SelectedValue = Objcuentas_contables.centro_contable;
                     ddlCuenta_Mayor.SelectedValue = Objcuentas_contables.cuenta_mayor;
                     txtcuenta_contable.Text = Objcuentas_contables.cuenta_contable;
-                    txtdescripcion.Text = Objcuentas_contables.descripcion;
+                    cta_mayor = Objcuentas_contables.cuenta_contable.Substring(0, 4); //Objcuentas_contables.cuenta_mayor;
+                    //if(Objcuentas_contables.nivel=="4")
+
+
                     txttipo.Text = Objcuentas_contables.tipo;
                     ddlclasificacion.SelectedValue = Objcuentas_contables.clasificacion;
                     ddlstatus.SelectedValue = Objcuentas_contables.status;
@@ -651,6 +691,20 @@ namespace SAF.Rep
                     ddlnivel.SelectedValue = Objcuentas_contables.nivel;
                     //lbtnagregar_Click(null, null);
                     habil_cuenta();
+                    if (Objcuentas_contables.nivel == "4" && (cta_mayor == "5518" || cta_mayor == "5515" || cta_mayor == "1263" || cta_mayor == "1241" || cta_mayor == "1242" || cta_mayor == "1243" || cta_mayor == "1244" || cta_mayor == "1245" || cta_mayor == "1246" || cta_mayor == "1247" || cta_mayor == "1248" || cta_mayor == "1251" || cta_mayor == "1252" || cta_mayor == "1253" || cta_mayor == "1254" || cta_mayor == "1293"))
+                    {
+                        linkBttnBuscarBien.Visible = true;
+                        ddlDescripcion.Visible = true;
+                        ListBienes.Clear();
+                        CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Bienes", ref ddlDescripcion, "p_cta_mayor", "p_nivel3", "p_edicion", cta_mayor, txtcuenta_contable.Text.Substring(17, 5),  Convert.ToString(SesionUsu.Editar), ref ListBienes);
+                        Session["Bienes"] = ListBienes;
+                        //ddlDescripcion.SelectedValue = txtcuenta_contable.Text.Substring(17, 5);
+                    }
+                    
+
+                    txtdescripcion.Text = Objcuentas_contables.descripcion;
+
+
                     DDLCentro_Contable.Enabled = false;
                     ddlCuenta_Mayor.Enabled = false;
                     txttipo.Enabled = false;
@@ -708,6 +762,11 @@ namespace SAF.Rep
             txtdescripcion.Text = Listcodigo[ddlCuenta_Mayor.SelectedIndex].EtiquetaTres;
             habil_cuenta();
             txt1.Enabled = true;
+            ddlDescripcion.Visible = false;
+            ddlDescripcion.Items.Clear();
+            this.ddlDescripcion.Items.Insert(0, new ListItem("---SELECCIONAR---", "0"));
+            //CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Bienes", ref ddlDescripcion, "p_cta_mayor", "p_nivel3", ddlCuenta_Mayor.SelectedValue, null);
+
 
         }
 
@@ -931,7 +990,7 @@ namespace SAF.Rep
                 txtCve.Enabled = false;
                 txtCve.Text = Convert.ToString(grdCatalogos.SelectedRow.Cells[0].Text);
                 txtDescCat.Text = objCta.descripcion;
-                ddlStatusCat.SelectedValue = objCta.status;               
+                ddlStatusCat.SelectedValue = objCta.status;
             }
             else
             {
@@ -1118,7 +1177,7 @@ namespace SAF.Rep
                 objCatCta.tipo = ddlTipoCat.SelectedValue;
                 objCatCta.natura = txtCve.Text.ToUpper();
                 if (ddlTipoCat.SelectedValue == "N")
-                    objCatCta.concepto=txtCta2.Text.ToUpper();
+                    objCatCta.concepto = txtCta2.Text.ToUpper();
 
                 objCatCta.descripcion = txtDescCat.Text.ToUpper();
                 objCatCta.status = ddlStatusCat.SelectedValue;
@@ -1147,7 +1206,7 @@ namespace SAF.Rep
 
             try
             {
-                
+
                 objCat.tipo = ddlTipoCat.SelectedValue;//ddlTipoCat.SelectedValue;
                                                        //txtCve.Text;
                 if (ddlTipoCat.SelectedValue == "N")
@@ -1166,7 +1225,7 @@ namespace SAF.Rep
                 objCat.status = ddlStatusCat.SelectedValue;
                 CNcuentas_contables.EditarCatCta(objCat, ref Verificador);
                 if (Verificador == "0")
-                {                    
+                {
                     CargarGridCatalogos();
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupCOG", "$('#modalCat').modal('hide')", true);
                 }
@@ -1299,6 +1358,29 @@ namespace SAF.Rep
             grdCatalogos.EditIndex = -1;
             CargarGridCatalogos();
             ScriptManager.RegisterStartupScript(this, GetType(), "GridCatalogos", "Catalogos();", true);
+        }
+
+        protected void linkBttnBuscarBien_Click(object sender, EventArgs e)
+        {
+            if(txt4.Text == string.Empty || txt4.Text== "00000")
+                CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Bienes", ref ddlDescripcion, "p_cta_mayor", "p_nivel3", "p_edicion", ddlCuenta_Mayor.SelectedValue, null, "0");
+            else
+                CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Bienes", ref ddlDescripcion, "p_cta_mayor", "p_nivel3", "p_edicion", ddlCuenta_Mayor.SelectedValue, txt4.Text, "0");
+            
+            ddlDescripcion_SelectedIndexChanged(null, null);
+        }
+
+        protected void ddlDescripcion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtdescripcion.Text = ddlDescripcion.SelectedItem.Text;
+            int position = txtdescripcion.Text.IndexOf("]");
+            txtdescripcion.Text = txtdescripcion.Text.Substring(position+1);
+            //txt4.Text = "00000";
+            //if(txt4.Text==string.Empty || txt4.Text== "00000")
+            //if (Session["Bienes"] != null)
+            //    txt4.Text = ListBienes[ddlDescripcion.SelectedIndex].EtiquetaDos;
+
+
         }
     }
 }

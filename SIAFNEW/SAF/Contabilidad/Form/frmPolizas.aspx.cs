@@ -242,25 +242,19 @@ namespace SAF.Form
                     TotalPagos = ListPolizaCFDI.Sum(item => Convert.ToDouble(item.CFDI_Total));
                     lblGranTotalInt.Text = Convert.ToString(TotalPagos);
                     lblGranTotal.Text = Convert.ToString(TotalPagos.ToString("C"));
-                    //Label lblTot = (Label)grvPolizaCFDI.FooterRow.FindControl("lblGranTotal");
-                    //Label lblTotInt = (Label)grvPolizaCFDI.FooterRow.FindControl("lblGranTotalInt");
-
-
-                    //lblTot.Text = TotalPagos.ToString("C");
-                    //lblTotInt.Text = Convert.ToString(TotalPagos);
+                   
 
                     if (grvPolizas.SelectedRow.Cells[16].Text == "S")
                     {
-                        //bttnAgregaFactura.Visible = true;
                         CNComun.HideColumns(grvPolizaCFDI, Celdas);
                     }
                     else
                     {
-                        //bttnAgregaFactura.Visible = false;
                         CNComun.HideColumns(grvPolizaCFDI, Celdas2);
                     }
 
                 }
+
 
             }
             catch (Exception ex)
@@ -318,15 +312,28 @@ namespace SAF.Form
                 ObjPoliza.Status = ddlStatus2.SelectedValue;
                 ObjPoliza.Tipo_captura = ddlTipo_CapturaInicio.SelectedValue;
                 ObjPoliza.Clasificacion = ddlClasificaIni.SelectedValue;
-                string FechaInicial = "01/" + ddlFecha_Ini.SelectedValue + "/" + SesionUsu.Usu_Ejercicio;
-                int DiaFinal = System.DateTime.DaysInMonth(Convert.ToInt32(SesionUsu.Usu_Ejercicio), Convert.ToInt32(ddlFecha_Fin.SelectedValue));
-                string FechaFinal = DiaFinal + "/" + ddlFecha_Fin.SelectedValue + "/" + SesionUsu.Usu_Ejercicio;
-                //CNPoliza.PolizaConsultaGrid(ref ObjPoliza, FechaInicial, FechaFinal, txtBuscar.Text.ToUpper(), SesionUsu.Usu_TipoUsu, ref List);
+                string FechaInicial;
+                string FechaFinal;
+                if (ddlFecha_Ini.SelectedValue=="00")
+                    FechaInicial = "01/01/" + SesionUsu.Usu_Ejercicio;
+                else
+                    FechaInicial = "01/" + ddlFecha_Ini.SelectedValue + "/" + SesionUsu.Usu_Ejercicio;
+
+
+
+                if (ddlFecha_Ini.SelectedValue == "00")
+                    FechaFinal = "31/01/" + SesionUsu.Usu_Ejercicio;
+                else
+                {
+                    int DiaFinal = System.DateTime.DaysInMonth(Convert.ToInt32(SesionUsu.Usu_Ejercicio), Convert.ToInt32(ddlFecha_Fin.SelectedValue));
+                    FechaFinal = DiaFinal + "/" + ddlFecha_Fin.SelectedValue + "/" + SesionUsu.Usu_Ejercicio;
+                }
+
                 if (Convert.ToInt32(SesionUsu.Usu_Ejercicio) >= 2021)
                     CNPoliza.PolizaConsultaGrid_Min(ref ObjPoliza, FechaInicial, FechaFinal, txtBuscar.Text.ToUpper(), SesionUsu.Usu_TipoUsu, ref List);
                 else
                     CNPoliza.PolizaConsultaGrid(ref ObjPoliza, FechaInicial, FechaFinal, txtBuscar.Text.ToUpper(), SesionUsu.Usu_TipoUsu, ref List);
-                if (List.Count >= 2000)
+                if (List.Count >= 4000)
                 {
                     List = null;
                     divErrorTot.Visible = true;
@@ -702,9 +709,8 @@ namespace SAF.Form
 
         protected void DDLCentro_Contable_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Clasificacion", ref ddlClasifica, "p_tipo_usuario", "p_centro_contable", SesionUsu.Usu_TipoUsu, DDLCentro_Contable.SelectedValue);
-            //CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Clasificacion", ref ddlClasificaIni, "p_tipo_usuario", "p_centro_contable", SesionUsu.Usu_TipoUsu, DDLCentro_Contable.SelectedValue);
-            CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Clasificacion", ref ddlClasificaCopia, "p_tipo_usuario", "p_centro_contable", SesionUsu.Usu_TipoUsu, DDLCentro_Contable.SelectedValue);
+            //CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Clasificacion", ref ddlClasifica, "p_tipo_usuario", "p_centro_contable", SesionUsu.Usu_TipoUsu, DDLCentro_Contable.SelectedValue);
+            //CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Clasificacion", ref ddlClasificaCopia, "p_tipo_usuario", "p_centro_contable", SesionUsu.Usu_TipoUsu, DDLCentro_Contable.SelectedValue);
 
             if (SesionUsu.Editar == 0 || SesionUsu.Editar == 1)
             {
@@ -724,13 +730,6 @@ namespace SAF.Form
                     fechaFin = Convert.ToDateTime("31/12/" + SesionUsu.Usu_Ejercicio);
                     SesionUsu.MesActivo = "12";
                 }
-                //else if (Convert.ToInt32(MesCC) == "00")
-                //{
-                //    DateTime fecha1 = Convert.ToDateTime("01/01/" + SesionUsu.Usu_Ejercicio);
-                //    fechaIni = new DateTime(fecha1.Year, fecha1.Month, 1); // iniciar el primer día de mes
-                //                                                         // Establecer esta variable al Calendar
-                //    fechaFin = fechaIni.AddMonths(1).AddDays(-1); // este es el último día del mes en curso. 
-                //}
                 else
                 {
 
@@ -1111,7 +1110,7 @@ namespace SAF.Form
         {
             Select_Programa();
             rowCFDI.Visible = true;
-            CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Tipo_Docto", ref ddlTipoDocto, "p_tipo_usuario", "p_tipo", SesionUsu.Usu_TipoUsu, ddlTipo0.SelectedValue);
+            CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Tipo_Docto", ref ddlTipoDocto, "p_tipo_usuario", "p_tipo", "p_centro_contable", SesionUsu.Usu_TipoUsu, ddlTipo0.SelectedValue, DDLCentro_Contable.SelectedValue);
 
             rowIngreso.Visible = true;
             ddlTipoDocto.SelectedIndex = 0;
@@ -1148,11 +1147,14 @@ namespace SAF.Form
         protected void btnSi_Click(object sender, EventArgs e)
         {
             Guardar();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupCOG", "$('#modalMsgError').modal('hide')", true);
         }
 
         protected void btnNo_Click(object sender, EventArgs e)
         {
-            modalGuardar.Hide();
+            //modalGuardar.Hide();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupCOG", "$('#modalMsgError').modal('hide')", true);
+
         }
 
         protected void ddlFecha_Fin_SelectedIndexChanged1(object sender, EventArgs e)
@@ -1345,7 +1347,7 @@ namespace SAF.Form
         {
             if (grvPolizas_Detalle.Rows.Count > 0)
                 if (Math.Abs(Convert.ToDouble(lblTotal_Cargos.Text)) != Math.Abs(Convert.ToDouble(lblTotal_Abonos.Text)))
-                    modalGuardar.Show();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupCOG", "$('#modalMsgError').modal('show')", true); //modalGuardar.Show();
                 else
                     Guardar();
             else
@@ -1558,12 +1560,12 @@ namespace SAF.Form
                     {
                         DateTime FechaActual = DateTime.Today;
                         XmlDocument xDoc = new XmlDocument();
-                        Ruta = Path.Combine(Server.MapPath("~/AdjuntosTemp"), grvPolizas.SelectedRow.Cells[17].Text + "-" + DDLCentro_Contable.SelectedValue + "-" + grvPolizas.SelectedRow.Cells[2].Text + "-" + NombreArchivo);
+                        Ruta = Path.Combine(Server.MapPath("~/AdjuntosTemp"), grvPolizas.SelectedRow.Cells[0].Text + grvPolizas.SelectedRow.Cells[17].Text + "-" + DDLCentro_Contable.SelectedValue + "-" + grvPolizas.SelectedRow.Cells[2].Text + "-" + NombreArchivo);
                         FileFactura.SaveAs(Ruta);
 
                         ObjPolizaCFDI.Beneficiario_Tipo = ddlTipo_Beneficiario.SelectedValue;
                         ObjPolizaCFDI.Tipo_Gasto = ddlTipo_Gasto.SelectedValue;
-                        ObjPolizaCFDI.NombreArchivoXML = grvPolizas.SelectedRow.Cells[17].Text + "-" + DDLCentro_Contable.SelectedValue + "-" + grvPolizas.SelectedRow.Cells[2].Text + "-" + NombreArchivo;
+                        ObjPolizaCFDI.NombreArchivoXML = grvPolizas.SelectedRow.Cells[0].Text + grvPolizas.SelectedRow.Cells[17].Text + "-" + DDLCentro_Contable.SelectedValue + "-" + grvPolizas.SelectedRow.Cells[2].Text + "-" + NombreArchivo;
                         ObjPolizaCFDI.Fecha_Captura = FechaActual.ToString("dd/MM/yyyy");
                         ObjPolizaCFDI.Usuario_Captura = SesionUsu.Usu_Nombre;
                         ObjPolizaCFDI.Ruta_XML = "~/AdjuntosTemp/" + ObjPolizaCFDI.NombreArchivoXML;
@@ -1664,6 +1666,11 @@ namespace SAF.Form
                                 ((XmlElement)listComplemento[0]).GetElementsByTagName("tfd:TimbreFiscalDigital");
                                 ObjPolizaCFDI.CFDI_UUID = listTimbreDigital[0].Attributes["UUID"].InnerText;
                                 objCFDI.CFDI_UUID = listTimbreDigital[0].Attributes["UUID"].InnerText;
+                                if (ObjPolizaCFDI.CFDI_UUID.Length < 36)
+                                {
+                                    ObjPolizaCFDI.CFDI_UUID = string.Empty;
+                                    VerificadorCFDI = "EL VALOR DEL CAMPO UUID ES INCORRECTO.";
+                                }
                             }
                             else
                                 VerificadorCFDI = "ERROR";
@@ -2490,6 +2497,12 @@ namespace SAF.Form
                                 XmlNodeList listTimbreDigital =
                                 ((XmlElement)listComplemento[0]).GetElementsByTagName("tfd:TimbreFiscalDigital");
                                 ObjPolizaCFDI.CFDI_UUID = listTimbreDigital[0].Attributes["UUID"].InnerText;
+                                if (ObjPolizaCFDI.CFDI_UUID.Length < 36)
+                                {
+                                    ObjPolizaCFDI.CFDI_UUID = string.Empty;
+                                    VerificadorCFDI = "EL VALOR DEL CAMPO UUID ES INCORRECTO.";
+                                }
+
                             }
                             else
                                 VerificadorCFDI = "ERROR";

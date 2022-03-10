@@ -267,15 +267,6 @@ namespace SAF.Contabilidad.Form
         protected global::System.Web.UI.WebControls.TextBox txtClave;
 
         /// <summary>
-        /// Control RequiredFieldValidator10.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator10;
-
-        /// <summary>
         /// Control ddlBancos.
         /// </summary>
         /// <remarks>

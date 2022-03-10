@@ -215,12 +215,7 @@
                                         <div class="col-md-2">Clave</div>
                                         <div class="col-md-3">
                                             <asp:TextBox ID="txtClave" runat="server" MaxLength="5"></asp:TextBox>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server"
-                                                ControlToValidate="txtClave" ErrorMessage="RequiredFieldValidator"
-                                                ValidationGroup="GuardaCuentaBancaria">*Requerido</asp:RequiredFieldValidator>
-                                        </div>
+                                        </div>                                        
                                         <div class="col-md-2">Banco</div>
                                         <div class="col-md-3">
                                             <asp:DropDownList ID="ddlBancos" runat="server" Width="100%">

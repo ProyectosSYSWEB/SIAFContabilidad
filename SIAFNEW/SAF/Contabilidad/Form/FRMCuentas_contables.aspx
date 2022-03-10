@@ -3,6 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script src="../../Scripts/DataTables/jquery.dataTables.min.js"></script>
     <link href="../../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://sysweb.unach.mx/INGRESOS/Scripts/select2/css/select2.min.css" type="text/css" rel="stylesheet" />
+    <script src="https://sysweb.unach.mx/INGRESOS/Scripts/select2/js/select2.min.js"></script>
 
     <style type="text/css">
         section {
@@ -339,21 +341,48 @@
                                                 <div class="col-md-2">
                                                     Nivel 4
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-2">
                                                     <asp:UpdatePanel ID="UpdatePanel16" runat="server">
                                                         <ContentTemplate>
                                                             <asp:TextBox ID="txt4" runat="server" Enabled="False" MaxLength="5"
-                                                                OnTextChanged="txt4_TextChanged" AutoPostBack="True" CssClass="form-control">00000</asp:TextBox>
+                                                                OnTextChanged="txt4_TextChanged" AutoPostBack="True" CssClass="form-control" Width="100%">00000</asp:TextBox>
                                                         </ContentTemplate>
                                                     </asp:UpdatePanel>
                                                 </div>
+                                                <div class="col-md-2">
+                                                    <asp:UpdatePanel ID="updPnlBuscarBien" runat="server">
+                                                        <ContentTemplate>
+                                                            <asp:LinkButton ID="linkBttnBuscarBien" runat="server" CssClass="btn btn-warning" OnClick="linkBttnBuscarBien_Click"><i class="fa fa-search" aria-hidden="true"></i> Buscar Bien</asp:LinkButton>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col text-center">
+                                                    <asp:UpdateProgress ID="updPgrBuscarBien" runat="server"
+                                                        AssociatedUpdatePanelID="updPnlBuscarBien">
+                                                        <ProgressTemplate>
+                                                            <asp:Image ID="imgBuscarBien" runat="server"
+                                                                AlternateText="Espere un momento, por favor.." Height="50px"
+                                                                ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                                                ToolTip="Espere un momento, por favor.." Width="50px" />
+                                                        </ProgressTemplate>
+                                                    </asp:UpdateProgress>
+                                                </div>
+                                            </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-2">
                                                     Descripción
                                                 </div>
                                                 <div class="col-md-10">
-                                                    <asp:TextBox ID="txtdescripcion" runat="server" CssClass="form-control"></asp:TextBox>
+                                                    <asp:UpdatePanel ID="UpdatePanel34" runat="server">
+                                                        <ContentTemplate>
+                                                            <asp:DropDownList ID="ddlDescripcion" runat="server" Visible="false" Width="100%" OnSelectedIndexChanged="ddlDescripcion_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                                            <asp:TextBox ID="txtdescripcion" runat="server" CssClass="form-control"></asp:TextBox>
+
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -399,7 +428,7 @@
 
                                                 <div class="col-md-2">
 
-                                                    <asp:Label ID="Label13" runat="server" Text="Nivel:"></asp:Label>
+                                                    <asp:Label ID="Label13" runat="server" Text="Nivel"></asp:Label>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <asp:UpdatePanel ID="UpdatePanel150" runat="server">
@@ -783,7 +812,7 @@
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField ShowHeader="False">
                                                                     <HeaderTemplate>
-                                                                        <asp:LinkButton ID="linkBttnAgregarCat" runat="server" CausesValidation="False" Text="Agregar" OnClick="linkBttnAgregarCat_Click"  CssClass="btn btn-primary"></asp:LinkButton>
+                                                                        <asp:LinkButton ID="linkBttnAgregarCat" runat="server" CausesValidation="False" Text="Agregar" OnClick="linkBttnAgregarCat_Click" CssClass="btn btn-primary"></asp:LinkButton>
                                                                     </HeaderTemplate>
                                                                     <ItemTemplate>
                                                                         <asp:LinkButton ID="linkBttnEditCat" runat="server" CausesValidation="False" CommandName="Select" Text="Editar"></asp:LinkButton>
@@ -796,11 +825,11 @@
                                                             <HeaderStyle CssClass="enc" />
                                                             <AlternatingRowStyle CssClass="alt" />
                                                         </asp:GridView>
-<asp:GridView ID="grdCatalogos2" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" OnSelectedIndexChanged="grdCatalogos2_SelectedIndexChanged">
+                                                        <asp:GridView ID="grdCatalogos2" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" OnSelectedIndexChanged="grdCatalogos2_SelectedIndexChanged">
                                                             <Columns>
                                                                 <asp:BoundField HeaderText="MAYOR" DataField="Etiqueta" />
                                                                 <asp:BoundField HeaderText="CTA2" DataField="EtiquetaDos" />
-                                                                <asp:BoundField HeaderText="DESCRIPCIÓN" DataField="EtiquetaTres">                                                                
+                                                                <asp:BoundField HeaderText="DESCRIPCIÓN" DataField="EtiquetaTres">
                                                                     <ItemStyle Width="75%" />
                                                                 </asp:BoundField>
                                                                 <asp:TemplateField HeaderText="STATUS">
@@ -955,7 +984,7 @@
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
                                 </div>
-                                </div>
+                            </div>
                             <div class="row" runat="server" id="rowCta2">
                                 <div class="col-md-2">Cta 2</div>
                                 <div class="col-md-4">
@@ -965,7 +994,7 @@
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
                                 </div>
-                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-2">Status</div>
                                 <div class="col-md-4">
@@ -1022,70 +1051,70 @@
                                 </div>
                             </div>
                         </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
 
 
-        <script type="text/javascript">       
-            function CuentasContables() {
-                //$('input[type=search]').val('');
-                $('#<%= grdcuentas_contables.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdcuentas_contables.ClientID %>').find("tr:first"))).DataTable({
-                    "destroy": true,
-                    "stateSave": true,
-                    "ordering": false,
-                    "lengthMenu": [[15, 30, 45, -1], [15, 30, 45, "All"]]
-                });
-            };
-            function CuentasContablesInicio() {
-                //$('input[type=search]').val('');
-                $('#<%= grdcuentas_contables.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdcuentas_contables.ClientID %>').find("tr:first"))).DataTable({
-                    "destroy": true,
-                    "stateSave": false,
-                    "ordering": false,
-                    "lengthMenu": [[15, 30, 45, -1], [15, 30, 45, "All"]]
-                });
-            };
-            function CatCOG() {
-                $('#<%= grdCatCOG.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdCatCOG.ClientID %>').find("tr:first"))).DataTable({
-                    "destroy": true,
-                    "ordering": false,
-                    "bStateSave": false,
-                    "bFilter": true,
-                    "lengthMenu": [[7, 14, 21, -1], [7, 14, 21, "All"]]
-                });
-            };
-            function Polizas() {
-                //$('input[type=search]').val('');
-                $('#<%= grvPolizas.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvPolizas.ClientID %>').find("tr:first"))).DataTable({
-                    "destroy": true,
-                    "stateSave": true,
-                    "ordering": false
-                });
-            };
-            function Catalogos() {
-                $('#<%= grdCatalogos.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdCatalogos.ClientID %>').find("tr:first"))).DataTable({
-                    "destroy": true,
-                    "stateSave": true,
-                    "ordering": false,
-                    "lengthMenu": [[7, 14, 21, -1], [7, 14, 21, "All"]]
-                });
-            };
-            function Catalogos2() {
-                $('#<%= grdCatalogos2.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdCatalogos2.ClientID %>').find("tr:first"))).DataTable({
-                    "destroy": true,
-                    "stateSave": true,
-                    "ordering": false,
-                    "lengthMenu": [[7, 14, 21, -1], [7, 14, 21, "All"]]
-                });
-            };
-            function OcultarPestania() {
-                $('#Pestania2').hide();
-            };
-            function cboCatCog() {
+    <script type="text/javascript">       
+        function CuentasContables() {
+            //$('input[type=search]').val('');
+            $('#<%= grdcuentas_contables.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdcuentas_contables.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": true,
+                "ordering": false,
+                "lengthMenu": [[15, 30, 45, -1], [15, 30, 45, "All"]]
+            });
+        };
+        function CuentasContablesInicio() {
+            //$('input[type=search]').val('');
+            $('#<%= grdcuentas_contables.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdcuentas_contables.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": false,
+                "ordering": false,
+                "lengthMenu": [[15, 30, 45, -1], [15, 30, 45, "All"]]
+            });
+        };
+        function CatCOG() {
+            $('#<%= grdCatCOG.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdCatCOG.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "ordering": false,
+                "bStateSave": false,
+                "bFilter": true,
+                "lengthMenu": [[7, 14, 21, -1], [7, 14, 21, "All"]]
+            });
+        };
+        function Polizas() {
+            //$('input[type=search]').val('');
+            $('#<%= grvPolizas.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvPolizas.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": true,
+                "ordering": false
+            });
+        };
+        function Catalogos() {
+            $('#<%= grdCatalogos.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdCatalogos.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": true,
+                "ordering": false,
+                "lengthMenu": [[7, 14, 21, -1], [7, 14, 21, "All"]]
+            });
+        };
+        function Catalogos2() {
+            $('#<%= grdCatalogos2.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdCatalogos2.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": true,
+                "ordering": false,
+                "lengthMenu": [[7, 14, 21, -1], [7, 14, 21, "All"]]
+            });
+        };
+        function OcultarPestania() {
+            $('#Pestania2').hide();
+        };
+        function cboCatCog() {
                <%-- var table = $('#<%= grdCatCOG.ClientID %>').DataTable();
                 var selectedValue = $('#<%= ddlMayor.ClientID %>').val();
                 table.search(selectedValue).draw();--%>
@@ -1093,14 +1122,16 @@
 
                 var table = $('#<%= grdCatCOG.ClientID %>').DataTable();
                 var selectedValue = $('#<%= ddlMayor.ClientID %>').val();
-                if (selectedValue != "00") {
-                    table.columns(0).search(selectedValue).draw();
-                }
-                else {
-                    table.columns(0).search("").draw();
-                }
+            if (selectedValue != "00") {
+                table.columns(0).search(selectedValue).draw();
+            }
+            else {
+                table.columns(0).search("").draw();
+            }
 
-            };
-
-        </script>
+        };
+        function FiltBienes() {
+            $('#<%= ddlDescripcion.ClientID %>').select2();
+        };
+    </script>
 </asp:Content>

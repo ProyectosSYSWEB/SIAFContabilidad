@@ -114,7 +114,7 @@ namespace SAF
             {
                 List<Comun> List = new List<Comun>();
                 //CNMonitor.Monitor(SesionUsu.Usu_Nombre, "15830", DDLCentro_Contable.SelectedValue, ref List);
-                CNMonitor.MonitorContabilidad(SesionUsu.Usu_Nombre, "15830", DDLCentro_Contable.SelectedValue, ref List);
+                CNMonitor.MonitorContabilidad(SesionUsu.Usu_Nombre, "15830", DDLCentro_Contable.SelectedValue, SesionUsu.Usu_Ejercicio, ref List);
                 return List;
             }
             catch (Exception ex)

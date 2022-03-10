@@ -34,49 +34,24 @@ namespace SAF.Contabilidad
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            //if (!IsPostBack)
-            //{
-
-            //    Token = Convert.ToString(Request.QueryString["Token"]);
-
-
-            //    if (Token != null)
-            //    {
-
-            //        try
-            //        {
-            //            Verificador = "-1";
-
-            //            Usuario = new Usuario();
-            //            Usuario.Token = Token;
-            //            CNUsuario.ValidarToken(ref Usuario, ref Verificador);
-
-            //            if (Verificador == "0")
-            //            {
-            //                txtUsario.Text = Usuario.CUsuario;
-            //                txtPassword.Text = Usuario.Password;
-
-            //                btnLogin_Click(null, null);
-            //            }
-            //            else lblError.Text = "El Token no es válido";
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            throw new Exception(ex.Message + ".-ValidarToken");
-            //        }
-
-            //    }
-            //    else
-            //    {
-
-            //        if ((Request.QueryString["Usuario"] != null) && (Request.QueryString["Ejercicio"] != null))
-            //        {
-            //            txtUsario.Text = Request.QueryString["Usuario"];
-            //        }
-            //    }
-            //}
-
+            lblError.Text = string.Empty;
+            try
+            {
+                if (!IsPostBack)
+                {
+                    if (Request.QueryString["TIPO_ACCESO"] != null)
+                    {
+                        if (Request.QueryString["TIPO_ACCESO"] == "C0NTR4")
+                            CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Ejercicios", ref ddlEjercicio, "p_tipo_usuario", "C0NTR4");
+                    }
+                    else
+                        CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Ejercicios", ref ddlEjercicio);
+                }
+            }
+            catch(Exception ex)
+            {
+                lblError.Text = ex.Message;
+            }      
         }
         protected void btnLogin2_Click(object sender, EventArgs e)
         {
@@ -184,7 +159,8 @@ namespace SAF.Contabilidad
                     SesionUsu.Nombre_Completo = Nombre;
                     SesionUsu.Usu_Ejercicio = ddlEjercicio.SelectedValue;
                     SesionUsu.Usu_TipoUsu = Usuario.TipoUsu;
-                    SesionUsu.Correo_UNACH = txtUsario.Text;
+                    SesionUsu.Correo_UNACH = txtUsario.Text;                    
+                    SesionUsu.Inicio = true;
                     Session["Usuario"] = SesionUsu;
                     return true;
                 }
