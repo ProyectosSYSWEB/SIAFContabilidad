@@ -9,6 +9,7 @@ using CapaEntidad;
 using CapaNegocio;
 using System.Xml;
 using System.IO;
+using System.Text;
 
 namespace SAF.Form
 {
@@ -79,6 +80,7 @@ namespace SAF.Form
 
             //ScriptManager.RegisterStartupScript(this, GetType(), "CtasContables", "FiltCtasContables();", true);
             ScriptManager.RegisterStartupScript(this, GetType(), "GridPolizas", "Polizas();", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridDetPolizas", "DetallePoliza();", true);
             ScriptManager.RegisterStartupScript(this, GetType(), "NumCedulas", "FiltNumCedulas();", true);
             ScriptManager.RegisterStartupScript(this, GetType(), "ComboProveedores", "Proveedores();", true);
             ScriptManager.RegisterStartupScript(this, GetType(), "GridCFDIS", "PolizaCFDI();", true);
@@ -114,7 +116,7 @@ namespace SAF.Form
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref DDLCentro_Contable, "p_usuario", "p_ejercicio", SesionUsu.Usu_Nombre, SesionUsu.Usu_Ejercicio, ref ListCentroContable);
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Tipo_Beneficiario", ref ddlTipo_Beneficiario);
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Tipo_Gasto", ref ddlTipo_Gasto);
-                //CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Clasificacion", ref ddlClasifica, "p_tipo_usuario", "p_centro_contable", SesionUsu.Usu_TipoUsu, DDLCentro_Contable.SelectedValue);
+                CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Clasificacion", ref ddlClasifica, "p_tipo_usuario", "p_centro_contable", SesionUsu.Usu_TipoUsu, DDLCentro_Contable.SelectedValue);
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Clasificacion", ref ddlClasificaIni, "p_tipo_usuario", "p_centro_contable", SesionUsu.Usu_TipoUsu, DDLCentro_Contable.SelectedValue);
                 //CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Clasificacion", ref ddlClasificaCopia, "p_tipo_usuario", "p_centro_contable", SesionUsu.Usu_TipoUsu, DDLCentro_Contable.SelectedValue);
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Proveedores", ref ddlProveedor);
@@ -242,7 +244,7 @@ namespace SAF.Form
                     TotalPagos = ListPolizaCFDI.Sum(item => Convert.ToDouble(item.CFDI_Total));
                     lblGranTotalInt.Text = Convert.ToString(TotalPagos);
                     lblGranTotal.Text = Convert.ToString(TotalPagos.ToString("C"));
-                   
+
 
                     if (grvPolizas.SelectedRow.Cells[16].Text == "S")
                     {
@@ -314,7 +316,7 @@ namespace SAF.Form
                 ObjPoliza.Clasificacion = ddlClasificaIni.SelectedValue;
                 string FechaInicial;
                 string FechaFinal;
-                if (ddlFecha_Ini.SelectedValue=="00")
+                if (ddlFecha_Ini.SelectedValue == "00")
                     FechaInicial = "01/01/" + SesionUsu.Usu_Ejercicio;
                 else
                     FechaInicial = "01/" + ddlFecha_Ini.SelectedValue + "/" + SesionUsu.Usu_Ejercicio;
@@ -657,7 +659,7 @@ namespace SAF.Form
                         ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, 'Error en el número de póliza, favor de verificar.');", true);
                     }
                 }
-               
+
                 else
                     ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Validado + "');", true);
 
@@ -828,7 +830,15 @@ namespace SAF.Form
                         txtCedula_Numero.Text = ObjPoliza.Cedula_numero;
                     }
                     txtBeneficiario.Text = ObjPoliza.Beneficiario;
-                    ddlClasifica.SelectedValue = ObjPoliza.Clasificacion;
+
+                    try
+                    {
+                        ddlClasifica.SelectedValue = ObjPoliza.Clasificacion;
+                    }
+                    catch
+                    {
+                        ddlClasifica.SelectedIndex = 0;
+                    }
 
 
 
@@ -1544,24 +1554,31 @@ namespace SAF.Form
         {
             string Ruta;
             string NombreArchivo;
+
+
             List<Poliza_CFDI> lstPolizasCFDI = new List<Poliza_CFDI>();
             Poliza_CFDI objCFDI = new Poliza_CFDI();
             string VerificadorCFDI = string.Empty;
             lblErrorCFDI.Text = string.Empty;
             lblErrorCFDI.Visible = false;
+
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, 'PRUEBAS');", true);
+
             try
             {
                 if (FileFactura.HasFile)
                 {
                     NombreArchivo = FileFactura.FileName.ToUpper();
-                    NombreArchivo=NombreArchivo.Replace("&", "");
+                    NombreArchivo = NombreArchivo.Replace("&", "");
                     NombreArchivo = NombreArchivo.Replace(" ", "_");
                     if (NombreArchivo.Contains(".XML"))
                     {
                         DateTime FechaActual = DateTime.Today;
                         XmlDocument xDoc = new XmlDocument();
+
                         Ruta = Path.Combine(Server.MapPath("~/AdjuntosTemp"), grvPolizas.SelectedRow.Cells[0].Text + grvPolizas.SelectedRow.Cells[17].Text + "-" + DDLCentro_Contable.SelectedValue + "-" + grvPolizas.SelectedRow.Cells[2].Text + "-" + NombreArchivo);
-                        FileFactura.SaveAs(Ruta);
+                        
+
 
                         ObjPolizaCFDI.Beneficiario_Tipo = ddlTipo_Beneficiario.SelectedValue;
                         ObjPolizaCFDI.Tipo_Gasto = ddlTipo_Gasto.SelectedValue;
@@ -1569,9 +1586,25 @@ namespace SAF.Form
                         ObjPolizaCFDI.Fecha_Captura = FechaActual.ToString("dd/MM/yyyy");
                         ObjPolizaCFDI.Usuario_Captura = SesionUsu.Usu_Nombre;
                         ObjPolizaCFDI.Ruta_XML = "~/AdjuntosTemp/" + ObjPolizaCFDI.NombreArchivoXML;
+                        FileFactura.SaveAs(Ruta);
+                        try
+                        {
+                            xDoc.Load(Ruta);
+                            
+                        }
+                        catch
+                        {
+                            StreamReader sr = new StreamReader(Ruta, System.Text.Encoding.UTF8);
+                            StreamWriter writer = new StreamWriter("UTF8-"+Ruta, false, Encoding.UTF8);
+                            //xDoc.Save(Ruta);
+                            //xDoc.Save(ruta + "\\" + archivo);
+
+                        }
 
 
-                        xDoc.Load(Ruta);
+
+
+
                         XmlNodeList datos = xDoc.GetElementsByTagName("cfdi:Comprobante");
 
                         foreach (XmlElement nodo in datos)
@@ -1704,7 +1737,7 @@ namespace SAF.Form
                 {
                     objCFDI.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
                     CNPolizaCFDI.PolizaCFDIValidar(ref objCFDI, ref Verificador);
-                    if (objCFDI.CFDI_Existe == 0 && Verificador=="0")
+                    if (objCFDI.CFDI_Existe == 0 && Verificador == "0")
                     {
                         if (Session["PolizasCFDI"] != null)
                             lstPolizasCFDI = (List<Poliza_CFDI>)Session["PolizasCFDI"];
@@ -1727,7 +1760,10 @@ namespace SAF.Form
                 else
                 {
                     Verificador = "Error en el XML, faltan uno de los siguientes campos: fecha, total, nombre, rfc, UUID (principal)";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+                    lblErrorCFDI.Visible = true;
+                    lblErrorCFDI.Text = Verificador;
+
+                    //ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
 
                 }
 
@@ -1736,9 +1772,14 @@ namespace SAF.Form
             catch (Exception ex)
             {
                 Verificador = ex.Message;
-                CNComun.VerificaTextoMensajeError(ref Verificador);
+                lblErrorCFDI.Visible = true;
+                lblErrorCFDI.Text = Verificador;
+                //CNComun.VerificaTextoMensajeError(ref Verificador);
+
                 //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);  //lblMsjFam.Text = Verificador;
-                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#modalError').modal('hide')", true);
+
 
 
             }
@@ -1974,7 +2015,7 @@ namespace SAF.Form
                     lblNumPlaza.Text = string.Empty;
                     grdCatEmpleados.DataSource = null;
                     grdCatEmpleados.DataBind();
-                    CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Docto_Oficio", ref DDLTipoDoctoOficio, "p_ejercicio", "p_centro_contable", SesionUsu.Usu_Ejercicio, DDLCentro_Contable.SelectedValue);
+                    CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Docto_Oficio", ref DDLTipoDoctoOficio, "p_ejercicio", "p_centro_contable", "P_TIPO_USUARIO", SesionUsu.Usu_Ejercicio, DDLCentro_Contable.SelectedValue, SesionUsu.Usu_TipoUsu);
 
                     ObjPolizaOficio.IdPoliza_Oficio = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
                     CNPolizaOficio.PolizaOficiosConsulta(ObjPolizaOficio, ref lstPolizaOficios, ref Verificador);
@@ -2182,7 +2223,7 @@ namespace SAF.Form
                     string NombreArchivo = FileOficio.FileName.ToUpper();
                     NombreArchivo = NombreArchivo.Replace(" ", "_");
                     NombreArchivo = NombreArchivo.Replace("%", string.Empty);
-                    NombreArchivo = grvPolizas.SelectedRow.Cells[0].Text +"-"+ grvPolizas.SelectedRow.Cells[17].Text + "-" + DDLCentro_Contable.SelectedValue + "-" + grvPolizas.SelectedRow.Cells[2].Text + "-" + NombreArchivo;
+                    NombreArchivo = grvPolizas.SelectedRow.Cells[0].Text + "-" + grvPolizas.SelectedRow.Cells[17].Text + "-" + DDLCentro_Contable.SelectedValue + "-" + grvPolizas.SelectedRow.Cells[2].Text + "-" + NombreArchivo;
                     //grvPolizas.SelectedRow.Cells[0].Text +mes_anio+centro_contable+numero_poliza
                     objPolizaOficio.Tipo_Docto_Oficio = DDLTipoDoctoOficio.SelectedValue;
                     objPolizaOficio.Numero_Oficio = txtOficio.Text;

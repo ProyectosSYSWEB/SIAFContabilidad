@@ -198,7 +198,7 @@ namespace SAF.Rep
         {
             CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref DDLCentro_Contable, "P_USUARIO", "p_ejercicio", SesionUsu.Usu_Nombre, SesionUsu.Usu_Ejercicio);
             //CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref DDLCentro_Contable);
-            CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cuentas_Mayor", ref ddlCuenta_Mayor, ref Listcodigo);
+            CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cuentas_Mayor", ref ddlCuenta_Mayor, "P_Ejercicio", SesionUsu.Usu_Ejercicio, ref Listcodigo);
             CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cuentas_Mayor_COG", ref ddlMayor);
 
 
@@ -461,7 +461,7 @@ namespace SAF.Rep
             }
             if (nivel_cuenta == 3)
             {
-                CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Sub_Contables", ref DDLSubdependencia, "p_centro_contable", DDLCentro_Contable.SelectedValue);
+                CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Sub_Contables", ref DDLSubdependencia, "p_centro_contable", "p_ejercicio", DDLCentro_Contable.SelectedValue, SesionUsu.Usu_Ejercicio);
                 string cadena = txtcuenta_contable.Text;
                 txtcuenta_contable.Text = cadena.Substring(0, 11) + DDLSubdependencia.SelectedValue + ".00000";
                 txtdescripcion.Text = DDLSubdependencia.SelectedItem.Text.Substring(8);
