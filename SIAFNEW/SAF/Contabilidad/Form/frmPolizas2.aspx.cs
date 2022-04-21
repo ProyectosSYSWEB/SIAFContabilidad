@@ -1437,8 +1437,8 @@ namespace SAF.Form
 
         protected void bttnAgregaFacturaPDF_Click(object sender, EventArgs e)
         {
-            string Ruta;
-            string NombreArchivo;
+            //string Ruta;
+            //string NombreArchivo;
             try
             {
                 

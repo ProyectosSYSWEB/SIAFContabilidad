@@ -5,6 +5,131 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="https://google-code-prettify.googlecode.com/svn/loader/prettify.css">
+    <style>
+        :after, :before {
+            box-sizing: border-box;
+        }
+
+        a {
+            color: #337ab7;
+            text-decoration: none;
+        }
+
+        i {
+            margin-bottom: 4px;
+        }
+
+        .btn {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+
+        .btn-app {
+            color: white;
+            box-shadow: none;
+            border-radius: 3px;
+            position: relative;
+            padding: 10px 15px;
+            margin: 0;
+            min-width: 40px;
+            max-width: 60px;
+            text-align: center;
+            border: 1px solid #ddd;
+            background-color: #f4f4f4;
+            font-size: 10px;
+            transition: all .2s;
+            background-color: steelblue !important;
+        }
+
+            .btn-app > .fa, .btn-app > .glyphicon, .btn-app > .ion {
+                font-size: 20px;
+                display: block;
+            }
+
+            .btn-app:hover {
+                border-color: #aaa;
+                transform: scale(1.1);
+            }
+
+        .pdf {
+            background-color: #5e5e5e !important;
+            /*background-color: #dc2f2f !important;*/
+        }
+
+        .excel {
+            background-color: #3ca23c !important;
+        }
+
+        .csv {
+            background-color: #e86c3a !important;
+        }
+
+        .imprimir {
+            background-color: #8766b1 !important;
+        }
+
+        /*
+Esto es opcional pero sirve para que todos los botones de exportacion se distribuyan de manera equitativa usando flexbox
+
+.flexcontent {
+    display: flex;
+    justify-content: space-around;
+}
+*/
+
+        .selectTable {
+            height: 40px;
+            float: right;
+        }
+
+        div.dataTables_wrapper div.dataTables_filter {
+            text-align: left;
+            margin-top: 15px;
+        }
+
+        .btn-secondary {
+            color: #fff;
+            background-color: #4682b4;
+            border-color: #4682b4;
+        }
+
+            .btn-secondary:hover {
+                color: #fff;
+                background-color: #315f86;
+                border-color: #545b62;
+            }
+
+
+
+        .titulo-tabla {
+            color: #606263;
+            text-align: center;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+
+
+
+
+
+        .inline {
+            display: inline-block;
+            padding: 0;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:UpdateProgress ID="UpdateProgress1" runat="server">
@@ -50,7 +175,7 @@
                     <div class="col-md-9">
                         <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                             <ContentTemplate>
-                                <asp:DropDownList ID="DDLCentro_Contable0" runat="server" Width="100%" Visible="False">
+                                <asp:DropDownList ID="DDLCentro_Contable0" runat="server" Width="100%" Visible="False" CssClass="select">
                                 </asp:DropDownList>
                             </ContentTemplate>
                         </asp:UpdatePanel>
@@ -95,7 +220,7 @@
                         <asp:UpdatePanel ID="UpdatePanel6" runat="server">
                             <ContentTemplate>
                                 <asp:DropDownList ID="ddl_cuentas" runat="server" AutoPostBack="True"
-                                    OnSelectedIndexChanged="ddl_cuentas_SelectedIndexChanged" Width="100%">
+                                    OnSelectedIndexChanged="ddl_cuentas_SelectedIndexChanged" Width="100%" CssClass="form-select">
                                 </asp:DropDownList>
                             </ContentTemplate>
                         </asp:UpdatePanel>
@@ -108,7 +233,7 @@
                     <div class="col-md-9">
                         <asp:UpdatePanel ID="UpdatePanel8" runat="server">
                             <ContentTemplate>
-                                <asp:DropDownList ID="ddl_cuentas0" runat="server" AutoPostBack="True" Width="100%">
+                                <asp:DropDownList ID="ddl_cuentas0" runat="server" AutoPostBack="True" Width="100%" CssClass="form-select">
                                 </asp:DropDownList>
                             </ContentTemplate>
                         </asp:UpdatePanel>
@@ -123,7 +248,7 @@
                             <ContentTemplate>
                                 <asp:DropDownList ID="ddlCuenta_Mayor" runat="server" AutoPostBack="True"
                                     Height="22px"
-                                    OnSelectedIndexChanged="ddlCuenta_Mayor_SelectedIndexChanged" Width="100%" Visible="False">
+                                    OnSelectedIndexChanged="ddlCuenta_Mayor_SelectedIndexChanged" Width="100%" Visible="False" CssClass="form-select">
                                     <asp:ListItem Value="0">0000--UNACH</asp:ListItem>
                                 </asp:DropDownList>
                             </ContentTemplate>
@@ -137,7 +262,7 @@
                     <div class="col-md-9">
                         <asp:UpdatePanel ID="UpdatePanel9" runat="server">
                             <ContentTemplate>
-                                <asp:DropDownList ID="ddlCuenta_Mayor0" runat="server" Height="21px" Visible="False" Width="100%">
+                                <asp:DropDownList ID="ddlCuenta_Mayor0" runat="server" Height="21px" Visible="False" Width="100%" CssClass="form-select">
                                     <asp:ListItem Value="0">0000--UNACH</asp:ListItem>
                                 </asp:DropDownList>
                             </ContentTemplate>
@@ -153,6 +278,8 @@
                             <ContentTemplate>
                                 <asp:DropDownList ID="ddlTipo" runat="server" AutoPostBack="True" Width="100%">
                                     <asp:ListItem Value="3262.0">Transferencias 3262</asp:ListItem>
+                                    <asp:ListItem Value="3221.5">Transferencias 3221 (5000)</asp:ListItem>
+                                    <asp:ListItem Value="3221.6">Transferencias 3221 (6000)</asp:ListItem>
                                     <asp:ListItem Value="3220.5">Transferencias 3220 (5000)</asp:ListItem>
                                     <asp:ListItem Value="3220.6">Transferencias 3220 (6000)</asp:ListItem>
                                 </asp:DropDownList>
@@ -175,27 +302,32 @@
                     <div class="col-md-2" id="colFechaIni" runat="server" visible="False">
                         Mes Inicial
                     </div>
-                    <div class="col-md-4" id="colFechaIni2" runat="server" visible="False">
-                        <asp:DropDownList ID="txtmes_inicial" runat="server" OnSelectedIndexChanged="txtmes_inicial_SelectedIndexChanged">
+                    <div class="col-md-2" id="colFechaIni2" runat="server" visible="False">
+                        <asp:DropDownList ID="txtmes_inicial" runat="server" Width="100%" OnSelectedIndexChanged="txtmes_inicial_SelectedIndexChanged">
                         </asp:DropDownList>
                     </div>
-                    <div class="col-md-2" id="colFechaFin" runat="server" visible="False">
+                    <div class="col-xl-auto" id="colFechaFin" runat="server" visible="False">
                         Mes Final
                     </div>
-                    <div class="col-md-4" id="colFechaFin2" runat="server" visible="False">
-                        <asp:DropDownList ID="txtmes_final" runat="server">
+                    <div class="col-md-2" id="colFechaFin2" runat="server" visible="False">
+                        <asp:DropDownList ID="txtmes_final" runat="server" Width="100%">
                         </asp:DropDownList>
                     </div>
+                    <%--<div class="col-md-1">Tipo Rep
+                        </div>
+                    <div class="col-md-1">
+                        <asp:DropDownList ID="DropDownList1" CssClass="btn btn-primary dropdown-toggle" runat="server" Width="100%">
+                            <asp:ListItem>PDF</asp:ListItem>
+                            <asp:ListItem>Excel</asp:ListItem>
+                            <asp:ListItem>CSV</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                    <div class="col-md-1">
+                        <asp:LinkButton ID="linkBttnNuevo" runat="server" CssClass="btn btn-primary">Ver</asp:LinkButton>
+                        </div>
+                    --%>
                 </div>
-                <%--<div class="row">
-                    <div class="col-md-2">
-                        <asp:Label ID="lbl_f_fin" runat="server" Text="Mes Final" Visible="False"></asp:Label>
-                    </div>
-                    <div class="col-md-10">
-                        <asp:DropDownList ID="txtmes_final" runat="server" Visible="False">
-                        </asp:DropDownList>
-                    </div>
-                </div>--%>
+
                 <div class="row">
                     <div class="col-md-2">
                         <asp:Label ID="Label6" runat="server" Text="Numero de poliza" Visible="False"></asp:Label>
@@ -211,7 +343,7 @@
                     <div class="col-md-9">
                         <asp:DropDownList ID="ddlsistemas" runat="server" AutoPostBack="True"
                             OnSelectedIndexChanged="DDLCentro_Contable_SelectedIndexChanged"
-                            Visible="False" Width="100%">
+                            Visible="False" Width="100%" CssClass="select">
                             <asp:ListItem Value="T">TODO</asp:ListItem>
                             <asp:ListItem Value="E">EGRESOS</asp:ListItem>
                             <asp:ListItem Value="I">INGRESOS</asp:ListItem>
@@ -259,16 +391,28 @@
                         </asp:UpdateProgress>
                     </div>
                 </div>
-                <br />
+                <hr />
                 <div class="row">
                     <div class="col-md-11 text-right">
                         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                             <ContentTemplate>
-                                <asp:ImageButton ID="btnAceptar" runat="server" Height="53px" ImageUrl="~/images/pdf.jpg" OnClick="btnAceptar_Click" ValidationGroup="Reporte" Width="49px" />
+                                <asp:LinkButton ID="linkBttnPDF" runat="server" class="btn btn-secondary buttons-pdf buttons-html5 btn-app export pdf" title="PDF" OnClick="linkBttnPDF_Click"><i class="fa fa-file-pdf-o"></i>PDF</asp:LinkButton>
+                                <asp:LinkButton ID="linkBttnExcel" runat="server" class="btn btn-secondary buttons-excel buttons-html5 btn-app export excel" title="Excel" OnClick="linkBttnExcel_Click"><i class="fa fa-file-excel-o"></i>Excel</asp:LinkButton>
+                                <asp:LinkButton ID="linkBttnCSV" runat="server" class="btn btn-secondary buttons-csv buttons-html5 btn-app export csv" title="CSV" OnClick="linkBttnCSV_Click"><i class="fa fa-file-text-o"></i>CSV</asp:LinkButton>
+
+
+                                <%--                                <asp:LinkButton ID="btnAceptar" runat="server" CssClass="btn btn-danger"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF</asp:LinkButton>
+                                <asp:LinkButton ID="ImageButton3" runat="server" CssClass="btn btn-green"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel</asp:LinkButton>
+                                <asp:LinkButton ID="btnRepCsv" runat="server" CssClass="btn btn-info"><i class="fa fa-file-text-o" aria-hidden="true"></i> CSV</asp:LinkButton>--%>
+                                <%--<asp:ImageButton ID="btnAceptar" runat="server" ImageUrl="../../images/pdf-icon.png" OnClick="btnAceptar_Click" ValidationGroup="Reporte" />
                                 &nbsp;
-                            <asp:ImageButton ID="ImageButton3" runat="server" Height="53px" ImageUrl="../../images/excel2.jpg" OnClick="imgBttnExcel" Visible="False" Width="49px" />
+                            <asp:ImageButton ID="ImageButton3" runat="server" ImageUrl="../../images/excel-xls-icon.png" OnClick="imgBttnExcel" Visible="False"/>
+                                  &nbsp;
+                            <asp:ImageButton ID="btnRepCsv" runat="server" ImageUrl="../../images/csv-icon.png" OnClick="imgBttnExcel"/>--%>
                             </ContentTemplate>
                         </asp:UpdatePanel>
+                    </div>
+                    <div class="col-md-1">
                     </div>
                 </div>
                 <div class="row">

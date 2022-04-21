@@ -388,7 +388,7 @@ namespace SAF.Contabilidad.Form
             grvPolizaCFDI.EditIndex = -1;
             List<Poliza_CFDI> lstPolizasCFDI = new List<Poliza_CFDI>();
             //Poliza objPolizas = new Poliza();
-            double total = 0;
+            //double total = 0;
             try
             {
                 if (grvPolizaCFDI.Rows.Count >= 1)

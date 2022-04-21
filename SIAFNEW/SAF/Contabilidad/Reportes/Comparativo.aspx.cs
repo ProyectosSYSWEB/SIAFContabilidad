@@ -55,21 +55,34 @@ namespace SAF.Contabilidad.Reportes
                             CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cuentas_Contables", ref ddlcuenta1, "p_ejercicio", "p_centro_contable", SesionUsu.Usu_Ejercicio, Convert.ToString(DDLCentro_Contable.SelectedValue));
 
                         }
+                        else if (SesionUsu.Usu_Rep == "RP-Diario-General")
+                            linkBttnCSV.Visible = true;
 
                         lblCentro_Contable.Visible = true;
                         DDLCentro_Contable.Visible = true;
                     }
+
                     else if (SesionUsu.Usu_Rep == "RP-20")
                     {
-                        imgBttnLotesPDF.Visible = true;
-                        imgBttnLotesExcel.Visible = true;
+                        //imgBttnLotesPDF.Visible = true;
+                        //imgBttnLotesExcel.Visible = true;
+                        linkBttnPDFLote.Visible = true;
+                        linkBttnExcelLote.Visible = true;
+
                     }
-                    
+
 
                 }
+
+                //else if (SesionUsu.Usu_Rep == "RP-21")
+                //{
+                //    MultiView1.ActiveViewIndex = 0;
+                //    CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cuentas_Contables", ref ddlcuenta1, "p_ejercicio", "p_centro_contable", SesionUsu.Usu_Ejercicio, "72103");
+                //}
+
                 else
                 {
-                    if (SesionUsu.Usu_Rep == "RP-Compara-01" || SesionUsu.Usu_Rep == "RP-Compara-01-Cja")
+                    if (SesionUsu.Usu_Rep == "RP-Compara-01" || SesionUsu.Usu_Rep == "RP-Compara-01-Cja" || SesionUsu.Usu_Rep == "RP-21")
                     {
                         MultiView1.ActiveViewIndex = 0;
                         CNComun.LlenaCombo("pkg_contabilidad. Obt_Combo_Ctas_Cmp_Ing_vs_Fond", ref ddl_cuentas, "p_ejercicio", SesionUsu.Usu_Ejercicio);
@@ -91,7 +104,8 @@ namespace SAF.Contabilidad.Reportes
                         MultiView1.ActiveViewIndex = 0;
                         lbl_f_ini.Visible = false;
                         txtmes_inicial.Visible = false;
-                        btnAceptar.Visible = false;
+                        linkBttnPDF1.Visible = false;
+                        linkBttnCSV1.Visible = true;
                         CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref ddl_cuentas, "p_usuario", "p_ejercicio", SesionUsu.Usu_Nombre, SesionUsu.Usu_Ejercicio);
                     }
                     if (SesionUsu.Usu_Rep == "RP-ADEUDO")
@@ -99,6 +113,7 @@ namespace SAF.Contabilidad.Reportes
                         MultiView1.ActiveViewIndex = 4;
                     }
                 }
+
             }
             catch (Exception ex)
             {
@@ -176,117 +191,9 @@ namespace SAF.Contabilidad.Reportes
             ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "Descargar_Cuentas_Por_Revisar('RP-revisar-exc');", true);
         }
 
-        protected void btnAceptar0_Click(object sender, ImageClickEventArgs e)
-        {
-
-            string caseSwitch = SesionUsu.Usu_Rep;
-            switch (caseSwitch)
-            {
-                case "RP-14":
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_concentrado_ingresos('RP-014','" + SesionUsu.Usu_Ejercicio + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "');", true);
-
-                    break;
-                case "RP-15":
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_concentrado_ingresos('RP-015','" + SesionUsu.Usu_Ejercicio + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "');", true);
-
-                    break;
-                case "RP-16":
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_concentrado_ingresos('RP-016','" + SesionUsu.Usu_Ejercicio + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "');", true);
-
-                    break;
-                case "RP-17":
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_concentrado_ingresos_por_centro('RP-017','" + SesionUsu.Usu_Ejercicio + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "', '" + DDLCentro_Contable.SelectedValue + "');", true);
-
-                    break;
-                case "RP-14-det":
-                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-14-det&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio;
-                    _open = "window.open('" + ruta + "', '_newtab');";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
-                    break;
-                case "RP-Diario-General":
-                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-Diario-General&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + DDLCentro_Contable.SelectedValue;
-                    _open = "window.open('" + ruta + "', '_newtab');";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
-
-                    break;
-                case "RP-Resumen-de-cuentas":
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_resumen_de_cuetas('RP-Resumen-de-cuentas','" + SesionUsu.Usu_Ejercicio + "','" + DDLCentro_Contable.SelectedValue + "','" + ddlcuenta1.SelectedValue + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "');", true);
-                    break;
-                case "RP-19":
-                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-019&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio;
-                    _open = "window.open('" + ruta + "', '_newtab');";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
-
-                    break;
-                case "RP-20":
-                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-020&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio;
-                    _open = "window.open('" + ruta + "', '_newtab');";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
-                    break;
-            }
-        }
-
-        protected void btn_excel_Click(object sender, ImageClickEventArgs e)
-        {
 
 
-            string caseSwitch = SesionUsu.Usu_Rep;
-            switch (caseSwitch)
-            {
-                case "RP-14":
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_concentrado_ingresos('RP-014exc','" + SesionUsu.Usu_Ejercicio + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "');", true);
-                    break;
-                case "RP-14-det":
-                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-14-detxls&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio;
-                    _open = "window.open('" + ruta + "', '_newtab');";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
-                    break;
-                case "RP-15":
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_concentrado_ingresos('RP-015exc','" + SesionUsu.Usu_Ejercicio + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "');", true);
-                    break;
-                case "RP-Diario-General":
-                    //ruta = "http://148.222.11.45/Contabilidad/Contabilidad/Reportes/VisualizadorCrystal.aspx?Tipo=RP-Diario-Generalxls&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + DDLCentro_Contable.SelectedValue;
-                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-Diario-Generalxls&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + DDLCentro_Contable.SelectedValue;
-                    _open = "window.open('" + ruta + "', '_newtab');";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
-                    //Response.Redirect(ruta, false);
-                    //ScriptManager.RegisterStartupScript(this, GetType(), "VerReporte", "Reporte('" + ruta + "');", true);
-                    break;
-                case "RP-Resumen-de-cuentas":
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_resumen_de_cuetas('RP-Resumen-de-cuentasxls','" + SesionUsu.Usu_Ejercicio + "','" + DDLCentro_Contable.SelectedValue + "','" + ddlcuenta1.SelectedValue + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "');", true);
-                    break;
-                case "RP-19":
-                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-019xls&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio;
-                    _open = "window.open('" + ruta + "', '_newtab');";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
 
-                    break;
-                case "RP-16":
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_concentrado_ingresos('RP-016xls','" + SesionUsu.Usu_Ejercicio + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "');", true);
-
-                    break;
-                case "RP-17":
-                    if (Convert.ToInt32(SesionUsu.Usu_Ejercicio) >= 2021)
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_concentrado_ingresos_por_centro('RP-017xls','" + SesionUsu.Usu_Ejercicio + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "', '" + DDLCentro_Contable.SelectedValue + "');", true);
-                    else
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_concentrado_ingresos_por_centro('RP-017xls','" + SesionUsu.Usu_Ejercicio + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "', '" + DDLCentro_Contable.SelectedValue + "');", true);
-
-
-                    break;
-
-                case "RP-20":
-                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-020xls&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio;
-                    _open = "window.open('" + ruta + "', '_newtab');";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
-
-                    break;
-                default:
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "Mensaje-Error('RP-Diario-Generalxls');", true);
-                    break;
-
-            }
-
-        }
 
         protected void btnAceptar_v_Click(object sender, ImageClickEventArgs e)
         {
@@ -449,11 +356,80 @@ namespace SAF.Contabilidad.Reportes
 
         }
 
-        protected void imgBttnLotesPDF_Click(object sender, ImageClickEventArgs e)
+
+
+        //protected void imgBttnExcelLotes_Click(object sender, ImageClickEventArgs e)
+        //{
+        //    string caseSwitch = SesionUsu.Usu_Rep;
+        //    switch (caseSwitch)
+        //    {
+        //        case "RP-20":
+        //            ruta = "VisualizadorCrystal.aspx?Tipo=RP-020-detxls&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio;
+        //            _open = "window.open('" + ruta + "', '_newtab');";
+        //            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+        //            break;
+        //    }
+        //}
+
+        protected void btnRepCsv_Click(object sender, ImageClickEventArgs e)
+        {
+
+        }
+
+        protected void linkBttnPDF_Click(object sender, EventArgs e)
         {
             string caseSwitch = SesionUsu.Usu_Rep;
             switch (caseSwitch)
-            {            
+            {
+                case "RP-14":
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_concentrado_ingresos('RP-014','" + SesionUsu.Usu_Ejercicio + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "');", true);
+
+                    break;
+                case "RP-15":
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_concentrado_ingresos('RP-015','" + SesionUsu.Usu_Ejercicio + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "');", true);
+
+                    break;
+                case "RP-16":
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_concentrado_ingresos('RP-016','" + SesionUsu.Usu_Ejercicio + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "');", true);
+
+                    break;
+                case "RP-17":
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_concentrado_ingresos_por_centro('RP-017','" + SesionUsu.Usu_Ejercicio + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "', '" + DDLCentro_Contable.SelectedValue + "');", true);
+
+                    break;
+                case "RP-14-det":
+                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-14-det&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio;
+                    _open = "window.open('" + ruta + "', '_newtab');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+                    break;
+                case "RP-Diario-General":
+                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-Diario-General&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + DDLCentro_Contable.SelectedValue;
+                    _open = "window.open('" + ruta + "', '_newtab');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+
+                    break;
+                case "RP-Resumen-de-cuentas":
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_resumen_de_cuetas('RP-Resumen-de-cuentas','" + SesionUsu.Usu_Ejercicio + "','" + DDLCentro_Contable.SelectedValue + "','" + ddlcuenta1.SelectedValue + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "');", true);
+                    break;
+                case "RP-19":
+                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-019&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio;
+                    _open = "window.open('" + ruta + "', '_newtab');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+
+                    break;
+                case "RP-20":
+                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-020&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio;
+                    _open = "window.open('" + ruta + "', '_newtab');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+                    break;
+            }
+        }
+
+        protected void linkBttnPDFLote_Click(object sender, EventArgs e)
+        {
+            string caseSwitch = SesionUsu.Usu_Rep;
+            switch (caseSwitch)
+            {
                 case "RP-20":
                     ruta = "VisualizadorCrystal.aspx?Tipo=RP-020-det&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio;
                     _open = "window.open('" + ruta + "', '_newtab');";
@@ -462,13 +438,281 @@ namespace SAF.Contabilidad.Reportes
             }
         }
 
-        protected void imgBttnExcelLotes_Click(object sender, ImageClickEventArgs e)
+        protected void linkBttnExcel_Click(object sender, EventArgs e)
+        {
+            string caseSwitch = SesionUsu.Usu_Rep;
+            switch (caseSwitch)
+            {
+                case "RP-14":
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_concentrado_ingresos('RP-014exc','" + SesionUsu.Usu_Ejercicio + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "');", true);
+                    break;
+                case "RP-14-det":
+                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-14-detxls&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio;
+                    _open = "window.open('" + ruta + "', '_newtab');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+                    break;
+                case "RP-15":
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_concentrado_ingresos('RP-015exc','" + SesionUsu.Usu_Ejercicio + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "');", true);
+                    break;
+                case "RP-Diario-General":
+                    //ruta = "http://148.222.11.45/Contabilidad/Contabilidad/Reportes/VisualizadorCrystal.aspx?Tipo=RP-Diario-Generalxls&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + DDLCentro_Contable.SelectedValue;
+                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-Diario-Generalxls&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + DDLCentro_Contable.SelectedValue;
+                    _open = "window.open('" + ruta + "', '_newtab');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+                    //Response.Redirect(ruta, false);
+                    //ScriptManager.RegisterStartupScript(this, GetType(), "VerReporte", "Reporte('" + ruta + "');", true);
+                    break;
+                case "RP-Resumen-de-cuentas":
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_resumen_de_cuetas('RP-Resumen-de-cuentasxls','" + SesionUsu.Usu_Ejercicio + "','" + DDLCentro_Contable.SelectedValue + "','" + ddlcuenta1.SelectedValue + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "');", true);
+                    break;
+                case "RP-19":
+                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-019xls&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio;
+                    _open = "window.open('" + ruta + "', '_newtab');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+
+                    break;
+                case "RP-16":
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_concentrado_ingresos('RP-016xls','" + SesionUsu.Usu_Ejercicio + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "');", true);
+
+                    break;
+                case "RP-17":
+                    if (Convert.ToInt32(SesionUsu.Usu_Ejercicio) >= 2021)
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_concentrado_ingresos_por_centro('RP-017xls','" + SesionUsu.Usu_Ejercicio + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "', '" + DDLCentro_Contable.SelectedValue + "');", true);
+                    else
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_concentrado_ingresos_por_centro('RP-017xls','" + SesionUsu.Usu_Ejercicio + "','" + ddlMes_inicial.SelectedValue + "', '" + ddlMes_final.SelectedValue + "', '" + DDLCentro_Contable.SelectedValue + "');", true);
+
+
+                    break;
+
+                case "RP-20":
+                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-020xls&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio;
+                    _open = "window.open('" + ruta + "', '_newtab');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+
+                    break;
+                default:
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "Mensaje-Error('RP-Diario-Generalxls');", true);
+                    break;
+
+            }
+        }
+
+        protected void linkBttnExcelLote_Click(object sender, EventArgs e)
         {
             string caseSwitch = SesionUsu.Usu_Rep;
             switch (caseSwitch)
             {
                 case "RP-20":
                     ruta = "VisualizadorCrystal.aspx?Tipo=RP-020-detxls&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio;
+                    _open = "window.open('" + ruta + "', '_newtab');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+                    break;
+            }
+        }
+
+        protected void linkBttnCSV_Click(object sender, EventArgs e)
+        {
+            string caseSwitch = SesionUsu.Usu_Rep;
+            switch (caseSwitch)
+            {
+               case "RP-Diario-General":
+                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-Diario-Generalcsv&mes_inicial=" + ddlMes_inicial.SelectedValue + "&mes_final=" + ddlMes_final.SelectedValue + "&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&centro_contable=" + DDLCentro_Contable.SelectedValue;
+                    _open = "window.open('" + ruta + "', '_newtab');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+                    break;
+                case "RP-Mayor-General":
+                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-Mayor-Generalcsv&Ejercicio=" + SesionUsu.Usu_Ejercicio;
+                    _open = "window.open('" + ruta + "', '_newtab');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+                    break;
+                default:
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "Mensaje-Error('RP-Diario-Generalcsv');", true);
+                    break;
+
+
+
+            }
+        }
+
+        protected void linkBttnPDF0_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "Ver_Volante_Transferencia('RP-Volante_T','" + SesionUsu.Usu_Ejercicio + ddlmes.SelectedValue + "','" + DDLCentro_Contable_v.SelectedItem + "','" + ddlnumero_poliza.SelectedValue + "', '" + ddltipo.SelectedValue + "');", true);
+        }
+
+        protected void linkBttnPDF1_Click(object sender, EventArgs e)
+        {
+            string anio = SesionUsu.Usu_Ejercicio.Substring(2, 2);
+            if (ddl_cuentas.SelectedValue.Substring(0, 10) == "3261.90001" || ddl_cuentas.SelectedValue.Substring(0, 10) == "3261.90002" || ddl_cuentas.SelectedValue.Substring(0, 10) == "3262.10001" || ddl_cuentas.SelectedValue.Substring(0, 10) == "3262.20001" || ddl_cuentas.SelectedValue.Substring(0, 10) == "3262.50005")
+            {
+                if (SesionUsu.Usu_Rep == "RP-Compara-01-Cja")
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_Ctas_Cmp_Ing_vs_Fond('RP-021','" + SesionUsu.Usu_Ejercicio + "','" + ddl_cuentas.SelectedItem.Text + "', '" + txtmes_inicial.SelectedValue + anio + "');", true);
+                else
+                {
+                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-compara-06&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&cuenta_contable=" + ddl_cuentas.SelectedValue + "&mes_inicial=" + txtmes_inicial.SelectedValue + anio;
+                    _open = "window.open('" + ruta + "', '_newtab');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+                }
+            }
+            else
+            {
+
+                if (ddl_cuentas.SelectedValue.Substring(0, 4) == "3262")
+                {
+
+                    if (ddl_cuentas.SelectedValue.Substring(0, 10) == "3262.70001")
+                    {
+                        if (SesionUsu.Usu_Rep == "RP-Compara-01-Cja")
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_Ctas_Cmp_Ing_vs_Fond('RP-021','" + SesionUsu.Usu_Ejercicio + "','" + ddl_cuentas.SelectedItem.Text + "', '" + txtmes_inicial.SelectedValue + anio + "');", true);
+                        else
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_Ctas_Cmp_Ing_vs_Fond('RP-compara-05','" + SesionUsu.Usu_Ejercicio + "','" + ddl_cuentas.SelectedItem.Text + "', '" + txtmes_inicial.SelectedValue + anio + "');", true);
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_Ctas_Cmp_Ing_vs_Fond('RP-compara-04','" + SesionUsu.Usu_Ejercicio + "','" + ddl_cuentas.SelectedItem.Text + "', '" + txtmes_inicial.SelectedValue + anio + "');", true);
+                    }
+                }
+                else
+                {
+                    if (ddl_cuentas.SelectedValue.Substring(0, 10) == "3261.10001")
+                    {
+                        if (SesionUsu.Usu_Rep == "RP-Compara-01-Cja")
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_Ctas_Cmp_Ing_vs_Fond('RP-021','" + SesionUsu.Usu_Ejercicio + "','" + ddl_cuentas.SelectedItem.Text + "', '" + txtmes_inicial.SelectedValue + anio + "');", true);
+                        else
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_Ctas_Cmp_Ing_vs_Fond('RP-compara-01','" + SesionUsu.Usu_Ejercicio + "','" + ddl_cuentas.SelectedItem.Text + "', '" + txtmes_inicial.SelectedValue + anio + "');", true);
+                    }
+                    else
+                    {
+                        if (SesionUsu.Usu_Rep == "RP-Compara-01-Cja")
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_Ctas_Cmp_Ing_vs_Fond('RP-021','" + SesionUsu.Usu_Ejercicio + "','" + ddl_cuentas.SelectedItem.Text + "', '" + txtmes_inicial.SelectedValue + anio + "');", true);
+                        else
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_Ctas_Cmp_Ing_vs_Fond('RP-compara-02','" + SesionUsu.Usu_Ejercicio + "','" + ddl_cuentas.SelectedItem.Text + "', '" + txtmes_inicial.SelectedValue + anio + "');", true);
+                    }
+                }
+            }
+        }
+
+        protected void linkBttnExcel1_Click(object sender, EventArgs e)
+        {
+            string anio = SesionUsu.Usu_Ejercicio.Substring(2, 2);
+            if (ddl_cuentas.SelectedValue.Substring(0, 4) == "3262")
+            {
+                if (ddl_cuentas.SelectedValue.Substring(0, 10) == "3262.70001")
+                {
+                    if (SesionUsu.Usu_Rep == "RP-Compara-01-Cja")
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_Ctas_Cmp_Ing_vs_Fond('RP-021','" + SesionUsu.Usu_Ejercicio + "','" + ddl_cuentas.SelectedItem.Text + "', '" + txtmes_inicial.SelectedValue + anio + "');", true);
+                    else
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_Ctas_Cmp_Ing_vs_Fond('RP-compara-05','" + SesionUsu.Usu_Ejercicio + "','" + ddl_cuentas.SelectedItem.Text + "', '" + txtmes_inicial.SelectedValue + anio + "');", true);
+                }
+                else
+                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-compara-04xls&Ejercicio=" + SesionUsu.Usu_Ejercicio + " &cuenta_contable=" + ddl_cuentas.SelectedItem + " &mes_inicial=" + txtmes_inicial.SelectedValue + anio;
+            }
+            else
+            {
+                if (SesionUsu.Usu_Rep == "RP-Compara-01")
+                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-compara-02xls&Ejercicio=" + SesionUsu.Usu_Ejercicio + " &cuenta_contable=" + ddl_cuentas.SelectedItem + " &mes_inicial=" + txtmes_inicial.SelectedValue + anio;
+
+                else
+                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-Mayor-General&Ejercicio=" + SesionUsu.Usu_Ejercicio;
+            }
+
+            _open = "window.open('" + ruta + "', '_newtab');";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+        }
+
+        protected void linkBttnPDF2_Click(object sender, EventArgs e)
+        {
+            string anio = SesionUsu.Usu_Ejercicio.Substring(2, 2);
+            if (ddl_cuentas.SelectedValue.Substring(0, 10) == "3261.90001" || ddl_cuentas.SelectedValue.Substring(0, 10) == "3261.90002" || ddl_cuentas.SelectedValue.Substring(0, 10) == "3262.10001" || ddl_cuentas.SelectedValue.Substring(0, 10) == "3262.20001" || ddl_cuentas.SelectedValue.Substring(0, 10) == "3262.50005")
+            {
+                if (SesionUsu.Usu_Rep == "RP-Compara-01-Cja")
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_Ctas_Cmp_Ing_vs_Fond('RP-021','" + SesionUsu.Usu_Ejercicio + "','" + ddl_cuentas.SelectedItem.Text + "', '" + txtmes_inicial.SelectedValue + anio + "');", true);
+                else
+                {
+                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-compara-06&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&cuenta_contable=" + ddl_cuentas.SelectedValue + "&mes_inicial=" + txtmes_inicial.SelectedValue + anio;
+                    _open = "window.open('" + ruta + "', '_newtab');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+                }
+            }
+            else
+            {
+
+                if (ddl_cuentas.SelectedValue.Substring(0, 4) == "3262")
+                {
+
+                    if (ddl_cuentas.SelectedValue.Substring(0, 10) == "3262.70001")
+                    {
+                        if (SesionUsu.Usu_Rep == "RP-Compara-01-Cja")
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_Ctas_Cmp_Ing_vs_Fond('RP-021','" + SesionUsu.Usu_Ejercicio + "','" + ddl_cuentas.SelectedItem.Text + "', '" + txtmes_inicial.SelectedValue + anio + "');", true);
+                        else
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_Ctas_Cmp_Ing_vs_Fond('RP-compara-05','" + SesionUsu.Usu_Ejercicio + "','" + ddl_cuentas.SelectedItem.Text + "', '" + txtmes_inicial.SelectedValue + anio + "');", true);
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_Ctas_Cmp_Ing_vs_Fond('RP-compara-04','" + SesionUsu.Usu_Ejercicio + "','" + ddl_cuentas.SelectedItem.Text + "', '" + txtmes_inicial.SelectedValue + anio + "');", true);
+                    }
+                }
+                else
+                {
+                    if (ddl_cuentas.SelectedValue.Substring(0, 10) == "3261.10001")
+                    {
+                        if (SesionUsu.Usu_Rep == "RP-Compara-01-Cja")
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_Ctas_Cmp_Ing_vs_Fond('RP-021','" + SesionUsu.Usu_Ejercicio + "','" + ddl_cuentas.SelectedItem.Text + "', '" + txtmes_inicial.SelectedValue + anio + "');", true);
+                        else
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_Ctas_Cmp_Ing_vs_Fond('RP-compara-01','" + SesionUsu.Usu_Ejercicio + "','" + ddl_cuentas.SelectedItem.Text + "', '" + txtmes_inicial.SelectedValue + anio + "');", true);
+                    }
+                    else
+                    {
+                        if (SesionUsu.Usu_Rep == "RP-Compara-01-Cja")
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_Ctas_Cmp_Ing_vs_Fond('RP-021','" + SesionUsu.Usu_Ejercicio + "','" + ddl_cuentas.SelectedItem.Text + "', '" + txtmes_inicial.SelectedValue + anio + "');", true);
+                        else
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ver_Ctas_Cmp_Ing_vs_Fond('RP-compara-02','" + SesionUsu.Usu_Ejercicio + "','" + ddl_cuentas.SelectedItem.Text + "', '" + txtmes_inicial.SelectedValue + anio + "');", true);
+                    }
+                }
+            }
+        }
+
+        protected void linkBttnExcel2_Click(object sender, EventArgs e)
+        {
+            string Notas = txtNotas.Text.Replace("\r\n", "%20%20%20%20%20");
+            string caseSwitch = ddl_Tipo_D.SelectedValue;
+            string TipoAdeudoIni = string.Empty;
+            string TipoAdeudoFin = string.Empty;
+            switch (ddl_subtipo.SelectedValue)
+            {
+                case "1":
+                    TipoAdeudoIni = "2117";
+                    TipoAdeudoFin = "2117";
+                    break;
+                case "2":
+                    TipoAdeudoIni = "2249";
+                    TipoAdeudoFin = "2249";
+                    break;
+                case "3":
+                    TipoAdeudoIni = "2117";
+                    TipoAdeudoFin = "2249";
+                    break;
+            }
+            switch (caseSwitch)
+            {
+                case "1":
+                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-SATxls&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&mes_inicial=" + ddlMes_inicial1.SelectedValue + "&mes_final=" + ddlMes_final1.SelectedValue + "&notas=" + Notas + "&tipo_adeudo_ini=" + TipoAdeudoIni + "&tipo_adeudo_fin=" + TipoAdeudoFin;
+                    _open = "window.open('" + ruta + "', '_newtab');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+
+                    break;
+                case "2":
+                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-FOVISSSTExls&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&mes_inicial=" + ddlMes_inicial1.SelectedValue + "&mes_final=" + ddlMes_final1.SelectedValue + "&notas=" + Notas + "&tipo_adeudo_ini=" + TipoAdeudoIni + "&tipo_adeudo_fin=" + TipoAdeudoFin;
+                    _open = "window.open('" + ruta + "', '_newtab');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+
+                    break;
+                case "3":
+                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-ISSSTExls&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&mes_inicial=" + ddlMes_inicial1.SelectedValue + "&mes_final=" + ddlMes_final1.SelectedValue + "&notas=" + Notas + "&=" + TipoAdeudoIni + "&tipo_adeudo_fin=" + TipoAdeudoFin;
+                    _open = "window.open('" + ruta + "', '_newtab');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+                    break;
+                case "4":
+                    ruta = "VisualizadorCrystal.aspx?Tipo=RP-Impuestosxls&Ejercicio=" + SesionUsu.Usu_Ejercicio + "&mes_inicial=" + ddlMes_inicial1.SelectedValue + "&mes_final=" + ddlMes_final1.SelectedValue + "&notas=" + Notas + "&tipo_adeudo_ini=" + TipoAdeudoIni + "&tipo_adeudo_fin=" + TipoAdeudoFin;
                     _open = "window.open('" + ruta + "', '_newtab');";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
                     break;

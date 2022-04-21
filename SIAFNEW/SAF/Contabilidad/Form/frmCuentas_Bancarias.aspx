@@ -214,7 +214,7 @@
                                     <div class="row">
                                         <div class="col-md-2">Clave</div>
                                         <div class="col-md-3">
-                                            <asp:TextBox ID="txtClave" runat="server" MaxLength="5"></asp:TextBox>
+                                            <asp:TextBox ID="txtClave" runat="server" MaxLength="5" Enabled="False"></asp:TextBox>
                                         </div>                                        
                                         <div class="col-md-2">Banco</div>
                                         <div class="col-md-3">

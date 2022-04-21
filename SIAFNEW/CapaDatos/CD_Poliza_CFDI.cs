@@ -12,29 +12,29 @@ namespace CapaDatos
         public void PolizaCFDIGuardar(Poliza_CFDI objPolizaCFDI, ref string Verificador)
         {
 
-            
-                CD_Datos CDDatos = new CD_Datos();
-                OracleCommand Cmd = null;
-                try
-                {
-                    String[] Parametros = { "P_ID_POLIZA", "P_NOMBRE_ARCHIVO_XML", "P_NOMBRE_ARCHIVO_PDF", "P_BENEF_TIPO",
+
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_ID_POLIZA", "P_NOMBRE_ARCHIVO_XML", "P_NOMBRE_ARCHIVO_PDF", "P_BENEF_TIPO",
                                         "P_CFDI_FOLIO", "P_CFDI_FECHA", "P_CFDI_TOTAL", "P_CFDI_RFC","P_TIPO_GASTO","P_CFDI_UUID","P_CFDI_NOMBRE", "P_FECHA_CAPTURA", "P_USUARIO_CAPTURA" };
-                    object[] Valores = {    objPolizaCFDI.IdPoliza, objPolizaCFDI.NombreArchivoXML,  objPolizaCFDI.NombreArchivoPDF, objPolizaCFDI.Beneficiario_Tipo,
+                object[] Valores = {    objPolizaCFDI.IdPoliza, objPolizaCFDI.NombreArchivoXML,  objPolizaCFDI.NombreArchivoPDF, objPolizaCFDI.Beneficiario_Tipo,
                     objPolizaCFDI.CFDI_Folio, objPolizaCFDI.CFDI_Fecha,   objPolizaCFDI.CFDI_Total, objPolizaCFDI.CFDI_RFC, objPolizaCFDI.Tipo_Gasto,objPolizaCFDI.CFDI_UUID,objPolizaCFDI.CFDI_Nombre,
                         objPolizaCFDI.Fecha_Captura,objPolizaCFDI.Usuario_Captura};
-                    String[] ParametrosOut = { "p_Bandera" };
-                    Cmd = CDDatos.GenerarOracleCommand("INS_SAF_POLIZAS_CFDI", ref Verificador, Parametros, Valores, ParametrosOut);
+                String[] ParametrosOut = { "p_Bandera" };
+                Cmd = CDDatos.GenerarOracleCommand("INS_SAF_POLIZAS_CFDI", ref Verificador, Parametros, Valores, ParametrosOut);
 
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
-                finally
-                {
-                    CDDatos.LimpiarOracleCommand(ref Cmd);
-                }
-            
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+
         }
 
         public void PolizaCFDIInsertar(Poliza_CFDI objPolizaCFDI, List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
@@ -46,13 +46,63 @@ namespace CapaDatos
                 OracleCommand Cmd = null;
                 try
                 {
-                    String[] Parametros = { "P_ID_POLIZA", "P_NOMBRE_ARCHIVO_XML", "P_NOMBRE_ARCHIVO_PDF", "P_BENEF_TIPO",
-                                        "P_CFDI_FOLIO", "P_CFDI_FECHA", "P_CFDI_TOTAL", "P_CFDI_RFC","P_TIPO_GASTO","P_CFDI_UUID","P_CFDI_NOMBRE", "P_FECHA_CAPTURA", "P_USUARIO_CAPTURA" };
-                    object[] Valores = {    objPolizaCFDI.IdPoliza, lstPolizasCFDI[i].NombreArchivoXML,  lstPolizasCFDI[i].NombreArchivoPDF, lstPolizasCFDI[i].Beneficiario_Tipo,
-                    lstPolizasCFDI[i].CFDI_Folio, lstPolizasCFDI[i].CFDI_Fecha,   lstPolizasCFDI[i].CFDI_Total, lstPolizasCFDI[i].CFDI_RFC, lstPolizasCFDI[i].Tipo_Gasto,lstPolizasCFDI[i].CFDI_UUID,lstPolizasCFDI[i].CFDI_Nombre,
-                        lstPolizasCFDI[i].Fecha_Captura,lstPolizasCFDI[i].Usuario_Captura};
+                    if (lstPolizasCFDI[i].Tipo_Docto == "OFICIO")
+                    {
+                        String[] Parametros = { "P_ID_POLIZA", "P_OFICIO_NUMERO", "P_OFICIO_FECHA", 
+                            "P_NOMBRE_ARCHIVO", "P_USUARIO", "P_PROVEEDOR", "P_RFC", "P_IMPORTE", "P_TIPO_DOCTO", 
+                            "P_NOMBRE_EMPLEADO", "P_TIPO_EMPLEADO", "P_PLAZA_EMPLEADO", "P_TIPO_GASTO", "P_TIPO_BENEF" };
+                        object[] Valores = { objPolizaCFDI.IdPoliza, lstPolizasCFDI[i].CFDI_Folio,  lstPolizasCFDI[i].CFDI_Fecha, 
+                            lstPolizasCFDI[i].NombreArchivoPDF, lstPolizasCFDI[i].Usuario_Captura, lstPolizasCFDI[i].CFDI_Nombre,
+                            lstPolizasCFDI[i].CFDI_RFC, lstPolizasCFDI[i].CFDI_Total,"COMPLEMENTO_CFDI",
+                        "","","",lstPolizasCFDI[i].Beneficiario_Tipo,lstPolizasCFDI[i].Tipo_Gasto};
+                        String[] ParametrosOut = { "p_Bandera" };
+                        Cmd = CDDatos.GenerarOracleCommand("INS_SAF_POLIZAS_OFICIOS2", ref Verificador, Parametros, Valores, ParametrosOut);
+                    }
+                    else
+                    {
+                        String[] Parametros = { "P_ID_POLIZA", "P_NOMBRE_ARCHIVO_XML", "P_NOMBRE_ARCHIVO_PDF", "P_BENEF_TIPO",
+                        "P_CFDI_FOLIO", "P_CFDI_FECHA", "P_CFDI_TOTAL", "P_CFDI_RFC","P_TIPO_GASTO","P_CFDI_UUID","P_CFDI_NOMBRE", "P_FECHA_CAPTURA", "P_USUARIO_CAPTURA",
+                        "P_CFDI_CONC_DESC"};
+                        object[] Valores = {    objPolizaCFDI.IdPoliza, lstPolizasCFDI[i].NombreArchivoXML,  lstPolizasCFDI[i].NombreArchivoPDF, lstPolizasCFDI[i].Beneficiario_Tipo,
+                        lstPolizasCFDI[i].CFDI_Folio, lstPolizasCFDI[i].CFDI_Fecha,   lstPolizasCFDI[i].CFDI_Total, lstPolizasCFDI[i].CFDI_RFC, lstPolizasCFDI[i].Tipo_Gasto,lstPolizasCFDI[i].CFDI_UUID,lstPolizasCFDI[i].CFDI_Nombre,
+                        lstPolizasCFDI[i].Fecha_Captura,lstPolizasCFDI[i].Usuario_Captura,
+                        lstPolizasCFDI[i].CFDI_Concepto_Descripcion};
+                        String[] ParametrosOut = { "p_Bandera" };
+                        Cmd = CDDatos.GenerarOracleCommand("INS_SAF_POLIZAS_CFDI2", ref Verificador, Parametros, Valores, ParametrosOut);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    CDDatos.LimpiarOracleCommand(ref Cmd);
+                }
+            }
+        }
+        public void PolizaCFDIActualizar(Poliza_CFDI objPolizaCFDI, List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
+        {
+
+            for (int i = 0; i < lstPolizasCFDI.Count; i++)
+            {
+                CD_Datos CDDatos = new CD_Datos();
+                OracleCommand Cmd = null;
+                try
+                {
+                    String[] Parametros = { "P_ID_CFDI",
+                    "P_CFDI_CONC_CVE", "P_CFDI_CONC_CANTIDAD", "P_CFDI_CONC_CVEUNI","P_CFDI_CONC_UNIDAD","P_CFDI_CONC_DESC",
+                    "P_CFDI_CONC_VALUNI","P_CFDI_CONC_IMPORTE"
+                    };
+                    object[] Valores = {    objPolizaCFDI.Id_CFDI,
+                        null
+                    //lstPolizasCFDI[i].CFDI_Concepto_Descripcion
+                    //lstPolizasCFDI[i].CFDI_Concepto_Cve, lstPolizasCFDI[i].CFDI_Concepto_Cantidad, lstPolizasCFDI[i].CFDI_Concepto_ClaveUnidad,
+                    //lstPolizasCFDI[i].CFDI_Concepto_Unidad, lstPolizasCFDI[i].CFDI_Concepto_Descripcion, lstPolizasCFDI[i].CFDI_Concepto_ValorUnitario,
+                    //lstPolizasCFDI[i].CFDI_Concepto_Importe
+                    };
                     String[] ParametrosOut = { "p_Bandera" };
-                    Cmd = CDDatos.GenerarOracleCommand("INS_SAF_POLIZAS_CFDI", ref Verificador, Parametros, Valores, ParametrosOut);
+                    Cmd = CDDatos.GenerarOracleCommand("UPD_SAF_POLIZAS_CFDI", ref Verificador, Parametros, Valores, ParametrosOut);
 
                 }
                 catch (Exception ex)
@@ -65,6 +115,7 @@ namespace CapaDatos
                 }
             }
         }
+
         public void PolizaCFDIExtraInsertar(Poliza objPoliza, List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
         {
 
@@ -98,6 +149,29 @@ namespace CapaDatos
         {
             EliminarCFDIEditar(objPolizaCFDI.IdPoliza, ref Verificador);
             PolizaCFDIInsertar(objPolizaCFDI, lstPolizasCFDI, ref Verificador);
+
+        }
+
+        public void PolizaCFDIEditarConceptos(Poliza_CFDI objPolizaCFDI, ref string Verificador)
+        {
+
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_ID_CFDI", "P_CONCEPTOS" };
+                object[] Valores = { objPolizaCFDI.Id_CFDI, objPolizaCFDI.CFDI_Concepto_Descripcion };
+                String[] ParametrosOut = { "p_Bandera" };
+                Cmd = CDDatos.GenerarOracleCommand("UPD_SAF_CONCEPTOS_CFDI", ref Verificador, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
 
         }
 
@@ -217,6 +291,33 @@ namespace CapaDatos
 
             }
         }
+        public void PolizaCFDIConsulta(ref Poliza_CFDI objPolizaCFDI, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_ID" };
+                object[] Valores = { objPolizaCFDI.Id_CFDI };
+                String[] ParametrosOut = { "P_RUTA_XML", "P_CONCEPTOS", "P_BANDERA" };
+                Cmd = CDDatos.GenerarOracleCommand("SEL_SAF_CFDI", ref Verificador, Parametros, Valores, ParametrosOut);
+                if (Verificador == "0")
+                {
+                    objPolizaCFDI = new Poliza_CFDI();
+                    objPolizaCFDI.Ruta_XML = Convert.ToString(Cmd.Parameters["P_RUTA_XML"].Value);
+                    objPolizaCFDI.CFDI_Concepto_Descripcion = Convert.ToString(Cmd.Parameters["P_CONCEPTOS"].Value);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+
+            }
+        }
 
         public void PolizaCFDIValidar(ref Poliza_CFDI objPolizaCFDI, ref string Verificador)
         {
@@ -256,7 +357,11 @@ namespace CapaDatos
                 String[] Parametros = { "P_ID_POLIZA" };
                 String[] Valores = { Convert.ToString(objPolizaCFDI.IdPoliza) };
 
-                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Polizas_CFDI", ref dr, Parametros, Valores);
+                if(objPolizaCFDI.Tipo_Docto=="CFDI")
+                    cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Polizas_CFDI", ref dr, Parametros, Valores);
+                else
+                    cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Cfdi_Oficios", ref dr, Parametros, Valores);
+
                 while (dr.Read())
                 {
 
@@ -277,6 +382,20 @@ namespace CapaDatos
                     objPolizaCFDI.Usuario_Captura = Convert.ToString(dr.GetValue(11));
                     objPolizaCFDI.Habilita = (Convert.ToString(dr.GetValue(12)) == "S") ? true : false;
                     objPolizaCFDI.Id_CFDI = Convert.ToInt32(dr.GetValue(13));
+                    objPolizaCFDI.CFDI_Concepto_Descripcion = Convert.ToString(dr.GetValue(22));
+                    objPolizaCFDI.Tipo_Docto = Convert.ToString(dr.GetValue(23));
+                    //objPolizaCFDI.CFDI_Concepto_Cve = Convert.ToString(dr.GetValue(15));
+                    //objPolizaCFDI.CFDI_Concepto_Cantidad = Convert.ToString(dr.GetValue(16));
+                    //objPolizaCFDI.CFDI_Concepto_ClaveUnidad = Convert.ToString(dr.GetValue(17));
+                    //objPolizaCFDI.CFDI_Concepto_Unidad = Convert.ToString(dr.GetValue(18));
+                    //objPolizaCFDI.CFDI_Concepto_Descripcion = Convert.ToString(dr.GetValue(19));
+                    //if (dr.GetValue(20) != null)
+                    //{
+                    //    objPolizaCFDI.CFDI_Concepto_ValorUnitario = Convert.ToDouble(dr.GetValue(20));
+                    //    objPolizaCFDI.CFDI_Concepto_Importe = Convert.ToDouble(dr.GetValue(21));
+                    //}
+
+
                     lstPolizasCFDI.Add(objPolizaCFDI);
                 }
                 dr.Close();
@@ -291,6 +410,38 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        public void PolizaCFDIConsultaConceptos(Poliza_CFDI objPolizaCFDI, ref List<Poliza_CFDI> lstPolizasCFDI)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+
+                OracleDataReader dr = null;
+                String[] Parametros = { "P_ID_CFDI" };
+                String[] Valores = { Convert.ToString(objPolizaCFDI.Id_CFDI) };
+
+                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Conceptos_CFDI", ref dr, Parametros, Valores);
+                while (dr.Read())
+                {
+
+                    objPolizaCFDI = new Poliza_CFDI();
+                    objPolizaCFDI.CFDI_Concepto_Descripcion = Convert.ToString(dr.GetValue(0));
+                    lstPolizasCFDI.Add(objPolizaCFDI);
+                }
+                dr.Close();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+
         public void PolizaCFDIExtrasConsultaDatos(Poliza_CFDI objPolizaCFDI, int idPoliza, string Partida, ref List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -371,6 +522,7 @@ namespace CapaDatos
                     objPolizaCFDI.Numero_poliza = Convert.ToString(dr.GetValue(13));
                     objPolizaCFDI.Mes_anio = Convert.ToString(dr.GetValue(14));
                     objPolizaCFDI.CFDI_Total = Convert.ToDouble(dr.GetValue(15));
+                    objPolizaCFDI.Id_CFDI = Convert.ToInt32(dr.GetValue(16));
                     lstPolizasCFDI.Add(objPolizaCFDI);
                 }
                 dr.Close();
@@ -405,14 +557,14 @@ namespace CapaDatos
                     objPoliza.Centro_contable = Convert.ToString(dr.GetValue(1));
                     objPoliza.Desc_Tipo_Documento = Convert.ToString(dr.GetValue(2));
                     objPoliza.Numero_poliza = Convert.ToString(dr.GetValue(3));
-                    objPoliza.Fecha= Convert.ToString(dr.GetValue(4));
+                    objPoliza.Fecha = Convert.ToString(dr.GetValue(4));
                     objPoliza.Concepto = Convert.ToString(dr.GetValue(5));
                     objPoliza.Tot_Cargo = Convert.ToDouble(dr.GetValue(6));
-                    objPoliza.Clasificacion = "("+Convert.ToString(dr.GetValue(7))+") Registro(s)";
+                    objPoliza.Clasificacion = "(" + Convert.ToString(dr.GetValue(7)) + ") Registro(s)";
                     objPoliza.Tot_Comprobado = Convert.ToDouble(dr.GetValue(8));
                     objPoliza.Partida = Convert.ToString(dr.GetValue(9));
                     lstPolizas.Add(objPoliza);
-                } 
+                }
                 dr.Close();
 
             }

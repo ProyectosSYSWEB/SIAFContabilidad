@@ -438,22 +438,31 @@ namespace SAF.Form
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
 
         /// <summary>
-        /// Control btnAceptar.
+        /// Control linkBttnPDF.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnAceptar;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnPDF;
 
         /// <summary>
-        /// Control ImageButton3.
+        /// Control linkBttnExcel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton3;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnExcel;
+
+        /// <summary>
+        /// Control linkBttnCSV.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnCSV;
 
         /// <summary>
         /// Control UpdateProgress2.

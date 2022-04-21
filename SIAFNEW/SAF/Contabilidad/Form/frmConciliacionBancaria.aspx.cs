@@ -1103,6 +1103,7 @@ namespace SAF.Contabilidad.Form
 
         protected void bttnModificar_Click(object sender, EventArgs e)
         {
+            Verificador = string.Empty;
             int Fila = -1;
             List<Poliza_Conciliacion> ListPDet = new List<Poliza_Conciliacion>();
 
@@ -1135,6 +1136,10 @@ namespace SAF.Contabilidad.Form
             }
             catch (Exception ex)
             {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupConciliacion", "$('#modalConciliacion').modal('hide')", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
 
             }
         }

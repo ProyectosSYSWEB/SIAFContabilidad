@@ -96,22 +96,31 @@ namespace SAF.Contabilidad.Reportes
         protected global::System.Web.UI.UpdatePanel UpdatePanel3;
 
         /// <summary>
-        /// Control btnAceptar.
+        /// Control linkBttnPDF1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnAceptar;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnPDF1;
 
         /// <summary>
-        /// Control xls.
+        /// Control linkBttnExcel1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton xls;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnExcel1;
+
+        /// <summary>
+        /// Control linkBttnCSV1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnCSV1;
 
         /// <summary>
         /// Control View2.
@@ -276,40 +285,49 @@ namespace SAF.Contabilidad.Reportes
         protected global::System.Web.UI.UpdatePanel UpdatePanel8;
 
         /// <summary>
-        /// Control btnAceptar0.
+        /// Control linkBttnPDF.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnAceptar0;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnPDF;
 
         /// <summary>
-        /// Control imgBttnLotesPDF.
+        /// Control linkBttnPDFLote.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBttnLotesPDF;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnPDFLote;
 
         /// <summary>
-        /// Control btn_excel.
+        /// Control linkBttnExcel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btn_excel;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnExcel;
 
         /// <summary>
-        /// Control imgBttnLotesExcel.
+        /// Control linkBttnExcelLote.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBttnLotesExcel;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnExcelLote;
+
+        /// <summary>
+        /// Control linkBttnCSV.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnCSV;
 
         /// <summary>
         /// Control View4.
@@ -420,13 +438,13 @@ namespace SAF.Contabilidad.Reportes
         protected global::System.Web.UI.UpdatePanel UpdatePanel11;
 
         /// <summary>
-        /// Control btnAceptar_v.
+        /// Control linkBttnPDF0.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnAceptar_v;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnPDF0;
 
         /// <summary>
         /// Control UpdateProgress5.
@@ -456,15 +474,6 @@ namespace SAF.Contabilidad.Reportes
         protected global::System.Web.UI.UpdatePanel UpdatePanel101;
 
         /// <summary>
-        /// Control lblmes_inicial1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblmes_inicial1;
-
-        /// <summary>
         /// Control ddlMes_inicial1.
         /// </summary>
         /// <remarks>
@@ -474,15 +483,6 @@ namespace SAF.Contabilidad.Reportes
         protected global::System.Web.UI.WebControls.DropDownList ddlMes_inicial1;
 
         /// <summary>
-        /// Control lblmes_final1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblmes_final1;
-
-        /// <summary>
         /// Control ddlMes_final1.
         /// </summary>
         /// <remarks>
@@ -490,15 +490,6 @@ namespace SAF.Contabilidad.Reportes
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlMes_final1;
-
-        /// <summary>
-        /// Control lbltipo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbltipo;
 
         /// <summary>
         /// Control ddl_Tipo_D.
@@ -519,15 +510,6 @@ namespace SAF.Contabilidad.Reportes
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
 
         /// <summary>
-        /// Control lblsubtipo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblsubtipo;
-
-        /// <summary>
         /// Control ddl_subtipo.
         /// </summary>
         /// <remarks>
@@ -535,15 +517,6 @@ namespace SAF.Contabilidad.Reportes
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddl_subtipo;
-
-        /// <summary>
-        /// Control lblNotas.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNotas;
 
         /// <summary>
         /// Control txtNotas.
@@ -564,22 +537,22 @@ namespace SAF.Contabilidad.Reportes
         protected global::System.Web.UI.UpdatePanel UpdatePanel103;
 
         /// <summary>
-        /// Control btnAceptar_D.
+        /// Control linkBttnPDF2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnAceptar_D;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnPDF2;
 
         /// <summary>
-        /// Control btn_excel_D.
+        /// Control linkBttnExcel2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btn_excel_D;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnExcel2;
 
         /// <summary>
         /// Control UpdateProgress10.

@@ -154,6 +154,11 @@ namespace SAF.Reportes
                     case "RP-012exc":
                         Reporte = "Contabilidad\\Reportes\\RP-012exc.rpt";
                         reportes_dir();
+                        report.SetParameterValue(0, Ejercicio); report.SetParameterValue(1, centro_contable); report.SetParameterValue(2, cuenta_mayor); report.SetParameterValue(3, mes_inicial); report.SetParameterValue(4, mes_final); report.SetParameterValue(5, nivel); reporte_GranXLS();
+                        break;
+                    case "RP-012csv":
+                        Reporte = "Contabilidad\\Reportes\\RP-012csv.rpt";
+                        reportes_dir();
                         report.SetParameterValue(0, Ejercicio); report.SetParameterValue(1, centro_contable); report.SetParameterValue(2, cuenta_mayor); report.SetParameterValue(3, mes_inicial); report.SetParameterValue(4, mes_final); report.SetParameterValue(5, nivel); reporte_CSV();
                         break;
                     case "RP-012-2":
@@ -192,12 +197,19 @@ namespace SAF.Reportes
                         report.SetParameterValue(0, Ejercicio); report.SetParameterValue(1, centro_contable); report.SetParameterValue(2, cuenta_contable); report.SetParameterValue(3, mes_inicial); report.SetParameterValue(4, mes_final); reporte_XLS();
                         break;
                     case "RP-014":
-                        Reporte = "Contabilidad\\Reportes\\RP-014.rpt";
+                        if (Convert.ToInt32(SesionUsu.Usu_Ejercicio) >= 2022)
+                            Reporte = "Contabilidad\\Reportes\\RP-014.rpt";
+                        else
+                            Reporte = "Contabilidad\\Reportes\\RP-014-old.rpt";
                         reportes_dir();
                         report.SetParameterValue(2, Ejercicio); report.SetParameterValue(0, mes_inicial); report.SetParameterValue(1, mes_final); reporte_PDF();
                         break;
                     case "RP-014exc":
-                        Reporte = "Contabilidad\\Reportes\\RP-014exc.rpt";
+                        if (Convert.ToInt32(SesionUsu.Usu_Ejercicio) >= 2022)
+                            Reporte = "Contabilidad\\Reportes\\RP-014exc.rpt";
+                        else
+                            Reporte = "Contabilidad\\Reportes\\RP-014exc-old.rpt";
+
                         reportes_dir();
                         report.SetParameterValue(2, Ejercicio); report.SetParameterValue(0, mes_inicial); report.SetParameterValue(1, mes_final); reporte_XLS();
                         break;
@@ -241,10 +253,14 @@ namespace SAF.Reportes
                         else
                             Reporte = "Contabilidad\\Reportes\\RP-014-det-old.rpt";
                         reportes_dir();
-                        report.SetParameterValue(0, mes_inicial); report.SetParameterValue(1, mes_final); report.SetParameterValue(2, Ejercicio); reporte_PDF();
+                        report.SetParameterValue(0, mes_inicial); report.SetParameterValue(1, mes_final); report.SetParameterValue(2, Ejercicio); reporte_PDF_Legal();
                         break;
                     case "RP-14-detxls":
-                        Reporte = "Contabilidad\\Reportes\\RP-014-detxls.rpt";
+                        if (Convert.ToInt32(SesionUsu.Usu_Ejercicio) >= 2022)
+                            Reporte = "Contabilidad\\Reportes\\RP-014-detxls.rpt";
+                        else
+                            Reporte = "Contabilidad\\Reportes\\RP-014-detxls-old.rpt";
+
                         reportes_dir();
                         report.SetParameterValue(0, mes_inicial); report.SetParameterValue(1, mes_final); report.SetParameterValue(2, Ejercicio); reporte_XLS();
                         break;
@@ -313,10 +329,20 @@ namespace SAF.Reportes
                         reportes_dir();
                         report.SetParameterValue(0, mes_inicial); report.SetParameterValue(1, mes_final); report.SetParameterValue(2, Ejercicio); report.SetParameterValue(3, centro_contable); reporte_GranXLS();
                         break;
+                    case "RP-Diario-Generalcsv":
+                        Reporte = "Contabilidad\\Reportes\\RP-Diario-Generalcsv.rpt";
+                        reportes_dir();
+                        report.SetParameterValue(0, mes_inicial); report.SetParameterValue(1, mes_final); report.SetParameterValue(2, Ejercicio); report.SetParameterValue(3, centro_contable); reporte_CSV();
+                        break;
                     case "RP-Mayor-General":
                         Reporte = "Contabilidad\\Reportes\\RP-Mayor-General.rpt";
                         reportes_dir();
                         report.SetParameterValue(0, Ejercicio); reporte_GranXLS();
+                        break;
+                    case "RP-Mayor-Generalcsv":
+                        Reporte = "Contabilidad\\Reportes\\RP-Mayor-Generalcsv.rpt";
+                        reportes_dir();
+                        report.SetParameterValue(0, Ejercicio); reporte_CSV();
                         break;
                     case "RP-Resumen-de-cuentas":
                         Reporte = "Contabilidad\\Reportes\\RP-Resumen-de-cuentas.rpt";
@@ -460,6 +486,7 @@ namespace SAF.Reportes
                         reporte_PDF();
                         break;
                     case "RP_CFDISxls":
+                        
                         Reporte = "Contabilidad\\Reportes\\RP_CFDISxls.rpt";
                         reportes_dir();
                         report.SetParameterValue(0, parametro1);
@@ -498,6 +525,7 @@ namespace SAF.Reportes
                 report.Close();
                 report.Dispose();
                 CR_Reportes.Dispose();
+                GC.Collect();
             }
         }
         private void reportes_dir()
@@ -510,6 +538,19 @@ namespace SAF.Reportes
         private void reporte_PDF()
         {
             report.PrintOptions.PaperSize = PaperSize.PaperLetter;
+            connectionInfo.ServerName = "dsia";
+            connectionInfo.UserID = "SAF";
+            connectionInfo.Password = "DSIA2014";
+            SetDBLogonForReport(connectionInfo, report);
+
+            report.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, false, Tipo);
+            CR_Reportes.ReportSource = report;
+
+        }
+
+        private void reporte_PDF_Legal()
+        {
+            report.PrintOptions.PaperSize = PaperSize.PaperLegal;
             connectionInfo.ServerName = "dsia";
             connectionInfo.UserID = "SAF";
             connectionInfo.Password = "DSIA2014";
@@ -545,14 +586,14 @@ namespace SAF.Reportes
 
         private void reporte_CSV()
         {
-           
+
             report.PrintOptions.PaperSize = PaperSize.PaperLetter;
             connectionInfo.ServerName = "dsia";
             connectionInfo.UserID = "SAF";
             connectionInfo.Password = "DSIA2014";
             SetDBLogonForReport(connectionInfo, report);
-            report.ExportToHttpResponse(ExportFormatType.CharacterSeparatedValues, Response, true, "pruebas.xlsx");
-            CR_Reportes.ReportSource = report;
+            report.ExportToHttpResponse(ExportFormatType.CharacterSeparatedValues, Response, true, Tipo);
+            Response.End();
         }
 
         private void reporte_GranXLS2()

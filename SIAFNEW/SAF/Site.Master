@@ -179,7 +179,7 @@
                                         <ProgressTemplate>
                                             <div class="overlay">
                                                 <div class="overlayContent">
-                                                    <asp:Image ID="img3" runat="server" Height="100px" ImageUrl="~/images/loader2.gif" Width="100px" />
+                                                    <asp:Image ID="img3" runat="server" Height="46px" ImageUrl="~/images/loader2.gif" Width="46px" />
                                                 </div>
                                             </div>
                                         </ProgressTemplate>

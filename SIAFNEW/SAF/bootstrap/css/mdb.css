@@ -2253,6 +2253,9 @@ a.waves-effect, a.waves-light {
     background-color: #0b51c5; }
   .btn-primary.dropdown-toggle {
     background-color: #4285f4 !important; }
+    .btn-primary.dropdown-toggle option {
+        background-color: #4285f4;
+    }
     .btn-primary.dropdown-toggle:hover, .btn-primary.dropdown-toggle:focus {
       background-color: #5a95f5 !important; }
   .btn-primary:not([disabled]):not(.disabled):active, .btn-primary:not([disabled]):not(.disabled).active,

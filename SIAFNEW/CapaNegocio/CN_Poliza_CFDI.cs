@@ -59,6 +59,18 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void PolizaCFDIEditarConceptos(Poliza_CFDI objPolizaCFDI, ref string Verificador)
+        {
+            try
+            {
+                CD_Poliza_CFDI CDPolizaCFDI = new CD_Poliza_CFDI();
+                CDPolizaCFDI.PolizaCFDIEditarConceptos(objPolizaCFDI, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
         public void PolizaCFDIValidar(ref Poliza_CFDI objPolizaCFDI, ref string Verificador)
         {
@@ -148,6 +160,18 @@ namespace CapaNegocio
             {
                 throw new Exception(ex.Message);
             }
+        }
+        public void PolizaCFDIConsulta(ref Poliza_CFDI objPolizaCFDI, ref string Verificador)
+        {
+            try
+            {
+                CD_Poliza_CFDI CDPolizaCFDI = new CD_Poliza_CFDI();
+                CDPolizaCFDI.PolizaCFDIConsulta(ref objPolizaCFDI, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
 
         }
 
@@ -164,9 +188,21 @@ namespace CapaNegocio
             {
                 throw new Exception(ex.Message);
             }
-
         }
 
+
+        public void PolizaCFDIConsultaConceptos(Poliza_CFDI objPolizaCFDI, ref List<Poliza_CFDI> lstPolizasCFDI)
+        {
+            try
+            {
+                CD_Poliza_CFDI CDPolizaCFDI = new CD_Poliza_CFDI();
+                CDPolizaCFDI.PolizaCFDIConsultaConceptos(objPolizaCFDI, ref lstPolizasCFDI);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
 
         public void PolizaCFDIExtrasConsultaDatos(Poliza_CFDI objPolizaCFDI, int idPoliza, string Partida, ref List<Poliza_CFDI> lstPolizasCFDI, ref string Verificador)

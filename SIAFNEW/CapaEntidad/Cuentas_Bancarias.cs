@@ -21,7 +21,7 @@ namespace CapaEntidad
             set { _Ejercicio = value; }
         }
 
-        private string _Clave;
+        private string _Clave=string.Empty;
         public string Clave
         {
             get { return _Clave; }

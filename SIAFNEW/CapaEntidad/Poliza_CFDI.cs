@@ -161,6 +161,10 @@ namespace CapaEntidad
             set { _CFDI_Nombre = value.Trim(); }
         }
 
+
+      
+
+
         private string _Tipo_Gasto;
         public string Tipo_Gasto
         {
@@ -195,7 +199,75 @@ namespace CapaEntidad
             get { return _Centro_Contable.Trim(); }
             set { _Centro_Contable = value.Trim(); }
         }
+        private string _CFDI_Concepto_Descripcion = string.Empty;
+        public string CFDI_Concepto_Descripcion
+        {
+            get { return _CFDI_Concepto_Descripcion.Trim(); }
+            set { _CFDI_Concepto_Descripcion = value.Trim(); }
+        }
+        //public List<Poliza_CFDI_Det> lstDetCFDI = new List<Poliza_CFDI_Det>();
+
     }
+
+    public class Poliza_CFDI_Det
+    {
+        private string _CFDI_Concepto_Cve = string.Empty;
+        public string CFDI_Concepto_Cve
+        {
+            get { return _CFDI_Concepto_Cve.Trim(); }
+            set { _CFDI_Concepto_Cve = value.Trim(); }
+        }
+
+        private string _CFDI_Concepto_Cantidad = string.Empty;
+        public string CFDI_Concepto_Cantidad
+        {
+            get { return _CFDI_Concepto_Cantidad.Trim(); }
+            set { _CFDI_Concepto_Cantidad = value.Trim(); }
+        }
+
+        private string _CFDI_Concepto_ClaveUnidad = string.Empty;
+        public string CFDI_Concepto_ClaveUnidad
+        {
+            get { return _CFDI_Concepto_ClaveUnidad.Trim(); }
+            set { _CFDI_Concepto_ClaveUnidad = value.Trim(); }
+        }
+
+        private string _CFDI_Concepto_Unidad = string.Empty;
+        public string CFDI_Concepto_Unidad
+        {
+            get { return _CFDI_Concepto_Unidad.Trim(); }
+            set { _CFDI_Concepto_Unidad = value.Trim(); }
+        }
+
+        private string _CFDI_Concepto_Descripcion = string.Empty;
+        public string CFDI_Concepto_Descripcion
+        {
+            get { return _CFDI_Concepto_Descripcion.Trim(); }
+            set { _CFDI_Concepto_Descripcion = value.Trim(); }
+        }
+
+        private double _CFDI_Concepto_ValorUnitario = 0;
+        public double CFDI_Concepto_ValorUnitario
+        {
+            get { return _CFDI_Concepto_ValorUnitario; }
+            set { _CFDI_Concepto_ValorUnitario = value; }
+        }
+
+        private double _CFDI_Concepto_Importe = 0;
+        public double CFDI_Concepto_Importe
+        {
+            get { return _CFDI_Concepto_Importe; }
+            set { _CFDI_Concepto_Importe = value; }
+        }
+
+        private string _Tipo_Docto;
+        public string Tipo_Docto
+        {
+            get { return _Tipo_Docto; }
+            set { _Tipo_Docto = value; }
+        }
+    }
+
     public class Poliza_Oficio:Empleado
     {
         private int _IdPoliza_Oficio;

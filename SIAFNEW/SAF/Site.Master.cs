@@ -49,12 +49,14 @@ namespace SAF
                     SesionUsu.Modifica_Ejercicio = false;
                     SesionUsu.Inicio = false;
                 }
-
-                else if (SesionUsu.Inicio == true)
-                {
+                else
                     ddlUsu_Ejercicio.SelectedValue = SesionUsu.Usu_Ejercicio;
 
-                }
+                //else if (SesionUsu.Inicio == true)
+                //{
+                //ddlUsu_Ejercicio.SelectedValue = SesionUsu.Usu_Ejercicio;
+
+                //}
             }
 
             //if (SesionUsu.Modifica_Ejercicio == true)

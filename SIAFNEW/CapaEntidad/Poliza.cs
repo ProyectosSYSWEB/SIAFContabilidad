@@ -51,6 +51,16 @@ namespace CapaEntidad
         private string _ValidaTotal = "S";
         private string _Partida;
         private int _IdCedula=0;
+        private int _IdTransf = 0;
+        private string _RutaVolante = string.Empty;
+        private bool _Validar_Total_CFDI=false;
+        private bool _Opcion_Volante;
+        private bool _Opcion_Volante2;
+        public string RutaVolante
+        {
+            get { return _RutaVolante; }
+            set { _RutaVolante = value; }
+        }
         public string Partida
         {
             get { return _Partida; }
@@ -77,6 +87,16 @@ namespace CapaEntidad
             get { return _Opcion_CFDI2; }
             set { _Opcion_CFDI2 = value; }
         }
+        public bool Opcion_Volante
+        {
+            get { return _Opcion_Volante; }
+            set { _Opcion_Volante = value; }
+        }
+        public bool Opcion_Volante2
+        {
+            get { return _Opcion_Volante2; }
+            set { _Opcion_Volante2 = value; }
+        }
 
         public int IdPoliza
         {
@@ -89,6 +109,11 @@ namespace CapaEntidad
             get { return _IdCedula; }
             set { _IdCedula = value; }
         }
+        public int IdTransf
+        {
+            get { return _IdTransf; }
+            set { _IdTransf = value; }
+        }
         public int Ejercicio
         {
             get { return _Ejercicio; }
@@ -98,6 +123,12 @@ namespace CapaEntidad
         {
             get { return _Numero_poliza.Trim(); }
             set { _Numero_poliza = value.Trim(); }
+        }
+
+        public bool Validar_Total_CFDI
+        {
+            get { return _Validar_Total_CFDI; }
+            set { _Validar_Total_CFDI = value; }
         }
         public string Centro_contable
         {

@@ -308,6 +308,7 @@ namespace CapaDatos
             for (int i = 0; i < ParametrosIn.Length; i++)
             {
                 valor = Valores[i].GetType().Name;
+                int tamanio = Valores[i].ToString().Length;
                 //string tipo = valor.GetType().Name;
                 if (valor == "Int32")
                 {

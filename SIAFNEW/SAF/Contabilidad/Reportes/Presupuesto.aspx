@@ -9,7 +9,8 @@
                 Ejercicio
             </div>
             <div class="col-md-2">
-                <asp:DropDownList ID="ddlEjercicio" runat="server">
+                <asp:DropDownList ID="ddlEjercicio" runat="server" width="100%">
+                    <asp:ListItem Value="2022">2022</asp:ListItem>
                     <asp:ListItem Value="2021">2021</asp:ListItem>
                     <asp:ListItem Value="2020">2020</asp:ListItem>
                     <asp:ListItem Value="2019">2019</asp:ListItem>
@@ -19,7 +20,7 @@
                 Periodo Inicial
             </div>
             <div class="col-md-2">
-                <asp:DropDownList ID="ddlPInicial" runat="server">
+                <asp:DropDownList ID="ddlPInicial" runat="server" width="100%">
                     <asp:ListItem Value="01">Enero</asp:ListItem>
                     <asp:ListItem Value="02">Febrero</asp:ListItem>
                     <asp:ListItem Value="03">Marzo</asp:ListItem>
