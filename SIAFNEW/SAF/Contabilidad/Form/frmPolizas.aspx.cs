@@ -259,6 +259,12 @@ namespace SAF.Form
                     }
 
                 }
+                else
+                {
+                    TotalPagos = 0;
+                    lblGranTotalInt.Text = Convert.ToString(TotalPagos);
+                    lblGranTotal.Text = Convert.ToString(TotalPagos.ToString("C"));
+                }
 
 
             }
@@ -2025,6 +2031,7 @@ namespace SAF.Form
             txtCFDI_RFC.Text = string.Empty;
             txtCFDI_Fecha.Text = string.Empty;
             txtCFDI_Total.Text = string.Empty;
+            txtNumFactura.Text = string.Empty;
 
 
             try
@@ -2036,7 +2043,7 @@ namespace SAF.Form
                     pnlPrincipal.Visible = false;
                     hddnTotCheque.Value = "0";
 
-
+                    CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Docto_CFDI", ref ddlDocto, "p_tipo_docto", grvPolizas.SelectedRow.Cells[20].Text);
 
                     lblNumPolizaCFDI.Text = "# DE PÓLIZA: " + grvPolizas.SelectedRow.Cells[2].Text;
                     if (grvPolizas.SelectedRow.Cells[4].Text == "Egreso" || grvPolizas.SelectedRow.Cells[4].Text == "Diario")
@@ -2070,6 +2077,9 @@ namespace SAF.Form
                     }
 
 
+                    ddlTipo_Gasto.SelectedIndex = 0;
+                    ddlTipo_Gasto_SelectedIndexChanged(null, null);
+                    //ddlProveedor2.SelectedIndex = 0;
                     ObjPolizaCFDI.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
                     ObjPolizaCFDI.Tipo_Docto = grvPolizas.SelectedRow.Cells[20].Text;
                     CNPolizaCFDI.PolizaCFDIConsultaDatos(ObjPolizaCFDI, ref lstPolizasCFDI, ref Verificador);
@@ -2486,6 +2496,16 @@ namespace SAF.Form
             txtRFC.Text = ddlProveedor.SelectedValue;
         }
 
+        protected void ddlProveedor2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlProveedor2.SelectedValue == "X")
+                txtProveedor2.Visible = true;
+            else
+                txtProveedor2.Visible = false;
+
+            txtCFDI_RFC.Text = ddlProveedor2.SelectedValue;
+        }
+
         protected void grdOficios_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -2662,11 +2682,14 @@ namespace SAF.Form
 
         protected void ddlDocto_SelectedIndexChanged(object sender, EventArgs e)
         {
+            lblErrorCFDI.Text = string.Empty;
             if (ddlDocto.SelectedValue == "OFICIO")
             {
                 //divOficio.Visible = true;
                 divDatosOficio.Visible = true;
                 divFacturas.Visible = false;
+                ddlProveedor2.SelectedIndex = 0;
+                ddlProveedor2_SelectedIndexChanged(null, null);
             }
             else
             {
@@ -2679,11 +2702,6 @@ namespace SAF.Form
         protected void linkBttnAgrOficio_Click(object sender, EventArgs e)
         {
 
-        }
-
-        protected void ddlProveedor2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            txtCFDI_RFC.Text = ddlProveedor2.SelectedValue;
         }
 
         protected void linkBttnOficioFact_Click(object sender, EventArgs e)
@@ -2709,9 +2727,13 @@ namespace SAF.Form
                     ObjPolizaCFDI.CFDI_Folio = string.Empty;
                     ObjPolizaCFDI.CFDI_Fecha = txtCFDI_Fecha.Text;
                     ObjPolizaCFDI.CFDI_Total = Convert.ToDouble(txtCFDI_Total.Text);
-                    ObjPolizaCFDI.CFDI_Nombre = ddlProveedor2.SelectedValue;
+                    if (ddlProveedor2.SelectedValue == "X")
+                        ObjPolizaCFDI.CFDI_Nombre = txtProveedor2.Text.ToUpper();
+                    else
+                        ObjPolizaCFDI.CFDI_Nombre = ddlProveedor2.SelectedItem.Text;
+
                     ObjPolizaCFDI.CFDI_RFC = txtCFDI_RFC.Text;
-                    ObjPolizaCFDI.CFDI_UUID = string.Empty;
+                    ObjPolizaCFDI.CFDI_UUID = txtNumFactura.Text; //string.Empty;
                     ObjPolizaCFDI.Beneficiario_Tipo = ddlTipo_Beneficiario.SelectedValue;
                     ObjPolizaCFDI.Tipo_Gasto = ddlTipo_Gasto.SelectedValue;
                     DateTime FechaActual = DateTime.Today;
@@ -2727,6 +2749,7 @@ namespace SAF.Form
                     txtCFDI_RFC.Text = string.Empty;
                     txtCFDI_Fecha.Text = string.Empty;
                     txtCFDI_Total.Text = string.Empty;
+                    txtNumFactura.Text = string.Empty;
 
                     Session["PolizasCFDI"] = lstPolizasCFDI;
                     CargarGridPolizaCFDI(lstPolizasCFDI);
@@ -2771,5 +2794,23 @@ namespace SAF.Form
             }
         }
 
+        protected void ddlTipo_Gasto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //if (ddlTipo_Gasto.SelectedValue == "COMISIONES")
+            //    reqNumFactura.ValidationGroup = string.Empty;
+            //else
+            //    reqNumFactura.ValidationGroup = "CFDI";
+            
+            //CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Proveedores", ref ddlProveedor2, "P_TIPO_GASTO", ddlTipo_Gasto.SelectedValue);
+
+        }
+
+        protected void reqNumFactura3_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if(ddlTipo_Gasto.SelectedValue == "COMISIONES")            
+                args.IsValid = false;
+            else
+                args.IsValid = true;
+        }
     }
 }

@@ -50,11 +50,11 @@ namespace CapaDatos
                     {
                         String[] Parametros = { "P_ID_POLIZA", "P_OFICIO_NUMERO", "P_OFICIO_FECHA", 
                             "P_NOMBRE_ARCHIVO", "P_USUARIO", "P_PROVEEDOR", "P_RFC", "P_IMPORTE", "P_TIPO_DOCTO", 
-                            "P_NOMBRE_EMPLEADO", "P_TIPO_EMPLEADO", "P_PLAZA_EMPLEADO", "P_TIPO_GASTO", "P_TIPO_BENEF" };
+                            "P_NOMBRE_EMPLEADO", "P_TIPO_EMPLEADO", "P_PLAZA_EMPLEADO", "P_TIPO_GASTO", "P_TIPO_BENEF", "P_CFDI_UUID" };
                         object[] Valores = { objPolizaCFDI.IdPoliza, lstPolizasCFDI[i].CFDI_Folio,  lstPolizasCFDI[i].CFDI_Fecha, 
                             lstPolizasCFDI[i].NombreArchivoPDF, lstPolizasCFDI[i].Usuario_Captura, lstPolizasCFDI[i].CFDI_Nombre,
                             lstPolizasCFDI[i].CFDI_RFC, lstPolizasCFDI[i].CFDI_Total,"COMPLEMENTO_CFDI",
-                        "","","",lstPolizasCFDI[i].Beneficiario_Tipo,lstPolizasCFDI[i].Tipo_Gasto};
+                        "","","",lstPolizasCFDI[i].Beneficiario_Tipo,lstPolizasCFDI[i].Tipo_Gasto,lstPolizasCFDI[i].CFDI_UUID};
                         String[] ParametrosOut = { "p_Bandera" };
                         Cmd = CDDatos.GenerarOracleCommand("INS_SAF_POLIZAS_OFICIOS2", ref Verificador, Parametros, Valores, ParametrosOut);
                     }

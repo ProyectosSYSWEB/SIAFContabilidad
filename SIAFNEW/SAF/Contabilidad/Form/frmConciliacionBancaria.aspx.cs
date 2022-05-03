@@ -108,8 +108,8 @@ namespace SAF.Contabilidad.Form
                 grdConciliacion.DataSource = GetList();
                 grdConciliacion.DataBind();
 
-                if (grdConciliacion.Rows.Count > 0)
-                    CNComun.HideColumns(grdConciliacion, Celdas);
+                //if (grdConciliacion.Rows.Count > 0)
+                //    CNComun.HideColumns(grdConciliacion, Celdas);
 
 
 

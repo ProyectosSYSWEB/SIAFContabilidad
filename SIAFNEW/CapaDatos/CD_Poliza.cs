@@ -152,6 +152,8 @@ namespace CapaDatos
                                 ObjPoliza.Desc_Tipo_Documento = "+ Oficio";
                             else if (Convert.ToString(dr.GetValue(18)) == "CFDI")
                                 ObjPoliza.Desc_Tipo_Documento = "+ Cfdi";
+                            else if (Convert.ToString(dr.GetValue(18)) == "AMBOS")
+                                ObjPoliza.Desc_Tipo_Documento = "+ Cfdi/Oficio";
                         }
                         else
                         {
@@ -183,7 +185,7 @@ namespace CapaDatos
                                 ObjPoliza.Desc_Tipo_Documento = Convert.ToString(dr.GetValue(14)) + " Cfdi(s)";
                         }
                     }
-                    else if (Convert.ToString(dr.GetValue(13)) == "D" && (Convert.ToString(dr.GetValue(18)) == "CFDI" || Convert.ToString(dr.GetValue(18)) == "OFICIO"))
+                    else if (Convert.ToString(dr.GetValue(13)) == "D" && (Convert.ToString(dr.GetValue(18)) == "CFDI" || Convert.ToString(dr.GetValue(18)) == "OFICIO") || Convert.ToString(dr.GetValue(18)) == "AMBOS")
                     {
                         ObjPoliza.Opcion_CFDI = true;
                         ObjPoliza.Opcion_CFDI2 = false;
@@ -194,6 +196,9 @@ namespace CapaDatos
                                 ObjPoliza.Desc_Tipo_Documento = "+ Oficio";
                             else if (Convert.ToString(dr.GetValue(18)) == "CFDI")
                                 ObjPoliza.Desc_Tipo_Documento = "+ Cfdi";
+                            else if (Convert.ToString(dr.GetValue(18)) == "AMBOS")
+                                ObjPoliza.Desc_Tipo_Documento = "+ Cfdi/Oficio";
+
                         }
                         else
                         {
@@ -201,6 +206,8 @@ namespace CapaDatos
                                 ObjPoliza.Desc_Tipo_Documento = Convert.ToString(dr.GetValue(14)) + " Oficio(s)";
                             else if (Convert.ToString(dr.GetValue(18)) == "CFDI")
                                 ObjPoliza.Desc_Tipo_Documento = Convert.ToString(dr.GetValue(14)) + " Cfdi(s)";
+                            else if (Convert.ToString(dr.GetValue(18)) == "AMBOS")
+                                ObjPoliza.Desc_Tipo_Documento = Convert.ToString(dr.GetValue(14)) + " Cfdi/Oficio";
                         }
                     }
                     else
@@ -352,12 +359,12 @@ namespace CapaDatos
             {
                 String[] Parametros = { "P_EJERCICIO", "P_NUMERO_POLIZA", "P_CENTRO_CONTABLE", "P_TIPO", "P_CONCEPTO", "P_FECHA", "P_STATUS",
                                         "P_TIPO_CAPTURA","P_ALTA_USUARIO","P_CHEQUE_CUENTA","P_CHEQUE_NUMERO","P_CHEQUE_IMPORTE","P_CEDULA_NUMERO",
-                                        "P_BENEFICIARIO", "P_CFDI", "P_OFICIO_AUTORIZACION","P_TIPO_DOCUMENTO", "P_CLASIFICACION", "P_ID_CEDULA"
-                                        };
+                                        "P_BENEFICIARIO", "P_CFDI", "P_OFICIO_AUTORIZACION","P_TIPO_DOCUMENTO", "P_CLASIFICACION", "P_ID_CEDULA",
+                                        "P_VALIDA_TOT_CFDI"};
                 object[] Valores = {    ObjPoliza.Ejercicio, ObjPoliza.Numero_poliza, ObjPoliza.Centro_contable, ObjPoliza.Tipo, ObjPoliza.Concepto,
                                         ObjPoliza.Fecha, ObjPoliza.Status, ObjPoliza.Tipo_captura, ObjPoliza.Alta_usuario, ObjPoliza.Cheque_cuenta,
                                         ObjPoliza.Cheque_numero,ObjPoliza.Cheque_importe,ObjPoliza.Cedula_numero,ObjPoliza.Beneficiario,ObjPoliza.CFDI,
-                                        ObjPoliza.Oficio_Autorizacion,ObjPoliza.Tipo_Documento,ObjPoliza.Clasificacion,ObjPoliza.IdCedula};
+                                        ObjPoliza.Oficio_Autorizacion,ObjPoliza.Tipo_Documento,ObjPoliza.Clasificacion,ObjPoliza.IdCedula, "N"};
                 String[] ParametrosOut = { "p_Bandera", "p_id_poliza" };
 
                 //Cmd = CDDatos.GenerarOracleCommand("ins_saf_polizas2", ref Verificador, Parametros, Valores, ParametrosOut);

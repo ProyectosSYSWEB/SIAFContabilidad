@@ -313,6 +313,7 @@
                                                                 OnTextChanged="txt1_TextChanged" CssClass="form-control">0000</asp:TextBox>
                                                         </ContentTemplate>
                                                     </asp:UpdatePanel>
+                                                    <asp:CustomValidator ID="valNiv1" runat="server" ClientValidationFunction="ValidaLongitudIni" ControlToValidate="txt1" ErrorMessage="*Se requiere 4 caracteres en nivel 1" ValidationGroup="guardar">*Se requiere 4 caracteres</asp:CustomValidator>
                                                 </div>
                                                 <div class="col-md-2">
                                                     Nivel2
@@ -324,6 +325,7 @@
                                                                 OnTextChanged="txt2_TextChanged" CssClass="form-control">00000</asp:TextBox>
                                                         </ContentTemplate>
                                                     </asp:UpdatePanel>
+                                                    <asp:CustomValidator ID="valNiv2" runat="server" ClientValidationFunction="ValidaLongitud" ControlToValidate="txt2" ErrorMessage="*Se requiere 5 caracteres en niveles 2,3,4" ValidationGroup="guardar">*Se requiere 5 caracteres</asp:CustomValidator>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -337,6 +339,7 @@
                                                                 Enabled="False" MaxLength="5" CssClass="form-control">00000</asp:TextBox>
                                                         </ContentTemplate>
                                                     </asp:UpdatePanel>
+                                                    <asp:CustomValidator ID="valNiv3" runat="server" ClientValidationFunction="ValidaLongitud" ControlToValidate="txt3" ErrorMessage="*Se requiere 5 caracteres" ValidationGroup="guardar"></asp:CustomValidator>
                                                 </div>
                                                 <div class="col-md-2">
                                                     Nivel 4
@@ -348,6 +351,7 @@
                                                                 OnTextChanged="txt4_TextChanged" AutoPostBack="True" CssClass="form-control" Width="100%">00000</asp:TextBox>
                                                         </ContentTemplate>
                                                     </asp:UpdatePanel>
+                                                    <asp:CustomValidator ID="valNiv4" runat="server" ClientValidationFunction="ValidaLongitud" ControlToValidate="txt4" ErrorMessage="*Se requiere 5 caracteres" ValidationGroup="guardar"></asp:CustomValidator>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <asp:UpdatePanel ID="updPnlBuscarBien" runat="server">
@@ -380,9 +384,9 @@
                                                         <ContentTemplate>
                                                             <asp:DropDownList ID="ddlDescripcion" runat="server" Visible="false" Width="100%" OnSelectedIndexChanged="ddlDescripcion_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                                                             <asp:TextBox ID="txtdescripcion" runat="server" CssClass="form-control"></asp:TextBox>
-
                                                         </ContentTemplate>
                                                     </asp:UpdatePanel>
+                                                    <asp:RequiredFieldValidator ID="reqDescripcion" runat="server" ErrorMessage="Descripción" ControlToValidate="txtdescripcion" Text="* Requerido" ValidationGroup="guardar"></asp:RequiredFieldValidator>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -451,10 +455,10 @@
                                                     <asp:UpdatePanel ID="UpdatePanel8" runat="server">
                                                         <ContentTemplate>
                                                             <asp:Button ID="BTN_Guardar" runat="server" OnClick="BTN_Guardar_Click"
-                                                                Text="Guardar" CssClass="btn btn-primary" />
+                                                                Text="Guardar" CssClass="btn btn-primary" ValidationGroup="guardar" />
                                                             &nbsp;
                                     <asp:Button ID="BTN_continuar" runat="server" OnClick="BTN_continuar_Click"
-                                        Text="Guardar y Continuar" Visible="False" CssClass="btn btn-info" />
+                                        Text="Guardar y Continuar" Visible="False" CssClass="btn btn-info" ValidationGroup="guardar" />
                                                             &nbsp;
                                     <asp:Button ID="BTN_Cancelar" runat="server" OnClick="BTN_Cancelar_Click"
                                         Text="Cancelar" CssClass="btn btn-blue-grey" />
@@ -972,6 +976,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
+
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
@@ -1120,8 +1125,8 @@
                 table.search(selectedValue).draw();--%>
 
 
-                var table = $('#<%= grdCatCOG.ClientID %>').DataTable();
-                var selectedValue = $('#<%= ddlMayor.ClientID %>').val();
+            var table = $('#<%= grdCatCOG.ClientID %>').DataTable();
+            var selectedValue = $('#<%= ddlMayor.ClientID %>').val();
             if (selectedValue != "00") {
                 table.columns(0).search(selectedValue).draw();
             }
@@ -1132,6 +1137,26 @@
         };
         function FiltBienes() {
             $('#<%= ddlDescripcion.ClientID %>').select2();
+        };
+        function ValidaLongitud(source, arguments) {
+            var Valor
+            Valor = arguments.Value;
+            if (Valor.length === 5) {
+                arguments.IsValid = true;
+            }
+            else {
+                arguments.IsValid = false;
+            }
+        };
+        function ValidaLongitudIni(source, arguments) {
+            var Valor
+            Valor = arguments.Value;
+            if (Valor.length === 4) {                
+                arguments.IsValid = true;
+            }
+            else {                
+                arguments.IsValid = false;
+            }
         };
     </script>
 </asp:Content>

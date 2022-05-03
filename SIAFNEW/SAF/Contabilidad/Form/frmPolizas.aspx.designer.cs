@@ -1032,6 +1032,15 @@ namespace SAF.Form
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator10;
 
         /// <summary>
+        /// Control valNumPoliza.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator valNumPoliza;
+
+        /// <summary>
         /// Control ValidatorNumPoliza.
         /// </summary>
         /// <remarks>
@@ -1392,6 +1401,15 @@ namespace SAF.Form
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqBenef;
 
         /// <summary>
+        /// Control UpdatePanel7.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel7;
+
+        /// <summary>
         /// Control ddlTipo_Gasto.
         /// </summary>
         /// <remarks>
@@ -1419,6 +1437,15 @@ namespace SAF.Form
         protected global::System.Web.UI.WebControls.DropDownList ddlDocto;
 
         /// <summary>
+        /// Control updPrgGasto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPrgGasto;
+
+        /// <summary>
         /// Control divDatosOficio.
         /// </summary>
         /// <remarks>
@@ -1428,13 +1455,13 @@ namespace SAF.Form
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDatosOficio;
 
         /// <summary>
-        /// Control UpdatePanel19.
+        /// Control updPnlProveedor2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel19;
+        protected global::System.Web.UI.UpdatePanel updPnlProveedor2;
 
         /// <summary>
         /// Control ddlProveedor2.
@@ -1446,13 +1473,13 @@ namespace SAF.Form
         protected global::System.Web.UI.WebControls.DropDownList ddlProveedor2;
 
         /// <summary>
-        /// Control TextBox2.
+        /// Control txtProveedor2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox txtProveedor2;
 
         /// <summary>
         /// Control reqProv.
@@ -1491,6 +1518,51 @@ namespace SAF.Form
         protected global::System.Web.UI.WebControls.TextBox txtCFDI_Fecha;
 
         /// <summary>
+        /// Control calCFDI_Fecha.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender calCFDI_Fecha;
+
+        /// <summary>
+        /// Control imgCFDI_Fecha.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgCFDI_Fecha;
+
+        /// <summary>
+        /// Control reqCFDI_Fecha.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqCFDI_Fecha;
+
+        /// <summary>
+        /// Control txtNumFactura.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNumFactura;
+
+        /// <summary>
+        /// Control reqNumFactura4.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator reqNumFactura4;
+
+        /// <summary>
         /// Control txtCFDI_Total.
         /// </summary>
         /// <remarks>
@@ -1498,6 +1570,15 @@ namespace SAF.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCFDI_Total;
+
+        /// <summary>
+        /// Control reqCFDI_Total.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqCFDI_Total;
 
         /// <summary>
         /// Control UpdatePanel20.
@@ -1525,6 +1606,15 @@ namespace SAF.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton linkBttnOficioFact;
+
+        /// <summary>
+        /// Control reqOficioFactura.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqOficioFactura;
 
         /// <summary>
         /// Control RegularExpressionValidator4.

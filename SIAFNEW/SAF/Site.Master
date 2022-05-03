@@ -90,6 +90,10 @@
             height: 320px;
             overflow: auto;
         }
+
+        .classHide {
+            display: none
+        }
     </style>
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
@@ -176,14 +180,14 @@
                     </div>
                     <div class="btn-group dropdown my-2 my-lg-9" style="left: 0px; top: 0px">
                         <asp:UpdateProgress ID="UpdPgrl10" runat="server" AssociatedUpdatePanelID="UpdatePanel10">
-                                        <ProgressTemplate>
-                                            <div class="overlay">
-                                                <div class="overlayContent">
-                                                    <asp:Image ID="img3" runat="server" Height="46px" ImageUrl="~/images/loader2.gif" Width="46px" />
-                                                </div>
-                                            </div>
-                                        </ProgressTemplate>
-                                    </asp:UpdateProgress>
+                            <ProgressTemplate>
+                                <div class="overlay">
+                                    <div class="overlayContent">
+                                        <asp:Image ID="img3" runat="server" Height="46px" ImageUrl="~/images/loader2.gif" Width="46px" />
+                                    </div>
+                                </div>
+                            </ProgressTemplate>
+                        </asp:UpdateProgress>
                         <asp:UpdatePanel ID="UpdatePanel10" runat="server">
                             <ContentTemplate>
                                 <asp:DropDownList ID="ddlUsu_Ejercicio" runat="server"

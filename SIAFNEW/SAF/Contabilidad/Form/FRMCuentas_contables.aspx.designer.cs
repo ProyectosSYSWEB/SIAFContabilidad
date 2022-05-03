@@ -204,6 +204,15 @@ namespace SAF.Rep
         protected global::System.Web.UI.WebControls.TextBox txt1;
 
         /// <summary>
+        /// Control valNiv1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator valNiv1;
+
+        /// <summary>
         /// Control UpdatePanel4.
         /// </summary>
         /// <remarks>
@@ -220,6 +229,15 @@ namespace SAF.Rep
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt2;
+
+        /// <summary>
+        /// Control valNiv2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator valNiv2;
 
         /// <summary>
         /// Control UpdatePanel15.
@@ -240,6 +258,15 @@ namespace SAF.Rep
         protected global::System.Web.UI.WebControls.TextBox txt3;
 
         /// <summary>
+        /// Control valNiv3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator valNiv3;
+
+        /// <summary>
         /// Control UpdatePanel16.
         /// </summary>
         /// <remarks>
@@ -256,6 +283,15 @@ namespace SAF.Rep
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt4;
+
+        /// <summary>
+        /// Control valNiv4.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator valNiv4;
 
         /// <summary>
         /// Control updPnlBuscarBien.
@@ -310,6 +346,15 @@ namespace SAF.Rep
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtdescripcion;
+
+        /// <summary>
+        /// Control reqDescripcion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqDescripcion;
 
         /// <summary>
         /// Control Label5.

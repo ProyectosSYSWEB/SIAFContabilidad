@@ -1569,7 +1569,7 @@ namespace SAF.Form
                 lblNumPolizaCFDI.Text ="# DE PÓLIZA: "+ grvPolizas.SelectedRow.Cells[2].Text;
                 //lblTotAbonoPol.Text = "TOTAL ABONO:"+ grvPolizas.SelectedRow.Cells[9].Text;
                 ObjPolizaCFDI.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
-                CNPolizaCFDI.PolizaCFDIConsultaDatos(ObjPolizaCFDI, ref lstPolizasCFDI, ref Verificador);
+                //CNPolizaCFDI.PolizaCFDIConsultaDatos(ObjPolizaCFDI, ref lstPolizasCFDI, ref Verificador);
                 if (lstPolizasCFDI.Count > 0)
                 {
                     Session["PolizasCFDI"] = lstPolizasCFDI;

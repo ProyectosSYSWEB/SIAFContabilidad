@@ -53,10 +53,6 @@
             /*height: 500px;*/
             overflow-x: auto;
         }
-
-        .classHide {
-            display: none
-        }
     </style>
     <script type="text/javascript">
 
@@ -491,6 +487,7 @@
                                         <asp:ListItem Value="TODOS">Todos</asp:ListItem>
                                         <asp:ListItem Value="OFICIO">Oficio</asp:ListItem>
                                         <asp:ListItem Value="CFDI">Cfdi</asp:ListItem>
+                                        <asp:ListItem Value="AMBOS">Cfdi y Oficio</asp:ListItem>
                                         <asp:ListItem Value="N">Ninguno</asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
@@ -789,6 +786,8 @@
                                                                         onkeyup="MascaraNumPoliza(this,2);" Width="80px"></asp:TextBox>--%>
                                                                     </div>
                                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtNumero_Poliza_Copia" ErrorMessage="*El # de póliza debe ser de 7 Digitos" ValidationExpression="^[\s\S]{4,4}$" ValidationGroup="Poliza"></asp:RegularExpressionValidator>
+
+
                                                                     <asp:RequiredFieldValidator ID="reqPolizaCopia" runat="server" ControlToValidate="txtNumero_Poliza_Copia" ErrorMessage="*Número de Poliza" ValidationGroup="Poliza">*Requerido</asp:RequiredFieldValidator>
                                                                     <asp:CustomValidator ID="CustomValidator2" runat="server" ClientValidationFunction="ClientValidate" ControlToValidate="txtNumero_Poliza_Copia" ErrorMessage="*Número Reservado" ValidationGroup="Poliza"></asp:CustomValidator>
 
@@ -918,7 +917,7 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col">
-                                            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0"
+                                            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="1"
                                                 CssClass="ajax__myTab" Width="100%">
                                                 <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                                                     <HeaderTemplate>
@@ -1097,6 +1096,7 @@
                                                                 <div class="col-md-4">
                                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator101" runat="server" ControlToValidate="txtNumero_Poliza" ErrorMessage="*El # de póliza debe ser de 7 Digitos" ValidationExpression="^[\s\S]{4,4}$" ValidationGroup="Poliza"></asp:RegularExpressionValidator>
                                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="txtNumero_Poliza" ErrorMessage="*Número de Poliza" ValidationGroup="Poliza">*Requerido</asp:RequiredFieldValidator>
+                                                                    <asp:RegularExpressionValidator ID="valNumPoliza" runat="server" ControlToValidate="txtNumero_Poliza" CssClass="MsjError" ErrorMessage="*El # de póliza debe ser numérico" SetFocusOnError="True" ValidationExpression="^(-?\d{0,13}\.\d{0,2}|\d{0,13})$" ValidationGroup="Poliza">*Solo Números</asp:RegularExpressionValidator>
                                                                     <asp:CustomValidator ID="ValidatorNumPoliza" runat="server" ClientValidationFunction="ClientValidate" ControlToValidate="txtNumero_Poliza" ErrorMessage="*Número Reservado" ValidationGroup="Poliza"></asp:CustomValidator>
                                                                 </div>
                                                             </div>
@@ -1192,7 +1192,6 @@
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col">
-
                                                                     <asp:GridView ID="grvPolizas_Detalle" runat="server" AutoGenerateColumns="False" CssClass="mGrid" OnRowCancelingEdit="grvPolizas_Detalle_RowCancelingEdit" OnRowDeleting="grvPolizas_Detalle_RowDeleting" OnRowEditing="grvPolizas_Detalle_RowEditing" OnRowUpdating="EditaRegistro" OnSelectedIndexChanged="grvPolizas_Detalle_SelectedIndexChanged" Width="100%">
                                                                         <Columns>
                                                                             <asp:BoundField DataField="IdCuenta_Contable" HeaderText="IdCuenta_Contable" ReadOnly="True" />
@@ -1201,7 +1200,9 @@
                                                                                     <asp:Label ID="lblNumero_Movimiento_Aut" runat="server" Text="<%# (grvPolizas_Detalle.PageSize * grvPolizas_Detalle.PageIndex) + Container.DisplayIndex + 1 %>"></asp:Label>
                                                                                 </ItemTemplate>
                                                                             </asp:TemplateField>
-                                                                            <asp:BoundField DataField="DescCuenta_Contable" HeaderText="Cuenta Contable" ReadOnly="True" />
+                                                                            <asp:BoundField DataField="DescCuenta_Contable" HeaderText="Cuenta Contable" ReadOnly="True">
+                                                                                <ItemStyle Width="85%" />
+                                                                            </asp:BoundField>
                                                                             <asp:BoundField DataField="Cargo" ReadOnly="True" />
                                                                             <asp:BoundField DataField="Abono" ReadOnly="True" />
                                                                             <asp:BoundField DataField="Cargo" DataFormatString="{0:c}" HeaderText="Cargo" />
@@ -1281,13 +1282,18 @@
                                                 </asp:DropDownList>
                                             </div>
                                             <div class="col-md-1">
-                                                <asp:RequiredFieldValidator ID="reqBenef" runat="server" ControlToValidate="ddlTipo_Beneficiario" ErrorMessage="* Tipo de Beneficiario" InitialValue="0" ValidationGroup="CFDI">*Requerido</asp:RequiredFieldValidator></div>
+                                                <asp:RequiredFieldValidator ID="reqBenef" runat="server" ControlToValidate="ddlTipo_Beneficiario" ErrorMessage="* Tipo de Beneficiario" InitialValue="0" ValidationGroup="CFDI">*Requerido</asp:RequiredFieldValidator>
+                                            </div>
                                             <div class="col-md-1">
                                                 Gasto
                                             </div>
                                             <div class="col-md-2">
-                                                <asp:DropDownList ID="ddlTipo_Gasto" runat="server" Width="100%">
-                                                </asp:DropDownList>
+                                                <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+                                                    <ContentTemplate>
+                                                        <asp:DropDownList ID="ddlTipo_Gasto" runat="server" Width="100%" OnSelectedIndexChanged="ddlTipo_Gasto_SelectedIndexChanged">
+                                                        </asp:DropDownList>
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
                                             </div>
                                             <div class="col-md-1">
                                                 <asp:RequiredFieldValidator ID="reqGasto" runat="server" ControlToValidate="ddlTipo_Gasto" ErrorMessage="* Tipo de Gasto" InitialValue="0" ValidationGroup="CFDI">*Requerido</asp:RequiredFieldValidator>
@@ -1302,6 +1308,17 @@
                                                 </asp:DropDownList>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col text-center">
+                                                <asp:UpdateProgress ID="updPrgGasto" runat="server" AssociatedUpdatePanelID="UpdatePanel7">
+                                                    <ProgressTemplate>
+                                                        <asp:Image ID="imgGasto" runat="server" Height="50px" ImageUrl="http://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                                            Width="50px" AlternateText="Espere un momento, por favor.."
+                                                            ToolTip="Espere un momento, por favor.." />
+                                                    </ProgressTemplate>
+                                                </asp:UpdateProgress>
+                                            </div>
+                                        </div>
                                         <div id="divDatosOficio" runat="server" visible="false" class="alert alert-warning">
                                             <div class="row">
                                                 <div class="col">
@@ -1311,13 +1328,13 @@
                                             <div class="row">
                                                 <div class="col-md-1">Proveedor</div>
                                                 <div class="col-md-11">
-                                                    <asp:UpdatePanel ID="UpdatePanel19" runat="server">
+                                                    <asp:UpdatePanel ID="updPnlProveedor2" runat="server">
                                                         <ContentTemplate>
                                                             <asp:DropDownList ID="ddlProveedor2" runat="server" Width="100%" OnSelectedIndexChanged="ddlProveedor2_SelectedIndexChanged" AutoPostBack="True" CssClass="select2"></asp:DropDownList>
-                                                            <asp:TextBox ID="TextBox2" runat="server" Width="100%" Visible="False" AutoPostBack="True" PlaceHolder="Nombre del Proveedor"></asp:TextBox>
+                                                            <asp:TextBox ID="txtProveedor2" runat="server" Width="100%" Visible="False" AutoPostBack="True" PlaceHolder="Nombre del Proveedor"></asp:TextBox>
                                                         </ContentTemplate>
                                                     </asp:UpdatePanel>
-                                                    <asp:RequiredFieldValidator ID="reqProv" runat="server" ErrorMessage="*Proveedor" ControlToValidate="ddlProveedor2" Text="* Requerido" ValidationGroup="CFDI"></asp:RequiredFieldValidator>
+                                                    <asp:RequiredFieldValidator ID="reqProv" runat="server" ErrorMessage="*Proveedor" ControlToValidate="ddlProveedor2" Text="* Requerido" ValidationGroup="CFDI" InitialValue="Z"></asp:RequiredFieldValidator>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -1330,15 +1347,30 @@
                                                 </div>
                                                 <div class="col-md-1">Fecha</div>
                                                 <div class="col-md-2">
-                                                    <asp:TextBox ID="txtCFDI_Fecha" runat="server"></asp:TextBox>
+                                                    <asp:TextBox ID="txtCFDI_Fecha" runat="server" Width="80px"></asp:TextBox>
+                                                    <ajaxToolkit:CalendarExtender ID="calCFDI_Fecha" runat="server" TargetControlID="txtCFDI_Fecha" PopupButtonID="imgCFDI_Fecha" />
+                                                    <asp:ImageButton ID="imgCFDI_Fecha" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <asp:RequiredFieldValidator ID="reqCFDI_Fecha" runat="server" ErrorMessage="*CFDI Fecha" ControlToValidate="txtCFDI_Fecha" Text="* Requerido" ValidationGroup="CFDI"></asp:RequiredFieldValidator>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-1"># Factura</div>
+                                                <div class="col-md-2">
+                                                    <asp:TextBox ID="txtNumFactura" runat="server"></asp:TextBox>
                                                 </div>
                                                 <div class="col-md-1">
+                                                    <%--<asp:RequiredFieldValidator ID="reqNumFactura2" runat="server" ErrorMessage="*# Factura" ControlToValidate="txtNumFactura" Text="* Requerido" ValidationGroup="CFDI"></asp:RequiredFieldValidator>--%>
+                                                    <asp:CustomValidator ID="reqNumFactura4" runat="server" ControlToValidate="txtNumFactura" ErrorMessage="*# Factura" ValidationGroup="CFDI" ValidateEmptyText="True" ClientValidationFunction="RequeridoNumFactura" Text="* Requerido"></asp:CustomValidator>
                                                 </div>
-                                                <div class="col-md-1">Total</div>
+                                                <div class="col-md-1">Monto</div>
                                                 <div class="col-md-2">
                                                     <asp:TextBox ID="txtCFDI_Total" runat="server"></asp:TextBox>
                                                 </div>
-                                                <div class="col-md-1"></div>
+                                                <div class="col-md-4">
+                                                    <asp:RequiredFieldValidator ID="reqCFDI_Total" runat="server" ErrorMessage="*CFDI Total" ControlToValidate="txtCFDI_Total" Text="* Requerido" ValidationGroup="CFDI"></asp:RequiredFieldValidator>
+                                                </div>
                                             </div>
                                             <asp:UpdatePanel ID="UpdatePanel20" runat="server">
                                                 <ContentTemplate>
@@ -1355,6 +1387,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
+                                                            <asp:RequiredFieldValidator ID="reqOficioFactura" runat="server" ErrorMessage="*Archivo Constancia" ControlToValidate="fileOficioFactura" Text="* Requerido" ValidationGroup="CFDI"></asp:RequiredFieldValidator>
                                                             <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="fileOficioFactura" ErrorMessage="Archivo incorrecto, debe ser un PDF" ValidationExpression="(.*?)\.(pdf|PDF)$" ValidationGroup="CFDI"></asp:RegularExpressionValidator>
                                                         </div>
                                                     </div>
@@ -1444,9 +1477,10 @@
                                                                         <asp:Label ID="Label1" runat="server" Text='<%# Bind("CFDI_Total") %>'></asp:Label>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
-                                                                <asp:BoundField HeaderText="Tipo_Docto" DataField="Tipo_Docto" >                                                                    
+                                                                <asp:BoundField HeaderText="Tipo_Docto" DataField="Tipo_Docto">
                                                                     <HeaderStyle HorizontalAlign="Center" />
-                                                                    <ItemStyle BackColor="#FFFF66" Font-Bold="True" HorizontalAlign="Center" /></asp:BoundField>
+                                                                    <ItemStyle BackColor="#FFFF66" Font-Bold="True" HorizontalAlign="Center" />
+                                                                </asp:BoundField>
                                                                 <asp:TemplateField>
                                                                     <ItemTemplate>
                                                                         <asp:LinkButton ID="linkBttnVer" runat="server" OnClick="linkBttnVer_Click">Conceptos</asp:LinkButton>
@@ -1938,7 +1972,7 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
     <script type="text/javascript">
 
         function FiltNumCedulas() {
@@ -2047,5 +2081,24 @@
         };
 
 
+        function RequeridoNumFactura(source, args) {
+            var v = document.getElementById('<%=ddlTipo_Gasto.ClientID%>').value;
+            if (v == 'COMISIONES') {
+                args.IsValid = true;  // field is empty
+            }
+            else {
+                args.IsValid = false;
+            }
+
+
+            <%--var TipoGasto = $('#<%= ddlTipo_Gasto.ClientID %>').val();
+            alert(TipoGasto);
+            if (TipoGasto === "COMISIONES") {
+                arguments.IsValid = false;
+            }
+            else {
+                arguments.IsValid = true;
+            }--%>
+        };
     </script>
 </asp:Content>
