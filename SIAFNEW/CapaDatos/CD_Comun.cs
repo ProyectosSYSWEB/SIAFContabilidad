@@ -939,6 +939,56 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        public void ObjetosInhabiles(ref List<Comun> List)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+                OracleDataReader dr = null;
+                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Inhabiles", ref dr);
+                while (dr.Read())
+                {
+                    Comun objMonitor = new Comun();
+                    objMonitor.Descripcion = Convert.ToString(dr.GetValue(0));
+                    List.Add(objMonitor);
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+        public void refresh_vmaterilaizada(Comun objComun, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+
+                String[] Parametros = { "p_vista" };
+                Object[] Valores = { objComun.Etiqueta };
+                String[] ParametrosOut = { "p_bandera" };
+
+
+                cmm = CDDatos.GenerarOracleCommand("GRL_REFRESCAR_VMATERIALIZADAS", ref Verificador, Parametros, Valores, ParametrosOut);
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
 
         public void MonitorGrupo(string Usuario, string Sistema, string Centro_Contable, string Grupo, ref List<Comun> List)
         {
@@ -998,7 +1048,35 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        //public void Sincronizacion(ref List<Comun> List)
+        //{
+        //    CD_Datos CDDatos = new CD_Datos();
+        //    OracleCommand cmm = null;
+        //    try
+        //    {
+        //        OracleDataReader dr = null;
 
+        //        String[] Parametros = { "p_centro_contable", "p_ejercicio", "p_clave" };
+        //        String[] Valores = { Centro_Contable, Ejercicio, Clave };
+
+        //        cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Detalle_Monitor", ref dr, Parametros, Valores);
+        //        while (dr.Read())
+        //        {
+        //            Comun objMonitor = new Comun();
+        //            objMonitor.Descripcion = Convert.ToString(dr.GetValue(2));
+        //            List.Add(objMonitor);
+        //        }
+        //        dr.Close();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        CDDatos.LimpiarOracleCommand(ref cmm);
+        //    }
+        //}
 
         public void Monitor_Patrimonio(string Centro_Contable, ref List<Comun> List)
         {

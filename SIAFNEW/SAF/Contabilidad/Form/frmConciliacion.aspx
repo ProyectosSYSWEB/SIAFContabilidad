@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmConciliacionBancaria.aspx.cs" Inherits="SAF.Contabilidad.Form.frmConciliacionBancaria" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmConciliacion.aspx.cs" Inherits="SAF.Contabilidad.Form.frmConciliacion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script src="../../Scripts/DataTables/jquery.dataTables.min.js"></script>
@@ -158,79 +158,6 @@
                                 </asp:UpdatePanel>
                             </div>
                         </div>
-                        <asp:HiddenField ID="hddnEdoCta" runat="server" />
-                        <ajaxToolkit:ModalPopupExtender ID="modalAdj" runat="server" TargetControlID="hddnEdoCta" PopupControlID="pnlDoctos" BackgroundCssClass="modalBackground_Proy">
-                        </ajaxToolkit:ModalPopupExtender>
-                        <asp:Panel ID="pnlDoctos" runat="server" CssClass="TituloModalPopupMsg">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col alert alert-warning alert-dismissible fade show">
-                                        <i class="fa fa-cloud-upload" aria-hidden="true"></i>ESTADO DE CUENTA
-                                    </div>
-                                </div>
-                                <br />
-                                <div class="row">
-                                    <div class="col">
-                                        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                                            <ContentTemplate>
-                                                <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">PDF</span>
-                                                    </div>
-                                                    <div class="custom-file">
-                                                        <asp:FileUpload ID="FileUpload1" runat="server" class="form-control" Height="40px" Width="100%" />
-                                                    </div>
-                                                    <div class="input-group-append">
-                                                        <asp:Button ID="bttnAdjuntar" runat="server" Text="Agregar" OnClick="bttnAdjuntar_Click" CssClass="btn btn-mdb-color" OnClientClick="mostrar_spinner( )" ValidationGroup="XLS" Style="left: 0px; top: 0px" />
-                                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="FileUpload1" ErrorMessage="Archivo incorrecto, debe ser un PDF" ValidationExpression="(.*?)\.(pdf|PDF)$" ValidationGroup="PDF"></asp:RegularExpressionValidator>
-                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="*Archivo XML" ControlToValidate="FileUpload1" Text="*" ValidationGroup="XLS"></asp:RequiredFieldValidator>
-                                                    </div>
-                                                </div>
-                                            </ContentTemplate>
-                                            <Triggers>
-                                                <asp:PostBackTrigger ControlID="bttnAdjuntar" />
-                                            </Triggers>
-                                        </asp:UpdatePanel>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <asp:UpdatePanel ID="UpdatePanel37" runat="server">
-                                            <ContentTemplate>
-                                                <div class="izquierda">
-                                                    <asp:GridView ID="grdDoctos" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" OnRowDeleting="grdDoctos_RowDeleting">
-                                                        <Columns>
-                                                            <asp:BoundField DataField="NombreArchivoPDF" HeaderText="Archivo" />
-                                                            <asp:TemplateField>
-                                                                <ItemTemplate>
-                                                                    <asp:HyperLink ID="linkArchivoPDF" runat="server" NavigateUrl='<%# Bind("Ruta_PDF") %>' Target="_blank">Ver</asp:HyperLink>
-                                                                </ItemTemplate>
-                                                            </asp:TemplateField>
-                                                            <asp:TemplateField ShowHeader="False">
-                                                                <ItemTemplate>
-                                                                    <asp:LinkButton ID="linkBttnEliminarAdj" runat="server" CausesValidation="False" CommandName="Delete" Text="Eliminar" OnClientClick="return confirm('¿Desea eliminar el registro?');"></asp:LinkButton>
-                                                                </ItemTemplate>
-                                                            </asp:TemplateField>
-                                                        </Columns>
-                                                        <FooterStyle CssClass="enc" />
-                                                        <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                        <SelectedRowStyle CssClass="sel" />
-                                                        <HeaderStyle CssClass="enc" />
-                                                        <AlternatingRowStyle CssClass="alt" />
-                                                    </asp:GridView>
-                                                </div>
-                                            </ContentTemplate>
-                                        </asp:UpdatePanel>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col text-right">
-                                        <asp:Button ID="btnCancelarAdj" runat="server" CausesValidation="False" CssClass="btn btn-blue-grey" OnClick="btnCancelarAdj_Click" Text="Cancelar" />
-                                        &nbsp;&nbsp;<asp:Button ID="btnGuardarAdj" runat="server" CssClass="btn btn-primary" OnClick="btnGuardarAdj_Click" Text="Guardar" ValidationGroup="Guardar" />
-                                    </div>
-                                </div>
-                            </div>
-                        </asp:Panel>
                     </div>
                 </asp:View>
                 <asp:View ID="View2" runat="server">
@@ -714,3 +641,4 @@
         };
     </script>
 </asp:Content>
+

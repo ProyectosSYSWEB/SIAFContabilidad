@@ -17,13 +17,20 @@ namespace SAF.Contabilidad.Form
         Sesion SesionUsu = new Sesion();
         string Verificador = string.Empty;
         CN_Comun CNComun = new CN_Comun();
+        Comun objComun = new Comun();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
             SesionUsu = (Sesion)Session["Usuario"];
             if (!IsPostBack)
             {
-                Cargarcombos();                
+                Cargarcombos();
+                CargarGrid_view_inhabiles();
+                if (SesionUsu.Usu_TipoUsu != "3")
+                    grvInhabiles.Visible = false;
+                else
+                    grvInhabiles.Visible = true;
+
             }
         }
 
@@ -50,6 +57,24 @@ namespace SAF.Contabilidad.Form
             }
 
         }
+        private void CargarGrid_view_inhabiles()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                grvInhabiles.DataSource = dt;
+                grvInhabiles.DataSource = GetListInhabiles();
+                grvInhabiles.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+            }
+
+        }
         private List<Comun> GetList()
         {
             try
@@ -63,6 +88,22 @@ namespace SAF.Contabilidad.Form
                 throw new Exception(ex.Message);
             }
         }
+
+        private List<Comun> GetListInhabiles()
+        {
+            try
+            {
+                List<Comun> List = new List<Comun>();
+                CNComun.ObjetosInhabiles(ref List);
+                return List;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+
         private void Cargarcombos()
         {
             Verificador = string.Empty;
@@ -98,6 +139,25 @@ namespace SAF.Contabilidad.Form
         protected void DDLFiltro_SelectedIndexChanged(object sender, EventArgs e)
         {
             MonitorConsultaGrid();
+        }
+
+
+        protected void grvInhabilesRecibos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            objComun.Etiqueta = grvInhabiles.SelectedRow.Cells[0].Text;
+            CNComun.refresh_vmaterilaizada(objComun, ref Verificador);
+            if (Verificador == "0")
+            {
+                DDLCentro_Contable_SelectedIndexChanged(null, null);
+                CargarGrid_view_inhabiles();
+                MonitorConsultaGrid();
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(1, 'La información se ha sincronizado correctamente');", true); //lblMsj.Text = ex.Message;blMsj.Text = "La información se ha sincronizado correctamente";
+            }
+            else
+            {
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true); //lblMsj.Text = ex.Message;
+            }
         }
     }
 }

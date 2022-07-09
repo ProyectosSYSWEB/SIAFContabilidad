@@ -123,6 +123,8 @@
     <Content Include="Contabilidad\Form\frmAdmin_CFDI.aspx" />
     <Content Include="Contabilidad\Form\frmCatEmpleados.aspx" />
     <Content Include="Contabilidad\Form\frmComprobaciones.aspx" />
+    <Content Include="Contabilidad\Form\frmConciliacion.aspx" />
+    <Content Include="Contabilidad\Form\frmConciliacionBancaria3.aspx" />
     <Content Include="Contabilidad\Form\frmConciliacionBancaria2.aspx" />
     <Content Include="Contabilidad\Form\frmConciliacionBancaria.aspx" />
     <Content Include="Contabilidad\Form\FRMCuentas_contables.aspx" />
@@ -741,6 +743,20 @@
     </Compile>
     <Compile Include="Contabilidad\Form\frmComprobaciones.aspx.designer.cs">
       <DependentUpon>frmComprobaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contabilidad\Form\frmConciliacion.aspx.cs">
+      <DependentUpon>frmConciliacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\Form\frmConciliacion.aspx.designer.cs">
+      <DependentUpon>frmConciliacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contabilidad\Form\frmConciliacionBancaria3.aspx.cs">
+      <DependentUpon>frmConciliacionBancaria3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\Form\frmConciliacionBancaria3.aspx.designer.cs">
+      <DependentUpon>frmConciliacionBancaria3.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contabilidad\Form\frmConciliacionBancaria2.aspx.cs">
       <DependentUpon>frmConciliacionBancaria2.aspx</DependentUpon>

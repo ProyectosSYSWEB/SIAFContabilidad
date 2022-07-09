@@ -283,12 +283,6 @@
                                                 OnSelectedIndexChanged="DDLCentro_Contable_SelectedIndexChanged"
                                                 ValidationGroup="Nuevo" CssClass="auto-style1">
                                             </asp:DropDownList>
-                                            <%-- <asp:DropDownList ID="DDLCentro_Contable" runat="server" Width="100%"
-                                                AutoPostBack="True"
-                                                OnSelectedIndexChanged="DDLCentro_Contable_SelectedIndexChanged" 
-                                                -onChange="LimpiarGrid()"
-                                                ValidationGroup="Nuevo" CssClass="auto-style1">
-                                            </asp:DropDownList>--%>
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
 
@@ -300,7 +294,6 @@
                                     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                         <ContentTemplate>
                                             <asp:LinkButton ID="linkBttnNuevo" runat="server" CssClass="btn btn-mdb-color" OnClick="linkBttnNuevo_Click" ValidationGroup="Nuevo"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo</asp:LinkButton>
-                                            <%--<asp:ImageButton ID="btnNuevo" runat="server" ImageUrl="http://sysweb.unach.mx/resources/imagenes/nuevo.png" OnClick="btnNuevo_Click" title="Nuevo" ValidationGroup="Nuevo" />--%>
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
                                 </div>
@@ -789,7 +782,7 @@
 
 
                                                                     <asp:RequiredFieldValidator ID="reqPolizaCopia" runat="server" ControlToValidate="txtNumero_Poliza_Copia" ErrorMessage="*Número de Poliza" ValidationGroup="Poliza">*Requerido</asp:RequiredFieldValidator>
-                                                                    <asp:CustomValidator ID="CustomValidator2" runat="server" ClientValidationFunction="ClientValidate" ControlToValidate="txtNumero_Poliza_Copia" ErrorMessage="*Número Reservado" ValidationGroup="Poliza"></asp:CustomValidator>
+                                                                    <%--<asp:CustomValidator ID="CustomValidator2" runat="server" ClientValidationFunction="ClientValidate" ControlToValidate="txtNumero_Poliza_Copia" ErrorMessage="*Número Reservado" ValidationGroup="Poliza"></asp:CustomValidator>--%>
 
                                                                     <%-- <asp:RegularExpressionValidator ID="RegularExpressionValidator105"
                                                                         runat="server" ControlToValidate="txtNumero_Poliza_Copia"
@@ -1097,7 +1090,7 @@
                                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator101" runat="server" ControlToValidate="txtNumero_Poliza" ErrorMessage="*El # de póliza debe ser de 7 Digitos" ValidationExpression="^[\s\S]{4,4}$" ValidationGroup="Poliza"></asp:RegularExpressionValidator>
                                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="txtNumero_Poliza" ErrorMessage="*Número de Poliza" ValidationGroup="Poliza">*Requerido</asp:RequiredFieldValidator>
                                                                     <asp:RegularExpressionValidator ID="valNumPoliza" runat="server" ControlToValidate="txtNumero_Poliza" CssClass="MsjError" ErrorMessage="*El # de póliza debe ser numérico" SetFocusOnError="True" ValidationExpression="^(-?\d{0,13}\.\d{0,2}|\d{0,13})$" ValidationGroup="Poliza">*Solo Números</asp:RegularExpressionValidator>
-                                                                    <asp:CustomValidator ID="ValidatorNumPoliza" runat="server" ClientValidationFunction="ClientValidate" ControlToValidate="txtNumero_Poliza" ErrorMessage="*Número Reservado" ValidationGroup="Poliza"></asp:CustomValidator>
+                                                                    <%--<asp:CustomValidator ID="ValidatorNumPoliza" runat="server" ClientValidationFunction="ClientValidate" ControlToValidate="txtNumero_Poliza" ErrorMessage="*Número Reservado" ValidationGroup="Poliza"></asp:CustomValidator>--%>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
@@ -1302,10 +1295,25 @@
                                                 Docto
                                             </div>
                                             <div class="col-md-2">
-                                                <asp:DropDownList ID="ddlDocto" runat="server" Width="100%" CssClass="btn btn-primary dropdown-toggle browser-default custom-select custom-select-lg mb-3" AutoPostBack="True" OnSelectedIndexChanged="ddlDocto_SelectedIndexChanged">
-                                                    <asp:ListItem>CFDI</asp:ListItem>
-                                                    <asp:ListItem>OFICIO</asp:ListItem>
-                                                </asp:DropDownList>
+                                                <asp:UpdatePanel ID="updPnlDocto" runat="server">
+                                                    <ContentTemplate>
+                                                        <asp:DropDownList ID="ddlDocto" runat="server" Width="100%" CssClass="btn btn-primary dropdown-toggle browser-default custom-select custom-select-lg mb-3" AutoPostBack="True" OnSelectedIndexChanged="ddlDocto_SelectedIndexChanged">
+                                                            <asp:ListItem>CFDI</asp:ListItem>
+                                                            <asp:ListItem>OFICIO</asp:ListItem>
+                                                        </asp:DropDownList>
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col text-center">
+                                                <asp:UpdateProgress ID="updPgrDocto" runat="server" AssociatedUpdatePanelID="updPnlDocto">
+                                                    <ProgressTemplate>
+                                                        <asp:Image ID="imgDocto" runat="server" Height="50px" ImageUrl="http://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                                            Width="50px" AlternateText="Espere un momento, por favor.."
+                                                            ToolTip="Espere un momento, por favor.." />
+                                                    </ProgressTemplate>
+                                                </asp:UpdateProgress>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -1321,11 +1329,30 @@
                                         </div>
                                         <div id="divDatosOficio" runat="server" visible="false" class="alert alert-warning">
                                             <div class="row">
-                                                <div class="col">
+                                                <div class="col-md-9">
                                                     <strong>Capturar los datos de la factura (cuando no se cuenta con el XML), adjuntando el oficio.</strong>
                                                 </div>
-                                            </div>
+                                                <div class="col-md-3">
+                                                    <asp:UpdatePanel ID="updPnlchkDocto" runat="server">
+                                                        <ContentTemplate>
+                                                            <asp:CheckBox ID="chkDocto" runat="server" Text="Con datos de la factura" AutoPostBack="True" OnCheckedChanged="chkDocto_CheckedChanged" />
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </div>
+</div>
                                             <div class="row">
+                                                <div class="col text-center">
+                                                    <asp:UpdateProgress ID="updPrgchkDocto" runat="server" AssociatedUpdatePanelID="updPnlchkDocto">
+                                                        <ProgressTemplate>
+                                                            <asp:Image ID="imgDocto2" runat="server" Height="50px" ImageUrl="http://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                                                Width="50px" AlternateText="Espere un momento, por favor.."
+                                                                ToolTip="Espere un momento, por favor.." />
+                                                        </ProgressTemplate>
+                                                    </asp:UpdateProgress>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" id="rowProveedores" runat="server">
                                                 <div class="col-md-1">Proveedor</div>
                                                 <div class="col-md-11">
                                                     <asp:UpdatePanel ID="updPnlProveedor2" runat="server">
@@ -1337,7 +1364,7 @@
                                                     <asp:RequiredFieldValidator ID="reqProv" runat="server" ErrorMessage="*Proveedor" ControlToValidate="ddlProveedor2" Text="* Requerido" ValidationGroup="CFDI" InitialValue="Z"></asp:RequiredFieldValidator>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row" id="rowDatosProveedor" runat="server">
                                                 <div class="col-md-1">RFC</div>
                                                 <div class="col-md-2">
                                                     <asp:TextBox ID="txtCFDI_RFC" runat="server"></asp:TextBox>
@@ -1351,32 +1378,65 @@
                                                     <ajaxToolkit:CalendarExtender ID="calCFDI_Fecha" runat="server" TargetControlID="txtCFDI_Fecha" PopupButtonID="imgCFDI_Fecha" />
                                                     <asp:ImageButton ID="imgCFDI_Fecha" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
                                                 </div>
-                                                <div class="col-md-4">
-                                                    <asp:RequiredFieldValidator ID="reqCFDI_Fecha" runat="server" ErrorMessage="*CFDI Fecha" ControlToValidate="txtCFDI_Fecha" Text="* Requerido" ValidationGroup="CFDI"></asp:RequiredFieldValidator>
+                                                <div class="col-md-1">
+                                                    <asp:RequiredFieldValidator ID="reqCFDI_Fecha" runat="server" ErrorMessage="*CFDI Fecha" ControlToValidate="txtCFDI_Fecha" Text="*" ValidationGroup="CFDI"></asp:RequiredFieldValidator>
                                                 </div>
-                                            </div>
-                                            <div class="row">
                                                 <div class="col-md-1"># Factura</div>
                                                 <div class="col-md-2">
                                                     <asp:TextBox ID="txtNumFactura" runat="server"></asp:TextBox>
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <%--<asp:RequiredFieldValidator ID="reqNumFactura2" runat="server" ErrorMessage="*# Factura" ControlToValidate="txtNumFactura" Text="* Requerido" ValidationGroup="CFDI"></asp:RequiredFieldValidator>--%>
-                                                    <asp:CustomValidator ID="reqNumFactura4" runat="server" ControlToValidate="txtNumFactura" ErrorMessage="*# Factura" ValidationGroup="CFDI" ValidateEmptyText="True" ClientValidationFunction="RequeridoNumFactura" Text="* Requerido"></asp:CustomValidator>
+                                                    <asp:CustomValidator ID="reqNumFactura4" runat="server" ControlToValidate="txtNumFactura" ErrorMessage="*# Factura" ValidationGroup="CFDI" ValidateEmptyText="True" Text="* Requerido"></asp:CustomValidator>
                                                 </div>
+                                            </div>
+                                            <div class="row">
                                                 <div class="col-md-1">Monto</div>
                                                 <div class="col-md-2">
                                                     <asp:TextBox ID="txtCFDI_Total" runat="server"></asp:TextBox>
                                                 </div>
-                                                <div class="col-md-4">
-                                                    <asp:RequiredFieldValidator ID="reqCFDI_Total" runat="server" ErrorMessage="*CFDI Total" ControlToValidate="txtCFDI_Total" Text="* Requerido" ValidationGroup="CFDI"></asp:RequiredFieldValidator>
+                                                <div class="col-md-1">
+                                                    <asp:RequiredFieldValidator ID="reqCFDI_Total" runat="server" ErrorMessage="* Monto" ControlToValidate="txtCFDI_Total" Text="*" ValidationGroup="CFDI"></asp:RequiredFieldValidator>
+                                                </div>
+
+
+
+                                                <div class="col-md-8">
+                                                    <asp:UpdatePanel ID="UpdatePanel20" runat="server">
+                                                        <ContentTemplate>
+                                                            <div class="row">
+                                                                <div class="col-md-2">Oficio</div>
+                                                                <div class="col-md-8 mb-3">
+                                                                    <div class="input-group mb-3">
+                                                                        <div class="custom-file input-group-text" style="background-color: #ffffff">
+                                                                            <asp:FileUpload ID="fileOficioFactura" runat="server" Height="40px" Width="100%" />
+                                                                        </div>
+                                                                        <div class="input-group-prepend">
+                                                                            <asp:LinkButton ID="linkBttnOficioFact" runat="server" ValidationGroup="CFDI" OnClick="linkBttnOficioFact_Click" CssClass="input-group-text"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i>Adjuntar</asp:LinkButton>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <asp:RequiredFieldValidator ID="reqOficioFactura" runat="server" ErrorMessage="* Oficio" ControlToValidate="fileOficioFactura" Text="*" ValidationGroup="CFDI"></asp:RequiredFieldValidator>
+                                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="fileOficioFactura" ErrorMessage="Archivo incorrecto, debe ser un PDF" ValidationExpression="(.*?)\.(pdf|PDF)$" ValidationGroup="CFDI"></asp:RegularExpressionValidator>
+                                                                </div>
+                                                            </div>
+                                                        </ContentTemplate>
+                                                        <Triggers>
+                                                            <asp:PostBackTrigger ControlID="linkBttnOficioFact" />
+                                                        </Triggers>
+                                                    </asp:UpdatePanel>
                                                 </div>
                                             </div>
-                                            <asp:UpdatePanel ID="UpdatePanel20" runat="server">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <asp:ValidationSummary ID="valDatosoficio" runat="server" ValidationGroup="CFDI" ShowMessageBox="False" HeaderText="Estos datos son requeridos, favor de verificar" />
+                                                </div>
+                                            </div>
+                                            <%--<asp:UpdatePanel ID="UpdatePanel20" runat="server">
                                                 <ContentTemplate>
                                                     <div class="row">
                                                         <div class="col-md-1">Oficio</div>
-                                                        <div class="col-md-8 mb-3">
+                                                        <div class="col-md-4 mb-3">
                                                             <div class="input-group mb-3">
                                                                 <div class="custom-file input-group-text" style="background-color: #ffffff">
                                                                     <asp:FileUpload ID="fileOficioFactura" runat="server" Height="40px" Width="100%" />
@@ -1395,7 +1455,7 @@
                                                 <Triggers>
                                                     <asp:PostBackTrigger ControlID="linkBttnOficioFact" />
                                                 </Triggers>
-                                            </asp:UpdatePanel>
+                                            </asp:UpdatePanel>--%>
                                         </div>
                                         <div class="row" id="divFacturas" runat="server">
                                             <div class="col-md-5">

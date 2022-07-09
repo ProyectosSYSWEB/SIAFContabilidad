@@ -1,11 +1,8 @@
-﻿
-using AjaxControlToolkit;
-using CapaEntidad;
+﻿using CapaEntidad;
 using CapaNegocio;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -13,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace SAF.Contabilidad.Form
 {
-    public partial class frmConciliacionBancaria : System.Web.UI.Page
+    public partial class frmConciliacion : System.Web.UI.Page
     {
         #region <Variables>
         string Verificador = string.Empty;
@@ -196,177 +193,27 @@ namespace SAF.Contabilidad.Form
             Verificador = string.Empty;
             grdConciliacion.SelectedIndex = row.RowIndex;
             Session["DoctosAdj"] = null;
-            grdDoctos.DataSource = null;
-            grdDoctos.DataBind();
-            try
-            {
-                objConciliacion.IdEnc = Convert.ToInt32(grdConciliacion.SelectedRow.Cells[12].Text);
-                CNConciliacion.ConciliacionAdjConsultaGrid(objConciliacion, ref ListAdj);
-                Session["DoctosAdj"] = ListAdj;
-                CargarGridAdjuntos(ListAdj);
+            //grdDoctos.DataSource = null;
+            //grdDoctos.DataBind();
+            //try
+            //{
+            //    objConciliacion.IdEnc = Convert.ToInt32(grdConciliacion.SelectedRow.Cells[12].Text);
+            //    CNConciliacion.ConciliacionAdjConsultaGrid(objConciliacion, ref ListAdj);
+            //    Session["DoctosAdj"] = ListAdj;
+            //    CargarGridAdjuntos(ListAdj);
 
 
-                modalAdj.Show();
-            }
-            catch (Exception ex)
-            {
-                Verificador = ex.Message;
-                CNComun.VerificaTextoMensajeError(ref Verificador);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+            //    modalAdj.Show();
+            //}
+            //catch (Exception ex)
+            //{
+            //    Verificador = ex.Message;
+            //    CNComun.VerificaTextoMensajeError(ref Verificador);
+            //    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
 
-            }
-
-        }
-        protected void bttnAdjuntar_Click(object sender, EventArgs e)
-        {
-            modalAdj.Show();
-            List<Poliza_Conciliacion> ListAdj = new List<Poliza_Conciliacion>();
-            string NombreArchivo = string.Empty;
-
-
-            if (FileUpload1.HasFile)
-            {
-                try
-                {
-                    string Nombre = "EDO_CTA_" + SesionUsu.Usu_Ejercicio + "-" + grdConciliacion.SelectedRow.Cells[0].Text + "-" + FileUpload1.FileName.ToUpper();
-                    string Ruta = Path.Combine(Server.MapPath("~/AdjuntosTemp"), Nombre);
-                    FileUpload1.SaveAs(Ruta);
-                    //NombreArchivo= FileUpload1.FileName.ToUpper();
-                    objAdjunto.NombreArchivoPDF = Nombre;
-                    objAdjunto.Ruta_PDF = "~/AdjuntosTemp/" + Nombre;
-
-                    if (Session["DoctosAdj"] != null)
-                        ListAdj = (List<Poliza_Conciliacion>)Session["DoctosAdj"];
-
-
-                    int count = (from dato in ListAdj
-                                 where dato.NombreArchivoPDF == Nombre
-                                 select dato).Count();
-
-                    if (count == 0)
-                    {
-                        ListAdj.Add(objAdjunto);
-                        Session["DoctosAdj"] = ListAdj;
-                        CargarGridAdjuntos(ListAdj);
-                    }
-                    else
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, 'Ya existe un archivo con ese nombre, verificar.');", true);
-                }
-                catch (Exception ex)
-                {
-                    Verificador = ex.Message;
-                    CNComun.VerificaTextoMensajeError(ref Verificador);
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
-
-                }
-            }
-        }
-        protected void btnCancelarAdj_Click(object sender, EventArgs e)
-        {
-            modalAdj.Hide();
-        }
-        protected void btnGuardarAdj_Click(object sender, EventArgs e)
-        {
-            modalAdj.Show();
-            Verificador = string.Empty;
-
-            try
-            {
-                List<Poliza_Conciliacion> ListAdj = new List<Poliza_Conciliacion>();
-                objConciliacion.IdEnc = Convert.ToInt32(grdConciliacion.SelectedRow.Cells[12].Text);
-                ListAdj = (List<Poliza_Conciliacion>)Session["DoctosAdj"];
-                CNConciliacion.PolizaAdjInsertar(objConciliacion, ListAdj, ref Verificador);
-                if (Verificador == "0")
-                {
-                    Copiar_a_Adjuntos(ListAdj);
-                    modalAdj.Hide();
-                    CargarGrid();
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'Doctos. guardados correctamente.');", true);
-
-                }
-                else
-                {
-                    CNComun.VerificaTextoMensajeError(ref Verificador);
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-                Verificador = ex.Message;
-                CNComun.VerificaTextoMensajeError(ref Verificador);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
-            }
-        }
-        private void Copiar_a_Adjuntos(List<Poliza_Conciliacion> lstPolizasAdj)
-        {
-            string OrigenArchivo = string.Empty;
-            string DestinoArchivo = string.Empty;
-
-            try
-            {
-                for (int i = 0; i < lstPolizasAdj.Count; i++)
-                {
-                    OrigenArchivo = Path.Combine(Server.MapPath("~/AdjuntosTemp"), lstPolizasAdj[i].NombreArchivoPDF); //System.IO.Path.Combine(Origen, fileName);
-                    DestinoArchivo = Path.Combine(Server.MapPath("~/Adjuntos"), lstPolizasAdj[i].NombreArchivoPDF);  //System.IO.Path.Combine(Destino, fileName);
-                    System.IO.File.Copy(OrigenArchivo, DestinoArchivo, true);
-                    //System.IO.File.Delete(OrigenArchivo); MODIFICADO DIA 26 / 03
-                }
-            }
-            catch (Exception ex)
-            {
-                Verificador = ex.Message;
-                CNComun.VerificaTextoMensajeError(ref Verificador);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
-            }
-        }
-
-
-        protected void grdDoctos_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            List<Poliza_Conciliacion> ListAdj = new List<Poliza_Conciliacion>();
-            ListAdj = (List<Poliza_Conciliacion>)Session["DoctosAdj"];
-            modalAdj.Show();
-            try
-            {
-                int fila = e.RowIndex;
-                int pagina = grdDoctos.PageSize * grdDoctos.PageIndex;
-                fila = pagina + fila;
-                ListAdj.RemoveAt(fila);
-                Session["DoctosAdj"] = ListAdj;
-                CargarGridAdjuntos(ListAdj);
-            }
-
-            catch (Exception ex)
-            {
-                Verificador = ex.Message;
-                CNComun.VerificaTextoMensajeError(ref Verificador);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
-            }
+            //}
 
         }
-
-        private void CargarGridAdjuntos(List<Poliza_Conciliacion> lstAdjuntos)
-        {
-            grdDoctos.DataSource = null;
-            grdDoctos.DataBind();
-            try
-            {
-                DataTable dt = new DataTable();
-                grdDoctos.DataSource = dt;
-                grdDoctos.DataSource = lstAdjuntos;
-                grdDoctos.DataBind();
-
-            }
-            catch (Exception ex)
-            {
-                Verificador = ex.Message;
-                CNComun.VerificaTextoMensajeError(ref Verificador);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
-            }
-        }
-
         protected void btnGuardar_Continuar_Click(object sender, EventArgs e)
         {
             if (grdDetalle.Rows.Count >= 1)
@@ -627,7 +474,7 @@ namespace SAF.Contabilidad.Form
             {
                 if (Session["ConciliacionDet"] != null)
                     ListPDet = (List<Poliza_Conciliacion>)Session["ConciliacionDet"];
-
+              
 
                 ListPDet[Fila].NumeroPoliza = txtNumPoliza.Text;
                 ListPDet[Fila].Numero_Cheque = txtNumPoliza.Text;
@@ -879,4 +726,5 @@ namespace SAF.Contabilidad.Form
         }
 
     }
+
 }

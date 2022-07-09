@@ -883,6 +883,33 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void ObjetosInhabiles(ref List<Comun> List)
+        {
+            try
+            {
+                CD_Comun CDMonitor = new CD_Comun();
+                CDMonitor.ObjetosInhabiles(ref List);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void refresh_vmaterilaizada(Comun objComun, ref string Verificador)
+        {
+            try
+            {
+                CD_Comun CDComun = new CD_Comun();
+                CDComun.refresh_vmaterilaizada(objComun, ref Verificador);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
 
         public void MonitorContabilidad(string Usuario, string Sistema, string Centro_Contable, string Ejercicio, ref List<Comun> List)
         {

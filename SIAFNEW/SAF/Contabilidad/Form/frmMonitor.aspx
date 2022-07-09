@@ -20,7 +20,7 @@
             <div class="col text-center">
                 <asp:UpdateProgress ID="UpdateProgress5" runat="server" AssociatedUpdatePanelID="UpdatePanel11">
                     <ProgressTemplate>
-                        <asp:Image ID="Image7" runat="server" Height="30px" ImageUrl="~/images/ajax_loader_gray_512.gif"
+                        <asp:Image ID="Image7" runat="server" Height="30px" ImageUrl="https://sysweb.unach.mx/SIAF-Contabilidad/images/ajax_loader_gray_512.gif"
                             Width="30px" AlternateText="Espere un momento, por favor.."
                             ToolTip="Espere un momento, por favor.." />
                     </ProgressTemplate>
@@ -39,6 +39,47 @@
             </div>
         </div>
         <div class="row">
+            <div class="col">
+                <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                    <ContentTemplate>
+                        <asp:GridView ID="grvInhabiles" runat="server"
+                            AutoGenerateColumns="False"
+                            EmptyDataText="NO HAY VISTAS MATERIALIZAS INHABILES"
+                            Width="100%"
+                            CssClass="mGrid" OnSelectedIndexChanged="grvInhabilesRecibos_SelectedIndexChanged" ShowHeader="False">
+                            <Columns>
+                                <asp:BoundField DataField="Descripcion" HeaderText="Objeto" />
+                                <asp:TemplateField ShowHeader="False">
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CssClass="btn btn-primary" CommandName="Select" Text="Actualizar Monitor"></asp:LinkButton>
+                                    </ItemTemplate>
+                                    <ItemStyle Width="20%" />
+                                </asp:TemplateField>
+                            </Columns>
+                            <FooterStyle CssClass="enc" />
+                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                            <SelectedRowStyle CssClass="sel" />
+                            <HeaderStyle CssClass="enc" />
+                            <AlternatingRowStyle CssClass="alt" />
+                        </asp:GridView>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <asp:UpdateProgress ID="UpdateProgress1" runat="server"
+                    AssociatedUpdatePanelID="UpdatePanel3">
+                    <ProgressTemplate>
+                        <span>
+                            <img height="26" src="~/images/ajax_loader_gray_512.gif" width="222" />
+                        </span><span class="loading">Sincronizacion en Proceso…
+                        </span>
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-2">
                 Centro Contable
             </div>
@@ -51,7 +92,7 @@
                         </asp:DropDownList>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-            </div>        
+            </div>
             <div class="col-md-2">
                 Filtro
             </div>
