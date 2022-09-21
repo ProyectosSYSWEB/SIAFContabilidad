@@ -910,7 +910,7 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col">
-                                            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="1"
+                                            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0"
                                                 CssClass="ajax__myTab" Width="100%">
                                                 <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                                                     <HeaderTemplate>
@@ -1090,7 +1090,6 @@
                                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator101" runat="server" ControlToValidate="txtNumero_Poliza" ErrorMessage="*El # de póliza debe ser de 7 Digitos" ValidationExpression="^[\s\S]{4,4}$" ValidationGroup="Poliza"></asp:RegularExpressionValidator>
                                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="txtNumero_Poliza" ErrorMessage="*Número de Poliza" ValidationGroup="Poliza">*Requerido</asp:RequiredFieldValidator>
                                                                     <asp:RegularExpressionValidator ID="valNumPoliza" runat="server" ControlToValidate="txtNumero_Poliza" CssClass="MsjError" ErrorMessage="*El # de póliza debe ser numérico" SetFocusOnError="True" ValidationExpression="^(-?\d{0,13}\.\d{0,2}|\d{0,13})$" ValidationGroup="Poliza">*Solo Números</asp:RegularExpressionValidator>
-                                                                    <%--<asp:CustomValidator ID="ValidatorNumPoliza" runat="server" ClientValidationFunction="ClientValidate" ControlToValidate="txtNumero_Poliza" ErrorMessage="*Número Reservado" ValidationGroup="Poliza"></asp:CustomValidator>--%>
                                                                 </div>
                                                             </div>
                                                             <div class="row">

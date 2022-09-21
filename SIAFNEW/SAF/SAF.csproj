@@ -134,6 +134,7 @@
     <Content Include="Contabilidad\Form\frmPolizas2.aspx" />
     <Content Include="Contabilidad\Form\frmPolizas_Old.aspx" />
     <Content Include="Contabilidad\Form\frmRegistroFacturas.aspx" />
+    <Content Include="Contabilidad\Form\frmUsuarios.aspx" />
     <Content Include="Contabilidad\Reportes\Presupuesto.aspx" />
     <Content Include="Contabilidad\Reportes\CajaGral.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -820,6 +821,13 @@
     </Compile>
     <Compile Include="Contabilidad\Form\frmRegistroFacturas.aspx.designer.cs">
       <DependentUpon>frmRegistroFacturas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contabilidad\Form\frmUsuarios.aspx.cs">
+      <DependentUpon>frmUsuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\Form\frmUsuarios.aspx.designer.cs">
+      <DependentUpon>frmUsuarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contabilidad\Reportes\Presupuesto.aspx.cs">
       <DependentUpon>Presupuesto.aspx</DependentUpon>

@@ -1002,7 +1002,7 @@ namespace SAF.Form
         protected void txtFecha_TextChanged(object sender, EventArgs e)
         {
             //lblError.Text = string.Empty;
-            lblIniPoliza.Text = Convert.ToString(txtFecha.Text).Substring(3, 2);
+            lblIniPoliza.Text = Convert.ToString(txtFecha.Text).Substring(3, 2)+ddlClasifica.SelectedValue;
             VerificaFechas(txtFecha);
             string Validado = ValidaMes(txtFecha);
             if (Validado != "Z")

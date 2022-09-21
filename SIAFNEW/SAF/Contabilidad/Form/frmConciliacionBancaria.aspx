@@ -387,7 +387,7 @@
                                                     </asp:UpdatePanel>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <asp:LinkButton ID="linkBttnCargarArchivo" runat="server" CssClass="btn btn-success"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i> Subir Archivo</asp:LinkButton>
+                                                    <asp:LinkButton ID="linkBttnCargarArchivo" runat="server" CssClass="btn btn-primary" data-toggle="modal" data-target="#modalSubirArchivo"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i> Subir Archivo</asp:LinkButton>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -687,7 +687,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modOficios">Detalle</h5>
+                    <h5 class="modal-title" id="modArchivo">Detalle</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -695,13 +695,34 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col"></div>
+                            <div class="col-md-3">
+                                Tipo
+                            </div>
+                            <div class="col-md-7">
+                                <asp:UpdatePanel ID="UpdatePanel13" runat="server">
+                                    <ContentTemplate>
+                                        <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged" TabIndex="1" Width="100%">
+                                        </asp:DropDownList>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                            <div class="col-md-2">
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="ddlTipo" ErrorMessage="* Tipo" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col alert alert-warning">
+                                Los campos que debe tener el archivo XLS son los siguientes: folio, fecha, iimporte y beneficiario, con ese nombre en cada columna.
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+
 
 
     <script type="text/javascript">        

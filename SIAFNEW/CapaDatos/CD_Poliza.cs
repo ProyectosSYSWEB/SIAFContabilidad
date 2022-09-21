@@ -99,7 +99,7 @@ namespace CapaDatos
             }
         }
         public void PolizaConsultaGrid_Min(ref Poliza ObjPoliza, String FechaInicial, String FechaFinal, String Buscar, String TipoUsu, ref List<Poliza> List)
-        {
+            {
             CD_Datos CDDatos = new CD_Datos();
             OracleCommand cmm = null;
             try
