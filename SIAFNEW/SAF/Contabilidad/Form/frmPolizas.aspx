@@ -1468,7 +1468,7 @@
                                                                 <asp:FileUpload ID="FileFactura" runat="server" class="form-control" Height="40px" Width="100%" />
                                                             </div>
                                                             <div class="input-group-append">
-                                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="FileFactura" ErrorMessage="Archivo incorrecto, debe ser un XML" ValidationExpression="(.*?)\.(xml|XML)$" ValidationGroup="CFDI"></asp:RegularExpressionValidator>
+                                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="FileFactura" ErrorMessage="Archivo incorrecto, debe ser un XML" ValidationExpression="(.*?)\.(xml|XML|Xml)$" ValidationGroup="CFDI"></asp:RegularExpressionValidator>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*Archivo XML" ControlToValidate="FileFactura" Text="* Requerido" ValidationGroup="CFDI"></asp:RequiredFieldValidator>
                                                             </div>
                                                         </div>
@@ -1489,7 +1489,7 @@
                                                                 <asp:FileUpload ID="FileFacturaPDF" runat="server" class="form-control" Height="40px" Width="100%" />
                                                             </div>
                                                             <div class="input-group-append">
-                                                                <asp:RegularExpressionValidator ID="reqExpFacturaPDF" runat="server" ControlToValidate="FileFacturaPDF" ErrorMessage="Archivo incorrecto, debe ser un PDF" ValidationExpression="(.*?)\.(pdf|PDF)$" ValidationGroup="CFDI"></asp:RegularExpressionValidator>
+                                                                <asp:RegularExpressionValidator ID="reqExpFacturaPDF" runat="server" ControlToValidate="FileFacturaPDF" ErrorMessage="Archivo incorrecto, debe ser un PDF" ValidationExpression="(.*?)\.(pdf|PDF|Pdf)$" ValidationGroup="CFDI"></asp:RegularExpressionValidator>
                                                                 <asp:RequiredFieldValidator ID="reqFacturaPDF" runat="server" ControlToValidate="FileFacturaPDF" ErrorMessage="*Archivo PDF" Text="* Requerido" ValidationGroup="CFDI"></asp:RequiredFieldValidator>
                                                             </div>
                                                         </div>

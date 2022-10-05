@@ -340,7 +340,7 @@ namespace SAF.Form
                     FechaFinal = DiaFinal + "/" + ddlFecha_Fin.SelectedValue + "/" + SesionUsu.Usu_Ejercicio;
                 }
 
-                if (Convert.ToInt32(SesionUsu.Usu_Ejercicio) >= 2021)
+                if (Convert.ToInt32(SesionUsu.Usu_Ejercicio) >= 2022)
                     CNPoliza.PolizaConsultaGrid_Min(ref ObjPoliza, FechaInicial, FechaFinal, txtBuscar.Text.ToUpper(), SesionUsu.Usu_TipoUsu, ref List);
                 else
                     CNPoliza.PolizaConsultaGrid(ref ObjPoliza, FechaInicial, FechaFinal, txtBuscar.Text.ToUpper(), SesionUsu.Usu_TipoUsu, ref List);
@@ -1927,7 +1927,7 @@ namespace SAF.Form
                     //Label lblTot = (Label)grvPolizaCFDI.FooterRow.FindControl("lblGranTotalInt");
                     //double lblTotInt = Convert.ToDouble(lblTot.Text);
                     double lblTotInt = Convert.ToDouble(lblGranTotalInt.Text);
-                    lblTotInt = Math.Ceiling(lblTotInt);
+                    //lblTotInt = Math.Ceiling(lblTotInt);
                     objPolizas.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
                     CNPoliza.ValidarTotal(ref objPolizas, ref Verificador);
 

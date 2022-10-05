@@ -244,12 +244,12 @@ namespace CapaNegocio
             }
         }
 
-        public void Editar_cuentas_contables(ref cuentas_contables objcuentas_contables, ref string Verificador)
+        public void Editar_cuentas_contables(ref cuentas_contables objcuentas_contables, string Usuario, string Correo_Unach, ref string Verificador)
         {
             try
             {
                 CD_Cuentas_contables cdcuenta = new CD_Cuentas_contables();
-                cdcuenta.Editar_cuentas_contables(ref objcuentas_contables, ref Verificador);
+                cdcuenta.Editar_cuentas_contables(ref objcuentas_contables, Usuario, Correo_Unach, ref Verificador);
             }
             catch (Exception ex)
             {

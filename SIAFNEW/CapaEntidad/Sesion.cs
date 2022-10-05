@@ -29,6 +29,7 @@ namespace CapaEntidad
         private string _Correo_UNACH;
         private string _Nombre_Completo;
         private string _MesActivo;
+        private string _Usu_TipoPermiso;
         public string Nombre_Completo
         {
             get { return _Nombre_Completo; }
@@ -118,6 +119,11 @@ namespace CapaEntidad
         {
             get { return _Usu_TipoUsu.Trim(); }
             set { _Usu_TipoUsu = value.Trim(); }
+        }
+        public string Usu_TipoPermiso
+        {
+            get { return _Usu_TipoPermiso.Trim(); }
+            set { _Usu_TipoPermiso = value.Trim(); }
         }
         public string Usu_Programa
         {

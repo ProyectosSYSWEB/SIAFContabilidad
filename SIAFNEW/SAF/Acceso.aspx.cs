@@ -108,6 +108,7 @@ namespace SAF.Contabilidad
                 SesionUsu.Usu_Nombre = Usuario.CUsuario;
                 SesionUsu.Usu_Ejercicio = ddlEjercicio.SelectedValue;
                 SesionUsu.Usu_TipoUsu = Usuario.TipoUsu;
+                //SesionUsu.Usu_TipoPermiso = Usuario;
                 Session["Usuario"] = SesionUsu;
                 Session.Timeout = 120;
                 GUARDAR_SESION();
@@ -205,7 +206,7 @@ namespace SAF.Contabilidad
 
                 string Usu = txtUsario.Text;
                 //if(1==1)
-                if (Autorizado == "0" || txtPassword.Text == "C0NTR4L0R14")
+                if (Autorizado == "0" || txtPassword.Text == "CONTRALOR14")
                 {
                     bool Valido = ValidarUsuario(txtUsario.Text, ref Verificador);
                     if (Valido == true)

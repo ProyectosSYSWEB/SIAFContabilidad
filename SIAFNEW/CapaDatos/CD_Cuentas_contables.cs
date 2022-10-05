@@ -394,15 +394,18 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
-        public void Editar_cuentas_contables(ref cuentas_contables objcuentas_contables, ref string Verificador)
+        public void Editar_cuentas_contables(ref cuentas_contables objcuentas_contables, string Usuario, string Correo_Unach, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
             OracleCommand Cmd = null;
             try
             {
-                String[] Parametros = { "P_CENTRO_CONTABLE", "P_CUENTA", "P_DESCRIPCION", "P_TIPO", "P_CLASIFICACION", "P_NIVEL", "P_STATUS", "P_ID_CUENTA_MAYOR", "P_ID" };
+                String[] Parametros = { "P_CENTRO_CONTABLE", "P_CUENTA", "P_DESCRIPCION", "P_TIPO", "P_CLASIFICACION", "P_NIVEL", "P_STATUS", "P_ID_CUENTA_MAYOR", "P_ID", "P_USUARIO", "P_CORREO" };
 
-                object[] Valores = { objcuentas_contables.centro_contable, objcuentas_contables.cuenta_contable, objcuentas_contables.descripcion, objcuentas_contables.tipo, objcuentas_contables.clasificacion, Convert.ToInt32(objcuentas_contables.nivel), objcuentas_contables.status, Convert.ToInt32(objcuentas_contables.cuenta_mayor), Convert.ToInt32(objcuentas_contables.id) };
+                object[] Valores = { objcuentas_contables.centro_contable, objcuentas_contables.cuenta_contable, objcuentas_contables.descripcion, objcuentas_contables.tipo, objcuentas_contables.clasificacion, 
+                    Convert.ToInt32(objcuentas_contables.nivel), objcuentas_contables.status, Convert.ToInt32(objcuentas_contables.cuenta_mayor), Convert.ToInt32(objcuentas_contables.id),
+                Usuario, Correo_Unach
+                };
 
                 String[] ParametrosOut = { "p_Bandera" };
                 Cmd = CDDatos.GenerarOracleCommand("UPD_SAF_CUENTAS_CONTABLES", ref Verificador, Parametros, Valores, ParametrosOut);

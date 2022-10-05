@@ -31,9 +31,7 @@
             <div class="col text-center">
                 <asp:UpdateProgress ID="updPgr12" runat="server" AssociatedUpdatePanelID="UpdatePanel2">
                     <ProgressTemplate>
-                        <asp:Image ID="img12" runat="server" Height="50px" ImageUrl="~/images/ajax_loader_gray_512.gif"
-                            Width="50px" AlternateText="Espere un momento, por favor.."
-                            ToolTip="Espere un momento, por favor.." />
+                       <img height="26" src="https://www.sysweb.unach.mx/Ingresos/Imagenes/load.gif" width="222" />
                     </ProgressTemplate>
                 </asp:UpdateProgress>
             </div>

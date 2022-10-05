@@ -129,6 +129,7 @@
     <Content Include="Contabilidad\Form\frmConciliacionBancaria.aspx" />
     <Content Include="Contabilidad\Form\FRMCuentas_contables.aspx" />
     <Content Include="Contabilidad\Form\frmDashboard.aspx" />
+    <Content Include="Contabilidad\Form\frmGenPolizas.aspx" />
     <Content Include="Contabilidad\Form\FrmIngresos_Propios.aspx" />
     <Content Include="Contabilidad\Form\frmMinistraciones_GC.aspx" />
     <Content Include="Contabilidad\Form\frmPolizas2.aspx" />
@@ -786,6 +787,13 @@
     </Compile>
     <Compile Include="Contabilidad\Form\frmDashboard.aspx.designer.cs">
       <DependentUpon>frmDashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contabilidad\Form\frmGenPolizas.aspx.cs">
+      <DependentUpon>frmGenPolizas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\Form\frmGenPolizas.aspx.designer.cs">
+      <DependentUpon>frmGenPolizas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contabilidad\Form\FrmIngresos_Propios.aspx.cs">
       <DependentUpon>FrmIngresos_Propios.aspx</DependentUpon>

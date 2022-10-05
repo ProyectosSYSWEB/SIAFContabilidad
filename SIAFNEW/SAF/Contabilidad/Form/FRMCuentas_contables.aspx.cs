@@ -14,7 +14,7 @@ namespace SAF.Rep
     {
 
         #region <Variables>
-        Int32[] Celdas = new Int32[] { 0 };
+        //Int32[] Celdas = new Int32[] { 0 };
         string Verificador = string.Empty;
         string cta_mayor = string.Empty;
         CN_Usuario CNUsuario = new CN_Usuario();
@@ -54,6 +54,7 @@ namespace SAF.Rep
         }
         private void CargarGrid()
         {
+            Int32[] Celdas;
             try
             {
                 DataTable dt = new DataTable();
@@ -63,16 +64,32 @@ namespace SAF.Rep
                 grdcuentas_contables.DataBind();
                 if (SesionUsu.Usu_TipoUsu == "2" || SesionUsu.Usu_TipoUsu == "3")
                 {
-
+                    Celdas = new Int32[] { 0 };
                 }
                 else
                 {
-                    Celdas = new Int32[] { 5, 6, 7 };
+                    Celdas = new Int32[] { 6, 7, 8 };
                 }
 
 
-                if (grdcuentas_contables.Rows.Count > 0)
-                    CNComun.HideColumns(grdcuentas_contables, Celdas);
+                for (int i = 0; i < Celdas.Length; i++)
+                {
+         
+                    grdcuentas_contables.HeaderRow.Cells[Convert.ToInt32(Celdas.GetValue(i))].Visible = false;
+                    if (SesionUsu.Usu_TipoUsu != "3")
+                    {
+                        Button bttnAgregarCtaContab = grdcuentas_contables.HeaderRow.Cells[9].FindControl("bttnAgregarCtaContab") as Button;
+                        bttnAgregarCtaContab.Visible = false;
+                    }
+
+                    foreach (GridViewRow row in grdcuentas_contables.Rows)
+                    {
+                        row.Cells[Convert.ToInt32(Celdas.GetValue(i))].Visible = false;
+                    }
+                    //grdcuentas_contables.FooterRow.Cells[Convert.ToInt32(Celdas.GetValue(i))].Visible = false;
+                }
+
+
 
             }
             catch (Exception ex)
@@ -304,7 +321,7 @@ namespace SAF.Rep
             //if (ddlnivel.SelectedValue == "4" && (cta_mayor == "5518" || cta_mayor == "5515" || cta_mayor == "1263" || cta_mayor == "1241" || cta_mayor == "1242" || cta_mayor == "1243" || cta_mayor == "1244" || cta_mayor == "1245" || cta_mayor == "1246" || cta_mayor == "1247" || cta_mayor == "1248" || cta_mayor == "1251" || cta_mayor == "1252" || cta_mayor == "1253" || cta_mayor == "1254" || cta_mayor == "1293"))
             //    Objcuentas_contables.descripcion = ddlDescripcion.Items.ToString();
             //else
-                
+
             Objcuentas_contables.descripcion = txtdescripcion.Text;
 
             Objcuentas_contables.tipo = txttipo.SelectedValue;
@@ -330,7 +347,7 @@ namespace SAF.Rep
                 else
                 {
                     Objcuentas_contables.id = grdcuentas_contables.Rows[grdcuentas_contables.SelectedIndex].Cells[0].Text;
-                    CNcuentas_contables.Editar_cuentas_contables(ref Objcuentas_contables, ref Verificador);
+                    CNcuentas_contables.Editar_cuentas_contables(ref Objcuentas_contables, SesionUsu.Usu_Nombre, SesionUsu.Correo_UNACH, ref Verificador);
                 }
                 if (Verificador != "0")
                 {
@@ -696,11 +713,11 @@ namespace SAF.Rep
                         linkBttnBuscarBien.Visible = true;
                         ddlDescripcion.Visible = true;
                         ListBienes.Clear();
-                        CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Bienes", ref ddlDescripcion, "p_cta_mayor", "p_nivel3", "p_edicion", cta_mayor, txtcuenta_contable.Text.Substring(17, 5),  Convert.ToString(SesionUsu.Editar), ref ListBienes);
+                        CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Bienes", ref ddlDescripcion, "p_cta_mayor", "p_nivel3", "p_edicion", cta_mayor, txtcuenta_contable.Text.Substring(17, 5), Convert.ToString(SesionUsu.Editar), ref ListBienes);
                         Session["Bienes"] = ListBienes;
                         //ddlDescripcion.SelectedValue = txtcuenta_contable.Text.Substring(17, 5);
                     }
-                    
+
 
                     txtdescripcion.Text = Objcuentas_contables.descripcion;
 
@@ -1362,11 +1379,11 @@ namespace SAF.Rep
 
         protected void linkBttnBuscarBien_Click(object sender, EventArgs e)
         {
-            if(txt4.Text == string.Empty || txt4.Text== "00000")
+            if (txt4.Text == string.Empty || txt4.Text == "00000")
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Bienes", ref ddlDescripcion, "p_cta_mayor", "p_nivel3", "p_edicion", ddlCuenta_Mayor.SelectedValue, null, "0");
             else
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Bienes", ref ddlDescripcion, "p_cta_mayor", "p_nivel3", "p_edicion", ddlCuenta_Mayor.SelectedValue, txt4.Text, "0");
-            
+
             ddlDescripcion_SelectedIndexChanged(null, null);
         }
 
@@ -1374,7 +1391,7 @@ namespace SAF.Rep
         {
             txtdescripcion.Text = ddlDescripcion.SelectedItem.Text;
             int position = txtdescripcion.Text.IndexOf("]");
-            txtdescripcion.Text = txtdescripcion.Text.Substring(position+1);
+            txtdescripcion.Text = txtdescripcion.Text.Substring(position + 1);
             //txt4.Text = "00000";
             //if(txt4.Text==string.Empty || txt4.Text== "00000")
             //if (Session["Bienes"] != null)
