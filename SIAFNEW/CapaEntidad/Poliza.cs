@@ -56,6 +56,14 @@ namespace CapaEntidad
         private bool _Validar_Total_CFDI=false;
         private bool _Opcion_Volante;
         private bool _Opcion_Volante2;
+        private string _RutaAnexo;
+        public string RutaAnexo
+        {
+            get { return _RutaAnexo; }
+            set { _RutaAnexo = value; }
+        }
+
+
         public string RutaVolante
         {
             get { return _RutaVolante; }

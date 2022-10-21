@@ -262,9 +262,17 @@ namespace CapaDatos
                         ObjPoliza.Opcion_Volante = true;
                         ObjPoliza.Opcion_Volante2 = false;
                     }
-                        
 
                     ObjPoliza.RutaVolante = "https://sysweb.unach.mx/SAF/Patrimonio/Reportes/VisualizadorCrystal_patrimonio.aspx?Tipo=RP-VOLANTE&Id=" + Convert.ToInt32(dr.GetValue(20));
+
+                    if (Convert.ToString(dr.GetValue(23)) == "T")
+                        ObjPoliza.RutaAnexo = "https://sysweb.unach.mx/SAF/Adjuntos/" + Convert.ToString(dr.GetValue(22));
+                    else if (Convert.ToString(dr.GetValue(23)) == "R")
+                        ObjPoliza.RutaAnexo = "https://sysweb.unach.mx/SAF/Patrimonio/Reportes/VisualizadorCrystal_patrimonio.aspx?Tipo=RP-RECLASIFICACION&Id=" + Convert.ToInt32(dr.GetValue(20));
+                    else
+                        ObjPoliza.RutaAnexo = string.Empty;
+
+                    
                     ObjPoliza.Validar_Total_CFDI = (Convert.ToString(dr.GetValue(21)) == "S") ? true : false;
                     List.Add(ObjPoliza);
                 }

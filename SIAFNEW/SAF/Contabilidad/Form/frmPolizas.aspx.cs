@@ -16,7 +16,7 @@ namespace SAF.Form
     public partial class frmPolizas : System.Web.UI.Page
     {
         #region <Variables>
-        Int32[] Celdas = new Int32[] { 0, 15, 16, 17, 18, 19, 20 };
+        Int32[] Celdas = new Int32[] { 0, 15, 16, 17, 18, 19, 20, 22, 23 };
         string Verificador = string.Empty;
         string Verificador2 = string.Empty;
         string MsjError = string.Empty;
@@ -152,6 +152,7 @@ namespace SAF.Form
                 grvPolizas.DataBind();
 
                 //if (grvPolizas.Rows.Count > 0)
+                //    CNComun.HideColumns(grvPolizas, Celdas);
                 //{
                 //    OcultaColumna(grvPolizas, Celdas, indexCopia);
                 //}
@@ -1998,7 +1999,25 @@ namespace SAF.Form
             }
 
         }
+        protected void linkBtnnAnexo_Click(object sender, EventArgs e)
+        {
+            string Ruta = string.Empty;
+            LinkButton cbi = (LinkButton)(sender);
+            GridViewRow row = (GridViewRow)cbi.NamingContainer;
+            grvPolizas.SelectedIndex = row.RowIndex;
+            DropDownList ddl = (DropDownList)(row.Cells[13].FindControl("ddlDoctosTrans"));
 
+            if (ddl.SelectedValue=="Volante")
+                Ruta=grvPolizas.SelectedRow.Cells[22].Text;
+            else if (ddl.SelectedValue == "Anexo")
+                Ruta = grvPolizas.SelectedRow.Cells[23].Text;
+
+
+            Ruta=Ruta.Replace("&amp;", "&");
+
+            string _open = "window.open('" + Ruta + "', '_newtab');";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+        }
         protected void linkBttnCFDI_Click(object sender, EventArgs e)
         {
             lblNumCheque.Visible = false;
@@ -2636,7 +2655,8 @@ namespace SAF.Form
 
         protected void grdCatEmpleados_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lblNombreEmp.Text = Convert.ToString(grdCatEmpleados.SelectedRow.Cells[1].Text);   // Convert.ToInt32(DataBinder.Eval(sender, "CommandArgument").ToString());
+            string Nombre = grdCatEmpleados.SelectedRow.Cells[1].Text.Replace("&#180;", "'");
+            lblNombreEmp.Text = Nombre;   // Convert.ToInt32(DataBinder.Eval(sender, "CommandArgument").ToString());
             lblTipoPersonal.Text = Convert.ToString(grdCatEmpleados.SelectedRow.Cells[2].Text);   // Convert.ToInt32(DataBinder.Eval(sender, "CommandArgument").ToString());
             lblNumPlaza.Text = Convert.ToString(grdCatEmpleados.SelectedRow.Cells[3].Text);   // Convert.ToInt32(DataBinder.Eval(sender, "CommandArgument").ToString());
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupEmp", "$('#modalEmp').modal('hide')", true);
