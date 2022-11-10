@@ -1561,6 +1561,7 @@
                                                                         <asp:Label ID="Label1" runat="server" Text='<%# Bind("CFDI_Total") %>'></asp:Label>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
+                                                                <asp:BoundField DataField="RegimenFiscal" HeaderText="CFDI_Regimen" />
                                                                 <asp:BoundField HeaderText="Tipo_Docto" DataField="Tipo_Docto">
                                                                     <HeaderStyle HorizontalAlign="Center" />
                                                                     <ItemStyle BackColor="#FFFF66" Font-Bold="True" HorizontalAlign="Center" />

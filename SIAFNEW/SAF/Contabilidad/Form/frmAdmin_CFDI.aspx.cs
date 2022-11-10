@@ -108,7 +108,7 @@ namespace SAF.Contabilidad.Form
         {
             SesionUsu = (Sesion)Session["Usuario"];
 
-            if (!IsPostBack)            
+            if (!IsPostBack)
                 Inicializar();
 
             ScriptManager.RegisterStartupScript(this, GetType(), "GridPolizasCFDI", "PolizasCFDI();", true);
@@ -198,14 +198,14 @@ namespace SAF.Contabilidad.Form
                                 if (nodoLstConceptos[i].Attributes["Importe"] != null)
                                     Concepto_Descripcion = Concepto_Descripcion + "Importe: " + nodoLstConceptos[i].Attributes["Importe"].InnerText + "\n";
 
-                                
+
 
 
                             }
                             ObjPolizaCFDI.CFDI_Concepto_Descripcion = Concepto_Descripcion;
                         }
 
-                        if(ObjPolizaCFDI.CFDI_Concepto_Descripcion!=string.Empty)
+                        if (ObjPolizaCFDI.CFDI_Concepto_Descripcion != string.Empty)
                         {
                             Verificador = string.Empty;
                             ObjPolizaCFDI.Id_CFDI = Convert.ToInt32(grvPolizaCFDI.SelectedRow.Cells[0].Text);
@@ -246,7 +246,7 @@ namespace SAF.Contabilidad.Form
             Verificador = string.Empty;
             string Concepto_Descripcion = string.Empty;
             int fila;
-            
+
             try
             {
                 foreach (GridViewRow gvrow in grvPolizaCFDI.Rows)
@@ -281,52 +281,81 @@ namespace SAF.Contabilidad.Form
                             {
                                 try
                                 {
-                                    XmlNodeList listConcepto = nodo.GetElementsByTagName("cfdi:Conceptos");
-                                    if (listConcepto.Count >= 1)
+                                    XmlNodeList listEmisor = nodo.GetElementsByTagName("cfdi:Emisor");
+                                    if (listEmisor.Count >= 1)
                                     {
-                                        XmlNodeList nodoLstConceptos =
-                                       ((XmlElement)listConcepto[0]).GetElementsByTagName("cfdi:Concepto");
-                                        for (int i = 0; i < nodoLstConceptos.Count; i++)
+                                        if (listEmisor[0].Attributes["RegimenFiscal"] != null)
+                                            ObjPolizaCFDI.RegimenFiscal = listEmisor[0].Attributes["RegimenFiscal"].InnerText;
+
+                                        if (listEmisor[0].Attributes["regimenfiscal"] != null)
+                                            ObjPolizaCFDI.RegimenFiscal = listEmisor[0].Attributes["regimenfiscal"].InnerText;
+
+                                        if (listEmisor[0].Attributes["REGIMENFISCAL"] != null)
+                                            ObjPolizaCFDI.RegimenFiscal = listEmisor[0].Attributes["REGIMENFISCAL"].InnerText;
+
+
+                                        if (ObjPolizaCFDI.RegimenFiscal != string.Empty)
                                         {
-                                            Poliza_CFDI_Det objCFDIDet = new Poliza_CFDI_Det();
-                                            fila = fila + 1;
-                                            Concepto_Descripcion = Concepto_Descripcion + "CONCEPTO " + fila + "----------------------\n";
-                                            if (nodoLstConceptos[i].Attributes["Descripcion"] != null)
-                                                Concepto_Descripcion = Concepto_Descripcion + "DESCRIPCION: " + nodoLstConceptos[i].Attributes["Descripcion"].InnerText.ToUpper() + "\n";
-                                            if (nodoLstConceptos[i].Attributes["ClaveProdServ"] != null)
-                                                Concepto_Descripcion = Concepto_Descripcion + "CLAVEPRODSERV: " + nodoLstConceptos[i].Attributes["ClaveProdServ"].InnerText.ToUpper() + "\n";
-                                            if (nodoLstConceptos[i].Attributes["Cantidad"] != null)
-                                                Concepto_Descripcion = Concepto_Descripcion + "CANTIDAD: " + nodoLstConceptos[i].Attributes["Cantidad"].InnerText.ToUpper() + "\n";
-                                            if (nodoLstConceptos[i].Attributes["ClaveUnidad"] != null)
-                                                Concepto_Descripcion = Concepto_Descripcion + "CLAVEUNIDAD: " + nodoLstConceptos[i].Attributes["ClaveUnidad"].InnerText.ToUpper() + "\n";
-                                            if (nodoLstConceptos[i].Attributes["Unidad"] != null)
-                                                Concepto_Descripcion = Concepto_Descripcion + "UNIDAD: " + nodoLstConceptos[i].Attributes["Unidad"].InnerText.ToUpper() + "\n";
-                                            if (nodoLstConceptos[i].Attributes["ValorUnitario"] != null)
-                                                Concepto_Descripcion = Concepto_Descripcion + "VALORUNITARIO: " + nodoLstConceptos[i].Attributes["ValorUnitario"].InnerText.ToUpper() + "\n";
-                                            if (nodoLstConceptos[i].Attributes["Importe"] != null)
-                                                Concepto_Descripcion = Concepto_Descripcion + "IMPORTE: " + nodoLstConceptos[i].Attributes["Importe"].InnerText.ToUpper() + "\n";
-
-
+                                            Verificador = string.Empty;
+                                            ObjPolizaCFDI.Id_CFDI = Convert.ToInt32(gvrow.Cells[0].Text);
+                                            CNPolizaCFDI.PolizaCFDIEditar(ObjPolizaCFDI, ref Verificador);
+                                            if (Verificador == "0")
+                                                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'El concepto fue actualizado correctamente.');", true);
+                                            else
+                                            {
+                                                CNComun.VerificaTextoMensajeError(ref Verificador);
+                                                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+                                            }
 
 
                                         }
-                                        ObjPolizaCFDI.CFDI_Concepto_Descripcion = Concepto_Descripcion;
                                     }
+                                        //XmlNodeList listConcepto = nodo.GetElementsByTagName("cfdi:Conceptos");
+                                        //if (listConcepto.Count >= 1)
+                                        //{
+                                        //    XmlNodeList nodoLstConceptos =
+                                        //   ((XmlElement)listConcepto[0]).GetElementsByTagName("cfdi:Concepto");
+                                        //    for (int i = 0; i < nodoLstConceptos.Count; i++)
+                                        //    {
+                                        //        Poliza_CFDI_Det objCFDIDet = new Poliza_CFDI_Det();
+                                        //        fila = fila + 1;
+                                        //        Concepto_Descripcion = Concepto_Descripcion + "CONCEPTO " + fila + "----------------------\n";
+                                        //        if (nodoLstConceptos[i].Attributes["Descripcion"] != null)
+                                        //            Concepto_Descripcion = Concepto_Descripcion + "DESCRIPCION: " + nodoLstConceptos[i].Attributes["Descripcion"].InnerText.ToUpper() + "\n";
+                                        //        if (nodoLstConceptos[i].Attributes["ClaveProdServ"] != null)
+                                        //            Concepto_Descripcion = Concepto_Descripcion + "CLAVEPRODSERV: " + nodoLstConceptos[i].Attributes["ClaveProdServ"].InnerText.ToUpper() + "\n";
+                                        //        if (nodoLstConceptos[i].Attributes["Cantidad"] != null)
+                                        //            Concepto_Descripcion = Concepto_Descripcion + "CANTIDAD: " + nodoLstConceptos[i].Attributes["Cantidad"].InnerText.ToUpper() + "\n";
+                                        //        if (nodoLstConceptos[i].Attributes["ClaveUnidad"] != null)
+                                        //            Concepto_Descripcion = Concepto_Descripcion + "CLAVEUNIDAD: " + nodoLstConceptos[i].Attributes["ClaveUnidad"].InnerText.ToUpper() + "\n";
+                                        //        if (nodoLstConceptos[i].Attributes["Unidad"] != null)
+                                        //            Concepto_Descripcion = Concepto_Descripcion + "UNIDAD: " + nodoLstConceptos[i].Attributes["Unidad"].InnerText.ToUpper() + "\n";
+                                        //        if (nodoLstConceptos[i].Attributes["ValorUnitario"] != null)
+                                        //            Concepto_Descripcion = Concepto_Descripcion + "VALORUNITARIO: " + nodoLstConceptos[i].Attributes["ValorUnitario"].InnerText.ToUpper() + "\n";
+                                        //        if (nodoLstConceptos[i].Attributes["Importe"] != null)
+                                        //            Concepto_Descripcion = Concepto_Descripcion + "IMPORTE: " + nodoLstConceptos[i].Attributes["Importe"].InnerText.ToUpper() + "\n";
 
-                                    if (ObjPolizaCFDI.CFDI_Concepto_Descripcion != string.Empty)
-                                    {
-                                        Verificador = string.Empty;
-                                        ObjPolizaCFDI.Id_CFDI = Convert.ToInt32(gvrow.Cells[0].Text);
-                                        CNPolizaCFDI.PolizaCFDIEditarConceptos(ObjPolizaCFDI, ref Verificador);
-                                        if (Verificador == "0")
-                                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'El concepto fue actualizado correctamente.');", true);
-                                        else
-                                        {
-                                            CNComun.VerificaTextoMensajeError(ref Verificador);
-                                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
-                                        }
+
+
+
+                                        //    }
+                                        //    ObjPolizaCFDI.CFDI_Concepto_Descripcion = Concepto_Descripcion;
+                                        //}
+
+                                        //if (ObjPolizaCFDI.CFDI_Concepto_Descripcion != string.Empty)
+                                        //{
+                                        //    Verificador = string.Empty;
+                                        //    ObjPolizaCFDI.Id_CFDI = Convert.ToInt32(gvrow.Cells[0].Text);
+                                        //    CNPolizaCFDI.PolizaCFDIEditarConceptos(ObjPolizaCFDI, ref Verificador);
+                                        //    if (Verificador == "0")
+                                        //        ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'El concepto fue actualizado correctamente.');", true);
+                                        //    else
+                                        //    {
+                                        //        CNComun.VerificaTextoMensajeError(ref Verificador);
+                                        //        ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+                                        //    }
+                                        //}
                                     }
-                                }
                                 catch (Exception)
                                 {
                                     ObjPolizaCFDI.CFDI_Folio = string.Empty;
@@ -337,7 +366,7 @@ namespace SAF.Contabilidad.Form
                 }
                 CargarGridPolizaCFDI();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Verificador = ex.Message;
                 CNComun.VerificaTextoMensajeError(ref Verificador);

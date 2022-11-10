@@ -43,7 +43,6 @@
                 <asp:UpdatePanel ID="updPnlGenPolizas" runat="server">
                     <ContentTemplate>
                         <asp:LinkButton ID="linkBttnGenPolizas" runat="server" CssClass="btn btn-primary" OnClick="linkBttnGenPolizas_Click" ValidationGroup="valMes">Generar Pólizas</asp:LinkButton>
-                        &nbsp;s
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>

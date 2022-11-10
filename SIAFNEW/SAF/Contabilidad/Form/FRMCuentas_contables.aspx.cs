@@ -74,13 +74,13 @@ namespace SAF.Rep
 
                 for (int i = 0; i < Celdas.Length; i++)
                 {
-         
+
                     grdcuentas_contables.HeaderRow.Cells[Convert.ToInt32(Celdas.GetValue(i))].Visible = false;
-                    if (SesionUsu.Usu_TipoUsu != "3")
-                    {
-                        Button bttnAgregarCtaContab = grdcuentas_contables.HeaderRow.Cells[9].FindControl("bttnAgregarCtaContab") as Button;
+                    Button bttnAgregarCtaContab = grdcuentas_contables.HeaderRow.Cells[9].FindControl("bttnAgregarCtaContab") as Button;
+                    if (SesionUsu.Usu_TipoUsu == "3" || SesionUsu.Usu_TipoUsu == "2")
+                        bttnAgregarCtaContab.Visible = true;
+                    else
                         bttnAgregarCtaContab.Visible = false;
-                    }
 
                     foreach (GridViewRow row in grdcuentas_contables.Rows)
                     {

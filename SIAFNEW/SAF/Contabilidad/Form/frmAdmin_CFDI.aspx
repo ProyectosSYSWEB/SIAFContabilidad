@@ -102,7 +102,7 @@
                 </asp:UpdateProgress>
             </div>
         </div>
-        <%--<div class="row">
+        <div class="row">
             <div class="col text-right">
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
@@ -110,7 +110,7 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-        </div>--%>
+        </div>
         <div class="row">
             <div class="col text-center">
                 <asp:UpdatePanel ID="UpdatePanel11" runat="server">
@@ -127,6 +127,7 @@
                                 <asp:BoundField DataField="CFDI_RFC" HeaderText="RFC" />
                                 <asp:BoundField DataField="CFDI_Nombre" HeaderText="Nombre" />
                                 <asp:BoundField DataField="CFDI_UUID" HeaderText="UUID" />
+                                <asp:BoundField DataField="RegimenFiscal" HeaderText="REGIMEN FISCAL" />
                                 <asp:BoundField DataField="CFDI_Total" HeaderText="Total" DataFormatString="{0:c}" />
                                 <asp:BoundField HeaderText="Fecha Registro" DataField="Fecha_Captura" />
                                 <asp:BoundField HeaderText="Usuario Registra" DataField="Usuario_Captura" />

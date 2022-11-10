@@ -235,8 +235,8 @@ namespace SAF.Form
         {
             grvPolizaCFDI.DataSource = null;
             grvPolizaCFDI.DataBind();
-            Int32[] Celdas = new Int32[] { 13, 14, 15 };
-            Int32[] Celdas2 = new Int32[] { 12, 13, 14, 15 };
+            Int32[] Celdas = new Int32[] { 14, 15, 16 };
+            Int32[] Celdas2 = new Int32[] { 13, 14, 15, 16 };
             try
             {
                 double TotalPagos;
@@ -1706,6 +1706,15 @@ namespace SAF.Form
 
                                 if (listEmisor[0].Attributes["RFC"] != null)
                                     ObjPolizaCFDI.CFDI_RFC = listEmisor[0].Attributes["RFC"].InnerText;
+
+                                if (listEmisor[0].Attributes["RegimenFiscal"] != null)
+                                    ObjPolizaCFDI.RegimenFiscal = listEmisor[0].Attributes["RegimenFiscal"].InnerText;
+
+                                if (listEmisor[0].Attributes["regimenfiscal"] != null)
+                                    ObjPolizaCFDI.RegimenFiscal = listEmisor[0].Attributes["regimenfiscal"].InnerText;
+
+                                if (listEmisor[0].Attributes["REGIMENFISCAL"] != null)
+                                    ObjPolizaCFDI.RegimenFiscal = listEmisor[0].Attributes["REGIMENFISCAL"].InnerText;
                                 /*FIN CAMPO RFC*/
 
 
@@ -2488,6 +2497,7 @@ namespace SAF.Form
 
         protected void linkBttnBuscar_Click(object sender, EventArgs e)
         {
+            ddlFiltDocto.SelectedIndex = 0;
             if (SesionUsu.Editar == -1)
                 CargarGrid(0);
         }

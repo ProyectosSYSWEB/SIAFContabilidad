@@ -69,6 +69,14 @@ namespace CapaEntidad
             set { _NombreArchivoPDF = value.Trim(); }
         }
 
+        private string _RegimenFiscal = string.Empty;
+        public string RegimenFiscal
+        {
+            get { return _RegimenFiscal.Trim(); }
+            set { _RegimenFiscal = value.Trim(); }
+        }
+
+
         private string _Ruta_PDF = string.Empty;
         public string Ruta_PDF
         {
