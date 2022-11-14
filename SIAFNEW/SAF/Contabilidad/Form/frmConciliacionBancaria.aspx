@@ -16,7 +16,7 @@
                                 Centro Contable
                             </div>
                             <div class="col-md-10">
-                                <asp:DropDownList ID="DDLCentro_Contable1" runat="server" Width="100%">
+                                <asp:DropDownList ID="DDLCentro_Contable1" runat="server" CssClass="form-control">
                                 </asp:DropDownList>
                             </div>
                         </div>
@@ -27,7 +27,7 @@
                             <div class="col-md-3">
                                 <asp:UpdatePanel ID="UpdatePanel23" runat="server">
                                     <ContentTemplate>
-                                        <asp:DropDownList ID="ddlFecha_Ini1" runat="server">
+                                        <asp:DropDownList ID="ddlFecha_Ini1" runat="server" CssClass="form-control">
                                             <asp:ListItem Value="01">Enero</asp:ListItem>
                                             <asp:ListItem Value="02">Febrero</asp:ListItem>
                                             <asp:ListItem Value="03">Marzo</asp:ListItem>
@@ -50,7 +50,7 @@
                             <div class="col-md-2">
                                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                     <ContentTemplate>
-                                        <asp:DropDownList ID="ddlFecha_Fin1" runat="server">
+                                        <asp:DropDownList ID="ddlFecha_Fin1" runat="server" CssClass="form-control">
                                             <asp:ListItem Value="01">Enero</asp:ListItem>
                                             <asp:ListItem Value="02">Febrero</asp:ListItem>
                                             <asp:ListItem Value="03">Marzo</asp:ListItem>
@@ -251,7 +251,7 @@
                                                     <div class="col-md-3">
                                                         <asp:UpdatePanel ID="updPnlFIni" runat="server">
                                                             <ContentTemplate>
-                                                                <asp:DropDownList ID="ddlFecha_Ini" runat="server" onChange="CambiaFechaFin2(this.value);">
+                                                                <asp:DropDownList ID="ddlFecha_Ini" runat="server" onChange="CambiaFechaFin2(this.value);" CssClass="form-control">
                                                                     <asp:ListItem Value="01">Enero</asp:ListItem>
                                                                     <asp:ListItem Value="02">Febrero</asp:ListItem>
                                                                     <asp:ListItem Value="03">Marzo</asp:ListItem>
@@ -274,7 +274,7 @@
                                                     <div class="col-md-4">
                                                         <asp:UpdatePanel ID="updPnlFFin" runat="server">
                                                             <ContentTemplate>
-                                                                <asp:DropDownList ID="ddlFecha_Fin" runat="server">
+                                                                <asp:DropDownList ID="ddlFecha_Fin" runat="server" CssClass="form-control">
                                                                     <asp:ListItem Value="01">Enero</asp:ListItem>
                                                                     <asp:ListItem Value="02">Febrero</asp:ListItem>
                                                                     <asp:ListItem Value="03">Marzo</asp:ListItem>
@@ -299,7 +299,7 @@
                                                     <div class="col-md-10">
                                                         <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                                                             <ContentTemplate>
-                                                                <asp:DropDownList ID="DDLCentro_Contable" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DDLCentro_Contable_SelectedIndexChanged" Width="100%">
+                                                                <asp:DropDownList ID="DDLCentro_Contable" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DDLCentro_Contable_SelectedIndexChanged" CssClass="form-control">
                                                                 </asp:DropDownList>
                                                             </ContentTemplate>
                                                         </asp:UpdatePanel>
@@ -313,10 +313,9 @@
                                                     <div class="col-md-10">
                                                         <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                                                             <ContentTemplate>
-                                                                <asp:DropDownList ID="DDLCuenta_Contable" runat="server" AutoPostBack="True" CssClass="select2" Font-Size="XX-Small" Width="100%">
+                                                                <asp:DropDownList ID="DDLCuenta_Contable" runat="server" AutoPostBack="True" CssClass="form-control">
                                                                 </asp:DropDownList>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="DDLCuenta_Contable" ErrorMessage="* Cuenta Contable" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
-
                                                             </ContentTemplate>
                                                         </asp:UpdatePanel>
                                                     </div>
@@ -695,30 +694,57 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 Tipo
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-10">
                                 <asp:UpdatePanel ID="UpdatePanel13" runat="server">
                                     <ContentTemplate>
-                                        <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged" TabIndex="1" Width="100%">
+                                        <asp:DropDownList ID="ddlTipo2" runat="server" CssClass="form-control">
                                         </asp:DropDownList>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
                             <div class="col-md-2">
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="ddlTipo" ErrorMessage="* Tipo" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="ddlTipo2" ErrorMessage="* Tipo" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col alert alert-warning">
-                                Los campos que debe tener el archivo XLS son los siguientes: folio, fecha, iimporte y beneficiario, con ese nombre en cada columna.
+                            <div class="col-md-10">
+                                <asp:UpdatePanel ID="UpdatePanel14" runat="server">
+                                    <ContentTemplate>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">XLS</span>
+                                            </div>
+                                            <div class="custom-file">
+                                                <asp:FileUpload ID="FileFactura" runat="server" class="form-control"/>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="FileFactura" ErrorMessage="Archivo incorrecto, debe ser un XML" ValidationExpression="(.*?)\.(xls|XLS|Xls|xlsx|XLSX|Xlsx)$" ValidationGroup="CFDI"></asp:RegularExpressionValidator>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ErrorMessage="*Archivo XML" ControlToValidate="FileFactura" Text="* Requerido" ValidationGroup="CFDI"></asp:RequiredFieldValidator>
+                                            </div>
+                                        </div>
+                                    </ContentTemplate>
+                                    <Triggers>
+                                        <asp:PostBackTrigger ControlID="bttnCargarArchivo" />
+                                    </Triggers>
+                                </asp:UpdatePanel>
+                            </div>                            
+                            <div class="col-md-2">
+                                <asp:LinkButton ID="bttnCargarArchivo" runat="server" ValidationGroup="CFDI" CssClass="btn btn-grey" OnClick="bttnCargarArchivo_Click"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i> Adjuntar</asp:LinkButton>
                             </div>
+                           
                         </div>
+                <div class="row">
+                    <div class="col alert alert-warning">
+                        Los campos que debe tener el archivo XLS son los siguientes: folio, fecha, iimporte y beneficiario, con ese nombre en cada columna.
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
 
 
@@ -727,11 +753,26 @@
 
     <script type="text/javascript">        
         function Conciliacion() {
+
             $('#<%= grdConciliacion.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdConciliacion.ClientID %>').find("tr:first"))).DataTable({
                 "destroy": true,
-                "stateSave": false,
-                "ordering": false
-            });
+                "stateSave": true,
+                "columns": [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            })
         };
     </script>
 </asp:Content>

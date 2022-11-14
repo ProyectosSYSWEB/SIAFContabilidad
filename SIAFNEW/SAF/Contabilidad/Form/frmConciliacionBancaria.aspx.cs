@@ -74,9 +74,9 @@ namespace SAF.Contabilidad.Form
             }
 
 
-            ScriptManager.RegisterStartupScript(this, GetType(), "Cuentas_Contables", "Autocomplete();", true);
+            //ScriptManager.RegisterStartupScript(this, GetType(), "Cuentas_Contables", "Autocomplete();", true);
             ScriptManager.RegisterStartupScript(this, GetType(), "GridConciliacion", "Conciliacion();", true);
-            ScriptManager.RegisterStartupScript(this, GetType(), "GridDetalle", "Detalle();", true);
+            //ScriptManager.RegisterStartupScript(this, GetType(), "GridDetalle", "Detalle();", true);
 
         }
         private void Inicializar()
@@ -123,6 +123,7 @@ namespace SAF.Contabilidad.Form
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref DDLCentro_Contable, "p_usuario", "p_ejercicio", "p_sistema", SesionUsu.Usu_Nombre, SesionUsu.Usu_Ejercicio, "CONCILIACION", ref ListCentroContable);
                 Session["CentrosContab"] = ListCentroContable;
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Tipo_Conciliacion", ref ddlTipo, "p_ejercicio", SesionUsu.Usu_Ejercicio, ref ListTipo);
+                CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Tipo_Conciliacion", ref ddlTipo2, "p_ejercicio", SesionUsu.Usu_Ejercicio, ref ListTipo);
             }
             catch (Exception ex)
             {
@@ -141,6 +142,22 @@ namespace SAF.Contabilidad.Form
             ddlTipo.SelectedIndex = 0;
             ddlTipo_SelectedIndexChanged(null, null);
             LimpiarCamposDet();
+        }
+        protected void bttnCargarArchivo_Click(object sender, EventArgs e)
+        {
+            Verificador = string.Empty;
+            try
+            {
+
+
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+
+            }
         }
         protected void linkBttnBuscar_Click(object sender, EventArgs e)
         {

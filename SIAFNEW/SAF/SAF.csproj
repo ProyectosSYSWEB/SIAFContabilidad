@@ -134,6 +134,7 @@
     <Content Include="Contabilidad\Form\frmMinistraciones_GC.aspx" />
     <Content Include="Contabilidad\Form\frmPolizas2.aspx" />
     <Content Include="Contabilidad\Form\frmPolizas_Old.aspx" />
+    <Content Include="Contabilidad\Form\frmRegBeneficiarios_Pasivo.aspx" />
     <Content Include="Contabilidad\Form\frmRegistroFacturas.aspx" />
     <Content Include="Contabilidad\Form\frmUsuarios.aspx" />
     <Content Include="Contabilidad\Reportes\Presupuesto.aspx" />
@@ -822,6 +823,13 @@
     </Compile>
     <Compile Include="Contabilidad\Form\frmPolizas_Old.aspx.designer.cs">
       <DependentUpon>frmPolizas_Old.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contabilidad\Form\frmRegBeneficiarios_Pasivo.aspx.cs">
+      <DependentUpon>frmRegBeneficiarios_Pasivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\Form\frmRegBeneficiarios_Pasivo.aspx.designer.cs">
+      <DependentUpon>frmRegBeneficiarios_Pasivo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contabilidad\Form\frmRegistroFacturas.aspx.cs">
       <DependentUpon>frmRegistroFacturas.aspx</DependentUpon>

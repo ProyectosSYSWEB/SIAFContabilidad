@@ -11,7 +11,7 @@
                 Centro Contable
             </div>
             <div class="col-md-10">
-                <asp:DropDownList ID="DDLCentro_Contable" runat="server" Width="100%">
+                <asp:DropDownList ID="DDLCentro_Contable" runat="server" CssClass="form-control">
                 </asp:DropDownList>
             </div>
         </div>
@@ -20,21 +20,21 @@
                 Tipo Beneficiario
             </div>
             <div class="col-md-2">
-                <asp:DropDownList ID="ddlTipo_Beneficiario" runat="server" Width="100%">
+                <asp:DropDownList ID="ddlTipo_Beneficiario" runat="server" CssClass="form-control">
                 </asp:DropDownList>
             </div>
             <div class="col-md-1">
                 Tipo Gasto
             </div>
             <div class="col-md-3">
-                <asp:DropDownList ID="ddlTipo_Gasto" runat="server" Width="100%">
+                <asp:DropDownList ID="ddlTipo_Gasto" runat="server" CssClass="form-control">
                 </asp:DropDownList>
             </div>
             <div class="col-md-1">
                 Mes
             </div>
             <div class="col-md-3">
-                <asp:DropDownList ID="ddlMes" runat="server" Width="100%">
+                <asp:DropDownList ID="ddlMes" runat="server" CssClass="form-control">
                     <asp:ListItem Value="00">--TODOS--</asp:ListItem>
                     <asp:ListItem Value="01">ENERO</asp:ListItem>
                     <asp:ListItem Value="02">FEBRERO</asp:ListItem>
@@ -102,7 +102,7 @@
                 </asp:UpdateProgress>
             </div>
         </div>
-        <div class="row">
+        <%--<div class="row">
             <div class="col text-right">
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
@@ -110,7 +110,7 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-        </div>
+        </div>--%>
         <div class="row">
             <div class="col text-center">
                 <asp:UpdatePanel ID="UpdatePanel11" runat="server">
@@ -162,12 +162,12 @@
             <div class="col-md-10">
             </div>
             <div class="col-md-2 text-right">
-                <%-- <asp:UpdatePanel ID="updPnlReps" runat="server">
-                    <ContentTemplate>--%>
+                 <asp:UpdatePanel ID="updPnlReps" runat="server">
+                    <ContentTemplate>
                 <asp:ImageButton ID="imgBttnPDF" runat="server" ImageUrl="http://sysweb.unach.mx/resources/imagenes/pdf.png" title="Reporte PDF" OnClick="imgBttnPDF_Click" />
                 &nbsp;<asp:ImageButton ID="imgBttnExcel" runat="server" ImageUrl="http://sysweb.unach.mx/resources/imagenes/excel.png" title="Reporte Excel" OnClick="imgBttnExcel_Click" />
-                <%-- </ContentTemplate>
-                </asp:UpdatePanel>--%>
+                 </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
         </div>
 
