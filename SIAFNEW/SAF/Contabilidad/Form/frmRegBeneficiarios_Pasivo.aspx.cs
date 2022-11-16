@@ -15,7 +15,9 @@ namespace SAF.Contabilidad.Form
         string Verificador = string.Empty;
         string VerificadorDet = string.Empty;
         Sesion SesionUsu = new Sesion();
+        Pasivo objPasivo = new Pasivo();
         CN_Comun CNComun = new CN_Comun();
+        CN_Poliza CNPasivo = new CN_Poliza();
         private static List<Comun> ListTipo = new List<Comun>();
 
         #endregion
@@ -30,7 +32,7 @@ namespace SAF.Contabilidad.Form
         }
         private void Inicializar()
         {
-            MultiView1.ActiveViewIndex = 0;           
+            MultiView1.ActiveViewIndex = 0;
             Cargarcombos();
             //CargarGrid();
         }
@@ -72,7 +74,7 @@ namespace SAF.Contabilidad.Form
             Verificador = string.Empty;
             try
             {
-                CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cedulas", ref DDLCedula, "p_ejercicio", "p_centro_contable", "p_mes_anio", "p_clave_evento", SesionUsu.Usu_Ejercicio, DDLCentro_Contable2.SelectedValue, "", "97");
+                CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Cedulas", ref DDLCedula, "p_ejercicio", "p_centro_contable", "p_mes_anio", "p_clave_evento", SesionUsu.Usu_Ejercicio, DDLCentro_Contable2.SelectedValue, "1222", "97");
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Polizas_Tipo", ref DDLPoliza, "p_ejercicio", "p_centro_contable", "p_mes_anio", SesionUsu.Usu_Ejercicio, DDLCentro_Contable2.SelectedValue, "");
                 DDLFormato2.SelectedIndex = 0;
                 DDLFormato2_SelectedIndexChanged(null, null);
@@ -99,6 +101,31 @@ namespace SAF.Contabilidad.Form
             try
             {
                 CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Ctas_Contables", ref DDLCuenta, "p_ejercicio", "p_centro_contable", "p_cta_mayor", "p_nivel", SesionUsu.Usu_Ejercicio, DDLCentro_Contable2.SelectedValue, DDLFormato2.SelectedValue, "4");
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+            }
+        }
+
+        protected void linBttnAgregar_Click(object sender, EventArgs e)
+        {
+            Verificador = string.Empty;
+            try
+            {
+                objPasivo.poliza.Centro_contable = DDLCentro_Contable2.SelectedValue;
+                objPasivo.poliza.IdCedula = Convert.ToInt32(DDLCedula.SelectedValue);
+                objPasivo.poliza.IdPoliza = Convert.ToInt32(DDLPoliza.SelectedValue);
+                objPasivo.cuenta = DDLCuenta.SelectedValue;
+                objPasivo.fuente_financiamiento = DDLFuente2.SelectedValue;
+                objPasivo.proyecto = DDLProyecto2.SelectedValue;
+                objPasivo.beneficiario = DDLBeneficiario.SelectedValue;
+                objPasivo.importe = Convert.ToDouble(txtImporte.Text);
+
+
+
             }
             catch (Exception ex)
             {

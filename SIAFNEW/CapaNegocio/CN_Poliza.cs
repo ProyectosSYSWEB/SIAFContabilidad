@@ -52,7 +52,6 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
-
         public void ValidarTotal(ref Poliza objPoliza, ref string Verificador)
         {
             try
@@ -84,6 +83,18 @@ namespace CapaNegocio
             {
                 CD_Poliza CDPoliza = new CD_Poliza();
                 CDPoliza.PolizaInsertar(ref ObjPoliza,ref Verificador);                
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void PasivoInsertar(ref Poliza ObjPoliza, ref string Verificador)
+        {
+            try
+            {
+                CD_Poliza CDPoliza = new CD_Poliza();
+                CDPoliza.PasivoInsertar(ref ObjPoliza, ref Verificador);
             }
             catch (Exception ex)
             {

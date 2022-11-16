@@ -94,30 +94,6 @@
                         </div>
                         <div class="row">
                             <div class="col-md-1">
-                                # Cédula
-                            </div>
-                            <div class="col-md-11">
-                                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                                    <ContentTemplate>
-                                        <asp:DropDownList ID="DDLCedula" runat="server" CssClass="form-control"></asp:DropDownList>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-1">
-                                # Póliza
-                            </div>
-                            <div class="col-md-11">
-                                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                                    <ContentTemplate>
-                                        <asp:DropDownList ID="DDLPoliza" runat="server" CssClass="form-control" AutoPostBack="True"></asp:DropDownList>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-1">
                                 Formato
                             </div>
                             <div class="col-md-2">
@@ -139,6 +115,37 @@
                                 </asp:UpdatePanel>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                # Cédula
+                            </div>
+                            <div class="col-md-11">
+                                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                    <ContentTemplate>
+                                        <asp:DropDownList ID="DDLCedula" runat="server" CssClass="form-control"></asp:DropDownList>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                # Póliza
+                            </div>
+                            <div class="col-md-7">
+                                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                    <ContentTemplate>
+                                        <asp:DropDownList ID="DDLPoliza" runat="server" CssClass="form-control" AutoPostBack="True"></asp:DropDownList>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                             <div class="col-md-1">
+                                Importe
+                            </div>
+                             <div class="col-md-1">
+                                 <asp:TextBox ID="txtImporte" runat="server"></asp:TextBox>
+                            </div>
+                        </div>
+                        
                         <div class="row">
                             <div class="col-md-1">
                                 Fuente Finan
@@ -167,14 +174,44 @@
                             <div class="col-md-1">
                                 Beneficiario
                             </div>
-                            <div class="col-md-11">
+                            <div class="col-md-9">
                                 <asp:UpdatePanel ID="UpdatePanel6" runat="server">
                                     <ContentTemplate>
                                         <asp:DropDownList ID="DDLBeneficiario" runat="server" CssClass="form-control select2"></asp:DropDownList>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
+                            <div class="col-md-2">
+                                <asp:LinkButton ID="linBttnAgregar" runat="server" CssClass="btn btn-primary" OnClick="linBttnAgregar_Click">Agregar</asp:LinkButton>
+                                </div>
                         </div>
+                        <div class="row">
+                            <div class="col">
+                                <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+                                    <ContentTemplate>
+                                        <asp:GridView ID="grdPasivos" runat="server" AutoGenerateColumns="False" Width="100%">
+                                            <Columns>
+                                                <asp:BoundField HeaderText="CC" />
+                                                <asp:BoundField HeaderText="Cuenta" />
+                                                <asp:BoundField HeaderText="Fuente" />
+                                                <asp:BoundField HeaderText="Proyecto" />
+                                                <asp:BoundField HeaderText="Importe" />
+                                                <asp:TemplateField ShowHeader="False">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Select" Text="Seleccionar"></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField ShowHeader="False">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Delete" Text="Eliminar"></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                            </Columns>
+                                        </asp:GridView>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                            </div>
                         <div class="row">
                             <div class="col text-right">
                                 <asp:LinkButton ID="linkBttnSalir" runat="server" CssClass="btn btn-grey" OnClick="linkBttnSalir_Click">Salir</asp:LinkButton>

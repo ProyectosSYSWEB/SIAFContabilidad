@@ -13,16 +13,16 @@ namespace CapaEntidad
         private string _Centro_contable;
         private string _Tipo;
         private string _Subsistema;
-        private string _Concepto=string.Empty;
+        private string _Concepto = string.Empty;
         private string _Fecha;
         private string _Mes_anio;
         private string _Status;
         private string _Tipo_captura;
         private string _Key_poliza;
         private string _Key_adecuacion;
-        private string _Cheque_cuenta= "00000";
+        private string _Cheque_cuenta = "00000";
         private string _Cheque_numero;
-        private string _Cedula_numero=string.Empty;
+        private string _Cedula_numero = string.Empty;
         private string _Beneficiario;
         private string _Alta_fecha;
         private string _Alta_usuario;
@@ -30,7 +30,7 @@ namespace CapaEntidad
         private string _Modificacion_usuario;
         private string _CFDI;
         private string _Oficio_Autorizacion;
-        private bool   _Opcion_Eliminar;
+        private bool _Opcion_Eliminar;
         private bool _Opcion_Eliminar2;
         private bool _Opcion_Modificar;
         private bool _Opcion_Modificar2;
@@ -50,10 +50,10 @@ namespace CapaEntidad
         private string _Clasificacion = string.Empty;
         private string _ValidaTotal = "S";
         private string _Partida;
-        private int _IdCedula=0;
+        private int _IdCedula = 0;
         private int _IdTransf = 0;
         private string _RutaVolante = string.Empty;
-        private bool _Validar_Total_CFDI=false;
+        private bool _Validar_Total_CFDI = false;
         private bool _Opcion_Volante;
         private bool _Opcion_Volante2;
         private string _RutaAnexo;
@@ -79,7 +79,7 @@ namespace CapaEntidad
             get { return _Clasificacion; }
             set { _Clasificacion = value; }
         }
-        public string  Mes_Cerrado
+        public string Mes_Cerrado
         {
             get { return _Mes_Cerrado; }
             set { _Mes_Cerrado = value; }
@@ -232,7 +232,7 @@ namespace CapaEntidad
         {
             get { return _Modificacion_usuario.Trim(); }
             set { _Modificacion_usuario = value.Trim(); }
-        }        
+        }
         public bool Opcion_Eliminar
         {
             get { return _Opcion_Eliminar; }
@@ -318,5 +318,15 @@ namespace CapaEntidad
             get { return _Total_CFDI; }
             set { _Total_CFDI = value; }
         }
+    }
+    public class Pasivo
+    {
+        public Poliza poliza { get; set; }
+        public string cuenta { get; set; }
+        public string fuente_financiamiento { get; set; }
+        public string proyecto { get; set; }
+        public string beneficiario { get; set; }
+        public double importe { get; set; }
+        public int id_pasivo { get; set; }
     }
 }
