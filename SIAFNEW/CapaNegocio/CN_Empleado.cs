@@ -22,5 +22,18 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void ConsultarCatEmpleados(Empleado objEmpleado, ref List<Empleado> lstEmpleados)
+        {
+            try
+            {
+
+                CD_Empleado CDEmpleado = new CD_Empleado();
+                CDEmpleado.ConsultarCatEmpleados(objEmpleado, ref lstEmpleados);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

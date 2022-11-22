@@ -89,12 +89,12 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
-        public void PasivoInsertar(ref Poliza ObjPoliza, ref string Verificador)
+        public void PasivoInsertar(ref Pasivo ObjPasivo, ref string Verificador)
         {
             try
             {
                 CD_Poliza CDPoliza = new CD_Poliza();
-                CDPoliza.PasivoInsertar(ref ObjPoliza, ref Verificador);
+                CDPoliza.PasivoInsertar(ref ObjPasivo, ref Verificador);
             }
             catch (Exception ex)
             {

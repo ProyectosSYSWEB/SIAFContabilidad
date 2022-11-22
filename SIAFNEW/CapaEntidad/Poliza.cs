@@ -321,11 +321,17 @@ namespace CapaEntidad
     }
     public class Pasivo
     {
-        public Poliza poliza { get; set; }
+        public string num_poliza { get; set; }
+        public string num_cedula { get; set; }
+        public int ejercicio { get; set; }
+        public int id_poliza { get; set; }
+        public int id_cedula { get; set; }
+        public string centro_contable { get; set; }        
         public string cuenta { get; set; }
         public string fuente_financiamiento { get; set; }
         public string proyecto { get; set; }
         public string beneficiario { get; set; }
+        public string formato { get; set; }
         public double importe { get; set; }
         public int id_pasivo { get; set; }
     }

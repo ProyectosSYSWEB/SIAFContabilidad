@@ -46,6 +46,37 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        public void ConsultarCatEmpleados(Empleado objEmpleado, ref List<Empleado> lstEmpleados)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+
+                OracleDataReader dr = null;
+                String[] Parametros = { "p_Nombre" };
+                Object[] Valores = { objEmpleado.Nombre };
+
+                cmm = CDDatos.GenerarOracleCommandCursor("PKG_CONTABILIDAD.Obt_Grid_Empleados2", ref dr, Parametros, Valores);
+
+                while (dr.Read())
+                {
+                    objEmpleado = new Empleado();
+                    objEmpleado.Nombre = Convert.ToString(dr[0]);
+                    lstEmpleados.Add(objEmpleado);
+                }
+
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
 
     }
 }

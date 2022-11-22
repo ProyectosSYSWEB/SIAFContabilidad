@@ -427,8 +427,8 @@ namespace CapaDatos
             {
                 String[] Parametros = { "P_EJERCICIO", "P_CENTRO_CONTABLE", "P_CEDULA", "P_POLIZA", "P_CUENTA", 
                     "P_FUENTE", "P_PROYECTO", "P_BENEFICIARIO", "P_IMPORTE" };
-                object[] Valores = { ObjPasivo.poliza.Ejercicio, ObjPasivo.poliza.Centro_contable, ObjPasivo.poliza.IdCedula,
-                    ObjPasivo.poliza.IdPoliza, ObjPasivo.cuenta, ObjPasivo.fuente_financiamiento, ObjPasivo.proyecto, ObjPasivo.beneficiario,
+                object[] Valores = { ObjPasivo.ejercicio, ObjPasivo.centro_contable, ObjPasivo.id_cedula,
+                    ObjPasivo.id_poliza, ObjPasivo.cuenta, ObjPasivo.fuente_financiamiento, ObjPasivo.proyecto, ObjPasivo.beneficiario,
                     ObjPasivo.importe};
                 String[] ParametrosOut = { "p_Bandera" };
                 Cmd = CDDatos.GenerarOracleCommand("INS_SAF_PASIVOS", ref Verificador, Parametros, Valores, ParametrosOut);
@@ -451,8 +451,8 @@ namespace CapaDatos
             {
                 String[] Parametros = { "P_ID_PASIVO", "P_CEDULA", "P_ID_POLIZA", "P_CUENTA",
                     "P_FUENTE", "P_PROYECTO", "P_BENEFICIARIO", "P_IMPORTE"};
-                object[] Valores = { Convert.ToInt32(ObjPasivo.id_pasivo),  ObjPasivo.poliza.IdCedula,
-                    ObjPasivo.poliza.IdPoliza, ObjPasivo.cuenta, ObjPasivo.fuente_financiamiento, ObjPasivo.proyecto, ObjPasivo.beneficiario,
+                object[] Valores = { Convert.ToInt32(ObjPasivo.id_pasivo),  ObjPasivo.id_cedula,
+                    ObjPasivo.id_poliza, ObjPasivo.cuenta, ObjPasivo.fuente_financiamiento, ObjPasivo.proyecto, ObjPasivo.beneficiario,
                     ObjPasivo.importe
                 };
                 String[] ParametrosOut = { "p_Bandera" };
