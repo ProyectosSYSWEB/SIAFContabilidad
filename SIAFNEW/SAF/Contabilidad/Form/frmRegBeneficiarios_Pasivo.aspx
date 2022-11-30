@@ -9,7 +9,7 @@
         <ContentTemplate>
             <asp:MultiView ID="MultiView1" runat="server">
                 <asp:View ID="View1" runat="server">
-                    <div class="container-fluid">
+                    <div class="container">
                         <div class="row">
                             <div class="col-md-2">
                                 Centro Contable
@@ -25,58 +25,101 @@
                             </div>
                             <div class="col-md-2">
                                 <asp:DropDownList ID="DDLFormato" runat="server" CssClass="form-control">
-                                    <%--<asp:ListItem Value="0000">--Todos--</asp:ListItem>--%>
+                                    <asp:ListItem Value="0000">--Todos--</asp:ListItem>
                                     <asp:ListItem>2111</asp:ListItem>
                                     <asp:ListItem>2112</asp:ListItem>
                                     <asp:ListItem>2113</asp:ListItem>
                                 </asp:DropDownList>
                             </div>
-                            <div class="col-md-2">
-                                Fuente de Financiamiento
-                            </div>
-                            <div class="col-md-6">
-                                <asp:DropDownList ID="DDLFuente" runat="server" CssClass="form-control">
-                                </asp:DropDownList>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                Proyecto
-                            </div>
-                            <div class="col-md-10">
-                                <asp:DropDownList ID="DDLProyecto" runat="server" CssClass="form-control">
-                                </asp:DropDownList>
+                            <div class="col-md-4">
+                                <asp:UpdatePanel ID="updPnlBttnsIni" runat="server">
+                                    <ContentTemplate>
+                                        <asp:LinkButton ID="linkBttnBuscar" CssClass="btn btn-grey" runat="server" OnClick="linkBttnBuscar_Click"><i class="fa fa-search" aria-hidden="true"></i> Ver Pasivos</asp:LinkButton>
+                                        <asp:LinkButton ID="linkBttnAgregar" CssClass="btn btn-primary" runat="server" OnClick="linkBttnAgregar_Click"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar</asp:LinkButton>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
                             </div>
                         </div>
-                        <asp:UpdatePanel ID="updPnlBsucar" runat="server">
-                            <ContentTemplate>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        Filtrar
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="input-group">
-
-                                            <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control"></asp:TextBox>
-                                            <asp:LinkButton ID="linkBttnBuscar" CssClass="btn btn-grey" runat="server">Ver Beneficiarios</asp:LinkButton>
-                                            <asp:LinkButton ID="linkBttnAgregar" CssClass="btn btn-primary" runat="server" OnClick="linkBttnAgregar_Click"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar</asp:LinkButton>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
                         <div class="row">
                             <div class="col text-center">
-                                <asp:UpdateProgress ID="updPgrBsucar" runat="server"
-                                    AssociatedUpdatePanelID="updPnlBsucar">
+                                <asp:UpdateProgress ID="updPgrBttnsIni" runat="server" AssociatedUpdatePanelID="updPnlBttnsIni">
                                     <ProgressTemplate>
-                                        <asp:Image ID="Image2q" runat="server"
-                                            AlternateText="Espere un momento, por favor.." Height="30px"
-                                            ImageUrl="~/images/ajax_loader_gray_512.gif"
-                                            ToolTip="Espere un momento, por favor.." Width="30px" />
+                                        <asp:Image ID="imgBttnsIni" runat="server" Height="50px" ImageUrl="http://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                            Width="50px" AlternateText="Espere un momento, por favor.."
+                                            ToolTip="Espere un momento, por favor.." />
                                     </ProgressTemplate>
                                 </asp:UpdateProgress>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <asp:UpdateProgress ID="updPgrPasivos" runat="server" AssociatedUpdatePanelID="updPnlPasivos">
+                                    <ProgressTemplate>
+                                        <asp:Image ID="pasivo" runat="server" Height="50px" ImageUrl="http://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                            Width="50px" AlternateText="Espere un momento, por favor.."
+                                            ToolTip="Espere un momento, por favor.." />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <asp:UpdatePanel ID="updPnlPasivos" runat="server">
+                                    <ContentTemplate>
+                                        <asp:GridView ID="grdPasivos0" runat="server" AutoGenerateColumns="False" CssClass="mGrid" OnRowDeleting="grdPasivos_RowDeleting" Width="100%" OnSelectedIndexChanged="grdPasivos0_SelectedIndexChanged" EmptyDataText="No hay registros para mostrar">
+                                            <Columns>
+                                                <asp:BoundField DataField="desc_centro_contable" HeaderText="Centro Contable">
+                                                    <HeaderStyle HorizontalAlign="Left" />
+                                                    <ItemStyle HorizontalAlign="Left" />
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="formato" HeaderText="Formato">
+                                                    <ItemStyle BackColor="#FFFF99" />
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="importe" HeaderText="Total" DataFormatString="{0:C2}">
+                                                    <ItemStyle Font-Bold="True" />
+                                                </asp:BoundField>
+                                                <asp:TemplateField ShowHeader="False">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="linkBttnEdit" runat="server" CausesValidation="False" CommandName="Select" CssClass="btn btn-mdb-color"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</asp:LinkButton>
+                                                    </ItemTemplate>
+                                                    <ItemStyle Width="85px" />
+                                                </asp:TemplateField>
+                                                <asp:TemplateField>
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="linkBttnEliminar" runat="server" CausesValidation="False" CssClass="btn btn-mdb-color" OnClick="linkBttnEliminar_Click"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</asp:LinkButton>
+                                                    </ItemTemplate>
+                                                    <ItemStyle Width="85px" />
+                                                </asp:TemplateField>
+                                                <asp:TemplateField>
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="linkBttnReporte" runat="server" CausesValidation="False" CssClass="btn btn-mdb-color" OnClick="linkBttnReporte_Click"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF</asp:LinkButton>
+                                                    </ItemTemplate>
+                                                    <ItemStyle Width="70px" />
+                                                </asp:TemplateField>
+                                                <asp:TemplateField>
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                                                    </EditItemTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="linkBttnExcel" runat="server" CssClass="btn btn-mdb-color" OnClick="linkBttnExcel_Click"><i class="fa fa-file-excel-o" aria-hidden="true"></i> XLS</asp:LinkButton>
+                                                    </ItemTemplate>
+                                                    <ItemStyle Width="70px" />
+                                                </asp:TemplateField>
+                                                <asp:BoundField DataField="centro_contable">
+                                                    <ControlStyle CssClass="classHide" />
+                                                    <FooterStyle CssClass="classHide" />
+                                                    <HeaderStyle CssClass="classHide" />
+                                                    <ItemStyle CssClass="classHide" />
+                                                </asp:BoundField>
+                                            </Columns>
+                                            <FooterStyle CssClass="enc" />
+                                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                            <SelectedRowStyle CssClass="sel" />
+                                            <HeaderStyle CssClass="enc" />
+                                            <AlternatingRowStyle CssClass="alt" />
+                                        </asp:GridView>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
                             </div>
                         </div>
                     </div>
@@ -133,6 +176,7 @@
                                 </asp:UpdatePanel>
                             </div>
                             <div class="col-md-9 fa-text-height">
+                                <asp:RequiredFieldValidator ID="reqNumPol" runat="server" ErrorMessage="* Número de Póliza" Text="*" ControlToValidate="txtNumPoliza" ValidationGroup="NewPasivo"></asp:RequiredFieldValidator>
                                 La póliza debe ser de 7 digitos
                             </div>
                         </div>
@@ -143,7 +187,8 @@
                             <div class="col-md-2">
                                 <asp:UpdatePanel ID="updPnlFormato2" runat="server">
                                     <ContentTemplate>
-                                        <asp:DropDownList ID="DDLFormato2" runat="server" CssClass="form-control" OnSelectedIndexChanged="DDLFormato2_SelectedIndexChanged" AutoPostBack="True">
+                                        <asp:DropDownList ID="DDLFormato2" runat="server" CssClass="form-control btn btn-primary dropdown-toggle browser-default custom-select custom-select-lg mb-3" OnSelectedIndexChanged="DDLFormato2_SelectedIndexChanged" AutoPostBack="True">
+                                            <asp:ListItem Value="0000">--TODAS--</asp:ListItem>
                                             <asp:ListItem>2111</asp:ListItem>
                                             <asp:ListItem>2112</asp:ListItem>
                                             <asp:ListItem>2113</asp:ListItem>
@@ -154,7 +199,7 @@
                             <div class="col-md-1">
                                 Cuenta
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                                     <ContentTemplate>
                                         <asp:DropDownList ID="DDLCuenta" runat="server" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="DDLCuenta_SelectedIndexChanged"></asp:DropDownList>
@@ -162,14 +207,20 @@
                                 </asp:UpdatePanel>
                             </div>
                             <div class="col-md-1">
+                                <asp:RequiredFieldValidator ID="reqCuenta" runat="server" ErrorMessage="* Cuenta" Text="*" ControlToValidate="DDLCuenta" ValidationGroup="NewPasivo" InitialValue="0"></asp:RequiredFieldValidator>
+                            </div>
+                            <div class="col-md-1">
                                 Importe
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <asp:UpdatePanel ID="updPnlImporte" runat="server">
                                     <ContentTemplate>
                                         <asp:TextBox ID="txtImporte" runat="server" CssClass="form-control" AutoPostBack="True"></asp:TextBox>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
+                            </div>
+                            <div class="col-md-1">
+                                <asp:RequiredFieldValidator ID="reqImporte" runat="server" ErrorMessage="* Importe" Text="*" ControlToValidate="txtImporte" ValidationGroup="NewPasivo" InitialValue="0"></asp:RequiredFieldValidator>
                             </div>
                         </div>
                         <div class="row">
@@ -200,39 +251,69 @@
                             <div class="col-md-1">
                                 Beneficiario
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-8">
                                 <asp:UpdatePanel ID="updPnlBeneficiario" runat="server">
                                     <ContentTemplate>
-                                        <%--<asp:Label ID="lblBeneficiario" runat="server" Text=""></asp:Label>--%>
                                         <asp:DropDownList ID="DDLBeneficiario" runat="server" CssClass="form-control select2"></asp:DropDownList>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
-                             <div class="col-md-2">
-                                <asp:LinkButton ID="linBttnAgregar" runat="server" CssClass="btn btn-primary" OnClick="linBttnAgregar_Click">Agregar</asp:LinkButton>
+                             <div class="col-md-1">
+                                <asp:RequiredFieldValidator ID="reqBeneficiario" runat="server" ErrorMessage="* Proveedor" Text="*" ControlToValidate="DDLBeneficiario" ValidationGroup="NewPasivo"></asp:RequiredFieldValidator>
                             </div>
-                           <%-- <div class="col-md-2">
-                                <asp:LinkButton ID="linkBttnBuscaEmp" runat="server" CssClass="btn btn-blue-pastel" OnClick="linkBttnBuscaEmp_Click">Buscar</asp:LinkButton>
-                            </div>--%>
+                            <div class="col-md-2">
+                                <asp:UpdatePanel ID="updPnlAgregarP" runat="server">
+                                    <ContentTemplate>
+                                        <asp:LinkButton ID="linBttnAgregar" runat="server" CssClass="btn btn-grey" OnClick="linkBttnAgregarP_Click" ValidationGroup="NewPasivo">Agregar</asp:LinkButton>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
                         </div>
                         <div class="row" id="rowProveedor" runat="server">
                             <div class="col-md-1">
                                 Proveedor
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-8">
                                 <asp:UpdatePanel ID="updPnlProveedor" runat="server">
                                     <ContentTemplate>
                                         <asp:DropDownList ID="DDLProveedor" runat="server" CssClass="form-control select2"></asp:DropDownList>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
+                            <div class="col-md-1">
+                                <asp:RequiredFieldValidator ID="reqProveedor" runat="server" ErrorMessage="* Proveedor" Text="*" ControlToValidate="DDLProveedor" ValidationGroup="NewPasivo" InitialValue="Z"></asp:RequiredFieldValidator>
+                            </div>
                             <div class="col-md-2">
-                                <asp:LinkButton ID="linBttnAgregar2" runat="server" CssClass="btn btn-primary" OnClick="linBttnAgregar_Click">Agregar</asp:LinkButton>
+                                <asp:UpdatePanel ID="updPnlAgregarP2" runat="server">
+                                    <ContentTemplate>
+                                        <asp:LinkButton ID="linkBttnAgregar2" runat="server" CssClass="btn btn-grey" OnClick="linkBttnAgregarP_Click" ValidationGroup="NewPasivo">Agregar</asp:LinkButton>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
                             </div>
                         </div>
-                        
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-10">
+                                <asp:ValidationSummary ID="valDatosPasivo" runat="server" ValidationGroup="NewPasivo" HeaderText="Estos campos son requeridos:" />
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col text-center">
+                                <asp:UpdateProgress ID="updPgrAgregarP2" runat="server" AssociatedUpdatePanelID="updPnlAgregarP2">
+                                    <ProgressTemplate>
+                                        <asp:Image ID="imgAgregarP2" runat="server" Height="50px" ImageUrl="http://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                            Width="50px" AlternateText="Espere un momento, por favor.."
+                                            ToolTip="Espere un momento, por favor.." />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                                <asp:UpdateProgress ID="updPgrAgregarP" runat="server" AssociatedUpdatePanelID="updPnlAgregarP">
+                                    <ProgressTemplate>
+                                        <asp:Image ID="imgAgregarP" runat="server" Height="50px" ImageUrl="http://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                            Width="50px" AlternateText="Espere un momento, por favor.."
+                                            ToolTip="Espere un momento, por favor.." />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
                                 <asp:UpdateProgress ID="updPgrCC2" runat="server" AssociatedUpdatePanelID="updPnlCC2">
                                     <ProgressTemplate>
                                         <asp:Image ID="img1" runat="server" Height="50px" ImageUrl="http://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
@@ -267,22 +348,30 @@
                             <div class="col">
                                 <asp:UpdatePanel ID="updPnlGridPasivos2" runat="server">
                                     <ContentTemplate>
-                                        <asp:GridView ID="grdPasivos" runat="server" AutoGenerateColumns="False" Width="100%" OnRowDeleting="grdPasivos_RowDeleting">
+                                        <asp:GridView ID="grdPasivos" runat="server" AutoGenerateColumns="False" Width="100%" OnRowDeleting="grdPasivos_RowDeleting" CssClass="mGrid">
                                             <Columns>
                                                 <asp:BoundField HeaderText="CC" DataField="centro_contable" />
-                                                <asp:BoundField HeaderText="Cédula" DataField="id_cedula" />
-                                                <asp:BoundField HeaderText="Póliza" DataField="id_poliza" />
-                                                <asp:BoundField HeaderText="Formato" DataField="formato" />
+                                                <asp:BoundField HeaderText="Cédula" DataField="cedula" />
+                                                <asp:BoundField HeaderText="Póliza" DataField="poliza" />
+                                                <asp:BoundField HeaderText="Formato" DataField="formato">
+                                                    <ItemStyle BackColor="#FFFF99" />
+                                                </asp:BoundField>
                                                 <asp:BoundField HeaderText="cuenta" DataField="cuenta" />
                                                 <asp:BoundField HeaderText="Importe" DataField="importe" />
-                                                <asp:BoundField HeaderText="Beneficiario" DataField="beneficiario" />                                                
-                                                <asp:CommandField ShowEditButton="True" />
+                                                <asp:BoundField HeaderText="Beneficiario" DataField="beneficiario" />
+                                                <asp:BoundField DataField="fuente" HeaderText="Fuente" />
+                                                <asp:BoundField DataField="proyecto" HeaderText="Proyecto" />
                                                 <asp:TemplateField ShowHeader="False">
                                                     <ItemTemplate>
                                                         <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Delete" Text="Eliminar"></asp:LinkButton>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>
+                                            <FooterStyle CssClass="enc" />
+                                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                            <SelectedRowStyle CssClass="sel" />
+                                            <HeaderStyle CssClass="enc" />
+                                            <AlternatingRowStyle CssClass="alt" />
                                         </asp:GridView>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
@@ -291,6 +380,7 @@
                         <div class="row">
                             <div class="col text-right">
                                 <asp:LinkButton ID="linkBttnSalir" runat="server" CssClass="btn btn-grey" OnClick="linkBttnSalir_Click">Salir</asp:LinkButton>
+                                &nbsp;<asp:LinkButton ID="linkBttnGuardar" runat="server" CssClass="btn btn-primary" OnClick="linkBttnGuardar_Click">Guardar</asp:LinkButton>
                             </div>
                         </div>
                     </div>
@@ -320,25 +410,50 @@
                                 <ContentTemplate>
                                     <asp:LinkButton ID="linkBttnBuscaNombreEmp" runat="server" CssClass="btn btn-blue-grey" OnClick="linkBttnBuscaNombreEmp_Click">Buscar</asp:LinkButton></div>
                                 </ContentTemplate>
-                            </asp:UpdatePanel>                            
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                                <ContentTemplate>
-                                    <asp:GridView ID="grdEmpleados" runat="server">
-                                        <Columns>
-                                            <asp:BoundField HeaderText="Empleado" DataField="Nombre" />
-                                        </Columns>
-                                    </asp:GridView>
-                                </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
+                        <div class="row">
+                            <div class="col">
+                                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                    <ContentTemplate>
+                                        <asp:GridView ID="grdEmpleados" runat="server">
+                                            <Columns>
+                                                <asp:BoundField HeaderText="Empleado" DataField="Nombre" />
+                                            </Columns>
+                                        </asp:GridView>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Agregar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="modalBorrar">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Eliminar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Esta seguro de eliminar el registro?</p>
+                </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Agregar</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+                        <ContentTemplate>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <asp:LinkButton ID="linkBttnEliminarPasivo" runat="server" CssClass="btn btn-danger" OnClick="linkBttnEliminarPasivo_Click"><i class="fa fa-trash" aria-hidden="true"></i> Borrar</asp:LinkButton>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
             </div>
         </div>

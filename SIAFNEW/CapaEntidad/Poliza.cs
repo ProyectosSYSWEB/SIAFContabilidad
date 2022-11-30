@@ -57,12 +57,21 @@ namespace CapaEntidad
         private bool _Opcion_Volante;
         private bool _Opcion_Volante2;
         private string _RutaAnexo;
+        private string _RutaReclasificacion;
+        private bool _Visible;
+        private bool _Visible2;
+
+
         public string RutaAnexo
         {
             get { return _RutaAnexo; }
             set { _RutaAnexo = value; }
         }
-
+        public string RutaReclasificacion
+        {
+            get { return _RutaReclasificacion; }
+            set { _RutaReclasificacion = value; }
+        }
 
         public string RutaVolante
         {
@@ -99,6 +108,16 @@ namespace CapaEntidad
         {
             get { return _Opcion_Volante; }
             set { _Opcion_Volante = value; }
+        }
+        public bool Visible
+        {
+            get { return _Visible; }
+            set { _Visible = value; }
+        }
+        public bool Visible2
+        {
+            get { return _Visible2; }
+            set { _Visible2 = value; }
         }
         public bool Opcion_Volante2
         {
@@ -326,10 +345,17 @@ namespace CapaEntidad
         public int ejercicio { get; set; }
         public int id_poliza { get; set; }
         public int id_cedula { get; set; }
-        public string centro_contable { get; set; }        
+        public int id_cuenta { get; set; }
+        public string poliza { get; set; }
+        public string cedula { get; set; }
+        public string centro_contable { get; set; }
+        public string desc_centro_contable { get; set; }
         public string cuenta { get; set; }
-        public string fuente_financiamiento { get; set; }
+        public int id_fuente { get; set; }
+        public string fuente { get; set; }
+        public int id_proyecto { get; set; }
         public string proyecto { get; set; }
+        public string id_beneficiario { get; set; }
         public string beneficiario { get; set; }
         public string formato { get; set; }
         public double importe { get; set; }

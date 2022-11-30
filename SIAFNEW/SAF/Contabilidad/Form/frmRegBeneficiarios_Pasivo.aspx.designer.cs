@@ -60,40 +60,13 @@ namespace SAF.Contabilidad.Form
         protected global::System.Web.UI.WebControls.DropDownList DDLFormato;
 
         /// <summary>
-        /// Control DDLFuente.
+        /// Control updPnlBttnsIni.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDLFuente;
-
-        /// <summary>
-        /// Control DDLProyecto.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDLProyecto;
-
-        /// <summary>
-        /// Control updPnlBsucar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updPnlBsucar;
-
-        /// <summary>
-        /// Control txtBuscar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBuscar;
+        protected global::System.Web.UI.UpdatePanel updPnlBttnsIni;
 
         /// <summary>
         /// Control linkBttnBuscar.
@@ -114,13 +87,40 @@ namespace SAF.Contabilidad.Form
         protected global::System.Web.UI.WebControls.LinkButton linkBttnAgregar;
 
         /// <summary>
-        /// Control updPgrBsucar.
+        /// Control updPgrBttnsIni.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress updPgrBsucar;
+        protected global::System.Web.UI.UpdateProgress updPgrBttnsIni;
+
+        /// <summary>
+        /// Control updPgrPasivos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPgrPasivos;
+
+        /// <summary>
+        /// Control updPnlPasivos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlPasivos;
+
+        /// <summary>
+        /// Control grdPasivos0.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdPasivos0;
 
         /// <summary>
         /// Control View2.
@@ -213,6 +213,15 @@ namespace SAF.Contabilidad.Form
         protected global::System.Web.UI.WebControls.TextBox txtNumPoliza;
 
         /// <summary>
+        /// Control reqNumPol.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqNumPol;
+
+        /// <summary>
         /// Control updPnlFormato2.
         /// </summary>
         /// <remarks>
@@ -249,6 +258,15 @@ namespace SAF.Contabilidad.Form
         protected global::System.Web.UI.WebControls.DropDownList DDLCuenta;
 
         /// <summary>
+        /// Control reqCuenta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqCuenta;
+
+        /// <summary>
         /// Control updPnlImporte.
         /// </summary>
         /// <remarks>
@@ -265,6 +283,15 @@ namespace SAF.Contabilidad.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtImporte;
+
+        /// <summary>
+        /// Control reqImporte.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqImporte;
 
         /// <summary>
         /// Control updPnlFuente2.
@@ -330,6 +357,24 @@ namespace SAF.Contabilidad.Form
         protected global::System.Web.UI.WebControls.DropDownList DDLBeneficiario;
 
         /// <summary>
+        /// Control reqBeneficiario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqBeneficiario;
+
+        /// <summary>
+        /// Control updPnlAgregarP.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlAgregarP;
+
+        /// <summary>
         /// Control linBttnAgregar.
         /// </summary>
         /// <remarks>
@@ -366,13 +411,58 @@ namespace SAF.Contabilidad.Form
         protected global::System.Web.UI.WebControls.DropDownList DDLProveedor;
 
         /// <summary>
-        /// Control linBttnAgregar2.
+        /// Control reqProveedor.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton linBttnAgregar2;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqProveedor;
+
+        /// <summary>
+        /// Control updPnlAgregarP2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlAgregarP2;
+
+        /// <summary>
+        /// Control linkBttnAgregar2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnAgregar2;
+
+        /// <summary>
+        /// Control valDatosPasivo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary valDatosPasivo;
+
+        /// <summary>
+        /// Control updPgrAgregarP2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPgrAgregarP2;
+
+        /// <summary>
+        /// Control updPgrAgregarP.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPgrAgregarP;
 
         /// <summary>
         /// Control updPgrCC2.
@@ -438,6 +528,15 @@ namespace SAF.Contabilidad.Form
         protected global::System.Web.UI.WebControls.LinkButton linkBttnSalir;
 
         /// <summary>
+        /// Control linkBttnGuardar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnGuardar;
+
+        /// <summary>
         /// Control txtNombre.
         /// </summary>
         /// <remarks>
@@ -481,5 +580,23 @@ namespace SAF.Contabilidad.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grdEmpleados;
+
+        /// <summary>
+        /// Control UpdatePanel6.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel6;
+
+        /// <summary>
+        /// Control linkBttnEliminarPasivo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnEliminarPasivo;
     }
 }

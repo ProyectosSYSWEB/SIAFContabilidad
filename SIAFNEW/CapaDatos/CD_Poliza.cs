@@ -98,6 +98,41 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        public void PasivoConsultaGrid(Pasivo objPasivo, ref List<Pasivo> List)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+                OracleDataReader dr = null;
+                String[] Parametros = { "P_CENTRO_CONTABLE", "P_EJERCICIO", "P_FORMATO" };
+                String[] Valores = { objPasivo.centro_contable, Convert.ToString(objPasivo.ejercicio), objPasivo.formato };
+                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Pasivos", ref dr, Parametros, Valores);
+
+
+                while (dr.Read())
+                {
+                    objPasivo = new Pasivo();
+                    objPasivo.desc_centro_contable = Convert.ToString(dr.GetValue(0));
+                    objPasivo.formato = Convert.ToString(dr.GetValue(1));
+                    objPasivo.importe = Convert.ToDouble(dr.GetValue(2));
+                    objPasivo.centro_contable = Convert.ToString(dr.GetValue(3));
+                    //objPasivo.id_pasivo = Convert.ToInt32(dr.GetValue(3));
+                    List.Add(objPasivo);
+                }
+
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+
         public void GenPolizasAuto(int Ejercicio, string Mes, string Tipo, ref int TotalPolizasGen, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -265,12 +300,28 @@ namespace CapaDatos
 
                     ObjPoliza.RutaVolante = "https://sysweb.unach.mx/SAF/Patrimonio/Reportes/VisualizadorCrystal_patrimonio.aspx?Tipo=RP-VOLANTE&Id=" + Convert.ToInt32(dr.GetValue(20));
 
-                    if (Convert.ToString(dr.GetValue(23)) == "T")
-                        ObjPoliza.RutaAnexo = "https://sysweb.unach.mx/SAF/Adjuntos/" + Convert.ToString(dr.GetValue(22));
-                    else if (Convert.ToString(dr.GetValue(23)) == "R")
+                    //if (Convert.ToString(dr.GetValue(23)) == "T")
+                    //    ObjPoliza.RutaAnexo = "https://sysweb.unach.mx/SAF/Adjuntos/" + Convert.ToString(dr.GetValue(22));
+                    ObjPoliza.Visible = false;
+                    ObjPoliza.Visible2 = true;
+                    //else 
+                    if (Convert.ToString(dr.GetValue(23)) == "R")
+                    {
+                        ObjPoliza.Visible = true;
+                        ObjPoliza.Visible2 = false;
                         ObjPoliza.RutaAnexo = "https://sysweb.unach.mx/SAF/Patrimonio/Reportes/VisualizadorCrystal_patrimonio.aspx?Tipo=RP-RECLASIFICACION&Id=" + Convert.ToInt32(dr.GetValue(20));
+                        ObjPoliza.RutaReclasificacion = "https://sysweb.unach.mx/SAF/Adjuntos/" + Convert.ToString(dr.GetValue(22));
+                    }
+                    //else if (Convert.ToString(dr.GetValue(23)) == "T")
+                    //{
+                    //    ObjPoliza.Visible = false;
+                    //    ObjPoliza.Visible2 = true;
+                    //}
                     else
+                    {
                         ObjPoliza.RutaAnexo = string.Empty;
+                        ObjPoliza.RutaReclasificacion = string.Empty;
+                    }
 
 
                     ObjPoliza.Validar_Total_CFDI = (Convert.ToString(dr.GetValue(21)) == "S") ? true : false;
@@ -386,6 +437,119 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
+        //public void ConsultarPasivoSel(ref Pasivo objPasivo, ref string Verificador)
+        //{
+        //    CD_Datos CDDatos = new CD_Datos();
+        //    OracleCommand Cmd = null;
+        //    try
+        //    {
+
+
+        //        string[] ParametrosIn = { "P_CENTRO_CONTABLE", "P_EJERCICIO", "P_FORMATO" };
+        //        object[] Valores = { objPasivo.centro_contable, objPasivo.ejercicio, objPasivo.formato
+        //    };
+        //        string[] ParametrosOut ={
+        //                                  "P_CENTRO_CONTABLE",
+        //                                  "P_FECHA",
+        //                                  "P_TIPO",
+        //                                  "P_STATUS",
+        //                                  "P_TIPO_CAPTURA",
+        //                                  "P_NUMERO_POLIZA",
+        //                                  "P_CONCEPTO",
+        //                                  "P_CHEQUE_CUENTA",
+        //                                  "P_CHEQUE_NUMERO",
+        //                                  "P_CHEQUE_IMPORTE",
+        //                                  "P_CEDULA_NUMERO",
+        //                                  "P_BENEFICIARIO",
+        //                                  "P_CFDI",
+        //                                  "P_TIPO_DOCUMENTO",
+        //                                  "P_CLASIFICACION",
+        //                                  "P_VALIDA_TOT_CFDI",
+        //                                  "P_BANDERA"
+        //        };
+
+        //        Cmd = CDDatos.GenerarOracleCommand("SEL_SAF_POLIZAS", ref Verificador, ParametrosIn, Valores, ParametrosOut);
+        //        if (Verificador == "0")
+        //        {
+        //            ObjPoliza = new Poliza();
+        //            ObjPoliza.Centro_contable = Convert.ToString(Cmd.Parameters["P_CENTRO_CONTABLE"].Value);
+        //            ObjPoliza.Fecha = Convert.ToString(Cmd.Parameters["P_FECHA"].Value);
+        //            ObjPoliza.Tipo = Convert.ToString(Cmd.Parameters["P_TIPO"].Value);
+        //            ObjPoliza.Status = Convert.ToString(Cmd.Parameters["P_STATUS"].Value);
+        //            ObjPoliza.Tipo_captura = Convert.ToString(Cmd.Parameters["P_TIPO_CAPTURA"].Value);
+        //            ObjPoliza.Numero_poliza = Convert.ToString(Cmd.Parameters["P_NUMERO_POLIZA"].Value);
+        //            ObjPoliza.Concepto = Convert.ToString(Cmd.Parameters["P_CONCEPTO"].Value);
+        //            ObjPoliza.Cheque_cuenta = Convert.ToString(Cmd.Parameters["P_CHEQUE_CUENTA"].Value);
+        //            ObjPoliza.Cheque_numero = Convert.ToString(Cmd.Parameters["P_CHEQUE_NUMERO"].Value);
+        //            ObjPoliza.Cheque_importe = Convert.ToDouble(Cmd.Parameters["P_CHEQUE_IMPORTE"].Value);
+        //            ObjPoliza.Cedula_numero = Convert.ToString(Cmd.Parameters["P_CEDULA_NUMERO"].Value);
+        //            ObjPoliza.Beneficiario = Convert.ToString(Cmd.Parameters["P_BENEFICIARIO"].Value);
+        //            ObjPoliza.CFDI = Convert.ToString(Cmd.Parameters["P_CFDI"].Value);
+        //            ObjPoliza.Tipo_Documento = Convert.ToString(Cmd.Parameters["P_TIPO_DOCUMENTO"].Value);
+        //            ObjPoliza.Clasificacion = Convert.ToString(Cmd.Parameters["P_CLASIFICACION"].Value);
+        //            ObjPoliza.Validar_Total_CFDI = true;
+        //            //if (Convert.ToString(Cmd.Parameters["P_VALIDA_TOT_CFDI"].Value) == "S")
+        //            //    ObjPoliza.Validar_Total_CFDI = true;
+        //            //else
+        //            //    ObjPoliza.Validar_Total_CFDI = false;
+        //        }
+
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        CDDatos.LimpiarOracleCommand(ref Cmd);
+        //    }
+        //}
+        public void ListPasivos(Pasivo objPasivo, ref List<Pasivo>lstPasivos)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+                OracleDataReader dr = null;
+
+
+                string[] Parametros = { "P_CENTRO_CONTABLE", "P_EJERCICIO", "P_FORMATO" };
+                object[] Valores = { objPasivo.centro_contable, objPasivo.ejercicio, objPasivo.formato };
+
+                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_List_Pasivos", ref dr, Parametros, Valores);
+                while (dr.Read())
+                {
+                    objPasivo = new Pasivo();
+                    objPasivo.centro_contable = Convert.ToString(dr.GetValue(2));
+                    objPasivo.ejercicio = Convert.ToInt32(dr.GetValue(1));
+                    objPasivo.id_cedula = Convert.ToInt32(dr.GetValue(3));
+                    objPasivo.id_poliza = Convert.ToInt32(dr.GetValue(4));
+                    objPasivo.cedula = Convert.ToString(dr.GetValue(10));
+                    objPasivo.poliza = Convert.ToString(dr.GetValue(11));
+                    objPasivo.formato = Convert.ToString(dr.GetValue(16));
+                    objPasivo.id_cuenta = Convert.ToInt32(dr.GetValue(5));
+                    objPasivo.cuenta = Convert.ToString(dr.GetValue(12));
+                    objPasivo.importe = Convert.ToDouble(dr.GetValue(9));
+                    objPasivo.id_fuente = Convert.ToInt32(dr.GetValue(6));
+                    objPasivo.fuente = Convert.ToString(dr.GetValue(13));
+                    objPasivo.id_proyecto = Convert.ToInt32(dr.GetValue(7));
+                    objPasivo.proyecto = Convert.ToString(dr.GetValue(14));
+                    objPasivo.id_beneficiario = Convert.ToString(dr.GetValue(8));
+                    objPasivo.beneficiario = Convert.ToString(dr.GetValue(15));
+                    lstPasivos.Add(objPasivo);
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
         public void PolizaInsertar(ref Poliza ObjPoliza, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -419,19 +583,59 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
-        public void PasivoInsertar(ref Pasivo ObjPasivo, ref string Verificador)
+        public void PasivoEliminar(Pasivo objPasivo, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
             OracleCommand Cmd = null;
             try
             {
-                String[] Parametros = { "P_EJERCICIO", "P_CENTRO_CONTABLE", "P_CEDULA", "P_POLIZA", "P_CUENTA", 
-                    "P_FUENTE", "P_PROYECTO", "P_BENEFICIARIO", "P_IMPORTE" };
-                object[] Valores = { ObjPasivo.ejercicio, ObjPasivo.centro_contable, ObjPasivo.id_cedula,
-                    ObjPasivo.id_poliza, ObjPasivo.cuenta, ObjPasivo.fuente_financiamiento, ObjPasivo.proyecto, ObjPasivo.beneficiario,
-                    ObjPasivo.importe};
-                String[] ParametrosOut = { "p_Bandera" };
-                Cmd = CDDatos.GenerarOracleCommand("INS_SAF_PASIVOS", ref Verificador, Parametros, Valores, ParametrosOut);
+                CDDatos.StartTrans();
+               
+                    String[] Parametros = { "P_EJERCICIO", "P_CENTRO_CONTABLE", "P_FORMATO" };
+                    object[] Valores = { objPasivo.ejercicio, objPasivo.centro_contable, objPasivo.formato };
+                    String[] ParametrosOut = { "p_Bandera" };
+                    Cmd = CDDatos.GenerarOracleCommand("DEL_SAF_PASIVOS", ref Verificador, Parametros, Valores, ParametrosOut);
+                
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+        public void PasivoInsertar(List<Pasivo> lstPasivos, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            try
+            {
+                CDDatos.StartTrans();
+                for (int i = 0; i < lstPasivos.Count; i++)
+                {
+                    String[] Parametros = { "P_EJERCICIO", "P_CENTRO_CONTABLE", "P_ID_CEDULA", "P_CEDULA",
+                        "P_ID_POLIZA", "P_POLIZA",
+                        "P_ID_CUENTA", "P_CUENTA",
+                        "P_ID_FUENTE", "P_FUENTE",
+                        "P_ID_PROYECTO", "P_PROYECTO",
+                        "P_ID_BENEFICIARIO", "P_BENEFICIARIO", "P_IMPORTE", "P_FORMATO" };
+                    object[] Valores = { lstPasivos[i].ejercicio, lstPasivos[i].centro_contable,
+                        lstPasivos[i].id_cedula, lstPasivos[i].cedula,
+                        lstPasivos[i].id_poliza, lstPasivos[i].poliza,
+                        lstPasivos[i].id_cuenta, lstPasivos[i].cuenta,
+                        lstPasivos[i].id_fuente, lstPasivos[i].fuente,
+                        lstPasivos[i].id_proyecto, lstPasivos[i].proyecto,
+                        lstPasivos[i].id_beneficiario, lstPasivos[i].beneficiario,
+                        lstPasivos[i].importe, lstPasivos[i].formato };
+                    String[] ParametrosOut = { "p_Bandera" };
+                    Cmd = CDDatos.GenerarOracleCommand("INS_SAF_PASIVOS", ref Verificador, Parametros, Valores, ParametrosOut);
+                }
+
+
             }
             catch (Exception ex)
             {
@@ -452,7 +656,7 @@ namespace CapaDatos
                 String[] Parametros = { "P_ID_PASIVO", "P_CEDULA", "P_ID_POLIZA", "P_CUENTA",
                     "P_FUENTE", "P_PROYECTO", "P_BENEFICIARIO", "P_IMPORTE"};
                 object[] Valores = { Convert.ToInt32(ObjPasivo.id_pasivo),  ObjPasivo.id_cedula,
-                    ObjPasivo.id_poliza, ObjPasivo.cuenta, ObjPasivo.fuente_financiamiento, ObjPasivo.proyecto, ObjPasivo.beneficiario,
+                    ObjPasivo.id_poliza, ObjPasivo.cuenta, ObjPasivo.fuente, ObjPasivo.proyecto, ObjPasivo.beneficiario,
                     ObjPasivo.importe
                 };
                 String[] ParametrosOut = { "p_Bandera" };
@@ -467,26 +671,26 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
-        public void PasivoEliminar(Pasivo ObjPasivo, ref string Verificador)
-        {
-            CD_Datos CDDatos = new CD_Datos();
-            OracleCommand Cmd = null;
-            try
-            {
-                String[] Parametros = { "P_ID_PASIVO" };
-                object[] Valores = { ObjPasivo.id_pasivo };
-                String[] ParametrosOut = { "p_Bandera" };
-                Cmd = CDDatos.GenerarOracleCommand("DEL_SAF_PASIVOS", ref Verificador, Parametros, Valores, ParametrosOut);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                CDDatos.LimpiarOracleCommand(ref Cmd);
-            }
-        }
+        //public void PasivoEliminar(Pasivo ObjPasivo, ref string Verificador)
+        //{
+        //    CD_Datos CDDatos = new CD_Datos();
+        //    OracleCommand Cmd = null;
+        //    try
+        //    {
+        //        String[] Parametros = { "P_ID_PASIVO" };
+        //        object[] Valores = { ObjPasivo.id_pasivo };
+        //        String[] ParametrosOut = { "p_Bandera" };
+        //        Cmd = CDDatos.GenerarOracleCommand("DEL_SAF_PASIVOS", ref Verificador, Parametros, Valores, ParametrosOut);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        CDDatos.LimpiarOracleCommand(ref Cmd);
+        //    }
+        //}
         public void PolizaEditar(ref Poliza ObjPoliza, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();

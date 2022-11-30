@@ -2,6 +2,7 @@
 using CapaNegocio;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -18,6 +19,7 @@ namespace SAF.Contabilidad.Form
         Sesion SesionUsu = new Sesion();
         CN_Comun CNComun = new CN_Comun();
         CN_Poliza CNPoliza = new CN_Poliza();
+        Poliza ObjPoliza = new Poliza();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -46,6 +48,7 @@ namespace SAF.Contabilidad.Form
                 if (Verificador == "0")
                 {
                     lblMsjError.Text = "Se han generado " + TotalPolizasGen + " pólizas.";
+                    CargarGrid(newIdPoliza);
                     //ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'Se han generado "+TotalPolizasGen+" pólizas.');", true);
                 }
                 else
@@ -61,6 +64,71 @@ namespace SAF.Contabilidad.Form
                 Verificador = ex.Message;
                 CNComun.VerificaTextoMensajeError(ref Verificador);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+            }
+        }
+        private void CargarGrid()
+        {
+            Verificador = string.Empty;
+            grvPolizas.DataSource = null;
+            grvPolizas.DataBind();
+            try
+            {
+                DataTable dt = new DataTable();
+                grvPolizas.DataSource = dt;
+                grvPolizas.DataSource = GetList();
+                grvPolizas.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+            }
+        }
+        private List<Poliza> GetList()
+        {
+            Verificador = string.Empty;
+            try
+            {
+                List<Poliza> List = new List<Poliza>();
+                ObjPoliza.Ejercicio = Convert.ToInt32(SesionUsu.Usu_Ejercicio);
+                 if (SesionUsu.Usu_Rep == "DEPTOFIN")
+                    ObjPoliza.Centro_contable = "72104";
+                else if (SesionUsu.Usu_Rep == "CJGRAL")
+                    ObjPoliza.Centro_contable = "72103";
+
+                string FechaInicial;
+                string FechaFinal;
+                if (ddlFecha_Ini.SelectedValue == "00")
+                    FechaInicial = "01/01/" + SesionUsu.Usu_Ejercicio;
+                else
+                    FechaInicial = "01/" + ddlFecha_Ini.SelectedValue + "/" + SesionUsu.Usu_Ejercicio;
+
+
+
+                if (ddlFecha_Ini.SelectedValue == "00")
+                    FechaFinal = "31/01/" + SesionUsu.Usu_Ejercicio;
+                else
+                {
+                    int DiaFinal = System.DateTime.DaysInMonth(Convert.ToInt32(SesionUsu.Usu_Ejercicio), Convert.ToInt32(ddlFecha_Fin.SelectedValue));
+                    FechaFinal = DiaFinal + "/" + ddlFecha_Fin.SelectedValue + "/" + SesionUsu.Usu_Ejercicio;
+                }
+
+                if (Convert.ToInt32(SesionUsu.Usu_Ejercicio) >= 2022)
+                    CNPoliza.PolizaConsultaGrid_Min(ref ObjPoliza, FechaInicial, FechaFinal, txtBuscar.Text.ToUpper(), SesionUsu.Usu_TipoUsu, ref List);
+                else
+                    CNPoliza.PolizaConsultaGrid(ref ObjPoliza, FechaInicial, FechaFinal, txtBuscar.Text.ToUpper(), SesionUsu.Usu_TipoUsu, ref List);
+                if (List.Count >= 4000)
+                {
+                    List = null;
+                    divErrorTot.Visible = true;
+
+                }
+                return List;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
     }

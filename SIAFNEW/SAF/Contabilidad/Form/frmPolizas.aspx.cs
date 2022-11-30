@@ -2018,11 +2018,14 @@ namespace SAF.Form
 
             if (ddl.SelectedValue=="Volante")
                 Ruta=grvPolizas.SelectedRow.Cells[22].Text;
-            else if (ddl.SelectedValue == "Anexo")
+            else if (ddl.SelectedValue == "Reclasificacion")
                 Ruta = grvPolizas.SelectedRow.Cells[23].Text;
+            else if (ddl.SelectedValue == "Anexo")
+                Ruta = grvPolizas.SelectedRow.Cells[24].Text;
 
 
-            Ruta=Ruta.Replace("&amp;", "&");
+
+            Ruta =Ruta.Replace("&amp;", "&");
 
             string _open = "window.open('" + Ruta + "', '_newtab');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);

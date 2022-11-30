@@ -361,7 +361,6 @@ namespace SAF.Contabilidad.Form
                 CNComun.VerificaTextoMensajeError(ref Verificador);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
             }
-
         }
 
         private void CargarGridAdjuntos(List<Poliza_Conciliacion> lstAdjuntos)

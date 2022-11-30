@@ -476,6 +476,16 @@ namespace SAF.Reportes
                         reportes_dir();
                         report.SetParameterValue(0, id); reporte_PDF();
                         break;
+                    case "RP_Pasivos":
+                        Reporte = "Contabilidad\\Reportes\\RP_Pasivos.rpt";
+                        reportes_dir();
+                        report.SetParameterValue(0, centro_contable); report.SetParameterValue(1, Ejercicio); report.SetParameterValue(2, mayor); reporte_PDF("FORMATO_"+mayor);
+                        break;
+                    case "RP_Pasivosxls":
+                        Reporte = "Contabilidad\\Reportes\\RP_Pasivosxls.rpt";
+                        reportes_dir();
+                        report.SetParameterValue(0, centro_contable); report.SetParameterValue(1, Ejercicio); report.SetParameterValue(2, mayor); reporte_XLS("FORMATO_" + mayor);
+                        break;
                     case "RP_CFDIS":
                         Reporte = "Contabilidad\\Reportes\\RP_CFDIS.rpt";
                         reportes_dir();
@@ -549,6 +559,19 @@ namespace SAF.Reportes
 
         }
 
+        private void reporte_PDF(string NombreReporte)
+        {
+            report.PrintOptions.PaperSize = PaperSize.PaperLetter;
+            connectionInfo.ServerName = "dsia";
+            connectionInfo.UserID = "SAF";
+            connectionInfo.Password = "DSIA2014";
+            SetDBLogonForReport(connectionInfo, report);
+
+            report.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, false, NombreReporte);
+            CR_Reportes.ReportSource = report;
+
+        }
+
         private void reporte_PDF_Legal()
         {
             report.PrintOptions.PaperSize = PaperSize.PaperLegal;
@@ -569,6 +592,18 @@ namespace SAF.Reportes
             connectionInfo.Password = "DSIA2014";
             SetDBLogonForReport(connectionInfo, report);
             report.ExportToHttpResponse(ExportFormatType.ExcelRecord, Response, false, Tipo);
+            CR_Reportes.ReportSource = report;
+
+        }
+
+        private void reporte_XLS(string nombre_reporte)
+        {
+            report.PrintOptions.PaperSize = PaperSize.PaperLetter;
+            connectionInfo.ServerName = "dsia";
+            connectionInfo.UserID = "SAF";
+            connectionInfo.Password = "DSIA2014";
+            SetDBLogonForReport(connectionInfo, report);
+            report.ExportToHttpResponse(ExportFormatType.ExcelRecord, Response, false, nombre_reporte);
             CR_Reportes.ReportSource = report;
 
         }

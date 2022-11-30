@@ -620,25 +620,28 @@
                                                     </asp:TemplateField>
                                                     <asp:TemplateField>
                                                         <ItemTemplate>
-                                                            <%--<div class="row">
+                                                            <div class="row" runat="server" id="rowReclasificacion" visible='<%# Bind("Visible") %>'>
                                                                 <div class="col">
                                                                     <div class="input-group">
-                                                                        <asp:DropDownList ID="ddlDoctosTrans" runat="server" Enabled='<%# Bind("Opcion_Volante") %>' Style="width: 70px">
-                                                                            <asp:ListItem Value="Volante">Volante</asp:ListItem>
+                                                                        <asp:DropDownList ID="ddlDoctosTrans" runat="server" Enabled='<%# Bind("Opcion_Volante") %>' CssClass="form-control" Font-Size="11px">
+                                                                            <asp:ListItem Value="Reclasificacion">Reclasificación</asp:ListItem>
                                                                             <asp:ListItem Value="Anexo">Anexo</asp:ListItem>
                                                                         </asp:DropDownList>
                                                                         <div class="input-group-prepend">
                                                                             <asp:LinkButton ID="linkBtnnAnexo" runat="server" CssClass="btn_grid btn-mdb-color" Visible='<%# Bind("Opcion_Volante") %>' OnClick="linkBtnnAnexo_Click">Ver</asp:LinkButton>
-                                                                            <asp:LinkButton ID="linkBtnnAnexo2" runat="server" CssClass="btn_grid btn-secondary disabled" Visible='<%# Bind("Opcion_Volante2") %>' >Ver</asp:LinkButton>
+                                                                            <asp:LinkButton ID="linkBtnnAnexo2" runat="server" CssClass="btn_grid btn-secondary disabled" Visible='<%# Bind("Opcion_Volante2") %>'>Ver</asp:LinkButton>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>--%>
-                                                            <asp:HyperLink ID="linkBttnVolante" runat="server" Visible='<%# Bind("Opcion_Volante") %>' CssClass="btn_grid btn-mdb-color" NavigateUrl='<%# Bind("RutaVolante") %>' Target="_blank">Volante</asp:HyperLink>
-                                                            <%--&nbsp;<asp:LinkButton ID="linkBtnnAnexo" runat="server" CssClass="btn_grid btn-mdb-color"><i class="fa fa-paperclip" aria-hidden="true"></i></asp:LinkButton>--%>
-                                                            <asp:LinkButton ID="linkBttnVolante2" runat="server" Visible='<%# Bind("Opcion_Volante2") %>' Width="100%" CssClass="btn_grid btn-secondary disabled">Volante</asp:LinkButton>
+                                                            </div>
+                                                            <div class="row" runat="server" id="rowVolante"  visible='<%# Bind("Visible2") %>'>
+                                                                <div class="col">
+                                                                    <asp:HyperLink ID="linkBttnVolante" runat="server"  Width="90%"  Visible='<%# Bind("Opcion_Volante") %>' CssClass="btn_grid btn-mdb-color" NavigateUrl='<%# Bind("RutaVolante") %>' Target="_blank"><i class="fa fa-file-o" aria-hidden="true"></i> Volante</asp:HyperLink>
+                                                                    <asp:LinkButton ID="linkBttnVolante2" runat="server"  Width="90%" Visible='<%# Bind("Opcion_Volante2") %>' CssClass="btn_grid btn-secondary disabled"><i class="fa fa-file-o" aria-hidden="true"></i> Volante</asp:LinkButton>
+                                                                </div>
+                                                            </div>
                                                         </ItemTemplate>
-                                                        <ItemStyle />
+                                                        <ItemStyle Width="130px" HorizontalAlign="Center"/>
                                                     </asp:TemplateField>
                                                     <asp:TemplateField>
                                                         <ItemTemplate>
@@ -698,6 +701,12 @@
                                                         <ItemStyle CssClass="classHide" />
                                                     </asp:BoundField>
                                                     <asp:BoundField DataField="RutaAnexo">
+                                                        <ControlStyle CssClass="classHide" />
+                                                        <FooterStyle CssClass="classHide" />
+                                                        <HeaderStyle CssClass="classHide" />
+                                                        <ItemStyle CssClass="classHide" />
+                                                    </asp:BoundField>
+                                                    <asp:BoundField DataField="RutaReclasificacion">
                                                         <ControlStyle CssClass="classHide" />
                                                         <FooterStyle CssClass="classHide" />
                                                         <HeaderStyle CssClass="classHide" />

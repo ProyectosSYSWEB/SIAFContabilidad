@@ -77,6 +77,18 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        //public void ConsultarPasivoSel(ref Pasivo objPasivo, ref string Verificador)
+        //{
+        //    try
+        //    {
+        //        CD_Poliza CDPoliza = new CD_Poliza();
+        //        CDPoliza.ConsultarPasivoSel(ref ObjPoliza, ref Verificador);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
         public void PolizaInsertar(ref Poliza ObjPoliza, ref string Verificador)
         {
             try
@@ -89,12 +101,63 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
-        public void PasivoInsertar(ref Pasivo ObjPasivo, ref string Verificador)
+        public void PasivoConsultaGrid(Pasivo objPasivo, ref List<Pasivo> List)
+        {
+            try
+            {
+                CD_Poliza CDPasivo = new CD_Poliza();
+                CDPasivo.PasivoConsultaGrid(objPasivo, ref List);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void PasivoInsertar(List<Pasivo> lstPasivos, ref string Verificador)
         {
             try
             {
                 CD_Poliza CDPoliza = new CD_Poliza();
-                CDPoliza.PasivoInsertar(ref ObjPasivo, ref Verificador);
+                CDPoliza.PasivoInsertar(lstPasivos, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void PasivoEditar(Pasivo objPasivo, List<Pasivo> lstPasivos, ref string Verificador)
+        {
+            try
+            {
+                CD_Poliza CDPasivo = new CD_Poliza();
+                CDPasivo.PasivoEliminar(objPasivo, ref Verificador);
+                if(Verificador=="0")
+                    CDPasivo.PasivoInsertar(lstPasivos, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void PasivoEliminar(Pasivo objPasivo, ref string Verificador)
+        {
+            try
+            {
+                CD_Poliza CDPasivo = new CD_Poliza();
+                CDPasivo.PasivoEliminar(objPasivo, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void ListPasivos(Pasivo objPasivo, ref List<Pasivo> lstPasivos)
+        {
+            try
+            {
+                CD_Poliza CDPasivo = new CD_Poliza();
+                CDPasivo.ListPasivos(objPasivo, ref lstPasivos);
             }
             catch (Exception ex)
             {

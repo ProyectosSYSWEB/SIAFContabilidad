@@ -6,9 +6,10 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h4><asp:Label ID="lblTitulo" runat="server" Text=""></asp:Label></h4>
-                </div>
-             </div>
+                <h4>
+                    <asp:Label ID="lblTitulo" runat="server" Text=""></asp:Label></h4>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-1">
                 Tipo
@@ -76,6 +77,33 @@
             </div>
         </div>
         <hr />
-
+        <div class="row">
+            <div class="col">
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <ContentTemplate>
+                        <asp:GridView ID="grvPolizas" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%">
+                            <Columns>
+                                <asp:BoundField HeaderText="ID" DataField="IdPoliza"  />
+                                <asp:BoundField HeaderText="CC" DataField="CENTRO_CONTABLE" />
+                                <asp:BoundField HeaderText="# PÓL	" DataField="NUMERO_POLIZA" />
+                                <asp:BoundField HeaderText="TIPO" DataField="TIPO" />
+                                <asp:BoundField HeaderText="FECHA" DataField="FECHA" />
+                                <asp:BoundField HeaderText="STATUS" DataField="STATUS" />
+                                <asp:BoundField HeaderText="CONCEPTO" DataField="CONCEPTO" />
+                                <asp:BoundField HeaderText="CARGO" DataField="TOT_CARGO" />
+                                <asp:BoundField HeaderText="ABONO" DataField="TOT_ABONO" />
+                                <asp:CommandField ShowSelectButton="True" />
+                                <asp:CommandField ShowDeleteButton="True" />
+                            </Columns>
+                            <FooterStyle CssClass="enc" />
+                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                            <SelectedRowStyle CssClass="sel" />
+                            <HeaderStyle CssClass="enc" />
+                            <AlternatingRowStyle CssClass="alt" />
+                        </asp:GridView>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+        </div>
     </div>
 </asp:Content>

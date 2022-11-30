@@ -901,6 +901,18 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Contabilidad\Reportes\RP-012-2-copia.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RP-012-2-copia.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\Reportes\RP-012-2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RP-012-2.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Contabilidad\Reportes\RP-012-2_Polizas.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1178,6 +1190,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RP_Concilliacion_2021.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\Reportes\RP_Pasivosxls.cs">
+      <DependentUpon>RP_Pasivosxls.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Contabilidad\Reportes\RP_Pasivos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RP_Pasivos.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Inicio.aspx.cs">
@@ -1634,6 +1658,14 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RP-012-2 - Copia.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Contabilidad\Reportes\RP-012-2-copia.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RP-012-2-copia.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contabilidad\Reportes\RP-012-2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RP-012-2.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Contabilidad\Reportes\RP-012-2_Polizas.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RP-012-2_Polizas.cs</LastGenOutput>
@@ -1772,6 +1804,14 @@
     <EmbeddedResource Include="Contabilidad\Reportes\RP_Concilliacion_2021.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RP_Concilliacion_2021.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contabilidad\Reportes\RP_Pasivosxls.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RP_Pasivosxls.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contabilidad\Reportes\RP_Pasivos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RP_Pasivos.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="images\.DS_Store" />
     <None Include="images\arrows.svg" />
