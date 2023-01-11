@@ -17,10 +17,28 @@ namespace SAF.Contabilidad.Form
         string Verificador = string.Empty;
         CN_Comun CNComun = new CN_Comun();
         Centros_Contables objCentroContable = new Centros_Contables();
+        CN_Centros_Contables CNCentroContable = new CN_Centros_Contables();
+        Sesion SesionUsu = new Sesion();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
-            CargarGrid();
+            SesionUsu = (Sesion)Session["Usuario"];
+            if (!IsPostBack)
+                Inicializar();
+        }
+        private void Inicializar()
+        {
+            Verificador = string.Empty;
+            try
+            {
+                CargarGrid();
+                CargarGridAsig();
+            }
+            catch(Exception ex)
+            {
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+            }
         }
         private void CargarGrid()
         {
@@ -48,8 +66,45 @@ namespace SAF.Contabilidad.Form
             try
             {
                 List<Centros_Contables> List = new List<Centros_Contables>();
+                Centros_Contables objCCDisp = new Centros_Contables();
+                objCCDisp.Ejercicio = Convert.ToInt32(SesionUsu.Usu_Ejercicio);
+                CNCentroContable.ConsultaGrid_CCDisp_1123(objCCDisp, ref List);
+                return List;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        private void CargarGridAsig()
+        {
+            Verificador = string.Empty;
 
-
+            grdCCAsignados.DataSource = null;
+            grdCCAsignados.DataBind();
+            try
+            {
+                DataTable dt = new DataTable();
+                grdCCAsignados.DataSource = dt;
+                grdCCAsignados.DataSource = GetListAsig();
+                grdCCAsignados.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+            }
+        }
+        private List<Centros_Contables> GetListAsig()
+        {
+            Verificador = string.Empty;
+            try
+            {
+                List<Centros_Contables> List = new List<Centros_Contables>();
+                Centros_Contables objCCDisp = new Centros_Contables();
+                objCCDisp.Ejercicio = Convert.ToInt32(SesionUsu.Usu_Ejercicio);
+                CNCentroContable.ConsultaGrid_CCDispAsig_1123(objCCDisp, ref List);
                 return List;
             }
             catch (Exception ex)

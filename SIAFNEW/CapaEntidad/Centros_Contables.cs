@@ -21,6 +21,13 @@ namespace CapaEntidad
             set { _Centro_Contable = value; }
         }
 
+        private string _Desc_Centro_Contable;
+        public string Desc_Centro_Contable
+        {
+            get { return _Desc_Centro_Contable; }
+            set { _Desc_Centro_Contable = value; }
+        }
+
         private string _Mes_anio;
         public string Mes_anio
         {

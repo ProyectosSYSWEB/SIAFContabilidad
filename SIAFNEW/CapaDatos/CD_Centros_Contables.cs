@@ -86,5 +86,65 @@ namespace CapaDatos
                 throw new Exception(ex.Message);
             }
         }
+        public void ConsultaGrid_CCDisp_1123(Centros_Contables objCC, ref List<Centros_Contables> List)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+                OracleDataReader dr = null;
+                string[] Parametros = { "p_ejercicio" };
+                object[] Valores = { objCC.Ejercicio };
+
+
+                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Control_Mayor_Disp", ref dr, Parametros, Valores);
+                while (dr.Read())
+                {
+                    objCC = new Centros_Contables();                    
+                    objCC.Centro_Contable = Convert.ToString(dr.GetValue(0));
+                    objCC.Desc_Centro_Contable = Convert.ToString(dr.GetValue(1));
+                    List.Add(objCC);
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+        public void ConsultaGrid_CCAsig_1123(Centros_Contables objCC, ref List<Centros_Contables> List)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+                OracleDataReader dr = null;
+                string[] Parametros = { "p_ejercicio" };
+                object[] Valores = { objCC.Ejercicio };
+
+
+                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Control_Mayor_Asig", ref dr, Parametros, Valores);
+                while (dr.Read())
+                {
+                    objCC = new Centros_Contables();
+                    objCC.Centro_Contable = Convert.ToString(dr.GetValue(0));
+                    objCC.Desc_Centro_Contable = Convert.ToString(dr.GetValue(1));
+                    List.Add(objCC);
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
     }
 }

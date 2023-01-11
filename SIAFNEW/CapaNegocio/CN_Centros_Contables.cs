@@ -32,5 +32,16 @@ namespace CapaNegocio
             CD_Centros_Contables CDControl_Cierre = new CD_Centros_Contables();
             CDControl_Cierre.Control_CierreGral(ref ObjControl_Cierre, Tipo, ref Verificador);
         }
+        public void ConsultaGrid_CCDisp_1123(Centros_Contables ObjControl_Cierre, ref List<Centros_Contables> List)
+        {
+            CD_Centros_Contables CDCCDisp = new CD_Centros_Contables();
+            CDCCDisp.ConsultaGrid_CCDisp_1123(ObjControl_Cierre, ref List);
+        }
+
+        public void ConsultaGrid_CCDispAsig_1123(Centros_Contables ObjControl_Cierre, ref List<Centros_Contables> List)
+        {
+            CD_Centros_Contables CDCCDisp = new CD_Centros_Contables();
+            CDCCDisp.ConsultaGrid_CCAsig_1123(ObjControl_Cierre, ref List);
+        }
     }
 }

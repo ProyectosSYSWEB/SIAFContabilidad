@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmHabilitaCta.aspx.cs" Inherits="SAF.Contabilidad.Form.frmHabilitaCta" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<div class="container">
+    <div class="container">
         <div class="row">
             <div class="col-md-5">
                 <asp:UpdatePanel ID="updPnlDisponibles" runat="server">
@@ -10,7 +11,7 @@
                         <asp:GridView ID="grdCCDisponibles" runat="server" CssClass="mGrid" AutoGenerateColumns="False" EmptyDataText="No hay centros contables disponibles." ShowHeaderWhenEmpty="True">
                             <Columns>
                                 <asp:BoundField DataField="Centro_Contable" HeaderText="Cve" />
-                                <asp:BoundField DataField="Centro_Contable" HeaderText="Centro Contable" />
+                                <asp:BoundField DataField="Desc_Centro_Contable" HeaderText="Centro Contable" />
                                 <asp:TemplateField ShowHeader="False">
                                     <ItemTemplate>
                                         <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Select" Text="Seleccionar" CssClass="btn btn-primary">Agregar</asp:LinkButton>
@@ -36,7 +37,8 @@
                                         <asp:LinkButton ID="linkBttnEliminar" runat="server" CausesValidation="False" CommandName="Select" Text="Seleccionar" CssClass="btn btn-danger">Eliminar</asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="Centro_Contable" HeaderText="Centro Contable" />
+                                <asp:BoundField DataField="Centro_Contable" HeaderText="Cve" />
+                                <asp:BoundField DataField="Desc_Centro_Contable" HeaderText="Centro Contable" />
                             </Columns>
                             <FooterStyle CssClass="enc" />
                             <HeaderStyle CssClass="enc" />
