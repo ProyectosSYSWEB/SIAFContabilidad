@@ -944,7 +944,7 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col">
-                                            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0"
+                                            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="1"
                                                 CssClass="ajax__myTab" Width="100%">
                                                 <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                                                     <HeaderTemplate>

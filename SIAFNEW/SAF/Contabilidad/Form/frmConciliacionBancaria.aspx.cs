@@ -1,5 +1,6 @@
 ﻿
 using AjaxControlToolkit;
+using Aspose.Cells;
 using CapaEntidad;
 using CapaNegocio;
 using System;
@@ -146,9 +147,60 @@ namespace SAF.Contabilidad.Form
         protected void bttnCargarArchivo_Click(object sender, EventArgs e)
         {
             Verificador = string.Empty;
+            string Ruta;
+            List<Poliza_Conciliacion> lstConciliacion = new List<Poliza_Conciliacion>();
             try
             {
+                if (FileFactura.HasFile)
+                {
+                    Ruta = Path.Combine(Server.MapPath("~/AdjuntosTemp"), FileFactura.FileName);
+                    FileFactura.SaveAs(Ruta);
+                    Workbook wb = new Workbook(Ruta);
 
+                    // Obtener todas las hojas de trabajo
+                    WorksheetCollection collection = wb.Worksheets;
+
+                    // Recorra todas las hojas de trabajo
+                    for (int worksheetIndex = 0; worksheetIndex < collection.Count; worksheetIndex++)
+                    {
+
+                        // Obtener hoja de trabajo usando su índice
+                        Worksheet worksheet = collection[worksheetIndex];
+
+                        // Imprimir el nombre de la hoja de trabajo
+                        Console.WriteLine("Worksheet: " + worksheet.Name);
+
+                        // Obtener el número de filas y columnas
+                        int rows = worksheet.Cells.MaxDataRow;
+                        int cols = worksheet.Cells.MaxDataColumn;
+                        if (Session["ConciliacionDet"] != null)
+                            lstConciliacion = (List<Poliza_Conciliacion>)Session["ConciliacionDet"];
+                        // Bucle a través de filas
+                        for (int i = 0; i < rows; i++)
+                        {
+
+                            // Recorra cada columna en la fila seleccionada
+
+                            objConciliacion.NumeroPoliza = Convert.ToString(worksheet.Cells[i, 0].Value);
+                            objConciliacion.Numero_Cheque = Convert.ToString(worksheet.Cells[i, 1].Value);
+                            objConciliacion.Fecha = Convert.ToString(worksheet.Cells[i, 2].Value).Substring(0,10);
+                            objConciliacion.Importe = Convert.ToDouble(worksheet.Cells[i, 3].Value);
+                            objConciliacion.Concepto = Convert.ToString(worksheet.Cells[i, 4].Value);
+                            lstConciliacion.Add(objConciliacion);
+                        }
+
+
+
+
+                        CargarGridConcDet(lstConciliacion);
+                        Session["ConciliacionDet"] = lstConciliacion;
+                    }
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0,'Adjuntar archivo xlsx.');", true);
+
+                }
 
             }
             catch (Exception ex)

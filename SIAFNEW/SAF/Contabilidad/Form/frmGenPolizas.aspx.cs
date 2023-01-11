@@ -48,7 +48,7 @@ namespace SAF.Contabilidad.Form
                 if (Verificador == "0")
                 {
                     lblMsjError.Text = "Se han generado " + TotalPolizasGen + " pólizas.";
-                    CargarGrid(newIdPoliza);
+                    CargarGrid();
                     //ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'Se han generado "+TotalPolizasGen+" pólizas.');", true);
                 }
                 else
@@ -97,33 +97,6 @@ namespace SAF.Contabilidad.Form
                 else if (SesionUsu.Usu_Rep == "CJGRAL")
                     ObjPoliza.Centro_contable = "72103";
 
-                string FechaInicial;
-                string FechaFinal;
-                if (ddlFecha_Ini.SelectedValue == "00")
-                    FechaInicial = "01/01/" + SesionUsu.Usu_Ejercicio;
-                else
-                    FechaInicial = "01/" + ddlFecha_Ini.SelectedValue + "/" + SesionUsu.Usu_Ejercicio;
-
-
-
-                if (ddlFecha_Ini.SelectedValue == "00")
-                    FechaFinal = "31/01/" + SesionUsu.Usu_Ejercicio;
-                else
-                {
-                    int DiaFinal = System.DateTime.DaysInMonth(Convert.ToInt32(SesionUsu.Usu_Ejercicio), Convert.ToInt32(ddlFecha_Fin.SelectedValue));
-                    FechaFinal = DiaFinal + "/" + ddlFecha_Fin.SelectedValue + "/" + SesionUsu.Usu_Ejercicio;
-                }
-
-                if (Convert.ToInt32(SesionUsu.Usu_Ejercicio) >= 2022)
-                    CNPoliza.PolizaConsultaGrid_Min(ref ObjPoliza, FechaInicial, FechaFinal, txtBuscar.Text.ToUpper(), SesionUsu.Usu_TipoUsu, ref List);
-                else
-                    CNPoliza.PolizaConsultaGrid(ref ObjPoliza, FechaInicial, FechaFinal, txtBuscar.Text.ToUpper(), SesionUsu.Usu_TipoUsu, ref List);
-                if (List.Count >= 4000)
-                {
-                    List = null;
-                    divErrorTot.Visible = true;
-
-                }
                 return List;
             }
             catch (Exception ex)

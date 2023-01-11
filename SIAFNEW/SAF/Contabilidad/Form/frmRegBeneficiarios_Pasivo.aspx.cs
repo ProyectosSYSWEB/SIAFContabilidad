@@ -33,6 +33,7 @@ namespace SAF.Contabilidad.Form
                 Inicializar();
 
             ScriptManager.RegisterStartupScript(this, GetType(), "Empleados", "Autocomplete();", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridPasivos", "Pasivos();", true);
             //ScriptManager.RegisterStartupScript(this, GetType(), "GridEmpleados", "CatEmpleados();", true);
 
         }

@@ -25,7 +25,6 @@
                             </div>
                             <div class="col-md-2">
                                 <asp:DropDownList ID="DDLFormato" runat="server" CssClass="form-control">
-                                    <asp:ListItem Value="0000">--Todos--</asp:ListItem>
                                     <asp:ListItem>2111</asp:ListItem>
                                     <asp:ListItem>2112</asp:ListItem>
                                     <asp:ListItem>2113</asp:ListItem>
@@ -175,7 +174,7 @@
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
-                            <div class="col-md-9 fa-text-height">
+                            <div class="col-md-9 font-weight-bold">
                                 <asp:RequiredFieldValidator ID="reqNumPol" runat="server" ErrorMessage="* Número de Póliza" Text="*" ControlToValidate="txtNumPoliza" ValidationGroup="NewPasivo"></asp:RequiredFieldValidator>
                                 La póliza debe ser de 7 digitos
                             </div>
@@ -184,11 +183,10 @@
                             <div class="col-md-1">
                                 Formato
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <asp:UpdatePanel ID="updPnlFormato2" runat="server">
                                     <ContentTemplate>
                                         <asp:DropDownList ID="DDLFormato2" runat="server" CssClass="form-control btn btn-primary dropdown-toggle browser-default custom-select custom-select-lg mb-3" OnSelectedIndexChanged="DDLFormato2_SelectedIndexChanged" AutoPostBack="True">
-                                            <asp:ListItem Value="0000">--TODAS--</asp:ListItem>
                                             <asp:ListItem>2111</asp:ListItem>
                                             <asp:ListItem>2112</asp:ListItem>
                                             <asp:ListItem>2113</asp:ListItem>
@@ -199,7 +197,7 @@
                             <div class="col-md-1">
                                 Cuenta
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-5">
                                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                                     <ContentTemplate>
                                         <asp:DropDownList ID="DDLCuenta" runat="server" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="DDLCuenta_SelectedIndexChanged"></asp:DropDownList>
@@ -465,6 +463,12 @@
         };
         function CatEmpleados() {
             $('#<%= grdEmpleados.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdEmpleados.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": true
+            })
+        };
+        function Pasivos() {
+            $('#<%= grdPasivos0.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdPasivos0.ClientID %>').find("tr:first"))).DataTable({
                 "destroy": true,
                 "stateSave": true
             })

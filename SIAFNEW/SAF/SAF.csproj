@@ -54,6 +54,9 @@
       <HintPath>..\packages\AjaxControlToolkit.15.1.4.0\lib\net40\AjaxControlToolkit.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Aspose.Cells, Version=22.11.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.Cells.22.11.0\lib\net40\Aspose.Cells.dll</HintPath>
+    </Reference>
     <Reference Include="BusyBoxDotNet, Version=0.2.1.1366, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Lis\Programas\BusyBoxDotNet-0.2.1-bin\BusyBoxDotNet-0.2.1-bin\BusyBoxDotNet.dll</HintPath>
@@ -130,6 +133,7 @@
     <Content Include="Contabilidad\Form\FRMCuentas_contables.aspx" />
     <Content Include="Contabilidad\Form\frmDashboard.aspx" />
     <Content Include="Contabilidad\Form\frmGenPolizas.aspx" />
+    <Content Include="Contabilidad\Form\frmHabilitaCta.aspx" />
     <Content Include="Contabilidad\Form\FrmIngresos_Propios.aspx" />
     <Content Include="Contabilidad\Form\frmMinistraciones_GC.aspx" />
     <Content Include="Contabilidad\Form\frmPolizas2.aspx" />
@@ -796,6 +800,13 @@
     <Compile Include="Contabilidad\Form\frmGenPolizas.aspx.designer.cs">
       <DependentUpon>frmGenPolizas.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Contabilidad\Form\frmHabilitaCta.aspx.cs">
+      <DependentUpon>frmHabilitaCta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\Form\frmHabilitaCta.aspx.designer.cs">
+      <DependentUpon>frmHabilitaCta.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Contabilidad\Form\FrmIngresos_Propios.aspx.cs">
       <DependentUpon>FrmIngresos_Propios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -905,12 +916,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RP-012-2-copia.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Contabilidad\Reportes\RP-012-2.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RP-012-2.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Contabilidad\Reportes\RP-012-2_Polizas.cs">
@@ -1661,10 +1666,6 @@
     <EmbeddedResource Include="Contabilidad\Reportes\RP-012-2-copia.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RP-012-2-copia.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Contabilidad\Reportes\RP-012-2.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>RP-012-2.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Contabilidad\Reportes\RP-012-2_Polizas.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

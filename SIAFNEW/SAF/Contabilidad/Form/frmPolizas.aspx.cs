@@ -1003,7 +1003,7 @@ namespace SAF.Form
         protected void txtFecha_TextChanged(object sender, EventArgs e)
         {
             //lblError.Text = string.Empty;
-            lblIniPoliza.Text = Convert.ToString(txtFecha.Text).Substring(3, 2)+ddlClasifica.SelectedValue;
+            lblIniPoliza.Text = Convert.ToString(txtFecha.Text).Substring(3, 2) + ddlClasifica.SelectedValue;
             VerificaFechas(txtFecha);
             string Validado = ValidaMes(txtFecha);
             if (Validado != "Z")
@@ -1733,8 +1733,8 @@ namespace SAF.Form
                                 objCFDI.CFDI_UUID = listTimbreDigital[0].Attributes["UUID"].InnerText;
                                 if (ObjPolizaCFDI.CFDI_UUID.Length < 36)
                                 {
-                                    ObjPolizaCFDI.CFDI_UUID = string.Empty;
-                                    VerificadorCFDI = "EL VALOR DEL CAMPO UUID ES INCORRECTO.";
+                                    VerificadorCFDI = "EL VALOR (" + ObjPolizaCFDI.CFDI_UUID + ") DEL CAMPO UUID ES INCORRECTO.";
+                                    ObjPolizaCFDI.CFDI_UUID = string.Empty;                                    
                                 }
                             }
                             else
@@ -1839,7 +1839,7 @@ namespace SAF.Form
                 }
                 else
                 {
-                    Verificador = "Error en el XML, faltan uno de los siguientes campos: fecha, total, nombre, rfc, UUID (principal)";
+                    Verificador = "ERROR EN EL XML: "+ VerificadorCFDI;
                     lblErrorCFDI.Visible = true;
                     lblErrorCFDI.Text = Verificador;
 
@@ -1874,7 +1874,11 @@ namespace SAF.Form
 
         protected void bttnAgregar_Click(object sender, EventArgs e)
         {
-
+            //var lstCtas1123 = new string[]{ "11122","12122","13122","11222" };
+            //var lstCtas1123 = Array.FindAll(ConceptosPosgrado, s => s.Equals(Substring(6, 5)));
+            string[] lstCtas1123 = { "11122", "12122", "13122", "11222" };
+            //var ExisteCta1123=string.Empty;
+            string CtaInvalida = "N";
             try
             {
 
@@ -1888,27 +1892,38 @@ namespace SAF.Form
                 ObjPolizaDet.DescCuenta_Contable = ddlCuentas_Contables.SelectedItem.Text;
                 ObjPolizaDet.Cargo = TotCargo; // Convert.ToDouble(txtCargo.Text);
                 ObjPolizaDet.Abono = TotAbono; // Convert.ToDouble(txtAbono.Text);
-                //ObjPolizaDet.Numero_Movimiento=((Label)grvPolizas_Detalle.Rows[0].FindControl("lblNumero_Movimiento_Aut")).
-                //_Detalle.PageSize * grvPolizas_Detalle.PageIndex) + Container.DisplayIndex + 1 
+                string nivel_2 = ddlCuentas_Contables.SelectedItem.Text.Substring(5, 5);
+                string mayor = ddlCuentas_Contables.SelectedItem.Text.Substring(0, 4);
+                //& ddlCuentas_Contables.SelectedItem.Text.Substring(0, 4) == "1123" & (nivel_2 == "11122" || nivel_2 == "12122" || nivel_2 == "13122" ||   nivel_2 == "11222" || nivel_2 == "12222" || nivel_2 == "13222" || nivel_2 == "11322" || nivel_2 == "12322" || nivel_2 == "13322" || nivel_2 == "11422" || nivel_2 == "12422" || nivel_2 == "13422" || nivel_2 == "11622" || nivel_2 == "12622" || nivel_2 == "13622"))
+
+                if (mayor=="1123" & ddlTipo0.SelectedValue == "E" & TotCargo > 0)                
+                    CtaInvalida = CNPoliza.ValidarTotalCta(DDLCentro_Contable.SelectedValue, nivel_2, ref Verificador);
+                
+                else
+                    CtaInvalida = "N";
 
 
-                if (Session["PolizaDet"] == null)
+                if(CtaInvalida == "N")
                 {
-                    ListPDet = new List<Poliza_Detalle>();
-                    ListPDet.Add(ObjPolizaDet);
+                    if (Session["PolizaDet"] == null)
+                    {
+                        ListPDet = new List<Poliza_Detalle>();
+                        ListPDet.Add(ObjPolizaDet);
+                    }
+                    else
+                    {
+                        ListPDet = (List<Poliza_Detalle>)Session["PolizaDet"];
+                        ListPDet.Add(ObjPolizaDet);
+                    }
+
+                    Session["PolizaDet"] = ListPDet;
+                    CargarGridDetalle(ListPDet);
+                    txtCargo.Text = string.Empty;
+                    txtAbono.Text = string.Empty;
                 }
                 else
-                {
-                    ListPDet = (List<Poliza_Detalle>)Session["PolizaDet"];
-                    ListPDet.Add(ObjPolizaDet);
-                }
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, 'No son permitidos los cargos en las ctas 11122, 12122, 13122, 11222, 12222, 13222, 11322, 12322, 13322, 11422, 12422, 13422, 11622, 12622 y 13622');", true);
 
-                Session["PolizaDet"] = ListPDet;
-                CargarGridDetalle(ListPDet);
-                txtCargo.Text = string.Empty;
-                txtAbono.Text = string.Empty;
-                //ddlCuentas_Contables.Focus();
-                //txtSearch.Focus();
             }
 
             catch (Exception ex)
@@ -2016,8 +2031,8 @@ namespace SAF.Form
             grvPolizas.SelectedIndex = row.RowIndex;
             DropDownList ddl = (DropDownList)(row.Cells[13].FindControl("ddlDoctosTrans"));
 
-            if (ddl.SelectedValue=="Volante")
-                Ruta=grvPolizas.SelectedRow.Cells[22].Text;
+            if (ddl.SelectedValue == "Volante")
+                Ruta = grvPolizas.SelectedRow.Cells[22].Text;
             else if (ddl.SelectedValue == "Reclasificacion")
                 Ruta = grvPolizas.SelectedRow.Cells[23].Text;
             else if (ddl.SelectedValue == "Anexo")
@@ -2025,7 +2040,7 @@ namespace SAF.Form
 
 
 
-            Ruta =Ruta.Replace("&amp;", "&");
+            Ruta = Ruta.Replace("&amp;", "&");
 
             string _open = "window.open('" + Ruta + "', '_newtab');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
@@ -2774,7 +2789,7 @@ namespace SAF.Form
                         ObjPolizaCFDI.CFDI_Nombre = string.Empty;
                         ObjPolizaCFDI.CFDI_RFC = string.Empty;
                     }
-                    
+
                     ObjPolizaCFDI.CFDI_UUID = txtNumFactura.Text; //string.Empty;
                     ObjPolizaCFDI.Beneficiario_Tipo = ddlTipo_Beneficiario.SelectedValue;
                     ObjPolizaCFDI.Tipo_Gasto = ddlTipo_Gasto.SelectedValue;
@@ -2842,14 +2857,14 @@ namespace SAF.Form
             //    reqNumFactura.ValidationGroup = string.Empty;
             //else
             //    reqNumFactura.ValidationGroup = "CFDI";
-            
+
             //CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Proveedores", ref ddlProveedor2, "P_TIPO_GASTO", ddlTipo_Gasto.SelectedValue);
 
         }
 
         protected void reqNumFactura3_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            if(ddlTipo_Gasto.SelectedValue == "COMISIONES")            
+            if (ddlTipo_Gasto.SelectedValue == "COMISIONES")
                 args.IsValid = false;
             else
                 args.IsValid = true;

@@ -13,6 +13,20 @@ namespace CapaNegocio
 {
     public class CN_Poliza
     {
+        public string ValidarTotalCta(string Centro_Contable, string Cuenta, ref string Verificador)
+        {
+            string Existe = "N";
+            try
+            {
+                CD_Poliza CDPoliza = new CD_Poliza();
+                Existe=CDPoliza.ValidarTotalCta(Centro_Contable, Cuenta, ref Verificador);
+                return Existe;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void PolizaConsultaGrid(ref Poliza ObjPoliza, String FechaInicial, String FechaFinal, String Buscar, String TipoUsu, ref List<Poliza> List)
         {
             try

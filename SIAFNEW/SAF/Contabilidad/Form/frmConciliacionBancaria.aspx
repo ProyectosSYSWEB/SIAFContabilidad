@@ -386,7 +386,7 @@
                                                     </asp:UpdatePanel>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <asp:LinkButton ID="linkBttnCargarArchivo" runat="server" CssClass="btn btn-primary" data-toggle="modal" data-target="#modalSubirArchivo"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i> Subir Archivo</asp:LinkButton>
+                                                    <asp:LinkButton ID="linkBttnCargarArchivo" runat="server" CssClass="btn btn-primary" data-toggle="modal" data-target="#modalSubirArchivo" Visible="False"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i> Subir Archivo</asp:LinkButton>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -710,7 +710,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-10">
+                            <div class="col-md-9">
                                 <asp:UpdatePanel ID="UpdatePanel14" runat="server">
                                     <ContentTemplate>
                                         <div class="input-group mb-3">
@@ -731,7 +731,7 @@
                                     </Triggers>
                                 </asp:UpdatePanel>
                             </div>                            
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <asp:LinkButton ID="bttnCargarArchivo" runat="server" ValidationGroup="CFDI" CssClass="btn btn-grey" OnClick="bttnCargarArchivo_Click"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i> Adjuntar</asp:LinkButton>
                             </div>
                            

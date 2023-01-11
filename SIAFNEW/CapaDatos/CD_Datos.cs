@@ -354,6 +354,66 @@ namespace CapaDatos
             }
 
         }
+        public OracleCommand GenerarOracleCommandBoolean(string SP, ref string Verificador, string[] ParametrosIn, object[] Valores, string[] ParametrosOut)
+        {
+
+            OracleCommand cmd = new OracleCommand(SP, Cnn);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            string valor = "";
+            //byte[] blob;
+
+
+            for (int i = 0; i < ParametrosIn.Length; i++)
+            {
+                valor = Valores[i].GetType().Name;
+                int tamanio = Valores[i].ToString().Length;
+                //string tipo = valor.GetType().Name;
+                if (valor == "Int32")
+                {
+                    cmd.Parameters.Add(ParametrosIn[i], OracleType.Number).Value = Valores[i];
+                }
+                else if (valor == "Double")
+                {
+                    cmd.Parameters.Add(ParametrosIn[i], OracleType.Number).Value = Valores[i];
+                }
+                else if (valor == "Byte[]")
+                {
+                    //blob = (byte[])Valores[i];
+                    byte[] blob_img = (byte[])Valores[i];
+                    cmd.Parameters.Add(ParametrosIn[i], OracleType.Blob).Value = blob_img;
+                }
+                else
+                {
+                    cmd.Parameters.Add(ParametrosIn[i], OracleType.VarChar).Value = Valores[i];
+                }
+
+            }
+
+            for (int i = 0; i < ParametrosOut.Length; i++)
+            {
+                valor = ParametrosOut[i].GetType().Name;
+
+                cmd.Parameters.Add(ParametrosOut[i], OracleType.VarChar, 1024).Direction = ParameterDirection.Output;
+            }
+
+
+            try
+            {
+                if (trans != null) cmd.Transaction = trans;
+                if (trans == null) Cnn.Open();
+                cmd.ExecuteNonQuery();
+                Verificador = cmd.Parameters["P_Bandera"].Value.ToString();
+                return cmd;
+            }
+
+
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+
+        }
         public OracleCommand GenerarOracleCommand(string SP, string[] ParametrosIn, object[] Valores, string[] ParametrosOut)
         {
 

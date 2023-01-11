@@ -16,6 +16,35 @@ namespace CapaDatos
 {
     public class CD_Poliza
     {
+        public string ValidarTotalCta(string Centro_Contable, string Cuenta, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            string Existe="N";
+            try
+            {
+                String[] Parametros = { "P_CENTRO_CONTABLE", "P_CUENTA" };
+                object[] Valores = { Centro_Contable, Cuenta };
+                String[] ParametrosOut = { "P_BANDERA", "P_EXISTE" };
+
+                Cmd = CDDatos.GenerarOracleCommand("VERIFICA_CTA_1123", ref Verificador, Parametros, Valores, ParametrosOut);
+                if (Verificador == "0")
+                {
+                    Existe = Convert.ToString(Cmd.Parameters["P_EXISTE"].Value);
+                    return Existe;
+                }
+                else
+                    return "N";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
         public void PolizaConsultaGrid(ref Poliza ObjPoliza, String FechaInicial, String FechaFinal, String Buscar, String TipoUsu, ref List<Poliza> List)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -505,7 +534,7 @@ namespace CapaDatos
         //        CDDatos.LimpiarOracleCommand(ref Cmd);
         //    }
         //}
-        public void ListPasivos(Pasivo objPasivo, ref List<Pasivo>lstPasivos)
+        public void ListPasivos(Pasivo objPasivo, ref List<Pasivo> lstPasivos)
         {
             CD_Datos CDDatos = new CD_Datos();
             OracleCommand cmm = null;
@@ -590,12 +619,12 @@ namespace CapaDatos
             try
             {
                 CDDatos.StartTrans();
-               
-                    String[] Parametros = { "P_EJERCICIO", "P_CENTRO_CONTABLE", "P_FORMATO" };
-                    object[] Valores = { objPasivo.ejercicio, objPasivo.centro_contable, objPasivo.formato };
-                    String[] ParametrosOut = { "p_Bandera" };
-                    Cmd = CDDatos.GenerarOracleCommand("DEL_SAF_PASIVOS", ref Verificador, Parametros, Valores, ParametrosOut);
-                
+
+                String[] Parametros = { "P_EJERCICIO", "P_CENTRO_CONTABLE", "P_FORMATO" };
+                object[] Valores = { objPasivo.ejercicio, objPasivo.centro_contable, objPasivo.formato };
+                String[] ParametrosOut = { "p_Bandera" };
+                Cmd = CDDatos.GenerarOracleCommand("DEL_SAF_PASIVOS", ref Verificador, Parametros, Valores, ParametrosOut);
+
 
 
             }
