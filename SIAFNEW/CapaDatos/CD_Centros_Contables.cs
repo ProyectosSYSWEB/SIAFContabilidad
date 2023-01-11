@@ -146,5 +146,49 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        public void Agregar_Mayor(Centros_Contables objCC, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+                string[] ParametrosIn = { "P_EJERCICIO", "P_CENTRO_CONTABLE" };
+                object[] Valores = { objCC.Ejercicio, objCC.Centro_Contable };
+                string[] ParametrosOut ={
+                                          "p_Bandera"
+                };
+
+                OracleCommand Cmd = CDDatos.GenerarOracleCommand("INS_CONTROL_MAYOR", ref Verificador, ParametrosIn, Valores, ParametrosOut);
+
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void Eliminar_Mayor(Centros_Contables objCC, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+                string[] ParametrosIn = { "P_EJERCICIO", "P_CENTRO_CONTABLE" };
+                object[] Valores = { objCC.Ejercicio, objCC.Centro_Contable };
+                string[] ParametrosOut ={
+                                          "p_Bandera"
+                };
+
+                OracleCommand Cmd = CDDatos.GenerarOracleCommand("DEL_CONTROL_MAYOR", ref Verificador, ParametrosIn, Valores, ParametrosOut);
+
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

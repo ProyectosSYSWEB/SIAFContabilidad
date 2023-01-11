@@ -19,12 +19,17 @@ namespace SAF.Contabilidad.Form
         Centros_Contables objCentroContable = new Centros_Contables();
         CN_Centros_Contables CNCentroContable = new CN_Centros_Contables();
         Sesion SesionUsu = new Sesion();
+        Centros_Contables objCC = new Centros_Contables();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
             SesionUsu = (Sesion)Session["Usuario"];
             if (!IsPostBack)
                 Inicializar();
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridDisp", "MayorDisponibles();", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridAsig", "MayorAsignados();", true);
+
         }
         private void Inicializar()
         {
@@ -103,6 +108,60 @@ namespace SAF.Contabilidad.Form
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
+            }
+        }
+
+        protected void grdCCDisponibles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Verificador = string.Empty;
+            try
+            {
+                objCC.Ejercicio = Convert.ToInt32(SesionUsu.Usu_Ejercicio);
+                objCC.Centro_Contable = Convert.ToString(grdCCDisponibles.SelectedRow.Cells[0].Text);
+                CNCentroContable.Agregar_Mayor(objCC, ref Verificador);
+                if (Verificador == "0")
+                {
+                    CargarGrid();
+                    CargarGridAsig();
+                }
+                else
+                {
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+            }
+        }
+
+        protected void grdCCAsignados_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Verificador = string.Empty;
+            try
+            {
+                objCC.Ejercicio = Convert.ToInt32(SesionUsu.Usu_Ejercicio);
+                objCC.Centro_Contable = Convert.ToString(grdCCAsignados.SelectedRow.Cells[0].Text);
+                CNCentroContable.Eliminar_Mayor(objCC, ref Verificador);
+                if (Verificador == "0")
+                {
+                    CargarGrid();
+                    CargarGridAsig();
+                }
+                else
+                {
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
             }
         }
     }
