@@ -8,7 +8,7 @@
             <div class="col-md-5">
                 <asp:UpdatePanel ID="updPnlDisponibles" runat="server">
                     <ContentTemplate>
-                        <asp:GridView ID="grdCCDisponibles" runat="server" CssClass="mGrid" AutoGenerateColumns="False" EmptyDataText="No hay centros contables disponibles." ShowHeaderWhenEmpty="True">
+                        <asp:GridView ID="grdCCDisponibles" runat="server" CssClass="mGrid" AutoGenerateColumns="False" EmptyDataText="No hay centros contables disponibles." ShowHeaderWhenEmpty="True" Width="100%">
                             <Columns>
                                 <asp:BoundField DataField="Centro_Contable" HeaderText="Cve" />
                                 <asp:BoundField DataField="Desc_Centro_Contable" HeaderText="Centro Contable" />
@@ -30,7 +30,7 @@
             <div class="col-md-5">
                 <asp:UpdatePanel ID="updPnlAsignados" runat="server">
                     <ContentTemplate>
-                        <asp:GridView ID="grdCCAsignados" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No hay centros contables asignados.">
+                        <asp:GridView ID="grdCCAsignados" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No hay centros contables asignados." Width="100%">
                             <Columns>
                                 <asp:TemplateField ShowHeader="False">
                                     <ItemTemplate>

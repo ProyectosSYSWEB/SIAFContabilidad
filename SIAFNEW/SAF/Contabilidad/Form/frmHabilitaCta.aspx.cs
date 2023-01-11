@@ -28,17 +28,10 @@ namespace SAF.Contabilidad.Form
         }
         private void Inicializar()
         {
-            Verificador = string.Empty;
-            try
-            {
+            
                 CargarGrid();
                 CargarGridAsig();
-            }
-            catch(Exception ex)
-            {
-                CNComun.VerificaTextoMensajeError(ref Verificador);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
-            }
+           
         }
         private void CargarGrid()
         {
