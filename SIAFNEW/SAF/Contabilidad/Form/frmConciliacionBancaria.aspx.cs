@@ -183,6 +183,7 @@ namespace SAF.Contabilidad.Form
 
                             objConciliacion.NumeroPoliza = Convert.ToString(worksheet.Cells[i, 0].Value);
                             objConciliacion.Numero_Cheque = Convert.ToString(worksheet.Cells[i, 1].Value);
+                            string Fecha = Convert.ToString(worksheet.Cells[i, 2].Value);
                             objConciliacion.Fecha = Convert.ToString(worksheet.Cells[i, 2].Value).Substring(0,10);
                             objConciliacion.Importe = Convert.ToDouble(worksheet.Cells[i, 3].Value);
                             objConciliacion.Concepto = Convert.ToString(worksheet.Cells[i, 4].Value);

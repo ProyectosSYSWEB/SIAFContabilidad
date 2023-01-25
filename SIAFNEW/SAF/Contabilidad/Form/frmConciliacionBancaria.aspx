@@ -386,7 +386,7 @@
                                                     </asp:UpdatePanel>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <asp:LinkButton ID="linkBttnCargarArchivo" runat="server" CssClass="btn btn-primary" data-toggle="modal" data-target="#modalSubirArchivo" Visible="False"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i> Subir Archivo</asp:LinkButton>
+                                                    <asp:LinkButton ID="linkBttnCargarArchivo" runat="server" CssClass="btn btn-primary" data-toggle="modal" data-target="#modalSubirArchivo"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i> Subir Archivo</asp:LinkButton>
                                                 </div>
                                             </div>
                                             <div class="row">

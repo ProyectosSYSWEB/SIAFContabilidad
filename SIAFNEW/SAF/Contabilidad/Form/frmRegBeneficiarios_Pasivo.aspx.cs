@@ -194,7 +194,7 @@ namespace SAF.Contabilidad.Form
 
             try
             {
-                if (DDLFormato2.SelectedValue == "2112")
+                if (DDLFormato2.SelectedValue == "2112" || DDLFormato2.SelectedValue == "2113")
                     rowProveedor.Visible = true;
                 else
                     rowBenef.Visible = true;
@@ -681,6 +681,25 @@ namespace SAF.Contabilidad.Form
                 CNComun.VerificaTextoMensajeError(ref Verificador);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
             }
+        }
+
+        protected void linkBttnGralPDF_Click(object sender, EventArgs e)
+        {
+            string cc = DDLCentro_Contable.SelectedValue;
+            string mayor =DDLFormato.SelectedValue;
+            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP_PasivosGral&centro_contable=" + cc + "&ejercicio=" + SesionUsu.Usu_Ejercicio;
+            string _open = "window.open('" + ruta + "', '_newtab');";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+        }
+
+        protected void linkBttnGralExcel_Click(object sender, EventArgs e)
+        {
+            string cc = DDLCentro_Contable.SelectedValue;
+            string mayor = DDLFormato.SelectedValue;
+            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=RP_PasivosGralxls&centro_contable=" + cc + "&ejercicio=" + SesionUsu.Usu_Ejercicio;
+            string _open = "window.open('" + ruta + "', '_newtab');";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+
         }
     }
 }

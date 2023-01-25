@@ -9,16 +9,13 @@
         :after, :before {
             box-sizing: border-box;
         }
-
         a {
             color: #337ab7;
             text-decoration: none;
         }
-
         i {
             margin-bottom: 4px;
         }
-
         .btn {
             display: inline-block;
             font-size: 14px;
@@ -33,8 +30,6 @@
             border: 1px solid transparent;
             border-radius: 4px;
         }
-
-
         .btn-app {
             color: white;
             box-shadow: none;
@@ -51,67 +46,52 @@
             transition: all .2s;
             background-color: steelblue !important;
         }
-
             .btn-app > .fa, .btn-app > .glyphicon, .btn-app > .ion {
                 font-size: 20px;
                 display: block;
             }
-
             .btn-app:hover {
                 border-color: #aaa;
                 transform: scale(1.1);
             }
-
         .pdf {
             background-color: #5e5e5e !important;
             /*background-color: #dc2f2f !important;*/
         }
-
         .excel {
             background-color: #3ca23c !important;
         }
-
         .csv {
             background-color: #e86c3a !important;
         }
-
         .imprimir {
             background-color: #8766b1 !important;
         }
-
         /*
 Esto es opcional pero sirve para que todos los botones de exportacion se distribuyan de manera equitativa usando flexbox
-
 .flexcontent {
     display: flex;
     justify-content: space-around;
 }
 */
-
         .selectTable {
             height: 40px;
             float: right;
         }
-
         div.dataTables_wrapper div.dataTables_filter {
             text-align: left;
             margin-top: 15px;
         }
-
         .btn-secondary {
             color: #fff;
             background-color: #4682b4;
             border-color: #4682b4;
         }
-
             .btn-secondary:hover {
                 color: #fff;
                 background-color: #315f86;
                 border-color: #545b62;
             }
-
-
-
         .titulo-tabla {
             color: #606263;
             text-align: center;
@@ -119,12 +99,6 @@ Esto es opcional pero sirve para que todos los botones de exportacion se distrib
             margin-bottom: 15px;
             font-weight: bold;
         }
-
-
-
-
-
-
         .inline {
             display: inline-block;
             padding: 0;

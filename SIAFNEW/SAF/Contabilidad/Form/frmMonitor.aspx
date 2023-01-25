@@ -7,35 +7,21 @@
         }
     </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <%--<div class="mensaje">
-        <asp:UpdatePanel ID="UpdatePanel100" runat="server">
-            <ContentTemplate>
-                <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-    </div>--%>
-    <div class="container">
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">   
+    <div class="container">        
         <div class="row">
             <div class="col text-center">
-                <asp:UpdateProgress ID="UpdateProgress5" runat="server" AssociatedUpdatePanelID="UpdatePanel11">
+                <asp:UpdateProgress ID="updPgr12" runat="server" AssociatedUpdatePanelID="UpdatePanel3">
                     <ProgressTemplate>
-                        <asp:Image ID="Image7" runat="server" Height="30px" ImageUrl="https://sysweb.unach.mx/SIAF-Contabilidad/images/ajax_loader_gray_512.gif"
-                            Width="30px" AlternateText="Espere un momento, por favor.."
-                            ToolTip="Espere un momento, por favor.." />
+                        <span>
+                            <asp:Image ID="Image7" runat="server" Height="40px" ImageUrl="https://sysweb.unach.mx/SIAF-Contabilidad/images/ajax_loader_gray_512.gif"
+                            Width="40px"
+                            ToolTip="Espere un momento, por favor.." />                     
+                        </span>
                     </ProgressTemplate>
                 </asp:UpdateProgress>
             </div>
-        </div>
-        <div class="row">
-            <div class="col text-center">
-                <asp:UpdateProgress ID="updPgr12" runat="server" AssociatedUpdatePanelID="UpdatePanel2">
-                    <ProgressTemplate>
-                       <img height="26" src="https://www.sysweb.unach.mx/Ingresos/Imagenes/load.gif" width="222" />
-                    </ProgressTemplate>
-                </asp:UpdateProgress>
-            </div>
-        </div>
+        </div>        
         <div class="row">
             <div class="col">
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
@@ -65,14 +51,25 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
-                <asp:UpdateProgress ID="UpdateProgress1" runat="server"
-                    AssociatedUpdatePanelID="UpdatePanel3">
+            <div class="col text-center">
+                <asp:UpdateProgress ID="updPgrCC" runat="server"
+                    AssociatedUpdatePanelID="updPnlCC">
                     <ProgressTemplate>
-                        <span>
-                            <img height="26" src="~/images/ajax_loader_gray_512.gif" width="222" />
-                        </span><span class="loading">Sincronizacion en Proceso…
-                        </span>
+                        <asp:Image ID="imgCC" runat="server" Height="40px" ImageUrl="https://sysweb.unach.mx/SIAF-Contabilidad/images/ajax_loader_gray_512.gif"
+                            Width="40px"
+                            ToolTip="Espere un momento, por favor.." />                        
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <asp:UpdateProgress ID="updPgrFiltro" runat="server"
+                    AssociatedUpdatePanelID="updPnlFiltro">
+                    <ProgressTemplate>
+                        <asp:Image ID="imgFiltro" runat="server" Height="40px" ImageUrl="https://sysweb.unach.mx/SIAF-Contabilidad/images/ajax_loader_gray_512.gif"
+                            Width="40px"
+                            ToolTip="Espere un momento, por favor.." />                        
                     </ProgressTemplate>
                 </asp:UpdateProgress>
             </div>
@@ -82,7 +79,7 @@
                 Centro Contable
             </div>
             <div class="col-md-10">
-                <asp:UpdatePanel ID="UpdatePanel11" runat="server">
+                <asp:UpdatePanel ID="updPnlCC" runat="server">
                     <ContentTemplate>
                         <asp:DropDownList ID="DDLCentro_Contable" runat="server" Width="100%"
                             AutoPostBack="True"
@@ -95,7 +92,7 @@
                 Filtro
             </div>
             <div class="col-md-10">
-                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                <asp:UpdatePanel ID="updPnlFiltro" runat="server">
                     <ContentTemplate>
                         <asp:DropDownList ID="DDLFiltro" runat="server" Width="100%"
                             AutoPostBack="True" OnSelectedIndexChanged="DDLFiltro_SelectedIndexChanged">
@@ -105,8 +102,19 @@
             </div>
         </div>
         <div class="row">
+            <div class="col text-center">
+                <asp:UpdateProgress ID="updPgrMonitorCont" runat="server" AssociatedUpdatePanelID="updPnlMonitorCont">
+                    <ProgressTemplate>
+                        <asp:Image ID="imgMonitorCont" runat="server" Height="40px" ImageUrl="https://sysweb.unach.mx/Ingresos/Imagenes/load.gif"
+                            Width="40px" AlternateText="Espere un momento, por favor.."
+                            ToolTip="Espere un momento, por favor.." />
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
+            </div>
+        </div>
+        <div class="row">
             <div class="col">
-                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <asp:UpdatePanel ID="updPnlMonitorCont" runat="server">
                     <ContentTemplate>
                         <div class="scroll_monitor">
                             <asp:GridView ID="grvMonitorCont" runat="server"

@@ -486,6 +486,16 @@ namespace SAF.Reportes
                         reportes_dir();
                         report.SetParameterValue(0, centro_contable); report.SetParameterValue(1, Ejercicio); report.SetParameterValue(2, mayor); reporte_XLS("FORMATO_" + mayor);
                         break;
+                    case "RP_PasivosGral":
+                        Reporte = "Contabilidad\\Reportes\\RP_PasivosGral.rpt";
+                        reportes_dir();
+                        report.SetParameterValue(0, centro_contable); report.SetParameterValue(1, Ejercicio); reporte_PDF("FORMATO_" + mayor);
+                        break;
+                    case "RP_PasivosGralxls":
+                        Reporte = "Contabilidad\\Reportes\\RP_PasivosGralxls.rpt";
+                        reportes_dir();
+                        report.SetParameterValue(0, centro_contable); report.SetParameterValue(1, Ejercicio); reporte_XLS("FORMATO_" + mayor);
+                        break;
                     case "RP_CFDIS":
                         Reporte = "Contabilidad\\Reportes\\RP_CFDIS.rpt";
                         reportes_dir();

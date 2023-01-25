@@ -81,33 +81,36 @@ namespace SAF
         {
             try
             {
-                SesionUsu = (Sesion)Session["Usuario"];                
-                lblUsuario.Text = SesionUsu.Nombre_Completo;
-                //ddlUsu_Ejercicio.SelectedValue = SesionUsu.Usu_Ejercicio;                
-                mnu.NombreMenu = "MenuTop";
-                mnu.UsuarioNombre = SesionUsu.Usu_Nombre;
-                bttnCorreoUnach.Text = " "+SesionUsu.Correo_UNACH;
-                mnu.Grupo = 15830;
-
-                string siteMap = "ArchivosMenu/Web" + SesionUsu.Usu_Nombre + ".sitemap";
-                string fullPath = Path.Combine(Server.MapPath("~"), siteMap);
-                if (!File.Exists(fullPath))
+                if (Session["Usuario"] == null)
+                    Response.Redirect(" /Acceso.aspx");
+                else
                 {
-                    CNMnu.GenerateXMLFile(mnu, fullPath);
-                }
+                    SesionUsu = (Sesion)Session["Usuario"];
+                    lblUsuario.Text = SesionUsu.Nombre_Completo;
+                    mnu.NombreMenu = "MenuTop";
+                    mnu.UsuarioNombre = SesionUsu.Usu_Nombre;
+                    bttnCorreoUnach.Text = " " + SesionUsu.Correo_UNACH;
+                    mnu.Grupo = 15830;
 
-                XmlSiteMapProvider testXmlProvider = new XmlSiteMapProvider();
-                NameValueCollection providerAttributes = new NameValueCollection(1);
-                providerAttributes.Add("siteMapFile", siteMap);
-                testXmlProvider.Initialize("MyXmlSiteMapProvider", providerAttributes);
-                testXmlProvider.BuildSiteMap();
-                SiteMapDataSource smd = new SiteMapDataSource();
-                smd.ShowStartingNode = false;
-                smd.Provider = testXmlProvider;
-                SiteMapPath1.Provider = testXmlProvider;
-                MenuTop.DataSource = smd;
-                MenuTop.DataBind();                
-               
+                    string siteMap = "ArchivosMenu/Web" + SesionUsu.Usu_Nombre + ".sitemap";
+                    string fullPath = Path.Combine(Server.MapPath("~"), siteMap);
+                    if (!File.Exists(fullPath))
+                    {
+                        CNMnu.GenerateXMLFile(mnu, fullPath);
+                    }
+
+                    XmlSiteMapProvider testXmlProvider = new XmlSiteMapProvider();
+                    NameValueCollection providerAttributes = new NameValueCollection(1);
+                    providerAttributes.Add("siteMapFile", siteMap);
+                    testXmlProvider.Initialize("MyXmlSiteMapProvider", providerAttributes);
+                    testXmlProvider.BuildSiteMap();
+                    SiteMapDataSource smd = new SiteMapDataSource();
+                    smd.ShowStartingNode = false;
+                    smd.Provider = testXmlProvider;
+                    SiteMapPath1.Provider = testXmlProvider;
+                    MenuTop.DataSource = smd;
+                    MenuTop.DataBind();
+                }
 
             }
             catch (Exception ex)

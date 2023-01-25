@@ -3,6 +3,138 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script src="../../Scripts/select2/js/select2.min.js"></script>
     <link href="../../Scripts/select2/css/select2.min.css" type="text/css" rel="stylesheet" />
+    <script src="../../Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <link href="../../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+     <style>
+        :after, :before {
+            box-sizing: border-box;
+        }
+
+        a {
+            color: #337ab7;
+            text-decoration: none;
+        }
+
+        i {
+            margin-bottom: 4px;
+        }
+
+        .btn {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+
+        .btn-app {
+            color: white;
+            box-shadow: none;
+            border-radius: 3px;
+            position: relative;
+            padding: 10px 15px;
+            margin: 0;
+            min-width: 40px;
+            max-width: 60px;
+            text-align: center;
+            border: 1px solid #ddd;
+            background-color: #f4f4f4;
+            font-size: 10px;
+            transition: all .2s;
+            background-color: steelblue !important;
+        }
+
+            .btn-app > .fa, .btn-app > .glyphicon, .btn-app > .ion {
+                font-size: 20px;
+                display: block;
+            }
+
+            .btn-app:hover {
+                border-color: #aaa;
+                transform: scale(1.1);
+            }
+
+        .pdf {
+            background-color: #5e5e5e !important;
+            /*background-color: #dc2f2f !important;*/
+        }
+
+        .excel {
+            background-color: #3ca23c !important;
+        }
+
+        .csv {
+            background-color: #e86c3a !important;
+        }
+
+        .imprimir {
+            background-color: #8766b1 !important;
+        }
+
+        /*
+Esto es opcional pero sirve para que todos los botones de exportacion se distribuyan de manera equitativa usando flexbox
+
+.flexcontent {
+    display: flex;
+    justify-content: space-around;
+}
+*/
+
+        .selectTable {
+            height: 40px;
+            float: right;
+        }
+
+        div.dataTables_wrapper div.dataTables_filter {
+            text-align: left;
+            margin-top: 15px;
+        }
+
+        .btn-secondary {
+            color: #fff;
+            background-color: #4682b4;
+            border-color: #4682b4;
+        }
+
+            .btn-secondary:hover {
+                color: #fff;
+                background-color: #315f86;
+                border-color: #545b62;
+            }
+
+
+
+        .titulo-tabla {
+            color: #606263;
+            text-align: center;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+
+
+
+
+
+        .inline {
+            display: inline-block;
+            padding: 0;
+        }
+
+        .auto-style1 {
+            left: -930px;
+            top: 6px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:UpdatePanel ID="UpdatePanel3" runat="server">
@@ -25,6 +157,7 @@
                             </div>
                             <div class="col-md-2">
                                 <asp:DropDownList ID="DDLFormato" runat="server" CssClass="form-control">
+                                    <asp:ListItem Value="0000">--TODOS--</asp:ListItem>
                                     <asp:ListItem>2111</asp:ListItem>
                                     <asp:ListItem>2112</asp:ListItem>
                                     <asp:ListItem>2113</asp:ListItem>
@@ -119,6 +252,12 @@
                                         </asp:GridView>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-right">
+                                <asp:LinkButton ID="linkBttnGralPDF" runat="server" class="btn btn-secondary buttons-pdf buttons-html5 btn-app export pdf" OnClick="linkBttnGralPDF_Click" title="PDF"><i class="fa fa-file-pdf-o"></i>PDF</asp:LinkButton>
+                                <asp:LinkButton ID="linkBttnGralExcel" runat="server" class="btn btn-secondary buttons-excel buttons-html5 btn-app export excel" OnClick="linkBttnGralExcel_Click" title="Excel"><i class="fa fa-file-excel-o"></i>Excel</asp:LinkButton>
                             </div>
                         </div>
                     </div>
@@ -256,7 +395,7 @@
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
-                             <div class="col-md-1">
+                            <div class="col-md-1">
                                 <asp:RequiredFieldValidator ID="reqBeneficiario" runat="server" ErrorMessage="* Proveedor" Text="*" ControlToValidate="DDLBeneficiario" ValidationGroup="NewPasivo"></asp:RequiredFieldValidator>
                             </div>
                             <div class="col-md-2">
@@ -460,13 +599,13 @@
     <script type="text/javascript">
         function Autocomplete() {
             $(".select2").select2();
-        };
+        }
         function CatEmpleados() {
             $('#<%= grdEmpleados.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdEmpleados.ClientID %>').find("tr:first"))).DataTable({
                 "destroy": true,
                 "stateSave": true
             })
-        };
+        }
         function Pasivos() {
             $('#<%= grdPasivos0.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdPasivos0.ClientID %>').find("tr:first"))).DataTable({
                 "destroy": true,

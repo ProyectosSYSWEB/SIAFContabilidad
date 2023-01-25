@@ -144,7 +144,7 @@ namespace SAF.Contabilidad.Form
             try
             {
                 objCC.Ejercicio = Convert.ToInt32(SesionUsu.Usu_Ejercicio);
-                objCC.Centro_Contable = Convert.ToString(grdCCAsignados.SelectedRow.Cells[0].Text);
+                objCC.Centro_Contable = Convert.ToString(grdCCAsignados.SelectedRow.Cells[1].Text);
                 CNCentroContable.Eliminar_Mayor(objCC, ref Verificador);
                 if (Verificador == "0")
                 {

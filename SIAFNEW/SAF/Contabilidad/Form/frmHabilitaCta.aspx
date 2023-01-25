@@ -33,6 +33,10 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-md-6"><h5>CC cerrados para cta 1123</h5></div>
+            <div class="col-md-6"><h5>CC aperturados para cta 1123</h5></div>
+            </div>
+        <div class="row">
             <div class="col-md-6">
                 <asp:UpdatePanel ID="updPnlDisponibles" runat="server">
                     <ContentTemplate>
@@ -83,13 +87,23 @@
         function MayorDisponibles() {
             $('#<%= grdCCDisponibles.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdCCDisponibles.ClientID %>').find("tr:first"))).DataTable({
                 "destroy": true,
-                "stateSave": true
+                "stateSave": true,
+                "columns": [
+                    null,
+                    null,
+                    null
+                ]
             })
         }
         function MayorAsignados() {
             $('#<%= grdCCAsignados.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdCCAsignados.ClientID %>').find("tr:first"))).DataTable({
                 "destroy": true,
-                "stateSave": true
+                "stateSave": true,
+                "columns": [
+                    null,
+                    null,
+                    null
+                ]
             })
         }
 

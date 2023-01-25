@@ -136,6 +136,7 @@
     <Content Include="Contabilidad\Form\frmHabilitaCta.aspx" />
     <Content Include="Contabilidad\Form\FrmIngresos_Propios.aspx" />
     <Content Include="Contabilidad\Form\frmMinistraciones_GC.aspx" />
+    <Content Include="Contabilidad\Form\frmRegPolizas.aspx" />
     <Content Include="Contabilidad\Form\frmPolizas2.aspx" />
     <Content Include="Contabilidad\Form\frmPolizas_Old.aspx" />
     <Content Include="Contabilidad\Form\frmRegBeneficiarios_Pasivo.aspx" />
@@ -821,6 +822,13 @@
     <Compile Include="Contabilidad\Form\frmMinistraciones_GC.aspx.designer.cs">
       <DependentUpon>frmMinistraciones_GC.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Contabilidad\Form\frmRegPolizas.aspx.cs">
+      <DependentUpon>frmRegPolizas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\Form\frmRegPolizas.aspx.designer.cs">
+      <DependentUpon>frmRegPolizas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Contabilidad\Form\frmPolizas2.aspx.cs">
       <DependentUpon>frmPolizas2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1196,6 +1204,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RP_Concilliacion_2021.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\Reportes\RP_PasivosGralxls.cs">
+      <DependentUpon>RP_PasivosGralxls.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Contabilidad\Reportes\RP_PasivosGral.cs">
+      <DependentUpon>RP_PasivosGral.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Contabilidad\Reportes\RP_Pasivosxls.cs">
       <DependentUpon>RP_Pasivosxls.rpt</DependentUpon>
@@ -1805,6 +1825,14 @@
     <EmbeddedResource Include="Contabilidad\Reportes\RP_Concilliacion_2021.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RP_Concilliacion_2021.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contabilidad\Reportes\RP_PasivosGralxls.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RP_PasivosGralxls.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contabilidad\Reportes\RP_PasivosGral.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RP_PasivosGral.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Contabilidad\Reportes\RP_Pasivosxls.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

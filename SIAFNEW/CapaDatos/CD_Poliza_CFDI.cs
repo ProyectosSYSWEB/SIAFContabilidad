@@ -791,6 +791,7 @@ namespace CapaDatos
                     objPoliza = new Poliza_CFDI();
                     objPoliza.Partida = Convert.ToString(dr.GetValue(0));
                     objPoliza.Importe_Partida = Convert.ToDouble(dr.GetValue(1));
+                    objPoliza.CFDI_Concepto_Descripcion = Convert.ToString(dr.GetValue(2));
                     lstPartidas.Add(objPoliza);
                 }
                 dr.Close();

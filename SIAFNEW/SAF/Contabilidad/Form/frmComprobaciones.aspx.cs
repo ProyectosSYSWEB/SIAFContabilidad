@@ -417,7 +417,6 @@ namespace SAF.Contabilidad.Form
                 grvPartidas.DataSource = lstPartidas;
                 grvPartidas.DataBind();
             }
-
         }
     }
 }

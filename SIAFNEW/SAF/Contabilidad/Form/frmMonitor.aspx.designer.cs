@@ -15,15 +15,6 @@ namespace SAF.Contabilidad.Form
     {
 
         /// <summary>
-        /// Control UpdateProgress5.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress5;
-
-        /// <summary>
         /// Control updPgr12.
         /// </summary>
         /// <remarks>
@@ -51,22 +42,31 @@ namespace SAF.Contabilidad.Form
         protected global::System.Web.UI.WebControls.GridView grvInhabiles;
 
         /// <summary>
-        /// Control UpdateProgress1.
+        /// Control updPgrCC.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
+        protected global::System.Web.UI.UpdateProgress updPgrCC;
 
         /// <summary>
-        /// Control UpdatePanel11.
+        /// Control updPgrFiltro.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel11;
+        protected global::System.Web.UI.UpdateProgress updPgrFiltro;
+
+        /// <summary>
+        /// Control updPnlCC.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlCC;
 
         /// <summary>
         /// Control DDLCentro_Contable.
@@ -78,13 +78,13 @@ namespace SAF.Contabilidad.Form
         protected global::System.Web.UI.WebControls.DropDownList DDLCentro_Contable;
 
         /// <summary>
-        /// Control UpdatePanel2.
+        /// Control updPnlFiltro.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+        protected global::System.Web.UI.UpdatePanel updPnlFiltro;
 
         /// <summary>
         /// Control DDLFiltro.
@@ -96,13 +96,22 @@ namespace SAF.Contabilidad.Form
         protected global::System.Web.UI.WebControls.DropDownList DDLFiltro;
 
         /// <summary>
-        /// Control UpdatePanel1.
+        /// Control updPgrMonitorCont.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.UpdateProgress updPgrMonitorCont;
+
+        /// <summary>
+        /// Control updPnlMonitorCont.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlMonitorCont;
 
         /// <summary>
         /// Control grvMonitorCont.
