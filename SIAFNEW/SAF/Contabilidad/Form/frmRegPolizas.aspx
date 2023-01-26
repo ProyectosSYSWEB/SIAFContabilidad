@@ -1547,19 +1547,7 @@
                                         </div>
 
 
-                                        <script type="text/javascript">
-<%--        $(function () { $('#<%=ctl00_MainContent_grvPolizaCFDI_ctl02_bttnAgregarPartidas.ClientID%>') }).click(function () { alert("pruebas");});--%>
-                                        
 
-                                            $("[src*=plus]").live("click", function () {
-                                                $(this).closest("tr").after("<tr><td></td><td colspan = '999'>" + $(this).next().html() + "</td></tr>")
-                                                $(this).attr("src", "../../images/minus.png");
-                                            });
-                                            $("[src*=minus]").live("click", function () {
-                                                $(this).attr("src", "../../images/plus.png");
-                                                $(this).closest("tr").next().remove();
-                                            });
-                                            </script>
 
 
                                         <div class="row">
@@ -1567,20 +1555,83 @@
                                                 <%--<div class="scroll_monitor">--%>
                                                 <asp:UpdatePanel ID="UpdatePanel49" runat="server">
                                                     <ContentTemplate>
-                                                        <asp:GridView ID="grvPolizaCFDI" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No existen documentos." OnPageIndexChanging="grvPolizaCFDI_PageIndexChanging" OnRowDeleting="grvPolizaCFDI_RowDeleting" ShowHeaderWhenEmpty="True" Width="100%" ShowFooter="True">
+                                                        <asp:GridView ID="grvPolizaCFDI" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No existen documentos." OnPageIndexChanging="grvPolizaCFDI_PageIndexChanging" OnRowDeleting="grvPolizaCFDI_RowDeleting" ShowHeaderWhenEmpty="True" Width="100%" ShowFooter="True" OnRowDataBound="grvPolizaCFDI_RowDataBound">
                                                             <Columns>
-                                                                <asp:BoundField DataField="Beneficiario_Tipo" HeaderText="Tipo" />
-                                                                <asp:BoundField DataField="Tipo_Gasto" HeaderText="Gasto" />
-                                                                <asp:BoundField DataField="CFDI_Folio" HeaderText="Folio" />
-                                                                <asp:BoundField DataField="CFDI_UUID" HeaderText="UUID" />
-                                                                <asp:BoundField DataField="CFDI_Fecha" HeaderText="Fecha" />
-                                                                <asp:BoundField DataField="CFDI_Nombre" HeaderText="Nombre" />
-                                                                <asp:BoundField DataField="CFDI_RFC" HeaderText="RFC" />
-                                                                <asp:BoundField DataField="RegimenFiscal" HeaderText="Régimen" />
-                                                                <asp:BoundField HeaderText="Tipo Docto" DataField="Tipo_Docto">
-                                                                    <HeaderStyle HorizontalAlign="Center" />
-                                                                    <ItemStyle BackColor="#FFFF66" Font-Bold="True" HorizontalAlign="Center" />
+                                                                <asp:BoundField DataField="Beneficiario_Tipo" HeaderText="Tipo">
+                                                                    <ItemStyle VerticalAlign="Top" />
                                                                 </asp:BoundField>
+                                                                <asp:BoundField DataField="Tipo_Gasto" HeaderText="Gasto">
+                                                                    <ItemStyle VerticalAlign="Top" />
+                                                                </asp:BoundField>
+                                                                <asp:TemplateField>
+                                                                    <ItemTemplate>
+                                                                        <%--<asp:ImageButton ID="bttnAgregarPartidas" runat="server" ImageUrl="../../images/plus.png" OnClick="bttnAgregarPartidas_Click" OnClientClick="VerFila(this);" />--%>
+                                                                        <%--<img alt="" style="cursor: pointer" src="../../images/plus.png" />--%>
+                                                                        <%--<asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="#multiCollapse_<%# Eval("CFDI_UUID") %>" >HyperLink</asp:HyperLink>--%>
+                                                                        <%--<asp:LinkButton ID="linkBttnAgregarPartidas" runat="server" data-toggle="collapse" OnClick="linkBttnAgregarPartidas_Click" ><i class="fa fa-home  fa-2x" aria-hidden="true"></i></asp:LinkButton>--%>
+                                                                        <%--<a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Toggle first element</a>--%>
+                                                                        <a class="btn btn-mdb-color" data-toggle="collapse" href="#multiCollapse_<%# Eval("CFDI_UUID") %>" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                                                        <%--<asp:HyperLink id="HyperLink2" NavigateUrl="#multiCollapseExample1" Text="Add" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" runat="server"/>--%>
+                                                                        <%--<asp:Button ID="Button1" runat="server" Text="Button"  data-toggle="collapse" data-target="#divDet<%# Eval("CFDI_UUID") %>"  />--%>
+                                                                        <%--<asp:LinkButton ID="lnkAddComment" data-toggle="collapse" data-target="#divDet<%# Eval("CFDI_UUID") %>" OnClientClick="return false;" CausesValidation="false" runat="server" CssClass="btn btn-danger btn-xs pull-right btn-xs-profile profile-Margin"><b class="glyphicon glyphicon-plus-sign"></b>Comment</asp:LinkButton>--%>
+                                                                        <div class="row">
+                                                                            <div class="col">
+                                                                                <div class="collapse multi-collapse" id="multiCollapse_<%# Eval("CFDI_UUID") %>">
+                                                                                    <div class="card card-body">
+                                                                                        <asp:Panel ID="pnlPartidas" runat="server">
+                                                                                            <asp:GridView ID="grdPartidas" runat="server" AutoGenerateColumns="False" CssClass="table" Width="100%">
+                                                                                                <Columns>
+                                                                                                    <asp:TemplateField HeaderText="PARTIDA">
+                                                                                                        <EditItemTemplate>
+                                                                                                            <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Partida") %>'></asp:TextBox>
+                                                                                                        </EditItemTemplate>
+                                                                                                        <ItemTemplate>
+                                                                                                            <asp:Label ID="Label1" runat="server" Text='<%# Bind("Partida") %>'></asp:Label>
+                                                                                                        </ItemTemplate>
+                                                                                                    </asp:TemplateField>
+                                                                                                    <asp:TemplateField HeaderText="DESC PARTIDA">
+                                                                                                        <EditItemTemplate>
+                                                                                                            <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("Partida_Descripcion") %>'></asp:TextBox>
+                                                                                                        </EditItemTemplate>
+                                                                                                        <ItemTemplate>
+                                                                                                            <asp:Label ID="Label2" runat="server" Text='<%# Bind("Partida_Descripcion") %>'></asp:Label>
+                                                                                                        </ItemTemplate>
+                                                                                                        <HeaderTemplate>
+                                                                                                            <asp:DropDownList ID="ddlCatPartidas" runat="server" ValidationGroup="valPartida" CssClass="form-control">
+                                                                                                                <asp:ListItem Value="0">--Seleccionar--</asp:ListItem>
+                                                                                                                <asp:ListItem Value="00">Apertura</asp:ListItem>
+                                                                                                                <asp:ListItem Value="01">Enero</asp:ListItem>
+                                                                                                                <asp:ListItem Value="02">Febrero</asp:ListItem>
+                                                                                                            </asp:DropDownList>
+                                                                                                        </HeaderTemplate>
+                                                                                                    </asp:TemplateField>
+                                                                                                    <asp:TemplateField HeaderText="IMPORTE">
+                                                                                                        <EditItemTemplate>
+                                                                                                            <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Importe_Partida") %>'></asp:TextBox>
+                                                                                                        </EditItemTemplate>
+                                                                                                        <ItemTemplate>
+                                                                                                            <asp:Label ID="Label3" runat="server" Text='<%# Bind("Importe_Partida") %>'></asp:Label>
+                                                                                                        </ItemTemplate>
+                                                                                                        <HeaderTemplate>
+                                                                                                            <asp:TextBox ID="txtImpPartida" runat="server" CssClass="form-control"></asp:TextBox>
+                                                                                                        </HeaderTemplate>
+                                                                                                    </asp:TemplateField>
+                                                                                                    <asp:TemplateField ShowHeader="False">
+                                                                                                        <ItemTemplate>
+                                                                                                            <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" Text="Eliminar"></asp:LinkButton>
+                                                                                                        </ItemTemplate>
+                                                                                                    </asp:TemplateField>
+                                                                                                </Columns>
+                                                                                                <HeaderStyle BackColor="#666666" Font-Bold="True" ForeColor="White" />
+                                                                                            </asp:GridView>
+                                                                                        </asp:Panel>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </ItemTemplate>
+                                                                    <ItemStyle VerticalAlign="Top" />
+                                                                </asp:TemplateField>
                                                                 <asp:TemplateField HeaderText="Total">
                                                                     <EditItemTemplate>
                                                                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("CFDI_Total") %>'></asp:TextBox>
@@ -1588,44 +1639,53 @@
                                                                     <ItemTemplate>
                                                                         <asp:Label ID="Label1" runat="server" Text='<%# Bind("CFDI_Total") %>'></asp:Label>
                                                                     </ItemTemplate>
+                                                                    <ItemStyle VerticalAlign="Top" />
                                                                 </asp:TemplateField>
-                                                                <asp:TemplateField>
-                                                                    <ItemTemplate>
-                                                                        <asp:ImageButton ID="bttnAgregarPartidas" runat="server" ImageUrl="../../images/plus.png" OnClick="bttnAgregarPartidas_Click" OnClientClick="VerFila(this);" />
-                                                                        <%--<img alt="" style="cursor: pointer" src="../../images/plus.png" />--%>
-
-                                                                        <asp:Panel ID="pnlPartidas" runat="server" Visible="false">
-                                                                            <asp:GridView ID="grdPartidas" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%">
-                                                                                <Columns>
-                                                                                    <asp:BoundField DataField="Partida" HeaderText="PARTIDA" />
-                                                                                    <asp:BoundField DataField="CFDI_Concepto_Descripcion" HeaderText="DESC PARTIDA" />
-                                                                                    <asp:BoundField DataField="Importe_Partida" HeaderText="IMPORTE" />
-                                                                                    <asp:CommandField ShowDeleteButton="True" />
-                                                                                </Columns>
-                                                                                <HeaderStyle BackColor="#666666" Font-Bold="True" ForeColor="White" />
-                                                                            </asp:GridView>                                                                          
-                                                                        </asp:Panel>
-                                                                    </ItemTemplate>
-                                                                </asp:TemplateField>
+                                                                <asp:BoundField DataField="CFDI_Folio" HeaderText="Folio">
+                                                                    <ItemStyle VerticalAlign="Top" />
+                                                                </asp:BoundField>
+                                                                <asp:BoundField DataField="CFDI_UUID" HeaderText="UUID">
+                                                                    <ItemStyle VerticalAlign="Top" />
+                                                                </asp:BoundField>
+                                                                <asp:BoundField DataField="CFDI_Fecha" HeaderText="Fecha">
+                                                                    <ItemStyle BorderStyle="Solid" VerticalAlign="Top" />
+                                                                </asp:BoundField>
+                                                                <asp:BoundField DataField="CFDI_Nombre" HeaderText="Nombre">
+                                                                    <ItemStyle BorderStyle="Solid" VerticalAlign="Top" />
+                                                                </asp:BoundField>
+                                                                <asp:BoundField DataField="CFDI_RFC" HeaderText="RFC">
+                                                                    <ItemStyle VerticalAlign="Top" />
+                                                                </asp:BoundField>
+                                                                <asp:BoundField DataField="RegimenFiscal" HeaderText="Régimen">
+                                                                    <ItemStyle VerticalAlign="Top" />
+                                                                </asp:BoundField>
+                                                                <asp:BoundField HeaderText="Tipo Docto" DataField="Tipo_Docto">
+                                                                    <HeaderStyle HorizontalAlign="Center" />
+                                                                    <ItemStyle BackColor="#FFFF66" Font-Bold="True" HorizontalAlign="Center" VerticalAlign="Top" />
+                                                                </asp:BoundField>
                                                                 <asp:TemplateField>
                                                                     <ItemTemplate>
                                                                         <asp:LinkButton ID="linkBttnVer" runat="server" OnClick="linkBttnVer_Click">Conceptos</asp:LinkButton>
                                                                     </ItemTemplate>
+                                                                    <ItemStyle VerticalAlign="Top" />
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField>
                                                                     <ItemTemplate>
                                                                         <asp:HyperLink ID="linkArchivoXML" runat="server" NavigateUrl='<%# Bind("Ruta_XML") %>' Target="_blank">XML</asp:HyperLink>
                                                                     </ItemTemplate>
+                                                                    <ItemStyle VerticalAlign="Top" />
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField>
                                                                     <ItemTemplate>
                                                                         <asp:HyperLink ID="linkArchivoPDF" runat="server" NavigateUrl='<%# Bind("Ruta_PDF") %>' Target="_blank">PDF</asp:HyperLink>
                                                                     </ItemTemplate>
+                                                                    <ItemStyle VerticalAlign="Top" />
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField ShowHeader="False">
                                                                     <ItemTemplate>
                                                                         <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" Text="Eliminar" OnClientClick="return confirm('¿Desea eliminar el registro?');"></asp:LinkButton>
                                                                     </ItemTemplate>
+                                                                    <ItemStyle VerticalAlign="Top" />
                                                                 </asp:TemplateField>
                                                                 <asp:BoundField DataField="Fecha_Captura" />
                                                                 <asp:BoundField DataField="Usuario_Captura" />
@@ -2240,5 +2300,5 @@
                 arguments.IsValid = true;
             }--%>
         };
-                                        </script>
+    </script>
 </asp:Content>

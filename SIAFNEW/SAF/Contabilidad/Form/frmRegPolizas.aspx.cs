@@ -250,14 +250,23 @@ namespace SAF.Form
                     lblGranTotal.Text = Convert.ToString(TotalPagos.ToString("C"));
 
 
-                    if (grvPolizas.SelectedRow.Cells[16].Text == "S")
+                    foreach (GridViewRow row in grvPolizaCFDI.Rows)
                     {
-                        CNComun.HideColumns(grvPolizaCFDI, Celdas);
+                        GridView grd2 = row.FindControl("grdPartidas") as GridView;
+                        DataTable dt2 = new DataTable();
+                        grd2.DataSource = dt;
+                        grd2.DataSource = ListPolizaCFDI[row.RowIndex].lstPolizaPartidas;
+                        grd2.DataBind();
                     }
-                    else
-                    {
-                        CNComun.HideColumns(grvPolizaCFDI, Celdas2);
-                    }
+
+                    //if (grvPolizas.SelectedRow.Cells[16].Text == "S")
+                    //{
+                    //    CNComun.HideColumns(grvPolizaCFDI, Celdas);
+                    //}
+                    //else
+                    //{
+                    //    CNComun.HideColumns(grvPolizaCFDI, Celdas2);
+                    //}
 
                 }
                 else
@@ -2490,7 +2499,7 @@ namespace SAF.Form
                 CargarGrid(0);
         }
 
-        
+
 
         protected void ddlProveedor_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -2564,7 +2573,7 @@ namespace SAF.Form
             }
         }
 
-      
+
         protected void ddlClasificaCopia_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -2617,7 +2626,7 @@ namespace SAF.Form
 
         }
 
-      
+
 
         protected void grdCatEmpleados_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -2635,7 +2644,7 @@ namespace SAF.Form
 
         }
 
-       
+
 
         protected void linkBttnVolante_Click(object sender, EventArgs e)
         {
@@ -2647,7 +2656,7 @@ namespace SAF.Form
 
         }
 
-        
+
 
         protected void ddlDocto_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -2668,7 +2677,7 @@ namespace SAF.Form
             }
         }
 
-      
+
 
         protected void linkBttnOficioFact_Click(object sender, EventArgs e)
         {
@@ -2769,7 +2778,7 @@ namespace SAF.Form
             }
         }
 
-       
+
 
         protected void reqNumFactura3_ServerValidate(object source, ServerValidateEventArgs args)
         {
@@ -2792,7 +2801,6 @@ namespace SAF.Form
                 rowDatosProveedor.Visible = false;
             }
         }
-
         protected void bttnAgregarPartidas_Click(object sender, EventArgs e)
         {
             Poliza_CFDI objPoliza = new Poliza_CFDI();
@@ -2836,6 +2844,37 @@ namespace SAF.Form
             //    grvPartidas.DataBind();
             //}
         }
+        protected void linkBttnAgregarPartidas_Click(object sender, EventArgs e)
+        {
+            ClientScript.RegisterStartupScript(GetType(), "Show", "<script> $('#album-photo').modal('toggle');</script>");
 
+
+            Poliza_CFDI objPoliza = new Poliza_CFDI();
+            List<Poliza_CFDI> lstPartidas = new List<Poliza_CFDI>();
+            LinkButton cbi = (LinkButton)(sender);
+            GridViewRow row = (GridViewRow)cbi.NamingContainer;
+            GridView grvPartidas = (GridView)(row.Cells[11].FindControl("grdPartidas"));
+            //Panel pnlPartidas = (Panel)(row.Cells[11].FindControl("pnlPartidas"));
+            //            GridView grvPartidas = (GridView)(row.Cells[11].FindControl("grdPartidas"));
+            DataTable dt2 = new DataTable();
+
+            grvPolizaCFDI.SelectedIndex = row.RowIndex;
+            objPoliza.IdPoliza = 1204918;
+
+            CNPolizaCFDI.PolizaPartidasDatos(objPoliza, ref lstPartidas, ref Verificador);
+            grvPartidas.DataSource = lstPartidas;
+            grvPartidas.DataBind();
+
+        }
+
+        protected void grvPolizaCFDI_DataBound(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void grvPolizaCFDI_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+
+        }
     }
 }

@@ -134,19 +134,7 @@ namespace CapaEntidad
         }
 
 
-        public double _Importe_Partida;
-        public double Importe_Partida
-        {
-            get { return _Importe_Partida; }
-            set { _Importe_Partida = value; }
-        }
-
-        private string _Partida;
-        public string Partida
-        {
-            get { return _Partida.Trim(); }
-            set { _Partida = value.Trim(); }
-        }
+       
 
         private string _CFDI_RFC;
         public string CFDI_RFC
@@ -207,13 +195,19 @@ namespace CapaEntidad
             get { return _Centro_Contable.Trim(); }
             set { _Centro_Contable = value.Trim(); }
         }
+
+        //public List<Poliza_CFDI_Det> lstDetCFDI = new List<Poliza_CFDI_Det>();
         private string _CFDI_Concepto_Descripcion = string.Empty;
         public string CFDI_Concepto_Descripcion
         {
             get { return _CFDI_Concepto_Descripcion.Trim(); }
             set { _CFDI_Concepto_Descripcion = value.Trim(); }
         }
-        //public List<Poliza_CFDI_Det> lstDetCFDI = new List<Poliza_CFDI_Det>();
+
+        //private List<Poliza_Partida> _lstPartidas=null;
+        public List<Poliza_Partida> lstPolizaPartidas { get; set; }
+        public List<Poliza_Partida> lstPartidas {get; set;}
+        public Poliza_Partida objPartida { get; set; }
 
     }
 
@@ -273,6 +267,30 @@ namespace CapaEntidad
         {
             get { return _Tipo_Docto; }
             set { _Tipo_Docto = value; }
+        }
+        
+    }
+
+    public class Poliza_Partida
+    {
+        public double _Importe_Partida;
+        public double Importe_Partida
+        {
+            get { return _Importe_Partida; }
+            set { _Importe_Partida = value; }
+        }
+
+        private string _Partida;
+        public string Partida
+        {
+            get { return _Partida.Trim(); }
+            set { _Partida = value.Trim(); }
+        }
+        private string _Partida_Descripcion = string.Empty;
+        public string Partida_Descripcion
+        {
+            get { return _Partida_Descripcion.Trim(); }
+            set { _Partida_Descripcion = value.Trim(); }
         }
     }
 
@@ -341,6 +359,8 @@ namespace CapaEntidad
             get { return _Tipo_Docto_Oficio.Trim(); }
             set { _Tipo_Docto_Oficio = value.Trim(); }
         }
+
+        
 
     }
 }

@@ -250,7 +250,7 @@ namespace CapaNegocio
             try
             {
                 CD_Poliza_Oficio CDPolizaOficio = new CD_Poliza_Oficio();
-                CDPolizaOficio.PolizaPartidasDatos(objPoliza, ref lstPartidas, ref Verificador);
+                //CDPolizaOficio.PolizaPartidasDatos(objPoliza, ref lstPartidas, ref Verificador);
             }
             catch (Exception ex)
             {
