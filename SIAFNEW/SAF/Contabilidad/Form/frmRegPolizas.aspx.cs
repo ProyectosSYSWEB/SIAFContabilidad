@@ -252,12 +252,27 @@ namespace SAF.Form
 
                     foreach (GridViewRow row in grvPolizaCFDI.Rows)
                     {
+
                         GridView grd2 = row.FindControl("grdPartidas") as GridView;
                         DataTable dt2 = new DataTable();
                         grd2.DataSource = dt;
                         grd2.DataSource = ListPolizaCFDI[row.RowIndex].lstPolizaPartidas;
                         grd2.DataBind();
                     }
+                    //    DropDownList ddlCatPartidas = row.FindControl("ddlCatPartidas") as DropDownList;
+                    //    ddlCatPartidas.DataSource = ListPolizaCFDI[row.RowIndex].lstPartidas;
+                    //    ddlCatPartidas.DataValueField = "IdStr";
+                    //    ddlCatPartidas.DataTextField = "Descripcion";
+                    //    ddlCatPartidas.DataBind();
+                    //    CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Centros_Contables", ref ddlCatPartidas, "p_usuario", "p_ejercicio", SesionUsu.Usu_Nombre, SesionUsu.Usu_Ejercicio, ref ListCentroContable);
+
+
+                    //    GridView grd2 = row.FindControl("grdPartidas") as GridView;
+                    //    DataTable dt2 = new DataTable();
+                    //    grd2.DataSource = dt;
+                    //    grd2.DataSource = ListPolizaCFDI[row.RowIndex].lstPolizaPartidas;
+                    //    grd2.DataBind();
+                    //}
 
                     //if (grvPolizas.SelectedRow.Cells[16].Text == "S")
                     //{

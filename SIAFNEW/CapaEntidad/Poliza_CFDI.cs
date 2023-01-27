@@ -206,7 +206,7 @@ namespace CapaEntidad
 
         //private List<Poliza_Partida> _lstPartidas=null;
         public List<Poliza_Partida> lstPolizaPartidas { get; set; }
-        public List<Poliza_Partida> lstPartidas {get; set;}
+        public List<Comun> lstPartidas {get; set;}
         public Poliza_Partida objPartida { get; set; }
 
     }

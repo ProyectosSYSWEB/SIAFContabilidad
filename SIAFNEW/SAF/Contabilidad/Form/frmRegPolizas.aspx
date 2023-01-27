@@ -1571,9 +1571,7 @@
                                                                         <%--<asp:LinkButton ID="linkBttnAgregarPartidas" runat="server" data-toggle="collapse" OnClick="linkBttnAgregarPartidas_Click" ><i class="fa fa-home  fa-2x" aria-hidden="true"></i></asp:LinkButton>--%>
                                                                         <%--<a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Toggle first element</a>--%>
                                                                         <a class="btn btn-mdb-color" data-toggle="collapse" href="#multiCollapse_<%# Eval("CFDI_UUID") %>" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"><i class="fa fa-plus" aria-hidden="true"></i></a>
-                                                                        <%--<asp:HyperLink id="HyperLink2" NavigateUrl="#multiCollapseExample1" Text="Add" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" runat="server"/>--%>
-                                                                        <%--<asp:Button ID="Button1" runat="server" Text="Button"  data-toggle="collapse" data-target="#divDet<%# Eval("CFDI_UUID") %>"  />--%>
-                                                                        <%--<asp:LinkButton ID="lnkAddComment" data-toggle="collapse" data-target="#divDet<%# Eval("CFDI_UUID") %>" OnClientClick="return false;" CausesValidation="false" runat="server" CssClass="btn btn-danger btn-xs pull-right btn-xs-profile profile-Margin"><b class="glyphicon glyphicon-plus-sign"></b>Comment</asp:LinkButton>--%>
+                                                                        <asp:DropDownList ID="ddlCatPartidas" runat="server"></asp:DropDownList>
                                                                         <div class="row">
                                                                             <div class="col">
                                                                                 <div class="collapse multi-collapse" id="multiCollapse_<%# Eval("CFDI_UUID") %>">
@@ -1596,14 +1594,6 @@
                                                                                                         <ItemTemplate>
                                                                                                             <asp:Label ID="Label2" runat="server" Text='<%# Bind("Partida_Descripcion") %>'></asp:Label>
                                                                                                         </ItemTemplate>
-                                                                                                        <HeaderTemplate>
-                                                                                                            <asp:DropDownList ID="ddlCatPartidas" runat="server" ValidationGroup="valPartida" CssClass="form-control">
-                                                                                                                <asp:ListItem Value="0">--Seleccionar--</asp:ListItem>
-                                                                                                                <asp:ListItem Value="00">Apertura</asp:ListItem>
-                                                                                                                <asp:ListItem Value="01">Enero</asp:ListItem>
-                                                                                                                <asp:ListItem Value="02">Febrero</asp:ListItem>
-                                                                                                            </asp:DropDownList>
-                                                                                                        </HeaderTemplate>
                                                                                                     </asp:TemplateField>
                                                                                                     <asp:TemplateField HeaderText="IMPORTE">
                                                                                                         <EditItemTemplate>
