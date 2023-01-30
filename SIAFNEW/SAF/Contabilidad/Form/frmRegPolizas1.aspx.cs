@@ -13,7 +13,7 @@ using System.Text;
 
 namespace SAF.Form
 {
-    public partial class frmRegPolizas : System.Web.UI.Page
+    public partial class frmRegPolizas1 : System.Web.UI.Page
     {
         #region <Variables>
         Int32[] Celdas = new Int32[] { 0, 15, 16, 17, 18, 19, 20, 22, 23 };

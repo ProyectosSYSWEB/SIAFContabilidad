@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmRegPolizas.aspx.cs" Inherits="SAF.Form.frmRegPolizas" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmRegPolizas1.aspx.cs" Inherits="SAF.Form.frmRegPolizas1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 
@@ -1597,12 +1597,12 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="row">
-                                                                                    <div class="col">
+                                                                                    <div class="col-md-8">
                                                                                         <asp:UpdatePanel ID="UpdatePanel25" runat="server">
                                                                                             <ContentTemplate>
-                                                                                                <asp:GridView ID="grdPartidas" runat="server" AutoGenerateColumns="False" CssClass="table" Width="100%" ShowHeaderWhenEmpty="True" EmptyDataText="No existen partidas para este CFDI.">
+                                                                                                <asp:GridView ID="grdPartidas" runat="server" AutoGenerateColumns="False" CssClass="table" Width="100%" ShowHeaderWhenEmpty="True" EmptyDataText="No existen partidas para este CFDI." Font-Size="Small">
                                                                                                     <Columns>
-                                                                                                        <asp:TemplateField HeaderText="PARTIDA">
+                                                                                                        <asp:TemplateField HeaderText="CVE">
                                                                                                             <EditItemTemplate>
                                                                                                                 <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Partida") %>'></asp:TextBox>
                                                                                                             </EditItemTemplate>
@@ -1610,7 +1610,7 @@
                                                                                                                 <asp:Label ID="Label1" runat="server" Text='<%# Bind("Partida") %>'></asp:Label>
                                                                                                             </ItemTemplate>
                                                                                                         </asp:TemplateField>
-                                                                                                        <asp:TemplateField HeaderText="DESC PARTIDA">
+                                                                                                        <asp:TemplateField HeaderText="PARTIDA">
                                                                                                             <EditItemTemplate>
                                                                                                                 <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("Partida_Descripcion") %>'></asp:TextBox>
                                                                                                             </EditItemTemplate>
@@ -1638,6 +1638,8 @@
                                                                                             </ContentTemplate>
                                                                                         </asp:UpdatePanel>
 
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -1708,9 +1710,24 @@
                                                                     </ItemTemplate>
                                                                     <ItemStyle VerticalAlign="Top" />
                                                                 </asp:TemplateField>
-                                                                <asp:BoundField DataField="Fecha_Captura" />
-                                                                <asp:BoundField DataField="Usuario_Captura" />
-                                                                <asp:BoundField DataField="Id_CFDI" />
+                                                                <asp:BoundField DataField="Fecha_Captura">
+                                                                    <ControlStyle CssClass="classHide" />
+                                                                    <FooterStyle CssClass="classHide" />
+                                                                    <HeaderStyle CssClass="classHide" />
+                                                                    <ItemStyle CssClass="classHide" />
+                                                                </asp:BoundField>
+                                                                <asp:BoundField DataField="Usuario_Captura">
+                                                                    <ControlStyle CssClass="classHide" />
+                                                                    <FooterStyle CssClass="classHide" />
+                                                                    <HeaderStyle CssClass="classHide" />
+                                                                    <ItemStyle CssClass="classHide" />
+                                                                </asp:BoundField>
+                                                                <asp:BoundField DataField="Id_CFDI">
+                                                                    <ControlStyle CssClass="classHide" />
+                                                                    <FooterStyle CssClass="classHide" />
+                                                                    <HeaderStyle CssClass="classHide" />
+                                                                    <ItemStyle CssClass="classHide" />
+                                                                </asp:BoundField>
                                                             </Columns>
                                                             <EmptyDataRowStyle ForeColor="#CC9900" />
                                                             <FooterStyle CssClass="enc" />
