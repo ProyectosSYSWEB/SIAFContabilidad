@@ -11,7 +11,7 @@ namespace SAF.Form
 {
 
 
-    public partial class frmRegPolizas1
+    public partial class frmRegPolizas2
     {
 
         /// <summary>
@@ -1806,24 +1806,6 @@ namespace SAF.Form
         protected global::System.Web.UI.WebControls.GridView grvPolizaCFDI;
 
         /// <summary>
-        /// Control UpdatePanel25.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel25;
-
-        /// <summary>
-        /// Control grdPartidas.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdPartidas;
-
-        /// <summary>
         /// Control updPnlTotales.
         /// </summary>
         /// <remarks>
@@ -2481,6 +2463,24 @@ namespace SAF.Form
         protected global::System.Web.UI.WebControls.TextBox txtImpPartida;
 
         /// <summary>
+        /// Control UpdatePanel25.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel25;
+
+        /// <summary>
+        /// Control grdPartidas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdPartidas;
+
+        /// <summary>
         /// Control UpdatePanel19.
         /// </summary>
         /// <remarks>
@@ -2490,12 +2490,12 @@ namespace SAF.Form
         protected global::System.Web.UI.UpdatePanel UpdatePanel19;
 
         /// <summary>
-        /// Control linkBttnAddPart.
+        /// Control linkBttnGuardarPart.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton linkBttnAddPart;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnGuardarPart;
     }
 }

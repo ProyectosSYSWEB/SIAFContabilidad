@@ -1576,13 +1576,16 @@
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField HeaderText="Partida(s)">
                                                                     <ItemTemplate>
+                                                                        <div class="row">
+                                                                            <div class="col-md-10">
+                                                                                <asp:DropDownList ID="ddlCatPartidas" runat="server" CssClass="form-control"></asp:DropDownList></div>
+                                                                            <div class="col-md-2">
+                                                                                <asp:LinkButton ID="linkBttnAddPartida" runat="server" CssClass="btn btn-info">Agregar</asp:LinkButton>
+                                                                            </div>
+                                                                        </div>
                                                                         <div class="collapse multi-collapse" id="multiCollapse_<%# Eval("CFDI_UUID") %>" style="width: 250px">
                                                                             <div class="card card-body">
-                                                                                <div class="row">
-                                                                                    <div class="col">
-                                                                                        <asp:DropDownList ID="ddlCatPartidas" runat="server" CssClass="form-control"></asp:DropDownList>
-                                                                                    </div>
-                                                                                </div>
+
                                                                                 <div class="row">
                                                                                     <div class="col">
                                                                                         <div class="input-group">
@@ -1708,9 +1711,24 @@
                                                                     </ItemTemplate>
                                                                     <ItemStyle VerticalAlign="Top" />
                                                                 </asp:TemplateField>
-                                                                <asp:BoundField DataField="Fecha_Captura" />
-                                                                <asp:BoundField DataField="Usuario_Captura" />
-                                                                <asp:BoundField DataField="Id_CFDI" />
+                                                                <asp:BoundField DataField="Fecha_Captura">
+                                                                    <ControlStyle CssClass="classHide" />
+                                                                    <FooterStyle CssClass="classHide" />
+                                                                    <HeaderStyle CssClass="classHide" />
+                                                                    <ItemStyle CssClass="classHide" />
+                                                                </asp:BoundField>
+                                                                <asp:BoundField DataField="Usuario_Captura">
+                                                                    <ControlStyle CssClass="classHide" />
+                                                                    <FooterStyle CssClass="classHide" />
+                                                                    <HeaderStyle CssClass="classHide" />
+                                                                    <ItemStyle CssClass="classHide" />
+                                                                </asp:BoundField>
+                                                                <asp:BoundField DataField="Id_CFDI">
+                                                                    <ControlStyle CssClass="classHide" />
+                                                                    <FooterStyle CssClass="classHide" />
+                                                                    <HeaderStyle CssClass="classHide" />
+                                                                    <ItemStyle CssClass="classHide" />
+                                                                </asp:BoundField>
                                                             </Columns>
                                                             <EmptyDataRowStyle ForeColor="#CC9900" />
                                                             <FooterStyle CssClass="enc" />

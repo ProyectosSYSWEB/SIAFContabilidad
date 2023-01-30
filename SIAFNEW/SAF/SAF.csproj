@@ -136,6 +136,7 @@
     <Content Include="Contabilidad\Form\frmHabilitaCta.aspx" />
     <Content Include="Contabilidad\Form\FrmIngresos_Propios.aspx" />
     <Content Include="Contabilidad\Form\frmMinistraciones_GC.aspx" />
+    <Content Include="Contabilidad\Form\frmRegPolizas2.aspx" />
     <Content Include="Contabilidad\Form\frmRegPolizas1.aspx" />
     <Content Include="Contabilidad\Form\frmRegPolizas.aspx" />
     <Content Include="Contabilidad\Form\frmPolizas2.aspx" />
@@ -822,6 +823,13 @@
     </Compile>
     <Compile Include="Contabilidad\Form\frmMinistraciones_GC.aspx.designer.cs">
       <DependentUpon>frmMinistraciones_GC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contabilidad\Form\frmRegPolizas2.aspx.cs">
+      <DependentUpon>frmRegPolizas2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\Form\frmRegPolizas2.aspx.designer.cs">
+      <DependentUpon>frmRegPolizas2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contabilidad\Form\frmRegPolizas1.aspx.cs">
       <DependentUpon>frmRegPolizas1.aspx</DependentUpon>

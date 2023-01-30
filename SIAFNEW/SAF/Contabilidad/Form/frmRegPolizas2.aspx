@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmRegPolizas1.aspx.cs" Inherits="SAF.Form.frmRegPolizas1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmRegPolizas2.aspx.cs" Inherits="SAF.Form.frmRegPolizas2" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 
@@ -1546,12 +1546,16 @@
                                             </div>
                                         </div>
 
+
+
+
+
                                         <div class="row">
-                                            <div class="col-md-9">
+                                            <div class="col">
                                                 <%--<div class="scroll_monitor">--%>
                                                 <asp:UpdatePanel ID="UpdatePanel49" runat="server">
                                                     <ContentTemplate>
-                                                        <asp:GridView ID="grvPolizaCFDI" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No existen documentos." OnPageIndexChanging="grvPolizaCFDI_PageIndexChanging" OnRowDeleting="grvPolizaCFDI_RowDeleting" ShowHeaderWhenEmpty="True" Width="100%" ShowFooter="True" OnRowDataBound="grvPolizaCFDI_RowDataBound" Font-Size="10px">
+                                                        <asp:GridView ID="grvPolizaCFDI" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No existen documentos." OnPageIndexChanging="grvPolizaCFDI_PageIndexChanging" OnRowDeleting="grvPolizaCFDI_RowDeleting" ShowHeaderWhenEmpty="True" Width="100%" ShowFooter="True" OnRowDataBound="grvPolizaCFDI_RowDataBound">
                                                             <Columns>
                                                                 <asp:BoundField DataField="Beneficiario_Tipo" HeaderText="Tipo">
                                                                     <ItemStyle VerticalAlign="Top" />
@@ -1559,6 +1563,31 @@
                                                                 <asp:BoundField DataField="Tipo_Gasto" HeaderText="Gasto">
                                                                     <ItemStyle VerticalAlign="Top" />
                                                                 </asp:BoundField>
+                                                                <asp:TemplateField>
+                                                                    <ItemTemplate>
+                                                                    </ItemTemplate>
+                                                                    <ItemStyle VerticalAlign="Top" />
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField HeaderText="Partida(s)">
+                                                                    <ItemTemplate>
+                                                                        <div class="row">
+                                                                            <div class="col-md-10">
+                                                                                <asp:DropDownList ID="ddlPartidasPoliza" runat="server" CssClass="form-control"></asp:DropDownList></div>
+                                                                            <div class="col-md-2">
+                                                                                <asp:LinkButton ID="linkBttnAddPartidas" runat="server" CssClass="btn btn-info" OnClick="linkBttnAddPartidas_Click">Detalle</asp:LinkButton>
+                                                                            </div>
+                                                                        </div>                                                                        
+                                                                    </ItemTemplate>
+                                                                    <ItemStyle Width="250px" />
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField HeaderText="Tot Partida(s)">
+                                                                    <EditItemTemplate>
+                                                                        <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                                                                    </EditItemTemplate>
+                                                                    <ItemTemplate>
+                                                                        <asp:Label ID="Label4" runat="server"></asp:Label>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
                                                                 <asp:TemplateField HeaderText="Total">
                                                                     <EditItemTemplate>
                                                                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("CFDI_Total") %>'></asp:TextBox>
@@ -1592,34 +1621,25 @@
                                                                 </asp:BoundField>
                                                                 <asp:TemplateField>
                                                                     <ItemTemplate>
-                                                                        <asp:LinkButton ID="linkBttnVer" runat="server" OnClick="linkBttnVer_Click" CssClass="btn btn-blue-grey">Conceptos</asp:LinkButton>
-                                                                    </ItemTemplate>
-                                                                    <ItemStyle VerticalAlign="Top" />
-                                                                </asp:TemplateField>
-                                                                <asp:TemplateField>
-                                                                    <EditItemTemplate>
-                                                                        <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-                                                                    </EditItemTemplate>
-                                                                    <ItemTemplate>
-                                                                        <asp:LinkButton ID="linkBttnAddPartida" runat="server" CssClass="btn btn-blue-grey" OnClick="linkBttnVerPartidas_Click">Partida(s)</asp:LinkButton>
+                                                                        <asp:LinkButton ID="linkBttnVer" runat="server" OnClick="linkBttnVer_Click">Conceptos</asp:LinkButton>
                                                                     </ItemTemplate>
                                                                     <ItemStyle VerticalAlign="Top" />
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField>
                                                                     <ItemTemplate>
-                                                                        <asp:HyperLink ID="linkArchivoXML" runat="server" NavigateUrl='<%# Bind("Ruta_XML") %>' Target="_blank" CssClass="btn btn-blue-grey">XML</asp:HyperLink>
+                                                                        <asp:HyperLink ID="linkArchivoXML" runat="server" NavigateUrl='<%# Bind("Ruta_XML") %>' Target="_blank">XML</asp:HyperLink>
                                                                     </ItemTemplate>
                                                                     <ItemStyle VerticalAlign="Top" />
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField>
                                                                     <ItemTemplate>
-                                                                        <asp:HyperLink ID="linkArchivoPDF" runat="server" NavigateUrl='<%# Bind("Ruta_PDF") %>' Target="_blank" CssClass="btn btn-blue-grey">PDF</asp:HyperLink>
+                                                                        <asp:HyperLink ID="linkArchivoPDF" runat="server" NavigateUrl='<%# Bind("Ruta_PDF") %>' Target="_blank">PDF</asp:HyperLink>
                                                                     </ItemTemplate>
                                                                     <ItemStyle VerticalAlign="Top" />
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField ShowHeader="False">
                                                                     <ItemTemplate>
-                                                                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" Text="Eliminar" OnClientClick="return confirm('¿Desea eliminar el registro?');" CssClass="btn btn-blue-grey"></asp:LinkButton>
+                                                                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" Text="Eliminar" OnClientClick="return confirm('¿Desea eliminar el registro?');"></asp:LinkButton>
                                                                     </ItemTemplate>
                                                                     <ItemStyle VerticalAlign="Top" />
                                                                 </asp:TemplateField>
@@ -1652,56 +1672,6 @@
                                                     </ContentTemplate>
                                                 </asp:UpdatePanel>
                                                 <%--</div>--%>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <hr />
-                                                <asp:UpdatePanel ID="UpdatePanel25" runat="server">
-                                                    <ContentTemplate>
-                                                        <asp:GridView ID="grdPartidas" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" ShowHeaderWhenEmpty="True" EmptyDataText="No existen partidas para este CFDI." Font-Size="Small">
-                                                            <Columns>
-                                                                <asp:TemplateField HeaderText="CVE">
-                                                                    <EditItemTemplate>
-                                                                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Partida") %>'></asp:TextBox>
-                                                                    </EditItemTemplate>
-                                                                    <ItemTemplate>
-                                                                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("Partida") %>'></asp:Label>
-                                                                    </ItemTemplate>
-                                                                </asp:TemplateField>
-                                                                <asp:TemplateField HeaderText="PARTIDA">
-                                                                    <EditItemTemplate>
-                                                                        <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("Partida_Descripcion") %>'></asp:TextBox>
-                                                                    </EditItemTemplate>
-                                                                    <ItemTemplate>
-                                                                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("Partida_Descripcion") %>'></asp:Label>
-                                                                    </ItemTemplate>
-                                                                </asp:TemplateField>
-                                                                <asp:TemplateField HeaderText="IMPORTE">
-                                                                    <EditItemTemplate>
-                                                                        <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Importe_Partida") %>'></asp:TextBox>
-                                                                    </EditItemTemplate>
-                                                                    <ItemTemplate>
-                                                                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("Importe_Partida") %>'></asp:Label>
-                                                                    </ItemTemplate>
-                                                                    <ItemStyle Width="50px" />
-                                                                </asp:TemplateField>
-                                                                <asp:TemplateField ShowHeader="False">
-                                                                    <HeaderTemplate>
-                                                                        <asp:LinkButton ID="linkBttnAddPartidas" runat="server" CssClass="btn btn-info" OnClick="linkBttnAddPartidas_Click">Agregar</asp:LinkButton>
-                                                                    </HeaderTemplate>
-                                                                    <ItemTemplate>
-                                                                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" Text="Eliminar"></asp:LinkButton>
-                                                                    </ItemTemplate>
-                                                                </asp:TemplateField>
-                                                            </Columns>
-                                                            <EmptyDataRowStyle ForeColor="#CC9900" />
-                                                            <FooterStyle CssClass="enc" />
-                                                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                            <SelectedRowStyle CssClass="sel" />
-                                                            <HeaderStyle CssClass="enc" />
-                                                            <AlternatingRowStyle CssClass="alt" />
-                                                        </asp:GridView>
-                                                    </ContentTemplate>
-                                                </asp:UpdatePanel>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -2022,10 +1992,7 @@
                                 </asp:UpdatePanel>
                             </div>
                         </div>
-                        <%-- <FooterTemplate>
-                                                                            <asp:Label ID="lblGranTotal" runat="server" Text="0" Font-Size="Medium" Font-Bold="True"></asp:Label>
-                                                                            <asp:Label ID="lblGranTotalInt" runat="server" Text="0" Visible="False"></asp:Label>
-                                                                        </FooterTemplate>--%>
+                        <%--</div>--%>
                         <div class="row">
                             <div class="col text-center">
                                 <asp:UpdateProgress ID="updPgrBuscarEmp" runat="server"
@@ -2096,9 +2063,12 @@
                             <div class="col">
                                 La póliza no esta cuadrada, favor de verificar.
                             </div>
-                            <%--</div>--%>
+                            <%-- <FooterTemplate>
+                                                                            <asp:Label ID="lblGranTotal" runat="server" Text="0" Font-Size="Medium" Font-Bold="True"></asp:Label>
+                                                                            <asp:Label ID="lblGranTotalInt" runat="server" Text="0" Visible="False"></asp:Label>
+                                                                        </FooterTemplate>--%>
                         </div>
-                        <%--<asp:Label ID="lblConceptos" runat="server" Text="Sin conceptos..." Font-Names="Calibri" Font-Size="10pt"></asp:Label>--%>
+                        <%--</div>--%>
                     </div>
                 </div>
             </div>
@@ -2122,6 +2092,7 @@
                                         <asp:Label ID="lblMsgErrorCFDI" runat="server" Text="Label"></asp:Label>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
+
                             </div>
                         </div>
                     </div>
@@ -2160,7 +2131,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                    <h5 class="modal-title">Partidas Asignadas</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -2179,28 +2150,66 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col text-right">
-                            <asp:UpdatePanel ID="UpdatePanel19" runat="server">
+                        <div class="col">
+                            <asp:UpdatePanel ID="UpdatePanel25" runat="server">
+                                                    <ContentTemplate>
+                                                        <asp:GridView ID="grdPartidas" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" ShowHeaderWhenEmpty="True" EmptyDataText="No existen partidas para este CFDI." Font-Size="Small">
+                                                            <Columns>
+                                                                <asp:TemplateField HeaderText="CVE">
+                                                                    <EditItemTemplate>
+                                                                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Partida") %>'></asp:TextBox>
+                                                                    </EditItemTemplate>
+                                                                    <ItemTemplate>
+                                                                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("Partida") %>'></asp:Label>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField HeaderText="PARTIDA">
+                                                                    <EditItemTemplate>
+                                                                        <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("Partida_Descripcion") %>'></asp:TextBox>
+                                                                    </EditItemTemplate>
+                                                                    <ItemTemplate>
+                                                                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("Partida_Descripcion") %>'></asp:Label>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField HeaderText="IMPORTE">
+                                                                    <EditItemTemplate>
+                                                                        <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Importe_Partida") %>'></asp:TextBox>
+                                                                    </EditItemTemplate>
+                                                                    <ItemTemplate>
+                                                                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("Importe_Partida") %>'></asp:Label>
+                                                                    </ItemTemplate>
+                                                                    <ItemStyle Width="50px" />
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField ShowHeader="False">                                                                   
+                                                                    <ItemTemplate>
+                                                                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" Text="Eliminar"></asp:LinkButton>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                            </Columns>
+                                                            <EmptyDataRowStyle ForeColor="#CC9900" />
+                                                            <FooterStyle CssClass="enc" />
+                                                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                            <SelectedRowStyle CssClass="sel" />
+                                                            <HeaderStyle CssClass="enc" />
+                                                            <AlternatingRowStyle CssClass="alt" />
+                                                        </asp:GridView>
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
+                        </div>
+                   </div>
+                </div>
+                <div class="modal-footer">                    
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                      <asp:UpdatePanel ID="UpdatePanel19" runat="server">
                                 <ContentTemplate>
-                            <asp:LinkButton ID="linkBttnAddPart" runat="server" CssClass="btn btn-info" OnClick="linkBttnAddPart_Click">Agregar</asp:LinkButton>
+                            <asp:LinkButton ID="linkBttnGuardarPart" runat="server" CssClass="btn btn-info" OnClick="linkBttnGuardarPart_Click">Agregar</asp:LinkButton>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
     <script type="text/javascript">
-
         function FiltNumCedulas() {
             $('#<%= ddlNumCedula.ClientID %>').select2();
         };

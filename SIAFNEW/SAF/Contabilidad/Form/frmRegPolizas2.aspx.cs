@@ -13,7 +13,7 @@ using System.Text;
 
 namespace SAF.Form
 {
-    public partial class frmRegPolizas1 : System.Web.UI.Page
+    public partial class frmRegPolizas2 : System.Web.UI.Page
     {
         #region <Variables>
         Int32[] Celdas = new Int32[] { 0, 15, 16, 17, 18, 19, 20, 22, 23 };
@@ -250,35 +250,35 @@ namespace SAF.Form
                     lblGranTotal.Text = Convert.ToString(TotalPagos.ToString("C"));
 
 
-                    //foreach (GridViewRow row in grvPolizaCFDI.Rows)
-                    //{
-                    //    GridView grd2 = row.FindControl("grdPartidas") as GridView;
-                    //    DataTable dt2 = new DataTable();
-                    //    grd2.DataSource = dt;
-                    //    if (ListPolizaCFDI[row.RowIndex].lstPolizaPartidas.Count > 0)
-                    //    {
-                    //        grd2.DataSource = ListPolizaCFDI[row.RowIndex].lstPolizaPartidas;
-                    //        grd2.DataBind();
-                    //    }
-                    //    else
-                    //    {
-                    //        grd2.DataSource = null;
-                    //        grd2.DataBind();
-                    //    }
+                    foreach (GridViewRow row in grvPolizaCFDI.Rows)
+                    {
+                        //GridView grd2 = row.FindControl("grdPartidas") as GridView;
+                        //DataTable dt2 = new DataTable();
+                        //grd2.DataSource = dt;
+                        //if (ListPolizaCFDI[row.RowIndex].lstPolizaPartidas.Count > 0)
+                        //{
+                        //    grd2.DataSource = ListPolizaCFDI[row.RowIndex].lstPolizaPartidas;
+                        //    grd2.DataBind();
+                        //}
+                        //else
+                        //{
+                        //    grd2.DataSource = null;
+                        //    grd2.DataBind();
+                        //}
 
-                    //    DropDownList ddlCatPartidas = row.FindControl("ddlCatPartidas") as DropDownList;
-                    //    ddlCatPartidas.DataSource = ListPolizaCFDI[row.RowIndex].lstPartidas;
-                    //    ddlCatPartidas.DataValueField = "IdStr";
-                    //    ddlCatPartidas.DataTextField = "Descripcion";
-                    //    ddlCatPartidas.DataBind();
+                        DropDownList ddlPartidasPoliza = row.FindControl("ddlPartidasPoliza") as DropDownList;
+                        ddlPartidasPoliza.DataSource = ListPolizaCFDI[row.RowIndex].lstPolizaPartidas;
+                        ddlPartidasPoliza.DataValueField = "IdStr";
+                        ddlPartidasPoliza.DataTextField = "Descripcion";
+                        ddlPartidasPoliza.DataBind();
 
-                    //    //DropDownList ddlCatPartidas = grd2.HeaderRow.FindControl("ddlCatPartidas") as DropDownList;
-                    //    ////DropDownList ddlCatPartidas = row.FindControl("ddlCatPartidas") as DropDownList;
-                    //    //ddlCatPartidas.DataSource = ListPolizaCFDI[row.RowIndex].lstPartidas;
-                    //    //ddlCatPartidas.DataValueField = "IdStr";
-                    //    //ddlCatPartidas.DataTextField = "Descripcion";
-                    //    //ddlCatPartidas.DataBind();
-                    //}
+                        //DropDownList ddlCatPartidas = grd2.HeaderRow.FindControl("ddlCatPartidas") as DropDownList;
+                        ////DropDownList ddlCatPartidas = row.FindControl("ddlCatPartidas") as DropDownList;
+                        //ddlCatPartidas.DataSource = ListPolizaCFDI[row.RowIndex].lstPartidas;
+                        //ddlCatPartidas.DataValueField = "IdStr";
+                        //ddlCatPartidas.DataTextField = "Descripcion";
+                        //ddlCatPartidas.DataBind();
+                    }
                     //    DropDownList ddlCatPartidas = row.FindControl("ddlCatPartidas") as DropDownList;
                     //    ddlCatPartidas.DataSource = ListPolizaCFDI[row.RowIndex].lstPartidas;
                     //    ddlCatPartidas.DataValueField = "IdStr";
@@ -2947,33 +2947,7 @@ namespace SAF.Form
                 grvPartidas.DataBind();
 
                 Session["PolizasCFDI"] = lstPolizasCfdi;
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#multiCollapse_" + grvPolizaCFDI.SelectedRow.Cells[7].Text+"').collapse()", true);
-            }
-            catch (Exception ex)
-            {
-                Verificador = ex.Message;
-                CNComun.VerificaTextoMensajeError(ref Verificador);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
-            }
-        }
-
-        protected void linkBttnVerPartidas_Click(object sender, EventArgs e)
-        {
-            LinkButton cbi = (LinkButton)(sender);
-            GridViewRow row = (GridViewRow)cbi.NamingContainer;
-            List<Poliza_CFDI> lstPolizasCfdi = new List<Poliza_CFDI>();
-            try
-            {
-                //GridView grvPartidas = (GridView)(row.Cells[3].FindControl("grdPartidas"));
-
-                if (Session["PolizasCFDI"] != null)
-                    lstPolizasCfdi = (List<Poliza_CFDI>)Session["PolizasCFDI"];
-
-                grdPartidas.DataSource = lstPolizasCfdi[row.RowIndex].lstPolizaPartidas;
-                grdPartidas.DataBind();
-
-
-                //ScriptManager.RegisterStartupScript(this, this.GetType(), "ModalPartidas", "$('#modalPartidas').modal('show')", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#multiCollapse_" + grvPolizaCFDI.SelectedRow.Cells[7].Text + "').collapse()", true);
             }
             catch (Exception ex)
             {
@@ -2984,18 +2958,65 @@ namespace SAF.Form
         }
         protected void linkBttnAddPartidas_Click(object sender, EventArgs e)
         {
+            LinkButton cbi = (LinkButton)(sender);
+            GridViewRow row = (GridViewRow)cbi.NamingContainer;
+            List<Poliza_CFDI> lstPolizasCfdi = new List<Poliza_CFDI>();
             try
             {
+
+                if (Session["PolizasCFDI"] != null)
+                    lstPolizasCfdi = (List<Poliza_CFDI>)Session["PolizasCFDI"];
+
+                grdPartidas.DataSource = lstPolizasCfdi[row.RowIndex].lstPolizaPartidas;
+                grdPartidas.DataBind();
+
+                ddlCatPartidas.DataSource = lstPolizasCfdi[row.RowIndex].lstPartidas;
+                ddlCatPartidas.DataValueField = "IdStr";
+                ddlCatPartidas.DataTextField = "Descripcion";
+                ddlCatPartidas.DataBind();
+
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "ModalPartidas", "$('#modalPartidas').modal('show')", true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Verificador = ex.Message;
                 CNComun.VerificaTextoMensajeError(ref Verificador);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
             }
         }
+        protected void linkBttnGuardarPart_Click(object sender, EventArgs e)
+        {
+            Poliza_CFDI objPoliza = new Poliza_CFDI();
+            List<Poliza_Partida> lstPartidas = new List<Poliza_Partida>();
+            List<Poliza_CFDI> lstPolizasCfdi = new List<Poliza_CFDI>();
+            Poliza_Partida objPartida = new Poliza_Partida();
+            Poliza_CFDI objPoliza_Partida = new Poliza_CFDI();
+
+            try
+            {
+                objPartida.Partida = ddlCatPartidas.SelectedValue;
+                objPartida.Importe_Partida = Convert.ToDouble(txtImporte.Text);
+                objPartida.Partida_Descripcion = ddlCatPartidas.SelectedItem.Text;
+
+                if (Session["PolizasCFDI"] != null)
+                    lstPolizasCfdi = (List<Poliza_CFDI>)Session["PolizasCFDI"];
 
 
+                lstPartidas.Add(objPartida);
+
+                lstPolizasCfdi[grvPolizaCFDI.SelectedRow.RowIndex].lstPolizaPartidas.Add(objPartida);// = lstPartidas;
+                grdPartidas.DataSource = lstPolizasCfdi[grvPolizaCFDI.SelectedRow.RowIndex].lstPolizaPartidas;
+                grdPartidas.DataBind();
+
+                Session["PolizasCFDI"] = lstPolizasCfdi;
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+
+            }
         }
     }
+}
