@@ -255,9 +255,9 @@ namespace SAF.Form
                         GridView grd2 = row.FindControl("grdPartidas") as GridView;
                         DataTable dt2 = new DataTable();
                         grd2.DataSource = dt;
-                        if (ListPolizaCFDI[row.RowIndex].lstPolizaPartidas.Count > 0)
+                        if (ListPolizaCFDI[row.RowIndex].listPolizaPartidas.Count > 0)
                         {
-                            grd2.DataSource = ListPolizaCFDI[row.RowIndex].lstPolizaPartidas;
+                            grd2.DataSource = ListPolizaCFDI[row.RowIndex].listPolizaPartidas;
                             grd2.DataBind();
                         }
                         else
@@ -2917,7 +2917,8 @@ namespace SAF.Form
             Poliza_CFDI objPoliza = new Poliza_CFDI();
             List<Poliza_Partida> lstPartidas = new List<Poliza_Partida>();
             List<Poliza_CFDI> lstPolizasCfdi = new List<Poliza_CFDI>();
-            Poliza_Partida objPartida = new Poliza_Partida();
+            //Poliza_Partida objPartida = new Poliza_Partida();
+            Poliza_Partida objPartida;
             Poliza_CFDI objPoliza_Partida = new Poliza_CFDI();
             LinkButton cbi = (LinkButton)(sender);
             GridViewRow row = (GridViewRow)cbi.NamingContainer;
@@ -2932,18 +2933,18 @@ namespace SAF.Form
                 objPoliza.IdPoliza = 1204918;
 
 
-                objPartida.Partida = ddlCatPartidas.SelectedValue;
-                objPartida.Importe_Partida = Convert.ToDouble(txtImporte.Text);
-                objPartida.Partida_Descripcion = ddlCatPartidas.SelectedItem.Text;
+                //objPartida.Partida = ddlCatPartidas.SelectedValue;
+                //objPartida.Importe_Partida = Convert.ToDouble(txtImporte.Text);
+                //objPartida.Partida_Descripcion = ddlCatPartidas.SelectedItem.Text;
 
                 if (Session["PolizasCFDI"] != null)
                     lstPolizasCfdi = (List<Poliza_CFDI>)Session["PolizasCFDI"];
 
 
-                lstPartidas.Add(objPartida);
+                //lstPartidas.Add(objPartida);
 
-                lstPolizasCfdi[row.RowIndex].lstPolizaPartidas.Add(objPartida);// = lstPartidas;
-                grvPartidas.DataSource = lstPolizasCfdi[row.RowIndex].lstPolizaPartidas;
+                //lstPolizasCfdi[row.RowIndex].listPolizaPartidas.Add(objPartida);// = lstPartidas;
+                grvPartidas.DataSource = lstPolizasCfdi[row.RowIndex].listPolizaPartidas;
                 grvPartidas.DataBind();
 
                 Session["PolizasCFDI"] = lstPolizasCfdi;

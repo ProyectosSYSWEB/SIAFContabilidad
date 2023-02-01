@@ -373,7 +373,7 @@ namespace CapaDatos
             CD_Datos CDDatos = new CD_Datos();
             CD_Comun CDComun = new CD_Comun();
             OracleCommand cmm = null;
-            List<Poliza_Partida> lstPartidasPoliza = new List<Poliza_Partida>();
+            
             
             int IdPoliza = objPolizaCFDI.IdPoliza;
             try
@@ -393,6 +393,7 @@ namespace CapaDatos
                     
                     objPolizaCFDI = new Poliza_CFDI();
                     List<Comun> list = new List<Comun>();
+                    List<Poliza_Partida> lstPartidasPoliza = new List<Poliza_Partida>();
                     objPolizaCFDI.Beneficiario_Tipo = Convert.ToString(dr.GetValue(0));
                     objPolizaCFDI.CFDI_Folio = Convert.ToString(dr.GetValue(1));
                     objPolizaCFDI.CFDI_Fecha = Convert.ToString(dr.GetValue(2));
@@ -411,9 +412,13 @@ namespace CapaDatos
                     objPolizaCFDI.Id_CFDI = Convert.ToInt32(dr.GetValue(13));
                     CDComun.LlenaCombo("PKG_Contabilidad.Obt_Combo_Poliza_Partidas", ref list, "P_ID_POLIZA", Convert.ToString(IdPoliza));
                     //this.PartidasDatos(objPolizaCFDI.IdPoliza, ref lstPartidasPoliza, ref Verificador);
+                    
                     this.PolizaPartidasDatos(objPolizaCFDI.Id_CFDI, ref lstPartidasPoliza, ref Verificador);
+                    objPolizaCFDI.GrupoPartidas=lstPartidasPoliza;
+
                     objPolizaCFDI.lstPartidas = list;
-                    objPolizaCFDI.lstPolizaPartidas = lstPartidasPoliza;
+                    //objPolizaCFDI.listPolizaPartidas = lstPartidasPoliza;
+                    //objPolizaCFDI.lstPolizaPartidas = lstPartidasPoliza;
                     objPolizaCFDI.CFDI_Concepto_Descripcion = Convert.ToString(dr.GetValue(22));
                     objPolizaCFDI.Tipo_Docto = Convert.ToString(dr.GetValue(23));
                     //objPolizaCFDI.objPartida.l = lstPartidasPoliza;
@@ -451,11 +456,11 @@ namespace CapaDatos
                 while (dr.Read())
                 {
 
+                    string Partida = Convert.ToString(dr.GetValue(0));
+                    double Importe_Partida = Convert.ToDouble(dr.GetValue(1));
+                    string Partida_Descripcion = Convert.ToString(dr.GetValue(2));
+                    Poliza_Partida objPartida = new Poliza_Partida(Partida, Partida_Descripcion, Importe_Partida);
                     
-                    Poliza_Partida objPartida = new Poliza_Partida();
-                    objPartida.Partida = Convert.ToString(dr.GetValue(0));
-                    objPartida.Importe_Partida = Convert.ToDouble(dr.GetValue(1));
-                    objPartida.Partida_Descripcion = Convert.ToString(dr.GetValue(2));
                     //lstPartidas.Add(objPartida);
                     lstPartidas.Add(objPartida);
                         //lstPolizasCFDI.Add(objPolizaCFDI);
@@ -474,45 +479,45 @@ namespace CapaDatos
             }
         }
 
-        public void PartidasDatos(int IdPoliza, ref List<Poliza_Partida> lstPartidas, ref string Verificador)
-        {
-            //List<Poliza_Partida> lstPartidas= new List <Poliza_Partida>();
-            CD_Datos CDDatos = new CD_Datos();
-            OracleCommand cmm = null;
+        //public void PartidasDatos(int IdPoliza, ref List<Poliza_Partida> lstPartidas, ref string Verificador)
+        //{
+        //    //List<Poliza_Partida> lstPartidas= new List <Poliza_Partida>();
+        //    CD_Datos CDDatos = new CD_Datos();
+        //    OracleCommand cmm = null;
 
-            try
-            {
+        //    try
+        //    {
 
-                OracleDataReader dr = null;
-                String[] Parametros = { "P_ID_POLIZA" };
-                String[] Valores = { Convert.ToString(IdPoliza) };
+        //        OracleDataReader dr = null;
+        //        String[] Parametros = { "P_ID_POLIZA" };
+        //        String[] Valores = { Convert.ToString(IdPoliza) };
 
-                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Combo_Poliza_Partidas", ref dr, Parametros, Valores);
-                while (dr.Read())
-                {
+        //        cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Combo_Poliza_Partidas", ref dr, Parametros, Valores);
+        //        while (dr.Read())
+        //        {
 
 
-                    Poliza_Partida objPartida = new Poliza_Partida();
-                    objPartida.Partida = Convert.ToString(dr.GetValue(0));
-                    objPartida.Importe_Partida = Convert.ToDouble(dr.GetValue(1));
-                    objPartida.Partida_Descripcion = Convert.ToString(dr.GetValue(2));
-                    //lstPartidas.Add(objPartida);
-                    lstPartidas.Add(objPartida);
-                    //lstPolizasCFDI.Add(objPolizaCFDI);
-                    ///objPolizaCFDI. .Add(objPoliza);
-                }
-                dr.Close();
+        //            Poliza_Partida objPartida = new Poliza_Partida();
+        //            objPartida.Partida = Convert.ToString(dr.GetValue(0));
+        //            objPartida.Importe_Partida = Convert.ToDouble(dr.GetValue(1));
+        //            objPartida.Partida_Descripcion = Convert.ToString(dr.GetValue(2));
+        //            //lstPartidas.Add(objPartida);
+        //            lstPartidas.Add(objPartida);
+        //            //lstPolizasCFDI.Add(objPolizaCFDI);
+        //            ///objPolizaCFDI. .Add(objPoliza);
+        //        }
+        //        dr.Close();
 
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                CDDatos.LimpiarOracleCommand(ref cmm);
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        CDDatos.LimpiarOracleCommand(ref cmm);
+        //    }
+        //}
 
         public void PolizaCFDIConsultaConceptos(Poliza_CFDI objPolizaCFDI, ref List<Poliza_CFDI> lstPolizasCFDI)
         {

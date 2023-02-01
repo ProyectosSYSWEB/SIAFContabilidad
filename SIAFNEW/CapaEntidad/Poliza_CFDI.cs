@@ -7,6 +7,11 @@ namespace CapaEntidad
 {
     public class Poliza_CFDI
     {
+        public Poliza_CFDI()
+        {
+            GrupoPartidas = new HashSet<Poliza_Partida>();
+        }
+
         private int _IdPoliza_CFDI;
         public int IdPoliza_CFDI
         {
@@ -205,6 +210,9 @@ namespace CapaEntidad
         }
 
         //private List<Poliza_Partida> _lstPartidas=null;
+        //public ICollection<Poliza_Partida> lstPolizaPartidas { get; private set; }
+        public ICollection<Poliza_Partida> GrupoPartidas { get; set; }
+        public ICollection<Poliza_Partida> listPolizaPartidas { get; set; }
         public List<Poliza_Partida> lstPolizaPartidas { get; set; }
         public List<Comun> lstPartidas {get; set;}
         public Poliza_Partida objPartida { get; set; }
@@ -273,6 +281,13 @@ namespace CapaEntidad
 
     public class Poliza_Partida
     {
+        public Poliza_Partida( string vPartida, string vPartida_Descripcion, double vImporte_Partida )
+        {
+            this.Partida = vPartida;
+            this.Importe_Partida = vImporte_Partida;
+            this.Partida_Descripcion = vPartida_Descripcion;
+        }
+
         public double _Importe_Partida;
         public double Importe_Partida
         {

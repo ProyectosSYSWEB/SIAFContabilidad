@@ -15,6 +15,13 @@ namespace CapaEntidad
         private string _EtiquetaCinco;
         private string _EtiquetaSeis;
         private string _Etiqueta;
+        private double _Numerico;
+
+        public double Numerico
+        {
+            get { return _Numerico; }
+            set { _Numerico = value; }
+        }
 
         public string Etiqueta
         {

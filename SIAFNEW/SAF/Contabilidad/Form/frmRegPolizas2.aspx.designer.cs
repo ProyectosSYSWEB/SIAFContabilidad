@@ -2445,6 +2445,15 @@ namespace SAF.Form
         protected global::System.Web.UI.WebControls.TextBox lblConceptos;
 
         /// <summary>
+        /// Control UpdatePanel26.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel26;
+
+        /// <summary>
         /// Control ddlCatPartidas.
         /// </summary>
         /// <remarks>
@@ -2461,6 +2470,24 @@ namespace SAF.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtImpPartida;
+
+        /// <summary>
+        /// Control UpdatePanel19.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel19;
+
+        /// <summary>
+        /// Control linkBttnGuardarPart.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnGuardarPart;
 
         /// <summary>
         /// Control UpdatePanel25.
@@ -2481,21 +2508,12 @@ namespace SAF.Form
         protected global::System.Web.UI.WebControls.GridView grdPartidas;
 
         /// <summary>
-        /// Control UpdatePanel19.
+        /// Control UpdatePanel27.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel19;
-
-        /// <summary>
-        /// Control linkBttnGuardarPart.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton linkBttnGuardarPart;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel27;
     }
 }
