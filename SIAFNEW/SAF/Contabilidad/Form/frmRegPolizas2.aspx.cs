@@ -240,6 +240,7 @@ namespace SAF.Form
             try
             {
                 double TotalPagos;
+                double totPartidas;
                 DataTable dt = new DataTable();
                 grvPolizaCFDI.DataSource = ListPolizaCFDI;
                 grvPolizaCFDI.DataBind();
@@ -262,6 +263,12 @@ namespace SAF.Form
                             ddlPartidasPoliza.DataValueField = "Partida";
                             ddlPartidasPoliza.DataTextField = "Partida_Descripcion";
                             ddlPartidasPoliza.DataBind();
+
+                            Label lblTotPartidas = row.Cells[3].FindControl("lblTotPartidas") as Label;
+                            totPartidas = ListPolizaCFDI[row.RowIndex].GrupoPartidas.Sum(item => Convert.ToDouble(item.Importe_Partida));
+                            lblTotPartidas.Text = string.Format("{0:c}", Convert.ToString(totPartidas));
+
+
                         }
 
                     }
@@ -2936,7 +2943,7 @@ namespace SAF.Form
                 if (Session["PolizasCFDI"] != null)
                     lstPolizasCfdi = (List<Poliza_CFDI>)Session["PolizasCFDI"];
 
-                if (lstPolizasCfdi[row.RowIndex].listPolizaPartidas != null)
+                if (lstPolizasCfdi[row.RowIndex].GrupoPartidas.Count>0)
                 {
                     grdPartidas.DataSource = lstPolizasCfdi[row.RowIndex].GrupoPartidas;
                     grdPartidas.DataBind();
@@ -3119,17 +3126,33 @@ namespace SAF.Form
             List<Poliza_Partida> lstPartidas=new List<Poliza_Partida>();
             lstPolizasCFDI = (List<Poliza_CFDI>)Session["PolizasCFDI"];
             int fila = e.RowIndex;
-
+            double totPartidas = 0;
             try
             {
-                lstGPartidas = lstPolizasCFDI[0].GrupoPartidas;//.Remove(fila);
+                lstGPartidas = lstPolizasCFDI[grvPolizaCFDI.SelectedRow.RowIndex].GrupoPartidas;//.Remove(fila);
                 lstPartidas = (List<Poliza_Partida>)lstGPartidas;
                 //lstPartidas =(List<Poliza_Partida>)lstPolizasCFDI[fila].GrupoPartidas;
                 lstPartidas.RemoveAt(fila);
                 //(List<Poliza_Partida>)lstPolizasCFDI.GrupoPartidas = lstPartidasPoliza;
 
                 Session["PolizasCFDI"] = lstPolizasCFDI;
-                CargarGridPolizaCFDI(lstPolizasCFDI);
+
+                DropDownList ddlPartidasPoliza = (DropDownList)(grvPolizaCFDI.SelectedRow.Cells[2].FindControl("ddlPartidasPoliza"));
+
+                ddlPartidasPoliza.DataSource = lstPolizasCFDI[grvPolizaCFDI.SelectedRow.RowIndex].GrupoPartidas;
+                ddlPartidasPoliza.DataValueField = "Partida";
+                ddlPartidasPoliza.DataTextField = "Partida_Descripcion";
+                ddlPartidasPoliza.DataBind();
+
+                Label lblTotPartidas = grvPolizaCFDI.SelectedRow.Cells[3].FindControl("lblTotPartidas") as Label;
+                totPartidas = lstPolizasCFDI[grvPolizaCFDI.SelectedRow.RowIndex].GrupoPartidas.Sum(item => Convert.ToDouble(item.Importe_Partida));
+                lblTotPartidas.Text = string.Format("{0:c}", Convert.ToString(totPartidas));
+
+                grdPartidas.DataSource = lstPolizasCFDI[grvPolizaCFDI.SelectedRow.RowIndex].GrupoPartidas;
+                grdPartidas.DataBind();
+
+
+                //CargarGridPolizaCFDI(lstPolizasCFDI);
             }
 
             catch (Exception ex)

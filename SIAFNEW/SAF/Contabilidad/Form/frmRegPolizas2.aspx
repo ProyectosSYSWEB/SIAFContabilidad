@@ -1580,7 +1580,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </ItemTemplate>
-                                                                    <ItemStyle Width="250px" />
+                                                                    <ItemStyle Width="250px" VerticalAlign="Top" />
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField HeaderText="Tot Partida(s)">
                                                                     <ItemTemplate>
@@ -1625,25 +1625,25 @@
                                                                 </asp:BoundField>
                                                                 <asp:TemplateField>
                                                                     <ItemTemplate>
-                                                                        <asp:LinkButton ID="linkBttnVer" runat="server" OnClick="linkBttnVer_Click">Conceptos</asp:LinkButton>
+                                                                        <asp:LinkButton ID="linkBttnVer" runat="server" OnClick="linkBttnVer_Click" CssClass="btn btn-grey">Conceptos</asp:LinkButton>
                                                                     </ItemTemplate>
                                                                     <ItemStyle VerticalAlign="Top" />
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField>
                                                                     <ItemTemplate>
-                                                                        <asp:HyperLink ID="linkArchivoXML" runat="server" NavigateUrl='<%# Bind("Ruta_XML") %>' Target="_blank">XML</asp:HyperLink>
+                                                                        <asp:HyperLink ID="linkArchivoXML" runat="server" NavigateUrl='<%# Bind("Ruta_XML") %>' Target="_blank" CssClass="btn btn-grey">XML</asp:HyperLink>
                                                                     </ItemTemplate>
                                                                     <ItemStyle VerticalAlign="Top" />
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField>
                                                                     <ItemTemplate>
-                                                                        <asp:HyperLink ID="linkArchivoPDF" runat="server" NavigateUrl='<%# Bind("Ruta_PDF") %>' Target="_blank">PDF</asp:HyperLink>
+                                                                        <asp:HyperLink ID="linkArchivoPDF" runat="server" NavigateUrl='<%# Bind("Ruta_PDF") %>' CssClass="btn btn-grey" Target="_blank">PDF</asp:HyperLink>
                                                                     </ItemTemplate>
                                                                     <ItemStyle VerticalAlign="Top" />
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField ShowHeader="False">
                                                                     <ItemTemplate>
-                                                                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" Text="Eliminar" OnClientClick="return confirm('¿Desea eliminar el registro?');"></asp:LinkButton>
+                                                                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" CssClass="btn btn-danger" Text="Eliminar" OnClientClick="return confirm('¿Desea eliminar el registro?');"></asp:LinkButton>
                                                                     </ItemTemplate>
                                                                     <ItemStyle VerticalAlign="Top" />
                                                                 </asp:TemplateField>
@@ -2159,7 +2159,7 @@
                         <div class="col-md-2">
                             <asp:UpdatePanel ID="UpdatePanel19" runat="server">
                                 <ContentTemplate>
-                                    <asp:LinkButton ID="linkBttnGuardarPart" runat="server" CssClass="btn btn-primary" OnClick="linkBttnGuardarPart_Click">Agregar</asp:LinkButton>
+                                    <asp:LinkButton ID="linkBttnGuardarPart" runat="server" CssClass="btn btn-primary" OnClick="linkBttnGuardarPart_Click">Guardar</asp:LinkButton>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
@@ -2188,7 +2188,7 @@
                                             </asp:TemplateField>
                                             <asp:TemplateField ShowHeader="False">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-danger" CausesValidation="False" CommandName="Delete" Text="Eliminar"></asp:LinkButton>
+                                                    <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-danger" CausesValidation="False" CommandName="Delete" Text="Eliminar" OnClientClick="return confirm('¿Desea eliminar la Partida?');"></asp:LinkButton>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                         </Columns>
