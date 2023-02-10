@@ -33,6 +33,13 @@ namespace SAF.Contabilidad.Form
                 lblTitulo.Text = "Pólizas de Finánzas";
             else
                 lblTitulo.Text = "Acceso denegado";
+
+
+
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridPolizas", "Polizas();", true);
+
+
         }
 
         protected void linkBttnGenPolizas_Click(object sender, EventArgs e)
@@ -119,6 +126,39 @@ namespace SAF.Contabilidad.Form
                 Verificador = ex.Message;
                 CNComun.VerificaTextoMensajeError(ref Verificador);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+            }
+        }
+
+        protected void grvPolizas_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            //lblMjErrorOficio.Text = string.Empty;
+            Verificador = string.Empty;
+            try
+            {
+                int fila = e.RowIndex;
+                ObjPoliza.IdPoliza = Convert.ToInt32(grvPolizas.Rows[fila].Cells[0].Text);
+                CNPoliza.PolizaEliminar(ObjPoliza, ref Verificador);
+
+                if (Verificador == "0")
+                    CargarGrid();
+                else
+                {
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    //lblMjErrorOficio.Text = Verificador;
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+
+                }
+                //modalOficios.Show();
+            }
+            catch (Exception ex)
+            {
+                //lblError.Text = ex.Message;
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+
+                //lblMjErrorOficio.Text = Verificador;
+                //modalOficios.Show();
             }
         }
     }
