@@ -128,6 +128,19 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void PolizasCjaConsultaGrid(Poliza objPoliza, ref List<Poliza> List)
+        {
+            try
+            {
+                CD_Poliza CDPasivo = new CD_Poliza();
+                CDPasivo.PolizasCjaConsultaGrid(objPoliza, ref List);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void PasivoInsertar(List<Pasivo> lstPasivos, ref string Verificador)
         {
             try

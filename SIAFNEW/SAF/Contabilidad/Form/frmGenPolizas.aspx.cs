@@ -92,16 +92,33 @@ namespace SAF.Contabilidad.Form
             {
                 List<Poliza> List = new List<Poliza>();
                 ObjPoliza.Ejercicio = Convert.ToInt32(SesionUsu.Usu_Ejercicio);
-                 if (SesionUsu.Usu_Rep == "DEPTOFIN")
-                    ObjPoliza.Centro_contable = "72104";
-                else if (SesionUsu.Usu_Rep == "CJGRAL")
-                    ObjPoliza.Centro_contable = "72103";
+                ObjPoliza.Mes_anio = ddlMes.SelectedValue + SesionUsu.Usu_Ejercicio.Substring(2);
+                CNPoliza.PolizasCjaConsultaGrid(ObjPoliza, ref List);
+                // if (SesionUsu.Usu_Rep == "DEPTOFIN")
+                //    ObjPoliza.Centro_contable = "72104";
+                //else if (SesionUsu.Usu_Rep == "CJGRAL")
+                //    ObjPoliza.Centro_contable = "72103";
 
                 return List;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
+            }
+        }
+
+        protected void ddlMes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Verificador = string.Empty;
+            try
+            {
+                CargarGrid();
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
             }
         }
     }

@@ -1576,7 +1576,7 @@
                                                                                 </asp:UpdatePanel>
                                                                             </div>
                                                                             <div class="col-md-2">
-                                                                                <asp:LinkButton ID="linkBttnAddPartidas" runat="server" CssClass="btn btn-info" OnClick="linkBttnAddPartidas_Click">Ver</asp:LinkButton>
+                                                                                <asp:LinkButton ID="linkBttnVerPartidas" runat="server" CssClass="btn btn-info" OnClick="linkBttnVerPartidas_Click"><i class="fa fa-plus" aria-hidden="true"></i></asp:LinkButton>
                                                                             </div>
                                                                         </div>
                                                                     </ItemTemplate>
@@ -1678,13 +1678,28 @@
                                                 <%--</div>--%>
                                             </div>
                                         </div>
+                                        <hr />
                                         <div class="row">
-                                            <div class="col-md-10 text-right" style="font-weight: bold; font-size: 20px">TOTAL:</div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-6"></div>
+                                            <div class="col-md-3 text-right">
+                                                <asp:UpdatePanel ID="UpdatePanel28" runat="server">
+                                                    <ContentTemplate>
+                                                        <div class="input-group  mb-3">
+                                                            <span class="input-group-text font-weight-bold" id="basic-addon1">TOTAL PARTIDA(S)</span>                                                                                                            
+                                                        <asp:Label ID="lblGranTotalPart" runat="server" Text="0" CssClass="form-control" Font-Size="20px" Font-Bold="True"></asp:Label>
+                                                            <asp:Label ID="lblGranTotalPartInt" runat="server" Text="0" Visible="False"></asp:Label>
+                                                        </div>
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
+                                            </div>
+                                            <div class="col-md-3 text-right">
                                                 <asp:UpdatePanel ID="updPnlTotales" runat="server">
                                                     <ContentTemplate>
-                                                        <asp:Label ID="lblGranTotal" runat="server" Text="0" Font-Size="20px" Font-Bold="True"></asp:Label>
-                                                        <asp:Label ID="lblGranTotalInt" runat="server" Text="0" Visible="False"></asp:Label>
+                                                        <div class="input-group  mb-3">
+                                                            <span class="input-group-text font-weight-bold" id="basic-addon2">TOTAL CFDI(S)</span>                                                                                                            
+                                                        <asp:Label ID="lblGranTotal" runat="server" Text="0" CssClass="form-control" Font-Size="20px" Font-Bold="True"></asp:Label>
+                                                            <asp:Label ID="lblGranTotalInt" runat="server" Text="0" Visible="False"></asp:Label>
+                                                        </div>
                                                     </ContentTemplate>
                                                 </asp:UpdatePanel>
                                             </div>
@@ -2146,7 +2161,7 @@
                         <div class="col-md-10">
                             <asp:UpdatePanel ID="UpdatePanel26" runat="server">
                                 <ContentTemplate>
-                                    <asp:DropDownList ID="ddlCatPartidas" runat="server" CssClass="form-control" AutoPostBack="true"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlCatPartidas" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlCatPartidas_SelectedIndexChanged"></asp:DropDownList>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
@@ -2154,12 +2169,16 @@
                     <div class="row">
                         <div class="col-md-2">Importe</div>
                         <div class="col-md-3">
-                            <asp:TextBox ID="txtImpPartida" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:UpdatePanel ID="updPnlPartida" runat="server">
+                                <ContentTemplate>
+                                    <asp:TextBox ID="txtImpPartida" runat="server" CssClass="form-control"></asp:TextBox>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                         </div>
                         <div class="col-md-2">
                             <asp:UpdatePanel ID="UpdatePanel19" runat="server">
                                 <ContentTemplate>
-                                    <asp:LinkButton ID="linkBttnGuardarPart" runat="server" CssClass="btn btn-primary" OnClick="linkBttnGuardarPart_Click">Guardar</asp:LinkButton>
+                                    <asp:LinkButton ID="linkBttnAgregarPart" runat="server" CssClass="btn btn-grey" OnClick="linkBttnAgregarPart_Click">Agregar</asp:LinkButton>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
@@ -2207,8 +2226,8 @@
                 <div class="modal-footer">
                     <asp:UpdatePanel ID="UpdatePanel27" runat="server">
                         <ContentTemplate>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <%--<asp:LinkButton ID="linkBttnGuardarPartidas" runat="server" OnClick="linkBttnGuardarPartidas_Click">Guardar</asp:LinkButton>--%>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal">Cerrar</button>
+                            <asp:LinkButton ID="linkBttnGuardarPartidas" runat="server" CssClass="btn btn-primary" OnClick="linkBttnGuardarPartidas_Click">Guardar</asp:LinkButton>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -2324,12 +2343,12 @@
 
         function RequeridoNumFactura(source, args) {
             var v = document.getElementById('<%=ddlTipo_Gasto.ClientID%>').value;
-        if (v == 'COMISIONES') {
-            args.IsValid = true;  // field is empty
-        }
-        else {
-            args.IsValid = false;
-        }
+            if (v == 'COMISIONES') {
+                args.IsValid = true;  // field is empty
+            }
+            else {
+                args.IsValid = false;
+            }
 
 
             <%--var TipoGasto = $('#<%= ddlTipo_Gasto.ClientID %>').val();

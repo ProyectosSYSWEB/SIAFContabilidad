@@ -162,6 +162,46 @@ namespace CapaDatos
             }
         }
 
+        public void PolizasCjaConsultaGrid(Poliza objPoliza, ref List<Poliza> List)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+                OracleDataReader dr = null;
+                String[] Parametros = { "P_Mes_Anio" };
+                String[] Valores = { objPoliza.Mes_anio };
+                cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Polizas_Caja", ref dr, Parametros, Valores);
+
+
+                while (dr.Read())
+                {
+                    objPoliza = new Poliza();
+                    objPoliza.IdPoliza = Convert.ToInt32(dr.GetValue(0));
+                    objPoliza.Centro_contable = Convert.ToString(dr.GetValue(1));
+                    objPoliza.Numero_poliza = Convert.ToString(dr.GetValue(2));
+                    objPoliza.Cedula_numero = Convert.ToString(dr.GetValue(3));
+                    objPoliza.Tipo = Convert.ToString(dr.GetValue(4));
+                    objPoliza.Fecha = Convert.ToString(dr.GetValue(5));
+                    objPoliza.Status = Convert.ToString(dr.GetValue(6));
+                    objPoliza.Concepto = Convert.ToString(dr.GetValue(7));
+                    objPoliza.Tot_Cargo = Convert.ToDouble(dr.GetValue(8));
+                    objPoliza.Tot_Abono = Convert.ToDouble(dr.GetValue(9));
+                    List.Add(objPoliza);
+                }
+
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+
         public void GenPolizasAuto(int Ejercicio, string Mes, string Tipo, ref int TotalPolizasGen, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();

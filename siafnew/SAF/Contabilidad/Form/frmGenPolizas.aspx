@@ -24,7 +24,7 @@
                 Mes
             </div>
             <div class="col-md-2">
-                <asp:DropDownList ID="ddlMes" runat="server" CssClass="form-control" ValidationGroup="valMes">
+                <asp:DropDownList ID="ddlMes" runat="server" CssClass="form-control" ValidationGroup="valMes" AutoPostBack="true" OnSelectedIndexChanged="ddlMes_SelectedIndexChanged">
                     <asp:ListItem Value="00">--Seleccionar--</asp:ListItem>
                     <asp:ListItem Value="01">Enero</asp:ListItem>
                     <asp:ListItem Value="02">Febrero</asp:ListItem>
@@ -79,7 +79,20 @@
         <hr />
         <div class="row">
             <div class="col">
-                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <asp:UpdateProgress ID="updPgrPolizas" runat="server"
+                                    AssociatedUpdatePanelID="updPnlPolizas">
+                                    <ProgressTemplate>
+                                        <asp:Image ID="Image2q" runat="server"
+                                            AlternateText="Espere un momento, por favor.." Height="30px"
+                                            ImageUrl="~/images/ajax_loader_gray_512.gif"
+                                            ToolTip="Espere un momento, por favor.." Width="30px" />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                </div>
+            </div>
+        <div class="row">
+            <div class="col">
+                <asp:UpdatePanel ID="updPnlPolizas" runat="server">
                     <ContentTemplate>
                         <asp:GridView ID="grvPolizas" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%">
                             <Columns>
@@ -92,8 +105,16 @@
                                 <asp:BoundField HeaderText="CONCEPTO" DataField="CONCEPTO" />
                                 <asp:BoundField HeaderText="CARGO" DataField="TOT_CARGO" />
                                 <asp:BoundField HeaderText="ABONO" DataField="TOT_ABONO" />
-                                <asp:CommandField ShowSelectButton="True" />
-                                <asp:CommandField ShowDeleteButton="True" />
+                                <asp:TemplateField ShowHeader="False">
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-grey" CausesValidation="False" CommandName="Select">Ver Póliza</asp:LinkButton>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField ShowHeader="False">
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="LinkButton2" runat="server" CssClass="btn btn-danger" CausesValidation="False" CommandName="Delete">Eliminar</asp:LinkButton>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                             </Columns>
                             <FooterStyle CssClass="enc" />
                             <PagerStyle CssClass="enc" HorizontalAlign="Center" />
@@ -106,4 +127,29 @@
             </div>
         </div>
     </div>
+
+
+    <script type="text/javascript">        
+        function Polizas() {
+            $('#<%= grvPolizas.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvPolizas.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": true
+                //"columns": [
+                //    null,
+                //    null,
+                //    null,
+                //    null,
+                //    null,
+                //    null,
+                //    null,
+                //    null,
+                //    null,
+                //    null,
+                //    null,
+                //    null,
+                //    null
+                //]
+            })
+        };
+    </script>
 </asp:Content>
