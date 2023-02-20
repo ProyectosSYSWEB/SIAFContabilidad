@@ -53,6 +53,20 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+
+        public void EliminarPolizasAuto(int Ejercicio, string Mes, string Tipo, ref string Verificador)
+        {
+            try
+            {
+                CD_Poliza CDPoliza = new CD_Poliza();
+                CDPoliza.EliminarPolizasAuto(Ejercicio, Mes, Tipo, ref Verificador);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void PolizaConsultaGrid_Min(ref Poliza ObjPoliza, String FechaInicial, String FechaFinal, String Buscar, String TipoUsu, ref List<Poliza> List)
         {
             try

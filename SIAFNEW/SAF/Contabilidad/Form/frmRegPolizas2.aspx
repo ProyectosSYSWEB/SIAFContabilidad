@@ -362,6 +362,7 @@
                                                 <asp:ListItem Value="10">Octubre</asp:ListItem>
                                                 <asp:ListItem Value="11">Noviembre</asp:ListItem>
                                                 <asp:ListItem Value="12">Diciembre</asp:ListItem>
+                                                <asp:ListItem Value="13">Cierre</asp:ListItem>
                                             </asp:DropDownList>
                                             <br />
                                             <asp:Label ID="lblRFecha_Ini" runat="server" ForeColor="Red"></asp:Label>
@@ -389,6 +390,7 @@
                                                 <asp:ListItem Value="10">Octubre</asp:ListItem>
                                                 <asp:ListItem Value="11">Noviembre</asp:ListItem>
                                                 <asp:ListItem Value="12">Diciembre</asp:ListItem>
+                                                <asp:ListItem Value="13">Cierre</asp:ListItem>
                                             </asp:DropDownList>
                                             <br />
                                             <asp:Label ID="lblRFecha_Fin" runat="server" ForeColor="Red"></asp:Label>
@@ -1685,8 +1687,8 @@
                                                 <asp:UpdatePanel ID="UpdatePanel28" runat="server">
                                                     <ContentTemplate>
                                                         <div class="input-group  mb-3">
-                                                            <span class="input-group-text font-weight-bold" id="basic-addon1">TOTAL PARTIDA(S)</span>                                                                                                            
-                                                        <asp:Label ID="lblGranTotalPart" runat="server" Text="0" CssClass="form-control" Font-Size="20px" Font-Bold="True"></asp:Label>
+                                                            <span class="input-group-text font-weight-bold" id="basic-addon1">TOTAL PARTIDA(S)</span>
+                                                            <asp:Label ID="lblGranTotalPart" runat="server" Text="0" CssClass="form-control" Font-Size="20px" Font-Bold="True"></asp:Label>
                                                             <asp:Label ID="lblGranTotalPartInt" runat="server" Text="0" Visible="False"></asp:Label>
                                                         </div>
                                                     </ContentTemplate>
@@ -1696,8 +1698,8 @@
                                                 <asp:UpdatePanel ID="updPnlTotales" runat="server">
                                                     <ContentTemplate>
                                                         <div class="input-group  mb-3">
-                                                            <span class="input-group-text font-weight-bold" id="basic-addon2">TOTAL CFDI(S)</span>                                                                                                            
-                                                        <asp:Label ID="lblGranTotal" runat="server" Text="0" CssClass="form-control" Font-Size="20px" Font-Bold="True"></asp:Label>
+                                                            <span class="input-group-text font-weight-bold" id="basic-addon2">TOTAL CFDI(S)</span>
+                                                            <asp:Label ID="lblGranTotal" runat="server" Text="0" CssClass="form-control" Font-Size="20px" Font-Bold="True"></asp:Label>
                                                             <asp:Label ID="lblGranTotalInt" runat="server" Text="0" Visible="False"></asp:Label>
                                                         </div>
                                                     </ContentTemplate>

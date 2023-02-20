@@ -24,27 +24,39 @@ namespace SAF.Contabilidad.Form
         protected void Page_Load(object sender, EventArgs e)
         {
             SesionUsu = (Sesion)Session["Usuario"];
-            if (Request.QueryString["P_Tipo"] != null)
-                SesionUsu.Usu_Rep = Request.QueryString["P_Tipo"];
-
-            if (SesionUsu.Usu_Rep == "CJGRAL")
-                lblTitulo.Text = "Pólizas de Caja General";
-            else if(SesionUsu.Usu_Rep == "DEPTOFIN")
-                lblTitulo.Text = "Pólizas de Finánzas";
-            else
-                lblTitulo.Text = "Acceso denegado";
+            if (!IsPostBack)            
+                Inicializar();
 
 
+            //    if (Request.QueryString["P_Tipo"] != null)
+            //    SesionUsu.Usu_Rep = Request.QueryString["P_Tipo"];
+            //else
+            //    SesionUsu.Usu_Rep = string.Empty;
 
+            //if (SesionUsu.Usu_Rep == "CJGRAL")
+            //    lblTitulo.Text = "Pólizas de Caja General";
+            //else if(SesionUsu.Usu_Rep == "DEPTOFIN")
+            //    lblTitulo.Text = "Pólizas de Finánzas";
+        
 
             ScriptManager.RegisterStartupScript(this, GetType(), "GridPolizas", "Polizas();", true);
 
 
         }
-
+        private void Inicializar()
+        {
+            CargarGrid();
+        }
         protected void linkBttnGenPolizas_Click(object sender, EventArgs e)
         {
             int TotalPolizasGen = 0;
+            //LinkButton cbi = (LinkButton)(sender);
+            //GridViewRow row = (GridViewRow)cbi.NamingContainer;
+
+            //LinkButton linkBttnAgregarReg = (LinkButton)(grvPolizas .HeaderRow.Cells[11].FindControl("linkBttnAgregarReg0"));
+
+
+            //grvPolizas.SelectedIndex = row.RowIndex; 
             Verificador = string.Empty;
             string ss=SesionUsu.Usu_Ejercicio.Substring(2, 2);
             string MesAnio =  ddlMes.SelectedValue+SesionUsu.Usu_Ejercicio.Substring(2, 2);
@@ -56,7 +68,6 @@ namespace SAF.Contabilidad.Form
                 {
                     lblMsjError.Text = "Se han generado " + TotalPolizasGen + " pólizas.";
                     CargarGrid();
-                    //ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'Se han generado "+TotalPolizasGen+" pólizas.');", true);
                 }
                 else
                 {
@@ -148,17 +159,53 @@ namespace SAF.Contabilidad.Form
                     ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
 
                 }
-                //modalOficios.Show();
             }
             catch (Exception ex)
             {
-                //lblError.Text = ex.Message;
                 Verificador = ex.Message;
                 CNComun.VerificaTextoMensajeError(ref Verificador);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+            }
+        }
 
-                //lblMjErrorOficio.Text = Verificador;
-                //modalOficios.Show();
+        protected void linkBttnVerPolizas_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CargarGrid();
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+            }
+        }
+
+        protected void linkBttnEliminarTodo_Click(object sender, EventArgs e)
+        {
+            Verificador = string.Empty;
+            string MesAnio = ddlMes.SelectedValue + SesionUsu.Usu_Ejercicio.Substring(2, 2);
+            try
+            {
+                CNPoliza.EliminarPolizasAuto(Convert.ToInt32(SesionUsu.Usu_Ejercicio), MesAnio, ddlTipo.SelectedValue, ref Verificador);
+
+                if (Verificador == "0")
+                {
+                    CargarGrid();
+                }
+                else
+                {
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
             }
         }
     }

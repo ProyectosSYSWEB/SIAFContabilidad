@@ -1973,7 +1973,7 @@ namespace SAF.Form
                     //Label lblTot = (Label)grvPolizaCFDI.FooterRow.FindControl("lblGranTotalInt");
                     //double lblTotInt = Convert.ToDouble(lblTot.Text);
                     double lblTotInt = Convert.ToDouble(lblGranTotalInt.Text);
-                    //lblTotInt = Math.Ceiling(lblTotInt);
+                    double lblTotPartInt = Convert.ToDouble(lblGranTotalPartInt.Text);
                     objPolizas.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
                     CNPoliza.ValidarTotal(ref objPolizas, ref Verificador);
 
@@ -1981,43 +1981,50 @@ namespace SAF.Form
                     total = Convert.ToDouble(hddnTotCheque.Value);
                     total_5131 = Convert.ToDouble(hddnTotCheque.Value);
                     total_5131 = total_5131 - 10;
-                    if (objPolizas.ValidaTotal == "S" && (grvPolizas.SelectedRow.Cells[4].Text == "Egreso" || grvPolizas.SelectedRow.Cells[4].Text == "Diario") && (lblTotInt < total_5131) && grvPolizas.SelectedRow.Cells[21].Text.ToUpper() == "FALSE")
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, 'El total de los CFDI´s es menor al total del cheque, favor de verificar.');", true);
 
-                    else if (objPolizas.ValidaTotal == "N" && (grvPolizas.SelectedRow.Cells[4].Text == "Egreso" || grvPolizas.SelectedRow.Cells[4].Text == "Diario") && (lblTotInt < total) && grvPolizas.SelectedRow.Cells[21].Text.ToUpper() == "FALSE")
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, 'El total de los CFDI´s es menor al total del cheque, favor de verificar.');", true);
-
+                    if (lblTotPartInt < lblTotInt)
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, 'El total de la(s) partida(s) es menor al total de los cfdis, favor de verificar.');", true);
                     else
                     {
 
-                        if (Session["PolizasCFDI"] != null)
-                            lstPolizasCFDI = (List<Poliza_CFDI>)Session["PolizasCFDI"];
+                        if (objPolizas.ValidaTotal == "S" && (grvPolizas.SelectedRow.Cells[4].Text == "Egreso" || grvPolizas.SelectedRow.Cells[4].Text == "Diario") && (lblTotInt < total_5131) && grvPolizas.SelectedRow.Cells[21].Text.ToUpper() == "FALSE")
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, 'El total de los CFDI´s es menor al total del cheque, favor de verificar.');", true);
 
+                        else if (objPolizas.ValidaTotal == "N" && (grvPolizas.SelectedRow.Cells[4].Text == "Egreso" || grvPolizas.SelectedRow.Cells[4].Text == "Diario") && (lblTotInt < total) && grvPolizas.SelectedRow.Cells[21].Text.ToUpper() == "FALSE")
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, 'El total de los CFDI´s es menor al total del cheque, favor de verificar.');", true);
 
-                        ObjPolizaCFDI.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
-                        CNPolizaCFDI.PolizaCFDIPartidaEditar(ObjPolizaCFDI, lstPolizasCFDI, ref Verificador);
-                        //CNPolizaCFDI.PolizaCFDIInsertar(ObjPolizaCFDI, lstPolizasCFDI, ref Verificador);
-
-                        if (Verificador == "0")
-                        {
-                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'Los datos han sido agregados correctamente.');", true);
-                            Copiar_a_Adjuntos(lstPolizasCFDI);
-                            SesionUsu.Editar = -1;
-                            MultiView1.ActiveViewIndex = 0;
-                            CargarGrid(0);
-                            filaCentroContable.Visible = true;
-                            filaFechasBusqueda.Visible = true;
-                            filaBusqueda.Visible = true;
-                            pnlPrincipal.Visible = true;
-                        }
                         else
                         {
-                            CNPolizaCFDI.EliminarCFDIEditar(Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text), ref Verificador2);
-                            CNComun.VerificaTextoMensajeError(ref Verificador);
-                            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + " " + Verificador2 + "');", true);
+
+                            if (Session["PolizasCFDI"] != null)
+                                lstPolizasCFDI = (List<Poliza_CFDI>)Session["PolizasCFDI"];
+
+
+                            ObjPolizaCFDI.IdPoliza = Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text);
+                            CNPolizaCFDI.PolizaCFDIPartidaEditar(ObjPolizaCFDI, lstPolizasCFDI, ref Verificador);
+                            //CNPolizaCFDI.PolizaCFDIInsertar(ObjPolizaCFDI, lstPolizasCFDI, ref Verificador);
+
+                            if (Verificador == "0")
+                            {
+                                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(1, 'Los datos han sido agregados correctamente.');", true);
+                                Copiar_a_Adjuntos(lstPolizasCFDI);
+                                SesionUsu.Editar = -1;
+                                MultiView1.ActiveViewIndex = 0;
+                                CargarGrid(0);
+                                filaCentroContable.Visible = true;
+                                filaFechasBusqueda.Visible = true;
+                                filaBusqueda.Visible = true;
+                                pnlPrincipal.Visible = true;
+                            }
+                            else
+                            {
+                                CNPolizaCFDI.EliminarCFDIEditar(Convert.ToInt32(grvPolizas.SelectedRow.Cells[0].Text), ref Verificador2);
+                                CNComun.VerificaTextoMensajeError(ref Verificador);
+                                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + " " + Verificador2 + "');", true);
+
+                            }
 
                         }
-
                     }
                 }
                 else

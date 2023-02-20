@@ -46,13 +46,6 @@
                          </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-            <div class="col-md-2">
-                <asp:UpdatePanel ID="updPnlGenPolizas" runat="server">
-                    <ContentTemplate>
-                        <asp:LinkButton ID="linkBttnGenPolizas" runat="server" CssClass="btn btn-primary" OnClick="linkBttnGenPolizas_Click" ValidationGroup="valMes">Generar Pólizas</asp:LinkButton>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </div>
         </div>
         <div class="row">
             <div class="col-md-4"></div>
@@ -61,7 +54,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col text-center">
                 <asp:UpdateProgress ID="updPgrMes" runat="server"
                     AssociatedUpdatePanelID="updPnlMes">
                     <ProgressTemplate>
@@ -71,20 +64,7 @@
                     </ProgressTemplate>
                 </asp:UpdateProgress>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <asp:UpdateProgress ID="updPgrGenPolizas" runat="server"
-                    AssociatedUpdatePanelID="updPnlGenPolizas">
-                    <ProgressTemplate>
-                        <span>
-                            <img height="26" src="https://www.sysweb.unach.mx/Ingresos/Imagenes/load.gif" width="222" />
-                        </span><span class="loading">Generando pólizas…
-                        </span>
-                    </ProgressTemplate>
-                </asp:UpdateProgress>
-            </div>
-        </div>
+        </div>        
         <div class="row">
             <div class="col">
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
@@ -96,7 +76,7 @@
         </div>
         <hr />
         <div class="row">
-            <div class="col">
+            <div class="col text-center">
                 <asp:UpdateProgress ID="updPgrPolizas" runat="server"
                                     AssociatedUpdatePanelID="updPnlPolizas">
                                     <ProgressTemplate>
@@ -112,7 +92,7 @@
             <div class="col">
                 <asp:UpdatePanel ID="updPnlPolizas" runat="server">
                     <ContentTemplate>
-                        <asp:GridView ID="grvPolizas" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" OnRowDeleting="grvPolizas_RowDeleting">
+                        <asp:GridView ID="grvPolizas" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" OnRowDeleting="grvPolizas_RowDeleting" EmptyDataText="No se encontraron pólizas.">
                             <Columns>
                                 <asp:BoundField HeaderText="ID" DataField="IdPoliza"  />
                                 <asp:BoundField HeaderText="CC" DataField="CENTRO_CONTABLE" />
@@ -124,14 +104,22 @@
                                 <asp:BoundField HeaderText="CARGO" DataField="TOT_CARGO" DataFormatString="{0:c}" />
                                 <asp:BoundField HeaderText="ABONO" DataField="TOT_ABONO" DataFormatString="{0:c}" />
                                 <asp:TemplateField ShowHeader="False">
+                                    <HeaderTemplate>
+                                        <asp:LinkButton ID="linkBttnGenPolizas" runat="server" CssClass="btn btn-primary" OnClick="linkBttnGenPolizas_Click">Generar Pólizas</asp:LinkButton>
+                                    </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-grey" CausesValidation="False" CommandName="Select">Ver Póliza</asp:LinkButton>
+                                        <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn_grid btn-mdb-color" Width="100%"  CausesValidation="False" CommandName="Select"><i class="fa fa-file" aria-hidden="true"></i> Ver Póliza</asp:LinkButton>
                                     </ItemTemplate>
+                                    <ItemStyle Width="8%" />
                                 </asp:TemplateField>
                                 <asp:TemplateField ShowHeader="False">
+                                    <HeaderTemplate>
+                                        <asp:LinkButton ID="linkBttnEliminarTodo" runat="server" CssClass="btn btn-danger" OnClientClick="return confirm('¿Desea eliminar TODAS LAS PÓLIZAS?');" OnClick="linkBttnEliminarTodo_Click">Borrar Todo</asp:LinkButton>
+                                    </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="linkBttnEliminar" runat="server" CssClass="btn btn-danger" CommandName="Delete" Width="100%" OnClientClick="return confirm('¿Desea eliminar la Póliza?');" Visible='<%# Bind("Opcion_Eliminar") %>'>Borrar</asp:LinkButton>
+                                        <asp:LinkButton ID="linkBttnEliminar" runat="server" CssClass="btn btn_grid btn-mdb-color" CommandName="Delete" Width="100%" OnClientClick="return confirm('¿Desea eliminar la Póliza?');"><i class="fa fa-trash" aria-hidden="true"></i> Borrar</asp:LinkButton>
                                     </ItemTemplate>
+                                    <ItemStyle Width="8%" />
                                 </asp:TemplateField>
                             </Columns>
                             <FooterStyle CssClass="enc" />
@@ -149,9 +137,23 @@
 
     <script type="text/javascript">        
         function Polizas() {
+            ////$('#<%= grvPolizas.ClientID %>').empty();
             $('#<%= grvPolizas.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvPolizas.ClientID %>').find("tr:first"))).DataTable({
                 "destroy": true,
-                "stateSave": true
+                "stateSave": true,
+                "columns": [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ]
             })
         };
     </script>

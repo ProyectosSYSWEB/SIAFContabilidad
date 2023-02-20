@@ -45,7 +45,7 @@ namespace SAF
             // Nota: el evento Session_End se desencadena sólo cuando el modo sessionstate
             // se establece como InProc en el archivo Web.config. Si el modo de sesión se establece como StateServer 
             // o SQLServer, el evento no se genera.
-            Response.Redirect("Acceso.aspx");
+            Response.Redirect("~/Acceso.aspx");
 
         }
 

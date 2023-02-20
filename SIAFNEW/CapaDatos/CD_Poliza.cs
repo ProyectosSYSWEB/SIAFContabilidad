@@ -230,6 +230,31 @@ namespace CapaDatos
             }
         }
 
+        public void EliminarPolizasAuto(int Ejercicio, string Mes, string Tipo, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_EJERCICIO", "P_MES_ANIO" };
+                object[] Valores = { Ejercicio, Mes };
+                String[] ParametrosOut = { "P_BANDERA" };
+                if (Tipo == "01")
+                    Cmd = CDDatos.GenerarOracleCommand("DEL_POLIZAS_INGRESOS_CAJAGRAL", ref Verificador, Parametros, Valores, ParametrosOut);
+                else
+                    Cmd = CDDatos.GenerarOracleCommand("DEL_POLIZAS_REND_CAJAGRAL", ref Verificador, Parametros, Valores, ParametrosOut);
+                
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+
         public void PolizaConsultaGrid_Min(ref Poliza ObjPoliza, String FechaInicial, String FechaFinal, String Buscar, String TipoUsu, ref List<Poliza> List)
         {
             CD_Datos CDDatos = new CD_Datos();

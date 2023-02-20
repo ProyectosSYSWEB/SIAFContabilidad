@@ -36,7 +36,7 @@ namespace SAF
             if (!IsPostBack)
             {
                 //SesionUsu.Modifica_Ejercicio = false;
-                if(SesionUsu.Usu_Ejercicio=="2022")
+                if(SesionUsu.Usu_Ejercicio=="2023")
                     CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Ejercicios", ref ddlUsu_Ejercicio, "p_tipo_usuario", "C0NTR4");
                 else
                     CNComun.LlenaCombo("pkg_contabilidad.Obt_Combo_Ejercicios", ref ddlUsu_Ejercicio);
