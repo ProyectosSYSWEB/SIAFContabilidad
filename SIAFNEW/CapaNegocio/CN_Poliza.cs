@@ -142,7 +142,7 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
-        public void PolizasCjaConsultaGrid(Poliza objPoliza, ref List<Poliza> List)
+        public void PolizasCjaConsultaGrid(Poliza objPoliza, string Tipo, ref List<Poliza> List)
         {
             try
             {

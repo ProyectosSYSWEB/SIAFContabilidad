@@ -162,7 +162,7 @@ namespace CapaDatos
             }
         }
 
-        public void PolizasCjaConsultaGrid(Poliza objPoliza, ref List<Poliza> List)
+        public void PolizasCjaConsultaGrid(Poliza objPoliza, string Tipo, ref List<Poliza> List)
         {
             CD_Datos CDDatos = new CD_Datos();
             OracleCommand cmm = null;
@@ -171,6 +171,7 @@ namespace CapaDatos
                 OracleDataReader dr = null;
                 String[] Parametros = { "P_Mes_Anio" };
                 String[] Valores = { objPoliza.Mes_anio };
+                if(Tipo=="1")
                 cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Polizas_Caja", ref dr, Parametros, Valores);
 
 
