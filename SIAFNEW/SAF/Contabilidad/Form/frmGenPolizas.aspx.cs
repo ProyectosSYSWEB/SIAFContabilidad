@@ -209,5 +209,10 @@ namespace SAF.Contabilidad.Form
                 ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "mostrar_modal(0, '" + Verificador + "');", true);
             }
         }
+
+        protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CargarGrid();
+        }
     }
 }

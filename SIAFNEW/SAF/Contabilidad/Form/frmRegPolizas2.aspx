@@ -949,8 +949,21 @@
                                                 <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                                                     <HeaderTemplate>
                                                         Información Gral.   
-                                                    </HeaderTemplate>
-                                                    <ContentTemplate>
+                                                    
+</HeaderTemplate>
+                                                    
+
+
+
+
+
+
+
+
+
+
+
+<ContentTemplate>
                                                         <div class="container-fluid">
                                                             <div class="row" id="rowCFDI" runat="server">
                                                                 <div class="col-md-2">
@@ -1138,13 +1151,39 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </ContentTemplate>
-                                                </ajaxToolkit:TabPanel>
+                                                    
+</ContentTemplate>
+                                                
+
+
+
+
+
+
+
+
+
+
+
+</ajaxToolkit:TabPanel>
                                                 <ajaxToolkit:TabPanel ID="TabPanel2" runat="server" HeaderText="Detalle">
                                                     <HeaderTemplate>
                                                         Detalle
-                                                    </HeaderTemplate>
-                                                    <ContentTemplate>
+                                                    
+</HeaderTemplate>
+                                                    
+
+
+
+
+
+
+
+
+
+
+
+<ContentTemplate>
                                                         <div class="container-fluid">
                                                             <div class="row">
                                                                 <div class="col-md-2">
@@ -1154,19 +1193,55 @@
                                                                     <asp:TextBox ID="txtSearch" runat="server" AutoPostBack="True"
                                                                         onkeyup="RefreshUpdatePanel();"
                                                                         OnTextChanged="txtSearch_TextChanged" Width="98%"></asp:TextBox>
-                                                                    <asp:UpdatePanel ID="UpdatePanel22" runat="server">
-                                                                        <ContentTemplate>
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                    <asp:UpdatePanel ID="UpdatePanel22" runat="server"><ContentTemplate>
                                                                             <asp:ListBox ID="ddlCuentas_Contables" runat="server"
                                                                                 onkeypress="if (event.keyCode==13) return false;"
                                                                                 Width="98%"></asp:ListBox>
-                                                                        </ContentTemplate>
-                                                                        <Triggers>
-                                                                            <asp:AsyncPostBackTrigger ControlID="txtSearch"></asp:AsyncPostBackTrigger>
-                                                                        </Triggers>
-                                                                    </asp:UpdatePanel>
+                                                                        
+</ContentTemplate>
+<Triggers>
+<asp:AsyncPostBackTrigger ControlID="txtSearch"></asp:AsyncPostBackTrigger>
+</Triggers>
+</asp:UpdatePanel>
+
+
+
+
+
+
+
+
+
+
+
+
                                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server"
                                                                         ControlToValidate="ddlCuentas_Contables" ErrorMessage="*Cuenta Contable"
                                                                         ValidationGroup="Detalle">*Requerido</asp:RequiredFieldValidator>
+
+
+
+
+
+
+
+
+
+
+
+
                                                                 </div>
                                                             </div>
                                                             <div class="row">
@@ -1174,80 +1249,277 @@
                                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
                                                                         ControlToValidate="ddlCuentas_Contables" ErrorMessage="*Cuenta Contable"
                                                                         ValidationGroup="Detalle">*Requerido</asp:RequiredFieldValidator>
+
+
+
+
+
+
+
+
+
+
+
+
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-2">Cargo</div>
                                                                 <div class="col-md-2">
                                                                     <asp:TextBox ID="txtCargo" runat="server" onKeyDown="return enter_abono(event);" onkeyup="mascara(this,'C');">0</asp:TextBox>
+
+
+
+
+
+
+
+
+
+
+
+
                                                                 </div>
                                                                 <div class="col-md-1">
                                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtCargo" ErrorMessage="*Cargo" ValidationGroup="Detalle">*Requerido</asp:RequiredFieldValidator>
+
+
+
+
+
+
+
+
+
+
+
+
                                                                     <br />
                                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator104" runat="server" ControlToValidate="txtCargo" SetFocusOnError="True" ValidationExpression="^-?([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9]{0,2})?$" ValidationGroup="Detalle">*Formato (999,999,999.99)</asp:RegularExpressionValidator>
+
+
+
+
+
+
+
+
+
+
+
+
                                                                 </div>
                                                                 <div class="col-md-2">
                                                                     Abono
                                                                 </div>
                                                                 <div class="col-md-2">
                                                                     <asp:TextBox ID="txtAbono" runat="server" onKeyDown="return enter_boton(event);" onkeyup="mascara(this,'A');" OnTextChanged="txtAbono_TextChanged">0</asp:TextBox>
+
+
+
+
+
+
+
+
+
+
+
+
                                                                 </div>
                                                                 <div class="col-md-1">
                                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtAbono" ErrorMessage="*Abono" ValidationGroup="Detalle">*Requerido</asp:RequiredFieldValidator>
+
+
+
+
+
+
+
+
+
+
+
+
                                                                     <br />
                                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txtAbono" SetFocusOnError="True" ValidationExpression="^-?([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9]{0,2})?$" ValidationGroup="Detalle">*Formato (999,999,999.99) 
                                                                                                                     Números</asp:RegularExpressionValidator>
+
+
+
+
+
+
+
+
+
+
+
+
                                                                 </div>
                                                                 <div class="col-md-2">
                                                                     <asp:Button ID="bttnAgregar" runat="server" CssClass="btn btn-info" OnClick="bttnAgregar_Click" Text="Agregar" />
+
+
+
+
+
+
+
+
+
+
+
+
                                                                 </div>
                                                             </div>
                                                             <div class="row alert alert-warning">
                                                                 <div class="col-md-6 text-center">
                                                                     <asp:Label ID="lblLeyTotal_Cargos" runat="server" Font-Bold="True" Text="TOTAL CARGOS"></asp:Label>
+
+
+
+
+
+
+
+
+
+
+
+
                                                                     <asp:Label ID="lblFormatoTotal_Cargos" runat="server" Font-Bold="True" Font-Size="Large" Text="0"></asp:Label>
+
+
+
+
+
+
+
+
+
+
+
+
                                                                     <br />
                                                                     <asp:Label ID="lblTotal_Cargos" runat="server" Visible="False"></asp:Label>
+
+
+
+
+
+
+
+
+
+
+
+
                                                                 </div>
                                                                 <div class="col-md-6 text-center">
                                                                     <asp:Label ID="lblLeyTotal_Abonos" runat="server" Font-Bold="True" Text="TOTAL ABONOS"></asp:Label>
+
+
+
+
+
+
+
+
+
+
+
+
                                                                     <asp:Label ID="lblFormatoTotal_Abonos" runat="server" Font-Bold="True" Font-Size="Large" Text="0"></asp:Label>
+
+
+
+
+
+
+
+
+
+
+
+
                                                                     <br />
                                                                     <asp:Label ID="lblTotal_Abonos" runat="server" Visible="False"></asp:Label>
+
+
+
+
+
+
+
+
+
+
+
+
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col">
                                                                     <asp:GridView ID="grvPolizas_Detalle" runat="server" AutoGenerateColumns="False" CssClass="mGrid" OnRowCancelingEdit="grvPolizas_Detalle_RowCancelingEdit" OnRowDeleting="grvPolizas_Detalle_RowDeleting" OnRowEditing="grvPolizas_Detalle_RowEditing" OnRowUpdating="EditaRegistro" OnSelectedIndexChanged="grvPolizas_Detalle_SelectedIndexChanged" Width="100%">
-                                                                        <Columns>
-                                                                            <asp:BoundField DataField="IdCuenta_Contable" HeaderText="IdCuenta_Contable" ReadOnly="True" />
-                                                                            <asp:TemplateField HeaderText="# Movto">
-                                                                                <ItemTemplate>
+<AlternatingRowStyle CssClass="alt" />
+<Columns>
+<asp:BoundField DataField="IdCuenta_Contable" HeaderText="IdCuenta_Contable" ReadOnly="True" />
+<asp:TemplateField HeaderText="# Movto"><ItemTemplate>
                                                                                     <asp:Label ID="lblNumero_Movimiento_Aut" runat="server" Text="<%# (grvPolizas_Detalle.PageSize * grvPolizas_Detalle.PageIndex) + Container.DisplayIndex + 1 %>"></asp:Label>
-                                                                                </ItemTemplate>
-                                                                            </asp:TemplateField>
-                                                                            <asp:BoundField DataField="DescCuenta_Contable" HeaderText="Cuenta Contable" ReadOnly="True">
-                                                                                <ItemStyle Width="85%" />
-                                                                            </asp:BoundField>
-                                                                            <asp:BoundField DataField="Cargo" ReadOnly="True" />
-                                                                            <asp:BoundField DataField="Abono" ReadOnly="True" />
-                                                                            <asp:BoundField DataField="Cargo" DataFormatString="{0:c}" HeaderText="Cargo" />
-                                                                            <asp:BoundField DataField="Abono" DataFormatString="{0:c}" HeaderText="Abono" />
-                                                                            <asp:CommandField ShowDeleteButton="True" />
-                                                                            <asp:CommandField ShowEditButton="True" />
-                                                                        </Columns>
-                                                                        <FooterStyle CssClass="enc" />
-                                                                        <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                                        <SelectedRowStyle CssClass="sel" />
-                                                                        <HeaderStyle CssClass="enc" />
-                                                                        <AlternatingRowStyle CssClass="alt" />
-                                                                    </asp:GridView>
+                                                                                
+</ItemTemplate>
+</asp:TemplateField>
+<asp:BoundField DataField="DescCuenta_Contable" HeaderText="Cuenta Contable" ReadOnly="True">
+<ItemStyle Width="85%" />
+</asp:BoundField>
+<asp:BoundField DataField="Cargo" ReadOnly="True" />
+<asp:BoundField DataField="Abono" ReadOnly="True" />
+<asp:BoundField DataField="Cargo" DataFormatString="{0:c}" HeaderText="Cargo" />
+<asp:BoundField DataField="Abono" DataFormatString="{0:c}" HeaderText="Abono" />
+<asp:CommandField ShowDeleteButton="True" />
+<asp:CommandField ShowEditButton="True" />
+</Columns>
+
+<FooterStyle CssClass="enc" />
+
+<HeaderStyle CssClass="enc" />
+
+<PagerStyle CssClass="enc" HorizontalAlign="Center" />
+
+<SelectedRowStyle CssClass="sel" />
+</asp:GridView>
+
+
+
+
+
+
+
+
+
+
+
+
                                                                 </div>
                                                             </div>
                                                         </div>
 
-                                                    </ContentTemplate>
-                                                </ajaxToolkit:TabPanel>
+                                                    
+</ContentTemplate>
+                                                
+
+
+
+
+
+
+
+
+
+
+
+</ajaxToolkit:TabPanel>
                                             </ajaxToolkit:TabContainer>
                                         </div>
                                     </div>
@@ -2159,9 +2431,20 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
+                        <div class="col text-center">
+                            <asp:UpdateProgress ID="updPrgCatPart" runat="server" AssociatedUpdatePanelID="updPnlCatPart">
+                                <ProgressTemplate>
+                                    <asp:Image ID="imgCatPart" runat="server" Height="50px" ImageUrl="http://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                        Width="50px" AlternateText="Espere un momento, por favor.."
+                                        ToolTip="Espere un momento, por favor.." />
+                                </ProgressTemplate>
+                            </asp:UpdateProgress>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-2">Partida</div>
                         <div class="col-md-10">
-                            <asp:UpdatePanel ID="UpdatePanel26" runat="server">
+                            <asp:UpdatePanel ID="updPnlCatPart" runat="server">
                                 <ContentTemplate>
                                     <asp:DropDownList ID="ddlCatPartidas" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlCatPartidas_SelectedIndexChanged"></asp:DropDownList>
                                 </ContentTemplate>
@@ -2353,7 +2636,7 @@
             }
 
 
-            <%--var TipoGasto = $('#<%= ddlTipo_Gasto.ClientID %>').val();
+            <%--var TipoGasto = $('#<%= ddlTipo_Gasto.ClientID %>').val(); ---
             alert(TipoGasto);
             if (TipoGasto === "COMISIONES") {
                 arguments.IsValid = false;

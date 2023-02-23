@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmGenPolizas.aspx.cs" Inherits="SAF.Contabilidad.Form.frmGenPolizas" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">    
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script src="../../Scripts/DataTables/jquery.dataTables.min.js"></script>
     <link href="../../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
 </asp:Content>
@@ -17,10 +17,14 @@
                 Tipo
             </div>
             <div class="col-md-3">
-                <asp:DropDownList ID="ddlTipo" runat="server" CssClass="form-control">
-                    <asp:ListItem Value="01">Pólizas de Ingresos</asp:ListItem>
-                    <asp:ListItem Value="02">Pólizas de Rendimientos</asp:ListItem>
-                </asp:DropDownList>
+                <asp:UpdatePanel ID="updPnlTipo" runat="server">
+                    <ContentTemplate>
+                        <asp:DropDownList ID="ddlTipo" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged">
+                            <asp:ListItem Value="01">Pólizas de Ingresos</asp:ListItem>
+                            <asp:ListItem Value="02">Pólizas de Rendimientos</asp:ListItem>
+                        </asp:DropDownList>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
             <div class="col-md-1">
                 Mes
@@ -28,25 +32,24 @@
             <div class="col-md-2">
                 <asp:UpdatePanel ID="updPnlMes" runat="server">
                     <ContentTemplate>
-                <asp:DropDownList ID="ddlMes" runat="server" CssClass="form-control" ValidationGroup="valMes" AutoPostBack="true" OnSelectedIndexChanged="ddlMes_SelectedIndexChanged">
-                    <asp:ListItem Value="00">--Seleccionar--</asp:ListItem>
-                    <asp:ListItem Value="01">Enero</asp:ListItem>
-                    <asp:ListItem Value="02">Febrero</asp:ListItem>
-                    <asp:ListItem Value="03">Marzo</asp:ListItem>
-                    <asp:ListItem Value="04">Abril</asp:ListItem>
-                    <asp:ListItem Value="05">Mayo</asp:ListItem>
-                    <asp:ListItem Value="06">Junio</asp:ListItem>
-                    <asp:ListItem Value="07">Julio</asp:ListItem>
-                    <asp:ListItem Value="08">Agosto</asp:ListItem>
-                    <asp:ListItem Value="09">Septiembre</asp:ListItem>
-                    <asp:ListItem Value="10">Octubre</asp:ListItem>
-                    <asp:ListItem Value="11">Noviembre</asp:ListItem>
-                    <asp:ListItem Value="12">Diciembre</asp:ListItem>
-                </asp:DropDownList>
-                         </ContentTemplate>
+                        <asp:DropDownList ID="ddlMes" runat="server" CssClass="form-control" ValidationGroup="valMes" AutoPostBack="true" OnSelectedIndexChanged="ddlMes_SelectedIndexChanged">
+                            <asp:ListItem Value="01">Enero</asp:ListItem>
+                            <asp:ListItem Value="02">Febrero</asp:ListItem>
+                            <asp:ListItem Value="03">Marzo</asp:ListItem>
+                            <asp:ListItem Value="04">Abril</asp:ListItem>
+                            <asp:ListItem Value="05">Mayo</asp:ListItem>
+                            <asp:ListItem Value="06">Junio</asp:ListItem>
+                            <asp:ListItem Value="07">Julio</asp:ListItem>
+                            <asp:ListItem Value="08">Agosto</asp:ListItem>
+                            <asp:ListItem Value="09">Septiembre</asp:ListItem>
+                            <asp:ListItem Value="10">Octubre</asp:ListItem>
+                            <asp:ListItem Value="11">Noviembre</asp:ListItem>
+                            <asp:ListItem Value="12">Diciembre</asp:ListItem>
+                        </asp:DropDownList>
+                    </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-        </div>
+        </div>        
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-8">
@@ -64,12 +67,12 @@
                     </ProgressTemplate>
                 </asp:UpdateProgress>
             </div>
-        </div>        
+        </div>
         <div class="row">
             <div class="col">
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
-                        <asp:Label ID="lblMsjError" runat="server" Text="" Font-Bold="true"></asp:Label>
+                        <asp:Label ID="lblMsjError" runat="server" Font-Bold="True" Visible="False"></asp:Label>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
@@ -78,23 +81,23 @@
         <div class="row">
             <div class="col text-center">
                 <asp:UpdateProgress ID="updPgrPolizas" runat="server"
-                                    AssociatedUpdatePanelID="updPnlPolizas">
-                                    <ProgressTemplate>
-                                        <asp:Image ID="Image2q" runat="server"
-                                            AlternateText="Espere un momento, por favor.." Height="30px"
-                                            ImageUrl="~/images/ajax_loader_gray_512.gif"
-                                            ToolTip="Espere un momento, por favor.." Width="30px" />
-                                    </ProgressTemplate>
-                                </asp:UpdateProgress>
-                </div>
+                    AssociatedUpdatePanelID="updPnlPolizas">
+                    <ProgressTemplate>
+                        <asp:Image ID="img5" runat="server"
+                            AlternateText="Espere un momento, por favor.." Height="30px"
+                            ImageUrl="~/images/ajax_loader_gray_512.gif"
+                            ToolTip="Espere un momento, por favor.." Width="30px" />
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
             </div>
+        </div>
         <div class="row">
             <div class="col">
                 <asp:UpdatePanel ID="updPnlPolizas" runat="server">
                     <ContentTemplate>
-                        <asp:GridView ID="grvPolizas" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" OnRowDeleting="grvPolizas_RowDeleting" EmptyDataText="No se encontraron pólizas.">
+                        <asp:GridView ID="grvPolizas" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" OnRowDeleting="grvPolizas_RowDeleting" EmptyDataText="No se encontraron pólizas." ShowHeaderWhenEmpty="True">
                             <Columns>
-                                <asp:BoundField HeaderText="ID" DataField="IdPoliza"  />
+                                <asp:BoundField HeaderText="ID" DataField="IdPoliza" />
                                 <asp:BoundField HeaderText="CC" DataField="CENTRO_CONTABLE" />
                                 <asp:BoundField HeaderText="# PÓL	" DataField="NUMERO_POLIZA" />
                                 <asp:BoundField HeaderText="TIPO" DataField="TIPO" />
@@ -108,7 +111,7 @@
                                         <asp:LinkButton ID="linkBttnGenPolizas" runat="server" CssClass="btn btn-primary" OnClick="linkBttnGenPolizas_Click">Generar Pólizas</asp:LinkButton>
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn_grid btn-mdb-color" Width="100%"  CausesValidation="False" CommandName="Select"><i class="fa fa-file" aria-hidden="true"></i> Ver Póliza</asp:LinkButton>
+                                        <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn_grid btn-mdb-color" Width="100%" CausesValidation="False" CommandName="Select"><i class="fa fa-file" aria-hidden="true"></i> Ver Póliza</asp:LinkButton>
                                     </ItemTemplate>
                                     <ItemStyle Width="8%" />
                                 </asp:TemplateField>
@@ -146,6 +149,7 @@
                     null,
                     null,
                     null,
+
                     null,
                     null,
                     null,

@@ -20,7 +20,7 @@ namespace CapaDatos
         {
             CD_Datos CDDatos = new CD_Datos();
             OracleCommand Cmd = null;
-            string Existe="N";
+            string Existe = "N";
             try
             {
                 String[] Parametros = { "P_CENTRO_CONTABLE", "P_CUENTA" };
@@ -169,9 +169,8 @@ namespace CapaDatos
             try
             {
                 OracleDataReader dr = null;
-                String[] Parametros = { "P_Mes_Anio" };
-                String[] Valores = { objPoliza.Mes_anio };
-                if(Tipo=="1")
+                String[] Parametros = { "P_Mes_Anio", "P_Tipo" };
+                String[] Valores = { objPoliza.Mes_anio, Tipo };
                 cmm = CDDatos.GenerarOracleCommandCursor("pkg_contabilidad.Obt_Grid_Polizas_Caja", ref dr, Parametros, Valores);
 
 
@@ -211,15 +210,12 @@ namespace CapaDatos
             {
                 String[] Parametros = { "P_EJERCICIO", "P_MES_ANIO" };
                 object[] Valores = { Ejercicio, Mes };
-                String[] ParametrosOut = { "P_TOTAL", "P_BANDERA" };
+                String[] ParametrosOut = { "P_BANDERA" };
                 if (Tipo == "01")
-                    Cmd = CDDatos.GenerarOracleCommand("GNR_POLIZAS_INGRESOS_CAJAGRAL", ref Verificador, Parametros, Valores, ParametrosOut);
+                    Cmd = CDDatos.GenerarOracleCommand("GNR_POLIZAS_INGRESOS", ref Verificador, Parametros, Valores, ParametrosOut);
                 else
-                    Cmd = CDDatos.GenerarOracleCommand("GNR_POLIZAS_REND_CAJAGRAL", ref Verificador, Parametros, Valores, ParametrosOut);
-                if (Verificador == "0")
-                {
-                    TotalPolizasGen = Convert.ToInt32(Cmd.Parameters["P_TOTAL"].Value);
-                }
+                    Cmd = CDDatos.GenerarOracleCommand("GNR_POLIZAS_RENDIMIENTOS", ref Verificador, Parametros, Valores, ParametrosOut);
+                
             }
             catch (Exception ex)
             {
@@ -244,7 +240,7 @@ namespace CapaDatos
                     Cmd = CDDatos.GenerarOracleCommand("DEL_POLIZAS_INGRESOS_CAJAGRAL", ref Verificador, Parametros, Valores, ParametrosOut);
                 else
                     Cmd = CDDatos.GenerarOracleCommand("DEL_POLIZAS_REND_CAJAGRAL", ref Verificador, Parametros, Valores, ParametrosOut);
-                
+
             }
             catch (Exception ex)
             {

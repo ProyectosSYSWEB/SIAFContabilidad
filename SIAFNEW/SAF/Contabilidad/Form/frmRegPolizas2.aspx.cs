@@ -2084,6 +2084,12 @@ namespace SAF.Form
             lblTotCheque.Visible = false;
             lblNumPolizaCFDI.Text = string.Empty;
             lblMsjOficios.Text = string.Empty;
+
+            lblGranTotalPart.Text = string.Empty;
+            lblGranTotalPartInt.Text = string.Empty;
+            lblGranTotal.Text = string.Empty;
+            lblGranTotalInt.Text = string.Empty;
+
             //lblTotAbonoPol.Text = string.Empty;
             LinkButton cbi = (LinkButton)(sender);
             GridViewRow row = (GridViewRow)cbi.NamingContainer;

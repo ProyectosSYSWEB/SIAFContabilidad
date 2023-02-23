@@ -147,7 +147,7 @@ namespace CapaNegocio
             try
             {
                 CD_Poliza CDPasivo = new CD_Poliza();
-                CDPasivo.PolizasCjaConsultaGrid(objPoliza, ref List);
+                CDPasivo.PolizasCjaConsultaGrid(objPoliza, Tipo, ref List);
 
             }
             catch (Exception ex)
